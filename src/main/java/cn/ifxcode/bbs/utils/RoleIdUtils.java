@@ -5,9 +5,9 @@ import java.util.List;
 
 import cn.ifxcode.bbs.entity.Role;
 
-public class ArrayUtils {
+public class RoleIdUtils {
 
-	public static String getRoleIds(List<Role> roles) {
+	public static String formatRoleIds(List<Role> roles) {
 		List<Integer> ids = new ArrayList<Integer>();
 		for (Role role : roles) {
 			ids.add(role.getRoleId());

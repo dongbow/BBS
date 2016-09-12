@@ -96,7 +96,7 @@ function login(){
     		} else if(result.rc == 1002) {
     			$('.alert').text('密码错误').show();
     			open();
-    		} else{
+    		} else {
     			$('.alert').text('表单内容不能为空').show();
     			open();
     		}

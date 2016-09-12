@@ -21,11 +21,7 @@
             <scope>test</scope>
         </dependency>
         <!-- 补全项目依赖 -->
-        <!-- 1:日志 java日志：slf4j,log4j,logback,common-logging
-            slf4j 是规范/接口
-            日志实现:log4j,logback,common-logging
-            使用:slf4j + logback
-         -->
+        <!-- 1:日志 java日志 -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -149,9 +145,19 @@
         </dependency>
         <!-- redis客户端:Jedis -->
         <dependency>
+		    <groupId>org.springframework.data</groupId>
+		    <artifactId>spring-data-redis</artifactId>
+		    <version>1.1.0.RELEASE</version>
+		</dependency>
+        <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
-            <version>2.7.3</version>
+            <version>2.1.0</version>
+        </dependency>
+        <dependency>
+        	<groupId>ltang</groupId>
+        	<artifactId>redis</artifactId>
+        	<version>3.0</version>
         </dependency>
         <!-- protostuff序列化依赖 -->
         <dependency>

@@ -16,8 +16,6 @@ public class MD5Utils {
 		try {
 			messagedigest = MessageDigest.getInstance("MD5");
 		} catch (NoSuchAlgorithmException nsaex) {
-			System.err.println(MD5Utils.class.getName()
-					+ "³õÊ¼»¯Ê§°Ü£¬MessageDigest²»Ö§³ÖMD5Util¡£");
 			nsaex.printStackTrace();
 		}
 	}

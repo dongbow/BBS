@@ -18,9 +18,8 @@ import cn.ifxcode.bbs.bean.Result;
 import cn.ifxcode.bbs.constant.BbsConstant;
 import cn.ifxcode.bbs.constant.BbsErrorCode;
 import cn.ifxcode.bbs.entity.User;
-import cn.ifxcode.bbs.entity.UserAccess;
 import cn.ifxcode.bbs.service.UserService;
-import cn.ifxcode.bbs.utils.ArrayUtils;
+import cn.ifxcode.bbs.utils.RoleIdUtils;
 import cn.ifxcode.bbs.utils.Base64Utils;
 import cn.ifxcode.bbs.utils.CookieUtils;
 import cn.ifxcode.bbs.utils.GetRemoteIpUtil;
@@ -56,10 +55,10 @@ public class LoginController {
 							BbsConstant.DOMAIN, BbsConstant.REMEMBER_MAXAGE));
 				}
 				CookieBean cookieBean = new CookieBean(user.getUserAccess().getUserId(), user.getUserAccess().getUserIsAdmin(), 
-						ArrayUtils.getRoleIds(user.getRoles()), user.getUserAccess().getUserNickname());
+						RoleIdUtils.formatRoleIds(user.getRoles()), user.getUserAccess().getUserNickname());
 				response.addCookie(CookieUtils.makeUserCookie(Base64Utils.getBase64(cookieBean.toString())));
 				result = new Result(BbsConstant.OK, null, BbsConstant.AUTH_HOME);
-				//TODO login error log
+				//TODO login success log
 				logger.info(name + " login successful, from ip " + GetRemoteIpUtil.getRemoteIp(request));
 			} else {
 				result = new Result(BbsErrorCode.PASSWORD_ERROR, BbsErrorCode.getDescribe(BbsErrorCode.PASSWORD_ERROR));
@@ -67,7 +66,6 @@ public class LoginController {
 				logger.info(name + BbsErrorCode.getDescribe(BbsErrorCode.PASSWORD_ERROR) + ", from ip " + GetRemoteIpUtil.getRemoteIp(request));
 			}
 		} else {
-			//TODO login error log
 			result = new Result(BbsErrorCode.FORM_NULL, BbsErrorCode.getDescribe(BbsErrorCode.FORM_NULL));
 			logger.info("unknown " + BbsErrorCode.getDescribe(BbsErrorCode.FORM_NULL) + ", from ip " + GetRemoteIpUtil.getRemoteIp(request));
 		}

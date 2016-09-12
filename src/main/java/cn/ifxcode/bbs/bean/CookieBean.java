@@ -10,7 +10,7 @@ public class CookieBean {
 	public CookieBean(long user_id, Integer is_admin, String role_ids, String nick_name) {
 		this.user_id = user_id;
 		this.is_admin = is_admin;
-		this.setRole_ids(role_ids);
+		this.role_ids = role_ids;
 		this.nick_name = nick_name;
 	}
 
