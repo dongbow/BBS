@@ -32,9 +32,14 @@
 	</resultMap>
 
 	<select id="authLogin" resultMap="BaseUser">
-		select ua.*, r.* from user_access as ua, role as r, user_role as ur  where user_name = #{name} and user_password =
-			#{password} and user_is_admin = 1 and user_is_delete = 0 and user_is_locked = 0 and ua.user_id = ur.user_id
-			and r.role_id = ur.role_id;
+		select ua.*, r.* 
+		from user_access as ua, role as r, user_role as ur 
+		where user_name = #{name} and user_password = #{password} 
+		and user_is_admin = 1 
+		and user_is_delete = 0 
+		and user_is_locked = 0 
+		and ua.user_id = ur.user_id
+		and r.role_id = ur.role_id;
 	</select>
 	 
 	<select id="valueCheck" resultType="Integer">
