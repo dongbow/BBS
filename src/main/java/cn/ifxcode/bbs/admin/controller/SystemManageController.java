@@ -9,7 +9,7 @@ public class SystemManageController {
 
 	@RequestMapping("/user")
 	public String toUserList() {
-		return "sysmanage/user-list";
+		return "admin/sysmanage/user-list";
 	}
 	
 }

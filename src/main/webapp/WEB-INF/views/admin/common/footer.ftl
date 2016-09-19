@@ -48,3 +48,4 @@
 <!--dynamic table initialization -->
 <script src="${path}/resources/static/admin/js/dynamic_table_init.js"></script>
 
+<script src="${path}/resources/dist/js/bootstrap-select.js"></script>
