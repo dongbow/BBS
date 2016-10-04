@@ -249,6 +249,7 @@
   }
 
 
+<<<<<<< HEAD
   // List of HTML entities for escaping.
   var escapeMap = {
     '&': '&amp;',
@@ -285,6 +286,25 @@
 
   var htmlEscape = createEscaper(escapeMap);
   var htmlUnescape = createEscaper(unescapeMap);
+=======
+  function htmlEscape(html) {
+    var escapeMap = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#x27;',
+      '`': '&#x60;'
+    };
+    var source = '(?:' + Object.keys(escapeMap).join('|') + ')',
+        testRegexp = new RegExp(source),
+        replaceRegexp = new RegExp(source, 'g'),
+        string = html == null ? '' : '' + html;
+    return testRegexp.test(string) ? string.replace(replaceRegexp, function (match) {
+      return escapeMap[match];
+    }) : string;
+  }
+>>>>>>> e8038f159cc0d6152b20abbdfb1a48fe3ba11f54
 
   var Selectpicker = function (element, options, e) {
     // bootstrap-select has been initialized - revert valHooks.select.set back to its original function
@@ -311,12 +331,15 @@
       this.options.title = this.$element.attr('title');
     }
 
+<<<<<<< HEAD
     // Format window padding
     var winPad = this.options.windowPadding;
     if (typeof winPad === 'number') {
       this.options.windowPadding = [winPad, winPad, winPad, winPad];
     }
 
+=======
+>>>>>>> e8038f159cc0d6152b20abbdfb1a48fe3ba11f54
     //Expose public methods
     this.val = Selectpicker.prototype.val;
     this.render = Selectpicker.prototype.render;
@@ -379,8 +402,12 @@
     maxOptions: false,
     mobile: false,
     selectOnTab: false,
+<<<<<<< HEAD
     dropdownAlignRight: false,
     windowPadding: 0
+=======
+    dropdownAlignRight: false
+>>>>>>> e8038f159cc0d6152b20abbdfb1a48fe3ba11f54
   };
 
   Selectpicker.prototype = {
@@ -586,8 +613,13 @@
       var generateA = function (text, classes, inline, tokens) {
         return '<a tabindex="0"' +
             (typeof classes !== 'undefined' ? ' class="' + classes + '"' : '') +
+<<<<<<< HEAD
             (inline ? ' style="' + inline + '"' : '') +
             (that.options.liveSearchNormalize ? ' data-normalized-text="' + normalizeToBase(htmlEscape($(text).html())) + '"' : '') +
+=======
+            (typeof inline !== 'undefined' ? ' style="' + inline + '"' : '') +
+            (that.options.liveSearchNormalize ? ' data-normalized-text="' + normalizeToBase(htmlEscape(text)) + '"' : '') +
+>>>>>>> e8038f159cc0d6152b20abbdfb1a48fe3ba11f54
             (typeof tokens !== 'undefined' || tokens !== null ? ' data-tokens="' + tokens + '"' : '') +
             ' role="option">' + text +
             '<span class="' + that.options.iconBase + ' ' + that.options.tickIcon + ' check-mark"></span>' +
@@ -672,7 +704,11 @@
                 labelSubtext = typeof $parent.data('subtext') !== 'undefined' ? '<small class="text-muted">' + $parent.data('subtext') + '</small>' : '',
                 labelIcon = $parent.data('icon') ? '<span class="' + that.options.iconBase + ' ' + $parent.data('icon') + '"></span> ' : '';
 
+<<<<<<< HEAD
             label = labelIcon + '<span class="text">' + htmlEscape(label) + labelSubtext + '</span>';
+=======
+            label = labelIcon + '<span class="text">' + label + labelSubtext + '</span>';
+>>>>>>> e8038f159cc0d6152b20abbdfb1a48fe3ba11f54
 
             if (index !== 0 && _li.length > 0) { // Is it NOT the first option of the select && are there elements in the dropdown?
               liIndex++;
@@ -780,7 +816,11 @@
           if (typeof $this.attr('title') !== 'undefined') {
             return $this.attr('title');
           } else if ($this.data('content') && that.options.showContent) {
+<<<<<<< HEAD
             return $this.data('content').toString();
+=======
+            return $this.data('content');
+>>>>>>> e8038f159cc0d6152b20abbdfb1a48fe3ba11f54
           } else {
             return icon + $this.html() + subtext;
           }
@@ -815,8 +855,13 @@
         title = typeof this.options.title !== 'undefined' ? this.options.title : this.options.noneSelectedText;
       }
 
+<<<<<<< HEAD
       //strip all HTML tags and trim the result, then unescape any escaped tags
       this.$button.attr('title', htmlUnescape($.trim(title.replace(/<[^>]*>?/g, ''))));
+=======
+      //strip all html-tags and trim the result
+      this.$button.attr('title', $.trim(title.replace(/<[^>]*>?/g, '')));
+>>>>>>> e8038f159cc0d6152b20abbdfb1a48fe3ba11f54
       this.$button.children('.filter-option').html(title);
 
       this.$element.trigger('rendered.bs.select');
@@ -970,6 +1015,7 @@
               containerPos = { top: 0, left: 0 };
             }
 
+<<<<<<< HEAD
             var winPad = that.options.windowPadding;
             selectOffsetTop = pos.top - containerPos.top - $window.scrollTop();
             selectOffsetBot = $window.height() - selectOffsetTop - selectHeight - containerPos.top - winPad[2];
@@ -977,6 +1023,12 @@
             selectOffsetRight = $window.width() - selectOffsetLeft - selectWidth - containerPos.left - winPad[1];
             selectOffsetTop -= winPad[0];
             selectOffsetLeft -= winPad[3];
+=======
+            selectOffsetTop = pos.top - containerPos.top - $window.scrollTop();
+            selectOffsetBot = $window.height() - selectOffsetTop - selectHeight - containerPos.top;
+            selectOffsetLeft = pos.left - containerPos.left - $window.scrollLeft();
+            selectOffsetRight = $window.width() - selectOffsetLeft - selectWidth - containerPos.left;
+>>>>>>> e8038f159cc0d6152b20abbdfb1a48fe3ba11f54
           };
 
       getPos();
@@ -1220,7 +1272,11 @@
 
     togglePlaceholder: function () {
       var value = this.$element.val();
+<<<<<<< HEAD
       this.$button.toggleClass('bs-placeholder', value === null || value === '' || (value.constructor === Array && value.length === 0));
+=======
+      this.$button.toggleClass('bs-placeholder', value === null || value === '');
+>>>>>>> e8038f159cc0d6152b20abbdfb1a48fe3ba11f54
     },
 
     tabIndex: function () {
