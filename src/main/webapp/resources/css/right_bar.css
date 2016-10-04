@@ -1,0 +1,190 @@
+body {
+     background: none repeat scroll 0% 0% #f2f2f2;
+}
+
+.right_bar {
+     margin-top:100px;
+     left: 50%;
+     margin-left: 510px;
+     position: fixed;
+     z-index: 1000;
+}
+
+.right_bar li {
+     display: block;
+}
+
+.right_bar a {
+     background: url("../images/right_bar.png") no-repeat scroll 0px 0px transparent;
+     display: block;
+     height: 45px;
+     margin-bottom: 2px;
+     outline: 0px none;
+     width: 45px;
+}
+
+.right_bar li.fbar_button a {
+     background-position: 0px 0px;
+}
+
+.right_bar li.fbar_button a:hover {
+     background-position: -45px 0px;
+}
+
+.right_bar li.refreshbar_button a {
+     background-position: 0px -49px;
+}
+
+.right_bar li.refreshbar_button a:hover {
+     background-position: -45px -49px;
+}
+
+#wechatbar_button a {
+     background-position: 0px -98px;
+}
+
+#wechatPic {
+     background: url("../images/wechatpic.png") no-repeat scroll 0px 0px transparent;
+     display: none;
+     height: 228px;
+     left: -215px;
+     position: absolute;
+     top: -55px;
+     width: 213px;
+     z-index: 1005;
+     //box-shadow:-5px 0 0 rgba(0,0,0,0.3);
+}
+
+#wechatbar_button a:hover {
+     background-position: -45px -98px;
+}
+
+.right_bar li.weibobar_button a {
+     background-position: 0px -148px;
+}
+
+.right_bar li.weibobar_button a:hover {
+     background-position: -45px -148px;
+}
+
+.gotopbar_button a{
+     background-position: 0px -198px; 
+}
+
+.gotopbar_button a:hover {
+     background-position: -45px -198px;
+}
+
+#fTopic{
+	width:450px; 
+	height:350px; 
+	background:#fff; 
+	top:150px; 
+	left:35%;
+	position:fixed; 
+	z-index:1001;
+}
+
+#fTopic{
+	 box-shadow: rgba(0,0,0,0.56) 0px 0px 10px; 
+	 border:1px soild #666; 
+	 border-radius:3px;
+}
+
+.nav_tit{
+	width:auto;
+	height:50px;
+	border-bottom:1px solid #bbb;
+	margin:auto 20px;
+}
+
+#_title{
+	float:left;
+	background-color:#fff;
+	color:#333;
+	width:140px;	
+	font-size:18px;
+}
+
+.nav_tit a{
+	float:right;
+	margin-right:10px;
+	margin-top:10px;
+	display:block;
+	width:80px;
+	height:30px;
+	border-radius:3px;
+	background-color:#ddd;
+	color:#999;
+	text-align:center;
+	line-height:30px;
+	font-size:16px;
+}
+
+#closetopic{
+	font:26px "microsoft yahei";
+	width:30px;
+	line-height:24px;
+	background-color:#ddd;
+	color:#999;
+}
+
+#closetopic:hover{
+	background-color:#f33;
+	color:#fff;
+}
+
+#leftmenu{
+	float:left;
+	width:180px;
+	height:250px;
+	background-color:#f2f2f2;
+	margin-left:30px;
+	margin-top:20px;
+	text-align:center;
+}
+
+#leftmenu li{
+	display:block;
+	font:16px "microsoft yahei";
+	margin-top:10px;
+}
+
+#rightmenu{
+	float:left;
+	width:180px;
+	height:250px;
+	background-color:#f2f2f2;
+	margin-left:30px;
+	margin-top:20px;
+	text-align:center;
+}
+
+#rightmenu li{
+	display:block;
+	font:16px "microsoft yahei";
+	margin-top:10px;
+}
+
+#leftmenu li a:hover,#rightmenu li a:hover{
+	color:#19b4ea;
+}
+
+#fbartpic.topicls{
+	background-color:#19b4ea;	
+	color:#fff;
+}
+
+.toclick{
+	color:#19b4ea;
+	font-size:18px;
+}
+
+
+
+
+
+
+
+
+

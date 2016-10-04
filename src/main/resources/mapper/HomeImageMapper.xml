@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ifxcode.bbs.dao.HomeImageDao">
+
+	<cache type="cn.ifxcode.bbs.dao.cache.LoggingRedisCache"/>
+	
+	<select id="getHomeImages" resultType="HomeImage">
+		select * from bbs_home_image where home_status = 0 order by home_sort asc
+	</select>
+	
+	<select id="searchImages" resultType="HomeImage">
+		select * from bbs_home_image order by home_create_time desc
+	</select>
+
+</mapper>

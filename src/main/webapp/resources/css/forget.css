@@ -1,0 +1,337 @@
+
+@charset "UTF-8";
+body {
+    background: white none repeat scroll 0 0;
+    margin: 0;
+    padding: 0;
+}
+div, p, form, input, img {
+    border: 0 none;
+    list-style: outside none none;
+    margin: 0;
+    padding: 0;
+}
+#hd_0 {
+    background: #ffffff none repeat scroll 0 0;
+    border-bottom: 1px solid #e0e0e0;
+    height: 80px;
+    min-width: 1000px;
+    width: 100%;
+}
+#wp_0 {
+    margin: 0 auto;
+    width: 1000px;
+}
+#header_cont_0 {
+    clear: both;
+    height: 75px;
+    width: 100%;
+}
+#logo_0 {
+    display: block;
+    float: left;
+    margin-right: 25px;
+    margin-top: 20px;
+}
+a {
+    font: 16px "microsoft yahei" !important;
+    height: 18px;
+    text-decoration: none;
+    width: 40px;
+}
+#login_0 {
+    float: right;
+    margin-top: 51px;
+}
+#login_0:hover {
+    color: #19b4ea;
+}
+#cow_0 {
+    float: right;
+    margin-right: 10px;
+    margin-top: 54px;
+}
+#register_0 {
+    float: right;
+    margin-right: 50px;
+    margin-top: 52px;
+}
+#register_0:hover {
+    color: #19b4ea;
+}
+.middle {
+    background-color: #fff;
+    font: 14px "microsoft yahei";
+    height: 440px;
+    margin: 0 auto;
+    text-align: center;
+    width: 440px;
+}
+.title {
+    font: 28px "microsoft yahei";
+    margin: 55px auto 0;
+    overflow: hidden;
+    width: 440px;
+}
+.error {
+    background-color: #ffebeb;
+    border: 1px solid #ffbdbe;
+    color: #f00;
+    display: block;
+    font: 14px/25px "microsoft yahei";
+    height: 25px;
+    margin-left: 49px;
+    margin-top: 20px;
+    width: 340px;
+}
+div.userInput {
+    overflow: visible;
+}
+.userInput {
+    border: 1px solid #dadada;
+    color: #474747;
+    display: inline-block;
+    font-size: 16px;
+    height: 50px;
+    line-height: 22px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    outline: medium none;
+    overflow: hidden;
+    padding: 0 10px;
+    position: relative;
+    width: 320px;
+}
+.userInput:hover {
+    border: 1px solid #19b4ea;
+}
+#user {
+    border: 1px solid #ccc;
+    font: 16px "microsoft yahei";
+    height: 25px;
+    margin-top: 15px;
+    padding: 7px;
+    width: 320px;
+}
+div.emailInput {
+    overflow: visible;
+}
+.emailInput {
+    border: 1px solid #dadada;
+    color: #474747;
+    display: inline-block;
+    font-size: 16px;
+    height: 50px;
+    line-height: 22px;
+    margin-bottom: 20px;
+    outline: medium none;
+    overflow: hidden;
+    padding: 0 10px;
+    position: relative;
+    width: 320px;
+}
+.emailInput:hover {
+    border: 1px solid #19b4ea;
+}
+#email {
+    border: 1px solid #ccc;
+    font: 16px "microsoft yahei";
+    height: 25px;
+    margin-top: 15px;
+    padding: 7px;
+    width: 320px;
+}
+div.codeInput {
+    overflow: visible;
+}
+.codeInput {
+    color: #474747;
+    display: inline-block;
+    float: left;
+    font-size: 16px;
+    height: 39px;
+    line-height: 22px;
+    margin-bottom: 40px;
+    margin-left: 52px;
+    margin-top: 15px;
+    width: 215px;
+}
+
+#user:focus,#email:focus,#valid:focus{
+	border:1px solid #19b4ea;
+}
+#valid {
+    border: 1px solid #ccc;
+    font: 16px "microsoft yahei";
+    height: 25px;
+    padding: 7px;
+    width: 201px;
+}
+#codeimg {
+    border: 1px solid #ccc;
+    cursor: pointer;
+    float: left;
+    margin: 15px 1px;
+    padding: 2px 19px;
+}
+.fullBtnBlue {
+    border: 1px solid #ccc;
+    border-radius: 50px;
+    color: #000;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 20px;
+    height: 50px;
+    line-height: 50px;
+    margin-bottom: 40px;
+    outline: medium none;
+    text-align: center;
+    width: 200px;
+}
+.fullBtnBlue:hover {
+    border: 1px solid #19b4ea;
+    color: #19b4ea;
+}
+.middle p {
+    color: #292a2a;
+}
+
+#mailresult{
+	width:900px; 
+	height:auto;
+	margin:8% auto;
+	background:#fff;
+	padding:35px 50px;
+	overflow:hidden;
+}
+
+#mailresult span a{
+	color:#19b4ea;
+}
+
+#mailresult a{
+	font:16px "microsoft yahei";
+	color:#fff;
+	text-decoration:none;
+}
+
+#mailresult a:hover{
+	color:#19b4ea;
+	text-decoration:underline;
+}
+
+#mailresult p{
+	font:16px "microsoft yahei";
+	color:#333;
+}
+
+#mailresult .tip label{
+	font:18px "microsoft yahei";
+	color:#333;
+}
+
+#mailresult .tip ol li{
+	font:16px "microsoft yahei";
+	color:#555;
+}
+
+#mailresult .resend{
+	display:block;
+	width:100px;
+	height:20px;
+	padding:5px;
+	font:16px "microsoft yahei";
+	background:#19b4ea;
+	border:1px solid #09F;
+	text-align:center;
+	margin-top:24px;
+	border-radius:2px;
+	float:left;
+}
+
+#mailresult .resend:hover{
+	text-decoration:none;
+	color:#fff;
+	box-shadow:0 0 5px rgba(20,20,20,0.3);
+}
+
+.footerWrap{
+	bottom:0px;
+}
+
+#resendtip{
+	float: left;
+	font: 16px "microsoft yahei";
+	margin-left: 20px;
+	margin-top: 24px;
+	padding: 5px;
+}
+
+h2{
+	 margin-top:60px; 
+	 font:28px "microsoft yahei";
+	 color:#333;
+}
+
+#setform{
+	width:320px;
+	height:auto;
+	padding:30px;
+	margin:-15px auto;
+}
+
+form label{
+	color:#555;
+	display:block;
+	font: 16px "Microsoft YaHei";
+	margin-bottom:10px;
+}
+
+#pwd1tip,#pwd2tip{
+	float:left;
+	margin-top:-20px;
+	width:auto;
+}
+
+.input{
+	width:300px;
+	height:25px;
+	border:1px solid #ccc;
+	font: 16px "Microsoft YaHei";
+	padding:7px 8px;
+	margin-bottom:20px;
+	color:#666;
+}
+
+.input:focus{
+	border:1px solid #19b4ea;
+}
+
+#btn{
+	width:320px;
+	height:40px;
+	background-color:#19b4ea;
+	border:none;
+	color:#fff;
+	font:16px "microsoft yahei";
+	margin-top:15px;
+}
+
+#btn:hover{
+	background-color:#59b4ea;
+	color:#fff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -184,5 +184,31 @@ public class DateUtils {
 		c.add(Calendar.DAY_OF_MONTH, -7);
 		return c.getTime();
 	}
+	
+	public static Date getSevenDaysAfterDate(Date date) {
+		if (date == null) {
+			date = new Date();
+		}
+		Calendar c = Calendar.getInstance();
+		c.setTime(date);
+		c.add(Calendar.DAY_OF_MONTH, 7);
+		return c.getTime();
+	}
+	
+	public static int getDateDifference(String begin, String end) {
+		long beginTime = DateUtils.dt14FromStr(begin).getTime();
+		long endTime = DateUtils.dt14FromStr(end).getTime();
+		int diff = (int) ((endTime - beginTime) / 1000 / 60);
+		diff = Math.abs(diff);
+		return diff;
+	}
+	
+	public static int getDateDifferenceBegin(String begin, String end) {
+		long beginTime = DateUtils.getBeginDateTime(DateUtils.dt14FromStr(begin)).getTime();
+		long endTime = DateUtils.getBeginDateTime(DateUtils.dt14FromStr(end)).getTime();
+		int diff = (int) ((endTime - beginTime) / 1000 / 60);
+		diff = Math.abs(diff);
+		return diff;
+	}
 
 }

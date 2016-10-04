@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ifxcode.bbs.dao.PastHistoryDao">
+
+	<cache type="cn.ifxcode.bbs.dao.cache.LoggingRedisCache"/>
+
+	<insert id="insertPastHistory" parameterType="PastHistory">
+		insert into past_history (
+			user_id, nickname, ip, past_time) 
+		values (
+			#{userId}, #{nickname}, #{ip}, #{pastTime}
+		)
+	</insert>
+
+</mapper>

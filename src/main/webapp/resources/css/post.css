@@ -1,0 +1,191 @@
+@charset "utf-8";
+/* CSS Document */
+body{
+	font-family:"microsoft yahei";
+	font-size:16px;
+	background-color:#f2f2f2;
+}
+
+.cl::after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+#local{
+    background: transparent none repeat scroll 0 0;
+    border: medium none;
+    height: 30px;
+    line-height: 29px;
+   // margin: -16px 0px 8px;
+    padding-left: 0;
+    margin:10px auto;
+    width:1000px;
+}
+
+#local .z {
+    padding-right: 10px;
+    width: 100%;
+}
+
+.z{
+	float:left;
+}
+
+#local .z span,#local .z a{
+	color:#515151;
+	font:16px "microsft yahei";
+}
+
+#local .z a.line:hover{
+	color:#19b4ea;
+	text-decoration:underline;
+}
+
+#ftopic_editor a{
+	display:block;
+	text-decoration:none;
+	color:#333;
+}
+
+#ftopic_editor{
+	 width:1000px; 
+	 height:auto; 
+	 background:#fff; 
+	 border:1px solid #f2f2f2; 
+	 margin:10px auto 30px;
+	 overflow:hidden;
+}
+
+.top_bar{
+	width:960px;
+	height:33px;
+	border-bottom:1px solid #999;
+	margin:20px;
+}
+
+.fbar{
+	display:block;
+	float:left;
+	font-size:20px;
+	width:100px;
+	height:30px;
+	margin-top:-8px;
+	border-right:1px solid #999;
+}
+
+.fbar:hover,.vote:hover{
+	color:#19b4ea;
+}
+
+.vote{
+	display:inline;
+	float:left;
+	font-size:20px;
+	width:100px;
+	height:30px;
+	margin-top:-8px;
+	margin-left:25px;
+}
+
+#topic_title{
+	//float:left;
+	margin-left:19px;
+	margin-bottom:10px;
+}
+
+#topic_title select{
+	width:90px;
+	height:30px;
+	font:14px "microsoft yahei";
+}
+
+#topic_title input{
+	width:450px;
+	height:18px;
+	font-size:14px;
+	border:1px solid #999;
+	color:#333;
+	padding:5px;
+}
+
+#topic_title input:hover{
+	border:1px solid #19b4ea;
+}
+
+#topic_title b{
+	font-size:14px;
+	color:#555;
+}
+
+#btns button  {
+	border: 0;
+	cursor:pointer;
+	background-color: #4387e9;
+	border-radius: 3px;
+	color: #ffffff;
+	float: left;
+	font-size: 16px;
+	height: 32px;
+	line-height: 30px;
+	margin-bottom: 30px;
+	margin-left: 20px;
+	text-align: center;
+	width: 100px;
+}
+
+#btns button:hover{
+	background-color:#09F;
+}
+
+#cke_editor{
+	margin:0 auto;
+}
+
+#cke_editor.cke_chrome{
+	box-shadow: 0 0 3px rgba(0, 0, 0, 0);
+}
+
+#edtiortoolbar{
+    border: medium none;
+    height: 30px;
+    line-height: 29px;
+    margin:-10px auto;
+    width:960px;
+    padding:0 20px;
+}
+
+#edtiortoolbar a{
+	display:block;
+	float: right;
+	font:16px "microsoft yahei";
+	color:#999;
+	width:100px;
+	text-align: right;
+}
+
+#bg{
+	background-color:#000;
+	position:absolute;
+	z-index:99;
+	left:0;
+	top:0;
+	display:none;
+	width:100%;
+	height:100%;
+	opacity:0.5;
+	filter: alpha(opacity=50);
+	-moz-opacity: 0.5;
+}
+
+#zilist{
+	margin:0;
+}
+
+
+
+
+
+

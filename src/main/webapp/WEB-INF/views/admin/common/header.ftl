@@ -1,3 +1,5 @@
+<#assign path="${request.contextPath}">
+
 <!-- header section start-->
 <div class="header-section">
 
@@ -179,14 +181,14 @@
             </li>
             <li>
                 <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                    <img src="images/photos/user-avatar.png" alt="" />
-                    John Doe
+                    <img id="headimg" src="images/photos/user-avatar.png" alt="" />
+                    <span id="nickname"></span>
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
-                    <li><a href="#"><i class="fa fa-user"></i>  Profile</a></li>
-                    <li><a href="#"><i class="fa fa-cog"></i>  Settings</a></li>
-                    <li><a href="#"><i class="fa fa-sign-out"></i> Log Out</a></li>
+                    <li><a href="#"><i class="fa fa-user"></i>个人信息</a></li>
+                    <li><a href="#"><i class="fa fa-cog"></i>系统设置</a></li>
+                    <li><a href="${path}/account/logout?from=system"><i class="fa fa-sign-out"></i>退出系统</a></li>
                 </ul>
             </li>
 

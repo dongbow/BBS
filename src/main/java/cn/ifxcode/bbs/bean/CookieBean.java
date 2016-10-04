@@ -7,6 +7,8 @@ public class CookieBean {
 	private String role_ids;
 	private String nick_name;
 
+	public CookieBean() {}
+
 	public CookieBean(long user_id, Integer is_admin, String role_ids, String nick_name) {
 		this.user_id = user_id;
 		this.is_admin = is_admin;
@@ -47,7 +49,7 @@ public class CookieBean {
 	}
 
 	public String toString() {
-		return user_id + ";" + is_admin + ";" + role_ids + ";" + nick_name;
+		return user_id + ";" + is_admin + ";" + role_ids + ";" + nick_name ;
 	}
 	
 }

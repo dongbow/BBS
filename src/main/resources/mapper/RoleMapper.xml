@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ifxcode.bbs.dao.RoleDao">
+
+	<cache type="cn.ifxcode.bbs.dao.cache.LoggingRedisCache"/>
+
+	 <resultMap type="Role" id="BaseRole">
+	 	<id column="role_id" property="roleId" jdbcType="INTEGER" />
+		<result column="role_name" property="roleName" jdbcType="VARCHAR" />
+		<result column="role_color" property="roleColor" jdbcType="VARCHAR" />
+		<result column="role_desc" property="roleDesc" jdbcType="VARCHAR" />
+		<result column="role_status" property="roleStatus" jdbcType="INTEGER" />
+		<result column="role_create_time" property="roleCreateTime" jdbcType="VARCHAR" />
+	 </resultMap>
+
+	<select id="getRoleIds" resultType="Integer">
+		select role_id from role
+	</select>
+	
+	<select id="getAllRoles" resultType="Role">
+		select * from role
+	</select>
+	
+	<insert id="insertUserRole">
+		insert into user_role (role_id, user_id) values (#{roleId}, #{userId})
+	</insert>
+	
+</mapper>

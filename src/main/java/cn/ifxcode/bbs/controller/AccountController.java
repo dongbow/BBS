@@ -1,7 +1,10 @@
 package cn.ifxcode.bbs.controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import ltang.redis.service.RedisObjectMapService;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -14,6 +17,7 @@ import cn.ifxcode.bbs.bean.Result;
 import cn.ifxcode.bbs.constant.BbsConstant;
 import cn.ifxcode.bbs.constant.BbsErrorCode;
 import cn.ifxcode.bbs.service.UserService;
+import cn.ifxcode.bbs.utils.ValidateCode;
 
 @Controller
 @RequestMapping("/account")
@@ -24,14 +28,31 @@ public class AccountController {
 	@Resource
 	private UserService userService;
 	
+	@Resource
+	private RedisObjectMapService redisObjectMapService;
+	
 	private Result result = null;
 	
 	@ResponseBody
 	@RequestMapping(value = "/{type}_exists", method = RequestMethod.POST)
 	public Result valueExists(@PathVariable("type")String type, String text ) {
 		if(userService.valueCheck(type, text) < BbsConstant.OK) {
-			result = new Result(BbsErrorCode.USERNAME_NOT_EXISTS, BbsErrorCode.getDescribe(BbsErrorCode.USERNAME_NOT_EXISTS)); 
-			logger.info(text + BbsErrorCode.getDescribe(BbsErrorCode.USERNAME_NOT_EXISTS));
+			if("name".equals(type)) {
+				result = new Result(BbsErrorCode.USERNAME_NOT_EXISTS, BbsErrorCode.getDescribe(BbsErrorCode.USERNAME_NOT_EXISTS)); 
+			} else {
+				result = new Result(BbsErrorCode.EMAIL_NOT_EXISTS, BbsErrorCode.getDescribe(BbsErrorCode.EMAIL_NOT_EXISTS)); 
+			}
+			logger.info(text + "is already exists");
+		}
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/validatecode", method = RequestMethod.POST)
+	public Result codeValidate(String validatecode, HttpServletRequest request) {
+		if(!StringUtils.equals(validatecode.toLowerCase(), 
+				ValidateCode.getValidateCode(request).toLowerCase())) {
+			result = new Result(BbsErrorCode.VALIDATE_CODE_ERROR, BbsErrorCode.getDescribe(BbsErrorCode.VALIDATE_CODE_ERROR));
 		}
 		return result;
 	}

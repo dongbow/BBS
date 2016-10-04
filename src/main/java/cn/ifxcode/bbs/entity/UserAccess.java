@@ -1,7 +1,11 @@
 package cn.ifxcode.bbs.entity;
 
-public class UserAccess {
+import java.io.Serializable;
 
+public class UserAccess implements Serializable{
+
+	private static final long serialVersionUID = 8714551535735544294L;
+	
 	private Long userId;
 	private String userName;
 	private String userNickname;

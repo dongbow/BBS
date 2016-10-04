@@ -1,0 +1,152 @@
+@charset "utf-8";
+/* CSS Document */
+*{
+	margin:0;
+	padding:0;
+}
+
+body{
+	background:#f2f2f2;
+}
+#quick_way ul li,#bbs_rule ul li,#bbs_notice ul li,#bbs_feel ul li{
+	display:block;
+	margin-bottom:10px;
+}
+
+#quick_way ul li{
+	width:45%;
+	float:left;
+}
+
+#leftMenu span{
+	font-size:14px;
+	text-align:center;
+	background:#ccc;
+	padding:1px 5px;
+	color:#555;
+	margin-right:3px;
+	border-radius:2px;
+}
+#leftMenu a{
+	display:inline;
+	text-decoration:none;
+	color:#444;
+}
+
+#leftMenu a:hover{
+	color:#19b4ea;
+}
+
+#time_img img{
+	width:710px;
+	height:300px;
+}
+
+#leftMenu{
+	//margin:100px 730px;
+	float:right;
+	width:278px;
+	height:auto;
+}
+
+.fbar_btn_all{
+	width:270px;
+	height:60px;
+	background:#19b4ea;
+	border-radius:3px;
+	text-align:center;
+	font:24px/2.4em "microsoft yahei";
+	margin-bottom:10px;
+}
+
+.signin{
+	width:270px;
+	height:60px;
+	background:#fe8535;
+	border-radius:3px;
+	text-align:center;
+	font:24px/2.4em "microsoft yahei";
+	margin-bottom:10px;
+}
+
+#sign_num p {
+	font: 14px "microsoft yahei";
+	padding: 7px;
+	cursor:pointer;
+}
+
+#sign_num a:hover{
+	color:#fff;
+}
+
+#sign_num label {
+	display: block;
+	font-size: 22px;
+	margin-top: -22px;
+}
+
+#fbar_btn_all a,#signin a,#sign_num{
+	display:block;
+	float:left;
+	width:270px;
+	height:60px;
+	color:#fff;
+}
+
+.fbar_btn_all label,.signin label{
+	color:#fff;
+	cursor:pointer;
+}
+
+#quick_way,#bbs_rule,#bbs_notice,#bbs_feel,#bbs_active{
+	background:#FFF;
+	width:250px;
+	height:auto;
+	padding:10px;
+	border-radius:3px;
+	margin-bottom:15px;
+}
+
+#quick_way{
+	overflow:hidden;
+}
+
+#quick_way p,#bbs_rule p,#bbs_notice p,#bbs_feel p,#bbs_active p{
+	font:18px "microsoft yahei";
+	padding:10px 0;
+	padding-top:0;
+	border-bottom:1px solid #ccc;
+	margin-bottom:10px;
+}
+
+.quick_way_href a,.bbs_rule_topic a,.bbs_notice_topic a,.bbs_feel_topic a{
+	margin:10px;
+	padding:15px 10px;
+	font:16px "microsoft yahei";
+}
+
+.bbs_rule_topic a,.bbs_notice_topic a,.bbs_feel_topic a{
+	padding:0;
+}
+
+.feeling img{
+	width:270px;
+	height:auto;
+}
+
+.bbs_active_space a{
+	width:80px;
+	height:80px;
+	margin-right:21px;
+}
+
+.bbs_active_space a p{
+	width:80px;
+	border_bottom:none !important;
+}
+
+.bbs_active_space img{
+	width:56px;
+	height:56px;
+	margin:5px;
+}

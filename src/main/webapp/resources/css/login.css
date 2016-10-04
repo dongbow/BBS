@@ -1,0 +1,225 @@
+@charset "utf-8";
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    color: #565656;
+    font: 12px "microsoft yahei";
+    background-color:#fff;
+    //overflow:hidden;
+}
+
+html {
+    //height: 100%;
+}
+
+.nav_h{
+	width:100%; 
+	height:80px; 
+	margin:0 auto; 
+	background-color:#fff;
+	border-bottom:1px solid #e5e6e7;
+}
+
+._headt{
+	 width:1000px; 
+	 height:50px; 
+	 margin:0 auto; 
+	 background-color:#fff;
+}
+
+.logo{
+	width:48px; 
+	height:48px; 
+	margin:20px 0; 
+	float:left;
+}
+
+#middle{
+	 margin:0; 
+	 padding:0; 
+	 width:100%; 
+	 height:100%;
+	 min-height:500px;
+	 max-height:1000px;
+	 background-color:#19b4ea;
+}
+
+.slogan_img{
+	display:block;
+	background:url("../images/login/slogan.png") no-repeat scroll 0 0 transparent;	
+	height: 294px;
+    width: 440px;
+    //margin-left:-150px;
+    margin-top:100px;
+}
+
+.signup_container {
+    background: none repeat scroll 0 0 #fff;
+    height: auto;
+    float:right;
+    //margin:0 60%;
+    margin-top:100px;
+    margin-bottom:9%;
+    padding-bottom: 20px;
+    text-align: center;
+    width: 380px;
+	//box-shadow: #666 0px 0px 3px;
+}
+
+.title{
+	border-bottom:1px solid #ccc;	
+	margin:0 10px;
+}
+
+.signup_title {
+    color: #19b4ea;
+    font: 20px "microsoft yahei";
+    text-align: left;
+    margin:5px;
+    margin-left:15px;
+    line-height:40px;
+    width: 50%;
+}
+
+a {
+    color: #333;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #00a7ea;
+    text-decoration:underline;
+}
+
+.login_error{
+	display:block;
+	width:93%;
+	height:25px;
+	border:1px solid #ffbdbe;
+	color:#f00;
+	background-color:#ffebeb;
+	font:14px "microsoft yahei";
+	line-height:25px;
+	margin-bottom:5px;
+}
+
+input[type="text"], input[type="password"]{
+    background: none repeat scroll 0 0 #fafafa;
+    border: 1px solid #bdbdbd;
+    color: #888;
+    outline: medium none;
+}
+
+.signup_forms {
+    margin: 20px 45px;
+    padding: 0;
+    width: 310px;
+}
+
+.in_icon{
+	background:url("../images/login/u.png") no-repeat scroll 0 0 #fff;
+	display:block;
+	width:39px;
+	height:39px;
+	float:left;
+	//background-color:#fff;
+	border:1px solid #bdbdbd;
+	//border-top-left-radius:5px;
+	//border-bottom-left-radius:5px;
+	text-align:center;
+}
+
+.in_icon_p{
+	background:url("../images/login/p.png") no-repeat scroll 0 0 #fff;
+	display:block;
+	width:39px;
+	height:39px;
+	float:left;
+	//background-color:#fff;
+	border:1px solid #bdbdbd;
+	//border-top-left-radius:5px;
+	//border-bottom-left-radius:5px;
+	text-align:center;
+}
+
+.signup_forms input {
+    border:1px solid #bdbdbd;
+    border-left:none;
+    //border-radius:5px;
+    //border-top-right-radius:5px;
+	//border-bottom-right-radius:5px;
+    color: #888;
+    display: block;
+    font: bold 14px/25px "microsoft yahei";
+    margin-bottom:10px;
+    outline: medium none;
+    padding: 7px 10px;
+    //text-indent: 40px;
+    width: 74%;
+    float:left;
+}
+
+.signup_forms input:focus {
+    border:1px solid #19b4ea;
+    border-left:none;
+    background-color:#fff;
+}
+
+.login-btn-set {
+    height: auto;
+    margin-top:10px;
+    margin: 15px 28px;
+    overflow: hidden;
+    width: 320px;
+}
+
+.login-btn-set .rem {
+    background: url("../images/login/remember.png") no-repeat scroll 0px -23px transparent;
+    cursor: pointer;
+    display: block;
+    float: left;
+    height: 20px;
+    margin: 10px 15px;
+    width: 275px;
+}
+
+.login-btn-set .rem span{
+	color:#f66;
+}
+
+.login-btn-set .rem.selected {
+    background-position: 0 0;
+}
+
+.login-btn {
+	border:none;
+    background-color:#19b4ea;
+    display: block;
+    float: left;
+    margin:0 20px;
+    height: 40px;
+    width: 280px;
+    color:#fff;
+    font:18px "microsoft yahei";
+    line-height:37px;
+    border-radius:2px;
+    cursor:pointer;
+}
+
+.login-btn:hover {
+    color:#fff;
+    text-decoration:none;
+}
+
+.signup_container .rf {
+    font: 14px "microsoft yahei";
+    margin-right: 160px;
+}
+/* 
+.footerWrap {
+    bottom:0px;
+} */

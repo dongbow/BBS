@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ifxcode.bbs.dao.ResourcesDao">
+
+	<cache type="cn.ifxcode.bbs.dao.cache.LoggingRedisCache"/>
+	
+	 <resultMap type="Resources" id="BaseResources">
+	 	<id column="res_id" property="resId" jdbcType="INTEGER"/>
+	 	<result column="res_name" property="resName" jdbcType="VARCHAR" />
+	 	<result column="res_link" property="resLink" jdbcType="VARCHAR" />
+	 	<result column="res_sign" property="resSign" jdbcType="VARCHAR" />
+	 	<result column="res_type" property="resType" jdbcType="INTEGER" />
+	 	<result column="res_status" property="resStatus" jdbcType="INTEGER" />
+	 	<result column="res_sort" property="resSort" jdbcType="INTEGER" />
+	 	<result column="res_parent_id" property="resParentId" jdbcType="INTEGER" />
+	 	<result column="res_create_time" property="resCreateTime" jdbcType="VARCHAR" />
+	 	<result column="res_icon" property="resIcon" jdbcType="VARCHAR" />
+	 	<collection property="roles" ofType="Role">
+	 		<id column="role_id" property="roleId" jdbcType="INTEGER" />
+			<result column="role_name" property="roleName" jdbcType="VARCHAR" />
+			<result column="role_color" property="roleColor" jdbcType="VARCHAR" />
+			<result column="role_desc" property="roleDesc" jdbcType="VARCHAR" />
+			<result column="role_status" property="roleStatus" jdbcType="INTEGER" />
+			<result column="role_create_time" property="roleCreateTime" jdbcType="VARCHAR" />
+	 	</collection>
+	 </resultMap>
+	 
+	 <select id="getResourcesByRoleId" resultMap="BaseResources">
+	 	select r.* from resources as r, role as ro, role_resources as rr
+	 	where r.res_id = rr.res_id
+	 	and ro.role_id = rr.role_id
+	 	and ro.role_id = #{id}
+	 </select>
+	 
+	 <select id="getResByRoleIds" resultMap="BaseResources">
+	 	 select distinct(r.res_id), r.res_name, r.res_link, r.res_sign, r.res_type, r.res_status, r.res_sort, r.res_parent_id,
+	 	 	r.res_create_time, res_icon from resources as r, role as l, role_resources as rr 
+	 	 	where r.res_id = rr.res_id 
+	 	 	and l.role_id = rr.role_id 
+	 	 	and r.res_status = 0
+	 	 	and l.role_status = 0
+	 	 	and l.role_id in 
+        	<foreach collection="array" index="index" item="roleIds" open="(" separator="," close=")">  
+            	#{roleIds}   
+    		</foreach>
+			order by r.res_id asc
+	 </select>
+
+</mapper>

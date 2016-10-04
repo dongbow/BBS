@@ -181,7 +181,7 @@ hr {
 ----------------------------------*/
 
 .left-side {
-    width: 240px;
+    width: 184px;
     position: absolute;
     top: 0;
     left: 0;
@@ -843,7 +843,7 @@ h5.left-nav-title {
     position: fixed;
     top: 0;
     left: 0;
-    width: 240px;
+    width: 184px;
     z-index: 100;
     background: #424f63;
 
@@ -856,7 +856,7 @@ h5.left-nav-title {
 .sticky-header .header-section {
     position: fixed;
     top: 0;
-    left: 240px;
+    left: 184px;
     width: 100%;
     z-index: 100;
 }
@@ -866,7 +866,7 @@ h5.left-nav-title {
 }
 
 .sticky-header .menu-right {
-    margin-right: 255px;
+    margin-right: 200px;
 }
 
 .sticky-header.left-side-collapsed .header-section {
@@ -899,7 +899,7 @@ h5.left-nav-title {
 ------------------------------*/
 
 .main-content {
-    margin-left: 240px;
+    margin-left: 184px;
     background: #eff0f4;
     min-height: 1000px;
 }

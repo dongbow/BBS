@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ifxcode.bbs.dao.ClassifyDao">
+	
+	<select id="getClassifyByBoardId" resultType="Classify">
+		select * from bbs_board_classify where class_status = 0 
+			and board_id = #{boardId}
+		order by class_sort asc
+	</select>
+	
+</mapper>

@@ -1,7 +1,6 @@
 <#assign path="${request.contextPath}">
 
 <!-- Placed js at the end of the document so the pages load faster -->
-<script src="${path}/resources/static/admin/js/jquery-1.10.2.min.js"></script>
 <script src="${path}/resources/static/admin/js/jquery-ui-1.9.2.custom.min.js"></script>
 <script src="${path}/resources/static/admin/js/jquery-migrate-1.2.1.min.js"></script>
 <script src="${path}/resources/static/admin/js/bootstrap.min.js"></script>
@@ -47,4 +46,21 @@
 
 <!--dynamic table initialization -->
 <script src="${path}/resources/static/admin/js/dynamic_table_init.js"></script>
+
+<!--pickers plugins-->
+<script type="text/javascript" src="${path}/resources/static/admin/js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="${path}/resources/static/admin/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="${path}/resources/static/admin/js/bootstrap-daterangepicker/moment.min.js"></script>
+<script type="text/javascript" src="${path}/resources/static/admin/js/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script type="text/javascript" src="${path}/resources/static/admin/js/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+<script type="text/javascript" src="${path}/resources/static/admin/js/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+
+<!--pickers initialization-->
+<script src="${path}/resources/static/admin/js/pickers-init.js"></script>
+
+<!-- boorstarp-select -->
+<script src="${path}/resources/static/admin/js/bootstrap.min.js"></script>
+<script src="${path}/resources/static/dist/js/bootstrap-select.js"></script>
+  
+<script src="${path}/resources/js/admin/APP.js"></script>
 

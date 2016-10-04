@@ -1,0 +1,472 @@
+@CHARSET "UTF-8";
+
+#fm{
+	margin:20px auto; 
+	width:1000px; 
+	height:auto; 
+	overflow:hidden;
+}
+
+#fm .bbs_board h4,#fm .bbs_board p{
+	margin:0;
+	padding:3px 0;
+}
+
+#fm .bbs_boards{
+	margin:0 auto 10px; 
+	width:1005px; 
+	padding-right:10px;
+	height:auto; 
+	overflow:hidden;
+}
+#fm .bbs_board{
+	display:block;
+	width:320px;
+	height:80px;
+	padding:10px 0;
+	color:#FFF;
+	margin-right:15px;
+	margin-bottom:15px;
+	background:#5fb5e8;
+	border-radius:3px;
+	float:left;
+	text-align:center;
+	text-decoration:none;
+}
+
+#fm .bbs_board h4{
+	font:28px/40px "microsoft yahei";
+}
+
+#fm .bbs_board p{
+	font:15px "microsoft yahei";
+}
+
+#ob1{
+	background:#5fb5e8;
+}
+
+#ob2{
+	background:#6bce8f;
+}
+
+#ob3{
+	background:#f2bd56;
+}
+
+#ob4{
+	background:#f2bd56;
+}
+
+#ob5{
+	background:#fb945d;
+}
+
+#ob6{
+	background:#5fb5e8;
+}
+
+#fm .bbs_boards a.ob1{
+	background:#5fb5e8;
+}
+
+#fm .bbs_boards a.ob2{
+	background:#6bce8f;
+}
+
+#fm .bbs_boards a.ob3{
+	background:#f2bd56;
+}
+
+#fm .bbs_boards a.ob4{
+	background:#f2bd56;
+}
+
+#fm .bbs_boards a.ob5{
+	background:#fb945d;
+}
+
+#fm .bbs_boards a.ob6{
+	background:#5fb5e8;
+}
+
+#bbs_topic{
+	width:710px;
+	height:5270px;
+	background:#FFF;
+	margin-top:0;
+}
+
+#demo1{
+	margin-bottom:17px;
+}
+
+.cl::after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+#local{
+    background: transparent none repeat scroll 0 0;
+    border: medium none;
+    height: 30px;
+    line-height: 29px;
+    //margin: -16px 0px 8px;
+    padding-left: 0;
+}
+
+#local .z {
+    padding-right: 10px;
+    width: 100%;
+}
+
+.z{
+	float:left;
+}
+
+#local .z span,#local .z a{
+	color:#515151;
+	font:16px "microsft yahei";
+}
+
+#local .z a.line:hover{
+	color:#19b4ea;
+	text-decoration:underline;
+}
+
+#bname{
+	margin-top:10px;
+	margin-bottom:20px;	
+}
+
+#bname .pipe{
+	margin: 0 8px;
+}
+
+#bname h2{
+	max-width: 275px;
+    overflow: hidden;
+    white-space: nowrap;
+    color: #010101;
+    float: left;
+    font-size: 41px;
+    font-weight: normal;
+    height: 43px;
+    margin-right: 18px;
+    text-align: left;
+}
+
+.details{
+	color: #7f7f7f;
+	float: left;
+	line-height: 22px;
+	max-width: 391px;
+}
+
+.details a{
+	color: #7f7f7f;
+	outline: medium none;
+	text-decoration: none;
+}
+
+#classcont{
+	background: #f2f2f2 none repeat scroll 0 0;
+	float: left;
+	height: auto;
+	padding:25px 0 10px;
+	width: 710px;
+}
+
+#bclassify{
+	float: left; 
+	width: 690px; 
+	height: auto; 
+	background:#fff;padding:10px;
+}
+
+#bclassify h4{
+	color: #7f7f7f;
+	float: left;
+	font-size: 14px;
+	height: 20px;
+	line-height: 20px;
+	text-align: left;
+	width: 60px;
+}
+
+.filter{
+	display: block;
+	float: left;
+	height: auto;
+	line-height: 20px;
+	overflow: hidden;
+	width: 624px;
+}
+
+
+.filter li {
+    display: block;
+    float: left;
+    height: 26px;
+    margin-right: 25px;
+}
+
+ul li, .xl li {
+  list-style: outside none none;
+}
+
+#cont{
+	width:690px;
+	padding: 30px 10px 10px;
+	background:#fff;
+	height:auto;
+}
+
+#cont .screen{
+	margin-top:140px;
+}
+
+#cont .screen a{
+	display:block;
+	float:left;
+	color:#666;
+	width:55px;
+	height:20px;
+	text-align:center;
+	padding:5px;
+	text-decoration:none;
+	border:1px solid #eee;
+	margin-right:10px;
+	font:16px/20px "microsoft yahei";
+	background:#f3f3f3;
+}
+
+#cont .screen a span{
+	color:#bbb;
+	margin-left:8px;
+	font:12px/20px "microsoft yahei";
+}
+
+#cont .screen .allway{
+	width:auto;
+	height:auto;
+	padding:10px 2px 0 2px;
+	position:absolute;
+	background:#f3f3f3;
+	border:1px solid #ddd;
+	top: 92px;
+}
+
+#cont .screen .sosh{
+	left:417px;
+}
+
+#cont .screen .allway a{
+	width:auto;
+	height:auto;
+	font:16px "microsoft yahei";
+	display:block;
+	float:none;
+	color:#666;
+	width:80px;
+	height:20px;
+	text-align:left;
+	padding:3px;
+	text-decoration:none;
+	border:none;
+	margin-right:0;
+	margin-bottom:8px;
+	font:16px "microsoft yahei";
+}
+
+#cont .screen .allway a.schover{
+	color:#19b4ea;
+	background:#e5edf2;
+}
+
+#cont .screen .allway a:hover{
+	color:#19b4ea;
+	background:#e5edf2;
+}
+
+.topiclist {
+  border-bottom: 1px solid #ededed;
+  margin-bottom: 20px;
+  overflow: hidden;
+  padding: 20px 5px;
+  width: 682px;
+}
+
+.topiclist a{
+	float:left;
+	display:block;
+	margin-right:5px;
+	text-decoration:none;
+	color:#434343;
+	font:16px "microsoft yahei";
+}
+
+.topic{
+	display:block;
+	float:left;
+	margin-left:10px;
+	//height:auto;
+	width: 617px;
+	word-break: break-all;
+}
+
+.topiclist a.board{
+	font:14px "microsoft yahei";
+	background:#0BF;
+	color:#fff;
+	width:auto;
+	text-align:center;
+	padding:1px 7px;
+	border-radius:3px;
+}
+
+.topiclist a.sshare{
+	background:#32CD32;
+}
+
+.topiclist a.sfeel{
+	background:#EE9611;
+}
+
+.topiclist a.swt{
+	background:#F55DBA;
+}
+
+.topiclist a.topictitle{
+	padding:0 5px;
+    border: 0 none;
+    list-style: outside none none;
+    margin: 0;
+}
+
+.topiclist a.addjing{
+	color:#F79709;
+}
+
+.topiclist a.addding{
+	color:#EE1111;
+}
+
+.topiclist a.addading{
+	font-weight:bold;
+}
+
+.marks{
+	display:block;
+	width:auto;
+	border: 0 none;
+    list-style: outside none none;
+    margin: 0;
+    padding: 0;
+}
+
+.marks a{
+	font:14px "microsoft yahei";
+	background:#0BF;
+	color:#fff;
+	width:auto;
+	text-align:center;
+	padding:0 2px;
+	font-weight: bold;
+}
+
+.marks a.jing{
+	background:#F70909;
+}
+
+.marks a.re{
+	background:#EEC211;
+}
+
+.marks a.tu{
+	background:#2BD52B;
+}
+
+.marks a.ding{
+	background:#d5d52b;
+}
+
+.marks a.ading{
+	background:#D52BB3;
+}
+
+.tinfo{
+  clear: both;
+  color: #d0d4d8;
+  font-size: 12px;
+  height: 18px;
+  margin-top: 30px;
+}
+
+.tinfo a{
+	font:14px "microsoft yahei" ;
+	color:#d0d4d8;
+	margin-right:10px;
+}
+
+.tinfo a.liu,.tinfo a.hui{
+	font:12px "microsoft yahei";
+	background:#d0d4d8;
+	color:#fff;
+	width:auto;
+	text-align:center;
+	padding:0 2px;
+	line-height:20px
+	font-weight: bold;
+	margin:0 5px;
+}
+
+.tinfo a.tctime{
+	float:right;
+}
+
+#cont h3 {
+  border-bottom: 1px solid #e5e5e5;
+  color: #434343;
+  font:16px "microsoft soft";
+  font-weight: normal;
+  margin: 34px 0 20px 0;
+  padding-bottom: 15px;
+  text-align: left;
+  margin-bottom:20px;
+}
+
+#kkpages{
+	width:710px;
+	margin-top:20px;
+}
+
+#kkpages .pageBtnWrap{
+	float: right;
+}
+
+#kkpager .infoTextAndGoPageBtnWrap {
+  font: 18px "microsoft yahei";
+  padding-top: 3px;
+}
+
+#kkpager_btn_go_input {
+  color: #666;
+  height: 26px;
+  font-size:15px;
+}
+
+
+
+
+
+
+
+
+
+
+
+

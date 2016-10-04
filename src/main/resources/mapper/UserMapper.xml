@@ -3,6 +3,9 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.ifxcode.bbs.dao.UserDao">
+
+	<cache type="cn.ifxcode.bbs.dao.cache.LoggingRedisCache"/>
+
 	<resultMap id="BaseUser" type="User">
 		<association property="userAccess" javaType="UserAccess">
 			<id column="user_id" property="userId" jdbcType="BIGINT" />
@@ -12,14 +15,34 @@
 			<result column="user_email" property="userEmail" jdbcType="VARCHAR" />
 			<result column="user_reg_ip" property="userRegIp" jdbcType="VARCHAR" />
 			<result column="user_is_online" property="userIsOnline" jdbcType="INTEGER" />
-			<result column="user_Is_Locked" property="userIsLocked" jdbcType="INTEGER" />
+			<result column="user_is_locked" property="userIsLocked" jdbcType="INTEGER" />
 			<result column="user_is_speak" property="userIsSpeak" jdbcType="INTEGER" />
 			<result column="user_lastest_login_time" property="userLastestLoginTime" jdbcType="VARCHAR" />
 			<result column="user_lastest_login_ip" property="userLastestLoginIp" jdbcType="VARCHAR" />
 			<result column="user_create_time" property="userCreateTime" jdbcType="VARCHAR" />
 			<result column="user_is_admin" property="userIsAdmin" jdbcType="INTEGER" />
-			<result column="user_is_boder_manager" property="userIsBoderManager" jdbcType="INTEGER" />
+			<result column="user_is_board_manager" property="userIsBoderManager" jdbcType="INTEGER" />
 			<result column="user_is_delete" property="userIsDelete" jdbcType="INTEGER" />
+		</association>
+		<association property="userInfo" javaType="UserInfo">
+			<id column="user_id" property="userId" jdbcType="BIGINT" />
+			<result column="user_head_img" property="userHeadImg" jdbcType="VARCHAR" />
+			<result column="user_birth" property="userBirth" jdbcType="VARCHAR" />
+			<result column="user_sex" property="userSex" jdbcType="INTEGER" />
+			<result column="user_province" property="userProvince" jdbcType="VARCHAR" />
+			<result column="user_city" property="userCity" jdbcType="VARCHAR" />
+			<result column="user_like" property="userLike" jdbcType="VARCHAR" />
+			<result column="user_sign" property="userSign" jdbcType="VARCHAR" />
+			<result column="user_qq" property="userQq" jdbcType="VARCHAR" />
+			<result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
+		</association>
+		<association property="userPrivacy" javaType="UserPrivacy">
+			<id column="user_id" property="userId" jdbcType="BIGINT" />
+			<result column="base_is_public" property="baseIsPublic" jdbcType="INTEGER" />
+			<result column="friend_is_public" property="friendIsPublic" jdbcType="INTEGER" />
+			<result column="is_add_friend" property="isAddFriend" jdbcType="INTEGER" />
+			<result column="topic_is_public" property="topicIsPublic" jdbcType="INTEGER" />
+			<result column="reply_is_public" property="replyIsPublic" jdbcType="INTEGER" />
 		</association>
 		<collection property="roles" ofType="Role">
 			<id column="role_id" property="roleId" jdbcType="INTEGER"/>
@@ -31,19 +54,132 @@
 		</collection>
 	</resultMap>
 
-	<select id="authLogin" resultMap="BaseUser">
-		select ua.*, r.* 
-		from user_access as ua, role as r, user_role as ur 
+	<select id="authLogin" resultMap="BaseUser" useCache="false">
+		select ua.*, ui.*, up.*, r.* 
+		from user_access as ua, user_info as ui, role as r, user_role as ur, user_privacy as up
 		where user_name = #{name} and user_password = #{password} 
 		and user_is_admin = 1 
 		and user_is_delete = 0 
 		and user_is_locked = 0 
 		and ua.user_id = ur.user_id
-		and r.role_id = ur.role_id;
+		and r.role_id = ur.role_id
+		and ui.user_id = ua.user_id
+		and ua.user_id = up.user_id
+	</select>
+	
+	<select id="loginCheck" resultMap="BaseUser" useCache="false">
+		select ua.*, ui.*, up.*, r.* 
+		from user_access as ua, user_info as ui, role as r, user_role as ur, user_privacy as up
+		where user_name = #{name} and user_password = #{password} 
+		and user_is_delete = 0 
+		and user_is_locked = 0 
+		and ua.user_id = ur.user_id
+		and r.role_id = ur.role_id
+		and ui.user_id = ua.user_id
+		and ua.user_id = up.user_id
 	</select>
 	 
-	<select id="valueCheck" resultType="Integer">
-		select count(*) from user_access where ${type} = #{value}
+	<select id="valueCheck" resultType="Integer" useCache="false">
+		select count(1) as count from user_access where ${type} = #{value}
+	</select>
+
+	<update id="updateUserLastestTimeAndIp">
+		update user_access set
+		user_lastest_login_ip = #{userLastestLoginIp}, 
+		user_lastest_login_time = #{userLastestLoginTime} 
+		where user_id = #{userId}
+	</update>
+
+	<select id="getAllUser" resultMap="BaseUser">
+		select ua.user_id, ua.user_name, ua.user_nickname, ua.user_email, ua.user_is_locked, ua.user_reg_ip, 
+			ua.user_create_time, ui.user_sex, ui.user_province, ui.user_city, r.role_name 
+		from user_access as ua, user_info as ui, role as r, user_role as ur 
+		where 1 = 1 
+		and user_is_delete = 0 
+		and ua.user_id = ur.user_id
+		and r.role_id = ur.role_id
+		and ui.user_id = ua.user_id
+		<if test="userid != null">
+			and ua.user_id = #{userid}
+		</if>
+		<if test="username != null">
+			and ua.user_name like #{username}
+		</if>
+		<if test="nickname != null">
+			and ua.user_nickname like #{nickname}
+		</if>
+		<if test="sex != null">
+			and ui.user_sex = #{sex}
+		</if>
+		<if test="role != null">
+			and r.role_id = #{role}
+		</if>
+		<if test="status != null">
+			and ua.user_is_locked = #{status}
+		</if>
+		<if test="starttime != null">
+			<![CDATA[ and DATE_FORMAT(ua.user_create_time, '%Y-%m-%d') >= #{starttime} ]]>
+		</if>
+		<if test="endtime != null">
+			<![CDATA[ and DATE_FORMAT(ua.user_create_time, '%Y-%m-%d') <= #{endtime} ]]>
+		</if>
+		order by ua.user_id asc
+	</select>
+
+	<insert id="insertUserAccess" keyProperty="userId" parameterType="UserAccess">
+		insert into user_access (user_name, user_nickname, user_password, user_email, 
+			user_reg_ip, user_is_online, user_is_locked, user_is_speak, user_lastest_login_time, 
+			user_lastest_login_ip, user_create_time, user_is_admin, user_is_board_manager,
+			user_is_delete)
+		values (#{userName}, #{userNickname}, #{userPassword}, #{userEmail}, 
+			#{userRegIp}, #{userIsOnline}, #{userIsLocked}, #{userIsSpeak}, #{userLastestLoginTime}, 
+			#{userLastestLoginIp}, #{userCreateTime}, #{userIsAdmin}, #{userIsBoderManager}, 
+			#{userIsDelete})
+	</insert>
+	
+	<insert id="insertUserInfo" useGeneratedKeys="true" keyProperty="userId" parameterType="UserInfo">
+		insert into user_info (user_id, user_head_img, user_birth, user_sex, user_province,
+			user_city, user_like, user_sign)
+		values (#{userId}, #{userHeadImg}, #{userBirth}, #{userSex}, #{userProvince}, 
+			#{userCity}, #{userLike}, #{userSign})
+	</insert>
+	
+	<insert id="insertUserPrivacy" useGeneratedKeys="true" keyProperty="userId" parameterType="UserPrivacy">
+		insert into user_privacy (user_id, base_is_public, friend_is_public, is_add_friend, topic_is_public, reply_is_public) 
+		values (#{userId}, #{baseIsPublic}, #{friendIsPublic}, #{isAddFriend}, #{topicIsPublic}, #{replyIsPublic})
+	</insert>
+	
+	<select id="getUserById" resultMap="BaseUser">
+		select ua.user_id, ua.user_name, ua.user_nickname, ua.user_email, ua.user_is_online, 
+			ua.user_is_speak, ua.user_lastest_login_time, ua.user_create_time, ua.user_is_admin, 
+			ua.user_is_board_manager, ui.*, up.*, r.role_id, r.role_name, r.role_color
+		from user_access as ua, user_info as ui, user_privacy as up, role as r, user_role as ur 
+		where ua.user_id = up.user_id 
+		and ua.user_id = ui.user_id 
+		and ua.user_id = ur.user_id 
+		and r.role_id = ur.role_id
+		and ua.user_is_delete = 0 
+		and ua.user_is_locked = 0 
+		and ua.user_id = #{userId}
+	</select>
+	
+	<select id="getUserNickname" resultType="String">
+		select user_nickname from user_access where user_is_delete = 0 
+		and user_is_locked = 0 and user_id = #{userId}
+	</select>
+	
+	<select id="getUserByUserNickname" resultMap="BaseUser">
+		select ua.user_id, ua.user_name, ua.user_nickname, ua.user_email, ua.user_is_online, 
+			ua.user_is_speak, ua.user_lastest_login_time, ua.user_create_time, ua.user_is_admin, 
+			ua.user_is_board_manager, ui.*, up.*, r.role_id, r.role_name, r.role_color
+		from user_access as ua, user_info as ui, user_privacy as up, role as r, user_role as ur 
+		where ua.user_id = up.user_id 
+		and ua.user_id = ui.user_id 
+		and ua.user_id = ur.user_id 
+		and r.role_id = ur.role_id
+		and ua.user_is_delete = 0 
+		and ua.user_is_locked = 0 
+		and ua.user_nickname = #{userNickname}
 	</select>
 
 </mapper>

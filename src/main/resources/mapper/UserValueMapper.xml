@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ifxcode.bbs.dao.UserValueDao">
+
+	<cache type="cn.ifxcode.bbs.dao.cache.LoggingRedisCache"/>
+
+	<insert id="insertUserValue">
+		insert into user_value (
+			user_id, user_experience, today_exp, today_exp_time, user_gold, today_gold, today_gold_time, 
+			user_topic_count, user_reply_count, user_friend_count, user_past_count, user_past_serial_count, user_lastest_past_time) 
+		values (
+			#{userId}, #{userExperience}, #{todayExp}, #{todayExpTime}, #{userGold}, #{todayGold}, 
+			#{todayGoldTime}, #{userTopicCount}, #{userReplyCount}, #{userFriendCount}, 
+			#{userPastCount}, #{userPastSerialCount}, #{userLastestPastTime}
+		)
+	</insert>
+	
+	<select id="getUserValue" resultType="UserValue">
+		select * from user_value where user_id = #{userId}
+	</select>
+
+	<update id="updateUserValue">
+		update user_value set user_experience = #{userExperience}, today_exp = #{todayExp}, 
+		today_exp_time = #{todayExpTime}, user_gold = #{userGold}, today_gold = #{todayGold}, 
+		today_gold_time = #{todayGoldTime}, user_topic_count = #{userTopicCount}, 
+		user_reply_count = #{userReplyCount}, user_friend_count = #{userFriendCount}, 
+		user_past_count = #{userPastCount}, user_past_serial_count = #{userPastSerialCount}, 
+		user_lastest_past_time = #{userLastestPastTime} where user_id = #{userId}
+	</update>
+
+</mapper>

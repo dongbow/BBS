@@ -1,0 +1,226 @@
+@CHARSET "UTF-8";
+body{
+	background-color:#fafafa ;
+}
+
+.reindex{
+	display:block;
+	font:18px "microsoft yahei"; 
+	color:#666;
+	width:120px;
+	height:60px;
+	//border:1px solid #eee;
+	//border-radius:8px;
+	text-align:center;
+	line-height:56px;
+	margin-top:10px;
+	//background-color:#eee;
+}
+
+.reindex:hover{
+	color:#19b4ea;
+	//border:1px solid #19b4ea;
+}
+
+.right_bar {
+  margin-top: 200px;
+}
+
+#searchpanel {
+  border-bottom: medium none;
+  height: auto;
+  margin: 10px auto;
+  min-height: 768px;
+  padding: 0 15px;
+  text-align: center;
+  width: 960px;
+}
+
+#logopic{
+	margin:30px auto;
+}
+
+.input_w{
+	margin:40px auto;
+	width:640px;
+	height:60px;
+	border:1px solid #19b4ea;
+	border-radius:6px;
+	text-align:center;
+}
+
+.sach{
+	float:left;
+	display:block;
+	margin:9px 10px;
+	//line-height:10px;
+	width:532px;
+	height:40px;
+	border:none;
+	color:#666;
+	//border-radius:5px;
+	font:20px "microsoft yahei";
+	background:#fafafa;
+}
+
+.scbtn{
+	float:left;
+	//margin:8px 0;
+	display:block;
+	width:86px;
+	height:60px;
+	color:#fff;
+	font:22px "arial";
+	line-height:60px;
+	background-color:#19b4ea;
+	//border:1px solid #ccc;
+	border-top-right-radius:5px;
+	border-bottom-right-radius:5px;
+}
+
+#toolway {
+  margin: 5px 0px 10px 158px;
+  width: 640px;
+  text-align:center;
+}
+
+#toolway a{
+	float:left;
+	display:block;
+	font:18px "microsoft yahei"; 
+	color:#666;
+	width:90px;
+	height:28px;
+	text-align:left;
+}
+
+#toolway a.author{
+	width:60px;
+}
+
+#toolway a.great{
+	float:right;
+	text-align:right;
+	color:#000;
+}
+
+#toolway a.quicks{
+	color:#666;
+}
+
+#qsc{
+	width:160px;
+	height:auto;
+	padding:10px;
+	background:#fff;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+	border-radius:5px;
+	position: absolute;
+	//margin-top: 28px;
+	top:259px;
+	margin-left: 576px;	
+}
+
+#qsc ul li{
+	display:block;
+	padding:5px;
+	text-align: left;
+}
+
+#qsc ul li:hover{
+	background:#e5edf2;
+}
+
+#qsc ul li a{
+	font:18px "microsoft yahei";
+	color:#666;
+}
+
+#qsc ul li a:hover{
+	color:#00a7ea;	
+}
+
+#tabs0 {
+	margin-bottom:30px;
+	margin:10px auto;
+    border: 1px solid #bbb;
+    height: 2800px;
+    width: 1000px;
+}
+
+#menu0 {
+    width: 1000px;
+}
+
+#menu0 li {
+    background: none repeat scroll 0 0 #ffffff;
+    border-bottom: thin solid #19b4ea;
+    cursor: pointer;
+    display: block;
+    float: left;
+    padding: 15px 0;
+    text-align: center;
+    width: 250px;
+}
+
+#menu0 li.hover {
+    background: none repeat scroll 0 0 #19b4ea;
+    color:#fff;
+}
+
+#main0 ul {
+    display: none;
+}
+
+#main0 ul.block {
+    display: block;
+}
+
+.CollapsiblePanel {
+	margin: 0px;
+	padding: 0px;
+	width:auto;
+//	border-left: solid 1px #CCC;
+//	border-right: solid 1px #999;
+//	border-top: solid 1px #999;
+	border-bottom: solid 1px #CCC;
+}
+
+.CollapsiblePanelTab {
+	font:1em "microsoft yahei";
+	background-color: #fff;
+	text-align:center;
+//	border-bottom: solid 1px #CCC;
+	margin: 0px;
+	padding: 2px;
+	cursor: pointer;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+}
+
+.CollapsiblePanelContent {
+	margin: 0px;
+	padding: 0px;
+}
+
+.CollapsiblePanelTab a {
+	color: black;
+	text-decoration: none;
+}
+
+.CollapsiblePanelOpen .CollapsiblePanelTab {
+	color:#19b4ea;
+}
+
+.CollapsiblePanelClosed .CollapsiblePanelTab {
+ /* background-color: #EFEFEF */
+}
+
+.CollapsiblePanelTabHover,  .CollapsiblePanelOpen .CollapsiblePanelTabHover {
+	//background-color: #fff;
+}
+
+.CollapsiblePanelFocused .CollapsiblePanelTab {
+	//background-color: #fff;
+}
+

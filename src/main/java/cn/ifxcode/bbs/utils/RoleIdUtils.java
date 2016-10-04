@@ -27,4 +27,8 @@ public class RoleIdUtils {
 		return roleIds;
 	}
 	
+	public static String getRoleIdsFromCookie(List<Integer> ids) {
+		return ids.toString().substring(1, ids.toString().length() - 1).replace(",", "");
+	}
+	
 }

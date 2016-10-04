@@ -1,13 +1,19 @@
 package cn.ifxcode.bbs.entity;
 
-public class Role {
+import java.io.Serializable;
+import java.util.List;
 
+public class Role implements Serializable{
+
+	private static final long serialVersionUID = 7264875619765583489L;
+	
 	private Integer roleId;
 	private String roleName;
 	private String roleColor;
 	private String roleDesc;
 	private Integer roleStatus;
 	private String roleCreateTime;
+	private List<Resources> resources;
 
 	public Integer getRoleId() {
 		return roleId;
@@ -55,5 +61,13 @@ public class Role {
 
 	public void setRoleCreateTime(String roleCreateTime) {
 		this.roleCreateTime = roleCreateTime;
+	}
+
+	public List<Resources> getResources() {
+		return resources;
+	}
+
+	public void setResources(List<Resources> resources) {
+		this.resources = resources;
 	}
 }

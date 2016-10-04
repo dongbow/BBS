@@ -12,10 +12,18 @@
 	<servlet>  
         <servlet-name>DruidStatView</servlet-name>  
         <servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>  
+        <init-param>  
+	        <param-name>loginUsername</param-name>  
+	        <param-value>druid_dongbo</param-value>  
+	    </init-param>  
+	    <init-param>  
+	        <param-name>loginPassword</param-name>  
+	        <param-value>access_able123sdo</param-value>  
+	    </init-param> 
     </servlet>  
     <servlet-mapping>  
         <servlet-name>DruidStatView</servlet-name>  
-        <url-pattern>/druid/*</url-pattern>  
+        <url-pattern>/system/auth/druid/*</url-pattern>  
     </servlet-mapping>
 	<filter>  
         <filter-name>DruidWebStatFilter</filter-name>  
@@ -55,6 +63,15 @@
         <servlet-name>bbs-dispatcher</servlet-name>
         <!-- 默认匹配所有的请求 -->
         <url-pattern>/</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+    	<servlet-name>code</servlet-name>
+    	<servlet-class>cn.ifxcode.bbs.utils.ValidateCode</servlet-class>
+    </servlet>
+    <servlet-mapping>
+    	<servlet-name>code</servlet-name>
+    	<url-pattern>/validateCode.img</url-pattern>
     </servlet-mapping>
     
     <error-page>

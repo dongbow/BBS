@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ifxcode.bbs.dao.QuickNavigationDao">
+	
+	<select id="getAllQuickNavigations" resultType="QuickNavigation">
+		select * from bbs_quick_navigation where quick_status = 0 order by quick_sort asc
+	</select>
+	
+	<select id="getAllQuickNavigationsPage" resultType="QuickNavigation">
+		select * from bbs_quick_navigation order by quick_create_time desc
+	</select>
+	
+</mapper>

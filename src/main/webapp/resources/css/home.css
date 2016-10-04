@@ -1,0 +1,327 @@
+@CHARSET "UTF-8";
+
+body{
+	background:#fff;
+}
+
+#homeerr{
+	width:900px; 
+	height:auto;
+	margin:8% auto;
+	background:#fff;
+	padding:35px 50px;
+	overflow:hidden;
+}
+
+#homeerr span a{
+	color:#19b4ea;
+}
+
+#homeerr a{
+	font:16px "microsoft yahei";
+	color:#fff;
+	text-decoration:none;
+}
+
+#homeerr a:hover{
+	color:#19b4ea;
+	text-decoration:underline;
+}
+
+#homeerr p{
+	font:16px "microsoft yahei";
+	color:#333;
+}
+
+#homemaincont{
+	width:1000px;
+	margin:0 auto;
+	margin-bottom:40px;
+}
+	
+.cl::after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+#local{
+    background: transparent none repeat scroll 0 0;
+    border: medium none;
+    height: 30px;
+    line-height: 29px;
+    margin: 10px 0 2px;
+    padding-left: 0;
+}
+
+#local .z {
+    padding-right: 10px;
+    width: 100%;
+}
+
+.z{
+	float:left;
+}
+
+#local .z span,#local .z a{
+	color:#515151;
+	font:16px "microsft yahei";
+}
+
+#local .z a.line:hover{
+	color:#19b4ea;
+	text-decoration:underline;
+}
+
+#ct{
+	min-height:400px;
+	width:1000px;
+	overflow:hidden;
+}
+
+.setitem{
+	border: 1px solid #ccc;
+}
+
+#homeleftmenu{
+	width:130px;
+	padding:10px;
+	min-height:400px;
+	height:auto;
+	background:#e5edf2;
+	float:left;
+	border-right:1px solid #ccc;
+}
+
+.chleft{
+	margin: 0 10px 0 -10px;
+	padding: 0 10px;
+	width: 130px;
+	border-bottom:1px solid #e4e7e9;
+}
+
+.chleft h2 {
+  color: #444;
+  font: 18px "microsft yahei";
+  margin-bottom:0 10px;
+  margin-top: 0;
+  height:18px;
+}
+
+#homeitems{
+	margin: 0 10px 10px -10px;
+	//padding: 0 10px;
+	width: 150px;
+}
+
+#homeitems li{
+	display:block;
+	width:130px;
+	height:40px;
+	padding:0 10px;
+}
+
+#homeitems li a{
+	font:16px/40px "microsft yahei";
+	color:#666;
+	width:130px;
+	height:40px;
+	display:block;
+	border-bottom: 1px dashed #ccc;
+}
+
+#homeitems li a:hover{
+	color:#333;
+}
+
+#homeitems li.hover{
+	background:#fff;
+	width:151px;
+}
+
+#rhomecont{
+	float:left;
+	margin-left:50px;
+	height:auto;
+	width:770px;
+	min-height:400px;
+	padding:10px;
+	//background:#f2f2f2;
+}
+
+#rhomecont ul{
+	border-bottom: 1px solid #ccc;
+    height: 31px;
+    margin: 0 auto;
+    //overflow: hidden;
+    padding: 0 10px;
+    width: 730px;
+}
+
+#rhomecont ul li{
+	display:block;
+	float:left;
+	height:20px;
+	width:auto;
+	padding:5px 10px;
+	background:#e5edf2;
+	margin-right:10px;
+	border:1px solid #ccc;
+}
+
+#rhomecont ul li.csth{
+	border-bottom:1px solid #fff;
+	background:#fff;
+}
+
+#rhomecont ul li a{
+	color:#666;
+	font:16px "microsoft yahei";
+	text-decoration:none;
+}
+
+#rhomecont ul li a:hover{
+	color:#333;
+}
+
+#rhomecont .cpcont{
+    height: auto;
+    margin: 0 auto;
+    padding: 10px;
+    width: 730px;
+}
+
+#rhomecont .cpcont table th{
+	width:80px;
+	text-align:right;
+	padding:10px;
+	font:16px "microsoft yahei";
+	color:#666;
+}
+
+#rhomecont .cpcont table td{
+	padding:5px;
+}
+
+#rhomecont .cpcont table td input{
+	width:300px;
+	height:20px;
+	text-align:left;
+	padding:7px 10px;
+	font:15px "microsoft yahei";
+	color::#666;
+	border:1px solid #ddd;
+}
+
+#rhomecont .cpcont table td input:focus{
+	border:1px solid #19b4ea;
+}
+
+#rhomecont .cpcont table td select{
+	width:90px;
+	height:35px;
+	font:15px/35px "microsoft yahei";
+	color::#666;
+}
+
+#rhomecont .cpcont table td textarea{
+	width:300px;
+	height:100px;
+	padding:7px 10px;
+	font:15px "microsoft yahei";
+	color::#666;
+	border:1px solid #ddd;
+}
+
+#rhomecont .cpcont table td textarea.likes{
+	height:60px;
+}
+
+#rhomecont .cpcont table td textarea:focus{
+	border:1px solid #19b4ea;
+}
+
+#upbtn{
+	width:80px;
+	height:30px;
+	font:16px "microsoft yahei";
+	background:#19b4ea;
+	text-align:center;
+	border:1px solid #3CF;
+	color:#fff;
+	margin:20px 150px;
+	cursor: pointer;
+}
+
+#mailchoose{
+	position:relative;
+}
+
+#mailchoose ul.on_changes{
+	width:300px; 
+	position:absolute; 
+	margin-top:14px; 
+	list-style:none; 
+	background:#FFF; 
+	border:1px solid #ccc; 
+	display:none; 
+	padding:10px;
+	height:auto;
+}
+
+#mailchoose ul.on_changes a{
+	margin:8px;
+	padding:4px;
+	font-size:18px;
+}
+
+#mailchoose ul.on_changes li{
+	margin:8px;
+	padding:4px;
+	background: #fff;
+	border:none;
+	float: none;
+	width: auto;
+}
+
+#mailchoose ul.on_changes li.active{ 
+	background:#CEE7FF;
+}
+
+.topc{
+	padding:10px 0;
+	height:auto;
+	border-bottom:1px solid #ddd;
+}
+
+.topc p,.bottomc span{
+	padding:10px;
+	color:#666;
+	font:16px "microsoft yahei";
+}
+
+.bottomc{
+	padding:10px 0;
+	height:auto;
+}
+
+.bottomc h2{
+	padding:0 0 0 10px;
+	margin:0 0 10px 0;
+	font:20px "microsoft yahei";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

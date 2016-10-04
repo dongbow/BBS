@@ -21,6 +21,10 @@ public class BbsErrorCode {
 	
 	public static final Integer USER_ID_NOT_EXISTS = 3001;
 	public static final Integer NICKNAME_NOT_EXISTS = 3002;
+	public static final Integer EMAIL_NOT_EXISTS = 3003;
+	
+	public static final Integer NOT_LOGIN = 9001;
+	public static final Integer REPEAT_SIGN = 9002;
 	
 	private static Map<Integer, String> map = new HashMap<Integer, String>();
 	
@@ -39,6 +43,10 @@ public class BbsErrorCode {
 		
 		map.put(USER_ID_NOT_EXISTS, "用户不存在");
 		map.put(NICKNAME_NOT_EXISTS, "用户不存在");
+		map.put(EMAIL_NOT_EXISTS, "邮箱不存在");
+		
+		map.put(NOT_LOGIN, "您还没有登录");
+		map.put(REPEAT_SIGN, "您今天已经签到过了，请明天再继续");
 	}
 	
 	public static String getDescribe(Integer errorCode) {

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ifxcode.bbs.dao.BoardDao">
+	
+	<select id="getBoardsByNavId" resultType="Board">
+		select * from bbs_board where board_status = 0 and board_is_open = 0 
+			and nav_id = #{navId}
+		order by board_sort asc
+	</select>
+	
+	<select id="getBoardId" resultType="Integer">
+		select board_id from bbs_board where board_status = 0 and board_is_open = 0 
+	</select>
+	
+</mapper>
