@@ -11,7 +11,7 @@ public class GoldHistory implements Serializable {
 	private String nickname;
 	private int goldValue;
 	private int goldFrom;
-	private String glodDesc;
+	private String goldDesc;
 	private String createTime;
 
 	public GoldHistory() {
@@ -27,12 +27,12 @@ public class GoldHistory implements Serializable {
 	}
 
 	public GoldHistory(long userId, String nickname, int goldValue,
-			int goldFrom, String glodDesc, String createTime) {
+			int goldFrom, String goldDesc, String createTime) {
 		this.userId = userId;
 		this.nickname = nickname;
 		this.goldValue = goldValue;
 		this.goldFrom = goldFrom;
-		this.glodDesc = glodDesc;
+		this.goldDesc = goldDesc;
 		this.createTime = createTime;
 	}
 
@@ -76,12 +76,12 @@ public class GoldHistory implements Serializable {
 		this.goldFrom = goldFrom;
 	}
 
-	public String getGlodDesc() {
-		return glodDesc;
+	public String getGolDesc() {
+		return goldDesc;
 	}
 
-	public void setGlodDesc(String glodDesc) {
-		this.glodDesc = glodDesc;
+	public void setGoldDesc(String goldDesc) {
+		this.goldDesc = goldDesc;
 	}
 
 	public String getCreateTime() {

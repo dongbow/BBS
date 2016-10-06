@@ -3,15 +3,7 @@
 <html lang="en">
 <head>
 	<#include "../common/import.ftl">
-<<<<<<< HEAD
   	<title>用户管理</title>
-=======
-	<!--dynamic table-->
-	<link href="${path}/resources/static/admin/js/advanced-datatable/css/demo_page.css" rel="stylesheet" />
-	<link href="${path}/resources/static/admin/js/advanced-datatable/css/demo_table.css" rel="stylesheet" />
-	<link href="${path}/resources/static/admin/js/data-tables/DT_bootstrap.css" rel="stylesheet" />
-  	<title>用户列表</title>
->>>>>>> e8038f159cc0d6152b20abbdfb1a48fe3ba11f54
 </head>
 
 <body class="sticky-header">

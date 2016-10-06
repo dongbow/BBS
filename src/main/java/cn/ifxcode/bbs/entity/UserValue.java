@@ -19,6 +19,8 @@ public class UserValue implements Serializable {
 	private int userPastCount;
 	private int userPastSerialCount;
 	private String userLastestPastTime;
+	private boolean expChange;
+	private boolean goldChange;
 
 	public long getUserId() {
 		return userId;
@@ -122,6 +124,22 @@ public class UserValue implements Serializable {
 
 	public void setUserFriendCount(int userFriendCount) {
 		this.userFriendCount = userFriendCount;
+	}
+
+	public boolean isExpChange() {
+		return expChange;
+	}
+
+	public void setExpChange(boolean expChange) {
+		this.expChange = expChange;
+	}
+
+	public boolean isGoldChange() {
+		return goldChange;
+	}
+
+	public void setGoldChange(boolean goldChange) {
+		this.goldChange = goldChange;
 	}
 
 }

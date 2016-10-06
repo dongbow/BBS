@@ -6,7 +6,10 @@ var Url = {
 	},
 	cpost : function() {
 		return root + "/post/choose";
-	} 
+	},
+	login : function() {
+		return root + "/tip/nologin";
+	}
 };
 
 $(function(){
@@ -17,15 +20,9 @@ $(function(){
 		}
 		$.post(Url.sign(), function(result) {
 			if(result.rc.rc == 1) {
-				$('#sign_btn').width('135px');
-				$('#sign_num').css('display','inline');
-				$('#sign_num').css('background','#6acb8c');
-				$('#sign_num').width('135px');
-				$('#sign_num').html('<p>连续签到天数</p><label id="sign_text" class="sign_text">' + result.uv.userPastSerialCount + '天</label>');
-				$('#signin').css('background','#3baa62');
-				$('#sign_text').html('已签到');
+				signSuc(result.uv.userPastSerialCount);
 			} else if(result.rc.rc == 9001){
-				alert(result.rc.msg);
+				loginDialog();
 			} else {
 				alert(result.rc.msg);
 			}
@@ -38,9 +35,44 @@ $(function(){
 		$('#ftopic_cont').remove();
 		$('#fTopic').hide();
 	});
+	
+	$('.tipclose').live('click', function(){
+		$('#checktip').remove();
+		$('#bbs-dialog').hide();
+	});
 });
 
 function choose() {
-	$('#fTopic').load(Url.cpost());
-	$('#fTopic').show();
+	$.get(Url.cpost(), function(result) {
+		if(result.rc != undefined && result.rc.rc == 9001){
+			loginDialog();
+			return false;
+		} else {
+			$('#fTopic').html(result);
+			$('#fTopic').show();
+		}
+	});
+}
+
+function loginDialog() {
+	$('#bbs-dialog').load(Url.login(),'',function(){
+		$('#checktip').css({
+			'top' : ($(window).height() - $('#checktip').height())/2 + 'px',
+			'left': ($(window).width() - $('#checktip').width())/2+'px'
+		});
+		$('.dialog_login_btn').attr('href', root + '/account/login?backurl=' + encodeURIComponent(window.location.href));
+		$('#bbs-dialog').show();
+	});
+}
+
+function signSuc(number) {
+	$('#sign_btn').width('135px');
+	$('#sign_num').css({
+		'display':'inline',
+		'background':'#6acb8c',
+		'width':'135px'
+	});
+	$('#sign_num').html('<p>连续签到天数</p><label id="sign_text" class="sign_text">' + number + '天</label>');
+	$('#signin').css('background','#3baa62');
+	$('#sign_text').html('已签到');
 }

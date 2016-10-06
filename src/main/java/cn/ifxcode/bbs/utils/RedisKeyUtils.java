@@ -41,5 +41,9 @@ public class RedisKeyUtils {
 	public static String getClassifyByBoardId(Integer id) {
 		return "bbs:global:classify:boardid:" + id;
 	}
+
+	public static String getSystemConfig() {
+		return "bbs:system:config";
+	}
 	
 }

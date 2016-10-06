@@ -42,6 +42,7 @@
 				    	<input id="rem_status" type="hidden" value="0" name="remember">
 				    	<button id="login_btn" class='login-btn'>登&nbsp;&nbsp;&nbsp;&nbsp;录</button>
 				    </div>
+				    <input type="hidden" id="backurl" name="backurl" value="">
 				    <div class="rf">
 				    	<a href="${path}/account/register">注册账号</a> | 
 				    	<a href="${path}/account/forget">找回密码</a>
@@ -51,5 +52,10 @@
 		</div>
 	</div>
 	<#include "../common/footer.ftl"/>
+	<script type="text/javascript">
+		$(function(){
+			$('#backurl').attr('value', window.location.href.split('=')[1]);
+		})
+	</script>
 	</body>
 </html>

@@ -8,4 +8,13 @@
 		select * from swf_area
 	</select>
 	
+	<insert id="insertGoldHistory" parameterType="GoldHistory">
+		insert into gold_history (user_id, nickname, gold_value, gold_from, gold_desc, create_time)
+		values(#{userId}, #{nickname}, #{goldValue}, #{goldFrom}, #{goldDesc}, #{createTime})
+	</insert>
+	
+	<insert id="insertExperienceHistory" parameterType="ExperienceHistory">
+		insert into experience_history (user_id, nickname, exp_value, exp_desc, create_time)
+		values(#{userId}, #{nickname}, #{expValue}, #{expDesc}, #{createTime})
+	</insert>
 </mapper>

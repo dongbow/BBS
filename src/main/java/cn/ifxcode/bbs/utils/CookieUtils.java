@@ -57,8 +57,8 @@ public class CookieUtils {
         return makeCookie(key, value, domain, maxAge, false);
     }
     
-    public static Cookie makeUserCookie(String value) {
-        return makeCookie(CRED_LOCAL_SESS, value, BbsConstant.DOMAIN, -1, false);
+    public static Cookie makeUserCookie(String value, int remember) {
+        return makeCookie(CRED_LOCAL_SESS, value, BbsConstant.DOMAIN, remember == 1 ? BbsConstant.REMEMBER_MAXAGE : -1, false);
     }
 
     public static Cookie makeCookie(String key, String value, String domain,

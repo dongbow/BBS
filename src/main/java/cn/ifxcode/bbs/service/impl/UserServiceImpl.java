@@ -27,6 +27,8 @@ import cn.ifxcode.bbs.dao.PastHistoryDao;
 import cn.ifxcode.bbs.dao.RoleDao;
 import cn.ifxcode.bbs.dao.UserDao;
 import cn.ifxcode.bbs.dao.UserValueDao;
+import cn.ifxcode.bbs.entity.ExperienceHistory;
+import cn.ifxcode.bbs.entity.GoldHistory;
 import cn.ifxcode.bbs.entity.PastHistory;
 import cn.ifxcode.bbs.entity.SwfArea;
 import cn.ifxcode.bbs.entity.User;
@@ -34,6 +36,8 @@ import cn.ifxcode.bbs.entity.UserAccess;
 import cn.ifxcode.bbs.entity.UserInfo;
 import cn.ifxcode.bbs.entity.UserPrivacy;
 import cn.ifxcode.bbs.entity.UserValue;
+import cn.ifxcode.bbs.enumtype.EGHistory;
+import cn.ifxcode.bbs.service.GoldExperienceService;
 import cn.ifxcode.bbs.service.UserService;
 import cn.ifxcode.bbs.utils.Base64Utils;
 import cn.ifxcode.bbs.utils.CookieUtils;
@@ -65,6 +69,9 @@ public class UserServiceImpl implements UserService{
 	@Resource
 	private RedisObjectMapService redisObjectMapService;
 	
+	@Resource
+	private GoldExperienceService goldExperienceService;
+	
 	public User authLogin(String name, String password) {
 		Map<String, Object> map = Maps.newHashMap();
 		map.put("name", name);
@@ -93,19 +100,15 @@ public class UserServiceImpl implements UserService{
 
 	public CookieBean getCookieBeanFromCookie(HttpServletRequest request) {
 		String cookie = Base64Utils.getFromBase64(CookieUtils.getUserCookieValue(request));
-		CookieBean bean = new CookieBean();
+		CookieBean bean = null;
 		if(StringUtils.isNotBlank(cookie)) {
 			String s[] = cookie.split(";");
 			if(s.length != 4) {
 				return null;
 			}
-			//bean = ReflectUtils.returnEntity(bean, cookie.split(";"));
-			bean.setUser_id(Long.parseLong(s[0]));
-			bean.setIs_admin(Integer.parseInt(s[1]));
-			bean.setRole_ids(s[2]);
-			bean.setNick_name(s[3]);
+			bean = ReflectUtils.returnEntity(CookieBean.class, cookie.split(";"));
 		}
-		return StringUtils.isNotBlank(cookie) ? bean : null;
+		return (bean != null && bean.getUser_id() > 0) ? bean : null;
 	}
 
 	@Override
@@ -204,6 +207,11 @@ public class UserServiceImpl implements UserService{
 				}
 				result = BbsConstant.OK;
 				logger.info("insert userinfo and user_role : userid = " + access.getUserId());
+				GoldHistory goldHistory = new GoldHistory(access.getUserId(), access.getUserNickname(), 50, EGHistory.REG.getFrom(), 
+						EGHistory.REG.getDesc(), access.getUserCreateTime());
+				ExperienceHistory experienceHistory = new ExperienceHistory(access.getUserId(), access.getUserNickname(), 1, 
+						EGHistory.REG.getDesc(), access.getUserCreateTime());
+				goldExperienceService.insertGE(goldHistory, experienceHistory);
 			}
 		}
 		return result;
@@ -270,12 +278,25 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Transactional
-	public Integer addSign(UserValue userValue, PastHistory pastHistory) {
+	public synchronized Integer addSign(UserValue userValue, PastHistory pastHistory) {
 		if(userValueDao.updateUserValue(userValue) == BbsConstant.OK
 				&& pastHistoryDao.insertPastHistory(pastHistory) == BbsConstant.OK) {
 			return BbsConstant.OK;
 		}
 		return BbsConstant.ERROR;
+	}
+
+	@Override
+	public boolean isTodayFirstLogin(String userLastestLoginTime) {
+		if(DateUtils.getDateDifferenceBegin(userLastestLoginTime, DateUtils.dt14LongFormat(new Date())) > 24 * 60) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public int updateUserValue(UserValue userValue) {
+		return userValueDao.updateUserValue(userValue);
 	}
 
 

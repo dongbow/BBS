@@ -24,12 +24,16 @@ import cn.ifxcode.bbs.constant.BbsErrorCode;
 import cn.ifxcode.bbs.entity.Board;
 import cn.ifxcode.bbs.entity.BoardInfo;
 import cn.ifxcode.bbs.entity.Classify;
+import cn.ifxcode.bbs.entity.ExperienceHistory;
+import cn.ifxcode.bbs.entity.GoldHistory;
 import cn.ifxcode.bbs.entity.HomeImage;
 import cn.ifxcode.bbs.entity.Navigation;
 import cn.ifxcode.bbs.entity.PastHistory;
 import cn.ifxcode.bbs.entity.UserValue;
+import cn.ifxcode.bbs.enumtype.EGHistory;
 import cn.ifxcode.bbs.service.BoardService;
 import cn.ifxcode.bbs.service.ClassifyService;
+import cn.ifxcode.bbs.service.GoldExperienceService;
 import cn.ifxcode.bbs.service.HomeImageService;
 import cn.ifxcode.bbs.service.NavigationService;
 import cn.ifxcode.bbs.service.UserService;
@@ -60,6 +64,17 @@ public class IndexController extends BaseUserController{
 	
 	@Resource
 	private RedisObjectMapService redisObjectMapService;
+	
+	@Resource
+	private GoldExperienceService goldExperienceService;
+	
+	private GoldHistory goldHistory = null;
+	private ExperienceHistory experienceHistory = null;
+	
+	@RequestMapping("/tip/nologin")
+	public String getTip() {
+		return "tip/login_tip";
+	}
 	
 	@RequestMapping("/index")
 	public String toIndex(Model model) {
@@ -128,6 +143,15 @@ public class IndexController extends BaseUserController{
 				PastHistory pastHistory = new PastHistory(cookieBean.getUser_id(), cookieBean.getNick_name(), 
 						GetRemoteIpUtil.getRemoteIp(request), userValue.getUserLastestPastTime());
 				if (BbsConstant.OK == userService.addSign(userValue, pastHistory)) {
+					if(userValue.isGoldChange()) {
+						goldHistory = new GoldHistory(userValue.getUserId(), cookieBean.getNick_name(), 1, EGHistory.SIGN.getFrom(), 
+								EGHistory.SIGN.getDesc(), userValue.getUserLastestPastTime());
+					}
+					if(userValue.isExpChange()) {
+						experienceHistory = new ExperienceHistory(userValue.getUserId(), cookieBean.getNick_name(), 1, 
+								EGHistory.SIGN.getDesc(), userValue.getUserLastestPastTime());
+					}
+					goldExperienceService.insertGE(goldHistory, experienceHistory);
 					result = new Result(BbsConstant.OK, "签到成功");
 					object.put("uv", userValue);
 				} else {

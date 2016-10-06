@@ -40,5 +40,9 @@ public interface UserService {
 	public CookieBean checkIsLogin(HttpServletRequest request);
 
 	public Integer addSign(UserValue userValue, PastHistory pastHistory);
+
+	public boolean isTodayFirstLogin(String userLastestLoginTime);
+
+	public int updateUserValue(UserValue userValue);
 	
 }

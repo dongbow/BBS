@@ -24,9 +24,14 @@ import cn.ifxcode.bbs.bean.CookieBean;
 import cn.ifxcode.bbs.bean.Result;
 import cn.ifxcode.bbs.constant.BbsConstant;
 import cn.ifxcode.bbs.constant.BbsErrorCode;
+import cn.ifxcode.bbs.entity.ExperienceHistory;
+import cn.ifxcode.bbs.entity.GoldHistory;
 import cn.ifxcode.bbs.entity.LoginLog;
 import cn.ifxcode.bbs.entity.User;
+import cn.ifxcode.bbs.entity.UserValue;
+import cn.ifxcode.bbs.enumtype.EGHistory;
 import cn.ifxcode.bbs.enumtype.LoginError;
+import cn.ifxcode.bbs.service.GoldExperienceService;
 import cn.ifxcode.bbs.service.LoginLogService;
 import cn.ifxcode.bbs.service.UserService;
 import cn.ifxcode.bbs.utils.DateUtils;
@@ -36,12 +41,15 @@ import cn.ifxcode.bbs.utils.RoleIdUtils;
 import cn.ifxcode.bbs.utils.Base64Utils;
 import cn.ifxcode.bbs.utils.CookieUtils;
 import cn.ifxcode.bbs.utils.GetRemoteIpUtil;
+import cn.ifxcode.bbs.utils.UserValueUtils;
 
 @Controller
 @RequestMapping("/system/admin/account")
 public class LoginController {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	private boolean isTodayFirst = false;
 	
 	private Result result = null;
 	
@@ -53,6 +61,13 @@ public class LoginController {
 	
 	@Resource
 	private LoginLogService loginLogService;
+	
+	@Resource
+	private GoldExperienceService goldExperienceService;
+	
+	private GoldHistory goldHistory = null;
+	private ExperienceHistory experienceHistory = null;
+	private UserValue userValue = null;
 	
 	@RequestMapping("/login")
 	public String goLogin(HttpServletRequest request) {
@@ -87,12 +102,28 @@ public class LoginController {
 				}
 				CookieBean cookieBean = new CookieBean(user.getUserAccess().getUserId(), user.getUserAccess().getUserIsAdmin(), 
 						RoleIdUtils.formatRoleIds(user.getRoles()), user.getUserAccess().getUserNickname());
-				response.addCookie(CookieUtils.makeUserCookie(Base64Utils.getBase64(cookieBean.toString())));
+				response.addCookie(CookieUtils.makeUserCookie(Base64Utils.getBase64(cookieBean.toString()), remember));
 				result = new Result(BbsConstant.OK, null, BbsConstant.AUTH_HOME);
+				if(!StringUtils.isNotBlank(user.getUserAccess().getUserLastestLoginTime()) || userService.isTodayFirstLogin(user.getUserAccess().getUserLastestLoginTime())) {
+					UserValue userValue = UserValueUtils.login(userService.getUserValue(user.getUserAccess().getUserId()));
+					userService.updateUserValue(userValue);
+					isTodayFirst = true;
+				}
 				user.getUserAccess().setUserLastestLoginIp(GetRemoteIpUtil.getRemoteIp(request));
 				user.getUserAccess().setUserLastestLoginTime(DateUtils.dt14LongFormat(new Date()));
 				userService.updateUserLastestTimeAndIp(user.getUserAccess().getUserId(), 
 						user.getUserAccess().getUserLastestLoginIp(), user.getUserAccess().getUserLastestLoginTime());
+				if(isTodayFirst) {
+					if(userValue.isGoldChange()) {
+						goldHistory = new GoldHistory(cookieBean.getUser_id(), cookieBean.getNick_name(), 1, EGHistory.LOGIN.getFrom(), 
+								EGHistory.LOGIN.getDesc(), user.getUserAccess().getUserLastestLoginTime());
+					}
+					if(userValue.isExpChange()) {
+						experienceHistory = new ExperienceHistory(cookieBean.getUser_id(), cookieBean.getNick_name(), 1, 
+								EGHistory.LOGIN.getDesc(), user.getUserAccess().getUserLastestLoginTime());
+					}
+					goldExperienceService.insertGE(goldHistory, experienceHistory);
+				}
 				JSONObject object = new JSONObject(true);
 				object.put("user", JSON.toJSONString(user));
 				redisObjectMapService.save(RedisKeyUtils.getUserInfo(user.getUserAccess().getUserId()), object, JSONObject.class);

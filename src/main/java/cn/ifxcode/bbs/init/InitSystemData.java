@@ -21,6 +21,7 @@ import cn.ifxcode.bbs.dao.QuickNavigationDao;
 import cn.ifxcode.bbs.dao.ResourcesDao;
 import cn.ifxcode.bbs.dao.RoleDao;
 import cn.ifxcode.bbs.dao.SystemBlackIpDao;
+import cn.ifxcode.bbs.dao.SystemConfigDao;
 import cn.ifxcode.bbs.dao.UserDao;
 import cn.ifxcode.bbs.entity.Board;
 import cn.ifxcode.bbs.entity.Classify;
@@ -29,6 +30,7 @@ import cn.ifxcode.bbs.entity.QuickNavigation;
 import cn.ifxcode.bbs.entity.Resources;
 import cn.ifxcode.bbs.entity.Role;
 import cn.ifxcode.bbs.entity.SwfArea;
+import cn.ifxcode.bbs.entity.SystemConfig;
 import cn.ifxcode.bbs.utils.JsonUtils;
 import cn.ifxcode.bbs.utils.RedisKeyUtils;
 import cn.ifxcode.bbs.utils.TreeUtils;
@@ -72,8 +74,12 @@ public class InitSystemData {
 	@Resource
 	private ClassifyDao classifyDao;
 	
+	@Resource
+	private SystemConfigDao systemConfigDao;
+	
 	@PostConstruct
 	public void initSystem() {
+		this.initSystemConfig();
 		this.initBlackIp();
 		this.initRsources();
 		this.initRoles();
@@ -176,6 +182,13 @@ public class InitSystemData {
 			jsonObject.put("classifies", jsonArray.toJSONString());
 			redisObjectMapService.save(RedisKeyUtils.getClassifyByBoardId(id), jsonObject, JSONObject.class);
 		}
+	}
+	
+	public void initSystemConfig() {
+		SystemConfig config = systemConfigDao.getSystemConfig();
+		JSONObject object = new JSONObject(true);
+		object.put("config", JSON.toJSONString(config));
+		redisObjectMapService.save(RedisKeyUtils.getSystemConfig(), object, JSONObject.class);
 	}
 	
 }

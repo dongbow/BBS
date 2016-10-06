@@ -19,5 +19,6 @@ public class BbsConstant {
 	public static final Integer OK = 1;
 	public static final Integer ERROR = 0;
 	public static final String DEFAULT_IMAGE = "/upload/images/default/default.jpg";
+	public static final String UTF8 = "utf-8";
 	
 }

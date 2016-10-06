@@ -30,6 +30,11 @@ public class BbsInterceptor extends HandlerInterceptorAdapter{
 			return false;
 		}
 		
+		if(generalService.checkBbsIsClose()) {
+			logger.info("bbs is close");
+			return false;
+		}
+		
 		if(generalService.checkLogin(request)) {
 			logger.info("not login, ip : " + GetRemoteIpUtil.getRemoteIp(request));
 			return false;

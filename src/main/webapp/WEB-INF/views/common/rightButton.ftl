@@ -68,3 +68,6 @@ function toziclick(e,id){
 <div id="fTopic" style="display: none;">
 	<!-- postui -->
 </div>
+<div id="bbs-dialog" style="display:none">
+	<!-- dialog -->
+</div>

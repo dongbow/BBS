@@ -12,8 +12,10 @@ import ltang.redis.service.RedisObjectMapService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
+import cn.ifxcode.bbs.entity.SystemConfig;
 import cn.ifxcode.bbs.service.GeneralService;
 import cn.ifxcode.bbs.utils.GetRemoteIpUtil;
 import cn.ifxcode.bbs.utils.RedisKeyUtils;
@@ -27,10 +29,12 @@ public class GeneralServiceImpl implements GeneralService {
 	public boolean checkIp(HttpServletRequest request) {
 		String ip = GetRemoteIpUtil.getRemoteIp(request);
 		List<String> ips = this.getBlackIpsFromCache();
-		for (String string : ips) {
-			Pattern pattern = Pattern.compile(string);
-			if(pattern.matcher(ip).find()) {
-				return true;
+		if(ips != null && ips.size() > 0) {
+			for (String string : ips) {
+				Pattern pattern = Pattern.compile(string);
+				if(pattern.matcher(ip).find()) {
+					return true;
+				}
 			}
 		}
 		return false;
@@ -53,6 +57,18 @@ public class GeneralServiceImpl implements GeneralService {
 	@Override
 	public boolean checkLogin(HttpServletRequest request) {
 		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean checkBbsIsClose() {
+		JSONObject object = redisObjectMapService.get(RedisKeyUtils.getSystemConfig(), JSONObject.class);
+		if(object != null) {
+			SystemConfig config = JSONObject.toJavaObject(JSONObject.parseObject(object.getString("config")), SystemConfig.class);
+			if(config.getIsOpenBbs() == 1) {
+				return true;
+			}
+		}
 		return false;
 	}
 

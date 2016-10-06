@@ -154,15 +154,9 @@ select.selectpicker {
 .bootstrap-select.btn-group .dropdown-menu li a {
   cursor: pointer;
   -webkit-user-select: none;
-<<<<<<< HEAD
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
-=======
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
->>>>>>> e8038f159cc0d6152b20abbdfb1a48fe3ba11f54
 }
 .bootstrap-select.btn-group .dropdown-menu li a.opt {
   position: relative;

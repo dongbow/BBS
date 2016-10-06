@@ -1,13 +1,14 @@
 package cn.ifxcode.bbs.utils;
 
+import java.beans.IntrospectionException;
+import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class ReflectUtils {
 
-	public static <T> Field[] getField(T t) {
-		Class<T> clazz = (Class<T>) t.getClass();
+	public static <T> Field[] getField(Class<T> clazz) {
 		Field fields[] = clazz.getDeclaredFields();
 		return fields;
 	}
@@ -20,10 +21,9 @@ public class ReflectUtils {
 		return field.getName();
 	}
 	
-	public static <T> Method getFieldMethod(T t, String methodName) {
+	public static <T> Method getFieldMethod(Class<T> clazz, String methodName) {
 		Method method = null;
 		try {
-			Class<T> clazz = (Class<T>) t.getClass();
 			method = clazz.getMethod(methodName);
 		} catch (NoSuchMethodException | SecurityException e) {
 			e.printStackTrace();
@@ -31,10 +31,10 @@ public class ReflectUtils {
 		return method;
 	}
 	
-	public static <T> T returnEntity(Class<?> t, String... str) {
-		T clazz = null;
+	public static <T> T returnEntity(Class<T> clazz, String... str) {
+		T t = null;
 		try {
-			clazz = (T) t.getClass().newInstance();
+			t = clazz.newInstance();
 		} catch (InstantiationException | IllegalAccessException e1) {
 			e1.printStackTrace();
 		}
@@ -46,33 +46,38 @@ public class ReflectUtils {
 			String type = getFieldType(f);
 			
 			try {
-				if("int".equals(type)) {
-					Integer value = (Integer) getFieldMethod(clazz, "get" + name).invoke(clazz);
+				if("int".equals(type) || "class java.lang.Integer".equals(type)) {
+					Integer value = (Integer) getFieldMethod(clazz, "get" + name).invoke(t);
 					if (value == null) {
-                        Method m = clazz.getClass().getMethod("set" + name, Integer.class);
-                        m.invoke(clazz, Integer.parseInt(str[i]));
+						PropertyDescriptor descriptor = new PropertyDescriptor(name, clazz);
+                        Method m = descriptor.getWriteMethod();
+                        m.invoke(t, new Object[]{Integer.parseInt(str[i])});
                     }
 				}
-				if("String".equals(type)) {
-					String value = (String) getFieldMethod(clazz, "get" + name).invoke(clazz);
+				if("class java.lang.String".equals(type)) {
+					String value = (String) getFieldMethod(clazz, "get" + name).invoke(t);
 					if (value == null) {
-                        Method m = clazz.getClass().getMethod("set" + name, String.class);
-                        m.invoke(clazz, str[i]);
+						PropertyDescriptor descriptor = new PropertyDescriptor(name, clazz);
+                        Method m = descriptor.getWriteMethod();
+                        m.invoke(t, new Object[]{str[i]});
                     }
 				}
 				if("long".equals(type)) {
-					long value = (Long) getFieldMethod(t.getClass(), "get" + name).invoke(clazz);
-					if (value > 0) {
-                        Method m = clazz.getClass().getMethod("set" + name, Long.class);
-                        m.invoke(clazz, Long.parseLong((str[i])));
+					long value = (Long) getFieldMethod(clazz, "get" + name).invoke(t);
+					if (value == 0) {
+						PropertyDescriptor descriptor = new PropertyDescriptor(name, clazz);
+                        Method m = descriptor.getWriteMethod();
+                        m.invoke(t, new Object[]{Long.parseLong((str[i]))});
                     }
 				}
 			} catch (IllegalAccessException | IllegalArgumentException
-					| InvocationTargetException | NoSuchMethodException | SecurityException e) {
+					| InvocationTargetException | SecurityException e) {
+				e.printStackTrace();
+			} catch (IntrospectionException e) {
 				e.printStackTrace();
 			}
 			i++;
 		}
-		return (T) clazz;
+		return t;
 	}
 }

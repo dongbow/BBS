@@ -23,8 +23,7 @@ public class CacheFilter implements Filter {
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
 		HttpServletResponse response = (HttpServletResponse) res;  
         HttpServletRequest request = (HttpServletRequest) req;  
-        String date = filterConfig.getInitParameter("date");  
-        response.setDateHeader("Expires", System.currentTimeMillis()+Integer.valueOf(date)*1000);     
+        response.setDateHeader("Expires", System.currentTimeMillis());     
         chain.doFilter(request, response);  
 	}
 

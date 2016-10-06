@@ -7,10 +7,6 @@
 	<link type="text/css" rel="stylesheet" href="${path}/resources/css/post.css">
 	<link type="text/css" rel="stylesheet" href="${path}/resources/css/shCoreDefault.css">
 	<link type="text/css" rel="stylesheet" href="${path}/resources/css/style_common.css">
-	<script type="text/javascript" src="${path}/resources/js/shCore.js"></script>
-	<script type="text/javascript" src="${path}/resources/js/syntaxhighlighter.js"></script>
-	<script type="text/javascript" src="${path}/resources/js/post.js"></script>
-	<script type="text/javascript" src="${path}/resources/static/ckeditor4/ckeditor.js"></script>
 </head>
 <body>
 	<#include "../common/header.ftl"/>
@@ -69,6 +65,10 @@
 	    </div>
 	</#if>
     <#include "../common/footer.ftl"/>
+    <script type="text/javascript" src="${path}/resources/js/shCore.js"></script>
+	<script type="text/javascript" src="${path}/resources/js/syntaxhighlighter.js"></script>
+	<script type="text/javascript" src="${path}/resources/js/post.js"></script>
+	<script type="text/javascript" src="${path}/resources/static/ckeditor4/ckeditor.js"></script>
     <script type="text/javascript">
 	    $(function () {
 			CKEDITOR.replace('editor',{ 

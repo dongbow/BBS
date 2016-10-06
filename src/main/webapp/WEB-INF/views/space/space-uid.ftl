@@ -70,7 +70,7 @@
 				</p>
 			</div>
 			<div class="mun">
-				<#if userinfo.userPrivacy.baseIsPublic == 0>
+				<#if userinfo.userPrivacy.baseIsPublic == 0 || (islogin == 1 && user.userAccess.userId == userinfo.userAccess.userId)>
 					<p>
 						<span>性别：<#if userinfo.userInfo.userSex! == 0>男<#else>女</#if></span>
 						<span>生日：${userinfo.userInfo.userBirth!}</span>
