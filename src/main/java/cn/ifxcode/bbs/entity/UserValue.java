@@ -21,6 +21,8 @@ public class UserValue implements Serializable {
 	private String userLastestPastTime;
 	private boolean expChange;
 	private boolean goldChange;
+	private int thisExp;
+	private int thisGold;
 
 	public long getUserId() {
 		return userId;
@@ -140,6 +142,22 @@ public class UserValue implements Serializable {
 
 	public void setGoldChange(boolean goldChange) {
 		this.goldChange = goldChange;
+	}
+
+	public int getThisExp() {
+		return thisExp;
+	}
+
+	public void setThisExp(int thisExp) {
+		this.thisExp = thisExp;
+	}
+
+	public int getThisGold() {
+		return thisGold;
+	}
+
+	public void setThisGold(int thisGold) {
+		this.thisGold = thisGold;
 	}
 
 }

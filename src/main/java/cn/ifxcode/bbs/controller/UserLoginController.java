@@ -44,6 +44,7 @@ import cn.ifxcode.bbs.utils.JsonUtils;
 import cn.ifxcode.bbs.utils.MD5Utils;
 import cn.ifxcode.bbs.utils.RedisKeyUtils;
 import cn.ifxcode.bbs.utils.RoleIdUtils;
+import cn.ifxcode.bbs.utils.SystemConfigUtils;
 import cn.ifxcode.bbs.utils.UserValueUtils;
 import cn.ifxcode.bbs.utils.ValidateCode;
 
@@ -152,6 +153,9 @@ public class UserLoginController {
 	
 	@RequestMapping("/register")
 	public String toRegister() {
+		if(!SystemConfigUtils.getIsAllowRegister()) {
+			return "account/register-stop";
+		}
 		return "account/register";
 	}
 	

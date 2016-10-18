@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ifxcode.bbs.dao.TopicDao">
+
+	<cache type="cn.ifxcode.bbs.dao.cache.LoggingRedisCache"/>
+
+	 <resultMap type="Topic" id="BaseTopic">
+	 	<id column="topic_id" property="topicId" jdbcType="BIGINT" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="board_id" property="boardId" jdbcType="INTEGER" />
+		<result column="class_id" property="classId" jdbcType="INTEGER" />
+		<result column="nav_id" property="navId" jdbcType="INTEGER" />
+		<result column="topic_title" property="topicTitle" jdbcType="VARCHAR" />
+		<result column="topic_content" property="topicContent" jdbcType="VARCHAR" />
+		<result column="topic_status" property="topicStatus" jdbcType="INTEGER" />
+		<result column="topic_create_time" property="topicCreateTime" jdbcType="VARCHAR" />
+		<result column="topic_create_ip" property="topicCreateIp" jdbcType="VARCHAR" />
+		<association property="topicInfo" javaType="TopicInfo">
+			<id column="topic_id" property="topicId" jdbcType="BIGINT" />
+			<result column="topic_is_check" property="topicIsCheck" jdbcType="INTEGER" />
+			<result column="topic_is_home" property="topicIsHome" jdbcType="INTEGER" />
+			<result column="topic_is_home_end_time" property="topicIsHomeEndTime" jdbcType="VARCHAR" />
+			<result column="topic_is_reply" property="topicIsReply" jdbcType="INTEGER" />
+			<result column="topic_is_local_top" property="topicIsLocalTop" jdbcType="INTEGER" />
+			<result column="topic_is_local_top_end_time" property="topicIsLocalTopEndTime" jdbcType="VARCHAR" />
+			<result column="topic_is_global_top" property="topicIsGlobalTop" jdbcType="INTEGER" />
+			<result column="topic_is_global_top_end_time" property="topicIsGlobalTopEndTime" jdbcType="VARCHAR" />
+			<result column="topic_is_hot" property="topicIsHot" jdbcType="INTEGER" />
+			<result column="topic_is_cream" property="topicIsCream" jdbcType="INTEGER" />
+		</association>
+		<association property="topicData" javaType="TopicData">
+			<id column="topic_id" property="topicId" jdbcType="BIGINT" />
+			<result column="topic_reply_count" property="topicReplyCount" jdbcType="BIGINT" />
+			<result column="topic_view_count" property="topicViewCount" jdbcType="BIGINT" />
+			<result column="topic_favorite_count" property="topicFavoriteCount" jdbcType="INTEGER" />
+			<result column="topic_title_style" property="topicTitleStyle" jdbcType="VARCHAR" />
+			<result column="lastest_reply_user" property="lastestReplyUser" jdbcType="VARCHAR" />
+			<result column="lastest_reply_time" property="lastestReplyTime" jdbcType="VARCHAR" />
+			<result column="topic_update_user_id" property="topicUpdateUserId" jdbcType="BIGINT" />
+			<result column="topic_update_user" property="topicUpdateUser" jdbcType="VARCHAR" />
+			<result column="topic_update_time" property="topicUpdateTime" jdbcType="VARCHAR" />
+		</association>
+	 </resultMap>
+	
+	<insert id="insertTopic" useGeneratedKeys="true" keyProperty="topicId" parameterType="Topic">
+		insert into bbs_topic (user_id, board_id, class_id, nav_id, topic_title, topic_content, topic_status, 
+			topic_create_time, topic_create_ip)
+		values (#{userId}, #{boardId}, #{classId}, #{navId}, #{topicTitle}, #{topicContent}, 
+			#{topicStatus}, #{topicCreateTime}, #{topicCreateIp})
+	</insert>
+	
+	<select id="getTopicByTopicId" resultMap="BaseTopic">
+		SELECT * FROM bbs_topic AS t LEFT JOIN bbs_topic_info AS i ON i.topic_id = t.topic_id 
+		LEFT JOIN bbs_topic_data AS d ON d.topic_id = t.topic_id WHERE 
+		t.topic_status = 0 AND t.topic_id = #{topicId}
+	</select>
+	
+</mapper>

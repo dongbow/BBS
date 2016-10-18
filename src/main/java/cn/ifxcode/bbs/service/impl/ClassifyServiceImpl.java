@@ -33,5 +33,16 @@ public class ClassifyServiceImpl implements ClassifyService {
 		List<Classify> classifies = JsonUtils.decodeJson(array, Classify.class);
 		return classifies;
 	}
+
+	@Override
+	public Classify getClassifyByCid(Integer boardId, Integer classId) {
+		List<Classify> classifies = this.getClassifyByBoardId(boardId);
+		for (Classify c : classifies) {
+			if(c.getClassId().equals(classId)) {
+				return c;
+			}
+		}
+		return null;
+	}
 	
 }

@@ -32,23 +32,31 @@ public class UserValueUtils {
 		return userValue;
 	}
 	
+	public static UserValue topic(UserValue userValue) {
+		Exp(userValue, 2);
+		gold(userValue, 2);
+		return userValue;
+	}
+	
 	private static void Exp(UserValue userValue, int value) {
 		if((userValue.getTodayExp() == 0 && !StringUtils.isNotBlank(userValue.getTodayExpTime()))
-				|| (userValue.getTodayExp() < 50 && DateUtils.getDateDifferenceBegin(userValue.getTodayExpTime(), DateUtils.dt14LongFormat(new Date())) > 0)) {
+				|| (userValue.getTodayExp() < 50 && DateUtils.getDateDifferenceBegin(userValue.getTodayExpTime(), DateUtils.dt14LongFormat(new Date())) >= 0)) {
 			userValue.setUserExperience(userValue.getUserExperience() + value);
 			userValue.setTodayExp(userValue.getTodayExp() + value);
 			userValue.setTodayExpTime(DateUtils.dt14FromDate(new Date()));
 			userValue.setExpChange(true);
+			userValue.setThisExp(value);
 		}
 	}
 	
 	private static void gold(UserValue userValue, int value) {
 		if((userValue.getTodayGold() == 0 && !StringUtils.isNotBlank(userValue.getTodayGoldTime()))
-				|| (userValue.getTodayGold() < 50 && DateUtils.getDateDifferenceBegin(userValue.getTodayGoldTime(), DateUtils.dt14LongFormat(new Date())) > 0)) {
+				|| (userValue.getTodayGold() < 50 && DateUtils.getDateDifferenceBegin(userValue.getTodayGoldTime(), DateUtils.dt14LongFormat(new Date())) >= 0)) {
 			userValue.setUserGold(userValue.getUserGold() + value);
 			userValue.setTodayGold(userValue.getTodayGold() + value);
 			userValue.setTodayGoldTime(DateUtils.dt14LongFormat(new Date()));
 			userValue.setGoldChange(true);
+			userValue.setThisGold(value);
 		}
 	}
 	

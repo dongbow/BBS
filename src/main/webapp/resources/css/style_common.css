@@ -262,7 +262,8 @@ body {
 .header_panel{
 	 float:right;
 	 //margin-right: -282px;
-	 left:70%;
+	 //left:70%;
+	 right:0;
      margin-top: 5px;
 	 width:210px;
 	 height:auto;

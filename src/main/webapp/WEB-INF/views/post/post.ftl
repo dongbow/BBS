@@ -14,8 +14,8 @@
 		<div id="local" class="c1">
 			<div class="z">
 				<span>当前位置：</span><a class="line" href="${path}">论坛首页</a> <em>></em>
-				<a class="line bltd" href="${path}/navigation/${pnav.navId}">${pnav.navName}</a><em>></em> 
-				<a class="line bltd" href="${path}/navigation/${pnav.navId}/board/${pboard.boardId}">${pboard.boardName}</a><em>></em>
+				<a class="line bltd" href="${path}/navigation/${navigation.navId}">${navigation.navName}</a><em>></em> 
+				<a class="line bltd" href="${path}/navigation/${navigation.navId}/board/${pboard.boardId}">${pboard.boardName}</a><em>></em>
 				<span class="ltd">发帖</span>
 			</div>
 		</div>
@@ -24,7 +24,7 @@
 	    		<a class="fbar" href="${path}/post/new/topic/${pboard.boardId}" style="color:#19b4ea">发表帖子</a>
 	        	<a class="vote" href="${path}/post/new/vote/${pboard.boardId}">发起投票</a>
 	        </div>
-	        <form action="" method="post">
+	        <form action="${path}/post/new/topic/do" method="post">
 		      	<div id="topic_title">
 		      		<select id="s1" name="cid">
 		      			<option>选择分类</option>
@@ -38,7 +38,7 @@
 				<textarea id="editor" name="tcontent" rows="10" cols="1"></textarea>
 		        <input type="hidden" name="uid" value="${user.userAccess.userId}">
 		        <input type="hidden" name="bid" value="${pboard.boardId}">
-		        <input type="hidden" name="gid" value="${pnav.navId}">
+		        <input type="hidden" name="gid" value="${navigation.navId}">
 		        <br/>
 		        <div id="edtiortoolbar">
 		        	<#if user.userAccess.userIsAdmin == 1 || user.userAccess.userIsBoderManager == 1>
@@ -56,11 +56,23 @@
 		        	<a class="editorclear" href="javascript:;">清空编辑器</a>
 		        	<a class="checklength" href="javascript:;">字数检查</a>
 		        </div>
+		        <div class="bbs-upload">
+		        	<div class="file-btns">
+		        		<a class="btn image-btn" href="javascript:;">上传图片</a>
+		        		<input name="images" id="images" multiple="multiple" accept="image/*" type="file" style="display:none">
+		        		<a class="btn file-btn" href="javascript:;">上传附件</a>
+		        		<input name="files" id="files" multiple="multiple" type="file" style="display:none">
+		        		<button onclick="">发表帖子</button>
+		        	</div>
+		        	<div class="upload-desc">
+		        		<p>图片只支持jpg|jpeg|png|gif|bmp，大小2M以内</p>
+		        		<p>附件支持exe|zip|rar|msi|png|jpg|jpeg|gif|bmp|doc|docx|xls|xlsx|ppt|pptx|txt|jar|md|sql|java|pdf|psd，大小50M以内</p>
+		        	</div>
+		        	<div class="image-cont" style=""></div>
+		        	<div class="file-cont" style=""></div>
+		        </div>
 		        <div id="bg"></div>
 		        <!-- tip -->
-		        <div id="btns">
-		        	<button onclick="">发表帖子</button>
-		        </div>
 	        </form>
 	    </div>
 	</#if>

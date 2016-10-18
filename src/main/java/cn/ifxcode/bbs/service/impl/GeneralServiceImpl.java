@@ -11,18 +11,37 @@ import ltang.redis.service.RedisObjectMapService;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
+import cn.ifxcode.bbs.bean.CookieBean;
+import cn.ifxcode.bbs.constant.BbsConstant;
+import cn.ifxcode.bbs.dao.GeneralDao;
+import cn.ifxcode.bbs.dao.UserValueDao;
+import cn.ifxcode.bbs.entity.ExperienceHistory;
+import cn.ifxcode.bbs.entity.GoldHistory;
 import cn.ifxcode.bbs.entity.SystemConfig;
+import cn.ifxcode.bbs.entity.UserValue;
+import cn.ifxcode.bbs.enumtype.EGHistory;
 import cn.ifxcode.bbs.service.GeneralService;
+import cn.ifxcode.bbs.service.UserService;
 import cn.ifxcode.bbs.utils.GetRemoteIpUtil;
 import cn.ifxcode.bbs.utils.RedisKeyUtils;
+import cn.ifxcode.bbs.utils.UserValueUtils;
 
 @Service
 public class GeneralServiceImpl implements GeneralService {
 
+	@Resource
+	private UserService userService;
+	
+	@Resource
+	private UserValueDao userValueDao;
+	
+	@Resource
+	private GeneralDao generalDao;
+	
 	@Resource
 	private RedisObjectMapService redisObjectMapService;
 	
@@ -55,12 +74,6 @@ public class GeneralServiceImpl implements GeneralService {
 	}
 
 	@Override
-	public boolean checkLogin(HttpServletRequest request) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
 	public boolean checkBbsIsClose() {
 		JSONObject object = redisObjectMapService.get(RedisKeyUtils.getSystemConfig(), JSONObject.class);
 		if(object != null) {
@@ -70,6 +83,33 @@ public class GeneralServiceImpl implements GeneralService {
 			}
 		}
 		return false;
+	}
+
+	@Override
+	@Transactional
+	public int UserAward(EGHistory eg, long uid, HttpServletRequest request) {
+		GoldHistory goldHistory = null;
+		ExperienceHistory experienceHistory = null;
+		UserValue userValue = UserValueUtils.topic(userService.getUserValue(uid));
+		if(eg.getFrom() == 3) {
+			userValue.setUserTopicCount(userValue.getUserTopicCount() + 1);
+		}
+		if(eg.getFrom() == 4) {
+			userValue.setUserReplyCount(userValue.getUserReplyCount() + 1);
+		}
+		CookieBean cookieBean = userService.getCookieBeanFromCookie(request);
+		if(userValue.isGoldChange()) {
+			goldHistory = new GoldHistory(userValue.getUserId(), cookieBean.getNick_name(), userValue.getThisGold(), eg.getFrom(), 
+					eg.getDesc(), userValue.getUserLastestPastTime());
+		}
+		if(userValue.isExpChange()) {
+			experienceHistory = new ExperienceHistory(userValue.getUserId(), cookieBean.getNick_name(), userValue.getThisExp(), 
+					eg.getDesc(), userValue.getUserLastestPastTime());
+		}
+		userValueDao.updateUserValue(userValue);
+		generalDao.insertExperienceHistory(experienceHistory);
+		generalDao.insertGoldHistory(goldHistory);
+		return BbsConstant.OK;
 	}
 
 }

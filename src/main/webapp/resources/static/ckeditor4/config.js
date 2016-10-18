@@ -25,7 +25,17 @@ CKEDITOR.editorConfig = function( config ) {
 	
 	config.toolbar = 'reply'; 
 	config.toolbar_reply = [ 
-		['Smiley']
+		['Link','Unlink'],
+		['Undo','Redo'], 
+		['Blockquote'], 
+		['JustifyLeft','JustifyCenter','JustifyRight'],
+		['Font','FontSize'],
+		['Bold','Underline'], 
+		['TextColor','BGColor'], 
+		['Table'],
+		['Image', 'Smiley'],
+		['Syntaxhighlight'],
+		['Maximize']
 	];
 	
 	config.toolbar = 'mood'; 
@@ -34,7 +44,7 @@ CKEDITOR.editorConfig = function( config ) {
 		['Undo','Redo'], 
 		['Blockquote'], 
 		['JustifyLeft','JustifyCenter','JustifyRight'],   
-		['FontSize'],
+		['Format','Font','FontSize'],
 		['Bold','Italic','Underline'], 
 		['TextColor','BGColor'],
 		['Image','Smiley'],

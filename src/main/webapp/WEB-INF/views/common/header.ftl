@@ -2,8 +2,8 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	changeActive();
-	var url=encodeURIComponent(window.location.href);
-	$('#exit').attr('href','${path}/account/logout?backurl='+url);
+	$('#exit').attr('href','${path}/account/logout?backurl=' + encodeURIComponent(window.location.href));
+	$('#header_panel').css('margin-right', $('#header_cont').offset().left + 'px');
 });
 
 function changeActive() {
@@ -32,8 +32,7 @@ $(function(){
 	});
 	
 	$('#login').click(function(){
-		var url=encodeURIComponent(window.location.href);
-		$('#login').attr('href','${path}/account/login?backurl='+url);
+		$('#login').attr('href','${path}/account/login?backurl=' + encodeURIComponent(window.location.href));
 	});
 	
 });

@@ -184,8 +184,58 @@ body{
 	margin:0;
 }
 
+.bbs-upload {
+	border: 1px solid #ddd;
+	margin: 10px 20px;
+	overflow: hidden;
+	padding: 5px;
+	width: 95%;
+	height: auto;
+}
 
+.file-btns {
+	overflow: hidden;
+}
 
+.btn {
+	background-color: #aaa;
+	color: #ffffff !important;
+	float: left;
+	font-size: 16px;
+	height: 32px;
+	line-height: 30px;
+	margin-right: 20px;
+	text-align: center;
+	width: 100px;
+}
 
+.btn:hover {
+	background: #19b4ea;
+}
 
+.bbs-upload button  {
+	border: 0;
+	cursor:pointer;
+	background-color: #4387e9;
+	border-radius: 3px;
+	color: #ffffff;
+	float: right;
+	font-size: 16px;
+	height: 32px;
+	line-height: 30px;
+	text-align: center;
+	width: 100px;
+}
 
+.bbs-upload button:hover{
+	background-color:#09F;
+}
+
+.upload-desc {
+  margin: 5px;
+}
+
+.upload-desc > p {
+  color: #666;
+  margin: 2px 0;
+}

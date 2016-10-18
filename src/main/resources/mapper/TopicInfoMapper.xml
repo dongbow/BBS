@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ifxcode.bbs.dao.TopicInfoDao">
+
+	<cache type="cn.ifxcode.bbs.dao.cache.LoggingRedisCache"/>
+	
+	<insert id="insert">
+		insert into bbs_topic_info (topic_id, topic_is_check, topic_is_home, topic_is_home_end_time, 
+			topic_is_reply, topic_is_local_top, topic_is_local_top_end_time, topic_is_global_top, 
+			topic_is_global_top_end_time, topic_is_hot, topic_is_cream)
+		values (#{topicId}, #{topicIsCheck}, #{topicIsHome}, #{topicIsHomeEndTime}, 
+			#{topicIsReply}, #{topicIsLocalTop}, #{topicIsLocalTopEndTime}, #{topicIsGlobalTop}, 
+			#{topicIsGlobalTopEndTime}, #{topicIsHot}, #{topicIsCream})
+	</insert>
+	
+</mapper>

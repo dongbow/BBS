@@ -33,6 +33,7 @@ import cn.ifxcode.bbs.entity.UserValue;
 import cn.ifxcode.bbs.enumtype.EGHistory;
 import cn.ifxcode.bbs.service.BoardService;
 import cn.ifxcode.bbs.service.ClassifyService;
+import cn.ifxcode.bbs.service.GeneralService;
 import cn.ifxcode.bbs.service.GoldExperienceService;
 import cn.ifxcode.bbs.service.HomeImageService;
 import cn.ifxcode.bbs.service.NavigationService;
@@ -68,8 +69,19 @@ public class IndexController extends BaseUserController{
 	@Resource
 	private GoldExperienceService goldExperienceService;
 	
+	@Resource
+	private GeneralService generalService;
+	
 	private GoldHistory goldHistory = null;
 	private ExperienceHistory experienceHistory = null;
+	
+	@RequestMapping("/close")
+	public String close() {
+		if(generalService.checkBbsIsClose()) {
+			return "close";
+		}
+		return "redirect:/index";
+	}
 	
 	@RequestMapping("/tip/nologin")
 	public String getTip() {

@@ -114,6 +114,9 @@ public class LoginFilter implements Filter {
 	
 	private JSONObject getJsonObjectFromRedis(String key) {
 		Jedis jedis = new Jedis(PropertiesUtils.getValue("redis.host"), Integer.parseInt(PropertiesUtils.getValue("redis.port")));
+		if(StringUtils.isNotBlank(PropertiesUtils.getValue("redis.pass"))) {
+			jedis.auth(PropertiesUtils.getValue("redis.pass"));
+		}
 		List<String> list = jedis.hmget(key, "user");
 		JSONObject object = null;
 		if(list != null && list.size() > 0) {

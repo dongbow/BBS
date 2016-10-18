@@ -8,4 +8,6 @@ public interface ClassifyService {
 
 	public List<Classify> getClassifyByBoardId(int boardId);
 
+	public Classify getClassifyByCid(Integer boardId, Integer classId);
+
 }

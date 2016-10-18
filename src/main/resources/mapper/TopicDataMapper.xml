@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ifxcode.bbs.dao.TopicDataDao">
+
+	<cache type="cn.ifxcode.bbs.dao.cache.LoggingRedisCache"/>
+
+	<insert id="insert">
+		insert into bbs_topic_data (topic_id, topic_reply_count, topic_view_count, topic_favorite_count, topic_title_style, 
+			lastest_reply_user, lastest_reply_time, topic_update_user_id, topic_update_user, topic_update_time)
+		values (#{topicId}, #{topicReplyCount}, #{topicViewCount}, #{topicFavoriteCount}, #{topicTitleStyle}, #{lastestReplyUser}, 
+			#{lastestReplyTime}, #{topicUpdateUserId}, #{topicUpdateUser}, #{topicUpdateTime})
+	</insert>
+	
+</mapper>

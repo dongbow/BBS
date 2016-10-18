@@ -3,6 +3,7 @@ package cn.ifxcode.bbs.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import ltang.redis.service.RedisObjectMapService;
 
@@ -10,13 +11,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import cn.ifxcode.bbs.constant.BbsConstant;
 import cn.ifxcode.bbs.entity.Board;
 import cn.ifxcode.bbs.entity.Classify;
 import cn.ifxcode.bbs.entity.Navigation;
 import cn.ifxcode.bbs.service.BoardService;
 import cn.ifxcode.bbs.service.ClassifyService;
 import cn.ifxcode.bbs.service.NavigationService;
+import cn.ifxcode.bbs.service.TopicService;
+import cn.ifxcode.bbs.service.UserService;
 import cn.ifxcode.bbs.utils.JsonUtils;
 import cn.ifxcode.bbs.utils.NumberUtils;
 import cn.ifxcode.bbs.utils.RedisKeyUtils;
@@ -29,6 +35,9 @@ import com.alibaba.fastjson.JSONObject;
 public class PostController extends BaseUserController {
 	
 	@Resource
+	private UserService userService;
+	
+	@Resource
 	private NavigationService navigationService;
 	
 	@Resource
@@ -36,6 +45,9 @@ public class PostController extends BaseUserController {
 	
 	@Resource
 	private ClassifyService classifyService;
+	
+	@Resource
+	private TopicService topicService;
 	
 	@Resource
 	private RedisObjectMapService redisObjectMapService;
@@ -68,10 +80,26 @@ public class PostController extends BaseUserController {
 		List<Classify> classifies = classifyService.getClassifyByBoardId((int) boardId);
 		Navigation navigation = navigationService.getNavigation(classifies.get(0).getNavId());
 		Board board = boardService.getBoardByBoardId(classifies.get(0).getNavId(), classifies.get(0).getBoardId());
-		model.addAttribute("pnav", navigation);
+		model.addAttribute("navigation", navigation);
 		model.addAttribute("pboard", board);
 		model.addAttribute("classifies", classifies);
 		return "post/post";
+	}
+	
+	@RequestMapping(value = "/new/topic/do", method = RequestMethod.POST)
+	public String doPost(int cid, String ttitle, String tcontent, long uid, int bid, int gid, 
+			@RequestParam(required = false, defaultValue = "0")int isreply,
+			@RequestParam(required = false, defaultValue = "0")int iselite,
+			@RequestParam(required = false, defaultValue = "0")int istop,
+			@RequestParam(required = false, defaultValue = "0")int isglobaltop,
+			@RequestParam(required = false, defaultValue = "0")int ishome, 
+			HttpServletRequest request) {
+		long topicId = topicService.insertTopic(cid, ttitle, tcontent, uid, bid, gid, 
+				isreply, iselite, istop, isglobaltop, ishome, request);
+		if(topicId > BbsConstant.OK) {
+			return "redirect:/topic/detail/" + topicId + "/1";
+		}
+		return "redirect:/index";
 	}
 
 }
