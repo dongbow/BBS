@@ -120,13 +120,12 @@ public class TopicServiceImpl implements TopicService{
 	public JSONObject saveOrUpdateTopicData(long topicId, TopicSign topicSign, String topicTitleStyle, String lastestReplyUser,
 			String lastestReplyTime, long topicUpdateUserId, String topicUpdateUser, String topicUpdateTime) {
 		JSONObject object = redisObjectMapService.get(RedisKeyUtils.getTopicData(topicId), JSONObject.class);
+		TopicData topicData = new TopicData();
 		if(object == null) {
-			TopicData topicData = new TopicData();
 			topicData.setTopicId(topicId);
 			topicData.setTopicViewCount(1);
-			object = JSONObject.parseObject(JSON.toJSONString(topicData));
 		} else {
-			TopicData topicData = JSON.toJavaObject(object, TopicData.class);
+			topicData = JSON.toJavaObject(object, TopicData.class);
 			if(topicSign.getCode() == 0) {
 				topicData.setTopicViewCount(topicData.getTopicViewCount() + 1);
 			} else if(topicSign.getCode() == 1) {
@@ -153,6 +152,7 @@ public class TopicServiceImpl implements TopicService{
 				topicData.setTopicTitleStyle(topicTitleStyle);
 			}
 		}
+		object = JSONObject.parseObject(JSON.toJSONString(topicData));
 		redisObjectMapService.save(RedisKeyUtils.getTopicData(topicId), object, JSONObject.class);
 		return object;
 	}
