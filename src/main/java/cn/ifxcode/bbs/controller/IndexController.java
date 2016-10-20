@@ -38,7 +38,6 @@ import cn.ifxcode.bbs.service.GoldExperienceService;
 import cn.ifxcode.bbs.service.HomeImageService;
 import cn.ifxcode.bbs.service.NavigationService;
 import cn.ifxcode.bbs.service.UserService;
-import cn.ifxcode.bbs.utils.DateUtils;
 import cn.ifxcode.bbs.utils.GetRemoteIpUtil;
 import cn.ifxcode.bbs.utils.JsonUtils;
 import cn.ifxcode.bbs.utils.NumberUtils;
@@ -81,11 +80,6 @@ public class IndexController extends BaseUserController{
 			return "close";
 		}
 		return "redirect:/index";
-	}
-	
-	@RequestMapping("/tip/nologin")
-	public String getTip() {
-		return "tip/login_tip";
 	}
 	
 	@RequestMapping("/index")

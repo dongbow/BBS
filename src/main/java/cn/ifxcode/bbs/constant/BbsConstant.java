@@ -4,6 +4,7 @@ public class BbsConstant {
 
 	public static final String DOMAIN = "";
 	public static final String ROOT = "/bbs";
+	public static final String TIP = "/tip";
 	public static final String CLOSE = "/close";
 	public static final String SYSTEM = "system";
 	public static final String AUTH_HOME = "/system/admin/index";

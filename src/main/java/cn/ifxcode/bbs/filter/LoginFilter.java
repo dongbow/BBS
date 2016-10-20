@@ -73,7 +73,7 @@ public class LoginFilter implements Filter {
 		if(isAjax(request)) {
 			JSONObject responseJSONObject = new JSONObject(true);
 			Result result = new Result(BbsErrorCode.NOT_LOGIN, BbsErrorCode.getDescribe(BbsErrorCode.NOT_LOGIN));
-			responseJSONObject.put("rc", result);
+			responseJSONObject.put(BbsConstant.RC, result);
 			response.setCharacterEncoding("UTF-8");  
 		    response.setContentType("application/json; charset=utf-8");  
 		    PrintWriter out = null;  
@@ -88,7 +88,7 @@ public class LoginFilter implements Filter {
 		        }  
 		    }  
 		} else {
-			response.sendRedirect(BbsConstant.ROOT + BbsConstant.SIMPLE_LOGIN + "?backurl=" + URLEncoder.encode(request.getRequestURL().toString(), BbsConstant.UTF8));
+			response.sendRedirect(BbsConstant.ROOT + BbsConstant.TIP + "?tip=nologin&back=" + URLEncoder.encode(request.getRequestURL().toString(), BbsConstant.UTF8));
 		}
 	}
 	

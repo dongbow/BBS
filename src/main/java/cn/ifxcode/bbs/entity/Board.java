@@ -16,6 +16,7 @@ public class Board implements Serializable {
 	private int boardSort;
 	private String boardManager;
 	private int boardIsOpen;
+	private int isAccess;
 	private String boardCreateTime;
 	private List<String> boardManagerName;
 
@@ -105,6 +106,14 @@ public class Board implements Serializable {
 
 	public void setBoardManagerName(List<String> boardManagerName) {
 		this.boardManagerName = boardManagerName;
+	}
+
+	public int getIsAccess() {
+		return isAccess;
+	}
+
+	public void setIsAccess(int isAccess) {
+		this.isAccess = isAccess;
 	}
 
 }
