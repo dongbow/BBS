@@ -69,6 +69,7 @@ public class TopicController extends BaseUserController{
 		if(topic != null) {
 			topic.setTopicContent(HtmlUtils.htmlUnescape(topic.getTopicContent()));
 			topic.setTopicCreateTime(DateUtils.dt14LongFormat(DateUtils.dt14FromStr(topic.getTopicCreateTime())));
+			topic.setTopicData(topicService.getTopicDateFromRedis(topic.getTopicId()));
 			User user = userService.getUserById(topic.getUserId());
 			UserValue userValue = userService.getUserValue(topic.getUserId());
 			Classify classify = classifyService.getClassifyByCid(topic.getBoardId(), topic.getClassId());

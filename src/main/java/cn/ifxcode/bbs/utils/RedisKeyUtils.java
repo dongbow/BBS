@@ -46,4 +46,8 @@ public class RedisKeyUtils {
 		return "bbs:system:config";
 	}
 	
+	public static String getTopicData(long topicId) {
+		return "bbs:data:topic:topicid:" + topicId;
+	}
+	
 }

@@ -16,7 +16,7 @@ public class TopicData implements Serializable {
 	private long topicUpdateUserId;
 	private String topicUpdateUser;
 	private String topicUpdateTime;
-
+	
 	public long getTopicId() {
 		return topicId;
 	}
