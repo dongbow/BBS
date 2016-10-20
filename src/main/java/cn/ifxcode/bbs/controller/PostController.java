@@ -75,7 +75,7 @@ public class PostController extends BaseUserController {
 	public String goPost(@PathVariable("bid")String bid, Model model) {
 		long boardId = NumberUtils.getAllNumber(bid);
 		if(Long.toString(boardId).length() > 10) {
-			return "redirect:/index";
+			return "redirect:/tip?tip=board-notexists";
 		}
 		List<Classify> classifies = classifyService.getClassifyByBoardId((int) boardId);
 		Navigation navigation = navigationService.getNavigation(classifies.get(0).getNavId());
@@ -97,9 +97,9 @@ public class PostController extends BaseUserController {
 		long topicId = topicService.insertTopic(cid, ttitle, tcontent, uid, bid, gid, 
 				isreply, iselite, istop, isglobaltop, ishome, request);
 		if(topicId > BbsConstant.OK) {
-			return "redirect:/topic/detail/" + topicId + "/1";
+			return "redirect:/board/" + bid + "/topic/detail/" + topicId + "/1";
 		}
-		return "redirect:/index";
+		return "redirect:/tip?tip=post-fail";
 	}
 
 }

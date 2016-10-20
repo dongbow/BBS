@@ -26,6 +26,8 @@ public class TipController {
 		} else if("nologin".equals(tip)) {
 			model.addAttribute("tip", "nologin");
 			model.addAttribute("back", back);
+		} else if("noauth".equals(tip)) {
+			model.addAttribute("tip", "noauth");
 		} else if("board-noauth".equals(tip)) {
 			model.addAttribute("tip", "board-noauth");
 		} else if("topic-noauth".equals(tip)) {
@@ -34,6 +36,8 @@ public class TipController {
 			model.addAttribute("tip", "post-noauth");
 		} else if("class-noauth".equals(tip)) {
 			model.addAttribute("tip", "class-noauth");
+		} else if("nav-notexists".equals(tip)) {
+			model.addAttribute("tip", "nav-notexists");
 		} else if("board-notexists".equals(tip)) {
 			model.addAttribute("tip", "board-notexists");
 		} else if("topic-notexists".equals(tip)) {
@@ -42,6 +46,8 @@ public class TipController {
 			model.addAttribute("tip", "class-notexists");
 		} else if("space-notexists".equals(tip)) {
 			model.addAttribute("tip", "space-notexists");
+		} else if("post-fail".equals(tip)) {
+			model.addAttribute("tip", "post-fail");
 		}
 		return "tip/system_tip";
 	}

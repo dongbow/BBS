@@ -29,7 +29,6 @@ import cn.ifxcode.bbs.utils.DateUtils;
 import cn.ifxcode.bbs.utils.NumberUtils;
 
 @Controller
-@RequestMapping("/topic")
 public class TopicController extends BaseUserController{
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -51,15 +50,20 @@ public class TopicController extends BaseUserController{
 	@Resource
 	private ClassifyService classifyService;
 	
-	@RequestMapping("/detail/{tid}/{pno}")
-	public String toTopic(@PathVariable("tid")String tid, @PathVariable("pno")int pno, 
+	@RequestMapping("/board/{bid}/topic/detail/{tid}/{pno}")
+	public String toTopic(@PathVariable("bid")String bid, 
+			@PathVariable("tid")String tid, @PathVariable("pno")int pno, 
 			@RequestParam(required = false, defaultValue = "1")int sort, 
 			@RequestParam(required = false)Integer floor, 
 			@RequestParam(required = false, defaultValue = "0")long uid, Model model, 
 			HttpServletRequest request) {
+		long boardId = NumberUtils.getAllNumber(bid);
+		if(Long.toString(boardId).length() > 10) {
+			return "redirect:/tip?tip=board-notexists";
+		}
 		long topicId = NumberUtils.getAllNumber(tid);
 		if(Long.toString(topicId).length() > 15) {
-			return "redirect:/index";
+			return "redirect:/tip?tip=topic-notexists";
 		}
 		Topic topic = topicService.getTopicByTopicId(topicId);
 		if(topic != null) {
@@ -85,7 +89,7 @@ public class TopicController extends BaseUserController{
 			return "topic/topic";
 		}
 		logger.info("topic is not found");
-		return "redirect:/index";
+		return "redirect:/tip?tip=topic-notexists";
 	}
 	
 }

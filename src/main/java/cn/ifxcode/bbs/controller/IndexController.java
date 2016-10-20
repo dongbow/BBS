@@ -94,11 +94,11 @@ public class IndexController extends BaseUserController{
 			Model model) {
 		long navId = NumberUtils.getAllNumber(gid);
 		if(Long.toString(navId).length() > 10) {
-			return "redirect:/index";
+			return "redirect:/tip?tip=nav-notexists";
 		}
 		JSONObject object = redisObjectMapService.get(RedisKeyUtils.getBoardsByNavId((int) navId), JSONObject.class);
 		if(object == null) {
-			return "redirect:/index";
+			return "redirect:/tip?tip=nav-notexists";
 		}
 		Navigation navigation = navigationService.getNavigation((int) navId);
 		JSONArray array = JSONArray.parseArray(object.getString("boards"));
@@ -113,20 +113,20 @@ public class IndexController extends BaseUserController{
 			Model model) {
 		long navId = NumberUtils.getAllNumber(gid);
 		if(Long.toString(navId).length() > 10) {
-			return "redirect:/index";
+			return "redirect:/tip?tip=nav-notexists";
 		}
 		JSONObject object = redisObjectMapService.get(RedisKeyUtils.getBoardsByNavId((int) navId), JSONObject.class);
 		if(object == null) {
-			return "redirect:/index";
+			return "redirect:/tip?tip=nav-notexists";
 		}
 		long boardId = NumberUtils.getAllNumber(bid);
 		if(Long.toString(boardId).length() > 10) {
-			return "redirect:/index";
+			return "redirect:/tip?tip=board-notexists";
 		}
 		Navigation navigation = navigationService.getNavigation((int) navId);
 		Board board = boardService.getBoardByBoardId(object, (int) boardId);
 		if(board == null) {
-			return "redirect:/index";
+			return "redirect:/tip?tip=board-notexists";
 		}
 		BoardInfo boardInfo = boardService.getBoardInfoByBoardId((int) boardId);
 		List<Classify> classifies = classifyService.getClassifyByBoardId((int) boardId);

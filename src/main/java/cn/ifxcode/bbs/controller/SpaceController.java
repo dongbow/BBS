@@ -45,7 +45,7 @@ public class SpaceController extends BaseUserController {
 		}
 		User user = userService.getUserById(userId);
 		if(user == null) {
-			return "redirect:/index";
+			return "redirect:/tip?tip=space-notexists";
 		}
 		UserValue userValue = userService.getUserValue(userId);
 		model.addAttribute("userinfo", user);
@@ -68,7 +68,7 @@ public class SpaceController extends BaseUserController {
 		}
 		User user = userService.getUserByUserNickname(nickname);
 		if(user == null) {
-			return "redirect:/index";
+			return "redirect:/tip?tip=space-notexists";
 		}
 		UserValue userValue = userService.getUserValue(user.getUserAccess().getUserId());
 		model.addAttribute("userinfo", user);

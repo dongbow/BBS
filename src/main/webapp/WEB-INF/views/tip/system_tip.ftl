@@ -20,6 +20,10 @@
 			     		<a class="dialog_login_btn" href="${path}/account/login?backurl=${back}">登录 | </a>
 			     		<a href="${path}/account/register">注册</a>
 		     		</#if>
+		     		<#if tip == 'noauth'>
+			     		抱歉，你没有权限执行此操作<br/>
+			     		<a href="${path}">返回首页</a>
+		     		</#if>
 		     		<#if tip == 'board-noauth'>
 			     		抱歉，你没有权限访问本版块<br/>
 			     		<a class="goback" href="javascript:;">返回上一页</a>
@@ -36,6 +40,10 @@
 			     		抱歉，你没有权限在此分类下发帖<br/>
 			     		<a class="goback" href="javascript:;">返回上一页</a>
 		     		</#if>
+		     		<#if tip == 'nav-notexists'>
+			     		抱歉，导航不存在<br/>
+			     		<a class="goback" href="javascript:;">返回上一页</a>
+		     		</#if>
 		     		<#if tip == 'board-notexists'>
 			     		抱歉，版块不存在<br/>
 			     		<a class="goback" href="javascript:;">返回上一页</a>
@@ -50,6 +58,10 @@
 		     		</#if>
 		     		<#if tip == 'space-notexists'>
 			     		抱歉，空间不存在<br/>
+			     		<a class="goback" href="javascript:;">返回上一页</a>
+		     		</#if>
+		     		<#if tip == 'post-fail'>
+			     		抱歉，帖子发表失败<br/>
 			     		<a class="goback" href="javascript:;">返回上一页</a>
 		     		</#if>
 		     	</p>
