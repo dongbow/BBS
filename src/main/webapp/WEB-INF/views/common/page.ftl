@@ -1,5 +1,5 @@
 <#macro buildPage page>
-	<#if page??>
+	<#if page?? && page.totalPage != 0>
 		<div id="kkpages">
 	    	<div id="kkpager">
 		    	<div>
@@ -31,12 +31,12 @@
 						  	<a href="${page.searchUrl}?p=${page.pageNo + 1}">下一页</a>  
 						  	<a href="${page.searchUrl}?p=${page.totalPage}">尾页</a>  
 						<#else>  
-							<a class="disabled">下一页</a>  
-						  	<a class="disabled">尾页</a>  
+							<span class="disabled">下一页</span>  
+						  	<span class="disabled">尾页</span>  
 						</#if>
 					</span>
 				</div>
-				<div style="clear:both;"></div>
+				<div class="both" style="clear:both;"></div>
 			</div>
 	    </div>
 	</#if>

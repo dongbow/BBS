@@ -71,7 +71,7 @@ public class PostController extends BaseUserController {
 		return "common/cpost";
 	}
 	
-	@RequestMapping("/new/topic/{bid}")
+	@RequestMapping("/new/board/{bid}/topic")
 	public String goPost(@PathVariable("bid")String bid, Model model) {
 		long boardId = NumberUtils.getAllNumber(bid);
 		if(Long.toString(boardId).length() > 10) {

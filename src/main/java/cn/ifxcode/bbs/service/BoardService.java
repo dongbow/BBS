@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 
 import cn.ifxcode.bbs.entity.Board;
 import cn.ifxcode.bbs.entity.BoardInfo;
+import cn.ifxcode.bbs.enumtype.BoardSign;
 
 public interface BoardService {
 
@@ -12,5 +13,9 @@ public interface BoardService {
 	public BoardInfo getBoardInfoByBoardId(int boardId);
 
 	public Board getBoardByBoardId(Integer navId, Integer boardId);
+
+	public JSONObject saveOrUpdateBoardInfo(int boardId, BoardSign sign);
+	
+	public BoardInfo getBoardInfoFromRedis(int boardId);
 
 }

@@ -49,5 +49,9 @@ public class RedisKeyUtils {
 	public static String getTopicData(long topicId) {
 		return "bbs:data:topic:topicid:" + topicId;
 	}
+
+	public static String getBoardInfoByBoardId(int boardId) {
+		return "bbs:data:board:boardid:" + boardId;
+	}
 	
 }

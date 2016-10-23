@@ -1,9 +1,12 @@
 package cn.ifxcode.bbs.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import com.alibaba.fastjson.JSONObject;
 
+import cn.ifxcode.bbs.bean.Page;
 import cn.ifxcode.bbs.entity.Topic;
 import cn.ifxcode.bbs.entity.TopicData;
 import cn.ifxcode.bbs.enumtype.TopicSign;
@@ -19,6 +22,8 @@ public interface TopicService {
 	public JSONObject saveOrUpdateTopicData(long topicId, TopicSign topicSign, String topicTitleStyle, String lastestReplyUser,
 			String lastestReplyTime, long topicUpdateUserId, String topicUpdateUser, String topicUpdateTime);
 	
-	public TopicData getTopicDateFromRedis(long topicId);
+	public TopicData getTopicDateFromRedis(long topicId, Integer boardId);
+
+	public List<Topic> getTopicListByUserId(Long userId, Page page);
 	
 }

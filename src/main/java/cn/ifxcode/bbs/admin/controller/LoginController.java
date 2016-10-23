@@ -74,11 +74,13 @@ public class LoginController {
 		CookieBean cookieBean = userService.getCookieBeanFromCookie(request);
 		if(cookieBean != null) {
 			JSONObject object = redisObjectMapService.get(RedisKeyUtils.getUserInfo(cookieBean.getUser_id()), JSONObject.class);
-			User user = JsonUtils.decodeJson(object);
-			logger.info(GetRemoteIpUtil.getRemoteIp(request) + " on admin login page");
-			if(cookieBean.getIs_admin() == BbsConstant.IS_ADMIN && user != null 
-					&& user.getUserAccess().getUserIsAdmin() == BbsConstant.IS_ADMIN) {
-				return "redirect:/system/admin/index";
+			if(object != null) {
+				User user = JsonUtils.decodeJson(object);
+				logger.info(GetRemoteIpUtil.getRemoteIp(request) + " on admin login page");
+				if(cookieBean.getIs_admin() == BbsConstant.IS_ADMIN && user != null 
+						&& user.getUserAccess().getUserIsAdmin() == BbsConstant.IS_ADMIN) {
+					return "redirect:/system/admin/index";
+				}
 			}
 		}
 		return "admin/account/login";

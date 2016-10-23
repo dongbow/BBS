@@ -128,7 +128,8 @@ public class IndexController extends BaseUserController{
 		if(board == null) {
 			return "redirect:/tip?tip=board-notexists";
 		}
-		BoardInfo boardInfo = boardService.getBoardInfoByBoardId((int) boardId);
+		//BoardInfo boardInfo = boardService.getBoardInfoByBoardId((int) boardId);
+		BoardInfo boardInfo = boardService.getBoardInfoFromRedis((int) boardId);
 		List<Classify> classifies = classifyService.getClassifyByBoardId((int) boardId);
 		model.addAttribute("navigation", navigation);
 		model.addAttribute("board", board);

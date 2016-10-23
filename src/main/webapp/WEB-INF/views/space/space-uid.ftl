@@ -27,7 +27,7 @@
 			<h2 class="mt">${userinfo.userAccess.userNickname}</h2>
 		</div>
 		<ul style="padding-left: 75px;" class="tb cl">
-			<li class="utp"><a href="space.htm?md=space&type=topic&uid=${userinfo.userAccess.userId}&view=me">主题</a></li>
+			<li class="utp"><a href="${path}/space/uid/${userinfo.userAccess.userId}/topic">主题</a></li>
 			<li class="a"><a href="${path}/space/uid/${userinfo.userAccess.userId}">个人资料</a></li>
 			<#if islogin == 1 && user.userAccess.userIsAdmin == 1 && user.userAccess.userId == userinfo.userAccess.userId>
 				<li class="cm"><a href="${path}/system/admin/account/login">进入后台</a></li>
@@ -36,7 +36,7 @@
 				<li class="cm"><a href="${path}">版主后台</a></li>
 			</#if>
 			<#if islogin == 1 && user.userAccess.userId == userinfo.userAccess.userId>
-				<li class="cm"><a href="home.htm?md=space&type=profile">修改资料</a></li>
+				<li class="cm"><a href="${path}/home/${user.userAccess.userId}/setting/profile">修改资料</a></li>
 			</#if>
 			<#if user??>
 				<#if user.userAccess.userId != userinfo.userAccess.userId>
@@ -61,9 +61,9 @@
 				<p class="mcn">
 					<span>
 						<span>统计信息：</span> 
-						<span class="count"><a href="space.htm?md=space&type=topic&uid=${userinfo.userAccess.userId}&view=me">主题：${uservalue.userTopicCount}</a></span>
-						<span class="count"><a href="space.htm?md=space&type=reply&uid=${userinfo.userAccess.userId}&view=me">回复：${uservalue.userReplyCount}</a></span> 
-						<span class="count"><a href="space.htm?md=space&type=friend&uid=${userinfo.userAccess.userId}&view=me">好友：${uservalue.userFriendCount}</a></span> 
+						<span class="count"><a href="${path}/space/uid/${userinfo.userAccess.userId}/topic">主题：${uservalue.userTopicCount}</a></span>
+						<span class="count"><a href="${path}/space/uid/${userinfo.userAccess.userId}/reply">回复：${uservalue.userReplyCount}</a></span> 
+						<span class="count"><a href="${path}/space/uid/${userinfo.userAccess.userId}/friends">好友：${uservalue.userFriendCount}</a></span> 
 						<span class="count">金币：${uservalue.userGold}</span> 
 						<span class="count none">经验：${uservalue.userExperience}</span> 
 					</span>
@@ -90,7 +90,7 @@
 				<p>
 					<span>用户组：
 						<#list userinfo.roles as role>
-							<a style="color:${role.roleColor}" href="home.htm?md=space&type=profile&ac=usergroup">${role.roleName}</a>.&nbsp;&nbsp;
+							<a style="color:${role.roleColor}" href="${path}/home/${userinfo.userAccess.userId}/setting/usergroup">${role.roleName}</a>.&nbsp;&nbsp;
 						</#list>
 					</span>
 				</p>

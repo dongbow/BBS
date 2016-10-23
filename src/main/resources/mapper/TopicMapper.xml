@@ -57,4 +57,8 @@
 		t.topic_status = 0 AND t.topic_id = #{topicId}
 	</select>
 	
+	<select id="getTopicListByUserId" resultMap="BaseTopic">
+		SELECT t.* FROM bbs_topic AS t WHERE t.topic_status = 0 AND t.user_id = #{userId}
+	</select>
+	
 </mapper>

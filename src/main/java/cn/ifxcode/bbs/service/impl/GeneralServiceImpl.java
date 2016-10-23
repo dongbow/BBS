@@ -19,14 +19,20 @@ import cn.ifxcode.bbs.bean.CookieBean;
 import cn.ifxcode.bbs.constant.BbsConstant;
 import cn.ifxcode.bbs.dao.GeneralDao;
 import cn.ifxcode.bbs.dao.UserValueDao;
+import cn.ifxcode.bbs.entity.Board;
+import cn.ifxcode.bbs.entity.Classify;
 import cn.ifxcode.bbs.entity.ExperienceHistory;
 import cn.ifxcode.bbs.entity.GoldHistory;
 import cn.ifxcode.bbs.entity.SystemConfig;
+import cn.ifxcode.bbs.entity.User;
 import cn.ifxcode.bbs.entity.UserValue;
 import cn.ifxcode.bbs.enumtype.EGHistory;
+import cn.ifxcode.bbs.service.BoardService;
+import cn.ifxcode.bbs.service.ClassifyService;
 import cn.ifxcode.bbs.service.GeneralService;
 import cn.ifxcode.bbs.service.UserService;
 import cn.ifxcode.bbs.utils.GetRemoteIpUtil;
+import cn.ifxcode.bbs.utils.JsonUtils;
 import cn.ifxcode.bbs.utils.RedisKeyUtils;
 import cn.ifxcode.bbs.utils.UserValueUtils;
 
@@ -41,6 +47,12 @@ public class GeneralServiceImpl implements GeneralService {
 	
 	@Resource
 	private GeneralDao generalDao;
+	
+	@Resource
+	private ClassifyService classifyService;
+	
+	@Resource
+	private BoardService boardService;
 	
 	@Resource
 	private RedisObjectMapService redisObjectMapService;
@@ -90,11 +102,13 @@ public class GeneralServiceImpl implements GeneralService {
 	public int UserAward(EGHistory eg, long uid, HttpServletRequest request) {
 		GoldHistory goldHistory = null;
 		ExperienceHistory experienceHistory = null;
-		UserValue userValue = UserValueUtils.topic(userService.getUserValue(uid));
+		UserValue userValue = null;
 		if(eg.getFrom() == 3) {
+			userValue = UserValueUtils.topic(userService.getUserValue(uid));
 			userValue.setUserTopicCount(userValue.getUserTopicCount() + 1);
 		}
 		if(eg.getFrom() == 4) {
+			userValue = UserValueUtils.reply(userService.getUserValue(uid));
 			userValue.setUserReplyCount(userValue.getUserReplyCount() + 1);
 		}
 		CookieBean cookieBean = userService.getCookieBeanFromCookie(request);
@@ -110,6 +124,61 @@ public class GeneralServiceImpl implements GeneralService {
 		generalDao.insertExperienceHistory(experienceHistory);
 		generalDao.insertGoldHistory(goldHistory);
 		return BbsConstant.OK;
+	}
+
+	@Override
+	public Board getBoardByBoardId(int boardId) {
+		List<Classify> classifies = classifyService.getClassifyByBoardId(boardId);
+		if(!classifies.isEmpty() && classifies.size() > 0) {
+			Board board = boardService.getBoardByBoardId(classifies.get(0).getNavId(), boardId);
+			if(board != null) {
+				return board;
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public boolean isLogin(HttpServletRequest request) {
+		CookieBean cookieBean = userService.getCookieBeanFromCookie(request);
+		if(cookieBean != null) {
+			JSONObject object = redisObjectMapService.get(RedisKeyUtils.getUserInfo(cookieBean.getUser_id()), JSONObject.class);
+			if(object != null) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	@Override
+	public boolean isBoardAccess(HttpServletRequest request) {
+		CookieBean cookieBean = userService.getCookieBeanFromCookie(request);
+		if(cookieBean != null) {
+			JSONObject object = redisObjectMapService.get(RedisKeyUtils.getUserInfo(cookieBean.getUser_id()), JSONObject.class);
+			if(object != null) {
+				User user = JsonUtils.decodeJson(object);
+				if(user.getUserAccess().getUserIsAdmin() == BbsConstant.OK 
+						|| user.getUserAccess().getUserIsBoderManager() == BbsConstant.OK) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	@Override
+	public boolean adminCheck(HttpServletRequest request) {
+		CookieBean cookieBean = userService.getCookieBeanFromCookie(request);
+		if(cookieBean != null) {
+			JSONObject object = redisObjectMapService.get(RedisKeyUtils.getUserInfo(cookieBean.getUser_id()), JSONObject.class);
+			if(object != null) {
+				User user = JsonUtils.decodeJson(object);
+				if(user.getUserAccess().getUserIsAdmin() == BbsConstant.OK) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 
 }

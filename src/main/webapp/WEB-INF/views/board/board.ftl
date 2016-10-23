@@ -13,7 +13,7 @@
 	<div id="fm">
 		<div id="local" class="c1">
 			<div class="z">
-				<span>当前位置：</span><a class="line" href="forum.htm">论坛首页</a> <em>></em>
+				<span>当前位置：</span><a class="line" href="${path}">论坛首页</a> <em>></em>
 				<a class="line bltd" href="${path}/navigation/${navigation.navId}">${navigation.navName}</a> <em>></em> 
 				<span id="boardname" class="ltd">${board.boardName}</span>
 			</div>

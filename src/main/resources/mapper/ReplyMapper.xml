@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ifxcode.bbs.dao.ReplyDao">
+
+	<cache type="cn.ifxcode.bbs.dao.cache.LoggingRedisCache"/>
+	
+	<select id="getReplyListByTopicId" resultType="Reply">
+		SELECT * FROM bbs_reply WHERE topic_id = #{topicId} 
+		<if test="userId != null">
+			and user_id = #{userId} 
+		</if>
+		ORDER BY reply_create_time ${sort}
+	</select>
+	
+	<insert id="insertReply" useGeneratedKeys="true" keyProperty="replyId" parameterType="Reply">
+		insert into bbs_reply (user_id, topic_id, board_id, reply_parent_id, reply_content, 
+			reply_is_check, reply_status, reply_update_user_id, reply_update_user, 
+			reply_update_time, reply_create_time, reply_ip)
+		values (#{userId}, #{topicId}, #{boardId}, #{replyParentId}, #{replyContent}, #{replyIsCheck}, 
+			#{replyStatus}, #{replyUpdateUserId}, #{replyUpdateUser}, #{replyUpdateTime}, 
+			#{replyCreateTime}, #{replyIp})
+	</insert>
+	
+	<select id="getReplyByPid" resultType="Reply">
+		SELECT * FROM bbs_reply WHERE reply_id = #{replyParentId} 
+	</select>
+	
+</mapper>

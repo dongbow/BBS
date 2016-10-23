@@ -3,7 +3,7 @@ package cn.ifxcode.bbs.enumtype;
 public enum TopicSign {
 
 
-	VIEW(0), REPLY(1), FAVORITE(1);
+	VIEW(0), REPLY(1), FAVORITE(2);
 	
 	private int code;
 	

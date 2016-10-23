@@ -38,6 +38,12 @@ public class UserValueUtils {
 		return userValue;
 	}
 	
+	public static UserValue reply(UserValue userValue) {
+		Exp(userValue, 1);
+		gold(userValue, 1);
+		return userValue;
+	}
+	
 	private static void Exp(UserValue userValue, int value) {
 		if((userValue.getTodayExp() == 0 && !StringUtils.isNotBlank(userValue.getTodayExpTime()))
 				|| (userValue.getTodayExp() < 50 && DateUtils.getDateDifferenceBegin(userValue.getTodayExpTime(), DateUtils.dt14LongFormat(new Date())) >= 0)) {
@@ -59,5 +65,5 @@ public class UserValueUtils {
 			userValue.setThisGold(value);
 		}
 	}
-	
+
 }

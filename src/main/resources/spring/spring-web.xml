@@ -11,7 +11,7 @@
         
     <mvc:interceptors>
     	<mvc:interceptor>
-    		<mvc:mapping path="/*"/>
+    		<mvc:mapping path="/**"/>
     		<bean class="cn.ifxcode.bbs.interceptor.BbsInterceptor"/>
     	</mvc:interceptor>
     </mvc:interceptors>

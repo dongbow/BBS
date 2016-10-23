@@ -4,7 +4,7 @@
 <head>
 	<#include "../common/import.ftl"/>
 	<title>系统提示</title>
-	<link href="${path}/resources/css/system_tip.css" rel="stylesheet" type="text/css" />
+	<link type="text/css" rel="stylesheet" href="${path}/resources/css/common_tip.css"/>
 </head>
 <body>
 	<#include "../common/header.ftl"/>
@@ -64,6 +64,18 @@
 			     		抱歉，帖子发表失败<br/>
 			     		<a class="goback" href="javascript:;">返回上一页</a>
 		     		</#if>
+		     		<#if tip == 'reply-fail'>
+			     		抱歉，回复失败<br/>
+			     		<a class="goback" href="javascript:;">返回上一页</a>
+		     		</#if>
+		     		<#if tip == 'reply-noauth'>
+			     		抱歉，没有权限回复该贴<br/>
+			     		<a class="goback" href="javascript:;">返回上一页</a>
+		     		</#if>
+		     		<#if tip == 'reply-notreply'>
+			     		抱歉，该贴禁止回复<br/>
+			     		<a class="goback" href="javascript:;">返回上一页</a>
+		     		</#if>
 		     	</p>
 		    </div>
 		</div>
@@ -71,10 +83,9 @@
 	<script type="text/javascript">
 		$(function(){
 			$('#checktip').css({
-				'top': ($(window).height() - $('#checktip').height())/2 + 'px';
-				'left': ($(window).width() - $('#checktip').width())/2 + 'px';
+				'top': ($(window).height() - $('#checktip').height())/2 + 'px',
+				'left': ($(window).width() - $('#checktip').width())/2 + 'px'
 			});
-			
 			$('.goback').click(function(){
 				history.go(-1);
 			});

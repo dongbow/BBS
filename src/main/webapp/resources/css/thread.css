@@ -282,7 +282,7 @@ a{
 	line-height:11px;
 }
 
-#replylist .tcontent{
+.replylist .tcontent{
 	width:744px;
 	padding:10px 0 30px;
 	height:auto;
@@ -295,7 +295,7 @@ a{
 	overflow:hidden;
 }
 
-#topiccont .tright .tcontent img,#replylist .tcontent img{
+#topiccont .tright .tcontent img,.replylist .tcontent img{
 	cursor: pointer;
 }
 
@@ -316,7 +316,7 @@ a{
 	color:#333;
 }
 
-#replylist{
+.replylist{
 	width:1000px;
 	height:auto;
 	min-height:400px;
@@ -326,7 +326,7 @@ a{
 	background:#fff;
 }
 
-#replylist .tleft{
+.replylist .tleft{
 	height:auto;
 	min-height:400px;
 	//border-right:1px solid #ddd;
@@ -337,7 +337,7 @@ a{
 	overflow:hidden;
 }
 
-#replylist .tleft .authorname{
+.replylist .tleft .authorname{
 	display: block;
     font: 16px "microsoft yahei";
     margin-bottom: 0;
@@ -346,19 +346,19 @@ a{
     white-space: nowrap;
 }
 
-#replylist .tleft img{
+.replylist .tleft img{
 	border: 3px solid #ececec;
     margin-bottom: 10px;
     margin-top: 10px;
 }
 
-#replylist .ugp{
+.replylist .ugp{
 	height:23px;
 	float:left;
 	margin-bottom:10px;
 }
 
-#replylist .ulevel{
+.replylist .ulevel{
 	margin:15px 0;
 	width:130px;
 	padding:5px 2px;
@@ -366,7 +366,7 @@ a{
 	overflow:hidden;
 }
 
-#replylist .ulevel span{
+.replylist .ulevel span{
 	display:block;
 	width:100px;
 	border:1px solid #FC6;
@@ -375,14 +375,14 @@ a{
 	float:left;
 }
 
-#replylist .ulevel span.dlev{
+.replylist .ulevel span.dlev{
 	display:block;
 	width:60px;
 	background:#FC6;
 	height:13px;
 }
 
-#replylist .ulevel span.levelnum {
+.replylist .ulevel span.levelnum {
   background: #fc6 none repeat scroll 0 0;
   color: #fff;
   font-size: 14px;
@@ -393,7 +393,7 @@ a{
   width: 18px;
 }
 
-#replylist .archives{
+.replylist .archives{
 	overflow:hidden;
 	width:134px;
 	margin-top:10px;
@@ -401,7 +401,7 @@ a{
 	border-bottom:1px dashed #ddd;
 }
 
-#replylist .archives li{
+.replylist .archives li{
 	display:block;
 	float:left;
 	text-align:center;
@@ -411,7 +411,7 @@ a{
 	color:#666;
 }
 
-#replylist .archives li.noborder{
+.replylist .archives li.noborder{
 	border-right:none;
 }
 
@@ -419,7 +419,7 @@ a{
 	color: #ff6000;
 }
 
-#replylist .adf,#replylist .spm{
+.replylist .adf,.replylist .spm{
 	display:block;
 	width:100px;
 	height:20px;
@@ -428,7 +428,7 @@ a{
 	font: 15px "microsoft yahei";
 }
 
-#replylist .tright{
+.replylist .tright{
 	height:auto;
 	min-height:400px;
 	float:left;
@@ -438,14 +438,14 @@ a{
 	border-left: 1px solid #ddd;
 }
 
-#replylist .tright .ttitle{
+.replylist .tright .ttitle{
 	margin-top:15px;
 	padding-bottom:15px;
 	border-bottom:1px solid #eee;
 	overflow:hidden;
 }
 
-#replylist .tmenu a{
+.replylist .tmenu a{
 	display:block;
 	float:left;
 	color:#999;
@@ -453,7 +453,7 @@ a{
 	margin-right:15px;
 }
 
-#replylist .tmenu span{
+.replylist .tmenu span{
 	float:right;
 	display:block;
 	padding:3px 7px;
@@ -465,12 +465,12 @@ a{
 	line-height:11px;
 }
 
-#replylist .tbmenu{
+.replylist .tbmenu{
 	width:744px;
 	border-top:1px solid #eee;
 }
 
-#replylist .tbmenu a{
+.replylist .tbmenu a{
 	float:right;
 	font:16px "microsoft yahei";
 	color:#666;
@@ -478,7 +478,7 @@ a{
 	line-height:38px;
 }
 
-#replylist .tbmenu a:hover{
+.replylist .tbmenu a:hover{
 	color:#333;
 }
 
@@ -700,9 +700,11 @@ blockquote a{
 }
 
 blockquote p {
-	display:inline;
-	 margin-left: 80px;
-	 color:#666;
+	background: rgba(0, 0, 0, 0) none repeat scroll 0 0 !important;
+	border: medium none !important;
+	color: #666;
+	display: inline;
+	margin-left: 80px;
 }
 
 #cke_sonreplyeditorcont.cke_chrome {

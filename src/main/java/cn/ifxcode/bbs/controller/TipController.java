@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class TipController {
+public class TipController extends BaseUserController{
 
 	@RequestMapping("/tip/nologin")
 	public String getNoLoginTip() {
@@ -20,7 +20,7 @@ public class TipController {
 	
 	@RequestMapping("/tip")
 	public String getSystemTips(@RequestParam(value = "tip", defaultValue = "index", required = false)String tip, 
-			@RequestParam(value = "tip", defaultValue = "index", required = false)String back, Model model) {
+			@RequestParam(value = "back", defaultValue = "index", required = false)String back, Model model) {
 		if("index".equals(tip)) {
 			return "redirect:/index";
 		} else if("nologin".equals(tip)) {
@@ -48,6 +48,14 @@ public class TipController {
 			model.addAttribute("tip", "space-notexists");
 		} else if("post-fail".equals(tip)) {
 			model.addAttribute("tip", "post-fail");
+		}  else if("reply-fail".equals(tip)) {
+			model.addAttribute("tip", "reply-fail");
+		}  else if("reply-noauth".equals(tip)) {
+			model.addAttribute("tip", "reply-noauth");
+		}  else if("reply-notreply".equals(tip)) {
+			model.addAttribute("tip", "reply-notreply");
+		} else {
+			return "redirect:/index";
 		}
 		return "tip/system_tip";
 	}

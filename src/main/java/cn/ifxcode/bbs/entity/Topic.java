@@ -14,10 +14,12 @@ public class Topic implements Serializable {
 	private String topicTitle;
 	private String topicContent;
 	private int topicStatus;
+	private int topicIsAccess;
 	private String topicCreateTime;
 	private String topicCreateIp;
 	private TopicInfo topicInfo;
 	private TopicData topicData;
+	private Board board;
 
 	public long getTopicId() {
 		return topicId;
@@ -113,6 +115,22 @@ public class Topic implements Serializable {
 
 	public void setTopicData(TopicData topicData) {
 		this.topicData = topicData;
+	}
+
+	public int getTopicIsAccess() {
+		return topicIsAccess;
+	}
+
+	public void setTopicIsAccess(int topicIsAccess) {
+		this.topicIsAccess = topicIsAccess;
+	}
+
+	public Board getBoard() {
+		return board;
+	}
+
+	public void setBoard(Board board) {
+		this.board = board;
 	}
 
 }

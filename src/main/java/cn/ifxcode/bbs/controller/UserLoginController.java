@@ -79,10 +79,12 @@ public class UserLoginController {
 		CookieBean cookieBean = userService.getCookieBeanFromCookie(request);
 		if(cookieBean != null) {
 			JSONObject object = redisObjectMapService.get(RedisKeyUtils.getUserInfo(cookieBean.getUser_id()), JSONObject.class);
-			User user = JsonUtils.decodeJson(object);
-			logger.info(GetRemoteIpUtil.getRemoteIp(request) + " on login page");
-			if(user != null) {
-				return "redirect:/index";
+			if(object != null) {
+				User user = JsonUtils.decodeJson(object);
+				logger.info(GetRemoteIpUtil.getRemoteIp(request) + " on login page");
+				if(user != null) {
+					return "redirect:/index";
+				}
 			}
 		}
 		return "account/login";

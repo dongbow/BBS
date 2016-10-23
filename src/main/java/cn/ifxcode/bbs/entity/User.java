@@ -7,6 +7,7 @@ public class User implements Serializable{
 
 	private static final long serialVersionUID = -4945319013726974900L;
 	
+	private long uid;
 	private UserAccess userAccess;
 	private UserInfo userInfo;
 	private UserPrivacy userPrivacy;
@@ -42,6 +43,14 @@ public class User implements Serializable{
 
 	public void setUserPrivacy(UserPrivacy userPrivacy) {
 		this.userPrivacy = userPrivacy;
+	}
+
+	public long getUid() {
+		return uid;
+	}
+
+	public void setUid(long uid) {
+		this.uid = uid;
 	}
 	
 }

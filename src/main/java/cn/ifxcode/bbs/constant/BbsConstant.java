@@ -25,4 +25,6 @@ public class BbsConstant {
 	public static final String DEFAULT_IMAGE = "/upload/images/default/default.jpg";
 	public static final String UTF8 = "utf-8";
 	
+	public static final String BOARD = "/board";
+	
 }

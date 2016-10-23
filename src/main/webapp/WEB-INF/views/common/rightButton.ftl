@@ -48,7 +48,7 @@ function toziclick(e,id){
 		$('.recover').removeClass('toclick');
 		$('.zilist').removeClass('toclick');
 		$(e).addClass('toclick');
-		$('#fbartpic').attr('href','${path}/post/new/topic/'+id);
+		$('#fbartpic').attr('href','${path}/post/new/board/' + id + '/topic');
 		$('#fbartpic').addClass('topicls');
 	}
 }

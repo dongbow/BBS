@@ -1,0 +1,137 @@
+package cn.ifxcode.bbs.service.impl;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.util.HtmlUtils;
+
+import com.google.common.collect.Maps;
+
+import cn.ifxcode.bbs.bean.CookieBean;
+import cn.ifxcode.bbs.bean.Page;
+import cn.ifxcode.bbs.constant.BbsConstant;
+import cn.ifxcode.bbs.dao.ReplyDao;
+import cn.ifxcode.bbs.entity.Reply;
+import cn.ifxcode.bbs.enumtype.BoardSign;
+import cn.ifxcode.bbs.enumtype.EGHistory;
+import cn.ifxcode.bbs.enumtype.TopicSign;
+import cn.ifxcode.bbs.service.BoardService;
+import cn.ifxcode.bbs.service.GeneralService;
+import cn.ifxcode.bbs.service.ReplyService;
+import cn.ifxcode.bbs.service.TopicService;
+import cn.ifxcode.bbs.service.UserService;
+import cn.ifxcode.bbs.utils.DateUtils;
+import cn.ifxcode.bbs.utils.GetRemoteIpUtil;
+import cn.ifxcode.bbs.utils.SystemConfigUtils;
+
+@Service
+public class ReplyServiceImpl implements ReplyService{
+
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	@Resource
+	private ReplyDao replyDao;
+	
+	@Resource
+	private TopicService topicService;
+	
+	@Resource
+	private BoardService boardService;
+	
+	@Resource
+	private UserService userService;
+	
+	@Resource
+	private GeneralService generalService;
+	
+	@Override
+	@Transactional
+	public long insertReply(HttpServletRequest request, long boardId,
+			long topicId, long uid, String rcontext, long pid) {
+		Lock lock = new ReentrantLock();
+		if(lock.tryLock()) {
+			try {
+				Reply reply = new Reply();
+				reply.setBoardId((int) boardId);
+				reply.setReplyContent(HtmlUtils.htmlEscape(rcontext));
+				reply.setReplyCreateTime(DateUtils.dt14LongFormat(new Date()));
+				reply.setReplyIp(GetRemoteIpUtil.getRemoteIp(request));
+				reply.setReplyParentId(pid);
+				if(SystemConfigUtils.getIsOpenReplyAudit()) {
+					reply.setReplyIsCheck(0);
+				} else {
+					reply.setReplyIsCheck(1);
+				}
+				reply.setReplyStatus(0);
+				reply.setTopicId(topicId);
+				reply.setUserId(uid);
+				if(replyDao.insertReply(reply) == BbsConstant.OK
+						&& generalService.UserAward(EGHistory.REPLY, uid, request) == BbsConstant.OK) {
+					CookieBean cookieBean = userService.getCookieBeanFromCookie(request);
+					topicService.saveOrUpdateTopicData(topicId, TopicSign.REPLY, null, cookieBean.getNick_name(), reply.getReplyCreateTime(), uid, null, null);
+					boardService.saveOrUpdateBoardInfo((int) boardId, BoardSign.REPLY);
+					return reply.getReplyId();
+				}
+			} catch (Exception e) {
+				logger.error("插入回复失败{topic:" + topicId + "}", e);
+				return 0;
+			} finally {
+				lock.unlock();
+			}
+		}
+		logger.error("回复超时，回复失败");
+		return 0;
+	}
+
+	@Override
+	public List<Reply> getReplyListByTopicId(Page page, long topicId, long uid, int sort) {
+		Map<String, Object> map = Maps.newHashMap();
+		map.put("page", page);
+		map.put("topicId", topicId);
+		if(uid != 0) {
+			map.put("userId", uid);
+		}
+		map.put("sort", sort == 0 ? "ASC" : "DESC");
+		List<Reply> replies = replyDao.getReplyListByTopicId(map);
+		this.formatReply(replies);
+		return replies;
+	}
+	
+	private void formatReply(List<Reply> replies) {
+		for (Reply reply : replies) {
+			reply = this.formatReplyContent(reply);
+			if(reply.getReplyParentId() != 0) {
+				reply.setReply(this.getParentReply(reply.getReplyParentId()));
+			}
+		}
+	}
+	
+	private Reply getParentReply(long pid) {
+		return this.formatReplyContent(replyDao.getReplyByPid(pid));
+	}
+	
+	private Reply formatReplyContent(Reply reply) {
+		reply.setReplyCreateTime(DateUtils.dt14LongFormat(DateUtils.dt14FromStr(reply.getReplyCreateTime())));
+		reply.setUser(userService.getUserById(reply.getUserId()));
+		reply.setUserValue(userService.getUserValue(reply.getUserId()));
+		if(reply.getReplyStatus() == 1 || reply.getReplyIsCheck() != 1 
+				|| reply.getUser().getUserAccess().getUserIsDelete() == 1
+				|| reply.getUser().getUserAccess().getUserIsLocked() == 1) {
+			reply.setReplyContent("<p style=\"padding: 10px; border: 1px solid #ddd; background: #eee;\">评论已隐藏</p>");
+		} else {
+			reply.setReplyContent(HtmlUtils.htmlUnescape(reply.getReplyContent()));
+		}
+		return reply;
+	}
+
+}

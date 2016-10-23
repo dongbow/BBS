@@ -1,5 +1,7 @@
 package cn.ifxcode.bbs.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,12 +19,14 @@ import cn.ifxcode.bbs.bean.Page;
 import cn.ifxcode.bbs.entity.Board;
 import cn.ifxcode.bbs.entity.Classify;
 import cn.ifxcode.bbs.entity.Navigation;
+import cn.ifxcode.bbs.entity.Reply;
 import cn.ifxcode.bbs.entity.Topic;
 import cn.ifxcode.bbs.entity.User;
 import cn.ifxcode.bbs.entity.UserValue;
 import cn.ifxcode.bbs.service.BoardService;
 import cn.ifxcode.bbs.service.ClassifyService;
 import cn.ifxcode.bbs.service.NavigationService;
+import cn.ifxcode.bbs.service.ReplyService;
 import cn.ifxcode.bbs.service.TopicService;
 import cn.ifxcode.bbs.service.UserService;
 import cn.ifxcode.bbs.utils.DateUtils;
@@ -50,13 +54,17 @@ public class TopicController extends BaseUserController{
 	@Resource
 	private ClassifyService classifyService;
 	
+	@Resource
+	private ReplyService replyService;
+	
 	@RequestMapping("/board/{bid}/topic/detail/{tid}/{pno}")
 	public String toTopic(@PathVariable("bid")String bid, 
 			@PathVariable("tid")String tid, @PathVariable("pno")int pno, 
-			@RequestParam(required = false, defaultValue = "1")int sort, 
+			@RequestParam(required = false, defaultValue = "0")int sort, 
 			@RequestParam(required = false)Integer floor, 
-			@RequestParam(required = false, defaultValue = "0")long uid, Model model, 
-			HttpServletRequest request) {
+			@RequestParam(required = false, defaultValue = "0")long uid, 
+			@RequestParam(required = false, defaultValue = "0")int lastest, 
+			Model model, HttpServletRequest request) {
 		long boardId = NumberUtils.getAllNumber(bid);
 		if(Long.toString(boardId).length() > 10) {
 			return "redirect:/tip?tip=board-notexists";
@@ -69,7 +77,7 @@ public class TopicController extends BaseUserController{
 		if(topic != null) {
 			topic.setTopicContent(HtmlUtils.htmlUnescape(topic.getTopicContent()));
 			topic.setTopicCreateTime(DateUtils.dt14LongFormat(DateUtils.dt14FromStr(topic.getTopicCreateTime())));
-			topic.setTopicData(topicService.getTopicDateFromRedis(topic.getTopicId()));
+			topic.setTopicData(topicService.getTopicDateFromRedis(topic.getTopicId(), topic.getBoardId()));
 			User user = userService.getUserById(topic.getUserId());
 			UserValue userValue = userService.getUserValue(topic.getUserId());
 			Classify classify = classifyService.getClassifyByCid(topic.getBoardId(), topic.getClassId());
@@ -80,6 +88,7 @@ public class TopicController extends BaseUserController{
 				url.append("?").append(request.getQueryString());
 			}
 			Page page = Page.newBuilder(pno, DEFAULT_PAGE_SIZE, url.toString());
+			List<Reply> replies = replyService.getReplyListByTopicId(page, topic.getTopicId(), uid, sort);
 			model.addAttribute("navigation", navigation);
 			model.addAttribute("pboard", board);
 			model.addAttribute("clas", classify);
@@ -87,6 +96,7 @@ public class TopicController extends BaseUserController{
 			model.addAttribute("uv", userValue);
 			model.addAttribute("topic", topic);
 			model.addAttribute("page", page);
+			model.addAttribute("replies", replies);
 			return "topic/topic";
 		}
 		logger.info("topic is not found");

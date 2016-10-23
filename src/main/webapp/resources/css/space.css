@@ -300,9 +300,10 @@ body{
 	font-weight: 700;
 }
 
-#ct t1{
+#ct .t1{
 	width:980px;
 	height:auto;
+	min-height:400px;
 }
 
 #ct .t1 table {
@@ -335,12 +336,12 @@ body{
 #ct .t1 th{
 	text-align:left;
 	padding-left:10px;
-	padding-right: 1.5em;
+	//padding-right: 1.5em;
 }
 
 #ct .t1 .th th{
 	padding-left:10px;
-	padding-right:1.5em;
+	//padding-right:1.5em;
 }
 
 #ct .t1 .frm {
@@ -356,15 +357,39 @@ body{
     width: 105px;
 }
 
-.tl cite, .t1 .num em {
+.t1 cite, .t1 em {
     display: block;
+    font-style: normal;
 }
 
+#ct .t1 .by {
+	padding-left:0;
+}
 
+.t1 .by cite a {
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 100%;
+}
 
+tr:hover{
+	background: #f2f2f2;
+}
 
+.board{
+	color:#999 !important;
+}
 
+tr a:hover{
+	color:#333;
+}
 
+#kkpager .pageBtnWrap {
+	float: right;
+	margin-right: 20px;
+}
 
 
 

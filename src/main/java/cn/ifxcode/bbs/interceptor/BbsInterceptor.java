@@ -1,5 +1,7 @@
 package cn.ifxcode.bbs.interceptor;
 
+import java.net.URLEncoder;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,9 +13,10 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import cn.ifxcode.bbs.constant.BbsConstant;
+import cn.ifxcode.bbs.entity.Board;
 import cn.ifxcode.bbs.service.GeneralService;
 import cn.ifxcode.bbs.utils.GetRemoteIpUtil;
-import cn.ifxcode.bbs.utils.PropertiesUtils;
+import cn.ifxcode.bbs.utils.NumberUtils;
 
 public class BbsInterceptor extends HandlerInterceptorAdapter{
 	
@@ -44,6 +47,47 @@ public class BbsInterceptor extends HandlerInterceptorAdapter{
 			return false;
 		}
 		
+		String uri = request.getRequestURI();
+		if(uri.indexOf(BbsConstant.BOARD) > 0) {
+			int boardId = 0;
+			if(uri.indexOf("/navigation") > 0 || uri.indexOf("/post") > 0) {
+				boardId = (int) NumberUtils.getAllNumber(uri.split("/")[5]);
+			} else {
+				boardId = (int) NumberUtils.getAllNumber(uri.split("/")[3]);
+			}
+			Board board = generalService.getBoardByBoardId(boardId);
+			if(board != null) {
+				if(board.getBoardIsOpen() == 1) {
+					if(generalService.adminCheck(request)) {
+						response.sendRedirect(BbsConstant.ROOT + BbsConstant.TIP + "?tip=board-noauth");
+						return false;
+					}
+				}
+				if(board.getIsAccess() == 1) {
+					if(generalService.isLogin(request)) {
+						response.sendRedirect(BbsConstant.ROOT + BbsConstant.TIP + "?tip=nologin&back=" + URLEncoder.encode(request.getRequestURL().toString(), BbsConstant.UTF8));
+						return false;
+					}
+					if(generalService.isBoardAccess(request)) {
+						if(uri.indexOf("/post") > 0) {
+							response.sendRedirect(BbsConstant.ROOT + BbsConstant.TIP + "?tip=post-noauth");
+						} else if(uri.indexOf("/reply") > 0) {
+							response.sendRedirect(BbsConstant.ROOT + BbsConstant.TIP + "?tip=reply-noauth");
+						} else if(uri.indexOf("/topic") > 0) {
+							response.sendRedirect(BbsConstant.ROOT + BbsConstant.TIP + "?tip=topic-noauth");
+						} else {
+							response.sendRedirect(BbsConstant.ROOT + BbsConstant.TIP + "?tip=board-noauth");
+						}
+						return false;
+					}
+				}
+			} else {
+				logger.info("board is not exist");
+				response.sendRedirect(BbsConstant.ROOT + BbsConstant.TIP + "?tip=board-notexists");
+				return false;
+			}
+		}
+		
 		this.auth(request, response);
 		
 		return true;
@@ -56,7 +100,7 @@ public class BbsInterceptor extends HandlerInterceptorAdapter{
 //				&& generalService.authCheck()) {
 //			
 //		}
-		return false;
+		return true;
 	}
 	
 	private void initService(HttpServletRequest request) {

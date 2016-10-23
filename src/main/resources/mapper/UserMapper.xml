@@ -7,6 +7,7 @@
 	<cache type="cn.ifxcode.bbs.dao.cache.LoggingRedisCache"/>
 
 	<resultMap id="BaseUser" type="User">
+		<result column="uid" property="uid" jdbcType="BIGINT"/>
 		<association property="userAccess" javaType="UserAccess">
 			<id column="user_id" property="userId" jdbcType="BIGINT" />
 			<result column="user_name" property="userName" jdbcType="VARCHAR" />
@@ -91,8 +92,8 @@
 	</update>
 
 	<select id="getAllUser" resultMap="BaseUser">
-		select ua.user_id, ua.user_name, ua.user_nickname, ua.user_email, ua.user_is_locked, ua.user_reg_ip, 
-			ua.user_create_time, ui.user_sex, ui.user_province, ui.user_city, r.role_name 
+		select ua.user_id as uid, ua.user_id, ua.user_name, ua.user_nickname, ua.user_email, ua.user_is_locked, ua.user_reg_ip, 
+			ua.user_create_time, ui.user_sex, ui.user_province, ui.user_city, r.role_id, r.role_name 
 		from user_access as ua, user_info as ui, role as r, user_role as ur 
 		where 1 = 1 
 		and user_is_delete = 0 
@@ -150,7 +151,7 @@
 	</insert>
 	
 	<select id="getUserById" resultMap="BaseUser">
-		select ua.user_id, ua.user_name, ua.user_nickname, ua.user_email, ua.user_is_online, 
+		select ua.user_id, ua.user_name, ua.user_nickname, ua.user_email, ua.user_is_online, ua.user_is_delete, ua.user_is_locked, 
 			ua.user_is_speak, ua.user_lastest_login_time, ua.user_create_time, ua.user_is_admin, 
 			ua.user_is_board_manager, ui.*, up.*, r.role_id, r.role_name, r.role_color
 		from user_access as ua, user_info as ui, user_privacy as up, role as r, user_role as ur 

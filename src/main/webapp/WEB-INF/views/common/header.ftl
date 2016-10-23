@@ -57,14 +57,14 @@ $(function(){
 	            <#assign n=0/>
 	            <#list user.roles as role>
 	            	<#if n gt 0><#break></#if>
-	            	<a href="home.htm?md=space&type=profile&ac=usergroup" style="color:${role.roleColor}">${role.roleName}</a>
+	            	<a href="${path}/home/${user.userAccess.userId}/setting/usergroup" style="color:${role.roleColor}">${role.roleName}</a>
 	            	<#assign n=n+1/>
 	            </#list>
 	        </div>
 	        <ul>
-	            <li><a target="_blank" href="space.htm?md=space&type=topic&uid=1&view=me">${userValue.userTopicCount}</a><p>主题</p></li>
-	            <li class="border"><a target="_blank" href="home.htm?md=space&type=profile&ac=credit">${userValue.userGold}</a><p>金币</p></li>
-	            <li class="border"><a target="_blank" href="space.htm?md=space&type=reply&uid=1&view=me">${userValue.userReplyCount}</a><p>回复</p></li>
+	            <li><a target="_blank" href="${path}/space/uid/${user.userAccess.userId}/topic">${userValue.userTopicCount}</a><p>主题</p></li>
+	            <li class="border"><a target="_blank" href="${path}/home/${user.userAccess.userId}/setting/credit">${userValue.userGold}</a><p>金币</p></li>
+	            <li class="border"><a target="_blank" href="${path}/space/uid/${user.userAccess.userId}/reply">${userValue.userReplyCount}</a><p>回复</p></li>
 	        </ul>
 	        <ul class="accountInfo">
 		        <li><span class="label_coin">经&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;验</span><a title="${userValue.userExperience}">${userValue.userExperience}</a></li>
@@ -73,12 +73,12 @@ $(function(){
 	        <div id="bbs_tip_menu">
 	            <ul>
 	                <li>
-	                	<a target="_blank" href="home.htm?md=space&type=pm">消息<span>0</span></a>
-	                	<a target="_blank" href="home.htm?md=space&type=friends">好友</a>
+	                	<a target="_blank" href="${path}/home/${user.userAccess.userId}/message">消息<span>0</span></a>
+	                	<a target="_blank" href="${path}/home/${user.userAccess.userId}/friends">好友</a>
 	                </li>
 	                <li>
-	                	<a target="_blank" href="home.htm?md=space&type=profile">设置</a>
-	                    <a target="_blank" href="home.htm?md=space&type=favorite&view=me">收藏</a>
+	                	<a target="_blank" href="${path}/home/${user.userAccess.userId}/setting/profile">设置</a>
+	                    <a target="_blank" href="${path}/home/${user.userAccess.userId}/favorite/topic">收藏</a>
 	                </li>
 	            </ul>
 	        </div>
