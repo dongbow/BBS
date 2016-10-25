@@ -14,6 +14,7 @@ import cn.ifxcode.bbs.constant.BbsConstant;
 
 public class CookieUtils {
     
+	public static final String PASSWORD = "5%lSx0s]YEm[gy%m2-=wT930!VUc2YA=";
     private static String HTTP_ONLY_COOKIE_TEMPLATE = "%1$s=%2$s;Domain=%3$s;Path=%4$s;HttpOnly";
     public static final String PARAMETER_COOKIE_SEPARATOR = ";";
     
@@ -28,7 +29,7 @@ public class CookieUtils {
         }
         for (Cookie ck : cookies) {
             if (key.equals(ck.getName())) {
-                return ck.getValue();
+                return AESUtils.decrypt(ck.getValue(), PASSWORD);
             }
         }
         return null;
@@ -41,7 +42,7 @@ public class CookieUtils {
         }
         for (Cookie ck : cookies) {
             if (CRED_LOCAL_SESS.equals(ck.getName())) {
-                return ck.getValue();
+                return AESUtils.decrypt(ck.getValue(), PASSWORD);
             }
         }
         return null;
@@ -63,7 +64,7 @@ public class CookieUtils {
 
     public static Cookie makeCookie(String key, String value, String domain,
             int maxAge, boolean secure) {
-        Cookie ck = new Cookie(key, value);
+        Cookie ck = new Cookie(key, StringUtils.isEmpty(value) ? null : AESUtils.encrypt(value, PASSWORD));
         ck.setMaxAge(maxAge); 
         ck.setPath("/");
         ck.setSecure(secure);

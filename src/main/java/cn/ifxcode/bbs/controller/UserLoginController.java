@@ -36,7 +36,6 @@ import cn.ifxcode.bbs.enumtype.LoginError;
 import cn.ifxcode.bbs.service.GoldExperienceService;
 import cn.ifxcode.bbs.service.LoginLogService;
 import cn.ifxcode.bbs.service.UserService;
-import cn.ifxcode.bbs.utils.Base64Utils;
 import cn.ifxcode.bbs.utils.CookieUtils;
 import cn.ifxcode.bbs.utils.DateUtils;
 import cn.ifxcode.bbs.utils.GetRemoteIpUtil;
@@ -100,7 +99,7 @@ public class UserLoginController {
 			user = userService.loginCheck(userName, MD5Utils.getMD5String(password));
 			if(user != null) {
 				if(remember == BbsConstant.REMEMBER_TRUE) {
-					response.addCookie(CookieUtils.makeCookie(BbsConstant.REMEMBER, Base64Utils.getBase64(Integer.toString(BbsConstant.REMEMBER_TRUE)), 
+					response.addCookie(CookieUtils.makeCookie(BbsConstant.REMEMBER, Integer.toString(BbsConstant.REMEMBER_TRUE), 
 							BbsConstant.DOMAIN, BbsConstant.REMEMBER_MAXAGE));
 					JSONObject object = new JSONObject();
 					object.put("expireTime", DateUtils.dt14LongFormat(DateUtils.getSevenDaysAfterDate(new Date())));
@@ -108,7 +107,7 @@ public class UserLoginController {
 				}
 				CookieBean cookieBean = new CookieBean(user.getUserAccess().getUserId(), user.getUserAccess().getUserIsAdmin(), 
 						RoleIdUtils.formatRoleIds(user.getRoles()), user.getUserAccess().getUserNickname());
-				response.addCookie(CookieUtils.makeUserCookie(Base64Utils.getBase64(cookieBean.toString()), remember));
+				response.addCookie(CookieUtils.makeUserCookie(cookieBean.toString(), remember));
 				if(!StringUtils.isNotBlank(user.getUserAccess().getUserLastestLoginTime()) || userService.isTodayFirstLogin(user.getUserAccess().getUserLastestLoginTime())) {
 					userValue = UserValueUtils.login(userService.getUserValue(user.getUserAccess().getUserId()));
 					userService.updateUserValue(userValue);

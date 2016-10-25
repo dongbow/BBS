@@ -39,7 +39,6 @@ import cn.ifxcode.bbs.entity.UserValue;
 import cn.ifxcode.bbs.enumtype.EGHistory;
 import cn.ifxcode.bbs.service.GoldExperienceService;
 import cn.ifxcode.bbs.service.UserService;
-import cn.ifxcode.bbs.utils.Base64Utils;
 import cn.ifxcode.bbs.utils.CookieUtils;
 import cn.ifxcode.bbs.utils.DateUtils;
 import cn.ifxcode.bbs.utils.GetRemoteIpUtil;
@@ -94,12 +93,12 @@ public class UserServiceImpl implements UserService{
 	}
 
 	public long getUserIdFromCookie(HttpServletRequest request) {
-		String cookie = Base64Utils.getFromBase64(CookieUtils.getUserCookieValue(request));
+		String cookie = CookieUtils.getUserCookieValue(request);
 		return Long.parseLong(cookie.split(";")[0]);
 	}
 
 	public CookieBean getCookieBeanFromCookie(HttpServletRequest request) {
-		String cookie = Base64Utils.getFromBase64(CookieUtils.getUserCookieValue(request));
+		String cookie = CookieUtils.getUserCookieValue(request);
 		CookieBean bean = null;
 		if(StringUtils.isNotBlank(cookie)) {
 			String s[] = cookie.split(";");

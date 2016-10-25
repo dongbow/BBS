@@ -26,7 +26,6 @@ import cn.ifxcode.bbs.bean.CookieBean;
 import cn.ifxcode.bbs.bean.Result;
 import cn.ifxcode.bbs.constant.BbsConstant;
 import cn.ifxcode.bbs.constant.BbsErrorCode;
-import cn.ifxcode.bbs.utils.Base64Utils;
 import cn.ifxcode.bbs.utils.CookieUtils;
 import cn.ifxcode.bbs.utils.PropertiesUtils;
 import cn.ifxcode.bbs.utils.RedisKeyUtils;
@@ -46,7 +45,7 @@ public class LoginFilter implements Filter {
         }  
         HttpServletRequest httpRequest = (HttpServletRequest) request;  
         HttpServletResponse httpResponse = (HttpServletResponse) response;
-        String cookie = Base64Utils.getFromBase64(CookieUtils.getUserCookieValue(httpRequest));
+        String cookie = CookieUtils.getUserCookieValue(httpRequest);
         if(StringUtils.isNotBlank(cookie)) {
         	CookieBean cookieBean = ReflectUtils.returnEntity(CookieBean.class, cookie.split(";"));
             if(cookieBean != null && cookieBean.getUser_id() > 0) {
