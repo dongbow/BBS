@@ -52,7 +52,7 @@ public class ReplyController {
 				if(topic.getTopicInfo().getTopicIsReply() == 0) {
 					long replyId = replyService.insertReply(request, topic.getBoardId(), topicId, uid, rcontext, pid);
 					if(replyId > BbsConstant.OK) {
-						return "redirect:/board/" + topic.getBoardId()+ "/topic/" + topic.getTopicId() + "/1?lastest=1";
+						return "redirect:/board/" + topic.getBoardId()+ "/topic/detail/" + topic.getTopicId() + "/1?lastest=1";
 					}
 				} else {
 					return "redirect:/tip?tip=reply-notreply";

@@ -223,10 +223,13 @@ ul li, .xl li {
 	padding: 30px 10px 10px;
 	background:#fff;
 	height:auto;
+	float:left;
+	overflow:hidden;
+	margin-bottom:15px;
 }
 
 #cont .screen{
-	margin-top:140px;
+	//margin-top:140px;
 }
 
 #cont .screen a{
@@ -369,13 +372,26 @@ ul li, .xl li {
 }
 
 .marks a{
-	font:14px "microsoft yahei";
+/* 	font:14px "microsoft yahei";
 	background:#0BF;
 	color:#fff;
 	width:auto;
 	text-align:center;
 	padding:0 2px;
-	font-weight: bold;
+	font-weight: bold; */
+	background:#0BF;
+	display: inline-block;
+	height: 19px;
+	line-height: 19px;
+	margin-left: 6px;
+	padding: 0 8px 1px;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	width: 26px;
+	border-radius: 2px;
+	color: #fff;
+	font-size: 12px;
 }
 
 .marks a.jing{

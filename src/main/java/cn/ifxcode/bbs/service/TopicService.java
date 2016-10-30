@@ -25,5 +25,12 @@ public interface TopicService {
 	public TopicData getTopicDateFromRedis(long topicId, Integer boardId);
 
 	public List<Topic> getTopicListByUserId(Long userId, Page page);
+
+	public List<Topic> getGlobalTopTopic();
+
+	public List<Topic> getHomeTopic();
+
+	public List<Topic> getTopicsByNavId(Page page, long navId, String type,
+			String filter, String orderby);
 	
 }

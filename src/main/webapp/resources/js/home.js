@@ -14,6 +14,9 @@ var Setting = {
 			$('#rhomecont ul li').removeClass('csth');
 			$('.cscy').addClass('csth');
 		}
+	},
+	getCity : function(value) {
+		return root + "/home/get/citys/" + value;
 	}
 };
 
@@ -172,5 +175,22 @@ $(function() {
 		} else {
 			return false;
 		}
+	});
+	
+	$('#province').change(function() {
+		$.post(Setting.getCity($(this).val()), function(data) {
+			$('#city').html("");
+			$('#city').append('<option value="-1">城市</option>');
+			for(var i = 0;i<data.length;i++) {
+				var city = data[i];
+				var html = '';
+				html += '<option value="' + city.id + '"';
+				if(i == 0) {
+					html += ' selected ';
+				}
+				html += '>' + city.name + '</option>';
+				$('#city').append(html);
+			}
+		});
 	});
 });

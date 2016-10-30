@@ -18,6 +18,8 @@ $(function(){
 		$('#demo1').slideBox();
 	});
 
+	filterchange();
+	
 	function filterchange(){
 		var _top=$('#scsh').offset().top;
 		var _left=$('#scsh').offset().left;
@@ -28,10 +30,6 @@ $(function(){
 		$('.sosh').css('left',left+'px');
 		$('.sosh').css('top',top+30+'px');
 	}
-	
-	$(document).ready(function(){
-		filterchange();
-	});
 	
 	$(window).resize(function(){
 		filterchange();

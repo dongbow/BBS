@@ -12,12 +12,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import cn.ifxcode.bbs.bean.CookieBean;
+import cn.ifxcode.bbs.bean.Page;
 import cn.ifxcode.bbs.bean.Result;
 import cn.ifxcode.bbs.constant.BbsConstant;
 import cn.ifxcode.bbs.constant.BbsErrorCode;
@@ -29,6 +31,7 @@ import cn.ifxcode.bbs.entity.GoldHistory;
 import cn.ifxcode.bbs.entity.HomeImage;
 import cn.ifxcode.bbs.entity.Navigation;
 import cn.ifxcode.bbs.entity.PastHistory;
+import cn.ifxcode.bbs.entity.Topic;
 import cn.ifxcode.bbs.entity.UserValue;
 import cn.ifxcode.bbs.enumtype.EGHistory;
 import cn.ifxcode.bbs.service.BoardService;
@@ -37,16 +40,20 @@ import cn.ifxcode.bbs.service.GeneralService;
 import cn.ifxcode.bbs.service.GoldExperienceService;
 import cn.ifxcode.bbs.service.HomeImageService;
 import cn.ifxcode.bbs.service.NavigationService;
+import cn.ifxcode.bbs.service.TopicService;
 import cn.ifxcode.bbs.service.UserService;
 import cn.ifxcode.bbs.utils.GetRemoteIpUtil;
 import cn.ifxcode.bbs.utils.JsonUtils;
 import cn.ifxcode.bbs.utils.NumberUtils;
+import cn.ifxcode.bbs.utils.ParamsBuildUtils;
 import cn.ifxcode.bbs.utils.RedisKeyUtils;
 import cn.ifxcode.bbs.utils.UserValueUtils;
 
 @Controller
 public class IndexController extends BaseUserController{
 
+	private final int DEFAULT_PAGE_SIZE = 25;
+	
 	@Resource
 	private HomeImageService homeImageService;
 	
@@ -71,6 +78,9 @@ public class IndexController extends BaseUserController{
 	@Resource
 	private GeneralService generalService;
 	
+	@Resource
+	private TopicService topicService;
+	
 	private GoldHistory goldHistory = null;
 	private ExperienceHistory experienceHistory = null;
 	
@@ -85,13 +95,21 @@ public class IndexController extends BaseUserController{
 	@RequestMapping("/index")
 	public String toIndex(Model model) {
 		List<HomeImage> images = homeImageService.getHomeImages();
+		List<Topic> gTopics = topicService.getGlobalTopTopic();
+		List<Topic> hTopics = topicService.getHomeTopic();
 		model.addAttribute("images", images);
+		model.addAttribute("gtopics", gTopics);
+		model.addAttribute("htopics", hTopics);
 		return "index";
 	}
 	
 	@RequestMapping("/navigation/{gid}")
 	public String toNavigation(@PathVariable("gid")String gid, 
-			Model model) {
+			@RequestParam(required = false, defaultValue = "topic")String type,
+			@RequestParam(required = false, defaultValue = "lastpost")String filter,
+			@RequestParam(required = false, defaultValue = "lastpost")String orderby, 
+			@RequestParam(value = "page", required = false, defaultValue = "1")int p, 
+			HttpServletRequest request, Model model) {
 		long navId = NumberUtils.getAllNumber(gid);
 		if(Long.toString(navId).length() > 10) {
 			return "redirect:/tip?tip=nav-notexists";
@@ -103,8 +121,14 @@ public class IndexController extends BaseUserController{
 		Navigation navigation = navigationService.getNavigation((int) navId);
 		JSONArray array = JSONArray.parseArray(object.getString("boards"));
 		List<Board> boards = JsonUtils.decodeJson(array, Board.class);
+		Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
+		List<Topic> gTopics = topicService.getGlobalTopTopic();
+		List<Topic> hTopics = topicService.getTopicsByNavId(page, navId, type, filter, orderby);
 		model.addAttribute("navigation", navigation);
 		model.addAttribute("boards", boards);
+		model.addAttribute("gtopics", gTopics);
+		model.addAttribute("htopics", hTopics);
+		model.addAttribute("page", page);
 		return "navigation";
 	}
 	

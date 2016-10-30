@@ -45,7 +45,7 @@
 										<tr>
 											<th>昵称：</th>
 											<td>
-												<input type="text" name="nickName" maxlength="20" id="nickname" value=""/>
+												<input type="text" name="nickName" maxlength="20" id="nickname" value="${huser.userAccess.userNickname}"/>
 												<label id="nicktip" style="color:#f00"></label>
 											</td>
 										</tr>
@@ -53,50 +53,60 @@
 											<th>性别：</th>
 											<td>
 												<select name="sex" id="sex">
-													<option value="0">男</option>
-													<option value="1">女</option>
-													<option value="2">保密</option>
+													<option value="0" <#if 0 == huser.userInfo.userSex!>selected</#if>>男</option>
+													<option value="1" <#if 1 == huser.userInfo.userSex!>selected</#if>>女</option>
+													<option value="2" <#if 2 == huser.userInfo.userSex!>selected</#if>>保密</option>
 												</select>
 											</td>
 										</tr>
 										<tr>
 											<th>生日：</th>
 											<td>
-												<input type="text" name="birthday" id="birthday" value="" onClick="WdatePicker()"/>
+												<input type="text" name="birthday" id="birthday" value="${huser.userInfo.userBirth!}" onClick="WdatePicker()" readOnly/>
 												<label id="birthtip"></label>
 											</td>
 										</tr>
 										<tr>
 											<th>所在城市：</th>
 											<td>
-												<select name="province" id="privence">
+												<select name="province" id="province">
 													<option value="-1">省份</option>
-													<option value=""></option>
+													<#list provinces as p>
+														<#if huser.userInfo.userProvince??>
+															<option value="${p.id}" <#if p.id == huser.userInfo.userProvince!?number>selected</#if>>${p.name}</option>
+														<#else>
+															<option value="${p.id}">${p.name}</option>
+														</#if>
+													</#list>
 												</select> 
 												<select name="city" id="city">
 													<option value="-1">城市</option>
-													<option value=""></option>
+													<#if citys??>
+														<#list citys as c>
+															<option value="${c.id}" <#if c.id == huser.userInfo.userCity!?number>selected</#if>>${c.name}</option>
+														</#list>
+													</#if>
 												</select> 
 											</td>
 										</tr>
 										<tr>
 											<th>QQ：</th>
-											<td><input type="text" name="qq" id="qq" value=""/></td>
+											<td><input type="text" name="qq" id="qq" value="${huser.userInfo.userQq!}"/></td>
 										</tr>
 										<tr>
 											<th>手机号：</th>
-											<td><input type="text" name="phonenumber" id="phonenumber" value=""/></td>
+											<td><input type="text" name="phonenumber" id="phonenumber" value="${huser.userInfo.userPhone!}"/></td>
 										</tr>
 										<tr>
 											<th>兴趣爱好：</th>
 											<td>
-												<textarea class="likes" name="userlikes" id="userlikes"></textarea>
+												<textarea class="likes" name="userlikes" id="userlikes">${huser.userInfo.userLike!}</textarea>
 											</td>
 										</tr>
 										<tr>
 											<th>签名档：</th>
 											<td>
-												<textarea name="signature" id="signature"></textarea>
+												<textarea name="signature" id="signature">${huser.userInfo.userSign!}</textarea>
 											</td>
 										</tr>
 									</tbody>
@@ -113,8 +123,8 @@
 									<PARAM NAME=movie VALUE="avatar.swf">
 									<PARAM NAME=quality VALUE=high>
 									<PARAM NAME=bgcolor VALUE=#FFFFFF>
-									<EMBED src="<%=basePath%>plugins/avatar/avatar.swf" quality=high bgcolor=#FFFFFF WIDTH="650" HEIGHT="450" 
-											wmode="transparent" flashVars="imgUrl=&uploadUrl=<${path}/plugins/avatar/upfile.jsp&uploadSrc=false"
+									<EMBED src="${path}/resources/static/avatar/avatar.swf" quality=high bgcolor=#FFFFFF WIDTH="650" HEIGHT="450" 
+											wmode="transparent" flashVars="imgUrl=${path}${user.userInfo.userHeadImg}&uploadUrl=${path}/resources/static/avatar/upfile.jsp&uploadSrc=false"
 										NAME="myMovieName" ALIGN="" TYPE="application/x-shockwave-flash" allowScriptAccess="always"
 										PLUGINSPAGE="http://www.macromedia.com/go/getflashplayer">
 									</EMBED>
@@ -235,7 +245,7 @@
 	});
 </script>
 <script type="text/javascript" src="${path}/resources/js/home.js" ></script>
-<script type="text/javascript" src="${path}/resources/js/inputmail.js"></script>
+<script type="text/javascript" src="${path}/resources/js/account/inputmail.js"></script>
 <script type="text/javascript" src="${path}/resources/static/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript" src="${path}/resources/static/avatar/avatar.js"></script>
 </html>

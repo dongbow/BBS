@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -44,6 +46,7 @@ import cn.ifxcode.bbs.utils.DateUtils;
 import cn.ifxcode.bbs.utils.GetRemoteIpUtil;
 import cn.ifxcode.bbs.utils.JsonUtils;
 import cn.ifxcode.bbs.utils.MD5Utils;
+import cn.ifxcode.bbs.utils.NumberUtils;
 import cn.ifxcode.bbs.utils.RedisKeyUtils;
 import cn.ifxcode.bbs.utils.ReflectUtils;
 import cn.ifxcode.bbs.utils.RoleIdUtils;
@@ -165,53 +168,64 @@ public class UserServiceImpl implements UserService{
 	@Transactional
 	public synchronized Integer insertUser(String userName, String password, String email, 
 			 int isAdmin, int boardManager, String roleIds, HttpServletRequest request) {
+		Lock lock = new ReentrantLock();
 		int result = 0;
-		UserAccess access = new UserAccess();
-		access.setUserName(userName);
-		access.setUserNickname(userName);
-		access.setUserPassword(MD5Utils.getMD5String(password));
-		access.setUserEmail(email);
-		access.setUserIsAdmin(isAdmin);
-		access.setUserCreateTime(DateUtils.dt14LongFormat(new Date()));
-		access.setUserIsBoderManager(boardManager);
-		access.setUserIsDelete(0);
-		access.setUserIsLocked(0);
-		access.setUserIsOnline(0);
-		access.setUserIsSpeak(0);
-		access.setUserRegIp(GetRemoteIpUtil.getRemoteIp(request));
-		if(BbsConstant.OK == userDao.insertUserAccess(access)) {
-			logger.info("insert access : userid = " + access.getUserId());
-			UserInfo info = new UserInfo();
-			info.setUserId(access.getUserId());
-			info.setUserHeadImg(BbsConstant.DEFAULT_IMAGE);
-			UserPrivacy privacy = new UserPrivacy();
-			privacy.setUserId(access.getUserId());
-			UserValue value = new UserValue();
-			value.setUserId(access.getUserId());
-			value.setUserExperience(1);
-			value.setTodayExp(1);
-			value.setTodayExpTime(DateUtils.dt14LongFormat(new Date()));
-			value.setUserGold(50);
-			value.setTodayGold(50);
-			value.setTodayGoldTime(DateUtils.dt14LongFormat(new Date()));
-			value.setUserReplyCount(0);
-			value.setUserTopicCount(0);
-			value.setUserFriendCount(0);
-			if(BbsConstant.OK == userDao.insertUserInfo(info)
-					&& BbsConstant.OK == userDao.insertUserPrivacy(privacy)
-					&& BbsConstant.OK == userValueDao.insertUserValue(value)) {
-				List<Integer> userRole = RoleIdUtils.getRoleIds(roleIds);
-				for (Integer roleId : userRole) {
-					roleDao.insertUserRole(access.getUserId(), roleId);
+		if(lock.tryLock()) {
+			try {
+				UserAccess access = new UserAccess();
+				access.setUserName(userName);
+				access.setUserNickname(userName);
+				access.setUserPassword(MD5Utils.getMD5String(password));
+				access.setUserEmail(email);
+				access.setUserIsAdmin(isAdmin);
+				access.setUserCreateTime(DateUtils.dt14LongFormat(new Date()));
+				access.setUserIsBoderManager(boardManager);
+				access.setUserIsDelete(0);
+				access.setUserIsLocked(0);
+				access.setUserIsOnline(0);
+				access.setUserIsSpeak(0);
+				access.setUserRegIp(GetRemoteIpUtil.getRemoteIp(request));
+				if(BbsConstant.OK == userDao.insertUserAccess(access)) {
+					logger.info("insert access : userid = " + access.getUserId());
+					UserInfo info = new UserInfo();
+					info.setUserId(access.getUserId());
+					info.setUserHeadImg(BbsConstant.DEFAULT_IMAGE);
+					UserPrivacy privacy = new UserPrivacy();
+					privacy.setUserId(access.getUserId());
+					UserValue value = new UserValue();
+					value.setUserId(access.getUserId());
+					value.setUserExperience(1);
+					value.setTodayExp(1);
+					value.setTodayExpTime(DateUtils.dt14LongFormat(new Date()));
+					value.setUserGold(50);
+					value.setTodayGold(50);
+					value.setTodayGoldTime(DateUtils.dt14LongFormat(new Date()));
+					value.setUserReplyCount(0);
+					value.setUserTopicCount(0);
+					value.setUserFriendCount(0);
+					if(BbsConstant.OK == userDao.insertUserInfo(info)
+							&& BbsConstant.OK == userDao.insertUserPrivacy(privacy)
+							&& BbsConstant.OK == userValueDao.insertUserValue(value)) {
+						List<Integer> userRole = RoleIdUtils.getRoleIds(roleIds);
+						for (Integer roleId : userRole) {
+							roleDao.insertUserRole(access.getUserId(), roleId);
+						}
+						result = BbsConstant.OK;
+						logger.info("insert userinfo and user_role : userid = " + access.getUserId());
+						GoldHistory goldHistory = new GoldHistory(access.getUserId(), access.getUserNickname(), 50, EGHistory.REG.getFrom(), 
+								EGHistory.REG.getDesc(), access.getUserCreateTime());
+						ExperienceHistory experienceHistory = new ExperienceHistory(access.getUserId(), access.getUserNickname(), 1, 
+								EGHistory.REG.getDesc(), access.getUserCreateTime());
+						goldExperienceService.insertGE(goldHistory, experienceHistory);
+					}
 				}
-				result = BbsConstant.OK;
-				logger.info("insert userinfo and user_role : userid = " + access.getUserId());
-				GoldHistory goldHistory = new GoldHistory(access.getUserId(), access.getUserNickname(), 50, EGHistory.REG.getFrom(), 
-						EGHistory.REG.getDesc(), access.getUserCreateTime());
-				ExperienceHistory experienceHistory = new ExperienceHistory(access.getUserId(), access.getUserNickname(), 1, 
-						EGHistory.REG.getDesc(), access.getUserCreateTime());
-				goldExperienceService.insertGE(goldHistory, experienceHistory);
+			} catch(Exception e) {
+				logger.error("插入用户失败", e);
+			} finally {
+				lock.unlock();
 			}
+		} else {
+			logger.error("插入用户超时");
 		}
 		return result;
 	}
@@ -222,7 +236,7 @@ public class UserServiceImpl implements UserService{
 		map.put("name", userName);
 		map.put("password", password);
 		User user = userDao.loginCheck(map);
-		return user == null ? null : this.formatUser(user);
+		return user == null ? null : user;
 	}
 
 	@Override
@@ -296,6 +310,16 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public int updateUserValue(UserValue userValue) {
 		return userValueDao.updateUserValue(userValue);
+	}
+
+	@Override
+	public User getUserByIdFromRedis(String uid) {
+		long userId = NumberUtils.getAllNumber(uid);
+		JSONObject object = redisObjectMapService.get(RedisKeyUtils.getUserInfo(userId), JSONObject.class);
+		if(object != null) {
+			return JsonUtils.decodeJson(object);
+		}
+		return null;
 	}
 
 

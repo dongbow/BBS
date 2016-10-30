@@ -45,12 +45,12 @@
 		        		<style type="text/css">
 		        			#btns button{margin-top:20px;}
 		        		</style>
-		        		<span><input type="checkbox" name="isreply" value="0">是否可以回复</span>
-			        	<span><input type="checkbox" name="iselite" value="0">是否加精</span>
-			        	<span><input type="checkbox" name="istop" value="0">是否置顶</span>
+		        		<span><input type="checkbox" class="checkbox" name="isreply" value="0">是否关闭回复</span>
+			        	<span><input type="checkbox" class="checkbox" name="iselite" value="0">是否加精</span>
+			        	<span><input type="checkbox" class="checkbox" name="istop" value="0">是否置顶</span>
 			        	<#if user.userAccess.userIsAdmin == 1>
-			        		<span><input type="checkbox" name="isglobaltop" value="0">是否全局置顶</span>
-			        		<span><input type="checkbox" name="ishome" value="0">是否推送首页</span>
+			        		<span><input type="checkbox" class="checkbox" name="isglobaltop" value="0">是否全局置顶</span>
+			        		<span><input type="checkbox" class="checkbox" name="ishome" value="0">是否推送首页</span>
 			        	</#if>
 		        	</#if>
 		        	<a class="editorclear" href="javascript:;">清空编辑器</a>

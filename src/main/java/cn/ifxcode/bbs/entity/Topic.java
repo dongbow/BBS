@@ -20,6 +20,7 @@ public class Topic implements Serializable {
 	private TopicInfo topicInfo;
 	private TopicData topicData;
 	private Board board;
+	private User user;
 
 	public long getTopicId() {
 		return topicId;
@@ -131,6 +132,14 @@ public class Topic implements Serializable {
 
 	public void setBoard(Board board) {
 		this.board = board;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

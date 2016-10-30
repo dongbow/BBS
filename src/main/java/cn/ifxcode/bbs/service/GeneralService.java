@@ -1,8 +1,11 @@
 package cn.ifxcode.bbs.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import cn.ifxcode.bbs.entity.Board;
+import cn.ifxcode.bbs.entity.SwfArea;
 import cn.ifxcode.bbs.enumtype.EGHistory;
 
 public interface GeneralService {
@@ -20,4 +23,8 @@ public interface GeneralService {
 	public boolean isBoardAccess(HttpServletRequest request);
 
 	public boolean adminCheck(HttpServletRequest request);
+
+	public List<SwfArea> getAllProvinces();
+
+	public List<SwfArea> getCitys(String userProvince);
 }

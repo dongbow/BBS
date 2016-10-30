@@ -13,7 +13,9 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.google.common.collect.Lists;
 
 import cn.ifxcode.bbs.bean.CookieBean;
 import cn.ifxcode.bbs.constant.BbsConstant;
@@ -23,6 +25,7 @@ import cn.ifxcode.bbs.entity.Board;
 import cn.ifxcode.bbs.entity.Classify;
 import cn.ifxcode.bbs.entity.ExperienceHistory;
 import cn.ifxcode.bbs.entity.GoldHistory;
+import cn.ifxcode.bbs.entity.SwfArea;
 import cn.ifxcode.bbs.entity.SystemConfig;
 import cn.ifxcode.bbs.entity.User;
 import cn.ifxcode.bbs.entity.UserValue;
@@ -179,6 +182,35 @@ public class GeneralServiceImpl implements GeneralService {
 			}
 		}
 		return true;
+	}
+
+	@Override
+	public List<SwfArea> getAllProvinces() {
+		List<SwfArea> areas = JsonUtils.decodeAreaJson(JSONArray
+				.parseArray(redisObjectMapService.get(RedisKeyUtils.getAreas(),
+						JSONObject.class).getString("areas")));
+		List<SwfArea> provinces = Lists.newArrayList();
+		for (SwfArea swfArea : areas) {
+			if(swfArea.getParentId() == 0) {
+				provinces.add(swfArea);
+			}
+		}
+		return provinces;
+	}
+
+	@Override
+	public List<SwfArea> getCitys(String userProvince) {
+		long pid = Integer.parseInt(userProvince);
+		List<SwfArea> areas = JsonUtils.decodeAreaJson(JSONArray
+				.parseArray(redisObjectMapService.get(RedisKeyUtils.getAreas(),
+						JSONObject.class).getString("areas")));
+		List<SwfArea> citys = Lists.newArrayList();
+		for (SwfArea swfArea : areas) {
+			if(swfArea.getParentId() == pid) {
+				citys.add(swfArea);
+			}
+		}
+		return citys;
 	}
 
 }

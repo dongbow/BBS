@@ -13,4 +13,10 @@ public interface TopicDao {
 
 	public List<Topic> getTopicListByUserId(Map<String, Object> map);
 
+	public List<Topic> getGlobalTopTopic();
+
+	public List<Topic> getHomeTopTopic();
+
+	public List<Topic> getTopicsByNavId(Map<String, Object> map);
+
 }

@@ -23,6 +23,14 @@ $(function(){
 	$('.file-btn').click(function(){
 		$('#files').click();
 	});
+	
+	$('.checkbox').click(function() {
+		if($(this).is(':checked')) {
+			$(this).val(1);
+		} else {
+			$(this).val(0);
+		}
+	});
 });
 
 function checklength() {

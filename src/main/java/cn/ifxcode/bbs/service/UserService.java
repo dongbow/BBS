@@ -44,5 +44,7 @@ public interface UserService {
 	public boolean isTodayFirstLogin(String userLastestLoginTime);
 
 	public int updateUserValue(UserValue userValue);
+
+	public User getUserByIdFromRedis(String uid);
 	
 }

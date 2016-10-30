@@ -66,9 +66,9 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<#if topics??>
-								<#list topics as topic>
+						<#if topics??>
+							<#list topics as topic>
+								<tr>
 									<th><a href="${path}/board/${topic.boardId}/topic/detail/${topic.topicId}/1" target="_blank">${topic.topicTitle}</a></th>
 									<th><a class="board" href="${path}/navigation/${topic.board.navId}/board/${topic.boardId}" target="_blank">${topic.board.boardName}</a></th>
 									<th class="num">
@@ -77,13 +77,15 @@
 									</th>
 									<th class="by">
 										<cite><a href="${path}/space/nickname/${topic.topicData.lastestReplyUser!}" target="_blank">${topic.topicData.lastestReplyUser!}</a></cite>
-                						<em><a href="" target="_blank">${topic.topicData.lastestReplyTime!}</a></em>
+	            						<em><a href="" target="_blank">${topic.topicData.lastestReplyTime!}</a></em>
 									</th>
-								</#list>
-							<#else>
+								</tr>
+							</#list>
+						<#else>
+							<tr>
 								<th colspan="4">无主题</th>
-							</#if>
-						</tr>
+							</tr>
+						</#if>
 					</tbody>
 				</table>
 			</div>

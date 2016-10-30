@@ -2,6 +2,7 @@ package cn.ifxcode.bbs.controller;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+
 import ltang.redis.service.RedisObjectMapService;
 
 import org.apache.commons.lang.StringUtils;
