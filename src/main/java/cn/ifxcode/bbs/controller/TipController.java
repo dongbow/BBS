@@ -48,12 +48,16 @@ public class TipController extends BaseUserController{
 			model.addAttribute("tip", "space-notexists");
 		} else if("post-fail".equals(tip)) {
 			model.addAttribute("tip", "post-fail");
-		}  else if("reply-fail".equals(tip)) {
+		} else if("reply-fail".equals(tip)) {
 			model.addAttribute("tip", "reply-fail");
-		}  else if("reply-noauth".equals(tip)) {
+		} else if("reply-noauth".equals(tip)) {
 			model.addAttribute("tip", "reply-noauth");
-		}  else if("reply-notreply".equals(tip)) {
+		} else if("reply-notreply".equals(tip)) {
 			model.addAttribute("tip", "reply-notreply");
+		} else if("forget-error".equals(tip)) {
+			model.addAttribute("tip", "forget-error");
+		} else if("forget-time".equals(tip)) {
+			model.addAttribute("tip", "forget-time");
 		} else {
 			return "redirect:/index";
 		}

@@ -12,13 +12,13 @@
 
     <title>Login</title>
 
-    <link href="${path }/resources/static/admin/css/style.css" rel="stylesheet">
-    <link href="${path }/resources/static/admin/css/style-responsive.css" rel="stylesheet">
+    <link href="${path}/resources/static/admin/css/style.css" rel="stylesheet">
+    <link href="${path}/resources/static/admin/css/style-responsive.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-    <script src="${path }/resources/static/admin/js/html5shiv.js"></script>
-    <script src="${path }/resources/static/admin/js/respond.min.js"></script>
+    <script src="${path}/resources/static/admin/js/html5shiv.js"></script>
+    <script src="${path}/resources/static/admin/js/respond.min.js"></script>
     <![endif]-->
 </head>
 
@@ -29,7 +29,9 @@
     <form class="form-signin">
         <div class="form-signin-heading text-center">
             <h1 class="sign-title">Sign In</h1>
-            <img src="${path }/resources/static/admin/images/login-logo.png" alt="LOGO"/>
+            <a href="${path}">
+            	<img src="${path}/resources/static/admin/images/login-logo.png" alt="LOGO"/>
+            </a>
         </div>
         <div class="login-wrap">
         	<div class="alert alert-block alert-danger fade in" style="display:none;">
@@ -44,49 +46,21 @@
             <label class="checkbox">
                 <input id="remember" class="" type="checkbox" value="0"> 记住登录状态
                 <span class="pull-right">
-                    <a data-toggle="modal" href="#myModal"> 忘记密码?</a>
+                    <a data-toggle="modal" href="${path}/account/forget"> 忘记密码?</a>
                 </span>
             </label>
 
         </div>
 
-        <!-- Modal -->
-        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">忘记密码?</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>请输入注册时的邮箱以找回密码.</p>
-                        <input type="text" id="fg_name" name="fg_name" placeholder="用户名" autocomplete="off" class="form-control placeholder-no-fix" >
-                        <input type="text" id="email" name="email" placeholder="邮箱" autocomplete="off" class="form-control placeholder-no-fix" >
-
-                    </div>
-                    <div class="modal-footer">
-                        <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                        <button id="forget" class="btn btn-primary" type="button">提交</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- modal -->
-
     </form>
 
 </div>
 
-
-
-<!-- Placed js at the end of the document so the pages load faster -->
-
-<!-- Placed js at the end of the document so the pages load faster -->
-<script src="${path }/resources/static/admin/js/jquery-1.10.2.min.js"></script>
-<script src="${path }/resources/static/admin/js/bootstrap.min.js"></script>
-<script src="${path }/resources/static/admin/js/modernizr.min.js"></script>
-<script src="${path }/resources/static/admin/js/jquery.validate.min.js"></script>
-<script src="${path }/resources/static/jquery/jquery.md5.js"></script>
-<script src="${path }/resources/js/admin/account/login.js"></script>
+<script src="${path}/resources/static/admin/js/jquery-1.10.2.min.js"></script>
+<script src="${path}/resources/static/admin/js/bootstrap.min.js"></script>
+<script src="${path}/resources/static/admin/js/modernizr.min.js"></script>
+<script src="${path}/resources/static/admin/js/jquery.validate.min.js"></script>
+<script src="${path}/resources/static/jquery/jquery.md5.js"></script>
+<script src="${path}/resources/js/admin/account/login.js"></script>
 </body>
 </html>

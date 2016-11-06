@@ -83,6 +83,10 @@
 	<select id="valueCheck" resultType="Integer" useCache="false">
 		select count(1) as count from user_access where ${type} = #{value}
 	</select>
+	
+	<select id="mate" resultType="Integer" useCache="false">
+		select count(1) as count from user_access where user_name = #{name} and user_email = #{email}
+	</select>
 
 	<update id="updateUserLastestTimeAndIp">
 		update user_access set
@@ -182,5 +186,9 @@
 		and ua.user_is_locked = 0 
 		and ua.user_nickname = #{userNickname}
 	</select>
+
+	<update id="resetPassword" flushCache="false">
+		update user_access set user_password = #{password} where ${type} = #{value}
+	</update>
 
 </mapper>

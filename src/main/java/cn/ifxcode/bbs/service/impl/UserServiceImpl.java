@@ -28,6 +28,7 @@ import cn.ifxcode.bbs.constant.BbsConstant;
 import cn.ifxcode.bbs.dao.PastHistoryDao;
 import cn.ifxcode.bbs.dao.RoleDao;
 import cn.ifxcode.bbs.dao.UserDao;
+import cn.ifxcode.bbs.dao.UserForgetDao;
 import cn.ifxcode.bbs.dao.UserValueDao;
 import cn.ifxcode.bbs.entity.ExperienceHistory;
 import cn.ifxcode.bbs.entity.GoldHistory;
@@ -35,6 +36,7 @@ import cn.ifxcode.bbs.entity.PastHistory;
 import cn.ifxcode.bbs.entity.SwfArea;
 import cn.ifxcode.bbs.entity.User;
 import cn.ifxcode.bbs.entity.UserAccess;
+import cn.ifxcode.bbs.entity.UserForget;
 import cn.ifxcode.bbs.entity.UserInfo;
 import cn.ifxcode.bbs.entity.UserPrivacy;
 import cn.ifxcode.bbs.entity.UserValue;
@@ -61,6 +63,9 @@ public class UserServiceImpl implements UserService{
 	
 	@Resource
 	private UserValueDao userValueDao;
+	
+	@Resource
+	private UserForgetDao forgetDao;
 	
 	@Resource
 	private RoleDao roleDao;
@@ -97,6 +102,9 @@ public class UserServiceImpl implements UserService{
 
 	public long getUserIdFromCookie(HttpServletRequest request) {
 		String cookie = CookieUtils.getUserCookieValue(request);
+		if(StringUtils.isEmpty(cookie)) {
+			return 0;
+		}
 		return Long.parseLong(cookie.split(";")[0]);
 	}
 
@@ -322,5 +330,38 @@ public class UserServiceImpl implements UserService{
 		return null;
 	}
 
+	@Override
+	public Integer mate(String name, String email) {
+		Map<String, Object> map = Maps.newHashMap();
+		map.put("name", name);
+		map.put("email", email);
+		return userDao.mate(map);
+	}
+
+	@Override
+	public int insertUserForget(UserForget uf) {
+		return forgetDao.insert(uf);
+	}
+
+	@Override
+	public UserForget getForgetByName(String name) {
+		synchronized (this) {
+			return forgetDao.getByName(name);
+		}
+	}
+
+	@Override
+	public int resetPassword(long uid, String name, String password) {
+		String type = uid == 0 ? "user_name" : "user_id";
+		Map<String, Object> map = Maps.newHashMap();
+		map.put("type", type);
+		if("user_name".equals(type)) {
+			map.put("value", name);
+		} else {
+			map.put("value", uid);
+		}
+		map.put("password", password);
+		return userDao.resetPassword(map);
+	}
 
 }

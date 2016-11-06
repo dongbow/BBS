@@ -15,7 +15,7 @@
 			<div id="demo1" class="slideBox">
 				<ul class="items">
 					<#list images as img>
-						<li><a href="${img.homeLink}" title="${img.homeTitle}"><img src="${path}${img.homeImgLink}"></a></li>
+						<li><a href="${img.homeLink}" title="${img.homeTitle}"><img src="${img.homeImgLink}"></a></li>
 					</#list>
 				</ul>
 			</div>
@@ -24,7 +24,7 @@
 					<#list gtopics as g>
 						<div id="topic_${g.topicId}" class="topiclist">
 					    	<a href="${path}/space/uid/${g.user.userAccess.userId}">
-					    		<img alt="头像" src="${path}${g.user.userInfo.userHeadImg}" width="50" height="50" />
+					    		<img alt="头像" src="${g.user.userInfo.userHeadImg}" width="50" height="50" />
 					    	</a>
 					        <div class="topic">
 					        	<a class="board" title="版块" href="${path}/navigation/${g.navId}/board/${g.boardId}" style="background:${g.board.boardColor}">${g.board.boardName}</a>
@@ -54,7 +54,7 @@
 			    	<#list htopics as h>
 			    		<div id="topic_${h.topicId}" class="topiclist">
 					    	<a href="${path}/space/uid/${h.user.userAccess.userId}">
-					    		<img alt="头像" src="${path}${h.user.userInfo.userHeadImg}" width="50" height="50" />
+					    		<img alt="头像" src="${h.user.userInfo.userHeadImg}" width="50" height="50" />
 					    	</a>
 					        <div class="topic">
 					        	<a class="board" title="版块" href="${path}/navigation/${h.navId}/board/${h.boardId}" style="background:${h.board.boardColor}">${h.board.boardName}</a>

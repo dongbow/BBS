@@ -58,4 +58,9 @@ public class ServiceTest {
 				JSONObject.parse(JSON.toJSONString(boardInfo)), JSONObject.class);
 	}
 	
+	@Test
+	public void testJson() {
+		JSONObject object = mapService.get(RedisKeyUtils.getSystemForget(), JSONObject.class);
+		System.out.println(object == null);
+	}
 }

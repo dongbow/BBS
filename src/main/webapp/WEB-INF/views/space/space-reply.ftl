@@ -21,7 +21,7 @@
 		<div id="uhd">
 			<div class="icn avt">
 				<a href="${path}/space/uid/${userinfo.userAccess.userId}"> 
-					<img src="${path}${userinfo.userInfo.userHeadImg}" />
+					<img src="${userinfo.userInfo.userHeadImg}" />
 				</a>
 			</div>
 			<h2 class="mt">${userinfo.userAccess.userNickname}</h2>

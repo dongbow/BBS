@@ -54,4 +54,8 @@ public class RedisKeyUtils {
 		return "bbs:data:board:boardid:" + boardId;
 	}
 	
+	public static String getSystemForget() {
+		return "bbs:system:forget";
+	}
+	
 }

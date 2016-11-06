@@ -65,7 +65,7 @@
 		        		<button onclick="">发表帖子</button>
 		        	</div>
 		        	<div class="upload-desc">
-		        		<p>图片只支持jpg|jpeg|png|gif|bmp，大小2M以内</p>
+		        		<p>图片只支持jpg|jpeg|png|gif|bmp，大小5M以内</p>
 		        		<p>附件支持exe|zip|rar|msi|png|jpg|jpeg|gif|bmp|doc|docx|xls|xlsx|ppt|pptx|txt|jar|md|sql|java|pdf|psd，大小50M以内</p>
 		        	</div>
 		        	<div class="image-cont" style=""></div>

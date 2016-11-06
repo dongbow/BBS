@@ -80,7 +80,7 @@
 	<select id="getTopicsByNavId" resultMap="BaseTopic">
 		SELECT * FROM bbs_topic AS t LEFT JOIN bbs_topic_info AS i ON i.topic_id = t.topic_id 
 		LEFT JOIN bbs_topic_data AS d ON d.topic_id = t.topic_id
-		WHERE t.topic_status = 0 AND t.nav_id = #{navId} and topic_id = 
+		WHERE t.topic_status = 0 AND t.nav_id = #{navId} 
  		<if test="filter != null">
 			<choose>
 				<when test="filter == 1">

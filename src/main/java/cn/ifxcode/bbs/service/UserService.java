@@ -8,6 +8,7 @@ import cn.ifxcode.bbs.bean.CookieBean;
 import cn.ifxcode.bbs.bean.Page;
 import cn.ifxcode.bbs.entity.PastHistory;
 import cn.ifxcode.bbs.entity.User;
+import cn.ifxcode.bbs.entity.UserForget;
 import cn.ifxcode.bbs.entity.UserValue;
 
 public interface UserService {
@@ -46,5 +47,13 @@ public interface UserService {
 	public int updateUserValue(UserValue userValue);
 
 	public User getUserByIdFromRedis(String uid);
+
+	public Integer mate(String name, String email);
+
+	public int insertUserForget(UserForget uf);
+
+	public UserForget getForgetByName(String name);
+
+	public int resetPassword(long uid, String name, String password);
 	
 }

@@ -12,28 +12,22 @@ $(document).ready(function(){
 $(function() {
 	
 	$('#user').blur(function(){
-		var params=$(this).serialize();
-		if($(this).val()==null||$(this).val()==""){
-			$('#error').show();
-			$('#error').html('用户名不能为空');
-		}else{
+		if($(this).val()){
 			$.ajax({
-				url:"account/exits.htm",
+				url: root + "/account/name_exists",
 				type:"post",
 				dataType:"json",
-				data:params,
+				data:{"text": $(this).val()},
 				beforeSend: function(){
 					$('#error').show();
 					$('#error').html('正在检测该用户是否存在...');
 				},
 				success:function(result){
-					var json = eval("("+result+")");
-					if(json.exits!='true'){
+					if(result && result.rc == 1001) {
 						$('#error').show();
-						$('#error').html('该用户不存在，请重新输入');
-				    }else{
+						$('#error').html(result.msg);
+					} else {
 				    	$('#error').hide();
-				    	$('#sum').html(1);
 				    }
 				}
 			});
@@ -41,32 +35,22 @@ $(function() {
 	});
 	
 	$('#email').blur(function(){
-		var params=$(this).serialize();
-		var name=$('#user').serialize();
-		if($(this).val()==null||$(this).val()==""){
-			$('#error').show();
-			$('#error').html('邮箱不能为空');
-		}else if($('#user').val()==""||$('#user').val()==null){
-			$('#error').show();
-			$('#error').html('请填过用户名之后再填邮箱');
-		}else{
+		if($(this).val() && $('#user').val()){
 			$.ajax({
-				url:"account/isnameMatchmail.htm",
+				url: root + "/account/email_exists",
 				type:"post",
 				dataType:"json",
-				data:params+"&"+name,
+				data:{"text": $(this).val()},
 				beforeSend: function(){
 					$('#error').show();
 					$('#error').html('正在检测用户名与邮箱是否匹配...');
 				},
 				success:function(result){
-					var json = eval("("+result+")");
-					if(json.exits!='true'){
+					if(result && result.rc == 3003) {
 						$('#error').show();
-						$('#error').html('用户名与邮箱不匹配，请检查之后重新输入');
-				    }else{
+						$('#error').html(result.msg);
+					} else {
 				    	$('#error').hide();
-				    	$('#sum').html(2);
 				    }
 				}
 			});
@@ -74,27 +58,18 @@ $(function() {
 	});
 	
 	$('#valid').blur(function(){
-		var params=$(this).serialize();
-		if($(this).val()==null||$(this).val()==""){
-			$('#error').show();
-			$('#error').html('验证码不能为空');
-		}else if($(this).val().length!=4){
-			$('#error').show();
-			$('#error').html('验证码只能为4位');
-		}else{
+		if($(this).val() && isNaN($(this).val())) {
 			$.ajax({
-				url:"account/validateCode.htm",
+				url:root + "/account/validatecode",
 				type:"post",
 				dataType:"json",
-				data:params,
+				data:{"validatecode": $(this).val()},
 				success:function(msg){
-					var json = eval("("+msg+")");
-					if(json.number=='true'){
-						$('#error').hide();
-						$('#sum').html(3);
-					}else{
+					if(msg && msg.rc == 1003){
 						$('#error').show();
-						$('#error').html('验证码错误，请重新输入');
+						$('#error').html(msg.msg);
+					}else{
+						$('#error').hide();
 					}
 				}
 			});
@@ -105,36 +80,30 @@ $(function() {
 		$('#codeimg').attr('src', root + '/validateCode.img?ver='+new Date().getTime()); 
 	});
 	
-	$('.fullBtnBlue').click(function(){
-		$('#user').trigger('blur');
-		$('#email').trigger('blur');
-		$('#valid').trigger('blur');
-		
-		if($('#sum').html()!=3){
+	$('.fullBtnBlue').click(function() {
+		if($('#user').val() && $('#email').val() && $('#valid').val() && isNaN($('#valid').val())) {
+			$('#mainForm').attr('action', root + '/account/forget/do');
+			$('#mainForm').submit();
+		} else {
 			$('#error').show();
 			$('#error').html('不可以留空');
 			return false;
-		}else{
-			$('#mainForm').attr('action','account/doforget.htm');
-			$('#mainForm').submit();
 		}
 	});
 	
 	$('#resend').click(function(){
-		var fname=$('#fname').serialize();
-		var fmail=$('#fmail').serialize();
-		//alert(fname+"/"+fmail);
+		var fname=$('#fname').val();
+		var fmail=$('#femail').val();
 		$.ajax({
-			url:"reSendMail.htm",
+			url: root + "/account/forget/sendmail/re",
 			type:"post",
 			dataType:"json",
-			data:fname+"&"+fmail,
+			data:{"fname": fname, "femail": fmail},
 			beforeSend: function(){
 				$('#resendtip').html('邮件正在重新发送，请稍后...');
 			},
 			success:function(result){
-				var json = eval("("+result+")");
-				if(json.exits!='false'){
+				if(result.rc == 1){
 					$('#resendtip').html('邮件重新发送成功，如果依然长时间未收到，请重新发送，或者联系管理员');
 			    }else{
 			    	$('#resendtip').html('<label style="color:#f00;">邮件重新发送失败，请重新发送，或者联系管理员</label>');

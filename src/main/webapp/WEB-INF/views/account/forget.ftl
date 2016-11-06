@@ -25,10 +25,10 @@
 		<form id="mainForm" name="mailForm" method="post">
 			<label id="error" class="error" style="display:none;"></label>
 			<label id="sum" style="display:none"></label>
-			<input id="user" type="text" placeholder="用户名" name="userName">
+			<input id="user" type="text" placeholder="用户名" name="name">
 			<input id="email" type="text" placeholder="邮箱" name="email">
 			<div class="codeInput">
-				<input id="valid" class="valid" type="text" placeholder="验证码/点击验证码换一张" maxlength="4" name="validatecode">
+				<input id="valid" class="valid" type="text" placeholder="验证码/点击验证码换一张" maxlength="4" name="code">
 			</div>
 			<div>
 				<img title="点击验证码换一张" id="codeimg" alt="验证码" src="${path}/validateCode.img"></img>
@@ -37,7 +37,7 @@
 				<button class="fullBtnBlue">提&nbsp;交</button>
 			</div>
 		</form>
-		<p>如果有任何疑问，请发送邮件至<a href="mailto:bbs@163.com">bbs@163.com</a>，寻求帮助。</p>
+		<p>如果有任何疑问，请发送邮件至<a href="mailto:bbshelp@163.com">bbshelp@163.com</a>，寻求帮助。</p>
 	</div>
 	<#include "../common/footer.ftl"/>
 </body>

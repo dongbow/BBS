@@ -9,9 +9,24 @@
         http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx.xsd">
+        
+    <context:property-placeholder location="classpath:app.properties"/>
+    
     <!-- 扫描service包下所有使用注解的类型 -->
     <context:component-scan base-package="cn.ifxcode.bbs.service ltang.redis cn.ifxcode.bbs.init cn.ifxcode.bbs.job"/>
 
+	<bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">    
+	    <property name="host" value="${email.host}" />    
+	    <property name="port" value="${email.port}" />    
+	    <property name="username" value="${email.username}" />    
+	    <property name="password" value="${email.password}" /> 
+	    <property name="javaMailProperties">    
+	        <props>  
+	            <prop key="mail.smtp.auth">true</prop>    
+	        </props>    
+	    </property> 
+    </bean>
+    
     <!-- 配置事务管理器 -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <!-- 注入数据库连接池 -->

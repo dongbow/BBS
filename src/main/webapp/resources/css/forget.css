@@ -315,6 +315,7 @@ form label{
 	color:#fff;
 	font:16px "microsoft yahei";
 	margin-top:15px;
+	cursor: pointer;
 }
 
 #btn:hover{

@@ -260,11 +260,11 @@ public class TopicServiceImpl implements TopicService{
 			map.put(t.getTopicId(), t);
 			datas.add(t.getTopicData());
 		}
-		Collections.sort(datas);
-		List<Topic> list = new ArrayList<Topic>();
-		for (TopicData d : datas) {
-			list.add(map.get(d.getTopicId()));
-		}
+//		Collections.sort(datas);
+//		List<Topic> list = new ArrayList<Topic>();
+//		for (TopicData d : datas) {
+//			list.add(map.get(d.getTopicId()));
+//		}
 	}
 
 	private void formatTopicData(List<Topic> topics) {

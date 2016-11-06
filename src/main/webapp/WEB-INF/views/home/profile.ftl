@@ -124,7 +124,7 @@
 									<PARAM NAME=quality VALUE=high>
 									<PARAM NAME=bgcolor VALUE=#FFFFFF>
 									<EMBED src="${path}/resources/static/avatar/avatar.swf" quality=high bgcolor=#FFFFFF WIDTH="650" HEIGHT="450" 
-											wmode="transparent" flashVars="imgUrl=${path}${user.userInfo.userHeadImg}&uploadUrl=${path}/resources/static/avatar/upfile.jsp&uploadSrc=false"
+											wmode="transparent" flashVars="imgUrl=${user.userInfo.userHeadImg}&uploadUrl=${path}/resources/static/avatar/upfile.jsp&uploadSrc=false"
 										NAME="myMovieName" ALIGN="" TYPE="application/x-shockwave-flash" allowScriptAccess="always"
 										PLUGINSPAGE="http://www.macromedia.com/go/getflashplayer">
 									</EMBED>

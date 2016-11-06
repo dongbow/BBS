@@ -34,9 +34,9 @@ $(document).ready(function() {
 
 function getUser() {
 	$.post(AUTH_URL.getUserInfo(), function(result) {
-		$('#headimg').attr('src', ADMIN_ROOT + result.img);
+		$('#headimg').attr('src', result.img);
 		$('#nickname').html(result.name);
-		$('#menu_headimg').attr('src', ADMIN_ROOT + result.img);
+		$('#menu_headimg').attr('src', result.img);
 		$('#menu_name').html(result.name);
 	});
 }

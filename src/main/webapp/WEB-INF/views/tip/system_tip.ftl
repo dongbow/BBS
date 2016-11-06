@@ -76,6 +76,14 @@
 			     		抱歉，该贴禁止回复<br/>
 			     		<a class="goback" href="javascript:;">返回上一页</a>
 		     		</#if>
+		     		<#if tip == 'forget-error'>
+			     		抱歉，链接错误<br/>
+			     		<a href="${path}/account/forget">返回重试</a>
+		     		</#if>
+		     		<#if tip == 'forget-time'>
+			     		抱歉，链接已失效<br/>
+			     		<a href="${path}/account/forget">返回重试</a>
+		     		</#if>
 		     	</p>
 		    </div>
 		</div>

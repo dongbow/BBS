@@ -12,6 +12,8 @@ public class BbsConstant {
 	public static final Integer REMEMBER_MAXAGE = 60 * 60 * 24 * 7;
 	public static final Integer REMEMBER_TRUE = 1;
 	
+	public static final String PASSWORD = "5%lSx0s]YEm[gy%m2-=wT930!VUc2YA=";
+	
 	public static final Integer IS_ADMIN = 1;
 	public static final Integer IS_BOARDMANAGER = 3;
 	

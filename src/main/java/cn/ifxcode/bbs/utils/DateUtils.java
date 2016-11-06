@@ -211,4 +211,12 @@ public class DateUtils {
 		return diff;
 	}
 
+	public static Date getEmailEndTime(Date date, String vaildTime) {
+		int min = Integer.parseInt(vaildTime);
+		Calendar c = Calendar.getInstance();
+		c.setTime(date);
+		c.add(Calendar.MINUTE, min);
+		return c.getTime();
+	}
+
 }

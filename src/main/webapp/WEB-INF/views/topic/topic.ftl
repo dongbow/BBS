@@ -39,7 +39,7 @@
 		            		<#assign n=n+1/>
 		            	</#list>">${ui.userAccess.userNickname}</a>
 		            <a href="${path}/space/uid/${ui.userAccess.userId}" target="_blank">
-		            	<img alt="头像" width="100" height="100" src="${path}${ui.userInfo.userHeadImg}"/>
+		            	<img alt="头像" width="100" height="100" src="${ui.userInfo.userHeadImg}"/>
 		            </a>
 		            <#assign m=0/>
 		            <#list ui.roles as role>
@@ -151,6 +151,7 @@
 		    </div>
 		</#if>
 	    <#if replies??>
+	    	<#assign floor = page.pageSize * (page.pageNo - 1) + 1/>
 	    	<#list replies as reply>
 	    		<div id="reply_${reply.replyId}" class="replylist">
 			        <div class="tleft">
@@ -165,7 +166,7 @@
 	            			${reply.user.userAccess.userNickname}
 	            		</a>
 			            <a href="${path}/space/uid/${reply.user.userAccess.userId}" target="_blank">
-			            	<img alt="头像" width="100" height="100" src="${path}${reply.user.userInfo.userHeadImg}"/>
+			            	<img alt="头像" width="100" height="100" src="${reply.user.userInfo.userHeadImg}"/>
 			            </a>
 			            <#assign m=0/>
 			            <#list reply.user.roles as role>
@@ -199,7 +200,17 @@
 			                <div class="tmenu">
 			                    <a class="createreplytime" title="创建时间">${reply.replyCreateTime}</a>
 			                    <a href="" title="倒序浏览">倒序浏览</a>
-			                    <span>沙发</span>
+			                    <span>
+			                    	<#if floor == 1>
+			                    		沙发
+			                    	<#elseif floor == 2>
+			                    		板凳
+			                    	<#elseif floor == 3>
+			                    		地板
+			                    	<#else>
+			                    		${floor} 楼
+			                    	</#if>
+			                    </span>
 			                </div>
 			            </div>
 			            <div class="tcontent">
@@ -230,6 +241,7 @@
 			            </div>
 			        </div>
 			    </div>
+			    <#assign floor = floor + 1/>
 	    	</#list>
 	    </#if>
 	    <!-- tip -->
@@ -252,7 +264,7 @@
 	    <div id="replyecont">
 	    	<#if user??>
 		    	<div class="info">
-		    		<img alt="头像" width="120" height="120" src="${path}${user.userInfo.userHeadImg}"/><br/>
+		    		<img alt="头像" width="120" height="120" src="${user.userInfo.userHeadImg}"/><br/>
 		    		<#assign q=0/>
 		    		<#list user.roles as role>
 		            	<#if q gt 0><#break></#if>

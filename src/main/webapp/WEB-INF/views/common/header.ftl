@@ -46,14 +46,14 @@ $(function(){
 	          <a href="home.htm?md=space&type=pm" target="_blank" id="message"><span>0</span></a>
 	          <a id="usercenter" title="${user.userAccess.userNickname}" target="_blank" href="${path}/space/uid/${user.userAccess.userId}">${user.userAccess.userNickname}</a>
 	          <a id="userhead" href="${path}/space/uid/${user.userAccess.userId}" target="_blank">
-	          	<img id="cut" title="访问我的空间" src="${path}${user.userInfo.userHeadImg}"/>
+	          	<img id="cut" title="访问我的空间" src="${user.userInfo.userHeadImg}"/>
 	          </a>
 	      </div>
 		</div>
 	    <div id="header_panel" class="header_panel" style="display:none;">
 	    	<div class="list_item_trangle"></div>
 	        <div class="bbs_quick_show">
-	            <img alt="headerimg" src="${path}${user.userInfo.userHeadImg}"/>
+	            <img alt="headerimg" src="${user.userInfo.userHeadImg}"/>
 	            <#assign n=0/>
 	            <#list user.roles as role>
 	            	<#if n gt 0><#break></#if>

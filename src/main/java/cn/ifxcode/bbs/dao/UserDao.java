@@ -36,4 +36,8 @@ public interface UserDao {
 	
 	public User getUserByUserNickname(String userNickname);
 
+	public Integer mate(Map<String, Object> map);
+
+	public int resetPassword(Map<String, Object> map);
+
 }
