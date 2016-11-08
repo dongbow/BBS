@@ -31,6 +31,7 @@ import cn.ifxcode.bbs.dao.RoleDao;
 import cn.ifxcode.bbs.dao.UserDao;
 import cn.ifxcode.bbs.dao.UserFavoriteDao;
 import cn.ifxcode.bbs.dao.UserForgetDao;
+import cn.ifxcode.bbs.dao.UserFriendsDao;
 import cn.ifxcode.bbs.dao.UserValueDao;
 import cn.ifxcode.bbs.entity.ExperienceHistory;
 import cn.ifxcode.bbs.entity.GoldHistory;
@@ -40,6 +41,7 @@ import cn.ifxcode.bbs.entity.User;
 import cn.ifxcode.bbs.entity.UserAccess;
 import cn.ifxcode.bbs.entity.UserFavorite;
 import cn.ifxcode.bbs.entity.UserForget;
+import cn.ifxcode.bbs.entity.UserFriends;
 import cn.ifxcode.bbs.entity.UserInfo;
 import cn.ifxcode.bbs.entity.UserPrivacy;
 import cn.ifxcode.bbs.entity.UserValue;
@@ -62,7 +64,7 @@ import cn.ifxcode.bbs.utils.ReflectUtils;
 import cn.ifxcode.bbs.utils.RoleIdUtils;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
@@ -83,6 +85,9 @@ public class UserServiceImpl implements UserService{
 	
 	@Resource
 	private UserFavoriteDao favoriteDao;
+	
+	@Resource
+	private UserFriendsDao friendsDao;
 	
 	@Resource
 	private TopicService topicService;
@@ -455,12 +460,81 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
+	@Transactional
 	public int cancelFavorite(String ids) {
 		String favIds[] = ids.split(",");
 		synchronized (this) {
 			Map<String, Object[]> map = Maps.newHashMap();
 			map.put("favIds", favIds);
 			if(favIds.length == favoriteDao.cancelFavorite(map)) {
+				return BbsConstant.OK;
+			}
+		}
+		return BbsConstant.ERROR;
+	}
+
+	@Override
+	public int addFriend(long recUserId, String recName, HttpServletRequest request) {
+		Lock lock = new ReentrantLock();
+		if(lock.tryLock()) {
+			try {
+				lock.lock();
+				long userId = this.getUserIdFromCookie(request);
+				Map<String, Object> map = Maps.newHashMap();
+				map.put("sendUserId", userId);
+				map.put("recUserId", recUserId);
+				int result = friendsDao.validFriend(map);
+				if(result == 0) {
+					CookieBean bean = this.getCookieBeanFromCookie(request);
+					UserFriends friends = new UserFriends();
+					friends.setSendUserId(userId);
+					friends.setSendUserName(bean.getNick_name());
+					friends.setSendTime(DateUtils.dt14LongFormat(new Date()));
+					friends.setRecUserId(recUserId);
+					friends.setRecUserName(recName);
+					friends.setFriendStatus(BbsConstant.FRIEND_STATUS_DEFAULT);
+					friends.setFriendIp(GetRemoteIpUtil.getRemoteIp(request));
+					if(friendsDao.insert(friends) > BbsConstant.OK) {
+						return BbsConstant.OK;
+					} else {
+						return BbsConstant.ERROR;
+					}
+				} else {
+					return BbsErrorCode.FRIEND_REPEAT;
+				}
+			} catch (Exception e) {
+				logger.error("add friend fail", e);
+				return BbsConstant.ERROR;				
+			} finally {
+				lock.unlock();
+			}
+		}
+		return BbsConstant.ERROR;
+	}
+
+	@Override
+	@Transactional
+	public int dealFriendStatus(String status, String... friendIds) {
+		int isStatus = 0, fs = 0;
+		Map<String, Object> map = Maps.newHashMap();
+		if(status.equals("pass")) {
+			fs = BbsConstant.FRIEND_STATUS_PASS;
+			isStatus = BbsConstant.FRIEND_STATUS_DEFAULT;
+		} else if(status.equals("refause")) {
+			fs = BbsConstant.FRIEND_STATUS_REFAUSE;
+			isStatus = BbsConstant.FRIEND_STATUS_DEFAULT;
+		} else if(status.equals("delete")) {
+			fs = BbsConstant.FRIEND_STATUS_DELETE;
+			isStatus = BbsConstant.FRIEND_STATUS_PASS;
+		} else {
+			return BbsConstant.ERROR;
+		}
+		map.put("status", fs);
+		map.put("isStatus", isStatus);
+		map.put("friendIds", friendIds);
+		map.put("update", new Date());
+		synchronized (this) {
+			if(BbsConstant.OK == friendsDao.dealFriendStatus(map)) {
 				return BbsConstant.OK;
 			}
 		}

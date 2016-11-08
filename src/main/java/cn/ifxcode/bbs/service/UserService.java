@@ -17,16 +17,13 @@ public interface UserService {
 
 	public Integer valueCheck(String type, String value);
 
-	public int updateUserLastestTimeAndIp(Long userId, String userLastestLoginIp,
-			String userLastestLoginTime);
+	public int updateUserLastestTimeAndIp(Long userId, String userLastestLoginIp, String userLastestLoginTime);
 
 	public long getUserIdFromCookie(HttpServletRequest request);
 
 	public CookieBean getCookieBeanFromCookie(HttpServletRequest request);
 
-	public List<User> getAllUser(Page page, long userId, String username,
-			String nickname, int sex, int role, int status, String startTime,
-			String endTime);
+	public List<User> getAllUser(Page page, long userId, String username, String nickname, int sex, int role, int status, String startTime, String endTime);
 
 	public Integer insertUser(String userName, String password, String email, int isAdmin, int boardManager, String roleIds, HttpServletRequest request);
 
@@ -59,5 +56,9 @@ public interface UserService {
 	public int addFavorite(long needId1, long needId2, String sign, String name, HttpServletRequest request);
 
 	public int cancelFavorite(String ids);
+
+	public int addFriend(long recUserId, String recName, HttpServletRequest request);
+
+	public int dealFriendStatus(String status, String... friendId);
 	
 }

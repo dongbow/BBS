@@ -6,7 +6,7 @@
 
 	<cache type="cn.ifxcode.bbs.dao.cache.LoggingRedisCache"/>
 
-	<select id="vaildFavorite" resultType="Integer">
+	<select id="vaildFavorite" resultType="Integer" useCache="false">
 		select count(1) from user_favorite where user_id = #{userId} and need_id1 = #{needId1} and need_id2 = #{needId2} and fav_sign = #{sign}
 	</select>
 

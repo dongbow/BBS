@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ifxcode.bbs.dao.UserFriendsDao">
+
+	<cache type="cn.ifxcode.bbs.dao.cache.LoggingRedisCache"/>
+
+	<select id="validFriend" resultType="Integer" useCache="false">
+		select count(1) from user_friends where status = 2 and ((send_user_id = #{sendUserId} and rec_user_id = #{recUserId}) or (send_user_id = #{recUserId} and rec_user_id = #{sendUserId})) 
+	</select>
+
+	<insert id="insert" keyProperty="friendId" parameterType="UserFriends">
+		insert into user_friends (send_user_id, send_user_name, rec_user_id, rec_user_name, friend_status, send_time, update_time, friend_ip)  
+		values (#{sendUserId}, #{sendUserName}, #{recUserId}, #{recUserName}, #{friendStatus}, #{sendTime}, #{updateTime}, #{friendIp})
+	</insert>
+	
+	<update id="dealFriendStatus">
+		update user_friends set status = #{status}, update_time = #{update} where status = #{isStatus}
+		and friend_id in 
+		<foreach collection="array" index="index" item="friendIds" open="(" separator="," close=")">  
+           	#{friendIds}   
+   		</foreach>
+	</update>
+</mapper>

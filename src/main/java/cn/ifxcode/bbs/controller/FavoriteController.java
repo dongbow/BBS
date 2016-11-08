@@ -7,6 +7,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.ifxcode.bbs.bean.CookieBean;
@@ -51,7 +52,7 @@ public class FavoriteController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/favorite/cancel", method = RequestMethod.POST)
-	public Result cancelFavorite(String ids) {
+	public Result cancelFavorite(@RequestParam(value = "ids[]")String ids) {
 		Result result = null;
 		if(StringUtils.isNotBlank(ids)) {
 			if(BbsConstant.OK == userService.cancelFavorite(ids)) {

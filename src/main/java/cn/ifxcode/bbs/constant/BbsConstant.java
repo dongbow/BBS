@@ -29,4 +29,9 @@ public class BbsConstant {
 	
 	public static final String BOARD = "/board";
 	
+	public static final int FRIEND_STATUS_DEFAULT = 1;//已发送
+	public static final int FRIEND_STATUS_PASS = 2;//已通过
+	public static final int FRIEND_STATUS_REFAUSE = 3;//已拒绝
+	public static final int FRIEND_STATUS_DELETE = 4;//已删除
+	
 }
