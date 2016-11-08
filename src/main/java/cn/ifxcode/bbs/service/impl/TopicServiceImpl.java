@@ -114,7 +114,7 @@ public class TopicServiceImpl implements TopicService{
 					topicData.setTopicViewCount(0);
 					if(topicDataDao.insert(topicData) == BbsConstant.OK
 							&& generalService.UserAward(EGHistory.TOPIC, uid, request) == BbsConstant.OK) {
-						boardService.saveOrUpdateBoardInfo(bid, BoardSign.TOPIC);
+						boardService.saveOrUpdateBoardInfo(bid, BoardSign.TOPIC, 0);
 						return topic.getTopicId();
 					}
 				}
@@ -135,44 +135,46 @@ public class TopicServiceImpl implements TopicService{
 	@Override
 	public JSONObject saveOrUpdateTopicData(long topicId, TopicSign topicSign, String topicTitleStyle, String lastestReplyUser,
 			String lastestReplyTime, long topicUpdateUserId, String topicUpdateUser, String topicUpdateTime) {
-		JSONObject object = redisObjectMapService.get(RedisKeyUtils.getTopicData(topicId), JSONObject.class);
-		TopicData topicData = new TopicData();
-		if(object == null) {
-			topicData.setTopicId(topicId);
-			topicData.setTopicViewCount(1);
-		} else {
-			topicData = JSON.toJavaObject(object, TopicData.class);
-			if(topicSign != null) {
-				if(topicSign.getCode() == 0) {
-					topicData.setTopicViewCount(topicData.getTopicViewCount() + 1);
-				} else if(topicSign.getCode() == 1) {
-					topicData.setTopicReplyCount(topicData.getTopicReplyCount() + 1);
-				} else if(topicSign.getCode() == 2) {
-					topicData.setTopicFavoriteCount(topicData.getTopicFavoriteCount() + 1);
+		synchronized (this) {
+			JSONObject object = redisObjectMapService.get(RedisKeyUtils.getTopicData(topicId), JSONObject.class);
+			TopicData topicData = new TopicData();
+			if(object == null) {
+				topicData.setTopicId(topicId);
+				topicData.setTopicViewCount(1);
+			} else {
+				topicData = JSON.toJavaObject(object, TopicData.class);
+				if(topicSign != null) {
+					if(topicSign.getCode() == 0) {
+						topicData.setTopicViewCount(topicData.getTopicViewCount() + 1);
+					} else if(topicSign.getCode() == 1) {
+						topicData.setTopicReplyCount(topicData.getTopicReplyCount() + 1);
+					} else if(topicSign.getCode() == 2) {
+						topicData.setTopicFavoriteCount(topicData.getTopicFavoriteCount() + 1);
+					}
+				}
+				if(StringUtils.isNotBlank(lastestReplyTime)) {
+					topicData.setLastestReplyTime(lastestReplyTime);
+				}
+				if(StringUtils.isNotBlank(lastestReplyUser)) {
+					topicData.setLastestReplyUser(lastestReplyUser);
+				}
+				if(StringUtils.isNotBlank(topicUpdateTime)) {
+					topicData.setTopicUpdateTime(topicUpdateTime);
+				}
+				if(StringUtils.isNotBlank(topicUpdateUser)) {
+					topicData.setTopicUpdateUser(topicUpdateUser);
+				}
+				if(topicUpdateUserId != -1) {
+					topicData.setTopicUpdateUserId(topicUpdateUserId);
+				}
+				if(StringUtils.isNotBlank(topicTitleStyle)) {
+					topicData.setTopicTitleStyle(topicTitleStyle);
 				}
 			}
-			if(StringUtils.isNotBlank(lastestReplyTime)) {
-				topicData.setLastestReplyTime(lastestReplyTime);
-			}
-			if(StringUtils.isNotBlank(lastestReplyUser)) {
-				topicData.setLastestReplyUser(lastestReplyUser);
-			}
-			if(StringUtils.isNotBlank(topicUpdateTime)) {
-				topicData.setTopicUpdateTime(topicUpdateTime);
-			}
-			if(StringUtils.isNotBlank(topicUpdateUser)) {
-				topicData.setTopicUpdateUser(topicUpdateUser);
-			}
-			if(topicUpdateUserId != -1) {
-				topicData.setTopicUpdateUserId(topicUpdateUserId);
-			}
-			if(StringUtils.isNotBlank(topicTitleStyle)) {
-				topicData.setTopicTitleStyle(topicTitleStyle);
-			}
+			object = JSONObject.parseObject(JSON.toJSONString(topicData));
+			redisObjectMapService.save(RedisKeyUtils.getTopicData(topicId), object, JSONObject.class);
+			return object;
 		}
-		object = JSONObject.parseObject(JSON.toJSONString(topicData));
-		redisObjectMapService.save(RedisKeyUtils.getTopicData(topicId), object, JSONObject.class);
-		return object;
 	}
 	
 	@Override
@@ -182,7 +184,7 @@ public class TopicServiceImpl implements TopicService{
 		try{
 			lock.lock();
 			JSONObject object = this.saveOrUpdateTopicData(topicId, TopicSign.VIEW, null, null, null, -1, null, null);
-			boardService.saveOrUpdateBoardInfo(boardId, BoardSign.CLICK);
+			boardService.saveOrUpdateBoardInfo(boardId, BoardSign.CLICK, 0);
 			topicData = JSON.toJavaObject(object, TopicData.class);
 		} catch (Exception e) {
 			logger.error("insertTopicData fail", e.getMessage());
@@ -283,7 +285,7 @@ public class TopicServiceImpl implements TopicService{
 		try{
 			lock.lock();
 			JSONObject object = this.saveOrUpdateTopicData(topicId, null, null, null, null, -1, null, null);
-			boardService.saveOrUpdateBoardInfo(boardId, BoardSign.CLICK);
+			boardService.saveOrUpdateBoardInfo(boardId, BoardSign.CLICK, 0);
 			topicData = JSON.toJavaObject(object, TopicData.class);
 		} catch (Exception e) {
 			logger.error("insertTopicData fail", e.getMessage());

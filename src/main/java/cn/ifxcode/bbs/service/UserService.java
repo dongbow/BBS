@@ -55,5 +55,9 @@ public interface UserService {
 	public UserForget getForgetByName(String name);
 
 	public int resetPassword(long uid, String name, String password);
+
+	public int addFavorite(long needId1, long needId2, String sign, String name, HttpServletRequest request);
+
+	public int cancelFavorite(String ids);
 	
 }

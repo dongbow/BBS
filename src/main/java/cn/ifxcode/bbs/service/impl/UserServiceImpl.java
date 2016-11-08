@@ -25,9 +25,11 @@ import com.google.common.collect.Maps;
 import cn.ifxcode.bbs.bean.CookieBean;
 import cn.ifxcode.bbs.bean.Page;
 import cn.ifxcode.bbs.constant.BbsConstant;
+import cn.ifxcode.bbs.constant.BbsErrorCode;
 import cn.ifxcode.bbs.dao.PastHistoryDao;
 import cn.ifxcode.bbs.dao.RoleDao;
 import cn.ifxcode.bbs.dao.UserDao;
+import cn.ifxcode.bbs.dao.UserFavoriteDao;
 import cn.ifxcode.bbs.dao.UserForgetDao;
 import cn.ifxcode.bbs.dao.UserValueDao;
 import cn.ifxcode.bbs.entity.ExperienceHistory;
@@ -36,12 +38,18 @@ import cn.ifxcode.bbs.entity.PastHistory;
 import cn.ifxcode.bbs.entity.SwfArea;
 import cn.ifxcode.bbs.entity.User;
 import cn.ifxcode.bbs.entity.UserAccess;
+import cn.ifxcode.bbs.entity.UserFavorite;
 import cn.ifxcode.bbs.entity.UserForget;
 import cn.ifxcode.bbs.entity.UserInfo;
 import cn.ifxcode.bbs.entity.UserPrivacy;
 import cn.ifxcode.bbs.entity.UserValue;
+import cn.ifxcode.bbs.enumtype.BoardSign;
 import cn.ifxcode.bbs.enumtype.EGHistory;
+import cn.ifxcode.bbs.enumtype.Favorite;
+import cn.ifxcode.bbs.enumtype.TopicSign;
+import cn.ifxcode.bbs.service.BoardService;
 import cn.ifxcode.bbs.service.GoldExperienceService;
+import cn.ifxcode.bbs.service.TopicService;
 import cn.ifxcode.bbs.service.UserService;
 import cn.ifxcode.bbs.utils.CookieUtils;
 import cn.ifxcode.bbs.utils.DateUtils;
@@ -72,6 +80,15 @@ public class UserServiceImpl implements UserService{
 	
 	@Resource
 	private PastHistoryDao pastHistoryDao;
+	
+	@Resource
+	private UserFavoriteDao favoriteDao;
+	
+	@Resource
+	private TopicService topicService;
+	
+	@Resource
+	private BoardService boardService;
 	
 	@Resource
 	private RedisObjectMapService redisObjectMapService;
@@ -288,21 +305,34 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public CookieBean checkIsLogin(HttpServletRequest request) {
-		CookieBean cookieBean = this.getCookieBeanFromCookie(request);
-		if(cookieBean != null) {
-			JSONObject object = redisObjectMapService.get(RedisKeyUtils.getUserInfo(cookieBean.getUser_id()), JSONObject.class);
-			if(object != null) {
-				return cookieBean;
+		synchronized (this) {
+			CookieBean cookieBean = this.getCookieBeanFromCookie(request);
+			if(cookieBean != null) {
+				JSONObject object = redisObjectMapService.get(RedisKeyUtils.getUserInfo(cookieBean.getUser_id()), JSONObject.class);
+				if(object != null) {
+					return cookieBean;
+				}
 			}
 		}
 		return null;
 	}
 
 	@Transactional
-	public synchronized Integer addSign(UserValue userValue, PastHistory pastHistory) {
-		if(userValueDao.updateUserValue(userValue) == BbsConstant.OK
-				&& pastHistoryDao.insertPastHistory(pastHistory) == BbsConstant.OK) {
-			return BbsConstant.OK;
+	public Integer addSign(UserValue userValue, PastHistory pastHistory) {
+		Lock lock = new ReentrantLock();
+		if(lock.tryLock()) {
+			try {
+				lock.lock();
+				if(userValueDao.updateUserValue(userValue) == BbsConstant.OK
+						&& pastHistoryDao.insertPastHistory(pastHistory) == BbsConstant.OK) {
+					return BbsConstant.OK;
+				}
+			} catch (Exception e) {
+				logger.error("user sign error", e);
+				return BbsConstant.ERROR;
+			} finally {
+				lock.unlock();
+			}
 		}
 		return BbsConstant.ERROR;
 	}
@@ -317,7 +347,18 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public int updateUserValue(UserValue userValue) {
-		return userValueDao.updateUserValue(userValue);
+		Lock lock = new ReentrantLock();
+		if(lock.tryLock()) {
+			try {
+				lock.lock();
+				return userValueDao.updateUserValue(userValue);
+			} catch (Exception e) {
+				logger.error("user update uservalue error", e);
+			} finally {
+				lock.unlock();
+			}
+		}
+		return BbsConstant.ERROR;
 	}
 
 	@Override
@@ -362,6 +403,68 @@ public class UserServiceImpl implements UserService{
 		}
 		map.put("password", password);
 		return userDao.resetPassword(map);
+	}
+
+	@Override
+	public int addFavorite(long needId1, long needId2, String sign, String name, HttpServletRequest request) {
+		Lock lock = new ReentrantLock();
+		if(lock.tryLock()) {
+			try {
+				lock.lock();
+				long userId = this.getUserIdFromCookie(request);
+				Map<String, Object> map = Maps.newHashMap();
+				map.put("userId", userId);
+				map.put("needId1", needId1);
+				map.put("needId2", needId2);
+				map.put("sign", sign);
+				int result = favoriteDao.vaildFavorite(map);
+				if(result == 0) {
+					UserFavorite favorite = new UserFavorite();
+					favorite.setUserId(userId);
+					favorite.setNeedId1(needId1);
+					favorite.setNeedId2(needId2);
+					if("board".equals(sign)) {
+						favorite.setFavSign(Favorite.BOARD.getCode());
+					} else {
+						favorite.setFavSign(Favorite.TOPIC.getCode());
+					}
+					favorite.setFavName(name);
+					favorite.setCreateTime(DateUtils.dt14LongFormat(new Date()));
+					favorite.setFavIp(GetRemoteIpUtil.getRemoteIp(request));
+					if(favoriteDao.insert(favorite) > BbsConstant.OK) {
+						if(favorite.getFavSign() == Favorite.BOARD.getCode()) {
+							boardService.saveOrUpdateBoardInfo((int) favorite.getNeedId2(), BoardSign.FAVORITE, 1);
+						} else {
+							topicService.saveOrUpdateTopicData(favorite.getNeedId2(), TopicSign.FAVORITE, null, null, null, -1, null, null);
+						}
+						return BbsConstant.OK;
+					} else {
+						return BbsConstant.ERROR;
+					}
+				} else {
+					return BbsErrorCode.FAVORITE_REPEAT;
+				}
+			} catch (Exception e) {
+				logger.error("insert favorite fail", e);
+				return BbsConstant.ERROR;				
+			} finally {
+				lock.unlock();
+			}
+		}
+		return BbsConstant.ERROR;
+	}
+
+	@Override
+	public int cancelFavorite(String ids) {
+		String favIds[] = ids.split(",");
+		synchronized (this) {
+			Map<String, Object[]> map = Maps.newHashMap();
+			map.put("favIds", favIds);
+			if(favIds.length == favoriteDao.cancelFavorite(map)) {
+				return BbsConstant.OK;
+			}
+		}
+		return BbsConstant.ERROR;
 	}
 
 }

@@ -32,6 +32,7 @@ public class BbsInterceptor extends HandlerInterceptorAdapter{
 		
 		if(generalService.checkIp(request)) {
 			logger.info("black ip : " + GetRemoteIpUtil.getRemoteIp(request));
+			response.sendError(HttpServletResponse.SC_FORBIDDEN);
 			return false;
 		}
 		

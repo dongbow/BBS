@@ -14,7 +14,7 @@ public interface BoardService {
 
 	public Board getBoardByBoardId(Integer navId, Integer boardId);
 
-	public JSONObject saveOrUpdateBoardInfo(int boardId, BoardSign sign);
+	public JSONObject saveOrUpdateBoardInfo(int boardId, BoardSign sign, int favorite);
 	
 	public BoardInfo getBoardInfoFromRedis(int boardId);
 

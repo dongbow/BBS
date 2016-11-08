@@ -1,4 +1,4 @@
-package cn.ifxcode.bbs.service;
+package cn.ifxcode.bbs.service.impl;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -16,6 +16,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+
+import cn.ifxcode.bbs.service.EmailService;
 
 @Service
 public class EmailServiceImpl implements EmailService {

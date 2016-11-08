@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import ltang.redis.service.RedisObjectMapService;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,8 +25,6 @@ import cn.ifxcode.bbs.bean.Result;
 import cn.ifxcode.bbs.constant.BbsConstant;
 import cn.ifxcode.bbs.constant.BbsErrorCode;
 import cn.ifxcode.bbs.entity.Board;
-import cn.ifxcode.bbs.entity.BoardInfo;
-import cn.ifxcode.bbs.entity.Classify;
 import cn.ifxcode.bbs.entity.ExperienceHistory;
 import cn.ifxcode.bbs.entity.GoldHistory;
 import cn.ifxcode.bbs.entity.HomeImage;
@@ -34,8 +33,6 @@ import cn.ifxcode.bbs.entity.PastHistory;
 import cn.ifxcode.bbs.entity.Topic;
 import cn.ifxcode.bbs.entity.UserValue;
 import cn.ifxcode.bbs.enumtype.EGHistory;
-import cn.ifxcode.bbs.service.BoardService;
-import cn.ifxcode.bbs.service.ClassifyService;
 import cn.ifxcode.bbs.service.GeneralService;
 import cn.ifxcode.bbs.service.GoldExperienceService;
 import cn.ifxcode.bbs.service.HomeImageService;
@@ -59,12 +56,6 @@ public class IndexController extends BaseUserController{
 	
 	@Resource
 	private NavigationService navigationService;
-	
-	@Resource
-	private BoardService boardService;
-	
-	@Resource
-	private ClassifyService classifyService;
 	
 	@Resource
 	private UserService userService;
@@ -132,36 +123,6 @@ public class IndexController extends BaseUserController{
 		return "navigation";
 	}
 	
-	@RequestMapping("/navigation/{gid}/board/{bid}")
-	public String toBoard(@PathVariable("gid")String gid, @PathVariable("bid")String bid, 
-			Model model) {
-		long navId = NumberUtils.getAllNumber(gid);
-		if(Long.toString(navId).length() > 10) {
-			return "redirect:/tip?tip=nav-notexists";
-		}
-		JSONObject object = redisObjectMapService.get(RedisKeyUtils.getBoardsByNavId((int) navId), JSONObject.class);
-		if(object == null) {
-			return "redirect:/tip?tip=nav-notexists";
-		}
-		long boardId = NumberUtils.getAllNumber(bid);
-		if(Long.toString(boardId).length() > 10) {
-			return "redirect:/tip?tip=board-notexists";
-		}
-		Navigation navigation = navigationService.getNavigation((int) navId);
-		Board board = boardService.getBoardByBoardId(object, (int) boardId);
-		if(board == null) {
-			return "redirect:/tip?tip=board-notexists";
-		}
-		//BoardInfo boardInfo = boardService.getBoardInfoByBoardId((int) boardId);
-		BoardInfo boardInfo = boardService.getBoardInfoFromRedis((int) boardId);
-		List<Classify> classifies = classifyService.getClassifyByBoardId((int) boardId);
-		model.addAttribute("navigation", navigation);
-		model.addAttribute("board", board);
-		model.addAttribute("boardInfo", boardInfo);
-		model.addAttribute("classifies", classifies);
-		return "board/board";
-	}
-	
 	@ResponseBody
 	@RequestMapping(value = "/sign/index", method = RequestMethod.POST)
 	public JSONObject toSign(HttpServletRequest request) {
@@ -197,4 +158,5 @@ public class IndexController extends BaseUserController{
 		object.put("rc", result);
 		return object;
 	}
+	
 }

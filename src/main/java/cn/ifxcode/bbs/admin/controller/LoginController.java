@@ -105,26 +105,12 @@ public class LoginController {
 						RoleIdUtils.formatRoleIds(user.getRoles()), user.getUserAccess().getUserNickname());
 				response.addCookie(CookieUtils.makeUserCookie(cookieBean.toString(), remember));
 				result = new Result(BbsConstant.OK, null, BbsConstant.AUTH_HOME);
-				if(!StringUtils.isNotBlank(user.getUserAccess().getUserLastestLoginTime()) || userService.isTodayFirstLogin(user.getUserAccess().getUserLastestLoginTime())) {
-					UserValue userValue = UserValueUtils.login(userService.getUserValue(user.getUserAccess().getUserId()));
-					userService.updateUserValue(userValue);
-					isTodayFirst = true;
-				}
+				this.loginAward(user.getUserAccess().getUserLastestLoginTime(), userValue);
 				user.getUserAccess().setUserLastestLoginIp(GetRemoteIpUtil.getRemoteIp(request));
 				user.getUserAccess().setUserLastestLoginTime(DateUtils.dt14LongFormat(new Date()));
 				userService.updateUserLastestTimeAndIp(user.getUserAccess().getUserId(), 
 						user.getUserAccess().getUserLastestLoginIp(), user.getUserAccess().getUserLastestLoginTime());
-				if(isTodayFirst) {
-					if(userValue.isGoldChange()) {
-						goldHistory = new GoldHistory(cookieBean.getUser_id(), cookieBean.getNick_name(), 1, EGHistory.LOGIN.getFrom(), 
-								EGHistory.LOGIN.getDesc(), user.getUserAccess().getUserLastestLoginTime());
-					}
-					if(userValue.isExpChange()) {
-						experienceHistory = new ExperienceHistory(cookieBean.getUser_id(), cookieBean.getNick_name(), 1, 
-								EGHistory.LOGIN.getDesc(), user.getUserAccess().getUserLastestLoginTime());
-					}
-					goldExperienceService.insertGE(goldHistory, experienceHistory);
-				}
+				this.updateAwardHis(user.getUserAccess().getUserLastestLoginTime(), cookieBean);
 				JSONObject object = new JSONObject(true);
 				object.put("user", JSON.toJSONString(user));
 				redisObjectMapService.save(RedisKeyUtils.getUserInfo(user.getUserAccess().getUserId()), object, JSONObject.class);
@@ -144,5 +130,27 @@ public class LoginController {
 			logger.info("unknown " + BbsErrorCode.getDescribe(BbsErrorCode.FORM_NULL) + ", from ip " + GetRemoteIpUtil.getRemoteIp(request));
 		}
 		return result;
+	}
+	
+	private void loginAward(String lastLoginTime, UserValue userValue) {
+		if(!StringUtils.isNotBlank(lastLoginTime) || userService.isTodayFirstLogin(lastLoginTime)) {
+			userValue = UserValueUtils.login(userService.getUserValue(userValue.getUserId()));
+			userService.updateUserValue(userValue);
+			isTodayFirst = true;
+		}
+	}
+	
+	private void updateAwardHis(String loginTime, CookieBean cookieBean) {
+		if(isTodayFirst) {
+			if(userValue.isGoldChange()) {
+				goldHistory = new GoldHistory(cookieBean.getUser_id(), cookieBean.getNick_name(), 1, EGHistory.LOGIN.getFrom(), 
+						EGHistory.LOGIN.getDesc(), loginTime);
+			}
+			if(userValue.isExpChange()) {
+				experienceHistory = new ExperienceHistory(cookieBean.getUser_id(), cookieBean.getNick_name(), 1, 
+						EGHistory.LOGIN.getDesc(), loginTime);
+			}
+			goldExperienceService.insertGE(goldHistory, experienceHistory);
+		}
 	}
 }

@@ -62,30 +62,32 @@ public class BoardServiceImpl implements BoardService {
 		return this.getBoardByBoardId(object, boardId);
 	}
 
-	public JSONObject saveOrUpdateBoardInfo(int boardId, BoardSign sign) {
-		JSONObject object = redisObjectMapService.get(RedisKeyUtils.getBoardInfoByBoardId(boardId), JSONObject.class);
-		BoardInfo boardInfo = new BoardInfo();
-		if(object == null) {
-			boardInfo.setBoardId(boardId);
-			boardInfo.setBoardClickCount(1);
-			boardInfo.setBoardReplyCount(0);
-			boardInfo.setBoardFavoriteCount(0);
-			boardInfo.setBoardTopicCount(0);
-		} else {
-			boardInfo = JSON.toJavaObject(object, BoardInfo.class);
-			if(sign.getCode() == 0) {
-				boardInfo.setBoardTopicCount(boardInfo.getBoardTopicCount() + 1);
-			} else if(sign.getCode() == 1) {
-				boardInfo.setBoardReplyCount(boardInfo.getBoardReplyCount() + 1);
-			} else if(sign.getCode() == 2) {
-				boardInfo.setBoardFavoriteCount(boardInfo.getBoardFavoriteCount() + 1);
-			} else if(sign.getCode() == 3) {
-				boardInfo.setBoardClickCount(boardInfo.getBoardClickCount() + 1);
+	public JSONObject saveOrUpdateBoardInfo(int boardId, BoardSign sign, int favorite) {
+		synchronized (this) {
+			JSONObject object = redisObjectMapService.get(RedisKeyUtils.getBoardInfoByBoardId(boardId), JSONObject.class);
+			BoardInfo boardInfo = new BoardInfo();
+			if(object == null) {
+				boardInfo.setBoardId(boardId);
+				boardInfo.setBoardClickCount(1);
+				boardInfo.setBoardReplyCount(0);
+				boardInfo.setBoardFavoriteCount(0);
+				boardInfo.setBoardTopicCount(0);
+			} else {
+				boardInfo = JSON.toJavaObject(object, BoardInfo.class);
+				if(sign.getCode() == 0) {
+					boardInfo.setBoardTopicCount(boardInfo.getBoardTopicCount() + 1);
+				} else if(sign.getCode() == 1) {
+					boardInfo.setBoardReplyCount(boardInfo.getBoardReplyCount() + 1);
+				} else if(sign.getCode() == 2) {
+					boardInfo.setBoardFavoriteCount(boardInfo.getBoardFavoriteCount() + favorite);
+				} else if(sign.getCode() == 3) {
+					boardInfo.setBoardClickCount(boardInfo.getBoardClickCount() + 1);
+				}
 			}
+			object = JSONObject.parseObject(JSON.toJSONString(boardInfo));
+			redisObjectMapService.save(RedisKeyUtils.getBoardInfoByBoardId(boardId), object, JSONObject.class);
+			return object;
 		}
-		object = JSONObject.parseObject(JSON.toJSONString(boardInfo));
-		redisObjectMapService.save(RedisKeyUtils.getBoardInfoByBoardId(boardId), object, JSONObject.class);
-		return object;
 	}
 	
 	@Override
@@ -94,7 +96,7 @@ public class BoardServiceImpl implements BoardService {
 		BoardInfo boardInfo = null;
 		try {
 			lock.lock();
-			JSONObject object = this.saveOrUpdateBoardInfo(boardId, BoardSign.CLICK);
+			JSONObject object = this.saveOrUpdateBoardInfo(boardId, BoardSign.CLICK, 0);
 			boardInfo = JSON.toJavaObject(object, BoardInfo.class);
 		} catch (Exception e) {
 			logger.error("insertBoardInfo fail", e.getMessage());
