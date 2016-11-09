@@ -40,4 +40,6 @@ public interface UserDao {
 
 	public int resetPassword(Map<String, Object> map);
 
+	public String getUserImage(long imgUserId);
+
 }

@@ -46,14 +46,11 @@ public class SettingController extends BaseUserController{
 	@Resource
 	private RedisObjectMapService redisObjectMapService;
 	
-	@RequestMapping("/{uid}/setting/profile")
-	public String profile(@PathVariable("uid")String uid, 
-			@RequestParam(required = false)String type, Model model, 
+	@RequestMapping("/setting/profile")
+	public String profile(@RequestParam(required = false)String type, Model model, 
 			HttpServletRequest request) {
-		if(!this.check(uid, request)) {
-			return "redirect:/home/" + userService.getUserIdFromCookie(request) + "/setting/profile";
-		}
-		User user = userService.getUserByIdFromRedis(uid);
+		CookieBean bean = userService.getCookieBeanFromCookie(request);
+		User user = userService.getUserByIdFromRedis(Long.toString(bean.getUser_id()));
 		if(StringUtils.isEmpty(type) || "info".equals(type)) {
 			List<SwfArea> provinces = generalService.getAllProvinces();;
 			List<SwfArea> citys = null;
@@ -77,17 +74,17 @@ public class SettingController extends BaseUserController{
 		} else {
 			return "redirect:/index";
 		}
-		return "home/profile";
+		return "home/setting-profile";
 	}
 
-	@RequestMapping("/{uid}/setting/credit")
+	@RequestMapping("/setting/credit")
 	public String credit() {
-		return "home/credit";
+		return "home/setting-credit";
 	}
 	
-	@RequestMapping("/{uid}/setting/usergroup")
+	@RequestMapping("/setting/usergroup")
 	public String userGroup() {
-		return "home/usergroup";
+		return "home/setting-usergroup";
 	}
 	
 	@ResponseBody
@@ -95,15 +92,6 @@ public class SettingController extends BaseUserController{
 	public List<SwfArea> getCitys(@PathVariable("pid")String pid) {
 		List<SwfArea> citys = generalService.getCitys(pid);
 		return citys;
-	}
-	
-	
-	private boolean check(String uid, HttpServletRequest request) {
-		long userId = userService.getUserIdFromCookie(request);
-		if(NumberUtils.getAllNumber(uid) == userId) {
-			return true;
-		}
-		return false;
 	}
 	
 }

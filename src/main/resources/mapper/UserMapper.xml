@@ -190,5 +190,9 @@
 	<update id="resetPassword" flushCache="false">
 		update user_access set user_password = #{password} where ${type} = #{value}
 	</update>
+	
+	<select id="getUserImage" resultType="String">
+		select user_head_img from user_info where user_id = #{imgUserId}
+	</select>
 
 </mapper>

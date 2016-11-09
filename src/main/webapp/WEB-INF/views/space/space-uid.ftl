@@ -2,7 +2,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<#include "../common/import.ftl"/>
 	<title>${userinfo.userAccess.userNickname}的个人中心</title>
 	<link href="${path}/resources/css/space.css" type="text/css" rel="stylesheet">
@@ -36,7 +35,7 @@
 				<li class="cm"><a href="${path}">版主后台</a></li>
 			</#if>
 			<#if islogin == 1 && user.userAccess.userId == userinfo.userAccess.userId>
-				<li class="cm"><a href="${path}/home/${user.userAccess.userId}/setting/profile">修改资料</a></li>
+				<li class="cm"><a href="${path}/home/setting/profile">修改资料</a></li>
 			</#if>
 			<#if user??>
 				<#if user.userAccess.userId != userinfo.userAccess.userId>
@@ -90,7 +89,7 @@
 				<p>
 					<span>用户组：
 						<#list userinfo.roles as role>
-							<a style="color:${role.roleColor}" href="${path}/home/${userinfo.userAccess.userId}/setting/usergroup">${role.roleName}</a>.&nbsp;&nbsp;
+							<a style="color:${role.roleColor}" href="${path}/home/setting/usergroup">${role.roleName}</a>.&nbsp;&nbsp;
 						</#list>
 					</span>
 				</p>
@@ -101,6 +100,7 @@
 				</#if>
 				<p>
 					<span>注册时间：${userinfo.userAccess.userCreateTime}</span>
+					<span>最近登录时间：${userinfo.userAccess.userLastestLoginIp!}</span>
 					<span>最近登录时间：${userinfo.userAccess.userLastestLoginTime!}</span>
 				</p>
 			</div>

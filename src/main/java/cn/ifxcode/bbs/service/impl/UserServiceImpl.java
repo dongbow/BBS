@@ -196,7 +196,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Transactional
-	public synchronized Integer insertUser(String userName, String password, String email, 
+	public Integer insertUser(String userName, String password, String email, 
 			 int isAdmin, int boardManager, String roleIds, HttpServletRequest request) {
 		Lock lock = new ReentrantLock();
 		int result = 0;
@@ -539,6 +539,41 @@ public class UserServiceImpl implements UserService {
 			}
 		}
 		return BbsConstant.ERROR;
+	}
+
+	@Override
+	public List<UserFriends> getAllFriendsRequest(long user_id, Page page) {
+		Map<String, Object> map = Maps.newHashMap();
+		map.put("userId", user_id);
+		map.put("page", page);
+		List<UserFriends> friends = friendsDao.getAllFriendsRequest(map);
+		for (UserFriends f : friends) {
+			f.setImage(userDao.getUserImage(f.getSendUserId()));
+			f.setSendTime(DateUtils.dt14LongFormat(DateUtils.dt14FromStr(f.getSendTime())));
+		}
+		return friends;
+	}
+
+	@Override
+	public List<UserFriends> getFriendsList(long user_id, Page page) {
+		Map<String, Object> map = Maps.newHashMap();
+		map.put("userId", user_id);
+		map.put("page", page);
+		List<UserFriends> friends = friendsDao.getFriendsList(map);
+		for (UserFriends f : friends) {
+			long imgUserId = f.getRecUserId() == user_id ? f.getSendUserId() : f.getRecUserId();
+			f.setImage(userDao.getUserImage(imgUserId));
+		}
+		return friends;
+	}
+
+	@Override
+	public List<UserFavorite> getAllFavorites(long user_id, Page page, int type) {
+		Map<String, Object> map = Maps.newHashMap();
+		map.put("userId", user_id);
+		map.put("page", page);
+		map.put("type", type);
+		return favoriteDao.getAllFavorites(map);
 	}
 
 }

@@ -63,7 +63,7 @@ $(function(){
 	        </div>
 	        <ul>
 	            <li><a target="_blank" href="${path}/space/uid/${user.userAccess.userId}/topic">${userValue.userTopicCount}</a><p>主题</p></li>
-	            <li class="border"><a target="_blank" href="${path}/home/${user.userAccess.userId}/setting/credit">${userValue.userGold}</a><p>金币</p></li>
+	            <li class="border"><a target="_blank" href="${path}/home/setting/credit">${userValue.userGold}</a><p>金币</p></li>
 	            <li class="border"><a target="_blank" href="${path}/space/uid/${user.userAccess.userId}/reply">${userValue.userReplyCount}</a><p>回复</p></li>
 	        </ul>
 	        <ul class="accountInfo">
@@ -73,12 +73,12 @@ $(function(){
 	        <div id="bbs_tip_menu">
 	            <ul>
 	                <li>
-	                	<a target="_blank" href="${path}/home/${user.userAccess.userId}/message">消息<span>0</span></a>
-	                	<a target="_blank" href="${path}/home/${user.userAccess.userId}/friends">好友</a>
+	                	<a target="_blank" href="${path}/home/message">消息<span>0</span></a>
+	                	<a target="_blank" href="${path}/home/friends/list">好友</a>
 	                </li>
 	                <li>
-	                	<a target="_blank" href="${path}/home/${user.userAccess.userId}/setting/profile">设置</a>
-	                    <a target="_blank" href="${path}/home/${user.userAccess.userId}/favorite/topic">收藏</a>
+	                	<a target="_blank" href="${path}/home/setting/profile">设置</a>
+	                    <a target="_blank" href="${path}/home/favorite/topic">收藏</a>
 	                </li>
 	            </ul>
 	        </div>

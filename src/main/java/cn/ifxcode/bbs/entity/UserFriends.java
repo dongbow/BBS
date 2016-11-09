@@ -15,6 +15,7 @@ public class UserFriends implements Serializable {
 	private String sendTime;
 	private String updateTime;
 	private String friendIp;
+	private String image;
 
 	public long getFriendId() {
 		return friendId;
@@ -86,6 +87,14 @@ public class UserFriends implements Serializable {
 
 	public void setFriendIp(String friendIp) {
 		this.friendIp = friendIp;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 }

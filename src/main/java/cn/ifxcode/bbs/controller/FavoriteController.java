@@ -1,26 +1,36 @@
 package cn.ifxcode.bbs.controller;
 
+import java.util.Collections;
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.ifxcode.bbs.bean.CookieBean;
+import cn.ifxcode.bbs.bean.Page;
 import cn.ifxcode.bbs.bean.Result;
 import cn.ifxcode.bbs.constant.BbsConstant;
 import cn.ifxcode.bbs.constant.BbsErrorCode;
+import cn.ifxcode.bbs.entity.UserFavorite;
 import cn.ifxcode.bbs.service.UserService;
 import cn.ifxcode.bbs.utils.NumberUtils;
+import cn.ifxcode.bbs.utils.ParamsBuildUtils;
 
 @Controller
 @RequestMapping("/home")
 public class FavoriteController {
 
+	private final int PAGE_SIZE_DEFAULT = 15;
+	
 	@Resource
 	private UserService userService;
 	
@@ -66,4 +76,29 @@ public class FavoriteController {
 		return result;
 	}
 	
+	@RequestMapping("/favorite/{type}")
+	public String getFavoriteList(@RequestParam(value = "page", required = false, defaultValue = "1")int pageNo, 
+			@PathVariable("type")String type, HttpServletRequest request, Model model) {
+		if(!validType(type)) {
+			return "redirect:/index";
+		}
+		CookieBean bean = userService.getCookieBeanFromCookie(request);
+		Page page = Page.newBuilder(pageNo, PAGE_SIZE_DEFAULT, ParamsBuildUtils.createUrl(request));
+		List<UserFavorite> favorites = Collections.emptyList();
+		if(type.equals("topic")) {
+			favorites = userService.getAllFavorites(bean.getUser_id(), page, 1);
+		} else {
+			favorites = userService.getAllFavorites(bean.getUser_id(), page, 2);
+		}
+		model.addAttribute("page", page);
+		model.addAttribute("favorites", favorites);
+		return "home/favorite";
+	}
+
+	private boolean validType(String type) {
+		if(type.equals("topic") || type.equals("board")) {
+			return true;
+		}
+		return false;
+	}
 }

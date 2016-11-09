@@ -8,7 +8,9 @@ import cn.ifxcode.bbs.bean.CookieBean;
 import cn.ifxcode.bbs.bean.Page;
 import cn.ifxcode.bbs.entity.PastHistory;
 import cn.ifxcode.bbs.entity.User;
+import cn.ifxcode.bbs.entity.UserFavorite;
 import cn.ifxcode.bbs.entity.UserForget;
+import cn.ifxcode.bbs.entity.UserFriends;
 import cn.ifxcode.bbs.entity.UserValue;
 
 public interface UserService {
@@ -60,5 +62,11 @@ public interface UserService {
 	public int addFriend(long recUserId, String recName, HttpServletRequest request);
 
 	public int dealFriendStatus(String status, String... friendId);
+
+	public List<UserFriends> getAllFriendsRequest(long user_id, Page page);
+
+	public List<UserFriends> getFriendsList(long user_id, Page page);
+
+	public List<UserFavorite> getAllFavorites(long user_id, Page page, int type);
 	
 }

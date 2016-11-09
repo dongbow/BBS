@@ -13,7 +13,7 @@
 		<div id="local" class="c1">
 			<div class="z">
 				<span>当前位置：</span><a class="line" href="${path}">论坛首页</a> <em>></em>
-				<a class="line bltd" href="${path}/home/${user.userAccess.userId}/setting/profile">设置</a> <em>></em> 
+				<a class="line bltd" href="${path}/home/setting/profile">设置</a> <em>></em> 
 				<span class="ltd">用户组</span>
 			</div>
 		</div>
@@ -23,9 +23,9 @@
 					<h2>设置</h2>
 				</div>
 				<ul id="homeitems">
-					<li class="hp"><a href="${path}/home/${user.userAccess.userId}/setting/profile">个人资料</a></li>
-					<li class="hm"><a href="${path}/home/${user.userAccess.userId}/setting/credit">金币</a></li>
-					<li class="hg hover"><a href="${path}/home/${user.userAccess.userId}/setting/usergroup">用户组</a></li>
+					<li class="hp"><a href="${path}/home/setting/profile">个人资料</a></li>
+					<li class="hm"><a href="${path}/home/setting/credit">金币</a></li>
+					<li class="hg hover"><a href="${path}/home/setting/usergroup">用户组</a></li>
 				</ul>
 			</div>
 			<div id="rhomecont">

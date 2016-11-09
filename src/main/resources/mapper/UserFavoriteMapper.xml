@@ -21,4 +21,8 @@
            	#{favIds}   
    		</foreach>
 	</delete>
+	
+	<select id="getAllFavorites" resultType="UserFavorite">
+		select * from user_favorite where user_id = #{userId} and fav_sign = #{type} order by create_time desc
+	</select>
 </mapper>

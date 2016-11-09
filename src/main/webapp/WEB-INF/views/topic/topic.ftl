@@ -44,7 +44,7 @@
 		            <#assign m=0/>
 		            <#list ui.roles as role>
 		            	<#if m gt 0><#break></#if>
-		            	<a href="${path}/home/${ui.userAccess.userId}/setting/usergroup"  target="_blank" class="ugp"><span style="color:${role.roleColor}">${role.roleName}</span></a>
+		            	<a href="${path}/home/setting/usergroup"  target="_blank" class="ugp"><span style="color:${role.roleColor}">${role.roleName}</span></a>
 		            	<#assign m=m+1/>
 		            </#list>
 		            <div class="ulevel" style="display:block;">
@@ -171,7 +171,7 @@
 			            <#assign m=0/>
 			            <#list reply.user.roles as role>
 			            	<#if m gt 0><#break></#if>
-			            	<a href="${path}/home/${reply.user.userAccess.userId}/setting/usergroup"  target="_blank" class="ugp"><span style="color:${role.roleColor}">${role.roleName}</span></a>
+			            	<a href="${path}/home/setting/usergroup"  target="_blank" class="ugp"><span style="color:${role.roleColor}">${role.roleName}</span></a>
 			            	<#assign m=m+1/>
 			            </#list>
 			            <div class="ulevel" style="display:block;">

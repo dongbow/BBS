@@ -22,4 +22,13 @@
            	#{friendIds}   
    		</foreach>
 	</update>
+	
+	<select id="getAllFriendsRequest" resultType="UserFriends">
+		select * from user_friends where rec_user_id = #{userId} and friend_status in (1, 2, 3) order by send_time desc
+	</select>
+	
+	<select id="getFriendsList" resultType="UserFriends">
+		select * from user_friends where status = 2 and ((send_user_id = #{userId} or rec_user_id = #{userId})) 
+	</select>
+	
 </mapper>
