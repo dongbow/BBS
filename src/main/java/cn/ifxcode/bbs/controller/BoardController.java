@@ -27,7 +27,7 @@ import cn.ifxcode.bbs.utils.RedisKeyUtils;
 import com.alibaba.fastjson.JSONObject;
 
 @Controller
-public class BoardController {
+public class BoardController extends BaseUserController {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	

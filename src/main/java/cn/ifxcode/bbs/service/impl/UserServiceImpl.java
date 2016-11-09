@@ -421,7 +421,11 @@ public class UserServiceImpl implements UserService {
 				map.put("userId", userId);
 				map.put("needId1", needId1);
 				map.put("needId2", needId2);
-				map.put("sign", sign);
+				if("board".equals(sign)) {
+					map.put("sign", Favorite.BOARD.getCode());
+				} else {
+					map.put("sign", Favorite.TOPIC.getCode());
+				}
 				int result = favoriteDao.vaildFavorite(map);
 				if(result == 0) {
 					UserFavorite favorite = new UserFavorite();
@@ -436,7 +440,7 @@ public class UserServiceImpl implements UserService {
 					favorite.setFavName(name);
 					favorite.setCreateTime(DateUtils.dt14LongFormat(new Date()));
 					favorite.setFavIp(GetRemoteIpUtil.getRemoteIp(request));
-					if(favoriteDao.insert(favorite) > BbsConstant.OK) {
+					if(favoriteDao.insert(favorite) == BbsConstant.OK) {
 						if(favorite.getFavSign() == Favorite.BOARD.getCode()) {
 							boardService.saveOrUpdateBoardInfo((int) favorite.getNeedId2(), BoardSign.FAVORITE, 1);
 						} else {
@@ -494,7 +498,7 @@ public class UserServiceImpl implements UserService {
 					friends.setRecUserName(recName);
 					friends.setFriendStatus(BbsConstant.FRIEND_STATUS_DEFAULT);
 					friends.setFriendIp(GetRemoteIpUtil.getRemoteIp(request));
-					if(friendsDao.insert(friends) > BbsConstant.OK) {
+					if(friendsDao.insert(friends) == BbsConstant.OK) {
 						return BbsConstant.OK;
 					} else {
 						return BbsConstant.ERROR;

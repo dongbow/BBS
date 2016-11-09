@@ -40,11 +40,11 @@
 			<#if user??>
 				<#if user.userAccess.userId != userinfo.userAccess.userId>
 					<li class="cm"><a href="">发私信</a></li>
-					<li class="cm"><a href="">加好友</a></li>
+					<li class="cm"><a href="javascript:;" onclick="friends(${userinfo.userAccess.userId}, '${userinfo.userAccess.userNickname}')">加好友</a></li>
 				</#if>
 			<#else>
 				<li class="cm"><a href="">发私信</a></li>
-				<li class="cm"><a href="">加好友</a></li>
+				<li class="cm"><a href="javascript:;" onclick="friends(${userinfo.userAccess.userId}, '${userinfo.userAccess.userNickname}')">加好友</a></li>
 			</#if>
 			
 		</ul>

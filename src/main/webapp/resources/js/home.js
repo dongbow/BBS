@@ -20,6 +20,16 @@ var Setting = {
 	}
 };
 
+var Friends = {
+	init : function(type) {
+		$('#homeleftmenu').css('height', $('#rhomecont').height());
+		if(type == 'add') {
+			$('#rhomecont ul li').removeClass('csth');
+			$('.cshead').addClass('csth');
+		}
+	}
+};
+
 $(function() {
 
 	$("#nmail").changeTips({

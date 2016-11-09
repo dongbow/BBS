@@ -48,5 +48,10 @@
 	</div>
 	<#include "../common/footer.ftl"/>
 </body>
+<script type="text/javascript">
+	$(document).ready(function() {
+		Friends.init('${type}');
+	});
+</script>
 <script type="text/javascript" src="${path}/resources/js/home.js" ></script>
 </html>

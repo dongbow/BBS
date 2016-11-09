@@ -7,7 +7,7 @@
 	<cache type="cn.ifxcode.bbs.dao.cache.LoggingRedisCache"/>
 
 	<select id="validFriend" resultType="Integer" useCache="false">
-		select count(1) from user_friends where status = 2 and ((send_user_id = #{sendUserId} and rec_user_id = #{recUserId}) or (send_user_id = #{recUserId} and rec_user_id = #{sendUserId})) 
+		select count(1) from user_friends where friend_status = 2 and ((send_user_id = #{sendUserId} and rec_user_id = #{recUserId}) or (send_user_id = #{recUserId} and rec_user_id = #{sendUserId})) 
 	</select>
 
 	<insert id="insert" keyProperty="friendId" parameterType="UserFriends">
@@ -16,7 +16,7 @@
 	</insert>
 	
 	<update id="dealFriendStatus">
-		update user_friends set status = #{status}, update_time = #{update} where status = #{isStatus}
+		update user_friends set friend_status = #{status}, update_time = #{update} where friend_status = #{isStatus}
 		and friend_id in 
 		<foreach collection="array" index="index" item="friendIds" open="(" separator="," close=")">  
            	#{friendIds}   
@@ -28,7 +28,7 @@
 	</select>
 	
 	<select id="getFriendsList" resultType="UserFriends">
-		select * from user_friends where status = 2 and ((send_user_id = #{userId} or rec_user_id = #{userId})) 
+		select * from user_friends where friend_status = 2 and ((send_user_id = #{userId} or rec_user_id = #{userId})) 
 	</select>
 	
 </mapper>

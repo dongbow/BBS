@@ -156,7 +156,7 @@
 	
 	<select id="getUserById" resultMap="BaseUser">
 		select ua.user_id, ua.user_name, ua.user_nickname, ua.user_email, ua.user_is_online, ua.user_is_delete, ua.user_is_locked, 
-			ua.user_is_speak, ua.user_lastest_login_time, ua.user_create_time, ua.user_is_admin, 
+			ua.user_is_speak, ua.user_reg_ip, ua.user_lastest_login_ip, ua.user_lastest_login_time, ua.user_create_time, ua.user_is_admin, 
 			ua.user_is_board_manager, ui.*, up.*, r.role_id, r.role_name, r.role_color
 		from user_access as ua, user_info as ui, user_privacy as up, role as r, user_role as ur 
 		where ua.user_id = up.user_id 
@@ -175,7 +175,7 @@
 	
 	<select id="getUserByUserNickname" resultMap="BaseUser">
 		select ua.user_id, ua.user_name, ua.user_nickname, ua.user_email, ua.user_is_online, 
-			ua.user_is_speak, ua.user_lastest_login_time, ua.user_create_time, ua.user_is_admin, 
+			ua.user_is_speak, ua.user_reg_ip, ua.user_lastest_login_ip, ua.user_lastest_login_time, ua.user_create_time, ua.user_is_admin, 
 			ua.user_is_board_manager, ui.*, up.*, r.role_id, r.role_name, r.role_color
 		from user_access as ua, user_info as ui, user_privacy as up, role as r, user_role as ur 
 		where ua.user_id = up.user_id 

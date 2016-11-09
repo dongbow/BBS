@@ -23,8 +23,8 @@
 					<h2>收藏</h2>
 				</div>
 				<ul id="homeitems">
-					<li class="hp <#if local == 'topic'>hover</#if>"><a href="${path}/home/favorite/topic">帖子收藏</a></li>
-					<li class="hm <#if local == 'board'>hover</#if>"><a href="${path}/home/friends/request">版块收藏</a></li>
+					<li class="hp <#if type == 'topic'>hover</#if>"><a href="${path}/home/favorite/topic">帖子收藏</a></li>
+					<li class="hm <#if type == 'board'>hover</#if>"><a href="${path}/home/favorite/board">版块收藏</a></li>
 				</ul>
 			</div>
 			<div id="rhomecont">

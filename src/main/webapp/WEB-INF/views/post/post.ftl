@@ -27,7 +27,7 @@
 	        <form action="${path}/post/new/topic/do" method="post">
 		      	<div id="topic_title">
 		      		<select id="s1" name="cid">
-		      			<option>选择分类</option>
+		      			<option value="-1">选择分类</option>
 		      			<#list classifies as class>
 			      			<option value="${class.classId}">${class.className}</option>
 		      			</#list>

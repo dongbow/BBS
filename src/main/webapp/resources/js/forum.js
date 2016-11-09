@@ -18,19 +18,6 @@ $(function(){
 		$('#demo1').slideBox();
 	});
 
-	filterchange();
-	
-	function filterchange(){
-		var _top=$('#scsh').offset().top;
-		var _left=$('#scsh').offset().left;
-		var top=$('#sosh').offset().top;
-		var left=$('#sosh').offset().left;
-		$('.scsh').css('left',_left+'px');
-		$('.scsh').css('top',_top+30+'px');
-		$('.sosh').css('left',left+'px');
-		$('.sosh').css('top',top+30+'px');
-	}
-	
 	$(window).resize(function(){
 		filterchange();
 	});
@@ -74,5 +61,20 @@ $(function(){
 		$('.sosh').hide();	
 		$('#sosh span').html('▼');
 	});
+	
+	filterchange();
 });
+
+function filterchange(){
+	if($('#scsh').length > 0) {
+		var _top=$('#scsh').offset().top;
+		var _left=$('#scsh').offset().left;
+		var top=$('#sosh').offset().top;
+		var left=$('#sosh').offset().left;
+		$('.scsh').css('left',_left+'px');
+		$('.scsh').css('top',_top+30+'px');
+		$('.sosh').css('left',left+'px');
+		$('.sosh').css('top',top+30+'px');
+	}
+}
 

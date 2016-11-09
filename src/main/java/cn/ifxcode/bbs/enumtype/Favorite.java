@@ -2,7 +2,7 @@ package cn.ifxcode.bbs.enumtype;
 
 public enum Favorite {
 
-	TOPIC(0), BOARD(1);
+	TOPIC(1), BOARD(2);
 	
 	private int code;
 	

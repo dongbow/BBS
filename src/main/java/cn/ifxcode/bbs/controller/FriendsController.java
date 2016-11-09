@@ -27,7 +27,7 @@ import cn.ifxcode.bbs.utils.ParamsBuildUtils;
 
 @Controller
 @RequestMapping("/home")
-public class FriendsController {
+public class FriendsController extends BaseUserController {
 
 	private final int PAGE_SIZE_DEFAULT = 15;
 	
@@ -67,11 +67,11 @@ public class FriendsController {
 		List<UserFriends> friends = userService.getFriendsList(bean.getUser_id(), page);
 		model.addAttribute("page", page);
 		model.addAttribute("friends", friends);
-		return "home/friend-list";
+		return "home/friends-list";
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/friend/delete", method = RequestMethod.POST)
+	@RequestMapping(value = "/friends/delete", method = RequestMethod.POST)
 	public Result deleteFriends(@RequestParam(value = "ids[]")String ids) {
 		if(StringUtils.isNotBlank(ids)) {
 			if(BbsConstant.OK == userService.dealFriendStatus("delete", ids)) {
@@ -85,7 +85,7 @@ public class FriendsController {
 		return result;
 	}
 	
-	@RequestMapping("/friend/request")
+	@RequestMapping("/friends/request")
 	public String getFriendsRequest(@RequestParam(value = "page", required = false, defaultValue = "1")int pageNo, 
 			@RequestParam(required = false, defaultValue="request")String type, HttpServletRequest request, Model model) {
 		CookieBean bean = userService.getCookieBeanFromCookie(request);
@@ -101,7 +101,7 @@ public class FriendsController {
 		} else {
 			model.addAttribute("type", "add");
 		}
-		return "home/request";
+		return "home/friends-request";
 	}
 	
 	@ResponseBody

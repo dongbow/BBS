@@ -79,7 +79,7 @@ public class ReplyServiceImpl implements ReplyService{
 						&& generalService.UserAward(EGHistory.REPLY, uid, request) == BbsConstant.OK) {
 					CookieBean cookieBean = userService.getCookieBeanFromCookie(request);
 					topicService.saveOrUpdateTopicData(topicId, TopicSign.REPLY, null, cookieBean.getNick_name(), reply.getReplyCreateTime(), uid, null, null);
-					boardService.saveOrUpdateBoardInfo((int) boardId, BoardSign.REPLY);
+					boardService.saveOrUpdateBoardInfo((int) boardId, BoardSign.REPLY, 0);
 					return reply.getReplyId();
 				}
 			} catch (Exception e) {

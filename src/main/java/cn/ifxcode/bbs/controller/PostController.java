@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import ltang.redis.service.RedisObjectMapService;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -94,6 +95,9 @@ public class PostController extends BaseUserController {
 			@RequestParam(required = false, defaultValue = "0")int isglobaltop,
 			@RequestParam(required = false, defaultValue = "0")int ishome, 
 			HttpServletRequest request) {
+		if(cid == -1 || StringUtils.isEmpty(ttitle) || StringUtils.isEmpty(tcontent)) {
+			return "redirect:/tip?tip=post-fail";
+		}
 		long topicId = topicService.insertTopic(cid, ttitle, tcontent, uid, bid, gid, 
 				isreply, iselite, istop, isglobaltop, ishome, request);
 		if(topicId > BbsConstant.OK) {

@@ -9,6 +9,12 @@ var Url = {
 	},
 	login : function() {
 		return root + "/tip/nologin";
+	},
+	favorite: function() {
+		return root + "/home/favorite/add";
+	},
+	friends: function() {
+		return root + "/home/friends/add";
 	}
 };
 
@@ -75,4 +81,45 @@ function signSuc(number) {
 	$('#sign_num').html('<p>连续签到天数</p><label id="sign_text" class="sign_text">' + number + '天</label>');
 	$('#signin').css('background','#3baa62');
 	$('#sign_text').html('已签到');
+}
+
+function favorite(id1, id2, name, sign) {
+	$.post(Url.favorite(), {
+		'id1': id1,
+		'id2': id2,
+		'name': name,
+		'sign':sign
+	}, function(result) {
+		if(result.rc.rc == 9001){
+			loginDialog();
+			return false;
+		} else if(result.rc == 0){
+			alert(result.msg);
+		} else if(result.rc == 3005) {
+			alert(result.msg);
+		} else {
+			if($('.bcf').length > 0) {
+				$('.bcf').text(parseInt($('.bcf').html()) + 1);
+			}
+			alert(result.msg);
+		}
+	});
+}
+
+function friends(id, name) {
+	$.post(Url.friends(), {
+		'recUid': id,
+		'recName': name
+	}, function(result) {
+		if(result.rc.rc == 9001){
+			loginDialog();
+			return false;
+		} else if(result.rc == 0){
+			alert(result.msg);
+		} else if(result.rc == 3006) {
+			alert(result.msg);
+		} else {
+			alert(result.msg);
+		}
+	});
 }

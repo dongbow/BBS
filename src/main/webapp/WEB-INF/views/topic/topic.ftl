@@ -65,8 +65,15 @@
 		                    <p>金币</p>
 		                </li>
 		            </ul>
-	            	<a href="javascript:;" class="adf">加好友</a>
-	            	<a href="javascript:;" class="spm">发私信</a>
+		            <#if user??>
+		            	<#if user.userAccess.userId != ui.userAccess.userId>
+		            		<a href="javascript:;" class="adf" onclick="friends(${ui.userAccess.userId}, '${ui.userAccess.userNickname}')">加好友</a>
+	            			<a href="javascript:;" class="spm">发私信</a>
+		            	</#if>
+		            <#else>
+		            	<a href="javascript:;" class="adf" onclick="friends(${ui.userAccess.userId}, '${ui.userAccess.userNickname}')">加好友</a>
+	            		<a href="javascript:;" class="spm">发私信</a>
+		            </#if>
 	        	</div>
 	        	<div class="tright">
 		            <div class="ttitle">
@@ -142,7 +149,7 @@
 		                <#if topic.topicInfo.topicIsReply == 0>
 		                	<a href="javascript:;" id="" onclick="window.scrollTo('0',document.body.scrollHeight-600)">回复</a>
 		                </#if>
-		                <a href="javascript:;" id="">收藏</a>
+		                <a href="javascript:;" onclick="favorite(${pboard.boardId}, ${topic.topicId}, '${topic.topicTitle}', 'topic');">收藏</a>
 		                <#if topic.topicInfo.topicIsReply == 0>
 		                	<a href="javascript:;" id="">举报</a>
 		                </#if>
@@ -192,8 +199,15 @@
 			                    <p>金币</p>
 			                </li>
 			            </ul>
-			            <a href="javascript:;" class="adf">加好友</a>
-			            <a href="javascript:;" class="spm">发私信</a>
+			            <#if user??>
+			            	<#if user.userAccess.userId != reply.user.userAccess.userId>
+			            		<a href="javascript:;" class="adf" onclick="friends(${reply.user.userAccess.userId}, '${reply.user.userAccess.userNickname}')">加好友</a>
+		            			<a href="javascript:;" class="spm">发私信</a>
+			            	</#if>
+			            <#else>
+			            	<a href="javascript:;" class="adf" onclick="friends(${reply.user.userAccess.userId}, '${reply.user.userAccess.userNickname}')">加好友</a>
+		            		<a href="javascript:;" class="spm">发私信</a>
+			            </#if>
 			        </div>
 			        <div class="tright">
 			            <div class="ttitle">

@@ -40,11 +40,11 @@
 			<#if user??>
 				<#if user.userAccess.userId != userinfo.userAccess.userId>
 					<li class="cm"><a href="">发私信</a></li>
-					<li class="cm"><a href="">加好友</a></li>
+					<li class="cm"><a href="javascript:;" onclick="friends(${userinfo.userAccess.userId}, '${userinfo.userAccess.userNickname}')">加好友</a></li>
 				</#if>
 			<#else>
 				<li class="cm"><a href="">发私信</a></li>
-				<li class="cm"><a href="">加好友</a></li>
+				<li class="cm"><a href="javascript:;" onclick="friends(${userinfo.userAccess.userId}, '${userinfo.userAccess.userNickname}')">加好友</a></li>
 			</#if>
 			
 		</ul>
@@ -100,8 +100,12 @@
 				</#if>
 				<p>
 					<span>注册时间：${userinfo.userAccess.userCreateTime}</span>
-					<span>最近登录时间：${userinfo.userAccess.userLastestLoginIp!}</span>
 					<span>最近登录时间：${userinfo.userAccess.userLastestLoginTime!}</span>
+					<#if islogin == 1 && user.userAccess.userId == userinfo.userAccess.userId>
+						<br/><br/>
+						<span>注册IP：${userinfo.userAccess.userRegIp!}</span>
+						<span>最近登录IP：${userinfo.userAccess.userLastestLoginIp!}</span>
+					</#if>
 				</p>
 			</div>
 		</div>

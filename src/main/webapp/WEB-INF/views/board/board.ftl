@@ -24,7 +24,7 @@
 					<h2>${board.boardName}</h2>
 					<div style="clear:right;" class="details">
 					   <p>
-			               <a onclick="" id="a_favorite" href="">收藏 <strong>(<span>${boardInfo.boardFavoriteCount}</span>)</strong></a>
+			               <a onclick="favorite(${navigation.navId}, ${board.boardId}, '${board.boardName}', 'board');" id="a_favorite" href="javascript:;">收藏 <strong>(<span class="bcf">${boardInfo.boardFavoriteCount}</span>)</strong></a>
 			               <span class="pipe">|</span>
 			               <span style="margin-left: 0">主题：<a class="todayPosts">${boardInfo.boardTopicCount}</a></span>
 			               <span class="pipe">|</span>
