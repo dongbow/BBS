@@ -29,9 +29,12 @@ public class ClassifyServiceImpl implements ClassifyService {
 	@Override
 	public List<Classify> getClassifyByBoardId(int boardId) {
 		JSONObject object = redisObjectMapService.get(RedisKeyUtils.getClassifyByBoardId(boardId), JSONObject.class);
-		JSONArray array = JSONArray.parseArray(object.getString("classifies"));
-		List<Classify> classifies = JsonUtils.decodeJson(array, Classify.class);
-		return classifies;
+		if(object != null) {
+			JSONArray array = JSONArray.parseArray(object.getString("classifies"));
+			List<Classify> classifies = JsonUtils.decodeJson(array, Classify.class);
+			return classifies;
+		}
+		return null;
 	}
 
 	@Override

@@ -75,16 +75,18 @@ public class PostController extends BaseUserController {
 	@RequestMapping("/new/board/{bid}/topic")
 	public String goPost(@PathVariable("bid")String bid, Model model) {
 		long boardId = NumberUtils.getAllNumber(bid);
-		if(Long.toString(boardId).length() > 10) {
-			return "redirect:/tip?tip=board-notexists";
+		if(boardId != 0) {
+			List<Classify> classifies = classifyService.getClassifyByBoardId((int) boardId);
+			if(classifies != null) {
+				Navigation navigation = navigationService.getNavigation(classifies.get(0).getNavId());
+				Board board = boardService.getBoardByBoardId(classifies.get(0).getNavId(), classifies.get(0).getBoardId());
+				model.addAttribute("navigation", navigation);
+				model.addAttribute("pboard", board);
+				model.addAttribute("classifies", classifies);
+				return "post/post";
+			}
 		}
-		List<Classify> classifies = classifyService.getClassifyByBoardId((int) boardId);
-		Navigation navigation = navigationService.getNavigation(classifies.get(0).getNavId());
-		Board board = boardService.getBoardByBoardId(classifies.get(0).getNavId(), classifies.get(0).getBoardId());
-		model.addAttribute("navigation", navigation);
-		model.addAttribute("pboard", board);
-		model.addAttribute("classifies", classifies);
-		return "post/post";
+		return "redirect:/tip?tip=board-notexists";
 	}
 	
 	@RequestMapping(value = "/new/topic/do", method = RequestMethod.POST)

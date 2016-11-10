@@ -41,10 +41,13 @@ $(function(){
 		$('#ftopic_cont').remove();
 		$('#fTopic').hide();
 	});
-	
+
 	$('.tipclose').live('click', function(){
 		$('#checktip').remove();
 		$('#bbs-dialog').hide();
+		if($('#bg').length > 0) {
+			$('#bg').hide();
+		}
 	});
 });
 
@@ -94,14 +97,14 @@ function favorite(id1, id2, name, sign) {
 			loginDialog();
 			return false;
 		} else if(result.rc == 0){
-			alert(result.msg);
+			dialog(result.msg);
 		} else if(result.rc == 3005) {
-			alert(result.msg);
+			dialog(result.msg);
 		} else {
 			if($('.bcf').length > 0) {
 				$('.bcf').text(parseInt($('.bcf').html()) + 1);
 			}
-			alert(result.msg);
+			dialog(result.msg);
 		}
 	});
 }
@@ -115,11 +118,99 @@ function friends(id, name) {
 			loginDialog();
 			return false;
 		} else if(result.rc == 0){
-			alert(result.msg);
+			dialog(result.msg);
 		} else if(result.rc == 3006) {
-			alert(result.msg);
+			dialog(result.msg);
 		} else {
-			alert(result.msg);
+			dialog(result.msg);
 		}
 	});
+}
+
+function dialog(msg) {
+	var sHtml = '<div id="checktip" style="width:400px;height:150px;">';
+	sHtml +=    '    <div class="tipcont">';
+	sHtml +=    '        <div class="tiptitle">';
+	sHtml +=    '        	<a class="titlename">系统提示</a>';
+	sHtml +=    '        	<a title="关闭" class="tipclose" href="javascript:;">X</a>';
+	sHtml +=    '        </div>';
+	sHtml +=    '     	<p class="context">';
+	sHtml += msg;
+	sHtml +=    '     	</p>';
+	sHtml +=    '    </div>';
+	sHtml +=    '</div>';
+	$('#bbs-dialog').html(sHtml);
+	$('#checktip').css({
+		'top' : ($(window).height() - $('#checktip').height())/2 + 'px',
+		'left': ($(window).width() - $('#checktip').width())/2+'px'
+	});
+	$('#bbs-dialog').show();
+}
+
+function dialog_confirm(msg, funOk) {
+	var sHtml = '<div id="checktip" style="width:400px;height:150px;">';
+	sHtml +=    '    <div class="tipcont">';
+	sHtml +=    '        <div class="tiptitle">';
+	sHtml +=    '        	<a class="titlename">系统提示</a>';
+	sHtml +=    '        	<a title="关闭" class="tipclose" href="javascript:;">X</a>';
+	sHtml +=    '        </div>';
+	sHtml +=    '     	<p class="context">';
+	sHtml += msg;
+	sHtml +=    '     	</p>';
+	sHtml +=    '     	<div class="tipfooter">';
+	sHtml +=    '     		<a class="tipsure" href="javascript:;">确定</a>';
+	sHtml +=    '     		<a  class="tipclose" href="javascript:;">取消</a>';
+	sHtml +=    '     	</div>';
+	sHtml +=    '    </div>';
+	sHtml +=    '</div>';
+	$('#bbs-dialog').html(sHtml);
+	$('#checktip').css({
+		'top' : ($(window).height() - $('#checktip').height())/2 + 'px',
+		'left': ($(window).width() - $('#checktip').width())/2+'px'
+	});
+	$('.tipsure').click(function() {
+		if(typeof funOk == 'function') {
+			$('#checktip').remove();
+			$('#bbs-dialog').hide();
+			funOk();
+			return true;
+		}
+	});
+	$('.tipclose').click(function(){
+		$('#checktip').remove();
+		$('#bbs-dialog').hide();
+		return false;
+	});
+	$('#bbs-dialog').show();
+}
+
+function dialogWithBtn(msg, funOk) {
+	var sHtml = '<div id="checktip" style="width:400px;height:150px;">';
+	sHtml +=    '    <div class="tipcont">';
+	sHtml +=    '        <div class="tiptitle">';
+	sHtml +=    '        	<a class="titlename">系统提示</a>';
+	sHtml +=    '        	<a title="关闭" class="tipclose" href="javascript:;">X</a>';
+	sHtml +=    '        </div>';
+	sHtml +=    '     	<p class="context">';
+	sHtml += msg;
+	sHtml +=    '     	</p>';
+	sHtml +=    '     	<div class="tipfooter">';
+	sHtml +=    '     		<a class="tipsure" href="javascript:;">确定</a>';
+	sHtml +=    '     	</div>';
+	sHtml +=    '    </div>';
+	sHtml +=    '</div>';
+	$('#bbs-dialog').html(sHtml);
+	$('#checktip').css({
+		'top' : ($(window).height() - $('#checktip').height())/2 + 'px',
+		'left': ($(window).width() - $('#checktip').width())/2+'px'
+	});
+	$('.tipsure').click(function() {
+		if(typeof funOk == 'function') {
+			$('#checktip').remove();
+			$('#bbs-dialog').hide();
+			funOk();
+			return true;
+		}
+	});
+	$('#bbs-dialog').show();
 }

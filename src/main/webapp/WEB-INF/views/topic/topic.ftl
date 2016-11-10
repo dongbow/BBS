@@ -214,7 +214,7 @@
 			                <div class="tmenu">
 			                    <a class="createreplytime" title="创建时间">${reply.replyCreateTime}</a>
 			                    <a href="" title="倒序浏览">倒序浏览</a>
-			                    <span>
+			                    <span id="floor_${floor}">
 			                    	<#if floor == 1>
 			                    		沙发
 			                    	<#elseif floor == 2>
@@ -249,7 +249,7 @@
 			            		</#if>
 			            	</#if>
 			            	<#if reply.replyStatus == 0 && reply.replyIsCheck == 1 && reply.user.userAccess.userIsDelete == 0 && reply.user.userAccess.userIsLocked == 0>
-			                	<a class="sonreply" href="javascript:;" id="r_${reply.replyId}_t_${reply.topicId}">回复</a>
+			                	<a class="sonreply" href="javascript:;" onclick="sReply(${reply.replyId}, ${reply.topicId});" id="reply_${reply.replyId}">回复</a>
 			                	<a href="javascript:;" id="">举报</a>
 			                </#if>
 			            </div>
@@ -258,19 +258,8 @@
 			    <#assign floor = floor + 1/>
 	    	</#list>
 	    </#if>
+	    <div id="sonreplyeditor"></div>
 	    <!-- tip -->
-		<#if user??>
-			<script type="text/javascript">
-				$(function(){
-					$('.sonreply').click(function(){
-						sonreply(this);
-					});
-				});
-			</script>
-		</#if>
-		<div id="sonreplyeditor">
-			<div class="popreplycont"></div>
-		</div>
 	</div>
 	<#include "../common/page.ftl"/>
 	<@buildPage page = page/>
@@ -296,11 +285,11 @@
 	    		</script>
 	    		<textarea id="replyeditor" name="rcontext" rows="12" cols="93"></textarea>
 	    		<#if user??>
-	    			<input type="hidden" name="uid" value="${user.userAccess.userId}">
-	    			<input type="hidden" name="tid" value="${topic.topicId}">
-	    			<input type="hidden" name="bid" value="${pboard.boardId}">
-	    			<input type="hidden" name="gid" value="${navigation.navId}">
-	    			<input type="hidden" name="cid" value="${clas.classId}">
+	    			<input type="hidden" name="uid" id="uid" value="${user.userAccess.userId}">
+					<input type="hidden" name="tid" id="tid" value="${topic.topicId}">
+					<input type="hidden" name="bid" id="bid" value="${pboard.boardId}">
+					<input type="hidden" name="gid" id="gid" value="${navigation.navId}">
+					<input type="hidden" name="cid" id="cid" value="${clas.classId}">
 					<button id="replybutton">回复</button>
 				<#else>
 					<script type="text/javascript">

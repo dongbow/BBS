@@ -295,7 +295,7 @@ public class UserLoginController {
 	
 	private String decode(String backurl) {
 		try {
-			backurl = URLDecoder.decode(backurl, BbsConstant.UTF8).split("/bbs")[1];
+			backurl = URLDecoder.decode(backurl, BbsConstant.UTF8).split(BbsConstant.ROOT)[1];
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}

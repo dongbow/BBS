@@ -295,4 +295,18 @@ public class TopicServiceImpl implements TopicService{
 		return topicData;
 	}
 
+	@Override
+	public List<Topic> getLocalTopTopic(int boardId) {
+		List<Topic> topics = topicDao.getBoardTopTopic(boardId);
+		this.formatTopicData(topics);
+		return topics;
+	}
+
+	@Override
+	public List<Topic> getTopicsByBoardId(Page page, long navId, String type,
+			String filter, String orderby) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

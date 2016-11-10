@@ -24,7 +24,7 @@
 	    		<a class="fbar" href="${path}/post/new/topic/${pboard.boardId}" style="color:#19b4ea">发表帖子</a>
 	        	<a class="vote" href="${path}/post/new/vote/${pboard.boardId}">发起投票</a>
 	        </div>
-	        <form action="${path}/post/new/topic/do" method="post">
+	        <form action="${path}/post/new/topic/do" method="post" id="postForm">
 		      	<div id="topic_title">
 		      		<select id="s1" name="cid">
 		      			<option value="-1">选择分类</option>
@@ -62,7 +62,7 @@
 		        		<input name="images" id="images" multiple="multiple" accept="image/*" type="file" style="display:none">
 		        		<a class="btn file-btn" href="javascript:;">上传附件</a>
 		        		<input name="files" id="files" multiple="multiple" type="file" style="display:none">
-		        		<button onclick="">发表帖子</button>
+		        		<button onclick="validate();">发表帖子</button>
 		        	</div>
 		        	<div class="upload-desc">
 		        		<p>图片只支持jpg|jpeg|png|gif|bmp，大小5M以内</p>
@@ -72,7 +72,9 @@
 		        	<div class="file-cont" style=""></div>
 		        </div>
 		        <div id="bg"></div>
-		        <!-- tip -->
+		        <div id="bbs-dialog" style="display:none">
+					<!-- dialog -->
+				</div>
 	        </form>
 	    </div>
 	</#if>

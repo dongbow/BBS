@@ -19,4 +19,6 @@ public interface TopicDao {
 
 	public List<Topic> getTopicsByNavId(Map<String, Object> map);
 
+	public List<Topic> getBoardTopTopic(int boardId);
+
 }

@@ -1,3 +1,5 @@
+var root = '/bbs';
+
 $(function(){
   $(document).ready(function(){
 	  $('body').find('.tcontent img').attr('title','点击查看大图');
@@ -5,57 +7,50 @@ $(function(){
 
 	
   $('.tcontent img').click(function(){
-    var imgsrc = this.src;
-    window.open(imgsrc);
+	  var imgsrc = this.src;
+	  window.open(imgsrc);
   });
-  
-  //CKEDITOR.replace('sonreplyeditorcont', { toolbar: 'reply', height: '240px', width: '700px' });
   
 });
 
-function sonreply(e){
-	var father_rid = e.id.split('_')[1];
-	var tid = e.id.split('_')[3];
-	var replyauthor = $('.replylist_'+father_rid+' .authorname').text();
-	var replytime = $('.replylist_'+father_rid+' .createreplytime').text();
-	var replycontent = $('.replylist_'+father_rid+' .tcontent').text();
-	$('#sonreplyeditor .popreplycont').html(
-			'<div class="popreplytitle">'
-        		+'<a class="popreplytitlename"><p>RE:</p></a>'
-        		+'<a title="关闭" onclick="closereply();" class="popreplyclose" href="javascript:;">X</a>'
-           +'</div>'
-           +'<div class="quotes">'
-		   +'<q>'
-				+'<span><a href="">'+replyauthor+' 于 '+replytime +'发表：</a><br>'
-						+'<p>'+replycontent.substring(0,100)+'<p></span>'
-			+'</q>'
-		+'</div>'
-		+'<div class="editorcont">'
-			+'<textarea id="sonreplyeditorcont" cols="50" rows="10"></textarea>'
-		+'</div>');
-	sonreplysize();
-	ckeditor();
-	$('#sonreplyeditor').show();
-}
-
-function sonreplysize(){
-	var width = $(window).width();
-	var height = $(window).height();
-	var contwidth = $('#sonreplyeditor').width();
-	var contheight = $('#sonreplyeditor').height();
-	var endtop = ( height - contheight )/2;
-	var endleft = ( width - contwidth)/2;
-	$('#sonreplyeditor').css('top',endtop+'px');
-	$('#sonreplyeditor').css('left',endleft+'px');
-}
-
-function closereply(){
-	 $('#sonreplyeditor').hide();
-	 $('#sonreplyeditor .popreplycont').html('');
-}
-
-function ckeditor(){
-	CKEDITOR.replace('sonreplyeditorcont', { toolbar: 'reply', height: '200px', width: '778px' });
+function sReply(pid, tid) {
+	var uid = $('#uid').val();
+	var bid = $('#bid').val();
+	var gid = $('#gid').val();
+	var cid = $('#cid').val();
+	var pName = $('#reply_' + pid + ' .authorname').text();
+	var pTime = $('#reply_' + pid + ' .createreplytime').text();
+	var pCont = $('#reply_' + pid + ' .tcontent').text();
+	var pFloor = $('#reply_' + pid + ' .tmenu span').id.split('_')[1];
+	$.get(root + '/post/new/reply?pid=' + pid + '&tid=' + tid + '&floor=' + pFloor, function(result) {
+		if(result.rc != undefined && result.rc.rc == 9001){
+			loginDialog();
+			return false;
+		} else {
+			$('#sonreplyeditor').html(result);
+			CKEDITOR.replace('sonreplyeditorcont', { toolbar: 'reply', height: '240px', width: '760px', resize_enabled: false, removePlugins: 'elementspath'});
+			$('.pinfo').html(pName + '于' + pTime + '发表：');
+			$('.quotes p').html(pCont.substring(0, 100));
+			$('.uid').attr('value', uid);
+			$('.gid').attr('value', gid);
+			$('.bid').attr('value', bid);
+			$('.tid').attr('value', tid);
+			$('.cid').attr('value', cid);
+			$('.pid').attr('value', pid);
+			$('#sonFM').attr('action', root + '/board/' + bid +'/topic/' + tid + '/new/reply/do');
+			var endtop = ($(window).height() - $('#sonreplyeditor').height())/2;
+			var endleft = ($(window).width() - $('#sonreplyeditor').width())/2;
+			$('#sonreplyeditor').css({
+				'top': endtop + 'px',
+				'left': endleft + 'px'
+			});
+			$('.popreplyclose').click(function() {
+				$('#sonreplyeditor').hide();
+				$('#sonreplyeditor').html('');
+			});
+			$('#sonreplyeditor').show();
+		}
+	});
 }
 
 

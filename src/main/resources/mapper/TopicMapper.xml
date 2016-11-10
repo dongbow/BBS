@@ -96,4 +96,12 @@
 		</if>
 	</select>
 	
+	<select id="getBoardTopTopic"  resultMap="BaseTopic">
+		SELECT * FROM bbs_topic AS t LEFT JOIN bbs_topic_info AS i ON i.topic_id = t.topic_id 
+		LEFT JOIN bbs_topic_data AS d ON d.topic_id = t.topic_id
+		WHERE t.topic_status = 0 AND i.topic_is_local_top = 1 AND t.board_id = #{boardId}
+		AND (DATE_FORMAT(i.topic_is_local_top_end_time, '%Y-%m-%d') &lt;= DATE_FORMAT(NOW(), '%Y-%m-%d')
+		OR i.topic_is_local_top_end_time IS NULL);
+	</select>
+	
 </mapper>
