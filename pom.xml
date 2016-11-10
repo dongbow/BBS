@@ -239,5 +239,19 @@
 	</dependencies>
 	<build>
 		<finalName>bbs</finalName>
+		<plugins>
+			<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.1.1</version>
+				<configuration>
+					<archive>
+						<addMavenDescriptor>false</addMavenDescriptor>
+					</archive>
+					<warName>bbs</warName>
+					<warSourceDirectory>src/main/webapp</warSourceDirectory>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 </project>
