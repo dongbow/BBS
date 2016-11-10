@@ -104,4 +104,24 @@
 		OR i.topic_is_local_top_end_time IS NULL);
 	</select>
 	
+	<select id="getTopicsByBoardId" resultMap="BaseTopic">
+		SELECT * FROM bbs_topic AS t LEFT JOIN bbs_topic_info AS i ON i.topic_id = t.topic_id 
+		LEFT JOIN bbs_topic_data AS d ON d.topic_id = t.topic_id
+		WHERE t.topic_status = 0 AND t.board_id = #{boardId} AND i.topic_is_local_top = 0 
+		AND i.topic_is_global_top = 0 
+ 		<if test="filter != null">
+			<choose>
+				<when test="filter == 1">
+					and i.topic_is_cream = 1 
+				</when>
+				<otherwise>
+					and i.topic_is_hot = 1 
+				</otherwise>
+			</choose>
+		</if>
+		<if test="orderby != null">
+			order by ${orderby} desc
+		</if>
+	</select>
+	
 </mapper>

@@ -37,6 +37,7 @@ import cn.ifxcode.bbs.enumtype.BoardSign;
 import cn.ifxcode.bbs.enumtype.EGHistory;
 import cn.ifxcode.bbs.enumtype.TopicSign;
 import cn.ifxcode.bbs.service.BoardService;
+import cn.ifxcode.bbs.service.ClassifyService;
 import cn.ifxcode.bbs.service.GeneralService;
 import cn.ifxcode.bbs.service.TopicService;
 import cn.ifxcode.bbs.service.UserService;
@@ -70,6 +71,9 @@ public class TopicServiceImpl implements TopicService{
 	
 	@Resource
 	private BoardService boardService;
+	
+	@Resource
+	private ClassifyService classifyService;
 	
 	@Resource
 	private RedisObjectMapService redisObjectMapService;
@@ -149,7 +153,11 @@ public class TopicServiceImpl implements TopicService{
 					} else if(topicSign.getCode() == 1) {
 						topicData.setTopicReplyCount(topicData.getTopicReplyCount() + 1);
 					} else if(topicSign.getCode() == 2) {
-						topicData.setTopicFavoriteCount(topicData.getTopicFavoriteCount() + 1);
+						if(topicData.getTopicFavoriteCount() == null) {
+							topicData.setTopicFavoriteCount(1);
+						} else{
+							topicData.setTopicFavoriteCount(topicData.getTopicFavoriteCount() + 1);
+						}
 					}
 				}
 				if(StringUtils.isNotBlank(lastestReplyTime)) {
@@ -279,6 +287,16 @@ public class TopicServiceImpl implements TopicService{
 		}
 	}
 	
+	private void formatTopicDataForBoard(List<Topic> topics) {
+		for (Topic topic : topics) {
+			topic.setTopicContent(HtmlUtils.htmlUnescape(topic.getTopicContent()));
+			topic.setTopicCreateTime(DateUtils.dt14LongFormat(DateUtils.dt14FromStr(topic.getTopicCreateTime())));
+			topic.setTopicData(this.getTopicDateForListFromRedis(topic.getTopicId(), topic.getBoardId()));
+			topic.setUser(userService.getUserById(topic.getUserId()));
+			topic.setClassify(classifyService.getClassifyByCid(topic.getBoardId(), topic.getClassId()));
+		}
+	}
+	
 	public TopicData getTopicDateForListFromRedis(long topicId, Integer boardId) {
 		Lock lock = new ReentrantLock();
 		TopicData topicData = null;
@@ -298,15 +316,37 @@ public class TopicServiceImpl implements TopicService{
 	@Override
 	public List<Topic> getLocalTopTopic(int boardId) {
 		List<Topic> topics = topicDao.getBoardTopTopic(boardId);
-		this.formatTopicData(topics);
+		this.formatTopicDataForBoard(topics);
 		return topics;
 	}
 
 	@Override
-	public List<Topic> getTopicsByBoardId(Page page, long navId, String type,
+	public List<Topic> getTopicsByBoardId(Page page, long boardId, String type,
 			String filter, String orderby) {
-		// TODO Auto-generated method stub
-		return null;
+		// TODO type搁置（代表主题和投票）
+		int f = 0;
+		switch (filter) {
+			case "lastpost": f = 0; break;
+			case "cream": f = 1; break;
+			case "hot": f = 2; break;
+		}
+		Map<String, Object> map = Maps.newHashMap();
+		map.put("page", page);
+		map.put("boardId", boardId);
+		if(f != 0) {
+			map.put("filter", f);
+		}
+		if("dateline".equals(orderby)) {
+			map.put("orderby", "t.topicCreateTime");
+		} else {
+			orderby = "d.lastestReplyTime";
+		}
+		List<Topic> topics = topicDao.getTopicsByBoardId(map);
+		this.formatTopicDataForBoard(topics);
+		if(orderby.equals("d.lastestReplyTime")) {
+			this.sort(topics);
+		}
+		return topics;
 	}
 
 }

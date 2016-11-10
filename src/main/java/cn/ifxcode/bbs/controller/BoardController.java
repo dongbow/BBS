@@ -87,14 +87,14 @@ public class BoardController extends BaseUserController {
 		Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
 		List<Topic> gTopics = topicService.getGlobalTopTopic();
 		List<Topic> lTopics = topicService.getLocalTopTopic(board.getBoardId());
-		List<Topic> hTopics = topicService.getTopicsByBoardId(page, navId, type, filter, orderby);
+		//List<Topic> hTopics = topicService.getTopicsByBoardId(page, boardId, type, filter, orderby);
 		model.addAttribute("navigation", navigation);
 		model.addAttribute("board", board);
 		model.addAttribute("boardInfo", boardInfo);
 		model.addAttribute("classifies", classifies);
 		model.addAttribute("gtopics", gTopics);
-		model.addAttribute("lTopics", lTopics);
-		model.addAttribute("htopics", hTopics);
+		model.addAttribute("ltopics", lTopics);
+		//model.addAttribute("htopics", hTopics);
 		model.addAttribute("page", page);
 		return "board/board";
 	}

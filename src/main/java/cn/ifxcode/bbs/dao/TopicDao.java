@@ -21,4 +21,6 @@ public interface TopicDao {
 
 	public List<Topic> getBoardTopTopic(int boardId);
 
+	public List<Topic> getTopicsByBoardId(Map<String, Object> map);
+
 }

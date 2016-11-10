@@ -108,4 +108,9 @@ public class PostController extends BaseUserController {
 		return "redirect:/tip?tip=post-fail";
 	}
 
+	@RequestMapping("/new/reply")
+	public String reply() {
+		return "topic/reply";
+	} 
+	
 }

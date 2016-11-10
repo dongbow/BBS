@@ -2,6 +2,8 @@ package cn.ifxcode.bbs.entity;
 
 import java.io.Serializable;
 
+import cn.ifxcode.bbs.utils.DateUtils;
+
 public class TopicData implements Serializable, Comparable<TopicData> {
 
 	private static final long serialVersionUID = 9102324956317006368L;
@@ -99,7 +101,7 @@ public class TopicData implements Serializable, Comparable<TopicData> {
 
 	@Override
 	public int compareTo(TopicData o) {
-		return this.lastestReplyTime.compareTo(o.lastestReplyTime);
+		return DateUtils.dt14FromStr(this.lastestReplyTime).compareTo(DateUtils.dt14FromStr(o.lastestReplyTime));
 	}
 
 }

@@ -114,11 +114,11 @@ public class IndexController extends BaseUserController{
 		List<Board> boards = JsonUtils.decodeJson(array, Board.class);
 		Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
 		List<Topic> gTopics = topicService.getGlobalTopTopic();
-		List<Topic> hTopics = topicService.getTopicsByNavId(page, navId, type, filter, orderby);
+		//List<Topic> hTopics = topicService.getTopicsByNavId(page, navId, type, filter, orderby);
 		model.addAttribute("navigation", navigation);
 		model.addAttribute("boards", boards);
 		model.addAttribute("gtopics", gTopics);
-		model.addAttribute("htopics", hTopics);
+		//model.addAttribute("htopics", hTopics);
 		model.addAttribute("page", page);
 		return "navigation";
 	}

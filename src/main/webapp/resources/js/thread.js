@@ -21,14 +21,14 @@ function sReply(pid, tid) {
 	var pName = $('#reply_' + pid + ' .authorname').text();
 	var pTime = $('#reply_' + pid + ' .createreplytime').text();
 	var pCont = $('#reply_' + pid + ' .tcontent').text();
-	var pFloor = $('#reply_' + pid + ' .tmenu span').id.split('_')[1];
+	var pFloor = $('#reply_' + pid + ' .tmenu span').attr('id').split('_')[1];
 	$.get(root + '/post/new/reply?pid=' + pid + '&tid=' + tid + '&floor=' + pFloor, function(result) {
 		if(result.rc != undefined && result.rc.rc == 9001){
 			loginDialog();
 			return false;
 		} else {
 			$('#sonreplyeditor').html(result);
-			CKEDITOR.replace('sonreplyeditorcont', { toolbar: 'reply', height: '240px', width: '760px', resize_enabled: false, removePlugins: 'elementspath'});
+			CKEDITOR.replace('sonreplyeditorcont', { toolbar: 'reply', height: '200px', width: '760px', resize_enabled: false, removePlugins: 'elementspath'});
 			$('.pinfo').html(pName + '于' + pTime + '发表：');
 			$('.quotes p').html(pCont.substring(0, 100));
 			$('.uid').attr('value', uid);
