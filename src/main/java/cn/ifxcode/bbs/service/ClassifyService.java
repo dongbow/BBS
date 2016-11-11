@@ -10,4 +10,6 @@ public interface ClassifyService {
 
 	public Classify getClassifyByCid(Integer boardId, Integer classId);
 
+	public int saveOrUpdateCount(int bid, int cid);
+
 }

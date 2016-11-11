@@ -57,5 +57,17 @@ public class RedisKeyUtils {
 	public static String getSystemForget() {
 		return "bbs:system:forget";
 	}
+
+	public static String getFriendLinks() {
+		return "bbs:global:friendlinks";
+	}
+
+	public static String getClick(String[] sign) {
+		String base = "bbs:global:click";
+		for (String s : sign) {
+			base += (":" + s);
+		}
+		return base;
+	}
 	
 }

@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import cn.ifxcode.bbs.dao.BoardDao;
 import cn.ifxcode.bbs.dao.ClassifyDao;
+import cn.ifxcode.bbs.dao.FriendLinkDao;
 import cn.ifxcode.bbs.dao.GeneralDao;
 import cn.ifxcode.bbs.dao.NavigationDao;
 import cn.ifxcode.bbs.dao.QuickNavigationDao;
@@ -28,6 +29,7 @@ import cn.ifxcode.bbs.dao.SystemConfigDao;
 import cn.ifxcode.bbs.dao.UserDao;
 import cn.ifxcode.bbs.entity.Board;
 import cn.ifxcode.bbs.entity.Classify;
+import cn.ifxcode.bbs.entity.FriendLink;
 import cn.ifxcode.bbs.entity.Navigation;
 import cn.ifxcode.bbs.entity.QuickNavigation;
 import cn.ifxcode.bbs.entity.Resources;
@@ -80,6 +82,9 @@ public class InitSystemData {
 	@Resource
 	private SystemConfigDao systemConfigDao;
 	
+	@Resource
+	private FriendLinkDao friendLinkDao;
+	
 	private ScheduledExecutorService executorService = Executors.newScheduledThreadPool(10);
 	
 	@PostConstruct
@@ -95,6 +100,7 @@ public class InitSystemData {
 		data.initQuickNavigation();
 		data.initNavBoard();
 		data.initClassify();
+		data.initFriendLink();
 		long end = System.currentTimeMillis();
 		logger.info("init system time: {}", (end - start) / 1000);
 	}
@@ -240,6 +246,19 @@ public class InitSystemData {
 				JSONObject object = new JSONObject(true);
 				object.put("config", JSON.toJSONString(config));
 				redisObjectMapService.save(RedisKeyUtils.getSystemConfig(), object, JSONObject.class);
+			}
+		};
+		executorService.scheduleWithFixedDelay(runnable, 1, 10, TimeUnit.SECONDS);
+	}
+	
+	public void initFriendLink() {
+		Runnable runnable = new Runnable() {
+			public void run() {
+				List<FriendLink> links = friendLinkDao.getAllFriendLinks();
+				JSONArray array = JSONArray.parseArray(JSON.toJSONString(links));
+				JSONObject object = new JSONObject(true);
+				object.put("friendlinks", array.toJSONString());
+				redisObjectMapService.save(RedisKeyUtils.getFriendLinks(), object, JSONObject.class);
 			}
 		};
 		executorService.scheduleWithFixedDelay(runnable, 1, 10, TimeUnit.SECONDS);

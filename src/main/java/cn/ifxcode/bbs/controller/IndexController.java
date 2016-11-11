@@ -1,5 +1,6 @@
 package cn.ifxcode.bbs.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -39,6 +40,7 @@ import cn.ifxcode.bbs.service.HomeImageService;
 import cn.ifxcode.bbs.service.NavigationService;
 import cn.ifxcode.bbs.service.TopicService;
 import cn.ifxcode.bbs.service.UserService;
+import cn.ifxcode.bbs.utils.DateUtils;
 import cn.ifxcode.bbs.utils.GetRemoteIpUtil;
 import cn.ifxcode.bbs.utils.JsonUtils;
 import cn.ifxcode.bbs.utils.NumberUtils;
@@ -157,6 +159,19 @@ public class IndexController extends BaseUserController{
 		}
 		object.put("rc", result);
 		return object;
+	}
+	
+	@RequestMapping("/click/{id}")
+	public Result click(@PathVariable("id")String id) {
+		Result result = null;
+		long fid = NumberUtils.getAllNumber(id);
+		if(fid != 0) {
+			generalService.click("friendlinks", Long.toString(fid));
+			result = new Result(BbsConstant.OK, BbsConstant.RC);
+		} else {
+			result = new Result(BbsConstant.ERROR, BbsConstant.RC);
+		}
+		return result;
 	}
 	
 }

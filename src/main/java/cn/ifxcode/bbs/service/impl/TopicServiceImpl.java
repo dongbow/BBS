@@ -119,6 +119,7 @@ public class TopicServiceImpl implements TopicService{
 					if(topicDataDao.insert(topicData) == BbsConstant.OK
 							&& generalService.UserAward(EGHistory.TOPIC, uid, request) == BbsConstant.OK) {
 						boardService.saveOrUpdateBoardInfo(bid, BoardSign.TOPIC, 0);
+						classifyService.saveOrUpdateCount(bid, cid);
 						return topic.getTopicId();
 					}
 				}

@@ -20,6 +20,7 @@ import cn.ifxcode.bbs.bean.CookieBean;
 import cn.ifxcode.bbs.entity.Navigation;
 import cn.ifxcode.bbs.entity.User;
 import cn.ifxcode.bbs.entity.UserValue;
+import cn.ifxcode.bbs.service.FriendLinkService;
 import cn.ifxcode.bbs.service.NavigationService;
 import cn.ifxcode.bbs.service.QuickNavigationService;
 import cn.ifxcode.bbs.service.UserService;
@@ -38,6 +39,9 @@ public class BaseUserController {
 	
 	@Resource
 	private QuickNavigationService quickNavigationService;
+	
+	@Resource
+	private FriendLinkService friendLinkService;
 	
 	@Resource
 	private RedisObjectMapService redisObjectMapService;
@@ -75,4 +79,8 @@ public class BaseUserController {
 		model.addAttribute("quickNavigations", quickNavigationService.getAllQuickNavigations());
 	}
 	
+	@ModelAttribute
+	public void getFriendLinks(Model model) {
+		model.addAttribute("links", friendLinkService.getAllFriendLinks());
+	}
 }

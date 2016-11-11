@@ -146,7 +146,7 @@ body {
     background-color: #ffffff;
     border-top: 1px solid #ccc;
     color: black;
-    height: 80px;
+    //height: 80px;
     position: absolute;
     width: 100%;
 }
@@ -157,12 +157,13 @@ body {
 }
 
 .footer-layer1 {
-     height: 70px;
+     //height: 70px;
      line-height: 36px;
      overflow: hidden;
 }
 
 .footer-innerLink a {
+	margin-right:15px;
      font-size: 16px;
 }
 

@@ -15,6 +15,9 @@ var Url = {
 	},
 	friends: function() {
 		return root + "/home/friends/add";
+	},
+	links: function(id) {
+		return root + "/click/" + id;
 	}
 };
 
@@ -49,6 +52,8 @@ $(function(){
 			$('#bg').hide();
 		}
 	});
+	
+	$('.friendlink').bind('click', click);
 });
 
 function choose() {
@@ -213,4 +218,13 @@ function dialogWithBtn(msg, funOk) {
 		}
 	});
 	$('#bbs-dialog').show();
+}
+
+function click() {
+	var id = $(this).attr('id');
+	$.post(Url.links(id), function(result) {
+		if(result.rc == 1) {
+			console.log('click');
+		}
+	});
 }

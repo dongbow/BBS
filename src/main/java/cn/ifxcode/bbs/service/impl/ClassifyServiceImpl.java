@@ -8,9 +8,11 @@ import ltang.redis.service.RedisObjectMapService;
 
 import org.springframework.stereotype.Service;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
+import cn.ifxcode.bbs.constant.BbsConstant;
 import cn.ifxcode.bbs.dao.ClassifyDao;
 import cn.ifxcode.bbs.entity.Classify;
 import cn.ifxcode.bbs.service.ClassifyService;
@@ -46,6 +48,25 @@ public class ClassifyServiceImpl implements ClassifyService {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public int saveOrUpdateCount(int bid, int cid) {
+		List<Classify> classifies = this.getClassifyByBoardId(bid);
+		for (Classify c : classifies) {
+			if(c.getClassId().equals(cid)) {
+				if(c.getClassTopicCount() == 0) {
+					c.setClassTopicCount(1);
+				} else {
+					c.setClassTopicCount(c.getClassTopicCount() + 1);
+				}
+			}
+		}
+		JSONArray jsonArray = JSONArray.parseArray(JSON.toJSONString(classifies));
+		JSONObject jsonObject = new JSONObject(true);
+		jsonObject.put("classifies", jsonArray.toJSONString());
+		redisObjectMapService.save(RedisKeyUtils.getClassifyByBoardId(bid), jsonObject, JSONObject.class);
+		return BbsConstant.OK;
 	}
 	
 }

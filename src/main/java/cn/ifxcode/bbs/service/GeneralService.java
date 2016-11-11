@@ -27,4 +27,6 @@ public interface GeneralService {
 	public List<SwfArea> getAllProvinces();
 
 	public List<SwfArea> getCitys(String userProvince);
+
+	public int click(String... sign);
 }

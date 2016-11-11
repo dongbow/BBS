@@ -26,13 +26,25 @@
 	<div class="footerInner">
 		<div class="footer-layer1">
 			<div class="footer-innerLink">
-				<a title="论坛首页" href="${path}">论坛首页</a> 
-				<img src="${path}/resources/images/login/space.gif"> 
-				<a title="联系我们" target="_blank" href="mailto:bbs@163.com">联系我们</a>
-				<img src="${path}/resources/images/login/space.gif"> 
-				<a title="郑州轻工业学院" target="_blank" href="http://www.zzuli.edu.cn">轻院首页</a>
-				<img src="${path}/resources/images/login/space.gif">  
-				<a title="信息门户" target="_blank" href="http://my.zzuli.edu.cn">信息门户</a>
+				<#if links??>
+					<p>站内：
+						<a title="论坛首页" href="${path}">论坛首页</a> 
+						<#list links as link>
+							<#if link.linkSign == 1>
+								<a title="${link.linkName}" target="_blank" href="${link.href}">${link.linkName}</a>
+							</#if>
+						</#link> 
+					</p>
+				</#if>
+				<#if links??>
+					<p>友情链接：
+						<#list links as link>
+							<#if link.linkSign == 2>
+								<a class="friendlink" id="${link.linkId}" title="${link.linkName}" target="_blank" href="${link.href}">${link.linkName}</a>
+							</#if>
+						</#link> 
+					</p>
+				</#if>
 				<p>当前时区 GMT+8, 现在时间是
 					<a id="ctime" href="javascript:;" style="font-family: Arial; font-size: 14px; color: #900;"></a>
 				</p>

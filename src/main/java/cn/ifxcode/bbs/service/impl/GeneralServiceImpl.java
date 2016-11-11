@@ -1,6 +1,7 @@
 package cn.ifxcode.bbs.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -34,6 +35,7 @@ import cn.ifxcode.bbs.service.BoardService;
 import cn.ifxcode.bbs.service.ClassifyService;
 import cn.ifxcode.bbs.service.GeneralService;
 import cn.ifxcode.bbs.service.UserService;
+import cn.ifxcode.bbs.utils.DateUtils;
 import cn.ifxcode.bbs.utils.GetRemoteIpUtil;
 import cn.ifxcode.bbs.utils.JsonUtils;
 import cn.ifxcode.bbs.utils.RedisKeyUtils;
@@ -211,6 +213,20 @@ public class GeneralServiceImpl implements GeneralService {
 			}
 		}
 		return citys;
+	}
+
+	@Override
+	public int click(String... sign) {
+		String time = DateUtils.dt10FromDate(new Date());
+		JSONObject object = redisObjectMapService.get(RedisKeyUtils.getClick(sign), JSONObject.class);
+		if(object != null && object.containsKey(time)) {
+			object.put(time, Long.parseLong(object.getString(time).toString()) + 1);
+		} else {
+			object = new JSONObject(true);
+			object.put(time, 1);
+		}
+		redisObjectMapService.save(RedisKeyUtils.getClick(sign), object, JSONObject.class);
+		return BbsConstant.OK;
 	}
 
 }
