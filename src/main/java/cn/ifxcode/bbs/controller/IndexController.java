@@ -1,6 +1,5 @@
 package cn.ifxcode.bbs.controller;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -8,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import ltang.redis.service.RedisObjectMapService;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,7 +38,6 @@ import cn.ifxcode.bbs.service.HomeImageService;
 import cn.ifxcode.bbs.service.NavigationService;
 import cn.ifxcode.bbs.service.TopicService;
 import cn.ifxcode.bbs.service.UserService;
-import cn.ifxcode.bbs.utils.DateUtils;
 import cn.ifxcode.bbs.utils.GetRemoteIpUtil;
 import cn.ifxcode.bbs.utils.JsonUtils;
 import cn.ifxcode.bbs.utils.NumberUtils;
@@ -161,7 +158,7 @@ public class IndexController extends BaseUserController{
 		return object;
 	}
 	
-	@RequestMapping("/click/{id}")
+	@RequestMapping(value = "/click/{id}", method = RequestMethod.POST)
 	public Result click(@PathVariable("id")String id) {
 		Result result = null;
 		long fid = NumberUtils.getAllNumber(id);

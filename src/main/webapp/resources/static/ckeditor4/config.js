@@ -53,17 +53,13 @@ CKEDITOR.editorConfig = function( config ) {
 	//		['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'], 
 	config.toolbar = 'post'; 
 	config.toolbar_post = [ 
-	    ['Source'],
-		['Link','Unlink'],
-		['Undo','Redo'], 
-		['NumberedList','BulletedList','Blockquote'],   
-		['FontSize'],
-		['Bold','Italic','Underline','Strike'], 
-		['TextColor','BGColor'], 
-		['PasteFromWord', '-', 'Table'],
-		['Image','Flash','Smiley','SpecialChar'],
-		['Syntaxhighlight'],
-		['Preview', 'Maximize']
+	    ['Undo','Redo'], 
+		['Font','FontSize'],
+		['TextColor'],
+		['Bold','Underline'], 
+		['Link','Unlink'], 
+		['Image','Smiley'],
+		['Syntaxhighlight']
 	];
 	
 	config.toolbar = 'full';

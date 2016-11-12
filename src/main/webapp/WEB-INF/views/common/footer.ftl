@@ -22,7 +22,7 @@
 	}
 	window.onload = showtime;
 </script>
-<div align="center" class="footerWrap">
+<div class="footerWrap">
 	<div class="footerInner">
 		<div class="footer-layer1">
 			<div class="footer-innerLink">
@@ -31,18 +31,18 @@
 						<a title="论坛首页" href="${path}">论坛首页</a> 
 						<#list links as link>
 							<#if link.linkSign == 1>
-								<a title="${link.linkName}" target="_blank" href="${link.href}">${link.linkName}</a>
+								<a title="${link.linkName}" target="_blank" href="${link.link}">${link.linkName}</a>
 							</#if>
-						</#link> 
+						</#list> 
 					</p>
 				</#if>
 				<#if links??>
 					<p>友情链接：
 						<#list links as link>
 							<#if link.linkSign == 2>
-								<a class="friendlink" id="${link.linkId}" title="${link.linkName}" target="_blank" href="${link.href}">${link.linkName}</a>
+								<a class="friendlink" id="${link.linkId}" title="${link.linkName}" target="_blank" href="${link.link}">${link.linkName}</a>
 							</#if>
-						</#link> 
+						</#list> 
 					</p>
 				</#if>
 				<p>当前时区 GMT+8, 现在时间是

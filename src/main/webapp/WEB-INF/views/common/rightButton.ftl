@@ -65,9 +65,9 @@ function toziclick(e,id){
 	<li><a id="wechatPic" style="display: none;"></a></li>
 </ul>
 <!-- hidden -->
-<div id="fTopic" style="display: none;">
+<div id="fTopic" style="display: none;z-index:1001;">
 	<!-- postui -->
 </div>
-<div id="bbs-dialog" style="display:none">
+<div id="bbs-dialog" style="display:none;z-index:10000; position: absolute">
 	<!-- dialog -->
 </div>

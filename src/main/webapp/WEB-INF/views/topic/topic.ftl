@@ -78,7 +78,7 @@
 	        	<div class="tright">
 		            <div class="ttitle">
 		                <h2>
-		                    <a href="" title="${clas.className}" style="color:#19b4ea">[${clas.className}]</a> 
+		                    <a href="${path}/navigation/${navigation.navId}/board/${pboard.boardId}/classify/${clas.classId}" title="${clas.className}" style="color:#19b4ea">[${clas.className}]</a> 
 		                    <a>${topic.topicTitle}</a>
 		                </h2>
 		                <div class="tmenu">
@@ -143,7 +143,7 @@
 	            		</#if>
 		            	<#if user??>
 		            		<#if user.userAccess.userIsAdmin == 1 || user.userAccess.userIsBoderManager == 1 || user.userAccess.userId == ui.userAccess.userId>
-		                		<a href="" id="">编辑</a>
+		                		<a href="${path}/board/${pboard.boardId}/topic/detail/${topic.topicId}/update" id="">编辑</a>
 		                	</#if>
 		                </#if>
 		                <#if topic.topicInfo.topicIsReply == 0>
@@ -151,7 +151,7 @@
 		                </#if>
 		                <a href="javascript:;" onclick="favorite(${pboard.boardId}, ${topic.topicId}, '${topic.topicTitle}', 'topic');">收藏</a>
 		                <#if topic.topicInfo.topicIsReply == 0>
-		                	<a href="javascript:;" id="">举报</a>
+		                	<a href="javascript:;" id="" onclick="report(${ui.userAccess.userId}, ${topic.topicId}, 0, 0);">举报</a>
 		                </#if>
 		            </div>
 		        </div>
@@ -250,7 +250,7 @@
 			            	</#if>
 			            	<#if reply.replyStatus == 0 && reply.replyIsCheck == 1 && reply.user.userAccess.userIsDelete == 0 && reply.user.userAccess.userIsLocked == 0>
 			                	<a class="sonreply" href="javascript:;" onclick="sReply(${reply.replyId}, ${reply.topicId});" id="reply_${reply.replyId}">回复</a>
-			                	<a href="javascript:;" id="">举报</a>
+			                	<a href="javascript:;" id="" onclick="report(${reply.user.userAccess.userId}, ${topic.topicId}, ${reply.replyId}, ${floor});">举报</a>
 			                </#if>
 			            </div>
 			        </div>
@@ -263,6 +263,7 @@
 	</div>
 	<#include "../common/page.ftl"/>
 	<@buildPage page = page/>
+	<div class="bbs-report" style="display:none;z-index: 999;"></div>
 	<#if topic.topicInfo.topicIsReply == 0>
 	    <div id="replyecont">
 	    	<#if user??>

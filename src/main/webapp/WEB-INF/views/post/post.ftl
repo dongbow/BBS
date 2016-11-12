@@ -29,7 +29,13 @@
 		      		<select id="s1" name="cid">
 		      			<option value="-1">选择分类</option>
 		      			<#list classifies as class>
-			      			<option value="${class.classId}">${class.className}</option>
+		      				<#if class.auth == 0>
+		      					<option value="${class.classId}">${class.className}</option>
+		      				<#else>
+		      					<#if user.userAccess.userIsAdmin == 1 || user.userAccess.userIsBoderManager == 1>
+		      						<option value="${class.classId}">${class.className}</option>
+		      					</#if>
+		      				</#if>
 		      			</#list>
 		            </select>
 		            <input id="topic_title_text" name="ttitle" type="text" maxlength="32"/>

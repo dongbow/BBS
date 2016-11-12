@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ifxcode.bbs.dao.ReportDao">
+	
+	<cache type="cn.ifxcode.bbs.dao.cache.LoggingRedisCache"/>
+	
+	<insert id="insert" parameterType="Report">
+		insert into report (be_uid, be_tid, be_rid, be_floor, reason, cus_reason, be_url, 
+			uid, nickname, report_ip, report_time, report_status, update_time) 
+		values (#{beUid}, #{beTid}, #{beRid}, #{beFloor}, #{reason}, #{cusReason}, #{beUrl}, 
+		#{uid}, #{nickname}, #{reportIp}, #{reportTime}, #{reportStatus}, #{updateTime})
+	</insert>
+
+</mapper>

@@ -615,7 +615,7 @@ a{
 	top:100px;
 	left:100px;
 	z-index: 1000;
-	width:800px;
+	width:540px;
 	height:auto;
 	display: none;
 }
@@ -623,6 +623,7 @@ a{
 #sonreplyeditor .popreplycont{
 	background: #fff;
 	padding:10px;
+	overflow:hidden;
 }
 
 #sonreplyeditor .popreplytitle{
@@ -670,6 +671,19 @@ a{
 #sonreplyeditor q span p{
 	margin-left:20px;
 	color:#666;
+}
+
+.sbtn {
+	//margin-right:20px !important;
+}
+
+.pinfo{
+	color:#19b4ea;
+}
+
+.ctxt{
+	margin-left:15px !important;
+	margin-bottom:10px !important;
 }
 
 blockquote {

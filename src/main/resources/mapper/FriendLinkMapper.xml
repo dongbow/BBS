@@ -7,7 +7,7 @@
 	<cache type="cn.ifxcode.bbs.dao.cache.LoggingRedisCache"/>
 	
 	<select id="getAllFriendLinks" resultType="FriendLink">
-		<![CDATA[ select * from friend_link where link_status = 0 and link_end_time >= NOW() ]]>
+		<![CDATA[ select * from friend_link where link_status = 1 and link_end_time >= NOW() ]]>
 	</select>
 
 </mapper>

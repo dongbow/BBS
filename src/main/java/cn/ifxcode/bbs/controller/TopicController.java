@@ -12,10 +12,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.HtmlUtils;
 
 import cn.ifxcode.bbs.bean.Page;
+import cn.ifxcode.bbs.bean.Result;
+import cn.ifxcode.bbs.constant.BbsConstant;
 import cn.ifxcode.bbs.entity.Board;
 import cn.ifxcode.bbs.entity.Classify;
 import cn.ifxcode.bbs.entity.Navigation;
@@ -27,6 +31,7 @@ import cn.ifxcode.bbs.service.BoardService;
 import cn.ifxcode.bbs.service.ClassifyService;
 import cn.ifxcode.bbs.service.NavigationService;
 import cn.ifxcode.bbs.service.ReplyService;
+import cn.ifxcode.bbs.service.ReportService;
 import cn.ifxcode.bbs.service.TopicService;
 import cn.ifxcode.bbs.service.UserService;
 import cn.ifxcode.bbs.utils.DateUtils;
@@ -56,6 +61,9 @@ public class TopicController extends BaseUserController{
 	
 	@Resource
 	private ReplyService replyService;
+	
+	@Resource
+	private ReportService reportService;
 	
 	@RequestMapping("/board/{bid}/topic/detail/{tid}/{pno}")
 	public String toTopic(@PathVariable("bid")String bid, 
@@ -103,4 +111,39 @@ public class TopicController extends BaseUserController{
 		return "redirect:/tip?tip=topic-notexists";
 	}
 	
+	@RequestMapping("/post/topic/report")
+	public String report() {
+		return "topic/report";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/post/topic/report/do", method = RequestMethod.POST)
+	public Result doReport(String uid, String tid, String rid, String floor, String rs, 
+			String other, String url, HttpServletRequest request) {
+		Result result = null;
+		if(this.isNotBlank(uid, tid, rid, floor, rs, url)) {
+			if("其他".equals(rs)) {
+				if(StringUtils.isEmpty(other) || other.length() < 5 || other.length() > 50) {
+					return new Result(BbsConstant.ERROR, "举报原因过长");
+				}
+			}
+			if(reportService.addReport(uid, tid, rid, floor, rs, other, url, request) == BbsConstant.OK) {
+				result = new Result(BbsConstant.OK, "举报成功");
+			} else {
+				result = new Result(BbsConstant.ERROR, "举报失败");
+			}
+		} else {
+			result = new Result(BbsConstant.ERROR, "举报失败");
+		}
+		return result;
+	}
+	
+	private boolean isNotBlank(String... str) {
+		for (String string : str) {
+			if(StringUtils.isEmpty(string)) {
+				return false;
+			}
+		}
+		return true;
+	}
 }

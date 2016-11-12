@@ -11,6 +11,16 @@ $(function(){
 	  window.open(imgsrc);
   });
   
+  $('.pr').live('click', function() {
+	  if($(this).hasClass('other')) {
+		  $('#report_other').show();
+	  } else {
+		  $('#report_other').hide();
+	  }
+	  $('.pr').removeClass('select');
+	  $(this).addClass('select');
+  });
+  
 });
 
 function sReply(pid, tid) {
@@ -28,9 +38,9 @@ function sReply(pid, tid) {
 			return false;
 		} else {
 			$('#sonreplyeditor').html(result);
-			CKEDITOR.replace('sonreplyeditorcont', { toolbar: 'reply', height: '200px', width: '760px', resize_enabled: false, removePlugins: 'elementspath'});
+			CKEDITOR.replace('sonreplyeditorcont', { toolbar: 'post', height: '150px', width: '515px', resize_enabled: false, removePlugins: 'elementspath'});
 			$('.pinfo').html(pName + '于' + pTime + '发表：');
-			$('.quotes p').html(pCont.substring(0, 100));
+			$('.ctxt').html(pCont.substring(0, 100));
 			$('.uid').attr('value', uid);
 			$('.gid').attr('value', gid);
 			$('.bid').attr('value', bid);
@@ -49,6 +59,81 @@ function sReply(pid, tid) {
 				$('#sonreplyeditor').html('');
 			});
 			$('#sonreplyeditor').show();
+		}
+	});
+}
+
+function report(uid, tid, rid, floor) {
+	var url = root + '/post/topic/report?uid=' + uid + '&tid=' + tid;
+	if(rid != 0) {
+		url += '&rid=' + rid;
+	}
+	if(floor != 0) {
+		url += '&floor=' + floor;
+	}
+	$.get(url, function(result) {
+		if(result.rc != undefined && result.rc.rc == 9001){
+			loginDialog();
+			return false;
+		} else {
+			$('.bbs-report').html(result);
+			$('#checktip').css({
+				'top' : ($(window).height() - $('#checktip').height())/2 + 'px',
+				'left': ($(window).width() - $('#checktip').width())/2+'px'
+			});
+			$('#checktip p').css('margin-top', '0');
+			$('.report-btn').attr('onclick', 'doReport(' + uid + ',' + tid + ',' + rid + ',' + floor + ');');
+			$('.bbs-report').show();
+		}
+	});
+}
+
+function doReport(uid, tid, rid, floor) {
+	var rs = $('.select').val();
+	if(!rs) {
+		dialog('请选择一个原因');
+		return false;
+	}
+	var url = '';
+	if(floor == 0) {
+		url = window.location.href;
+	} else {
+		//FIXME 回复的链接地址
+		url = window.location.href;
+	}
+	var other = '';
+	if($('.select').hasClass('other')) {
+		other = $('#report_message').val();
+		if(other) {
+			if(other.length < 5 || other.length > 50) {
+				dialog('字符在5-50之间');
+				return false;
+			}
+		} else {
+			dialog('请输入理由');
+			return false;
+		}
+	}
+	$.post(root + '/post/topic/report/do', {
+		'uid': uid,
+		'tid': tid,
+		'rid': rid,
+		'floor': floor,
+		'rs': rs,
+		'other': other,
+		'url': url
+	}, function(result) {
+		if(result.rc != undefined && result.rc.rc == 9001){
+			loginDialog();
+			return false;
+		} else if(result.rc == 1){
+			$('.bbs-report').html('');
+			$('.bbs-report').hide();
+			dialog('举报成功');
+		} else {
+			$('.bbs-report').html('');
+			$('.bbs-report').hide();
+			dialog(result.msg);
 		}
 	});
 }

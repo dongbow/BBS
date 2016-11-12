@@ -4,17 +4,19 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.stereotype.Service;
+
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import ltang.redis.service.RedisObjectMapService;
-
 import cn.ifxcode.bbs.dao.FriendLinkDao;
 import cn.ifxcode.bbs.entity.FriendLink;
 import cn.ifxcode.bbs.service.FriendLinkService;
 import cn.ifxcode.bbs.utils.JsonUtils;
 import cn.ifxcode.bbs.utils.RedisKeyUtils;
 
+@Service
 public class FriendLinkServiceImpl implements FriendLinkService {
 
 	@Resource

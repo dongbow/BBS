@@ -15,6 +15,7 @@ public class Classify implements Serializable {
 	private int classSort;
 	private long classTopicCount;
 	private String classCreateTime;
+	private int auth;
 
 	public Integer getClassId() {
 		return classId;
@@ -86,6 +87,14 @@ public class Classify implements Serializable {
 
 	public void setClassCreateTime(String classCreateTime) {
 		this.classCreateTime = classCreateTime;
+	}
+
+	public int getAuth() {
+		return auth;
+	}
+
+	public void setAuth(int auth) {
+		this.auth = auth;
 	}
 
 }
