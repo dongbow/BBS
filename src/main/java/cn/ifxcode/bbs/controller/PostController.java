@@ -103,7 +103,7 @@ public class PostController extends BaseUserController {
 		long topicId = topicService.insertTopic(cid, ttitle, tcontent, uid, bid, gid, 
 				isreply, iselite, istop, isglobaltop, ishome, request);
 		if(topicId > BbsConstant.OK) {
-			return "redirect:/board/" + bid + "/topic/detail/" + topicId + "/1";
+			return "redirect:/board/" + bid + "/topic/detail/" + topicId;
 		}
 		return "redirect:/tip?tip=post-fail";
 	}

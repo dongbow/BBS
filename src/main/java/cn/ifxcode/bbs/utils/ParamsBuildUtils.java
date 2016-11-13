@@ -8,8 +8,6 @@ import org.apache.commons.lang.StringUtils;
 
 import com.google.common.collect.Maps;
 
-import cn.ifxcode.bbs.constant.BbsConstant;
-
 public class ParamsBuildUtils {
 
 	public static String createUrl(HttpServletRequest request) {
@@ -19,7 +17,7 @@ public class ParamsBuildUtils {
 			String param[] = params.split("&");
 			Map<String, Object> map = Maps.newHashMap();
 			for (String s : param) {
-				if(!s.split("=").equals("page")) {
+				if(!s.split("=")[0].equals("page")) {
 					map.put(s.split("=")[0], s.split("=")[1]);
 				}
 			}
@@ -31,7 +29,7 @@ public class ParamsBuildUtils {
 			}
 			params += "page=";
 		}
-		return uri.replace(BbsConstant.ROOT, "") + (StringUtils.isNotBlank(params) ? params : "");
+		return uri + (StringUtils.isNotBlank(params) ? params : "?page=");
 	}
 
 	

@@ -36,6 +36,7 @@ import cn.ifxcode.bbs.service.TopicService;
 import cn.ifxcode.bbs.service.UserService;
 import cn.ifxcode.bbs.utils.DateUtils;
 import cn.ifxcode.bbs.utils.NumberUtils;
+import cn.ifxcode.bbs.utils.ParamsBuildUtils;
 
 @Controller
 public class TopicController extends BaseUserController{
@@ -65,9 +66,10 @@ public class TopicController extends BaseUserController{
 	@Resource
 	private ReportService reportService;
 	
-	@RequestMapping("/board/{bid}/topic/detail/{tid}/{pno}")
+	@RequestMapping("/board/{bid}/topic/detail/{tid}")
 	public String toTopic(@PathVariable("bid")String bid, 
-			@PathVariable("tid")String tid, @PathVariable("pno")int pno, 
+			@PathVariable("tid")String tid, 
+			@RequestParam(value = "page", required = false, defaultValue = "1")int pno, 
 			@RequestParam(required = false, defaultValue = "0")int sort, 
 			@RequestParam(required = false)Integer floor, 
 			@RequestParam(required = false, defaultValue = "0")long uid, 
@@ -91,11 +93,7 @@ public class TopicController extends BaseUserController{
 			Classify classify = classifyService.getClassifyByCid(topic.getBoardId(), topic.getClassId());
 			Navigation navigation = navigationService.getNavigation(topic.getNavId());
 			Board board = boardService.getBoardByBoardId(topic.getNavId(), topic.getBoardId());
-			StringBuilder url = new StringBuilder(request.getRequestURI());
-			if(StringUtils.isNotBlank(request.getQueryString())) {
-				url.append("?").append(request.getQueryString());
-			}
-			Page page = Page.newBuilder(pno, DEFAULT_PAGE_SIZE, url.toString());
+			Page page = Page.newBuilder(pno, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
 			List<Reply> replies = replyService.getReplyListByTopicId(page, topic.getTopicId(), uid, sort);
 			model.addAttribute("navigation", navigation);
 			model.addAttribute("pboard", board);
@@ -105,6 +103,7 @@ public class TopicController extends BaseUserController{
 			model.addAttribute("topic", topic);
 			model.addAttribute("page", page);
 			model.addAttribute("replies", replies);
+			model.addAttribute("sort", sort);
 			return "topic/topic";
 		}
 		logger.info("topic is not found");

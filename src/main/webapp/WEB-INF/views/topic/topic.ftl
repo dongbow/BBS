@@ -18,7 +18,7 @@
 			<a class="line" href="${path}">论坛首页</a> <em>></em>
 			<a class="line bltd" href="${path}/navigation/${navigation.navId}">${navigation.navName}</a><em>></em> 
 			<a class="line bltd" href="${path}/navigation/${navigation.navId}/board/${pboard.boardId}">${pboard.boardName}</a><em>></em>
-			<span id="spacelocal">${topic.topicTitle}</span>
+			<span id="spacelocal"><a class="line bltd" href="${path}/board/${pboard.boardId}/topic/detail/${topic.topicId}">${topic.topicTitle}</a></span>
 			<#if topic.topicInfo.topicIsReply == 0>
 				<div id="replymenu">
 					<a id="quickbtn" href="javascript:;" onclick="window.scrollTo('0',document.body.scrollHeight-600)">回复</a>
@@ -87,10 +87,14 @@
 		                    <a class="hui" title="回复人数">回</a>
 		                    <a>${topic.topicData.topicReplyCount}</a>
 		                    <a title="创建时间">${topic.topicCreateTime}</a>
-		                    <a href="" title="倒序浏览">倒序浏览</a>
-		                    <a href="" title="只看作者">只看作者</a>
+		                    <#if sort == 0>
+		                    	<a href="${path}/board/${pboard.boardId}/topic/detail/${topic.topicId}?sort=1&page=1" title="倒序浏览">倒序浏览</a>
+		                    <#else>
+		                    	<a href="${path}/board/${pboard.boardId}/topic/detail/${topic.topicId}?sort=0&page=1" title="正序浏览">正序浏览</a>
+		                    </#if>
+		                    <a href="${path}/board/${pboard.boardId}/topic/detail/${topic.topicId}?uid=${ui.userAccess.userId}&page=1" title="只看作者">只看作者</a>
 		                    <input type="text" id="floor"/>
-		                    <a id="gofloor" href="" title="跳转楼层" class="gofloor">Go</a>
+		                    <a id="gofloor" href="javascript:;" title="跳转楼层" class="gofloor" onclick="gofloor(${page.totalPage}, ${page.totalRecord}, ${page.pageSize}, $('#floor').val());">Go</a>
 		                    <span>楼主</span>
 		                </div>
 		            </div>
@@ -158,7 +162,11 @@
 		    </div>
 		</#if>
 	    <#if replies??>
-	    	<#assign floor = page.pageSize * (page.pageNo - 1) + 1/>
+	    	<#if sort == 0>
+	    		<#assign floor = page.pageSize * (page.pageNo - 1) + 1/>
+	    	<#else>
+	    		<#assign floor = page.totalRecord - page.pageSize * (page.pageNo - 1)/>
+	    	</#if>
 	    	<#list replies as reply>
 	    		<div id="reply_${reply.replyId}" class="replylist">
 			        <div class="tleft">
@@ -213,7 +221,7 @@
 			            <div class="ttitle">
 			                <div class="tmenu">
 			                    <a class="createreplytime" title="创建时间">${reply.replyCreateTime}</a>
-			                    <a href="" title="倒序浏览">倒序浏览</a>
+			                    <a href="${path}/board/${pboard.boardId}/topic/detail/${topic.topicId}?uid=${reply.user.userAccess.userId}&page=1" title="只看作者">只看作者</a>
 			                    <span id="floor_${floor}">
 			                    	<#if floor == 1>
 			                    		沙发
@@ -255,7 +263,11 @@
 			            </div>
 			        </div>
 			    </div>
-			    <#assign floor = floor + 1/>
+			    <#if sort == 0>
+			    	<#assign floor = floor + 1/>
+			    <#else>
+			    	<#assign floor = floor - 1/>
+			    </#if>
 	    	</#list>
 	    </#if>
 	    <div id="sonreplyeditor"></div>

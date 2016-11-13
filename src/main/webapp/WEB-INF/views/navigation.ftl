@@ -24,19 +24,19 @@
 				<div class="sctopic">
 		        	<a id="scsh" href="javascript:;">主题<span>▼</span></a>
 		            <div class="allway scsh" style="display:none;">
-		            	<a class="schover" href="">全部主题</a>
+		            	<a class="schover" href="${path}/navigation/${navigation.navId}">全部主题</a>
 		                <a class="scvote" href="">投票</a>
 		            </div>
 		        </div>
 		        <div class="tsort">
 		        	<a id="sosh" href="javascript:;">排序<span>▼</span></a>
 		            <div class="allway sosh" style="display:none;">
-		            	<a class="schover" href="">回复时间</a>
-		                <a class="soreply" href="">发表时间</a>
+		            	<a class="schover replytime" href="">回复时间</a>
+			            <a class="soreply posttime" href="">发表时间</a>
 		            </div>
 		        </div>
-		        <a href="">精华</a>
-		        <a href="">热门</a>
+		        <a class="fcream" href="">精华</a>
+		        <a class="fhot" href="">热门</a>
 		    </div>
 			<#if gtopics??>
 				<#list gtopics as g>
@@ -46,7 +46,7 @@
 				    	</a>
 				        <div class="topic">
 				        	<a class="board" title="版块" href="${path}/navigation/${g.navId}/board/${g.boardId}" style="background:${g.board.boardColor}">${g.board.boardName}</a>
-				            <a class="topictitle addding" title="${g.topicTitle}" href="${path}/board/${g.boardId}/topic/detail/${g.topicId}/1">${g.topicTitle}</a>
+				            <a class="topictitle addding" title="${g.topicTitle}" href="${path}/board/${g.boardId}/topic/detail/${g.topicId}">${g.topicTitle}</a>
 				            <span class="marks">
 				                <#if g.topicInfo.topicIsCream == 1>
 				            		<a class="jing" title="精华">精</a>
@@ -76,7 +76,7 @@
 				    	</a>
 				        <div class="topic">
 				        	<a class="board" title="版块" href="${path}/navigation/${h.navId}/board/${h.boardId}" style="background:${h.board.boardColor}">${h.board.boardName}</a>
-				            <a class="topictitle" title="${h.topicTitle}" href="${path}/board/${h.boardId}/topic/detail/${h.topicId}/1">${h.topicTitle}</a>
+				            <a class="topictitle" title="${h.topicTitle}" href="${path}/board/${h.boardId}/topic/detail/${h.topicId}">${h.topicTitle}</a>
 				            <span class="marks">
 				                <#if h.topicInfo.topicIsCream == 1>
 				            		<a class="jing" title="精华">精</a>

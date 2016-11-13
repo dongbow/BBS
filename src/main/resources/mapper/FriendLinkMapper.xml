@@ -9,5 +9,10 @@
 	<select id="getAllFriendLinks" resultType="FriendLink">
 		<![CDATA[ select * from friend_link where link_status = 1 and link_end_time >= NOW() ]]>
 	</select>
+	
+	<insert id="insert" parameterType="FriendLink">
+		insert into friend_link (link_name, link, link_sign, link_status, link_contacts, link_create_time, link_end_time) 
+		values (#{linkName}, #{link}, #{linkSign}, #{linkStatus}, #{linkContacts}, #{linkCreateTime}, #{linkEndTime})
+	</insert>
 
 </mapper>

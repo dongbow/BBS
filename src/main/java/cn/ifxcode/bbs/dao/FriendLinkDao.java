@@ -7,5 +7,7 @@ import cn.ifxcode.bbs.entity.FriendLink;
 public interface FriendLinkDao {
 
 	public List<FriendLink> getAllFriendLinks();
+
+	public int insert(FriendLink friendLink);
 	
 }

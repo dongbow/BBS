@@ -251,13 +251,13 @@ public class TopicServiceImpl implements TopicService{
 			map.put("filter", f);
 		}
 		if("dateline".equals(orderby)) {
-			map.put("orderby", "topicCreateTime");
+			map.put("orderby", "topic_create_time");
 		} else {
-			orderby = "lastestReplyTime";
+			orderby = "lastest_reply_time";
 		}
 		List<Topic> topics = topicDao.getTopicsByNavId(map);
 		this.formatTopicData(topics);
-		if(orderby.equals("lastestReplyTime")) {
+		if(orderby.equals("lastest_reply_time")) {
 			this.sort(topics);
 		}
 		return topics;
@@ -338,13 +338,42 @@ public class TopicServiceImpl implements TopicService{
 			map.put("filter", f);
 		}
 		if("dateline".equals(orderby)) {
-			map.put("orderby", "t.topicCreateTime");
+			map.put("orderby", "t.topic_create_time");
 		} else {
-			orderby = "d.lastestReplyTime";
+			orderby = "d.lastest_reply_time";
 		}
 		List<Topic> topics = topicDao.getTopicsByBoardId(map);
 		this.formatTopicDataForBoard(topics);
-		if(orderby.equals("d.lastestReplyTime")) {
+		if(orderby.equals("d.lastest_reply_time")) {
+			this.sort(topics);
+		}
+		return topics;
+	}
+
+	@Override
+	public List<Topic> getTopicsByClassId(Page page, long classId, String type,
+			String filter, String orderby) {
+		// TODO type搁置（代表主题和投票）
+		int f = 0;
+		switch (filter) {
+			case "lastpost": f = 0; break;
+			case "cream": f = 1; break;
+			case "hot": f = 2; break;
+		}
+		Map<String, Object> map = Maps.newHashMap();
+		map.put("page", page);
+		map.put("classId", classId);
+		if(f != 0) {
+			map.put("filter", f);
+		}
+		if("dateline".equals(orderby)) {
+			map.put("orderby", "t.topic_create_time");
+		} else {
+			orderby = "d.lastest_reply_time";
+		}
+		List<Topic> topics = topicDao.getTopicsByClassId(map);
+		this.formatTopicDataForBoard(topics);
+		if(orderby.equals("d.lastest_reply_time")) {
 			this.sort(topics);
 		}
 		return topics;

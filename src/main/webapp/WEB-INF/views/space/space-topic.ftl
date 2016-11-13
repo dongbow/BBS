@@ -68,10 +68,10 @@
 						<#if topics??>
 							<#list topics as topic>
 								<tr>
-									<th><a href="${path}/board/${topic.boardId}/topic/detail/${topic.topicId}/1" target="_blank">${topic.topicTitle}</a></th>
+									<th><a href="${path}/board/${topic.boardId}/topic/detail/${topic.topicId}" target="_blank">${topic.topicTitle}</a></th>
 									<th><a class="board" href="${path}/navigation/${topic.board.navId}/board/${topic.boardId}" target="_blank">${topic.board.boardName}</a></th>
 									<th class="num">
-										<a class="xi2" href="${path}/board/${topic.boardId}/topic/detail/${topic.topicId}/1" target="_blank">${topic.topicData.topicReplyCount}</a>
+										<a class="xi2" href="${path}/board/${topic.boardId}/topic/detail/${topic.topicId}" target="_blank">${topic.topicData.topicReplyCount}</a>
 										<em>${topic.topicData.topicViewCount}</em>
 									</th>
 									<th class="by">

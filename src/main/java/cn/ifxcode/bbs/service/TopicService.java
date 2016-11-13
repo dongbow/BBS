@@ -36,5 +36,7 @@ public interface TopicService {
 	public List<Topic> getLocalTopTopic(int boardId);
 
 	public List<Topic> getTopicsByBoardId(Page page, long boardId, String type, String filter, String orderby);
+
+	public List<Topic> getTopicsByClassId(Page page, long classId, String type, String filter, String orderby);
 	
 }

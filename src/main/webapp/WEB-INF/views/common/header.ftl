@@ -57,7 +57,7 @@ $(function(){
 	            <#assign n=0/>
 	            <#list user.roles as role>
 	            	<#if n gt 0><#break></#if>
-	            	<a href="${path}/home/${user.userAccess.userId}/setting/usergroup" style="color:${role.roleColor}">${role.roleName}</a>
+	            	<a href="${path}/home/setting/usergroup" style="color:${role.roleColor}">${role.roleName}</a>
 	            	<#assign n=n+1/>
 	            </#list>
 	        </div>

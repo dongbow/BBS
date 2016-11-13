@@ -28,7 +28,7 @@
 					    	</a>
 					        <div class="topic">
 					        	<a class="board" title="版块" href="${path}/navigation/${g.navId}/board/${g.boardId}" style="background:${g.board.boardColor}">${g.board.boardName}</a>
-					            <a class="topictitle addding" title="${g.topicTitle}" href="${path}/board/${g.boardId}/topic/detail/${g.topicId}/1">${g.topicTitle}</a>
+					            <a class="topictitle addding" title="${g.topicTitle}" href="${path}/board/${g.boardId}/topic/detail/${g.topicId}">${g.topicTitle}</a>
 					            <span class="marks">
 					                <#if g.topicInfo.topicIsCream == 1>
 					            		<a class="jing" title="精华">精</a>
@@ -58,7 +58,7 @@
 					    	</a>
 					        <div class="topic">
 					        	<a class="board" title="版块" href="${path}/navigation/${h.navId}/board/${h.boardId}" style="background:${h.board.boardColor}">${h.board.boardName}</a>
-					            <a class="topictitle" title="${h.topicTitle}" href="${path}/board/${h.boardId}/topic/detail/${h.topicId}/1">${h.topicTitle}</a>
+					            <a class="topictitle" title="${h.topicTitle}" href="${path}/board/${h.boardId}/topic/detail/${h.topicId}">${h.topicTitle}</a>
 					            <span class="marks">
 					                <#if h.topicInfo.topicIsCream == 1>
 					            		<a class="jing" title="精华">精</a>

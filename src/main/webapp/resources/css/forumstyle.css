@@ -384,11 +384,11 @@ ul li, .xl li {
 	height: 19px;
 	line-height: 19px;
 	margin-left: 6px;
-	padding: 0 8px 1px;
+	padding: 0 4px 1px;
 	text-align: center;
 	vertical-align: middle;
 	white-space: nowrap;
-	width: 26px;
+	//width: 26px;
 	border-radius: 2px;
 	color: #fff;
 	font-size: 12px;

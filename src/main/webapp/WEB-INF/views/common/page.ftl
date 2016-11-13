@@ -6,14 +6,19 @@
 		    		<span class="infoTextAndGoPageBtnWrap">
 						<span class="goPageBox">&nbsp;转到
 							<span id="kkpager_gopage_wrap">
-								<input type="text" value="2" onkeypress="return kkpager.keypress_gopage(event);"  id="kkpager_btn_go_input">
+								<#if page.pageNo lt page.totalPage && page.totalPage != 0> 
+									<#assign next = page.pageNo + 1/>
+								<#else>  
+									<#assign next = 1/>
+								</#if>
+								<input type="text" value="${next}" onkeypress="gopage(event);"  id="kkpager_btn_go_input">
 							</span>
 						</span>
 					</span>
 					<span class="pageBtnWrap">
 						<#if page.pageNo != 1 && page.totalPage != 0>  
-						  	<a href="${page.searchUrl}?p=1">首页</a>  
-						  	<a href="${page.searchUrl}?p=${page.pageNo - 1}">上一页</a>  
+						  	<a href="${page.searchUrl}1">首页</a>  
+						  	<a href="${page.searchUrl}${page.pageNo - 1}">上一页</a>  
 						<#else>  
 						  	<span class="disabled">首页</span>
 							<span class="disabled">上一页</span>
@@ -22,14 +27,14 @@
 							<#if num?number == 0>  
 						      	<span class="spanDot">...</span>  
 						  	<#elseif num?number != page.pageNo>  
-						      	<a href="${page.searchUrl}?p=${num}">${num}</a>  
+						      	<a href="${page.searchUrl}${num}">${num}</a>  
 						  	<#else>  
 						      	<span class="curr">${num}</span> 
 						  	</#if>  
 						</#list>  
 						<#if page.pageNo lt page.totalPage && page.totalPage != 0>  
-						  	<a href="${page.searchUrl}?p=${page.pageNo + 1}">下一页</a>  
-						  	<a href="${page.searchUrl}?p=${page.totalPage}">尾页</a>  
+						  	<a href="${page.searchUrl}${page.pageNo + 1}">下一页</a>  
+						  	<a href="${page.searchUrl}${page.totalPage}">尾页</a>  
 						<#else>  
 							<span class="disabled">下一页</span>  
 						  	<span class="disabled">尾页</span>  

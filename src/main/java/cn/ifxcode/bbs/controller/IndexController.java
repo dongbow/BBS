@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import ltang.redis.service.RedisObjectMapService;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -32,6 +34,7 @@ import cn.ifxcode.bbs.entity.PastHistory;
 import cn.ifxcode.bbs.entity.Topic;
 import cn.ifxcode.bbs.entity.UserValue;
 import cn.ifxcode.bbs.enumtype.EGHistory;
+import cn.ifxcode.bbs.service.FriendLinkService;
 import cn.ifxcode.bbs.service.GeneralService;
 import cn.ifxcode.bbs.service.GoldExperienceService;
 import cn.ifxcode.bbs.service.HomeImageService;
@@ -70,6 +73,9 @@ public class IndexController extends BaseUserController{
 	
 	@Resource
 	private TopicService topicService;
+	
+	@Resource
+	private FriendLinkService friendLinkService;
 	
 	private GoldHistory goldHistory = null;
 	private ExperienceHistory experienceHistory = null;
@@ -113,11 +119,11 @@ public class IndexController extends BaseUserController{
 		List<Board> boards = JsonUtils.decodeJson(array, Board.class);
 		Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
 		List<Topic> gTopics = topicService.getGlobalTopTopic();
-		//List<Topic> hTopics = topicService.getTopicsByNavId(page, navId, type, filter, orderby);
+		List<Topic> hTopics = topicService.getTopicsByNavId(page, navId, type, filter, orderby);
 		model.addAttribute("navigation", navigation);
 		model.addAttribute("boards", boards);
 		model.addAttribute("gtopics", gTopics);
-		//model.addAttribute("htopics", hTopics);
+		model.addAttribute("htopics", hTopics);
 		model.addAttribute("page", page);
 		return "navigation";
 	}
@@ -169,6 +175,23 @@ public class IndexController extends BaseUserController{
 			result = new Result(BbsConstant.ERROR, BbsConstant.RC);
 		}
 		return result;
+	}
+	
+	@RequestMapping("/friendlink")
+	public String toFriendLink() {
+		return "friendlink";
+	}
+	
+	@RequestMapping(value = "/friendlink/apply", method = RequestMethod.POST)
+	public String friendLink(String linkname, String link, String contact, RedirectAttributesModelMap modelMap) {
+		if(StringUtils.isNotBlank(link) && StringUtils.isNotBlank(linkname)
+				&& StringUtils.isNotBlank(contact)) {
+			int row = friendLinkService.addLink(linkname, link, contact);
+			if(row == BbsConstant.OK) {
+				modelMap.addFlashAttribute("status", 1);
+			}
+		}
+		return "redirect:/friendlink";
 	}
 	
 }
