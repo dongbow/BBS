@@ -106,20 +106,27 @@ public class UserServiceImpl implements UserService {
 		map.put("name", name);
 		map.put("password", password);
 		User user = userDao.authLogin(map);
-		return user == null ? null : this.formatUser(user);
+		if(user != null) {
+			this.formatEmail(user);
+		}
+		return user == null ? null : user;
 	}
 
-	public synchronized Integer valueCheck(String type, String value) {
-		type = "name".equals(type) ? "user_name" : "user_email";
-		Map<String, Object> map = Maps.newHashMap();
-		map.put("type", type);
-		map.put("value", value);
-		return userDao.valueCheck(map);
+	public Integer valueCheck(String type, String value) {
+		synchronized (this) {
+			type = "name".equals(type) ? "user_name" : "user_email";
+			Map<String, Object> map = Maps.newHashMap();
+			map.put("type", type);
+			map.put("value", value);
+			return userDao.valueCheck(map);
+		}
 	}
 
-	public synchronized int updateUserLastestTimeAndIp(Long userId,
+	public int updateUserLastestTimeAndIp(Long userId,
 			String userLastestLoginIp, String userLastestLoginTime) {
-		return userDao.updateUserLastestTimeAndIp(userId, userLastestLoginIp, userLastestLoginTime);
+		synchronized (this) {
+			return userDao.updateUserLastestTimeAndIp(userId, userLastestLoginIp, userLastestLoginTime);
+		}
 	}
 
 	public long getUserIdFromCookie(HttpServletRequest request) {
@@ -229,7 +236,6 @@ public class UserServiceImpl implements UserService {
 					value.setTodayExpTime(DateUtils.dt14LongFormat(new Date()));
 					value.setUserGold(50);
 					value.setTodayGold(50);
-					value.setTodayGoldTime(DateUtils.dt14LongFormat(new Date()));
 					value.setUserReplyCount(0);
 					value.setUserTopicCount(0);
 					value.setUserFriendCount(0);
@@ -262,10 +268,26 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User loginCheck(String userName, String password) {
-		Map<String, Object> map = Maps.newHashMap();
-		map.put("name", userName);
-		map.put("password", password);
-		User user = userDao.loginCheck(map);
+		Lock lock = new ReentrantLock();
+		User user = null;
+		if(lock.tryLock()) {
+			try {
+				lock.lock();
+				Map<String, Object> map = Maps.newHashMap();
+				map.put("name", userName);
+				map.put("password", password);
+				user = userDao.loginCheck(map);
+			} catch (Exception e) {
+				logger.error("login fail", e);
+			} finally {
+				lock.unlock();
+			}
+		} else {
+			logger.error("login timeout, name{}, password{}", userName, password);
+		}
+		if(user != null) {
+			this.formatEmail(user);
+		}
 		return user == null ? null : user;
 	}
 
@@ -280,7 +302,20 @@ public class UserServiceImpl implements UserService {
 		return user == null ? null : this.formatUser(user);
 	}
 	
+	private void formatEmail(User user) {
+		String email = user.getUserAccess().getUserEmail();
+		String first = email.split("@")[0];
+		if(first.length() < 4) {
+			first = first.substring(0, 1) + "****";
+		} else {
+			first = first.substring(0, 4) + "****";
+		}
+		email = first + "@" + email.split("@")[1];
+		user.getUserAccess().setUserEmail(email);
+	}
+	
 	private User formatUser(User user) {
+		this.formatEmail(user);
 		if(StringUtils.isNotBlank(user.getUserInfo().getUserProvince())
 				&& StringUtils.isNotBlank(user.getUserInfo().getUserCity())) {
 			List<SwfArea> areas = JsonUtils.decodeAreaJson(JSONArray
@@ -578,6 +613,11 @@ public class UserServiceImpl implements UserService {
 		map.put("page", page);
 		map.put("type", type);
 		return favoriteDao.getAllFavorites(map);
+	}
+
+	@Override
+	public List<Integer> getAllBoardManageId(long user_id) {
+		return userDao.getAllBoardManageId(user_id);
 	}
 
 }

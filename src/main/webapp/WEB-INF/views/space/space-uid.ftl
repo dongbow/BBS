@@ -30,9 +30,10 @@
 			<li class="a"><a href="${path}/space/uid/${userinfo.userAccess.userId}">个人资料</a></li>
 			<#if islogin == 1 && user.userAccess.userIsAdmin == 1 && user.userAccess.userId == userinfo.userAccess.userId>
 				<li class="cm"><a href="${path}/system/admin/account/login">进入后台</a></li>
+				<li class="cm"><a href="${path}/manage/bmc/index">版主后台</a></li>
 			</#if>
 			<#if islogin == 1 && user.userAccess.userIsBoderManager == 1 && user.userAccess.userId == userinfo.userAccess.userId>
-				<li class="cm"><a href="${path}">版主后台</a></li>
+				<li class="cm"><a href="${path}/manage/bmc/index">版主后台</a></li>
 			</#if>
 			<#if islogin == 1 && user.userAccess.userId == userinfo.userAccess.userId>
 				<li class="cm"><a href="${path}/home/setting/profile">修改资料</a></li>
@@ -71,7 +72,7 @@
 			<div class="mun">
 				<#if userinfo.userPrivacy.baseIsPublic == 0 || (islogin == 1 && user.userAccess.userId == userinfo.userAccess.userId)>
 					<p>
-						<span>性别：<#if userinfo.userInfo.userSex! == 0>男<#else>女</#if></span>
+						<span>性别：<#if userinfo.userInfo.userSex! == 0>男<#elseif userinfo.userInfo.userSex! == 1>女<#else>保密</#if></span>
 						<span>生日：${userinfo.userInfo.userBirth!}</span>
 						<span>所在城市：${userinfo.userInfo.userProvince!}/${userinfo.userInfo.userCity!}</span>
 					</p>

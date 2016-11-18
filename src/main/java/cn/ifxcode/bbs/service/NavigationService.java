@@ -9,5 +9,7 @@ public interface NavigationService {
 	public List<Navigation> getAllNavigations();
 
 	public Navigation getNavigation(int navId);
+
+	public List<Navigation> getBCMNavs(List<Integer> boardIds);
 	
 }

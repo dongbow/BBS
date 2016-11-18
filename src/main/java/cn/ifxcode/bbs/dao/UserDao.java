@@ -42,4 +42,6 @@ public interface UserDao {
 
 	public String getUserImage(long imgUserId);
 
+	public List<Integer> getAllBoardManageId(long userId);
+
 }

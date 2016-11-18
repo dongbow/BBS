@@ -26,8 +26,10 @@ public class BbsErrorCode {
 	public static final int FAVORITE_REPEAT = 3005;
 	public static final int FRIEND_REPEAT = 3006;
 	
-	public static final Integer NOT_LOGIN = 9001;
-	public static final Integer REPEAT_SIGN = 9002;
+	public static final int NOT_LOGIN = 9001;
+	public static final int REPEAT_SIGN = 9002;
+
+	public static final int NOT_AUTH = 9999;
 
 	private static Map<Integer, String> map = new HashMap<Integer, String>();
 	
@@ -53,6 +55,7 @@ public class BbsErrorCode {
 		
 		map.put(NOT_LOGIN, "您还没有登录");
 		map.put(REPEAT_SIGN, "您今天已经签到过了，请明天再继续");
+		map.put(NOT_AUTH, "您没有权限执行此操作");
 	}
 	
 	public static String getDescribe(Integer errorCode) {

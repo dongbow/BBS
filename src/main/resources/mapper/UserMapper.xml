@@ -194,5 +194,9 @@
 	<select id="getUserImage" resultType="String">
 		select user_head_img from user_info where user_id = #{imgUserId}
 	</select>
+	
+	<select id="getAllBoardManageId" resultType="Integer">
+		select board_id from bbs_board_manage where status = 0 and user_id = #{userId}
+	</select>
 
 </mapper>

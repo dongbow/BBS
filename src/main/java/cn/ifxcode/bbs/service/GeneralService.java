@@ -29,4 +29,8 @@ public interface GeneralService {
 	public List<SwfArea> getCitys(String userProvince);
 
 	public int click(String... sign);
+
+	public boolean authCheck(HttpServletRequest request);
+
+	public boolean bmcCheck(HttpServletRequest request);
 }

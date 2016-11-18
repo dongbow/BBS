@@ -120,14 +120,14 @@ public class GeneralServiceImpl implements GeneralService {
 		if(userValue.isGoldChange()) {
 			goldHistory = new GoldHistory(userValue.getUserId(), cookieBean.getNick_name(), userValue.getThisGold(), eg.getFrom(), 
 					eg.getDesc(), userValue.getUserLastestPastTime());
+			generalDao.insertGoldHistory(goldHistory);
 		}
 		if(userValue.isExpChange()) {
 			experienceHistory = new ExperienceHistory(userValue.getUserId(), cookieBean.getNick_name(), userValue.getThisExp(), 
 					eg.getDesc(), userValue.getUserLastestPastTime());
+			generalDao.insertExperienceHistory(experienceHistory);
 		}
 		userValueDao.updateUserValue(userValue);
-		generalDao.insertExperienceHistory(experienceHistory);
-		generalDao.insertGoldHistory(goldHistory);
 		return BbsConstant.OK;
 	}
 
@@ -227,6 +227,26 @@ public class GeneralServiceImpl implements GeneralService {
 		}
 		redisObjectMapService.save(RedisKeyUtils.getClick(sign), object, JSONObject.class);
 		return BbsConstant.OK;
+	}
+
+	@Override
+	public boolean authCheck(HttpServletRequest request) {
+		CookieBean bean = userService.getCookieBeanFromCookie(request);
+		User user = userService.getUserByIdFromRedis(Long.toString(bean.getUser_id()));
+		if(bean.getIs_admin() == 1 && user.getUserAccess().getUserIsAdmin() == 1) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean bmcCheck(HttpServletRequest request) {
+		CookieBean bean = userService.getCookieBeanFromCookie(request);
+		User user = userService.getUserByIdFromRedis(Long.toString(bean.getUser_id()));
+		if(user.getUserAccess().getUserIsAdmin() == 1 || user.getUserAccess().getUserIsBoderManager() == 1) {
+			return true;
+		}
+		return false;
 	}
 
 }

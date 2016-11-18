@@ -68,5 +68,7 @@ public interface UserService {
 	public List<UserFriends> getFriendsList(long user_id, Page page);
 
 	public List<UserFavorite> getAllFavorites(long user_id, Page page, int type);
+
+	public List<Integer> getAllBoardManageId(long user_id);
 	
 }

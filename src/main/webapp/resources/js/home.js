@@ -75,8 +75,7 @@ $(function() {
 			});
 		} else {
 			$('#otip').html('原密码不能为空');
-		}
-		;
+		};
 	});
 
 	$('#npwd').blur(function() {

@@ -45,7 +45,7 @@ public class UserValueUtils {
 	}
 	
 	private static void Exp(UserValue userValue, int value) {
-		if((userValue.getTodayExp() == 0 && !StringUtils.isNotBlank(userValue.getTodayExpTime()))
+		if((userValue.getTodayExp() == 0 && StringUtils.isEmpty(userValue.getTodayExpTime()))
 				|| (userValue.getTodayExp() < 50 && DateUtils.getDateDifferenceBegin(userValue.getTodayExpTime(), DateUtils.dt14LongFormat(new Date())) >= 0)) {
 			userValue.setUserExperience(userValue.getUserExperience() + value);
 			userValue.setTodayExp(userValue.getTodayExp() + value);
@@ -56,10 +56,14 @@ public class UserValueUtils {
 	}
 	
 	private static void gold(UserValue userValue, int value) {
-		if((userValue.getTodayGold() == 0 && !StringUtils.isNotBlank(userValue.getTodayGoldTime()))
+		if((userValue.getTodayGold() == 50 && StringUtils.isEmpty(userValue.getTodayGoldTime()))
 				|| (userValue.getTodayGold() < 50 && DateUtils.getDateDifferenceBegin(userValue.getTodayGoldTime(), DateUtils.dt14LongFormat(new Date())) >= 0)) {
 			userValue.setUserGold(userValue.getUserGold() + value);
-			userValue.setTodayGold(userValue.getTodayGold() + value);
+			if(userValue.getTodayGold() == 50) {
+				userValue.setTodayGold(value);
+			} else {
+				userValue.setTodayGold(userValue.getTodayGold() + value);
+			}
 			userValue.setTodayGoldTime(DateUtils.dt14LongFormat(new Date()));
 			userValue.setGoldChange(true);
 			userValue.setThisGold(value);

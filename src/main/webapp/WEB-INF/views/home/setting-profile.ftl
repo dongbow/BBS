@@ -167,9 +167,15 @@
 							<table>
 								<tbody>
 									<tr>
-										<th>目前邮箱：</th>
+										<th>当前邮箱：</th>
 										<td>
-											<b id="nowemail" style="font:16px 'microsoft yahei'; margin-top:5px;display:block"></b>
+											<b id="nowemail" style="font:16px 'microsoft yahei'; margin-top:5px;display:block">${huser.userAccess.userEmail}</b>
+										</td>
+									</tr>
+									<tr>
+										<th>验证邮箱：</th>
+										<td>
+											<input type="text" name="omail" id="omail"/>
 										</td>
 									</tr>
 									<tr>
@@ -202,28 +208,49 @@
 										<tr>
 											<th>资料公开：</th>
 											<td>
-												<select name="ispublic" id="ispublic">
-													<option value="0">公开</option>
-													<option value="1">好友可见</option>
-													<option value="2">保密</option>
+												<select name="baseinfo" id="ispublic">
+													<option value="0" <#if 0 == huser.userPrivacy.baseIsPublic!?number>selected</#if>>公开</option>
+													<option value="1" <#if 1 == huser.userPrivacy.baseIsPublic!?number>selected</#if>>好友可见</option>
+													<option value="2" <#if 2 == huser.userPrivacy.baseIsPublic!?number>selected</#if>>保密</option>
 												</select>
 											</td>
-										</tr><tr>
+										</tr>
+										<tr>
+											<th>添加好友：</th>
+											<td>
+												<select name="addfriend" id="ispublictopic">
+													<option value="0" <#if 0 == huser.userPrivacy.isAddFriend!?number>selected</#if>>允许</option>
+													<option value="1" <#if 1 == huser.userPrivacy.isAddFriend!?number>selected</#if>>不允许</option>
+												</select>
+											</td>
+										</tr>
+										<tr>
+											<th>好友公开：</th>
+											<td>
+												<select name="publicfriend" id="ispublictopic">
+													<option value="0" <#if 0 == huser.userPrivacy.friendIsPublic!?number>selected</#if>>公开</option>
+													<option value="1" <#if 1 == huser.userPrivacy.friendIsPublic!?number>selected</#if>>好友可见</option>
+													<option value="2" <#if 2 == huser.userPrivacy.friendIsPublic!?number>selected</#if>>保密</option>
+												</select>
+											</td>
+										</tr>
+										<tr>
 											<th>主题公开：</th>
 											<td>
-												<select name="ispublictopic" id="ispublictopic">
-													<option value="0">公开</option>
-													<option value="1">好友可见</option>
-													<option value="2">保密</option>
+												<select name="publictopic" id="ispublictopic">
+													<option value="0" <#if 0 == huser.userPrivacy.topicIsPublic!?number>selected</#if>>公开</option>
+													<option value="1" <#if 1 == huser.userPrivacy.topicIsPublic!?number>selected</#if>>好友可见</option>
+													<option value="2" <#if 2 == huser.userPrivacy.topicIsPublic!?number>selected</#if>>保密</option>
 												</select>
 											</td>
-										</tr><tr>
+										</tr>
+										<tr>
 											<th>回复公开：</th>
 											<td>
-												<select name="ispublicreply" id="ispublicreply">
-													<option value="0">公开</option>
-													<option value="1">好友可见</option>
-													<option value="2">保密</option>
+												<select name="publicreply" id="ispublicreply">
+													<option value="0" <#if 0 == huser.userPrivacy.replyIsPublic!?number>selected</#if>>公开</option>
+													<option value="1" <#if 1 == huser.userPrivacy.replyIsPublic!?number>selected</#if>>好友可见</option>
+													<option value="2" <#if 2 == huser.userPrivacy.replyIsPublic!?number>selected</#if>>保密</option>
 												</select>
 											</td>
 										</tr>

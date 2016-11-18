@@ -61,7 +61,6 @@ public class SettingController extends BaseUserController{
 				}
 			}
 			model.addAttribute("provinces", provinces);
-			model.addAttribute("huser", user);
 			model.addAttribute("type", "info");
 		} else if("headimg".equals(type)) {
 			model.addAttribute("type", "headimg");
@@ -74,6 +73,7 @@ public class SettingController extends BaseUserController{
 		} else {
 			return "redirect:/index";
 		}
+		model.addAttribute("huser", user);
 		return "home/setting-profile";
 	}
 

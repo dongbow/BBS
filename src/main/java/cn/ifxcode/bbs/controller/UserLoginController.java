@@ -183,6 +183,9 @@ public class UserLoginController {
 			@RequestParam(value = "boardManager", required = false, defaultValue = "0")int boardManager, 
 			@RequestParam(value = "roleIds", required = false, defaultValue = "4")String roleIds, 
 			HttpServletRequest request) {
+		if(!SystemConfigUtils.getIsAllowRegister()) {
+			return "account/register-stop";
+		}
 		String href = null;
 		if("0".equals(validatecode)) {
 			return "redirect:/account/register";

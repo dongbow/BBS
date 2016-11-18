@@ -30,7 +30,7 @@ function sReply(pid, tid) {
 	var cid = $('#cid').val();
 	var pName = $('#reply_' + pid + ' .authorname').text();
 	var pTime = $('#reply_' + pid + ' .createreplytime').text();
-	var pCont = $('#reply_' + pid + ' .tcontent').text();
+	var pCont = $('#reply_' + pid + ' .tcontent').html();
 	var pFloor = $('#reply_' + pid + ' .tmenu span').attr('id').split('_')[1];
 	$.get(root + '/post/new/reply?pid=' + pid + '&tid=' + tid + '&floor=' + pFloor, function(result) {
 		if(result.rc != undefined && result.rc.rc == 9001){
@@ -139,7 +139,7 @@ function doReport(uid, tid, rid, floor) {
 }
 
 function gofloor(total, count, size, floor) {
-	if(floor) {
+	if(floor && isNaN(floor)) {
 		if(floor == 0 || (floor > count) || (floor / size > total)) {
 			dialog('楼层不存在');
 			return false;
