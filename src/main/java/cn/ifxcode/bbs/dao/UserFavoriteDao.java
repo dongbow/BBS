@@ -11,7 +11,7 @@ public interface UserFavoriteDao {
 
 	public int vaildFavorite(Map<String, Object> map);
 
-	public int cancelFavorite(Map<String, Object[]> map);
+	public int cancelFavorite(Map<String, Object> map);
 
 	public List<UserFavorite> getAllFavorites(Map<String, Object> map);
 	

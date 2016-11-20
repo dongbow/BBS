@@ -134,33 +134,29 @@
 						</div>
 					<#elseif type == "password">
 			    		<div class="cpcont">
-							<form action="account/user_updatePwd.htm" id="upform" name="upform" method="post">
-								<table>
-									<tbody>
-										<tr>
-											<th>原密码：</th>
-											<td>
-												<input type="password" name="password" id="opwd"/>
-												<span id="otip" style="color:#f00;"></span>
-											</td>
-										</tr><tr>
-											<th>新密码：</th>
-											<td>
-												<input type="password" name="pwd" maxlength="16" id="npwd"/>
-												<span id="ntip" style="color:#f00;"></span>
-											</td>
-										</tr><tr>
-											<th>新密码：</th>
-											<td>
-												<input type="password" name="repassword" maxlength="16" id="rnpwd"/>
-												<span id="rntip" style="color:#f00;"></span>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-								<input type="hidden" id="nowname" name="uid" value=""/>
-								<button id="upbtn">保存</button>
-							</form>
+							<table>
+								<tbody>
+									<tr>
+										<th>原密码：</th>
+										<td>
+											<input type="password" name="password" id="opwd"/>
+										</td>
+									</tr>
+									<tr>
+										<th>新密码：</th>
+										<td>
+											<input type="password" name="pwd" maxlength="16" id="npwd"/>
+										</td>
+									</tr>
+									<tr>
+										<th>新密码：</th>
+										<td>
+											<input type="password" name="repassword" maxlength="16" id="rnpwd"/>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<button id="upbtn" class="btn-pwd">保存</button>
 						</div>
 					<#elseif type == "email">
 			    		<div class="cpcont">
@@ -183,8 +179,6 @@
 										<td>
 											<div id="mailchoose">
 												<input type="text" name="email" id="nmail"/>
-												<span id="mailtip" style="color:#f00;"></span>
-												<input type="hidden" id="result" value="0">
 			                               		<ul class="on_changes" style="position: absolute; left:0; top: 22px;">
 			                                   		<a email="">请选择邮箱类型</a>
 			                                    	<li email=""></li>
@@ -197,67 +191,64 @@
 									</tr>
 								</tbody>
 							</table>
-							<input type="hidden" id="nowname" name="uid" value=""/>
 							<button id="upbtn" class="mailbutton">保存</button>
 						</div>
 					<#else>
 						<div class="cpcont">
-							<form action="" id="upform" name="upform">
-								<table>
-									<tbody>
-										<tr>
-											<th>资料公开：</th>
-											<td>
-												<select name="baseinfo" id="ispublic">
-													<option value="0" <#if 0 == huser.userPrivacy.baseIsPublic!?number>selected</#if>>公开</option>
-													<option value="1" <#if 1 == huser.userPrivacy.baseIsPublic!?number>selected</#if>>好友可见</option>
-													<option value="2" <#if 2 == huser.userPrivacy.baseIsPublic!?number>selected</#if>>保密</option>
-												</select>
-											</td>
-										</tr>
-										<tr>
-											<th>添加好友：</th>
-											<td>
-												<select name="addfriend" id="ispublictopic">
-													<option value="0" <#if 0 == huser.userPrivacy.isAddFriend!?number>selected</#if>>允许</option>
-													<option value="1" <#if 1 == huser.userPrivacy.isAddFriend!?number>selected</#if>>不允许</option>
-												</select>
-											</td>
-										</tr>
-										<tr>
-											<th>好友公开：</th>
-											<td>
-												<select name="publicfriend" id="ispublictopic">
-													<option value="0" <#if 0 == huser.userPrivacy.friendIsPublic!?number>selected</#if>>公开</option>
-													<option value="1" <#if 1 == huser.userPrivacy.friendIsPublic!?number>selected</#if>>好友可见</option>
-													<option value="2" <#if 2 == huser.userPrivacy.friendIsPublic!?number>selected</#if>>保密</option>
-												</select>
-											</td>
-										</tr>
-										<tr>
-											<th>主题公开：</th>
-											<td>
-												<select name="publictopic" id="ispublictopic">
-													<option value="0" <#if 0 == huser.userPrivacy.topicIsPublic!?number>selected</#if>>公开</option>
-													<option value="1" <#if 1 == huser.userPrivacy.topicIsPublic!?number>selected</#if>>好友可见</option>
-													<option value="2" <#if 2 == huser.userPrivacy.topicIsPublic!?number>selected</#if>>保密</option>
-												</select>
-											</td>
-										</tr>
-										<tr>
-											<th>回复公开：</th>
-											<td>
-												<select name="publicreply" id="ispublicreply">
-													<option value="0" <#if 0 == huser.userPrivacy.replyIsPublic!?number>selected</#if>>公开</option>
-													<option value="1" <#if 1 == huser.userPrivacy.replyIsPublic!?number>selected</#if>>好友可见</option>
-													<option value="2" <#if 2 == huser.userPrivacy.replyIsPublic!?number>selected</#if>>保密</option>
-												</select>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-								<button id="upbtn">保存</button>
-							</form>
+							<table>
+								<tbody>
+									<tr>
+										<th>资料公开：</th>
+										<td>
+											<select name="baseinfo" id="ispublic">
+												<option value="0" <#if 0 == huser.userPrivacy.baseIsPublic!?number>selected</#if>>公开</option>
+												<option value="1" <#if 1 == huser.userPrivacy.baseIsPublic!?number>selected</#if>>好友可见</option>
+												<option value="2" <#if 2 == huser.userPrivacy.baseIsPublic!?number>selected</#if>>保密</option>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<th>添加好友：</th>
+										<td>
+											<select name="addfriend" id="isaddfriend">
+												<option value="0" <#if 0 == huser.userPrivacy.isAddFriend!?number>selected</#if>>允许</option>
+												<option value="1" <#if 1 == huser.userPrivacy.isAddFriend!?number>selected</#if>>不允许</option>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<th>好友公开：</th>
+										<td>
+											<select name="publicfriend" id="ispublicfriend">
+												<option value="0" <#if 0 == huser.userPrivacy.friendIsPublic!?number>selected</#if>>公开</option>
+												<option value="1" <#if 1 == huser.userPrivacy.friendIsPublic!?number>selected</#if>>好友可见</option>
+												<option value="2" <#if 2 == huser.userPrivacy.friendIsPublic!?number>selected</#if>>保密</option>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<th>主题公开：</th>
+										<td>
+											<select name="publictopic" id="ispublictopic">
+												<option value="0" <#if 0 == huser.userPrivacy.topicIsPublic!?number>selected</#if>>公开</option>
+												<option value="1" <#if 1 == huser.userPrivacy.topicIsPublic!?number>selected</#if>>好友可见</option>
+												<option value="2" <#if 2 == huser.userPrivacy.topicIsPublic!?number>selected</#if>>保密</option>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<th>回复公开：</th>
+										<td>
+											<select name="publicreply" id="ispublicreply">
+												<option value="0" <#if 0 == huser.userPrivacy.replyIsPublic!?number>selected</#if>>公开</option>
+												<option value="1" <#if 1 == huser.userPrivacy.replyIsPublic!?number>selected</#if>>好友可见</option>
+												<option value="2" <#if 2 == huser.userPrivacy.replyIsPublic!?number>selected</#if>>保密</option>
+											</select>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<button id="upbtn" class="btn-privacy">保存</button>
 						</div>
 					</#if>
 				</div>
@@ -272,6 +263,7 @@
 	});
 </script>
 <script type="text/javascript" src="${path}/resources/js/home.js" ></script>
+<script type="text/javascript" src="${path}/resources/js/jquery/jquery.md5.js"></script>
 <script type="text/javascript" src="${path}/resources/js/account/inputmail.js"></script>
 <script type="text/javascript" src="${path}/resources/static/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript" src="${path}/resources/static/avatar/avatar.js"></script>

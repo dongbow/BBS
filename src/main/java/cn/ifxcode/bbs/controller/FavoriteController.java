@@ -29,7 +29,7 @@ import cn.ifxcode.bbs.utils.ParamsBuildUtils;
 @RequestMapping("/home")
 public class FavoriteController extends BaseUserController {
 
-	private final int PAGE_SIZE_DEFAULT = 15;
+	private final int PAGE_SIZE_DEFAULT = 10;
 	
 	@Resource
 	private UserService userService;

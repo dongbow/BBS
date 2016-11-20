@@ -13,10 +13,21 @@
 	<div id="fm">
 		<div class="bbs_boards">
 			<#list boards as board>
-				<a class="bbs_board" style="background:${board.boardColor}" href="${path}/navigation/${navigation.navId}/board/${board.boardId}">
-				    <h4>${board.boardName}</h4>
-				    <p>${board.boardDesc!}</p>
-				</a>
+				<#if board.isAccess == 1>
+					<#if user??>
+						<#if user.userAccess.userIsAdmin == 1 || user.userAccess.userIsBoderManager == 1>
+							<a class="bbs_board" style="background:${board.boardColor}" href="${path}/navigation/${navigation.navId}/board/${board.boardId}">
+							    <h4>${board.boardName}</h4>
+							    <p>${board.boardDesc!}</p>
+							</a>
+						</#if>
+					</#if>
+				<#else>
+					<a class="bbs_board" style="background:${board.boardColor}" href="${path}/navigation/${navigation.navId}/board/${board.boardId}">
+					    <h4>${board.boardName}</h4>
+					    <p>${board.boardDesc!}</p>
+					</a>
+				</#if>
 			</#list>
 		</div>
 	    <div id="cont">

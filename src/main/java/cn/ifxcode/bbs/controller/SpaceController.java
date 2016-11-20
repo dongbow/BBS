@@ -122,7 +122,7 @@ public class SpaceController extends BaseUserController {
 			mv.addObject("islogin", 1);
 		}
 		if("topic".equals(bbs)) {
-			if(user.getUserPrivacy().getTopicIsPublic() == 0) {
+			if(user.getUserPrivacy().getTopicIsPublic() == 0 || (object != null && user.getUserAccess().getUserId() == cookieBean.getUser_id())) {
 				Page page = Page.newBuilder(pageNo, DEFAULT_PAGE_SIZE, request.getRequestURI());
 				List<Topic> topics = topicService.getTopicListByUserId(user.getUserAccess().getUserId(), page);
 				mv.addObject("page", page);
@@ -131,7 +131,7 @@ public class SpaceController extends BaseUserController {
 			mv.setViewName("space/space-topic");
 		} else if("reply".equals(bbs)) {
 			mv.setViewName("space/space-reply");
-			if(user.getUserPrivacy().getReplyIsPublic() == 0) {
+			if(user.getUserPrivacy().getReplyIsPublic() == 0 || (object != null && user.getUserAccess().getUserId() == cookieBean.getUser_id())) {
 //				Page page = Page.newBuilder(pageNo, DEFAULT_PAGE_SIZE, request.getRequestURI());
 //				List<Reply> replies = replyService.getReplyListByUserId();
 //				mv.addObject("page", page);

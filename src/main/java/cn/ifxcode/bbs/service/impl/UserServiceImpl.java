@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;
@@ -302,6 +303,10 @@ public class UserServiceImpl implements UserService {
 		return user == null ? null : this.formatUser(user);
 	}
 	
+	public User getUserByIdToRedis(long userId) {
+		return userDao.getUserById(userId);
+	}
+	
 	private void formatEmail(User user) {
 		String email = user.getUserAccess().getUserEmail();
 		String first = email.split("@")[0];
@@ -502,14 +507,17 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public int cancelFavorite(String ids) {
 		String favIds[] = ids.split(",");
-		synchronized (this) {
-			Map<String, Object[]> map = Maps.newHashMap();
+		int result = 0;
+		try{
+			Map<String, Object> map = Maps.newConcurrentMap();
 			map.put("favIds", favIds);
 			if(favIds.length == favoriteDao.cancelFavorite(map)) {
-				return BbsConstant.OK;
+				result = BbsConstant.OK;
 			}
+		} catch(Exception e) {
+			logger.error("删除收藏失败", e);
 		}
-		return BbsConstant.ERROR;
+		return result;
 	}
 
 	@Override
@@ -618,6 +626,87 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<Integer> getAllBoardManageId(long user_id) {
 		return userDao.getAllBoardManageId(user_id);
+	}
+
+	@Override
+	public int updateUserPrivacy(int ispublic, int isaddfriend,
+			int ispublicfriend, int ispublictopic, int ispublicreply, HttpServletRequest request) {
+		int result = 0;
+		UserPrivacy privacy = new UserPrivacy();
+		try {
+			synchronized (privacy) {
+				privacy.setBaseIsPublic(ispublic);
+				privacy.setIsAddFriend(isaddfriend);
+				privacy.setFriendIsPublic(ispublicfriend);
+				privacy.setReplyIsPublic(ispublicreply);
+				privacy.setTopicIsPublic(ispublictopic);
+				privacy.setUserId(this.getUserIdFromCookie(request));
+				result = userDao.updateUserPrivacy(privacy);
+				if(result == BbsConstant.OK) {
+					this.updateUserToRedis(request, null, privacy);
+				}
+			}
+		} catch (Exception e) {
+			logger.error("update user privacy fail",  e);
+		}
+		return result;
+	}
+
+	@Override
+	public void updateUserToRedis(HttpServletRequest request, String mail, UserPrivacy privacy) {
+		long uid = this.getUserIdFromCookie(request);
+		User user = this.getUserByIdFromRedis(Long.toString(uid));
+		if(StringUtils.isNotBlank(mail)) {
+			user.getUserAccess().setUserEmail(mail);
+			this.formatEmail(user);
+		} else if (privacy != null) {
+			user.setUserPrivacy(privacy);
+		}
+		JSONObject object = new JSONObject(true);
+		object.put("user", JSON.toJSONString(user));
+		redisObjectMapService.save(RedisKeyUtils.getUserInfo(user.getUserAccess().getUserId()), object, JSONObject.class);
+	}
+
+	@Override
+	public int vaildEmail(String omail, HttpServletRequest request) {
+		int result = 0;
+		try {
+			long uid = this.getUserIdFromCookie(request);
+			Map<String, Object> map = Maps.newConcurrentMap();
+			map.put("uid", uid);
+			map.put("email", omail);
+			result = userDao.vaildEmail(map);
+		} catch (Exception e) {
+			logger.error("vaild email fail");
+		}
+		return result;
+	}
+
+	@Override
+	public int updateUserEmail(String nmail, HttpServletRequest request) {
+		long uid = this.getUserIdFromCookie(request);
+		return userDao.updateUserEmail(nmail, uid);
+	}
+
+	@Override
+	public int vaildPassword(HttpServletRequest request, String opwd) {
+		int result = 0;
+		try {
+			long uid = this.getUserIdFromCookie(request);
+			Map<String, Object> map = Maps.newConcurrentMap();
+			map.put("uid", uid);
+			map.put("password", opwd);
+			result = userDao.vaildPassword(map);
+		} catch (Exception e) {
+			logger.error("vaild pwd fail");
+		}
+		return result;
+	}
+
+	@Override
+	public int updatePassword(String npwd, HttpServletRequest request) {
+		long uid = this.getUserIdFromCookie(request);
+		return userDao.updatePassword(npwd, uid);
 	}
 
 }

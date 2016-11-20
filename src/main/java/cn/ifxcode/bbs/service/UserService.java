@@ -11,6 +11,7 @@ import cn.ifxcode.bbs.entity.User;
 import cn.ifxcode.bbs.entity.UserFavorite;
 import cn.ifxcode.bbs.entity.UserForget;
 import cn.ifxcode.bbs.entity.UserFriends;
+import cn.ifxcode.bbs.entity.UserPrivacy;
 import cn.ifxcode.bbs.entity.UserValue;
 
 public interface UserService {
@@ -70,5 +71,18 @@ public interface UserService {
 	public List<UserFavorite> getAllFavorites(long user_id, Page page, int type);
 
 	public List<Integer> getAllBoardManageId(long user_id);
+
+	public int updateUserPrivacy(int ispublic, int isaddfriend,
+			int ispublicfriend, int ispublictopic, int ispublicreply, HttpServletRequest request);
+
+	public void updateUserToRedis(HttpServletRequest request, String nmail, UserPrivacy privacy);
+
+	public int vaildEmail(String omail, HttpServletRequest request);
+
+	public int updateUserEmail(String nmail, HttpServletRequest request);
+
+	public int vaildPassword(HttpServletRequest request, String opwd);
+
+	public int updatePassword(String npwd, HttpServletRequest request);
 	
 }

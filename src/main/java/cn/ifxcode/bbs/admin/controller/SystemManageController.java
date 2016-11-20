@@ -68,4 +68,8 @@ public class SystemManageController extends BaseController{
 		return "admin/sysmanage/resources-list";
 	}
 	
+	@RequestMapping("/resources/add")
+	public String getResourcesAddPanel() {
+		return "admin/sysmanage/resources-add";
+	}
 }

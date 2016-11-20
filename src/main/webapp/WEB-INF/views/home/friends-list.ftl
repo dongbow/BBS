@@ -29,7 +29,21 @@
 			</div>
 			<div id="rhomecont">
 				<div class="rhmct">
-					list
+					<div class="list">
+						<div class="f-search">
+							<input type="text" class="myfds">
+							<a href="javascript:;" class="s-btn"></a>
+						</div>
+						<div class="f-list">
+							<div class="f-one">
+								<img src=""/>
+								<span></span>
+							</div>
+						</div>
+					</div>
+					<div class="message">
+					
+					</div>
 				</div>
 			</div>
 		</div>

@@ -109,7 +109,7 @@ public class UserLoginController {
 	public String doLogin(String userName, String password,
 			@RequestParam(value="remember", required = false, defaultValue = "0")int remember, 
 			@RequestParam(value="backurl", required = false, defaultValue = "/index")String backurl, 
-			HttpServletRequest request, HttpServletResponse response, Model model) {
+			HttpServletRequest request, HttpServletResponse response, RedirectAttributesModelMap model) {
 		User user = null;
 		if(StringUtils.isNotBlank(userName) && StringUtils.isNotBlank(password) && remember != -1) {
 			user = userService.loginCheck(userName, MD5Utils.getMD5String(password));
@@ -158,12 +158,12 @@ public class UserLoginController {
 				LoginLog loginLog = new LoginLog(userName, BbsConstant.SIMPLE_LOGIN, BbsConstant.ERROR, LoginError.PASSWORD_ERROR.getCode(), 
 						DateUtils.dt14LongFormat(new Date()), GetRemoteIpUtil.getRemoteIp(request));
 				loginLogService.insertLog(loginLog);
-				model.addAttribute("error", BbsErrorCode.getDescribe(BbsErrorCode.PASSWORD_ERROR));
-				backurl = "forward:" + BbsConstant.SIMPLE_LOGIN;
+				model.addFlashAttribute("error", BbsErrorCode.getDescribe(BbsErrorCode.PASSWORD_ERROR));
+				backurl = "redirect:" + BbsConstant.SIMPLE_LOGIN;
 			}
 		} else {
-			model.addAttribute("error", BbsErrorCode.getDescribe(BbsErrorCode.FORM_NULL));
-			backurl = "forward:" + BbsConstant.SIMPLE_LOGIN;
+			model.addFlashAttribute("error", BbsErrorCode.getDescribe(BbsErrorCode.FORM_NULL));
+			backurl = "redirect:" + BbsConstant.SIMPLE_LOGIN;
 		}
 		return backurl;
 	}

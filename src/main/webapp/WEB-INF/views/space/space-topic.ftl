@@ -83,7 +83,7 @@
 							</#list>
 						<#else>
 							<tr>
-								<th colspan="4">无主题</th>
+								<th colspan="4" style="text-align:center">该用户主题未公开</th>
 							</tr>
 						</#if>
 					</tbody>

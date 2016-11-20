@@ -63,7 +63,7 @@
 		            </div>
 		            <div class="col-md-3 form-group">
 		            	<a class="btn btn-success btn-sm" type="button"><i class="fa fa-search"></i> 查询 </a>
-        				<a class="btn btn-info btn-sm" type="button" href="#add"><i class="fa fa-plus"></i> 添加 </a>
+        				<a class="btn btn-info btn-sm" type="button" href="${path}/system/admin/sysmanage/resources/add" id="res-add"><i class="fa fa-plus"></i> 添加 </a>
 	            		<a class="btn btn-danger btn-sm" type="button"><i class="fa fa-trash-o"></i> 删除 </a>
 		            </div>
             	</div>
@@ -99,57 +99,7 @@
         <!--body wrapper end-->
 
         <!-- Modal -->
-        <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="add" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">新增资源</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form action="#" class="form-horizontal ">
-                            <div class="form-group">
-                                <label class="control-label col-md-4">资源名称</label>
-                                <div class="col-md-6">
-                                    <input type="text" value="" class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="control-label col-md-4">资源链接</label>
-                                <div class="col-md-6 col-xs-11">
-                                    <input class="form-control" type="text" value="" />
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="control-label col-md-4">资源标记</label>
-                                <div class="col-md-6 col-xs-11">
-                                    <input class="form-control" type="text" value="" />
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="control-label col-md-4">资源图标</label>
-                                <div class="col-md-6 col-xs-11">
-                                    <input class="form-control" type="text" value="" />
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="control-label col-md-4">资源状态</label>
-                                <div class="col-md-6 col-xs-11">
-                                    <input class="form-control" type="text" value="" />
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button data-dismiss="modal" class="btn btn-primary" type="button">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="modal fade" id="res-modal" tabindex="-1" role="dialog" aria-labelledby="res-modal" aria-hidden="true"  data-backdrop="static"></div>
         <!-- modal -->
 
         <!--footer section start-->
@@ -158,10 +108,10 @@
         </footer>
         <!--footer section end-->
 
-
     </div>
     <!-- main content end-->
 </section>
 	<#include "../common/footer.ftl">
+	<script type="text/javascript" src="${path}/resources/js/admin/sysmanage/resources.js"></script>
 </body>
 </html>

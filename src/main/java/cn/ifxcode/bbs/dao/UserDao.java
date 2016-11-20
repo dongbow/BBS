@@ -44,4 +44,14 @@ public interface UserDao {
 
 	public List<Integer> getAllBoardManageId(long userId);
 
+	public int updateUserPrivacy(UserPrivacy privacy);
+
+	public int vaildEmail(Map<String, Object> map);
+
+	public int updateUserEmail(@Param("email")String email, @Param("uid")long uid);
+
+	public int vaildPassword(Map<String, Object> map);
+
+	public int updatePassword(@Param("password")String password, @Param("uid")long uid);
+
 }

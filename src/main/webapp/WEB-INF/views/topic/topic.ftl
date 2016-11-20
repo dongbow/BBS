@@ -249,7 +249,7 @@
 			            </div>
 			            <div class="tbmenu">
 			            	<#if user??>
-			            		<#if user.userAccess.userIsAdmin == 1 || user.userAccess.userIsBoderManager == 1 || user.userAccess.userId == ui.userAccess.userId>
+			            		<#if user.userAccess.userIsAdmin == 1 || user.userAccess.userIsBoderManager == 1 || user.userAccess.userId == reply.user.userAccess.userId>
 			                		<a href="" id="">编辑</a>
 			                	</#if>
             					<#if user.userAccess.userIsAdmin == 1 || user.userAccess.userIsBoderManager == 1>

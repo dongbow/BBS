@@ -198,5 +198,27 @@
 	<select id="getAllBoardManageId" resultType="Integer">
 		select board_id from bbs_board_manage where status = 0 and user_id = #{userId}
 	</select>
+	
+	<update id="updateUserPrivacy" parameterType="UserPrivacy">
+		update user_privacy set base_is_public = #{baseIsPublic}, friend_is_public = #{friendIsPublic}, 
+			is_add_friend = #{isAddFriend}, topic_is_public = #{topicIsPublic}, reply_is_public = #{replyIsPublic} 
+		where user_id = #{userId}
+	</update>
+	
+	<select id="vaildEmail" useCache="false" resultType="Integer">
+		select count(1) from user_access where user_id = #{uid} and user_email = #{email}
+	</select>
+	
+	<update id="updateUserEmail" flushCache="false">
+		update user_access set user_email = #{email} where user_id = #{uid}
+	</update>
+	
+	<select id="vaildPassword" useCache="false" resultType="Integer">
+		select count(1) from user_access where user_id = #{uid} and user_password = #{password}
+	</select>
+
+	<update id="updatePassword" flushCache="false">
+		update user_access set user_password = #{password} where user_id = #{uid}
+	</update>
 
 </mapper>

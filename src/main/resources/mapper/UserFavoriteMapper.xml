@@ -15,10 +15,10 @@
 		values (#{userId}, #{needId1}, #{needId2}, #{favSign}, #{favName}, #{createTime}, #{favIp})
 	</insert>
 	
-	<delete id="cancelFavorite">
+	<delete id="cancelFavorite" parameterType="map">
 		delete from user_favorite where fav_id in 
-		<foreach collection="array" index="index" item="favIds" open="(" separator="," close=")">  
-           	#{favIds}   
+		<foreach collection="favIds" index="index" item="favId" open="(" separator="," close=")">  
+           	#{favId}   
    		</foreach>
 	</delete>
 	
