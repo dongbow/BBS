@@ -15,7 +15,9 @@ $(function(){
 	});*/
 	
 	jQuery(function($){
-		$('#demo1').slideBox();
+		if($('#demo1').length > 0) {
+			$('#demo1').slideBox();
+		}
 	});
 
 	$(window).resize(function(){

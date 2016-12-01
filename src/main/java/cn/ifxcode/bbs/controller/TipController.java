@@ -58,7 +58,9 @@ public class TipController extends BaseUserController{
 			model.addAttribute("tip", "forget-error");
 		} else if("forget-time".equals(tip)) {
 			model.addAttribute("tip", "forget-time");
-		} else {
+		} else if("update-fail".equals(tip)) {
+			model.addAttribute("tip", "update-fail");
+		}else {
 			return "redirect:/index";
 		}
 		return "tip/system_tip";

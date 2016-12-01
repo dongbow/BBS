@@ -1,11 +1,10 @@
 var root = '/bbs';
 
 $(function(){
-  $(document).ready(function(){
+  $(document).ready(function() {
 	  $('body').find('.tcontent img').attr('title','点击查看大图');
   });
 
-	
   $('.tcontent img').click(function(){
 	  var imgsrc = this.src;
 	  window.open(imgsrc);

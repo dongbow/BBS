@@ -38,5 +38,8 @@ public interface TopicService {
 	public List<Topic> getTopicsByBoardId(Page page, long boardId, String type, String filter, String orderby);
 
 	public List<Topic> getTopicsByClassId(Page page, long classId, String type, String filter, String orderby);
-	
+
+	public int updateTopic(String tid, String ttitle, String tcontent, int isreply, int iselite, int istop, 
+			int isglobaltop, int ishome, HttpServletRequest request);
+
 }

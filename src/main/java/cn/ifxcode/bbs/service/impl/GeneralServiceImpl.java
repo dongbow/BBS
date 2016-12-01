@@ -249,4 +249,42 @@ public class GeneralServiceImpl implements GeneralService {
 		return false;
 	}
 
+	@Override
+	public boolean isLocalBMC(HttpServletRequest request) {
+		String uri = request.getRequestURI();
+		int id = 0;
+		if(uri.indexOf("/post") > 0) {
+			id = Integer.parseInt(uri.replace("/bbs/post/new/board/", "").split("/")[0]);
+		} else {
+			id = Integer.parseInt(uri.replace("/bbs/board/", "").split("/")[0]);
+		}
+		long uid = userService.getUserIdFromCookie(request);
+		User user = userService.getUserByIdFromRedis(Long.toString(uid));
+		if(user != null && user.getUserAccess().getUserIsBoderManager() == 1) {
+			List<Integer> list = userService.getAllBoardManageId(uid);
+			for (Integer bid : list) {
+				if(bid.equals(id)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public boolean checkUpdate(HttpServletRequest request, long userId) {
+		long uid = userService.getUserIdFromCookie(request);
+		if(uid == userId) {
+			return true;
+		}
+		User user = userService.getUserByIdFromRedis(Long.toString(uid));
+		if(user.getUserAccess().getUserIsAdmin() == 1) {
+			return true;
+		}
+		if(user.getUserAccess().getUserIsBoderManager() == 1) {
+			return this.isLocalBMC(request);
+		}
+		return false;
+	}
+
 }

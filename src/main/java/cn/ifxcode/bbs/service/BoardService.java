@@ -1,5 +1,7 @@
 package cn.ifxcode.bbs.service;
 
+import java.util.List;
+
 import com.alibaba.fastjson.JSONObject;
 
 import cn.ifxcode.bbs.entity.Board;
@@ -17,5 +19,7 @@ public interface BoardService {
 	public JSONObject saveOrUpdateBoardInfo(int boardId, BoardSign sign, int favorite);
 	
 	public BoardInfo getBoardInfoFromRedis(int boardId);
+
+	public List<Board> getBMC(List<Integer> boardIds);
 
 }

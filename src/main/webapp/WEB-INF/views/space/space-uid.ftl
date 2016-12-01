@@ -96,7 +96,11 @@
 				</p>
 				<#if userinfo.userAccess.userIsBoderManager == 1>
 					<p>
-						<span>管理板块：<a href="">答疑解惑</a></span>
+						<span>管理板块：
+							<#list boards as b>
+								<a href="${path}/navigation/${b.navId}/board/${b.boardId}" target="_blank">${b.boardName}</a>
+							</#list>
+						</span>
 					</p>
 				</#if>
 				<p>

@@ -111,8 +111,8 @@
 					                <a class="hui"  title="回复人数">回</a>
 					                <a>${g.topicData.topicReplyCount}</a>
 					                <a title="最后回复">${g.topicData.lastestReplyUser!}</a>
-					                <a href="" title="最后回复时间">${g.topicData.lastestReplyTime!}</a>
-					                <a title="帖子创建时间" class="tctime">${g.topicCreateTime}</a>
+					                <a href="" title="最后回复时间"><#if g.topicData.lastestReplyTime??>${g.topicData.lastestReplyTime?substring(0,16)}</#if></a>
+					                <a title="帖子创建时间" class="tctime">${g.topicCreateTime?substring(0,10)}</a>
 					            </div>
 					        </div>
 					    </div>
@@ -140,8 +140,8 @@
 					                <a class="hui"  title="回复人数">回</a>
 					                <a>${l.topicData.topicReplyCount}</a>
 					                <a title="最后回复">${l.topicData.lastestReplyUser!}</a>
-					                <a href="" title="最后回复时间">${l.topicData.lastestReplyTime!}</a>
-					                <a title="帖子创建时间" class="tctime">${l.topicCreateTime}</a>
+					                <a href="" title="最后回复时间"><#if l.topicData.lastestReplyTime??>${l.topicData.lastestReplyTime?substring(0,16)}</#if></a>
+					                <a title="帖子创建时间" class="tctime">${l.topicCreateTime?substring(0,10)}</a>
 					            </div>
 					        </div>
 					    </div>
@@ -169,8 +169,8 @@
 					                <a class="hui"  title="回复人数">回</a>
 					                <a>${h.topicData.topicReplyCount}</a>
 					                <a title="最后回复">${h.topicData.lastestReplyUser!}</a>
-					                <a href="" title="最后回复时间">${h.topicData.lastestReplyTime!}</a>
-					                <a title="帖子创建时间" class="tctime">${h.topicCreateTime}</a>
+					                <a href="" title="最后回复时间"><#if h.topicData.lastestReplyTime??>${h.topicData.lastestReplyTime?substring(0,16)}</#if></a>
+					                <a title="帖子创建时间" class="tctime">${h.topicCreateTime?substring(0,10)}</a>
 					            </div>
 					        </div>
 					    </div>

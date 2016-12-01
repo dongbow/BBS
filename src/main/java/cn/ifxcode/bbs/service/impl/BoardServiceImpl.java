@@ -1,5 +1,6 @@
 package cn.ifxcode.bbs.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -20,6 +21,7 @@ import cn.ifxcode.bbs.dao.BoardDao;
 import cn.ifxcode.bbs.dao.BoardInfoDao;
 import cn.ifxcode.bbs.entity.Board;
 import cn.ifxcode.bbs.entity.BoardInfo;
+import cn.ifxcode.bbs.entity.Navigation;
 import cn.ifxcode.bbs.enumtype.BoardSign;
 import cn.ifxcode.bbs.service.BoardService;
 import cn.ifxcode.bbs.utils.JsonUtils;
@@ -104,6 +106,27 @@ public class BoardServiceImpl implements BoardService {
 			lock.unlock();
 		}
 		return boardInfo;
+	}
+
+	@Override
+	public List<Board> getBMC(List<Integer> boardIds) {
+		JSONObject object = redisObjectMapService.get(RedisKeyUtils.getNavigations(), JSONObject.class);
+		JSONArray array = JSONArray.parseArray(object.getString("navigations"));
+		List<Navigation> navigations = JsonUtils.decodeJson(array, Navigation.class);
+		List<Board> list = new ArrayList<Board>();
+		for (Navigation n : navigations) {
+			JSONObject boardObject = redisObjectMapService.get(RedisKeyUtils.getBoardsByNavId((int) n.getNavId()), JSONObject.class);
+			JSONArray boardArray = JSONArray.parseArray(boardObject.getString("boards"));
+			List<Board> boards = JsonUtils.decodeJson(boardArray, Board.class);
+			for (Board board : boards) {
+				for (Integer id : boardIds) {
+					if(id.equals(board.getBoardId())) {
+						list.add(board);
+					}
+				}
+			}
+		}
+		return list;
 	}
 
 }

@@ -100,53 +100,17 @@
 		            </div>
 		            <div class="tcontent">
 		                <#noescape>${topic.topicContent}</#noescape>
+		                <#if topic.topicData.topicUpdateTime??>
+		                	<div class="edit-info">
+		                		由<a href="${path}/space/uid/${topic.topicData.topicUpdateUserId}" target="_blank">${topic.topicData.topicUpdateUser}</a>
+		                		编辑于${topic.topicData.topicUpdateTime?substring(0, 16)}
+		                	</div>
+		                </#if>
 		            </div>
 	            	<div class="tbmenu">
-	            		<#if user??>
-	            			<#if user.userAccess.userIsAdmin == 1 || user.userAccess.userIsBoderManager == 1>
-	            				<script type="text/javascript">
-		            				$(function(){
-		            					$('.system_option').css({
-		            						'top' : $('#a_system').offset().top - 320 + 'px',
-		            						'left': $('#a_system').offset().left - 63 + 'px'
-		            					});
-		            					
-		            					$('#a_system').mouseover(function(){
-		            						$('.system_option').show();
-		            					});
-		            					
-		            					$('#a_system').mouseout(function(){
-		            						$('.system_option').hide();
-		            					});
-		            					
-		            					$('.system_option').mouseover(function(){
-		            						$('.system_option').show();
-		            					});
-		            					
-		            					$('.system_option').mouseout(function(){
-		            						$('.system_option').hide();
-		            					});
-		            				});
-		            			</script>
-	            				<div class="system_option">
-			            			<ul>
-			            				<li><a href="">本版置顶</a></li>
-			            				<#if user.userAccess.userIsAdmin == 1>
-				            				<li><a href="">全局置顶</a></li>
-				            				<li><a href="">推送首页</a></li>
-				            			</#if>
-			            				<li><a href="">关闭回复</a></li>
-			            				<li><a href="">打开回复</a></li>
-			            				<li><a href="">加精</a></li>
-			            				<li><a href="">移动</a></li>
-			            				<li><a href="">删除</a></li>
-			            			</ul>
-		            			</div>
-		            			<a href="javascript:;" id="a_system">管理选项</a>
-	            			</#if>
-	            		</#if>
+	            		<#include "topicManage.ftl"/>
 		            	<#if user??>
-		            		<#if user.userAccess.userIsAdmin == 1 || user.userAccess.userIsBoderManager == 1 || user.userAccess.userId == ui.userAccess.userId>
+		            		<#if user.userAccess.userIsAdmin == 1 || (user.userAccess.userIsBoderManager == 1 && localbmc == 1) || user.userAccess.userId == ui.userAccess.userId>
 		                		<a href="${path}/board/${pboard.boardId}/topic/detail/${topic.topicId}/update" id="">编辑</a>
 		                	</#if>
 		                </#if>
@@ -154,9 +118,7 @@
 		                	<a href="javascript:;" id="" onclick="window.scrollTo('0',document.body.scrollHeight-600)">回复</a>
 		                </#if>
 		                <a href="javascript:;" onclick="favorite(${pboard.boardId}, ${topic.topicId}, '${topic.topicTitle}', 'topic');">收藏</a>
-		                <#if topic.topicInfo.topicIsReply == 0>
-		                	<a href="javascript:;" id="" onclick="report(${ui.userAccess.userId}, ${topic.topicId}, 0, 0);">举报</a>
-		                </#if>
+		                <a href="javascript:;" id="" onclick="report(${ui.userAccess.userId}, ${topic.topicId}, 0, 0);">举报</a>
 		            </div>
 		        </div>
 		    </div>
@@ -249,10 +211,10 @@
 			            </div>
 			            <div class="tbmenu">
 			            	<#if user??>
-			            		<#if user.userAccess.userIsAdmin == 1 || user.userAccess.userIsBoderManager == 1 || user.userAccess.userId == reply.user.userAccess.userId>
+			            		<#if user.userAccess.userIsAdmin == 1 || (user.userAccess.userIsBoderManager == 1 && localbmc == 1)|| user.userAccess.userId == reply.user.userAccess.userId>
 			                		<a href="" id="">编辑</a>
 			                	</#if>
-            					<#if user.userAccess.userIsAdmin == 1 || user.userAccess.userIsBoderManager == 1>
+            					<#if user.userAccess.userIsAdmin == 1 || (user.userAccess.userIsBoderManager == 1 && localbmc == 1)>
 				            		<a href="" id="">删除</a>
 			            		</#if>
 			            	</#if>

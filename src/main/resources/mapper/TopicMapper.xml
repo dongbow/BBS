@@ -98,6 +98,12 @@
 				</otherwise>
 			</choose>
 		</if>
+		<if test="bids != null">
+			AND t.board_id not in 
+			<foreach collection="bids" index="index" item="bid" open="(" separator="," close=")">
+				${bid}
+			</foreach>
+		</if>
 		<if test="orderby != null">
 			order by ${orderby} desc
 		</if>
@@ -164,4 +170,10 @@
 			order by ${orderby} desc
 		</if>
 	</select>
+	
+	<update id="updateTopic">
+		update bbs_topic set board_id = #{boardId}, class_id = #{classId}, nav_id = #{navId}, 
+			topic_title = #{topicTitle}, topic_content = #{topicContent}, topic_status = #{topicStatus} 
+		where topic_id = #{topicId}
+	</update>
 </mapper>

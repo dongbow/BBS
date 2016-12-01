@@ -15,4 +15,11 @@
 			#{topicIsGlobalTopEndTime}, #{topicIsHot}, #{topicIsCream})
 	</insert>
 	
+	<update id="update">
+		update bbs_topic_info set topic_is_check = #{topicIsCheck}, topic_is_home = #{topicIsHome}, topic_is_home_end_time = #{topicIsHomeEndTime}, 
+			topic_is_reply = #{topicIsReply}, topic_is_local_top = #{topicIsLocalTop}, 
+			topic_is_local_top_end_time = #{topicIsLocalTopEndTime}, topic_is_global_top = #{topicIsGlobalTop}, 
+			topic_is_global_top_end_time = #{topicIsGlobalTopEndTime}, topic_is_hot = #{topicIsHot}, topic_is_cream = #{topicIsCream} 
+		where topic_id = #{topicId}
+	</update>
 </mapper>

@@ -221,6 +221,7 @@ a{
 	font:16px "microsoft yahei";
 	padding:10px 0 30px;
 	overflow: hidden;
+	position: relative;
 }
 
 .tcontent table,th,tr,td{
@@ -740,9 +741,23 @@ blockquote p {
   font-size:15px;
 }
 
+#report_other > textarea {
+	border: 1px solid #aaa;
+	height: auto;
+	min-height: 80px;
+	padding: 5px 10px;
+	resize: none;
+	width: 200px;
+}
 
-
-
+.edit-info {
+	bottom: 0;
+	color: #666;
+	margin-bottom: 10px;
+	position: absolute;
+	text-align: center;
+	width: 100%;
+}
 
 
 

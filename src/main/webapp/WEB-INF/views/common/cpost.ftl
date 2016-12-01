@@ -17,10 +17,23 @@
 			<#list cnav as nav>
 				<ul id="zimenu${nav.navId}" class="before" style="display:none;">
 					<#list nav.boards as board>
-						<li><a class="zilist" href="javascript:;" onclick="toziclick(this,${board.boardId});">${board.boardName}</a></li>
+						<#if board.isAccess == 1>
+							<#if user.userAccess.userIsAdmin == 1 || user.userAccess.userIsBoderManager == 1>
+								<li><a class="zilist" href="javascript:;" onclick="toziclick(this,${board.boardId});">${board.boardName}</a></li>
+							</#if>
+						<#else>
+							<li><a class="zilist" href="javascript:;" onclick="toziclick(this,${board.boardId});">${board.boardName}</a></li>
+						</#if>
 					</#list>
 				</ul>
 			</#list>
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+	$(document).ready(function() {
+		<#if gid??>
+			$('#fu' + ${gid}).click();
+		</#if>
+	});
+</script>

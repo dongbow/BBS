@@ -1,7 +1,6 @@
 package cn.ifxcode.bbs.service.impl;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -21,15 +20,19 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.util.HtmlUtils;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
+import cn.ifxcode.bbs.bean.CookieBean;
 import cn.ifxcode.bbs.bean.Page;
 import cn.ifxcode.bbs.constant.BbsConstant;
 import cn.ifxcode.bbs.dao.TopicDao;
 import cn.ifxcode.bbs.dao.TopicDataDao;
 import cn.ifxcode.bbs.dao.TopicInfoDao;
 import cn.ifxcode.bbs.dao.UserValueDao;
+import cn.ifxcode.bbs.entity.Board;
 import cn.ifxcode.bbs.entity.Topic;
 import cn.ifxcode.bbs.entity.TopicData;
 import cn.ifxcode.bbs.entity.TopicInfo;
@@ -43,6 +46,8 @@ import cn.ifxcode.bbs.service.TopicService;
 import cn.ifxcode.bbs.service.UserService;
 import cn.ifxcode.bbs.utils.DateUtils;
 import cn.ifxcode.bbs.utils.GetRemoteIpUtil;
+import cn.ifxcode.bbs.utils.JsonUtils;
+import cn.ifxcode.bbs.utils.NumberUtils;
 import cn.ifxcode.bbs.utils.RedisKeyUtils;
 import cn.ifxcode.bbs.utils.SystemConfigUtils;
 
@@ -125,7 +130,7 @@ public class TopicServiceImpl implements TopicService{
 				}
 			}
 		} catch (Exception e) {
-			logger.error("insertTopic fail", e.getMessage());
+			logger.error("insertTopic fail", e);
 		} finally {
 			lock.unlock();
 		}
@@ -195,6 +200,9 @@ public class TopicServiceImpl implements TopicService{
 			JSONObject object = this.saveOrUpdateTopicData(topicId, TopicSign.VIEW, null, null, null, -1, null, null);
 			boardService.saveOrUpdateBoardInfo(boardId, BoardSign.CLICK, 0);
 			topicData = JSON.toJavaObject(object, TopicData.class);
+			if (StringUtils.isNotBlank(topicData.getTopicUpdateTime())) {
+				topicData.setTopicUpdateTime(DateUtils.dt14LongFormat(DateUtils.dt14FromStr(topicData.getTopicUpdateTime())));
+			}
 		} catch (Exception e) {
 			logger.error("insertTopicData fail", e.getMessage());
 		} finally {
@@ -237,6 +245,15 @@ public class TopicServiceImpl implements TopicService{
 	
 	public List<Topic> getTopicsByNavId(Page page, long navId, String type,
 			String filter, String orderby) {
+		JSONObject object = redisObjectMapService.get(RedisKeyUtils.getBoardsByNavId((int) navId), JSONObject.class);
+		JSONArray array = JSONArray.parseArray(object.getString("boards"));
+		List<Board> boards = JsonUtils.decodeJson(array, Board.class);
+		List<Integer> filterBids = Lists.newArrayList();
+		for (Board board : boards) {
+			if(board.getIsAccess() == 1) {
+				filterBids.add(board.getBoardId());
+			}
+		}
 		// TODO type搁置（代表主题和投票）
 		int f = 0;
 		switch (filter) {
@@ -254,6 +271,9 @@ public class TopicServiceImpl implements TopicService{
 			map.put("orderby", "topic_create_time");
 		} else {
 			orderby = "lastest_reply_time";
+		}
+		if(!filterBids.isEmpty() && filterBids.size() > 0) {
+			map.put("bids", filterBids);
 		}
 		List<Topic> topics = topicDao.getTopicsByNavId(map);
 		this.formatTopicData(topics);
@@ -377,6 +397,61 @@ public class TopicServiceImpl implements TopicService{
 			this.sort(topics);
 		}
 		return topics;
+	}
+
+	@Override
+	@Transactional
+	public int updateTopic(String tid, String ttitle, String tcontent,
+			int isreply, int iselite, int istop, int isglobaltop, int ishome,
+			HttpServletRequest request) {
+		Lock lock = new ReentrantLock();
+		try {
+			lock.lock();
+			if(NumberUtils.getAllNumber(tid) > 0) {
+				Topic topic = this.getTopicByTopicId(NumberUtils.getAllNumber(tid));
+				if(topic == null) {
+					return BbsConstant.ERROR;
+				}
+				topic.setTopicTitle(ttitle);
+				topic.setTopicContent(HtmlUtils.htmlEscape(tcontent));
+				if(topicDao.updateTopic(topic) == BbsConstant.OK) {
+					TopicInfo topicInfo = new TopicInfo();
+					topicInfo.setTopicId(topic.getTopicId());
+					if(SystemConfigUtils.getIsOpenTopicAudit()) {
+						topicInfo.setTopicIsCheck(0);
+					} else {
+						topicInfo.setTopicIsCheck(1);
+					}
+					topicInfo.setTopicIsCream(iselite);
+					topicInfo.setTopicIsGlobalTop(isglobaltop);
+					topicInfo.setTopicIsHome(ishome);
+					topicInfo.setTopicIsHot(0);
+					topicInfo.setTopicIsLocalTop(istop);
+					topicInfo.setTopicIsReply(isreply);
+					if(topicInfoDao.update(topicInfo) == BbsConstant.OK) {
+						TopicData topicData = this.getTopicDateFromRedis(topic.getTopicId(), topic.getBoardId());
+						CookieBean bean = userService.getCookieBeanFromCookie(request);
+						topicData.setTopicId(topic.getTopicId());
+						if(topicData.getTopicFavoriteCount() == null) {
+							topicData.setTopicFavoriteCount(0);
+						}
+						topicData.setTopicUpdateUserId(bean.getUser_id());
+						topicData.setTopicUpdateUserId(bean.getUser_id());
+						topicData.setTopicUpdateUser(bean.getNick_name());
+						topicData.setTopicUpdateTime(DateUtils.dt14LongFormat(new Date()));
+						if(topicDataDao.update(topicData) == BbsConstant.OK) {
+							this.saveOrUpdateTopicData(topic.getTopicId(), null, null, null, null, bean.getUser_id(), bean.getNick_name(), topicData.getTopicUpdateTime());
+							return BbsConstant.OK;
+						}
+					}
+				}
+			}
+		} catch (Exception e) {
+			logger.error("update topic fail", e);
+		} finally {
+			lock.unlock();
+		}
+		return BbsConstant.ERROR;
 	}
 
 }

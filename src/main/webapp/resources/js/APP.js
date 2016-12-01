@@ -4,8 +4,12 @@ var Url = {
 	sign : function() {
 		return root + "/sign/index";
 	},
-	cpost : function() {
-		return root + "/post/choose";
+	cpost : function(id1) {
+		var href = root + "/post/choose";
+		if(id1 > 0) {
+			href = href + "?gid=" + id1;
+		}
+		return href;
 	},
 	login : function() {
 		return root + "/tip/nologin";
@@ -57,15 +61,30 @@ $(function(){
 });
 
 function choose() {
-	$.get(Url.cpost(), function(result) {
-		if(result.rc != undefined && result.rc.rc == 9001){
-			loginDialog();
-			return false;
-		} else {
-			$('#fTopic').html(result);
-			$('#fTopic').show();
+	var href = GetUrlRelativePath();
+	var id1 = 0, id2 = 0;
+	if(href.indexOf("navigation") > 0) {
+		id1 = href.replace("/bbs/navigation/", "").split("/")[0];
+		if(href.indexOf("board") > 0) {
+			id2 = href.replace("/bbs/navigation/", "").split("/")[2];
 		}
-	});
+	}
+	if(href.indexOf("topic/detail") > 0) {
+		id2 = href.replace("/bbs/board/", "").split("/")[0];
+	}
+	if(id2 > 0) {
+		window.location = root + '/post/new/board/' + id2 + '/topic';
+	} else {
+		$.get(Url.cpost(id1), function(result) {
+			if(result.rc != undefined && result.rc.rc == 9001){
+				loginDialog();
+				return false;
+			} else {
+				$('#fTopic').html(result);
+				$('#fTopic').show();
+			}
+		});
+	}
 }
 
 function loginDialog() {
@@ -173,6 +192,15 @@ function dialog_confirm(msg, funOk) {
 		'top' : ($(window).height() - $('#checktip').height())/2 + 'px',
 		'left': ($(window).width() - $('#checktip').width())/2+'px'
 	});
+	if($('#time').length > 0) {
+		$('#time').css({
+			'border': '1px solid #aaa',
+		  	'height': '15px',
+		  	'margin': '10px 0',
+		  	'padding': '5px',
+			'width': '180px'
+		});
+	}
 	$('.tipsure').click(function() {
 		if(typeof funOk == 'function') {
 			$('#checktip').remove();
@@ -227,4 +255,15 @@ function click() {
 			console.log('click');
 		}
 	});
+}
+
+function GetUrlRelativePath(){
+	var url = document.location.toString();
+	var arrUrl = url.split("//");
+	var start = arrUrl[1].indexOf("/");
+	var relUrl = arrUrl[1].substring(start);
+	if(relUrl.indexOf("?") != -1){
+		relUrl = relUrl.split("?")[0];
+	}
+	return relUrl;
 }

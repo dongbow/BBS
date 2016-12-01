@@ -48,6 +48,9 @@ function validate() {
 	var description = editorhtml.replace(/<.*?>/ig,"");
 	if($('#s1').val() != -1 && description != null && description != '' && description.length >= 10 && $('#topic_title_text').val()) {
 		$('#postForm').submit();
+	} else if(description.length < 10){
+		dialog('帖子内容过短');
+		return false;
 	} else {
 		dialog('不能留空');
 		return false;

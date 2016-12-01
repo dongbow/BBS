@@ -6,4 +6,6 @@ public interface TopicDataDao {
 
 	public Integer insert(TopicData topicData);
 
+	public int update(TopicData topicData);
+
 }

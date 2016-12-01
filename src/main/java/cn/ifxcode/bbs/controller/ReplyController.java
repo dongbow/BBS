@@ -65,4 +65,6 @@ public class ReplyController {
 		return "redirect:/tip?tip=reply-fail";
 	}
 	
+	
+	
 }

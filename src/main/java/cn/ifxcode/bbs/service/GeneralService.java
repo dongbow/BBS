@@ -33,4 +33,8 @@ public interface GeneralService {
 	public boolean authCheck(HttpServletRequest request);
 
 	public boolean bmcCheck(HttpServletRequest request);
+
+	public boolean isLocalBMC(HttpServletRequest request);
+
+	public boolean checkUpdate(HttpServletRequest request, long userId);
 }

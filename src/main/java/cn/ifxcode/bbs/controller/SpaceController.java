@@ -20,10 +20,12 @@ import com.alibaba.fastjson.JSONObject;
 import cn.ifxcode.bbs.bean.CookieBean;
 import cn.ifxcode.bbs.bean.Page;
 import cn.ifxcode.bbs.constant.BbsConstant;
+import cn.ifxcode.bbs.entity.Board;
 import cn.ifxcode.bbs.entity.Reply;
 import cn.ifxcode.bbs.entity.Topic;
 import cn.ifxcode.bbs.entity.User;
 import cn.ifxcode.bbs.entity.UserValue;
+import cn.ifxcode.bbs.service.BoardService;
 import cn.ifxcode.bbs.service.ReplyService;
 import cn.ifxcode.bbs.service.TopicService;
 import cn.ifxcode.bbs.service.UserService;
@@ -44,6 +46,9 @@ public class SpaceController extends BaseUserController {
 	
 	@Resource
 	private ReplyService replyService;
+	
+	@Resource
+	private BoardService boardService;
 	
 	@Resource
 	private RedisObjectMapService redisObjectMapService;
@@ -72,6 +77,11 @@ public class SpaceController extends BaseUserController {
 		} else {
 			model.addAttribute("islogin", 1);
 		}
+		if(user.getUserAccess().getUserIsBoderManager() == 1) {
+			List<Integer> boardIds = userService.getAllBoardManageId(user.getUserAccess().getUserId());
+			List<Board> boards = boardService.getBMC(boardIds);
+			model.addAttribute("boards", boards);
+		}
 		return "space/space-uid";
 	}
 	
@@ -94,6 +104,11 @@ public class SpaceController extends BaseUserController {
 			model.addAttribute("islogin", 0);
 		} else {
 			model.addAttribute("islogin", 1);
+		}
+		if(user.getUserAccess().getUserIsBoderManager() == 1) {
+			List<Integer> boardIds = userService.getAllBoardManageId(user.getUserAccess().getUserId());
+			List<Board> boards = boardService.getBMC(boardIds);
+			model.addAttribute("boards", boards);
 		}
 		return "space/space-uid";
 	}

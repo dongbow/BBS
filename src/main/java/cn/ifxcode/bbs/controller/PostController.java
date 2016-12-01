@@ -21,6 +21,7 @@ import cn.ifxcode.bbs.entity.Classify;
 import cn.ifxcode.bbs.entity.Navigation;
 import cn.ifxcode.bbs.service.BoardService;
 import cn.ifxcode.bbs.service.ClassifyService;
+import cn.ifxcode.bbs.service.GeneralService;
 import cn.ifxcode.bbs.service.NavigationService;
 import cn.ifxcode.bbs.service.TopicService;
 import cn.ifxcode.bbs.service.UserService;
@@ -53,6 +54,9 @@ public class PostController extends BaseUserController {
 	@Resource
 	private RedisObjectMapService redisObjectMapService;
 	
+	@Resource
+	private GeneralService generalService;
+	
 	public void data(Model model) {
 		JSONObject object = redisObjectMapService.get(RedisKeyUtils.getNavigations(), JSONObject.class);
 		JSONArray array = JSONArray.parseArray(object.getString("navigations"));
@@ -67,13 +71,16 @@ public class PostController extends BaseUserController {
 	}
 	
 	@RequestMapping("/choose")
-	public String cPost(Model model) {
+	public String cPost(Model model, @RequestParam(value = "gid", required = false)String gid) {
 		this.data(model);
+		if(StringUtils.isNotBlank(gid) && NumberUtils.getAllNumber(gid) > 0) {
+			model.addAttribute("gid", NumberUtils.getAllNumber(gid));
+		}
 		return "common/cpost";
 	}
 	
 	@RequestMapping("/new/board/{bid}/topic")
-	public String goPost(@PathVariable("bid")String bid, Model model) {
+	public String goPost(@PathVariable("bid")String bid, Model model, HttpServletRequest request) {
 		long boardId = NumberUtils.getAllNumber(bid);
 		if(boardId != 0) {
 			List<Classify> classifies = classifyService.getClassifyByBoardId((int) boardId);
@@ -83,6 +90,11 @@ public class PostController extends BaseUserController {
 				model.addAttribute("navigation", navigation);
 				model.addAttribute("pboard", board);
 				model.addAttribute("classifies", classifies);
+				if(generalService.isLocalBMC(request)) {
+					model.addAttribute("localbmc", 1);
+				} else {
+					model.addAttribute("localbmc", 0);
+				}
 				return "post/post";
 			}
 		}

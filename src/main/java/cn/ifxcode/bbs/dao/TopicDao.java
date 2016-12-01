@@ -25,4 +25,6 @@ public interface TopicDao {
 
 	public List<Topic> getTopicsByClassId(Map<String, Object> map);
 
+	public int updateTopic(Topic topic);
+
 }

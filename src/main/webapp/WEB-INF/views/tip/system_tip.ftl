@@ -84,6 +84,10 @@
 			     		抱歉，链接已失效<br/>
 			     		<a href="${path}/account/forget">返回重试</a>
 		     		</#if>
+		     		<#if tip == 'update-fail'>
+		     			更新失败<br/>
+			     		<a class="goback" href="javascript:;">返回上一页</a>
+		     		</#if>
 		     	</p>
 		    </div>
 		</div>

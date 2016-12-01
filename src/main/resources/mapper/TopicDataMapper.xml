@@ -13,4 +13,12 @@
 			#{lastestReplyTime}, #{topicUpdateUserId}, #{topicUpdateUser}, #{topicUpdateTime})
 	</insert>
 	
+	<update id="update" flushCache="false">
+		update bbs_topic_data set topic_reply_count = #{topicReplyCount}, topic_view_count = #{topicViewCount}, 
+			topic_favorite_count = #{topicFavoriteCount}, topic_title_style = #{topicTitleStyle}, 
+			lastest_reply_user = #{lastestReplyUser}, lastest_reply_time = #{lastestReplyTime}, 
+			topic_update_user_id = #{topicUpdateUserId}, topic_update_user = #{topicUpdateUser}, topic_update_time = #{topicUpdateTime} 
+		where topic_id = #{topicId}
+	</update>
+	
 </mapper>

@@ -29,6 +29,7 @@ import cn.ifxcode.bbs.entity.User;
 import cn.ifxcode.bbs.entity.UserValue;
 import cn.ifxcode.bbs.service.BoardService;
 import cn.ifxcode.bbs.service.ClassifyService;
+import cn.ifxcode.bbs.service.GeneralService;
 import cn.ifxcode.bbs.service.NavigationService;
 import cn.ifxcode.bbs.service.ReplyService;
 import cn.ifxcode.bbs.service.ReportService;
@@ -65,6 +66,9 @@ public class TopicController extends BaseUserController{
 	
 	@Resource
 	private ReportService reportService;
+	
+	@Resource
+	private GeneralService generalService;
 	
 	@RequestMapping("/board/{bid}/topic/detail/{tid}")
 	public String toTopic(@PathVariable("bid")String bid, 
@@ -104,6 +108,11 @@ public class TopicController extends BaseUserController{
 			model.addAttribute("page", page);
 			model.addAttribute("replies", replies);
 			model.addAttribute("sort", sort);
+			if(generalService.isLocalBMC(request)) {
+				model.addAttribute("localbmc", 1);
+			} else {
+				model.addAttribute("localbmc", 0);
+			}
 			return "topic/topic";
 		}
 		logger.info("topic is not found");
@@ -123,7 +132,7 @@ public class TopicController extends BaseUserController{
 		if(this.isNotBlank(uid, tid, rid, floor, rs, url)) {
 			if("其他".equals(rs)) {
 				if(StringUtils.isEmpty(other) || other.length() < 5 || other.length() > 50) {
-					return new Result(BbsConstant.ERROR, "举报原因过长");
+					return new Result(BbsConstant.ERROR, "举报原因过长或过短");
 				}
 			}
 			if(reportService.addReport(uid, tid, rid, floor, rs, other, url, request) == BbsConstant.OK) {
@@ -135,6 +144,65 @@ public class TopicController extends BaseUserController{
 			result = new Result(BbsConstant.ERROR, "举报失败");
 		}
 		return result;
+	}
+	
+	@RequestMapping(value = "/board/{bid}/topic/detail/{tid}/update", method = RequestMethod.GET)
+	public String topicUpdate(@PathVariable("bid")String bid, @PathVariable("tid")String tid, 
+			HttpServletRequest request, Model model) {
+		long boardId = NumberUtils.getAllNumber(bid);
+		if(Long.toString(boardId).length() > 10) {
+			return "redirect:/tip?tip=board-notexists";
+		}
+		long topicId = NumberUtils.getAllNumber(tid);
+		if(Long.toString(topicId).length() > 15) {
+			return "redirect:/tip?tip=topic-notexists";
+		}
+		Topic topic = topicService.getTopicByTopicId(topicId);
+		if(topic != null) {
+			if(generalService.checkUpdate(request, topic.getUserId())) {
+				topic.setTopicContent(HtmlUtils.htmlUnescape(topic.getTopicContent()));
+				Classify classify = classifyService.getClassifyByCid(topic.getBoardId(), topic.getClassId());
+				Navigation navigation = navigationService.getNavigation(topic.getNavId());
+				Board board = boardService.getBoardByBoardId(topic.getNavId(), topic.getBoardId());
+				model.addAttribute("navigation", navigation);
+				model.addAttribute("pboard", board);
+				model.addAttribute("clas", classify);
+				model.addAttribute("topic", topic);
+				if(generalService.isLocalBMC(request)) {
+					model.addAttribute("localbmc", 1);
+				} else {
+					model.addAttribute("localbmc", 0);
+				}
+				return "post/topic-update";
+			} else {
+				return "redirect:/tip?tip=noauth";
+			}
+		}
+		logger.info("topic is not found");
+		return "redirect:/tip?tip=topic-notexists";
+	}
+	
+	@RequestMapping(value = "/board/{boardid}/topic/update", method = RequestMethod.POST)
+	public String topicUpdateDo(String bid, String tid, String ttitle, String tcontent, String uid, 
+			@RequestParam(required = false, defaultValue = "0")int isreply,
+			@RequestParam(required = false, defaultValue = "0")int iselite,
+			@RequestParam(required = false, defaultValue = "0")int istop,
+			@RequestParam(required = false, defaultValue = "0")int isglobaltop,
+			@RequestParam(required = false, defaultValue = "0")int ishome, 
+			HttpServletRequest request) {
+		if(StringUtils.isEmpty(ttitle) || StringUtils.isEmpty(tcontent)) {
+			return "redirect:/tip?tip=update-fail";
+		}
+		if(generalService.checkUpdate(request, NumberUtils.getAllNumber(uid))) {
+			int row = topicService.updateTopic(tid, ttitle, tcontent, isreply, iselite, istop, isglobaltop, ishome, request);
+			if(row == BbsConstant.OK) {
+				return "redirect:/board/" + bid + "/topic/detail/" + tid;
+			} else {
+				return "redirect:/tip?tip=update-fail";
+			}
+		} else {
+			return "redirect:/tip?tip=noauth";
+		}
 	}
 	
 	private boolean isNotBlank(String... str) {
