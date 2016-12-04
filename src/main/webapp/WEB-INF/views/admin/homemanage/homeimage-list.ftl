@@ -59,7 +59,7 @@
 				                            </td>
 				                            <td class="numeric" data-title="创建时间">${img.homeCreateTime}</td>
 				                            <th class="numeric" data-title="操作">
-				                            	<a class="btn btn-link btn-xs" type="button"> 查看图片 </a>
+				                            	<a class="btn btn-link btn-xs btn-img" type="button" data-img="${img.homeImgLink}"> 查看图片 </a>
 				                            </th>
 				                        </tr>
 		                        	</#list>
@@ -68,6 +68,21 @@
 	                    </table>
 	                </section>
 	                <@buildPage page=page/>
+	                <!-- Modal -->
+			        <div class="modal fade" id="image-modal" tabindex="-1" role="dialog" aria-labelledby="image-modal" aria-hidden="true">
+			        	<div class="modal-dialog modal-lg">
+						    <div class="modal-content">
+						        <div class="modal-header">
+						            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						            <h4 class="modal-title">查看图片</h4>
+						        </div>
+						        <div class="modal-body" style="text-align:center; overflow:hidden">
+						        	<img class="look-img" alt="image" src=""/>
+						        </div>
+						    </div>
+						</div>
+			        </div>
+			        <!-- modal -->
 	            </div>
 	        </section>
         </div>
@@ -83,6 +98,7 @@
     </div>
     <!-- main content end-->
 </section>
+	<script type="text/javascript" src="${path}/resources/js/admin/homemanage/homeimage.js"></script>
 	<#include "../common/footer.ftl">
 </body>
 </html>

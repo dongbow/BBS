@@ -26,7 +26,7 @@ public interface UserService {
 
 	public CookieBean getCookieBeanFromCookie(HttpServletRequest request);
 
-	public List<User> getAllUser(Page page, long userId, String username, String nickname, int sex, int role, int status, String startTime, String endTime);
+	public List<User> getAllUser(Page page, long userId, String username, String nickname, int sex, int role, int status, String startTime, String endTime, int isAdmin);
 
 	public Integer insertUser(String userName, String password, String email, int isAdmin, int boardManager, String roleIds, HttpServletRequest request);
 
@@ -84,5 +84,7 @@ public interface UserService {
 	public int vaildPassword(HttpServletRequest request, String opwd);
 
 	public int updatePassword(String npwd, HttpServletRequest request);
+
+	public String getNicknameFromCookie(HttpServletRequest request);
 	
 }

@@ -13,4 +13,6 @@ public interface ReplyDao {
 
 	public Reply getReplyByPid(long replyParentId);
 
+	public int getCount(long tid);
+
 }

@@ -23,7 +23,7 @@ public class ValidateCode extends HttpServlet {
      * 验证码session的名称。
      */
     public static final String SESSION_ATT_NAME = "validateCode";
-
+    
     /**
      * 验证码图片的宽度。
      */

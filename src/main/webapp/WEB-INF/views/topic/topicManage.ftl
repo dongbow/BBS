@@ -53,8 +53,8 @@
 				<#else>
 					<li><a href="" class="mt cream">加精</a></li>
 				</#if>
-				<li><a href="" class="mt move">移动</a></li>
-				<li><a href="" class="mt del">删除</a></li>
+				<li><a href="" class="mt tmove">移动</a></li>
+				<li><a href="" class="mt tdel">删除</a></li>
 			</ul>
 		</div>
 		<a href="javascript:;" id="a_system">管理选项</a>

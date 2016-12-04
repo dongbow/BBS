@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.ui.Model;
 
 import com.google.common.collect.Maps;
 
@@ -18,7 +19,11 @@ public class ParamsBuildUtils {
 			Map<String, Object> map = Maps.newHashMap();
 			for (String s : param) {
 				if(!s.split("=")[0].equals("page")) {
-					map.put(s.split("=")[0], s.split("=")[1]);
+					if(s.split("=").length == 1) {
+						map.put(s.split("=")[0], "");
+					} else {
+						map.put(s.split("=")[0], s.split("=")[1]);
+					}
 				}
 			}
 			params = "?";
@@ -32,5 +37,20 @@ public class ParamsBuildUtils {
 		return uri + (StringUtils.isNotBlank(params) ? params : "?page=");
 	}
 
+	public static void createModel(Model model, HttpServletRequest request) {
+		String params = request.getQueryString();
+		if(StringUtils.isNotBlank(params)) {
+			String param[] = params.split("&");
+			for (String s : param) {
+				if(!s.split("=")[0].equals("page")) {
+					if(s.split("=").length == 1 || s.split("=")[0].equals("userId")) {
+						model.addAttribute(s.split("=")[0], "");
+					} else {
+						model.addAttribute(s.split("=")[0], s.split("=")[1]);
+					}
+				}
+			}
+		}
+	}
 	
 }

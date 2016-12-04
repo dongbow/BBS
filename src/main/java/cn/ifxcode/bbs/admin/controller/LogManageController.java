@@ -22,7 +22,7 @@ public class LogManageController extends BaseController{
 	
 	@RequestMapping("/login")
 	public String toLoginLog(
-			@RequestParam(value="p", required = false, defaultValue = "1")int p,
+			@RequestParam(value="page", required = false, defaultValue = "1")int p,
 			HttpServletRequest request, Model model) {
 		Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, request.getRequestURI());
 		model.addAttribute("logs", loginLogService.getAllLoginlog(page, null, null, null, -1));
@@ -32,7 +32,7 @@ public class LogManageController extends BaseController{
 	
 	@RequestMapping("/login/search")
 	public String loginLogSearch(
-			@RequestParam(value="p", required = false, defaultValue = "1")int pageNo, 
+			@RequestParam(value="page", required = false, defaultValue = "1")int pageNo, 
 			String startTime,String endTime, String loginName, int status,
 			HttpServletRequest request, Model model) {
 		Page page = Page.newBuilder(pageNo, DEFAULT_PAGE_SIZE, request.getRequestURI());

@@ -3,17 +3,20 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/tx
-        http://www.springframework.org/schema/tx/spring-tx.xsd">
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
         
     <context:property-placeholder location="classpath:app.properties"/>
     
     <!-- 扫描service包下所有使用注解的类型 -->
-    <context:component-scan base-package="cn.ifxcode.bbs.service ltang.redis cn.ifxcode.bbs.init cn.ifxcode.bbs.job"/>
+    <context:component-scan base-package="cn.ifxcode.bbs.service ltang.redis cn.ifxcode.bbs.init cn.ifxcode.bbs.job cn.ifxcode.bbs.logger"/>
 
 	<bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">    
 	    <property name="host" value="${email.host}" />    
@@ -36,4 +39,6 @@
     <!-- 配置基于注解的声明式事务  -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
+	<aop:aspectj-autoproxy/>
+	
 </beans>

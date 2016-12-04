@@ -138,12 +138,12 @@ function doReport(uid, tid, rid, floor) {
 }
 
 function gofloor(total, count, size, floor) {
-	if(floor && isNaN(floor)) {
+	if(floor) {
 		if(floor == 0 || (floor > count) || (floor / size > total)) {
 			dialog('楼层不存在');
 			return false;
 		} else {
-			window.location = $('#spacelocal a').attr('href') + '?floor=' + floor + '&page=' + Math.ceil(floor / size);
+			window.location = $('#spacelocal a').attr('href') + '/gofloor?floor=' + floor + '&page=' + Math.ceil(floor / size);
 		}
 	}
 }
@@ -152,6 +152,26 @@ function gopage(e) {
 	if(e.keyCode == 13) {
 		window.location = $('#spacelocal a').attr('href') + '?page=' + $('#kkpager_btn_go_input').val();
 	}
+}
+
+function nt(uid) {
+	$.post(root + "/system/admin/sysmanage/user/talk", {
+		'uid': uid
+	}, function(result) {
+		if(result.rc.rc == 9001){
+			loginDialog();
+			return false;
+		} else if(result.rc == 0){
+			dialog(result.msg);
+		} else if(result.rc == 3005) {
+			dialog(result.msg);
+		} else {
+			if($('.bcf').length > 0) {
+				$('.bcf').text(parseInt($('.bcf').html()) + 1);
+			}
+			dialog(result.msg);
+		}
+	});
 }
 
 

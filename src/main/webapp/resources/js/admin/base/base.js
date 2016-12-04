@@ -69,7 +69,7 @@ function activeClass() {
 	var url = window.location.pathname;
 	$('#bbs-menu a').each(function(){
 		var href = $(this).attr('href');
-		if(href == url && href != '/bbs/system/admin/index') {
+		if(url.indexOf(href) >= 0 && href != '/bbs/system/admin/index') {
 			$('.bbs-home').removeClass('active');
 			$(this).parent().addClass('active');
 			$(this).parent().parent().css('display','block');

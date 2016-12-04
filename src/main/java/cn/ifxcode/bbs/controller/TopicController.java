@@ -75,9 +75,7 @@ public class TopicController extends BaseUserController{
 			@PathVariable("tid")String tid, 
 			@RequestParam(value = "page", required = false, defaultValue = "1")int pno, 
 			@RequestParam(required = false, defaultValue = "0")int sort, 
-			@RequestParam(required = false)Integer floor, 
 			@RequestParam(required = false, defaultValue = "0")long uid, 
-			@RequestParam(required = false, defaultValue = "0")int lastest, 
 			Model model, HttpServletRequest request) {
 		long boardId = NumberUtils.getAllNumber(bid);
 		if(Long.toString(boardId).length() > 10) {
@@ -117,6 +115,28 @@ public class TopicController extends BaseUserController{
 		}
 		logger.info("topic is not found");
 		return "redirect:/tip?tip=topic-notexists";
+	}
+	
+	@RequestMapping("/board/{bid}/topic/detail/{tid}/gofloor")
+	public String toTopicFloor(@PathVariable("bid")String bid, 
+			@PathVariable("tid")String tid, 
+			@RequestParam(value = "page", required = false, defaultValue = "1")int pno, 
+			@RequestParam(required = false)Integer floor, 
+			@RequestParam(required = false, defaultValue = "0")int lastest) {
+		long boardId = NumberUtils.getAllNumber(bid);
+		if(Long.toString(boardId).length() > 10) {
+			return "redirect:/tip?tip=board-notexists";
+		}
+		long topicId = NumberUtils.getAllNumber(tid);
+		if(Long.toString(topicId).length() > 15) {
+			return "redirect:/tip?tip=topic-notexists";
+		}
+		if(lastest != 0) {
+			int count = replyService.getCount(topicId);
+			pno = (int) Math.ceil((double) count / DEFAULT_PAGE_SIZE);
+			floor = count;
+		}
+		return "redirect:/board/" + boardId + "/topic/detail/" + topicId + "?page=" + pno + "#floor_" + floor;
 	}
 	
 	@RequestMapping("/post/topic/report")

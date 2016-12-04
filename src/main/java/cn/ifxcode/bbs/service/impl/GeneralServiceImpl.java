@@ -26,11 +26,13 @@ import cn.ifxcode.bbs.entity.Board;
 import cn.ifxcode.bbs.entity.Classify;
 import cn.ifxcode.bbs.entity.ExperienceHistory;
 import cn.ifxcode.bbs.entity.GoldHistory;
+import cn.ifxcode.bbs.entity.Resources;
 import cn.ifxcode.bbs.entity.SwfArea;
 import cn.ifxcode.bbs.entity.SystemConfig;
 import cn.ifxcode.bbs.entity.User;
 import cn.ifxcode.bbs.entity.UserValue;
 import cn.ifxcode.bbs.enumtype.EGHistory;
+import cn.ifxcode.bbs.exception.StopException;
 import cn.ifxcode.bbs.service.BoardService;
 import cn.ifxcode.bbs.service.ClassifyService;
 import cn.ifxcode.bbs.service.GeneralService;
@@ -39,6 +41,7 @@ import cn.ifxcode.bbs.utils.DateUtils;
 import cn.ifxcode.bbs.utils.GetRemoteIpUtil;
 import cn.ifxcode.bbs.utils.JsonUtils;
 import cn.ifxcode.bbs.utils.RedisKeyUtils;
+import cn.ifxcode.bbs.utils.RoleIdUtils;
 import cn.ifxcode.bbs.utils.UserValueUtils;
 
 @Service
@@ -55,6 +58,8 @@ public class GeneralServiceImpl implements GeneralService {
 	
 	@Resource
 	private ClassifyService classifyService;
+	
+	boolean result = false;
 	
 	@Resource
 	private BoardService boardService;
@@ -134,7 +139,7 @@ public class GeneralServiceImpl implements GeneralService {
 	@Override
 	public Board getBoardByBoardId(int boardId) {
 		List<Classify> classifies = classifyService.getClassifyByBoardId(boardId);
-		if(!classifies.isEmpty() && classifies.size() > 0) {
+		if(classifies != null && classifies.size() > 0) {
 			Board board = boardService.getBoardByBoardId(classifies.get(0).getNavId(), boardId);
 			if(board != null) {
 				return board;
@@ -283,6 +288,36 @@ public class GeneralServiceImpl implements GeneralService {
 		}
 		if(user.getUserAccess().getUserIsBoderManager() == 1) {
 			return this.isLocalBMC(request);
+		}
+		return false;
+	}
+
+	@Override
+	public boolean authResources(HttpServletRequest request) {
+		String url = request.getRequestURI();
+		if(url.indexOf("/auth") > 0 || url.indexOf(BbsConstant.AUTH_HOME) > 0) {
+			return true;
+		}
+		CookieBean bean = userService.getCookieBeanFromCookie(request);
+		String ids = RoleIdUtils.getRoleIdsFromCookie(RoleIdUtils.getRoleIds(bean.getRole_ids()));
+		JSONObject object = redisObjectMapService.get(RedisKeyUtils.getResourcesByRoleId(Integer.parseInt(ids)), JSONObject.class);
+		List<Resources> resources = JsonUtils.decodeJson(JSONArray.parseArray(object.getString("resources")));
+		try {
+			this.authHref(url, resources);
+		} catch (StopException e) {
+			return true;
+		}
+		return result;
+	}
+	
+	private boolean authHref(String url, List<Resources> resources) {
+		for (Resources res : resources) {
+			if(url.endsWith(res.getResLink())) {
+				throw new StopException();
+			}
+			if(res.getResources() != null && res.getResources().size() > 0) {
+				this.authHref(url, res.getResources());
+			}
 		}
 		return false;
 	}

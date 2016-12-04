@@ -66,6 +66,9 @@
 		                </li>
 		            </ul>
 		            <#if user??>
+		            	<#if user.userAccess.userIsAdmin == 1 || user.userAccess.userIsBoderManager == 1>
+		                	<a href="javascript:;" class="nt" onclick="nt(${ui.userAccess.userId})">禁言</a>
+		                </#if>
 		            	<#if user.userAccess.userId != ui.userAccess.userId>
 		            		<a href="javascript:;" class="adf" onclick="friends(${ui.userAccess.userId}, '${ui.userAccess.userNickname}')">加好友</a>
 	            			<a href="javascript:;" class="spm">发私信</a>
@@ -170,6 +173,9 @@
 			                </li>
 			            </ul>
 			            <#if user??>
+			            	<#if user.userAccess.userIsAdmin == 1 || user.userAccess.userIsBoderManager == 1>
+			                	<a href="javascript:;" class="nt" onclick="nt(${reply.user.userAccess.userId})">禁言</a>
+			                </#if>
 			            	<#if user.userAccess.userId != reply.user.userAccess.userId>
 			            		<a href="javascript:;" class="adf" onclick="friends(${reply.user.userAccess.userId}, '${reply.user.userAccess.userNickname}')">加好友</a>
 		            			<a href="javascript:;" class="spm">发私信</a>

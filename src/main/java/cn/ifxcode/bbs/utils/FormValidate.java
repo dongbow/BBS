@@ -3,6 +3,8 @@ package cn.ifxcode.bbs.utils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang.StringUtils;
+
 public class FormValidate {
 
 	public static boolean email(String... emails) {
@@ -16,4 +18,12 @@ public class FormValidate {
 		return true;
 	}
 	
+	public static boolean stringUtils(String... str) {
+		for (String s : str) {
+			if(StringUtils.isEmpty(s)) {
+				return false;
+			}
+		}
+		return true;
+	}
 }

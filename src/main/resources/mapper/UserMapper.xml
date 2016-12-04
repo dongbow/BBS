@@ -104,6 +104,7 @@
 		and ua.user_id = ur.user_id
 		and r.role_id = ur.role_id
 		and ui.user_id = ua.user_id
+		and ua.user_is_admin = #{isadmin} 
 		<if test="userid != null">
 			and ua.user_id = #{userid}
 		</if>

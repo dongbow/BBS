@@ -14,4 +14,6 @@ public interface ReplyService {
 
 	public List<Reply> getReplyListByTopicId(Page page, long topicId, long uid, int sort);
 
+	public int getCount(long topicId);
+
 }

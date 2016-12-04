@@ -27,4 +27,8 @@
 		SELECT * FROM bbs_reply WHERE reply_id = #{replyParentId} 
 	</select>
 	
+	<select id="getCount" resultType="Integer">
+		select count(1) from bbs_reply where topic_id = #{tid}
+	</select>
+	
 </mapper>

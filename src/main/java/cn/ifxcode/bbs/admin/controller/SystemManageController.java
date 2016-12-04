@@ -9,16 +9,23 @@ import ltang.redis.service.RedisObjectMapService;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import cn.ifxcode.bbs.bean.Page;
+import cn.ifxcode.bbs.bean.Result;
+import cn.ifxcode.bbs.constant.BbsConstant;
 import cn.ifxcode.bbs.entity.Role;
+import cn.ifxcode.bbs.service.ResourcesService;
 import cn.ifxcode.bbs.service.UserService;
 import cn.ifxcode.bbs.utils.JsonUtils;
+import cn.ifxcode.bbs.utils.ParamsBuildUtils;
 import cn.ifxcode.bbs.utils.RedisKeyUtils;
 
 @Controller
@@ -31,28 +38,43 @@ public class SystemManageController extends BaseController{
 	private UserService userService;
 	
 	@Resource
+	private ResourcesService resourcesService;
+	
+	@Resource
 	private RedisObjectMapService redisObjectMapService;
 	
 	@RequestMapping("/user")
 	public String toUserList(
-			@RequestParam(value="p", required = false, defaultValue = "1")int p,
+			@RequestParam(value="page", required = false, defaultValue = "1")int p,
 			HttpServletRequest request, Model model) {
 		Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, request.getRequestURI());
-		model.addAttribute("users", userService.getAllUser(page, 0, null, null, -1, -1, -1, null, null));
+		model.addAttribute("users", userService.getAllUser(page, 0, null, null, -1, -1, -1, null, null, 0));
 		model.addAttribute("page", page);
 		return "admin/sysmanage/user-list";
 	}
 	
-	@RequestMapping("/user/search")
+	@RequestMapping("/admin")
+	public String toAdminList(
+			@RequestParam(value="page", required = false, defaultValue = "1")int p,
+			HttpServletRequest request, Model model) {
+		Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, request.getRequestURI());
+		model.addAttribute("users", userService.getAllUser(page, 0, null, null, -1, -1, -1, null, null, 1));
+		model.addAttribute("page", page);
+		return "admin/sysmanage/admin-list";
+	}
+	
+	@RequestMapping("/{user}/search")
 	public String searchUserList(
-			@RequestParam(value="p", required = false, defaultValue = "1")int p,
+			@PathVariable("user")String user, 
+			@RequestParam(value="page", required = false, defaultValue = "1")int p,
 			long userId, String username, String nickname, int sex, int role, 
 			int status, String startTime, String endTime,
 			HttpServletRequest request, Model model) {
-		Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, request.getRequestURI());
-		model.addAttribute("users", userService.getAllUser(page, userId, username, nickname, sex, role, status, startTime, endTime));
+		Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
+		model.addAttribute("users", userService.getAllUser(page, userId, username, nickname, sex, role, status, startTime, endTime, "admin".equals(user) ? 1 : 0));
 		model.addAttribute("page", page);
-		return "admin/sysmanage/user-list";
+		ParamsBuildUtils.createModel(model, request);
+		return "admin/sysmanage/" + user +"-list";
 	}
 	
 	@RequestMapping("/role")
@@ -68,8 +90,22 @@ public class SystemManageController extends BaseController{
 		return "admin/sysmanage/resources-list";
 	}
 	
-	@RequestMapping("/resources/add")
+	@RequestMapping(value = "/resources/add", method = RequestMethod.GET)
 	public String getResourcesAddPanel() {
 		return "admin/sysmanage/resources-add";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/resources/add", method = RequestMethod.POST)
+	public Result addResources(String name, String link, String sign, int pid, 
+			String icon, int type, int sort, int status, HttpServletRequest request) {
+		Result result = null;
+		int row = resourcesService.addResources(name, link, sign, pid, icon, type, sort, status, request);
+		if(row == BbsConstant.OK) {
+			result = new Result(BbsConstant.OK, "添加成功");
+		} else {
+			result = new Result(BbsConstant.ERROR, "添加失败，请重试");
+		}
+		return result;
 	}
 }

@@ -148,7 +148,7 @@ public class BbsInterceptor extends HandlerInterceptorAdapter{
 			if(!generalService.authCheck(request)) {
 				return false;
 			} else {
-				return true;
+				return generalService.authResources(request);
 			}
 		}
 		return true; 

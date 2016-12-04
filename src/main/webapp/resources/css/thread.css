@@ -181,7 +181,7 @@ a{
 	color: #ff6000;
 }
 
-#topiccont .adf,#topiccont .spm{
+#topiccont .adf,#topiccont .spm, #topiccont .nt{
 	display:block;
 	width:100px;
 	height:20px;
@@ -420,7 +420,7 @@ a{
 	color: #ff6000;
 }
 
-.replylist .adf,.replylist .spm{
+.replylist .adf,.replylist .spm, .replylist .nt{
 	display:block;
 	width:100px;
 	height:20px;

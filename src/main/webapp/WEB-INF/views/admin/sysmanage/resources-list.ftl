@@ -41,6 +41,8 @@
 <head>
 	<#include "../common/import.ftl">
   	<title>资源管理</title>
+  	<link href="${path}/resources/static/admin/js/bootstrap-icon/css/icon-picker.min.css" media="all" rel="stylesheet" type="text/css" />
+	<style type="text/css">.dropdown-menu {z-index: 10000;}.icon-popup .ip-search {height: 25px;}</style>
 </head>
 
 <body class="sticky-header">
@@ -112,6 +114,7 @@
     <!-- main content end-->
 </section>
 	<#include "../common/footer.ftl">
+	<script src="${path}/resources/static/admin/js/bootstrap-icon/js/iconPicker.js"></script>
 	<script type="text/javascript" src="${path}/resources/js/admin/sysmanage/resources.js"></script>
 </body>
 </html>

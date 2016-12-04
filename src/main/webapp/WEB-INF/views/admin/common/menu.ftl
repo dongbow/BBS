@@ -2,7 +2,7 @@
 <#macro buildMenu child>
 	<#if child?? && child?size gt 0>
 		<#list child as res>
-    		<#if res.resources?? && res.resources?size gt 0 && res.resType lt 1>
+    		<#if res.resources?? && res.resources?size gt 0 && res.resType lt 1 && res.resStatus == 0>
     			<li class="menu-list"><a href="${path}${res.resLink}"><i class="fa ${res.resIcon}"></i><span>${res.resName}</span></a>
                     <ul class="sub-menu-list">
                     	<#list res.resources as sub>
@@ -10,7 +10,7 @@
 						</#list>
                     </ul>
             	</li>
-    		<#elseif res.resources?? && res.resources?size gt 0 && res.resType lt 1>
+    		<#elseif res.resources?? && res.resources?size gt 0 && res.resType lt 1 && res.resStatus == 0>
     			<li><a href="${path}${res.resLink}"><i class="fa ${res.resIcon}"></i><span>${res.resName}</span></a></li>
     		</#if>
             <@buildMenu child=res.resources/>

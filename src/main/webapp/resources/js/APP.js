@@ -192,15 +192,51 @@ function dialog_confirm(msg, funOk) {
 		'top' : ($(window).height() - $('#checktip').height())/2 + 'px',
 		'left': ($(window).width() - $('#checktip').width())/2+'px'
 	});
-	if($('#time').length > 0) {
-		$('#time').css({
-			'border': '1px solid #aaa',
-		  	'height': '15px',
-		  	'margin': '10px 0',
-		  	'padding': '5px',
-			'width': '180px'
-		});
-	}
+	$('.tipsure').click(function() {
+		if(typeof funOk == 'function') {
+			$('#checktip').remove();
+			$('#bbs-dialog').hide();
+			funOk();
+			return true;
+		}
+	});
+	$('.tipclose').click(function(){
+		$('#checktip').remove();
+		$('#bbs-dialog').hide();
+		return false;
+	});
+	$('#bbs-dialog').show();
+}
+
+function dialog_confirm_time(msg, funOk) {
+	var sHtml = '<div id="checktip" style="width:400px;height:150px;">';
+	sHtml +=    '    <div class="tipcont">';
+	sHtml +=    '        <div class="tiptitle">';
+	sHtml +=    '        	<a class="titlename">系统提示</a>';
+	sHtml +=    '        	<a title="关闭" class="tipclose" href="javascript:;">X</a>';
+	sHtml +=    '        </div>';
+	sHtml +=    '     	<p class="context">';
+	sHtml += msg;
+	sHtml +=    '			</br><input type="text" id="time" onClick="WdatePicker()" readOnly>';
+	sHtml +=    '     	</p>';
+	sHtml +=    '     	<div class="tipfooter">';
+	sHtml +=    '     		<a class="tipsure" href="javascript:;">确定</a>';
+	sHtml +=    '     		<a  class="tipclose" href="javascript:;">取消</a>';
+	sHtml +=    '     	</div>';
+	sHtml +=    '    </div>';
+	sHtml +=    '</div>';
+	$('#bbs-dialog').html(sHtml);
+	$('#checktip').css({
+		'top' : ($(window).height() - $('#checktip').height())/2 + 'px',
+		'left': ($(window).width() - $('#checktip').width())/2+'px'
+	});
+	$('#time').css({
+		'border': '1px solid #aaa',
+	  	'height': '15px',
+	  	'margin': '10px 0',
+	  	'padding': '5px',
+		'width': '180px'
+	});
 	$('.tipsure').click(function() {
 		if(typeof funOk == 'function') {
 			$('#checktip').remove();

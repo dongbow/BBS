@@ -71,7 +71,8 @@ public class LoginFilter implements Filter {
 	private void result(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		if(isAjax(request)) {
 			JSONObject responseJSONObject = new JSONObject(true);
-			Result result = new Result(BbsErrorCode.NOT_LOGIN, BbsErrorCode.getDescribe(BbsErrorCode.NOT_LOGIN));
+			Result result = new Result(BbsErrorCode.NOT_LOGIN, BbsErrorCode.getDescribe(BbsErrorCode.NOT_LOGIN), 
+					(Object) BbsConstant.SIMPLE_LOGIN);
 			responseJSONObject.put(BbsConstant.RC, result);
 			response.setCharacterEncoding("UTF-8");  
 		    response.setContentType("application/json; charset=utf-8");  

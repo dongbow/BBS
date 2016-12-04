@@ -134,4 +134,9 @@ public class ReplyServiceImpl implements ReplyService{
 		return reply;
 	}
 
+	@Override
+	public int getCount(long tid) {
+		return replyDao.getCount(tid);
+	}
+
 }

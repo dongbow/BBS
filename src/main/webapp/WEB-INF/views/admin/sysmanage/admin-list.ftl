@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 	<#include "../common/import.ftl">
-  	<title>会员管理</title>
+  	<title>管理员管理</title>
 </head>
 
 <body class="sticky-header">
@@ -42,8 +42,8 @@
 			            <div class="col-md-2 form-group">
 		                    <select id="user-role" name="role" class="selectpicker show-tick form-control">
 		                      	<option value="-1">选择角色</option>
-						        <option value="3" <#if role??><#if role?number == 3>selected</#if></#if>>论坛版主</option>
-						        <option value="4" <#if role??><#if role?number == 4>selected</#if></#if>>普通用户</option>
+						        <option value="1" <#if role??><#if role?number == 1>selected</#if></#if>>超级管理员</option>
+						        <option value="2" <#if role??><#if role?number == 2>selected</#if></#if>>管理员</option>
 					        </select>
 			            </div>
 			            <div class="col-md-2 form-group">
@@ -61,7 +61,7 @@
 	                        </div>
 	                	</div>
 	                	<div class="col-md-4 form-group">
-	            			<a class="btn btn-success btn-sm user-search" type="button" href="${path}/system/admin/sysmanage/user/search"><i class="fa fa-search"></i> 查找 </a>
+	            			<a class="btn btn-success btn-sm user-search" type="button" href="${path}/system/admin/sysmanage/admin/search"><i class="fa fa-search"></i> 查找 </a>
 	            			<a class="btn btn-info btn-sm" type="button"><i class="fa fa-plus"></i> 添加 </a>
 			            	<a class="btn btn-danger btn-sm" type="button"><i class="fa fa-trash-o"></i> 删除 </a>
 			            	<button class="btn btn-primary btn-sm" type="button"><i class="fa fa-share-square-o"></i> 导出 </button>
@@ -99,7 +99,7 @@
 			                            <td class="numeric" data-title="昵称">${user.userAccess.userNickname}</td>
 			                            <td class="numeric" data-title="角色">
 			                            	<#list user.roles as role>
-			                            		${role.roleName}
+			                            		${role.roleName}.
 			                            	</#list>
 			                            </td>
 			                            <td class="numeric" data-title="邮箱">${user.userAccess.userEmail}</td>

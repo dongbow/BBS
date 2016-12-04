@@ -154,7 +154,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> getAllUser(Page page, long userId, String username,
 			String nickname, int sex, int role, int status, String startTime,
-			String endTime) {
+			String endTime, int isAdmin) {
 		Map<String, Object> map = Maps.newHashMap();
 		map.put("page", page);
 		if(userId != 0) {
@@ -181,6 +181,7 @@ public class UserServiceImpl implements UserService {
 		if(StringUtils.isNotBlank(endTime)) {
 			map.put("endtime", endTime);
 		}
+		map.put("isadmin", isAdmin);
 		return this.formatUser(userDao.getAllUser(map));
 	}
 	
@@ -707,6 +708,11 @@ public class UserServiceImpl implements UserService {
 	public int updatePassword(String npwd, HttpServletRequest request) {
 		long uid = this.getUserIdFromCookie(request);
 		return userDao.updatePassword(npwd, uid);
+	}
+
+	@Override
+	public String getNicknameFromCookie(HttpServletRequest request) {
+		return this.getCookieBeanFromCookie(request).getNick_name();
 	}
 
 }

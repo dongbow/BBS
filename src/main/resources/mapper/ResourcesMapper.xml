@@ -39,7 +39,6 @@
 	 	 	r.res_create_time, res_icon from resources as r, role as l, role_resources as rr 
 	 	 	where r.res_id = rr.res_id 
 	 	 	and l.role_id = rr.role_id 
-	 	 	and r.res_status = 0
 	 	 	and l.role_status = 0
 	 	 	and l.role_id in 
         	<foreach collection="array" index="index" item="roleIds" open="(" separator="," close=")">  

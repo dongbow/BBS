@@ -29,11 +29,11 @@
 			<li class="utp"><a href="${path}/space/uid/${userinfo.userAccess.userId}/topic">主题</a></li>
 			<li class="a"><a href="${path}/space/uid/${userinfo.userAccess.userId}">个人资料</a></li>
 			<#if islogin == 1 && user.userAccess.userIsAdmin == 1 && user.userAccess.userId == userinfo.userAccess.userId>
-				<li class="cm"><a href="${path}/system/admin/account/login">进入后台</a></li>
-				<li class="cm"><a href="${path}/manage/bmc/index">版主后台</a></li>
+				<li class="cm"><a href="${path}/system/admin/account/login" target="_blank">进入后台</a></li>
+				<li class="cm"><a href="${path}/manage/bmc/index" target="_blank">版主后台</a></li>
 			</#if>
 			<#if islogin == 1 && user.userAccess.userIsBoderManager == 1 && user.userAccess.userId == userinfo.userAccess.userId>
-				<li class="cm"><a href="${path}/manage/bmc/index">版主后台</a></li>
+				<li class="cm"><a href="${path}/manage/bmc/index" target="_blank">版主后台</a></li>
 			</#if>
 			<#if islogin == 1 && user.userAccess.userId == userinfo.userAccess.userId>
 				<li class="cm"><a href="${path}/home/setting/profile">修改资料</a></li>

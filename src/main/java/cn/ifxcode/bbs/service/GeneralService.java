@@ -37,4 +37,6 @@ public interface GeneralService {
 	public boolean isLocalBMC(HttpServletRequest request);
 
 	public boolean checkUpdate(HttpServletRequest request, long userId);
+
+	public boolean authResources(HttpServletRequest request);
 }

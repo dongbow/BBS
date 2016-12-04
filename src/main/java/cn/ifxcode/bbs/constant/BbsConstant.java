@@ -24,7 +24,7 @@ public class BbsConstant {
 	public static final String RC = "rc";
 	public static final int OK = 1;
 	public static final int ERROR = 0;
-	public static final String DEFAULT_IMAGE = "/upload/images/default/default.jpg";
+	public static final String DEFAULT_IMAGE = "http://ofrjra54d.bkt.clouddn.com/04d3d70e8529492eb63bae21f4a705dc1478274399206.jpg";
 	public static final String UTF8 = "utf-8";
 	
 	public static final String BOARD = "/board";

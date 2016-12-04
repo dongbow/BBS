@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ifxcode.bbs.dao.SystemLogDao">
+
+	<cache type="cn.ifxcode.bbs.dao.cache.LoggingRedisCache"/>
+
+	<sql id="allKey">
+		module, method, status, status_desc, args, user_id, user_nickname, ip, create_time
+	</sql>
+	
+    <insert id="insert" parameterType="SystemLog">
+    	insert into system_log (<include refid="allKey"/>)
+    	values (#{module}, #{method}, #{status}, #{statusDesc}, #{args}, #{userId}, #{userNickname}, #{ip}, #{createTime})
+    </insert>
+
+</mapper>
