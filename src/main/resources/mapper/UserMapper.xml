@@ -50,7 +50,8 @@
 			<result column="role_name" property="roleName" jdbcType="VARCHAR"/>
 			<result column="role_color" property="roleColor" jdbcType="VARCHAR"/>
 			<result column="role_desc" property="roleDesc" jdbcType="VARCHAR"/>
-			<result column="role_status" property="roleStatus" jdbcType="VARCHAR"/>
+			<result column="role_status" property="roleStatus" jdbcType="INTEGER"/>
+			<result column="is_access" property="isAccess" jdbcType="INTEGER"/>
 			<result column="role_create_time" property="roleCreateTime" jdbcType="VARCHAR"/>
 		</collection>
 	</resultMap>

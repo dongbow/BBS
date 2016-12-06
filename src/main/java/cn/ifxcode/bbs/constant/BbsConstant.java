@@ -2,6 +2,8 @@ package cn.ifxcode.bbs.constant;
 
 public class BbsConstant {
 
+	public static final int SUPER_ADMIN = 1;
+	
 	public static final String DOMAIN = "";
 	public static final String ROOT = "/bbs";
 	public static final String TIP = "/tip";

@@ -38,7 +38,6 @@ import cn.ifxcode.bbs.entity.SwfArea;
 import cn.ifxcode.bbs.entity.SystemConfig;
 import cn.ifxcode.bbs.utils.JsonUtils;
 import cn.ifxcode.bbs.utils.RedisKeyUtils;
-import cn.ifxcode.bbs.utils.TreeUtils;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -130,7 +129,7 @@ public class InitSystemData {
 				List<Integer> roleIds = roleDao.getRoleIds();
 				for (Integer id : roleIds) {
 					JSONObject jsonObject = new JSONObject();
-					List<Resources> resources = TreeUtils.formatResources(resourcesDao.getResourcesByRoleId(id));
+					List<Resources> resources = resourcesDao.getResourcesByRoleId(id);
 					JSONArray jsonArray = JSONArray.parseArray(JSON.toJSONString(resources));
 					if(jsonArray != null){
 						jsonObject.put("resources", jsonArray.toJSONString());

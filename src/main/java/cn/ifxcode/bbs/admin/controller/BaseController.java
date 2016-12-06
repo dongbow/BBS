@@ -1,6 +1,9 @@
 package cn.ifxcode.bbs.admin.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
@@ -39,20 +41,30 @@ public class BaseController {
 	
 	@ModelAttribute
 	public void getMenuNotJson(HttpServletRequest request, Model model) {
-		JSONArray result = null;
+//		JSONArray result = null;
 		CookieBean bean = userService.getCookieBeanFromCookie(request);
-		String ids = RoleIdUtils.getRoleIdsFromCookie(RoleIdUtils.getRoleIds(bean.getRole_ids()));
-		JSONObject jsonObject = redisObjectMapService.get(RedisKeyUtils.getResourcesByRoleId(Integer.parseInt(ids)), JSONObject.class);
-		if(jsonObject == null) {
-			List<Resources> resources = TreeUtils.formatResources(resourcesService.getResourcesByIds(RoleIdUtils.getRoleIds(bean.getRole_ids())));
-			result = JSONArray.parseArray(JSON.toJSONString(resources));
-			jsonObject = new JSONObject();
-			jsonObject.put("resources", result.toJSONString());
-			redisObjectMapService.save(RedisKeyUtils.getResourcesByRoleId(Integer.parseInt(ids)), jsonObject, JSONObject.class);
-		} else {
-			result = JSONArray.parseArray(jsonObject.getString("resources"));
+		List<Integer> ids = RoleIdUtils.getRoleIds(bean.getRole_ids());
+		List<Resources> lists = new ArrayList<Resources>();
+		for (Integer id : ids) {
+			JSONObject object = redisObjectMapService.get(RedisKeyUtils.getResourcesByRoleId(id), JSONObject.class);
+			JSONArray result = JSONArray.parseArray(object.getString("resources"));
+			List<Resources> res = JsonUtils.decodeJson(result);
+			lists.addAll(res);
 		}
-		List<Resources> resources = JsonUtils.decodeJson(result);
+		Set<Resources> set = new TreeSet<Resources>(lists);
+		List<Resources> resources = TreeUtils.formatResources(new ArrayList<Resources>(set));
+//		String ids = RoleIdUtils.getRoleIdsFromCookie(RoleIdUtils.getRoleIds(bean.getRole_ids()));
+//		JSONObject jsonObject = redisObjectMapService.get(RedisKeyUtils.getResourcesByRoleId(Integer.parseInt(ids)), JSONObject.class);
+//		if(jsonObject == null) {
+//			List<Resources> resources = TreeUtils.formatResources(resourcesService.getResourcesByIds(RoleIdUtils.getRoleIds(bean.getRole_ids())));
+//			result = JSONArray.parseArray(JSON.toJSONString(resources));
+//			jsonObject = new JSONObject();
+//			jsonObject.put("resources", result.toJSONString());
+//			redisObjectMapService.save(RedisKeyUtils.getResourcesByRoleId(Integer.parseInt(ids)), jsonObject, JSONObject.class);
+//		} else {
+//			result = JSONArray.parseArray(jsonObject.getString("resources"));
+//		}
+//		List<Resources> resources = JsonUtils.decodeJson(result);
 		this.formatResources(resources);
 		model.addAttribute("resources", resources);
 	}

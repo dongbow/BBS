@@ -10,5 +10,9 @@ public interface ResourcesDao {
 	public List<Resources> getResourcesByRoleId(Integer id);
 
 	public List<Resources> getResByRoleIds(Map<String, Object[]> map);
+
+	public int insertResources(Resources resources);
+
+	public List<String> getAllModules();
 	
 }

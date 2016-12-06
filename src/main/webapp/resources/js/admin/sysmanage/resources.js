@@ -15,7 +15,8 @@ function addPanel(event) {
 	$.get($(this).attr('href'), function(result) {
 		if(result.rc != undefined && result.rc.rc == 9001){
 			loginDialog(result);
-			return false;
+		} else if(result.rc != undefined && result.rc.rc == 9999) {
+			authDialog(result);
 		} else {
 			$('#res-modal').html(result);
 			$('#res-modal').modal();
@@ -35,7 +36,8 @@ function save() {
 	var type = $('#type').val();
 	var sort = $('#sort').val();
 	var status = $('#status').val();
-	if(name && link && sign && pid && icon && type && sort && status) {
+	var roles = $('#roles').val();
+	if(name && link && sign && pid && icon && type && sort && status && roles) {
 		$.post($('#res-add').attr('href'), {
 			"name": name,
 			"link": link,
@@ -44,7 +46,8 @@ function save() {
 			"icon": icon,
 			"type": type,
 			"sort": sort,
-			"status": status
+			"status": status,
+			"roles": roles
 		}, function(result) {
 			if(result.rc.rc == 9001){
 				loginDialog(result);

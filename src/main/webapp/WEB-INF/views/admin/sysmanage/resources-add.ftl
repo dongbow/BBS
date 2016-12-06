@@ -71,6 +71,23 @@
 				        <option value="1">暂不使用</option>
 			        </select>
 	            </div>
+	            
+	            <div class="form-group">
+               		<label class="control-label col-md-4">分配角色</label>
+                    <select id="roles" class="selectpicker show-tick col-md-6 col-xs-11" multiple>
+                    	<#list roles as role>
+                    		<#if role.isAccess == 1>
+                    			<#if role.roleId == 1>
+	                    			<#if su == 1>
+	                    				<option value="${role.roleId}">${role.roleName}</option>
+	                    			</#if>
+	                    		<#else>
+	                    			<option value="${role.roleId}">${role.roleName}</option>
+	                    		</#if>
+                    		</#if>
+                    	</#list>
+			        </select>
+	            </div>
             </form>
         </div>
         <div class="modal-footer" style="text-align:center">

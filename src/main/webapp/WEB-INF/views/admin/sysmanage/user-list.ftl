@@ -42,8 +42,11 @@
 			            <div class="col-md-2 form-group">
 		                    <select id="user-role" name="role" class="selectpicker show-tick form-control">
 		                      	<option value="-1">选择角色</option>
-						        <option value="3" <#if role??><#if role?number == 3>selected</#if></#if>>论坛版主</option>
-						        <option value="4" <#if role??><#if role?number == 4>selected</#if></#if>>普通用户</option>
+		                      	<#list roles as r>
+		                      		<#if r.roleId gt 2>
+		                      			<option value="${r.roleId}" <#if role??><#if role?number == r.roleId>selected</#if></#if>>${r.roleName}</option>
+		                      		</#if>
+		                      	</#list>
 					        </select>
 			            </div>
 			            <div class="col-md-2 form-group">

@@ -48,7 +48,7 @@ public class LoginLogServiceImpl implements LoginLogService {
 	}
 	
 	private List<LoginLog> formatLog(List<LoginLog> logs) {
-		List<LoginLog> list = new ArrayList<>();
+		List<LoginLog> list = new ArrayList<LoginLog>();
 		for (LoginLog loginLog : logs) {
 			if(loginLog.getErrorType() != null && loginLog.getErrorType() == 0) {
 				loginLog.setErrorText(LoginError.PASSWORD_ERROR.getValue());

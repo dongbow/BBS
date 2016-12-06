@@ -23,6 +23,7 @@
 			<result column="role_color" property="roleColor" jdbcType="VARCHAR" />
 			<result column="role_desc" property="roleDesc" jdbcType="VARCHAR" />
 			<result column="role_status" property="roleStatus" jdbcType="INTEGER" />
+			<result column="is_access" property="isAccess" jdbcType="INTEGER" />
 			<result column="role_create_time" property="roleCreateTime" jdbcType="VARCHAR" />
 	 	</collection>
 	 </resultMap>
@@ -31,12 +32,13 @@
 	 	select r.* from resources as r, role as ro, role_resources as rr
 	 	where r.res_id = rr.res_id
 	 	and ro.role_id = rr.role_id
-	 	and ro.role_id = #{id}
+	 	and ro.role_id = #{id} 
+	 	order by r.res_sort asc
 	 </select>
 	 
 	 <select id="getResByRoleIds" resultMap="BaseResources">
 	 	 select distinct(r.res_id), r.res_name, r.res_link, r.res_sign, r.res_type, r.res_status, r.res_sort, r.res_parent_id,
-	 	 	r.res_create_time, res_icon from resources as r, role as l, role_resources as rr 
+	 	 	r.res_create_time, r.res_icon from resources as r, role as l, role_resources as rr 
 	 	 	where r.res_id = rr.res_id 
 	 	 	and l.role_id = rr.role_id 
 	 	 	and l.role_status = 0
@@ -46,5 +48,16 @@
     		</foreach>
 			order by r.res_id asc
 	 </select>
+	 
+	 <insert id="insertResources" keyProperty="resId" parameterType="Resources">
+	 	insert into resources (res_name, res_link, res_sign, res_type, res_status, res_sort, res_parent_id,
+	 	 	res_create_time, res_icon)
+	 	values (#{resName}, #{resLink}, #{resSign}, #{resType}, #{resStatus}, #{resSort}, #{resParentId}, 
+	 		#{resCreateTime}, #{resIcon})
+	 </insert>
+
+	<select id="getAllModules" resultType="String">
+		select res_name from resources where res_parent_id = 0
+	</select>
 
 </mapper>

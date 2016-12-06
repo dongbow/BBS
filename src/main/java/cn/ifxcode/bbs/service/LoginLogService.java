@@ -9,7 +9,7 @@ public interface LoginLogService {
 
 	public int insertLog(LoginLog loginLog);
 
-	public List<LoginLog> getAllLoginlog(Page page, String satrtTime, String endTime,
+	public List<LoginLog> getAllLoginlog(Page page, String startTime, String endTime,
 			String loginName, int status);
 	
 }

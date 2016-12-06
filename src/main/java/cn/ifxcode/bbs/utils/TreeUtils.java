@@ -1,6 +1,7 @@
 package cn.ifxcode.bbs.utils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -12,7 +13,7 @@ import cn.ifxcode.bbs.entity.Resources;
 public class TreeUtils {
 
 	public static List<Resources> formatResources(List<Resources> list) {
-		
+		Collections.sort(list);
 		List<Resources> root = new ArrayList<Resources>();
 		
 		if(list != null && list.size() > 0) {

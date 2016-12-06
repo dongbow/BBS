@@ -13,5 +13,9 @@ public interface RoleDao {
 	public List<Role> getAllRoles();
 
 	public void insertUserRole(@Param("userId")Long userId, @Param("roleId")Integer roleId);
+
+	public int insertRoleResources(@Param("roleId")int roleId, @Param("resIds")List<Integer> resIds);
+
+	public int addRole(Role role);
 	
 }

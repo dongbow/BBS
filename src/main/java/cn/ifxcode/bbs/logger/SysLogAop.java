@@ -56,8 +56,8 @@ public class SysLogAop {
 		HttpServletRequest request = sra.getRequest();
 		SystemLog systemLog = new SystemLog();
 		Map<String, Object> map = this.getMethodDescription(point);
-		systemLog.setModule(map.get("module").toString());
-		systemLog.setMethod("<font color=\"red\">执行方法异常:-->" + map.get("methods").toString() + "</font>");
+		systemLog.setModule("<font color=\"red\">" + map.get("module").toString() + "</font>");
+		systemLog.setMethod("<font color=\"red\">" + map.get("methods").toString() + "</font>");
 		systemLog.setStatus(0);
 		systemLog.setStatusDesc("<font color=\"red\">执行方法异常:-->" + e + "</font>");
 		systemLog.setArgs(map.get("args").toString());

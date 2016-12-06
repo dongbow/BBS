@@ -11,6 +11,10 @@ public interface ResourcesService {
 	public List<Resources> getResourcesByIds(List<Integer> roleIds);
 
 	public int addResources(String name, String link, String sign, int pid,
-			String icon, int type, int sort, int status, HttpServletRequest request);
+			String icon, int type, int sort, int status, int[] roles, HttpServletRequest request);
+
+	public List<String> getAllModules();
+	
+	public void addResourcesToRedis(Resources resources, int[] roles);
 	
 }

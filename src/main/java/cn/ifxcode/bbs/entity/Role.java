@@ -13,6 +13,7 @@ public class Role implements Serializable{
 	private String roleDesc;
 	private Integer roleStatus;
 	private String roleCreateTime;
+	private int isAccess;
 	private List<Resources> resources;
 
 	public Integer getRoleId() {
@@ -69,5 +70,13 @@ public class Role implements Serializable{
 
 	public void setResources(List<Resources> resources) {
 		this.resources = resources;
+	}
+
+	public int getIsAccess() {
+		return isAccess;
+	}
+
+	public void setIsAccess(int isAccess) {
+		this.isAccess = isAccess;
 	}
 }

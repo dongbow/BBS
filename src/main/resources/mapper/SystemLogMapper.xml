@@ -15,4 +15,23 @@
     	values (#{module}, #{method}, #{status}, #{statusDesc}, #{args}, #{userId}, #{userNickname}, #{ip}, #{createTime})
     </insert>
 
+	<select id="getAllOperationLog" resultType="SystemLog">
+		select * from system_log where 1 = 1 
+		<if test="starttime != null">
+			<![CDATA[ and DATE_FORMAT(create_time, '%Y-%m-%d') >= #{starttime} ]]>
+		</if>
+		<if test="endtime != null">
+			<![CDATA[ and DATE_FORMAT(create_time, '%Y-%m-%d') <= #{endtime} ]]>
+		</if>
+		<if test="module != null">
+			and module = #{module} 
+		</if>
+		<if test="name != null">
+			and user_nickname = #{name} 
+		</if>
+		<if test="status != null">
+			and status = #{status} 
+		</if>
+		order by create_time desc
+	</select>
 </mapper>

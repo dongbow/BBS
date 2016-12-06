@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Resources implements Serializable{
+public class Resources implements Serializable, Comparable<Resources> {
 
 	private static final long serialVersionUID = -4940735715008958259L;
 	
@@ -128,6 +128,11 @@ public class Resources implements Serializable{
 
 	public void setResIcon(String resIcon) {
 		this.resIcon = resIcon;
+	}
+
+	@Override
+	public int compareTo(Resources res) {
+		return this.resId.compareTo(res.resId);
 	}
 	
 }

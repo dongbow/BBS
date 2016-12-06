@@ -1,9 +1,12 @@
 package cn.ifxcode.bbs.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class SystemLog {
+public class SystemLog implements Serializable {
 
+	private static final long serialVersionUID = 8328057155616842146L;
+	
 	private long id;
 	private String module;
 	private String method;

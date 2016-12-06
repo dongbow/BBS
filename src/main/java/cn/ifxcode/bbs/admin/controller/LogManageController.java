@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import cn.ifxcode.bbs.bean.Page;
 import cn.ifxcode.bbs.service.LoginLogService;
+import cn.ifxcode.bbs.service.OperationLogService;
+import cn.ifxcode.bbs.service.ResourcesService;
+import cn.ifxcode.bbs.utils.ParamsBuildUtils;
 
 @Controller
 @RequestMapping("/system/admin/log")
@@ -19,6 +22,12 @@ public class LogManageController extends BaseController{
 	
 	@Resource
 	private LoginLogService loginLogService;
+	
+	@Resource
+	private OperationLogService operationLogService;
+	
+	@Resource
+	private ResourcesService resourcesService;
 	
 	@RequestMapping("/login")
 	public String toLoginLog(
@@ -35,10 +44,22 @@ public class LogManageController extends BaseController{
 			@RequestParam(value="page", required = false, defaultValue = "1")int pageNo, 
 			String startTime,String endTime, String loginName, int status,
 			HttpServletRequest request, Model model) {
-		Page page = Page.newBuilder(pageNo, DEFAULT_PAGE_SIZE, request.getRequestURI());
+		Page page = Page.newBuilder(pageNo, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
 		model.addAttribute("logs", loginLogService.getAllLoginlog(page, startTime, endTime, loginName, status));
 		model.addAttribute("page", page);
+		ParamsBuildUtils.createModel(model, request);
 		return "admin/logmanage/loginlog-list";
+	}
+	
+	@RequestMapping("/operation")
+	public String toOperationLog(
+			@RequestParam(value="page", required = false, defaultValue = "1")int p,
+			HttpServletRequest request, Model model) {
+		Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, request.getRequestURI());
+		model.addAttribute("logs", operationLogService.getAllOperationLog(page, null, null, null, null, -1));
+		model.addAttribute("page", page);
+		model.addAttribute("modules", resourcesService.getAllModules());
+		return "admin/logmanage/operationlog-list";
 	}
 	
 }
