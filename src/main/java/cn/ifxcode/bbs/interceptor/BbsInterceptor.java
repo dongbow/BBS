@@ -56,7 +56,7 @@ public class BbsInterceptor extends HandlerInterceptorAdapter{
 		}
 		
 		String uri = request.getRequestURI();
-		if(uri.indexOf(BbsConstant.BOARD) > 0 && uri.indexOf("/favorite/board") < 0) {
+		if(uri.indexOf(BbsConstant.BOARD) > 0 && uri.indexOf("/favorite/board") < 0 && uri.indexOf("/navboard/board") < 0) {
 			int boardId = 0;
 			if(uri.indexOf("/navigation") > 0 || uri.indexOf("/post") > 0) {
 				boardId = (int) NumberUtils.getAllNumber(uri.split("/")[5]);

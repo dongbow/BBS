@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.alibaba.fastjson.JSONObject;
 
+import cn.ifxcode.bbs.bean.Page;
 import cn.ifxcode.bbs.entity.Board;
 import cn.ifxcode.bbs.entity.BoardInfo;
 import cn.ifxcode.bbs.enumtype.BoardSign;
@@ -21,5 +22,7 @@ public interface BoardService {
 	public BoardInfo getBoardInfoFromRedis(int boardId);
 
 	public List<Board> getBMC(List<Integer> boardIds);
+
+	public List<Board> getAllBoard(Page page);
 
 }

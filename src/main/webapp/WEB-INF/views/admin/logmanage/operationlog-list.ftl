@@ -81,7 +81,7 @@
 				                            <td class="numeric" data-title="执行状态">
 				                            	<#if log.status == 1>成功<#else><font color="red">失败</font></#if></td>
 				                            <td class="numeric" data-title="执行人">
-				                            	<a class="btn btn-link btn-md" type="button" target="_blank" href="${path}/space/uid/${log.userId}">${log.userNickname}</a>
+				                            	<a href="${path}/space/uid/${log.userId}" target="_blank" style="color:#428bca">${log.userNickname}</a>
 				                            </td>
 				                            <td class="numeric" data-title="执行IP">${log.ip}</td>
 				                            <td class="numeric" data-title="执行时间">${log.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>

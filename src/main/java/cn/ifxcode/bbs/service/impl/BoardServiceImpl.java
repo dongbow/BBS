@@ -2,6 +2,7 @@ package cn.ifxcode.bbs.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -9,6 +10,7 @@ import javax.annotation.Resource;
 
 import ltang.redis.service.RedisObjectMapService;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -16,7 +18,9 @@ import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.google.common.collect.Maps;
 
+import cn.ifxcode.bbs.bean.Page;
 import cn.ifxcode.bbs.dao.BoardDao;
 import cn.ifxcode.bbs.dao.BoardInfoDao;
 import cn.ifxcode.bbs.entity.Board;
@@ -24,6 +28,8 @@ import cn.ifxcode.bbs.entity.BoardInfo;
 import cn.ifxcode.bbs.entity.Navigation;
 import cn.ifxcode.bbs.enumtype.BoardSign;
 import cn.ifxcode.bbs.service.BoardService;
+import cn.ifxcode.bbs.service.NavigationService;
+import cn.ifxcode.bbs.utils.DateUtils;
 import cn.ifxcode.bbs.utils.JsonUtils;
 import cn.ifxcode.bbs.utils.RedisKeyUtils;
 
@@ -40,6 +46,9 @@ public class BoardServiceImpl implements BoardService {
 
 	@Resource
 	private RedisObjectMapService redisObjectMapService;
+	
+	@Resource
+	private NavigationService navigationService;
 	
 	@Override
 	public Board getBoardByBoardId(JSONObject object, int boardId) {
@@ -127,6 +136,58 @@ public class BoardServiceImpl implements BoardService {
 			}
 		}
 		return list;
+	}
+
+	public List<Board> getAllBoard() {
+		List<Navigation> navigations = navigationService.getAllNavigations();
+		List<Board> list = new ArrayList<Board>();
+		for (Navigation nav : navigations) {
+			JSONObject object = redisObjectMapService.get(RedisKeyUtils.getBoardsByNavId(nav.getNavId()), JSONObject.class);
+			JSONArray array = JSONArray.parseArray(object.getString("boards"));
+			List<Board> boards = JsonUtils.decodeJson(array, Board.class);
+			list.addAll(boards);
+		}
+		return list;
+	}
+	
+	@Override
+	public List<Board> getAllBoard(Page page) {
+		return this.getAllBoardWithCondition(page, null, null, 0, null, -1, 0, -1, -1);
+	}
+	
+	public List<Board> getAllBoardWithCondition(Page page, String startTime, String endTime, int boardId, 
+			String boardName, int status, int navId, int isOpen, int access) {
+		Map<String, Object> map = Maps.newHashMap();
+		map.put("page", page);
+		if (StringUtils.isNotBlank(startTime)) {
+			map.put("starttime", startTime);
+		}
+		if(StringUtils.isNotBlank(endTime)) {
+			map.put("endtime", endTime);
+		}
+		if(boardId != 0) {
+			map.put("bid", boardId);
+		}
+		if(StringUtils.isNotBlank(boardName)) {
+			map.put("name", "%" + boardName + "%");
+		}
+		if(status != -1) {
+			map.put("status", status);
+		}
+		if(navId != 0) {
+			map.put("navId", navId);
+		}
+		if(isOpen != -1) {
+			map.put("isOpen", isOpen);
+		}
+		if(access != -1) {
+			map.put("access", access);
+		}
+		List<Board> boards = boardDao.getAllBoard(map);
+		for (Board board : boards) {
+			board.setBoardCreateTime(DateUtils.dt14LongFormat(DateUtils.dt14FromStr(board.getBoardCreateTime())));
+		}
+		return boards;
 	}
 
 }

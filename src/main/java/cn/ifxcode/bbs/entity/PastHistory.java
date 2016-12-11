@@ -11,7 +11,11 @@ public class PastHistory implements Serializable {
 	private String nickname;
 	private String ip;
 	private String pastTime;
+	private int totalSign;
+	private int serialSign;
 
+	public PastHistory() {}
+	
 	public PastHistory(long userId, String nickname, String ip, String pastTime) {
 		this.userId = userId;
 		this.nickname = nickname;
@@ -57,6 +61,22 @@ public class PastHistory implements Serializable {
 
 	public void setPastTime(String pastTime) {
 		this.pastTime = pastTime;
+	}
+
+	public int getTotalSign() {
+		return totalSign;
+	}
+
+	public void setTotalSign(int totalSign) {
+		this.totalSign = totalSign;
+	}
+
+	public int getSerialSign() {
+		return serialSign;
+	}
+
+	public void setSerialSign(int serialSign) {
+		this.serialSign = serialSign;
 	}
 
 }

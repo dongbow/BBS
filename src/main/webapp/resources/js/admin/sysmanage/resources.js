@@ -77,6 +77,9 @@ function parent() {
 	} else if(restype == 1) {
 		$('.res-type').attr('value', 2);
 		$('.res-type-text').attr('value', '按钮');
+	} else if(restype == 2) {
+		$('.res-type').attr('value', 2);
+		$('.res-type-text').attr('value', '按钮');
 	} else if(restype == -1) {
 		$('.res-type').attr('value', 0);
 		$('.res-type-text').attr('value', '模块');

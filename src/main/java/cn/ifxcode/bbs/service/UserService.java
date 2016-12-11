@@ -86,5 +86,9 @@ public interface UserService {
 	public int updatePassword(String npwd, HttpServletRequest request);
 
 	public String getNicknameFromCookie(HttpServletRequest request);
+
+	public List<PastHistory> getAllUserSigns(Page page, long userId);
+
+	public List<PastHistory> getUserSignsByUid(Page page, String startTime, String endTime, long uid);
 	
 }

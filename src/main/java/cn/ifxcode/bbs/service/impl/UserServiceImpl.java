@@ -715,4 +715,41 @@ public class UserServiceImpl implements UserService {
 		return this.getCookieBeanFromCookie(request).getNick_name();
 	}
 
+	@Override
+	public List<PastHistory> getAllUserSigns(Page page, long userId) {
+		Map<String, Object> map = Maps.newHashMap();
+		if(page != null) {
+			map.put("page", page);
+		}
+		if(userId != 0) {
+			map.put("uid", userId);
+		}
+		List<PastHistory> histories = pastHistoryDao.getAllHistory(map);
+		for (PastHistory ph : histories) {
+			ph.setPastTime(DateUtils.dt14LongFormat(DateUtils.dt14FromStr(ph.getPastTime())));
+			UserValue value = userValueDao.getUserValue(ph.getUserId());
+			ph.setTotalSign(value.getUserPastCount());
+			ph.setSerialSign(value.getUserPastSerialCount());
+		}
+		return histories;
+	}
+
+	@Override
+	public List<PastHistory> getUserSignsByUid(Page page, String startTime, String endTime, long uid) {
+		Map<String, Object> map = Maps.newHashMap();
+		map.put("page", page);
+		if(StringUtils.isNotBlank(startTime)) {
+			map.put("starttime", startTime);
+		}
+		if(StringUtils.isNotBlank(endTime)) {
+			map.put("endtime", endTime);
+		}
+		map.put("uid", uid);
+		List<PastHistory> histories = pastHistoryDao.getUserSignsByUid(map);
+		for (PastHistory ph : histories) {
+			ph.setPastTime(DateUtils.dt14LongFormat(DateUtils.dt14FromStr(ph.getPastTime())));
+		}
+		return histories;
+	}
+
 }

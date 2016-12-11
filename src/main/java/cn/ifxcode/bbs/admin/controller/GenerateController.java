@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import ltang.redis.service.RedisObjectMapService;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -77,6 +78,14 @@ public class GenerateController extends BaseController{
 			result = JSONArray.parseArray(jsonObject.getString("resources"));
 		}
 		return result;
+	}
+	
+	@RequestMapping("/system/admin/self")
+	public String toSelf(HttpServletRequest request, Model model) {
+		long uid = userService.getUserIdFromCookie(request);
+		User user = userService.getUserByIdFromRedis(Long.toString(uid));
+		model.addAttribute("uInfo", user);
+		return "admin/self";
 	}
 	
 }

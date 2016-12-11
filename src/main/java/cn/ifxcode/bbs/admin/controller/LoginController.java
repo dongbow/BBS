@@ -105,7 +105,7 @@ public class LoginController {
 						RoleIdUtils.formatRoleIds(user.getRoles()), user.getUserAccess().getUserNickname());
 				response.addCookie(CookieUtils.makeUserCookie(cookieBean.toString(), remember));
 				result = new Result(BbsConstant.OK, null, BbsConstant.AUTH_HOME);
-				this.loginAward(user.getUserAccess().getUserLastestLoginTime(), userValue);
+				this.loginAward(user.getUserAccess().getUserLastestLoginTime(), userValue, user.getUserAccess().getUserId());
 				user.getUserAccess().setUserLastestLoginIp(GetRemoteIpUtil.getRemoteIp(request));
 				user.getUserAccess().setUserLastestLoginTime(DateUtils.dt14LongFormat(new Date()));
 				userService.updateUserLastestTimeAndIp(user.getUserAccess().getUserId(), 
@@ -132,9 +132,9 @@ public class LoginController {
 		return result;
 	}
 	
-	private void loginAward(String lastLoginTime, UserValue userValue) {
+	private void loginAward(String lastLoginTime, UserValue userValue, Long userId) {
 		if(!StringUtils.isNotBlank(lastLoginTime) || userService.isTodayFirstLogin(lastLoginTime)) {
-			userValue = UserValueUtils.login(userService.getUserValue(userValue.getUserId()));
+			userValue = UserValueUtils.login(userService.getUserValue(userId));
 			userService.updateUserValue(userValue);
 			isTodayFirst = true;
 		}

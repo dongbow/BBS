@@ -46,7 +46,7 @@ public class SystemManageController extends BaseController{
 	public String toUserList(
 			@RequestParam(value="page", required = false, defaultValue = "1")int p,
 			HttpServletRequest request, Model model) {
-		Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, request.getRequestURI());
+		Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
 		model.addAttribute("users", userService.getAllUser(page, 0, null, null, -1, -1, -1, null, null, 0));
 		model.addAttribute("page", page);
 		List<Role> roles = roleService.getAllRoles();
@@ -58,7 +58,7 @@ public class SystemManageController extends BaseController{
 	public String toAdminList(
 			@RequestParam(value="page", required = false, defaultValue = "1")int p,
 			HttpServletRequest request, Model model) {
-		Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, request.getRequestURI());
+		Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
 		model.addAttribute("users", userService.getAllUser(page, 0, null, null, -1, -1, -1, null, null, 1));
 		model.addAttribute("page", page);
 		return "admin/sysmanage/admin-list";

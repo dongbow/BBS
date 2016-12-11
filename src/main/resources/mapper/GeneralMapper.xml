@@ -17,4 +17,42 @@
 		insert into experience_history (user_id, nickname, exp_value, exp_desc, create_time)
 		values(#{userId}, #{nickname}, #{expValue}, #{expDesc}, #{createTime})
 	</insert>
+	
+	<select id="getAllGoldHistory" parameterType="map" resultType="GoldHistory">
+		SELECT user_id, nickname FROM gold_history where 1 = 1 
+		<if test="uid != null">
+			and user_id = #{uid}
+		</if>
+		GROUP BY user_id ORDER BY user_id
+	</select>
+	
+	<select id="getUserGoldsByUid" parameterType="map" resultType="GoldHistory">
+		SELECT user_id, nickname, gold_value, gold_desc, create_time FROM gold_history where user_id = #{uid} 
+		<if test="starttime != null">
+			<![CDATA[ and DATE_FORMAT(create_time, '%Y-%m-%d') >= #{starttime} ]]>
+		</if>
+		<if test="endtime != null">
+			<![CDATA[ and DATE_FORMAT(create_time, '%Y-%m-%d') <= #{endtime} ]]>
+		</if>
+		ORDER BY create_time desc
+	</select>
+	
+	<select id="getAllExps" parameterType="map" resultType="ExperienceHistory">
+		SELECT user_id, nickname FROM experience_history where 1 = 1 
+		<if test="uid != null">
+			and user_id = #{uid}
+		</if>
+		GROUP BY user_id ORDER BY user_id
+	</select>
+	
+	<select id="getUserExpsByUid" parameterType="map" resultType="ExperienceHistory">
+		SELECT * FROM experience_history where user_id = #{uid} 
+		<if test="starttime != null">
+			<![CDATA[ and DATE_FORMAT(create_time, '%Y-%m-%d') >= #{starttime} ]]>
+		</if>
+		<if test="endtime != null">
+			<![CDATA[ and DATE_FORMAT(create_time, '%Y-%m-%d') <= #{endtime} ]]>
+		</if>
+		ORDER BY create_time desc
+	</select>
 </mapper>

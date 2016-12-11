@@ -10,7 +10,7 @@
 						</#list>
                     </ul>
             	</li>
-    		<#elseif res.resources?? && res.resources?size gt 0 && res.resType lt 1 && res.resStatus == 0>
+    		<#elseif res.resources?? && res.resType lt 1 && res.resStatus == 0>
     			<li><a href="${path}${res.resLink}"><i class="fa ${res.resIcon}"></i><span>${res.resName}</span></a></li>
     		</#if>
             <@buildMenu child=res.resources/>
@@ -44,7 +44,7 @@
 
             <h5 class="left-nav-title">账户信息</h5>
             <ul class="nav nav-pills nav-stacked custom-nav">
-              <li><a href="#"><i class="fa fa-user"></i> <span>个人信息</span></a></li>
+              <li><a href="${path}/system/admin/self"><i class="fa fa-user"></i> <span>个人信息</span></a></li>
               <li><a href="#"><i class="fa fa-cog"></i> <span>系统设置</span></a></li>
               <li><a href="${path}/account/logout?from=system"><i class="fa fa-sign-out"></i> <span>退出系统</span></a></li>
             </ul>

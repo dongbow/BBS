@@ -18,11 +18,13 @@ import com.alibaba.fastjson.JSONObject;
 
 import cn.ifxcode.bbs.bean.CookieBean;
 import cn.ifxcode.bbs.entity.Navigation;
+import cn.ifxcode.bbs.entity.Recommend;
 import cn.ifxcode.bbs.entity.User;
 import cn.ifxcode.bbs.entity.UserValue;
 import cn.ifxcode.bbs.service.FriendLinkService;
 import cn.ifxcode.bbs.service.NavigationService;
 import cn.ifxcode.bbs.service.QuickNavigationService;
+import cn.ifxcode.bbs.service.RecommendService;
 import cn.ifxcode.bbs.service.UserService;
 import cn.ifxcode.bbs.utils.DateUtils;
 import cn.ifxcode.bbs.utils.JsonUtils;
@@ -42,6 +44,9 @@ public class BaseUserController {
 	
 	@Resource
 	private FriendLinkService friendLinkService;
+	
+	@Resource
+	private RecommendService recommendService;
 	
 	@Resource
 	private RedisObjectMapService redisObjectMapService;
@@ -77,6 +82,12 @@ public class BaseUserController {
 	@ModelAttribute
 	public void getQuickNavigations(Model model) {
 		model.addAttribute("quickNavigations", quickNavigationService.getAllQuickNavigations());
+	}
+	
+	@ModelAttribute
+	public void getRecommends(Model model) {
+		List<Recommend> recommends = recommendService.getAllRecommends();
+		model.addAttribute("rcs", recommends);
 	}
 	
 	@ModelAttribute

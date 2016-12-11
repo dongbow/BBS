@@ -1,3 +1,19 @@
+<#macro buildParent parent>
+	<#if parent?? && parent?size gt 0>
+		<#list parent as res>
+			<#assign i = res.resources?size/>
+			<#if res.resType == 0>
+        		<#assign m = '-----'/>
+        	<#elseif res.resType == 1>
+        		<#assign m = '----------'/>
+        	<#else>
+        		<#assign m = '---------------'/>
+        	</#if>
+			<option value="${res.resId}_${res.resType}_${i + 1}">${m}${res.resName}</option>
+			<@buildParent parent = res.resources/>
+		</#list>
+	</#if>
+</#macro>
 <div class="modal-dialog">
     <div class="modal-content">
         <div class="modal-header">
@@ -30,15 +46,9 @@
                 <div class="form-group">
                     <label class="control-label col-md-4">上一级</label>
                     <select id="pid" class="selectpicker show-tick col-md-6 col-xs-11 parent" data-live-search="true">
-                    	<option value="0_-1_1">顶级目录</option>
-				        <#list resources as res>
-				        	<#assign i = res.resources?size/>
-				        	<option value="${res.resId}_${res.resType}_${i + 1}">-----${res.resName}</option>
-				        	<#list res.resources as res>
-				        		<#assign j = res.resources?size/>
-					        	<option value="${res.resId}_${res.resType}_${j + 1}">----------${res.resName}</option>
-					        </#list>
-				        </#list>
+                    	<#assign s = resources?size/>
+                    	<option value="0_-1_${s + 1}">顶级目录</option>
+				        <@buildParent parent = resources/>
 			        </select>
                 </div>
                 
@@ -60,7 +70,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-4">资源顺序</label>
                     <div class="col-md-6 col-xs-11">
-                        <input id="sort" class="form-control res-sort" type="text" value="1"/>
+                        <input id="sort" class="form-control res-sort" type="text" value="${s + 1}"/>
                     </div>
                 </div>
                 
