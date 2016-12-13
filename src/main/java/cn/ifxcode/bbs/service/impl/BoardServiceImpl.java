@@ -158,7 +158,9 @@ public class BoardServiceImpl implements BoardService {
 	public List<Board> getAllBoardWithCondition(Page page, String startTime, String endTime, int boardId, 
 			String boardName, int status, int navId, int isOpen, int access) {
 		Map<String, Object> map = Maps.newHashMap();
-		map.put("page", page);
+		if (page != null) {
+			map.put("page", page);
+		}
 		if (StringUtils.isNotBlank(startTime)) {
 			map.put("starttime", startTime);
 		}
@@ -188,6 +190,11 @@ public class BoardServiceImpl implements BoardService {
 			board.setBoardCreateTime(DateUtils.dt14LongFormat(DateUtils.dt14FromStr(board.getBoardCreateTime())));
 		}
 		return boards;
+	}
+
+	@Override
+	public List<Board> getAllBoards() {
+		return this.getAllBoard(null);
 	}
 
 }

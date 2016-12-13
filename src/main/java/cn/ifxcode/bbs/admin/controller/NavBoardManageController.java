@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import cn.ifxcode.bbs.bean.Page;
 import cn.ifxcode.bbs.service.BoardService;
+import cn.ifxcode.bbs.service.ClassifyService;
 import cn.ifxcode.bbs.service.NavigationService;
 import cn.ifxcode.bbs.utils.ParamsBuildUtils;
 
@@ -24,6 +25,9 @@ public class NavBoardManageController extends BaseController{
 	
 	@Resource
 	private BoardService boardService;
+	
+	@Resource
+	private ClassifyService classifyService;
 	
 	@RequestMapping("/navigation")
 	public String toNavigation(@RequestParam(value="page", required = false, defaultValue = "1")int p,
@@ -42,6 +46,16 @@ public class NavBoardManageController extends BaseController{
 		model.addAttribute("navs", navigationService.getAllNavigations());
 		model.addAttribute("page", page);
 		return "admin/navboardmanage/board-list";
+	}
+	
+	@RequestMapping("/classify")
+	public String toClassify(@RequestParam(value="page", required = false, defaultValue = "1")int p,
+			HttpServletRequest request, Model model) {
+		Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
+		model.addAttribute("clas", classifyService.getAllClassify(page));
+		model.addAttribute("boards", boardService.getAllBoards());
+		model.addAttribute("page", page);
+		return "admin/navboardmanage/classify-list";
 	}
 	
 }

@@ -1,17 +1,23 @@
 package cn.ifxcode.bbs.service;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
-import com.alibaba.fastjson.JSONObject;
+import javax.servlet.http.HttpServletRequest;
 
 public interface FileService {
 
-	public JSONObject uploadPicture(HttpServletRequest request);
+	public String uploadPicture(HttpServletRequest request);
 	
-	public JSONObject uploadPicture(HttpServletRequest request, String fileName);
+	public String uploadPicture(HttpServletRequest request, String fileName);
 	
-	public JSONObject uploadFile(HttpServletRequest request);
+	public String uploadFile(HttpServletRequest request);
 	
-	public JSONObject uploadFile(HttpServletRequest request, String fileName);
+	public String uploadFile(HttpServletRequest request, String fileName);
+
+	public Map<String, Object> getFileLinkByUuid(String file);
+
+	public boolean vaildOnce(String uuid, HttpServletRequest request);
+
+	public int AddDownCount(String uuid, HttpServletRequest request);
 	
 }

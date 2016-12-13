@@ -28,7 +28,6 @@ import cn.ifxcode.bbs.entity.ExperienceHistory;
 import cn.ifxcode.bbs.entity.GoldHistory;
 import cn.ifxcode.bbs.entity.Resources;
 import cn.ifxcode.bbs.entity.SwfArea;
-import cn.ifxcode.bbs.entity.SystemConfig;
 import cn.ifxcode.bbs.entity.User;
 import cn.ifxcode.bbs.entity.UserValue;
 import cn.ifxcode.bbs.enumtype.EGHistory;
@@ -98,9 +97,8 @@ public class GeneralServiceImpl implements GeneralService {
 	@Override
 	public boolean checkBbsIsClose() {
 		JSONObject object = redisObjectMapService.get(RedisKeyUtils.getSystemConfig(), JSONObject.class);
-		if(object != null) {
-			SystemConfig config = JSONObject.toJavaObject(JSONObject.parseObject(object.getString("config")), SystemConfig.class);
-			if(config.getIsOpenBbs() == 1) {
+		if(object != null && object.containsKey("isOpenBbs")) {
+			if(Integer.parseInt(object.getString("isOpenBbs")) == 1) {
 				return true;
 			}
 		}

@@ -6,7 +6,8 @@ public enum EGHistory {
 	LOGIN("登录", 1), 
 	REG("注册", 2),
 	TOPIC("发帖", 3),
-	REPLY("回帖", 4);
+	REPLY("回帖", 4),
+	DOWNLOAD("下载", 5);
 	
 	private String desc;
 	private int from;

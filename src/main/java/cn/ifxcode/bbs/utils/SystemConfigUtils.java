@@ -1,6 +1,6 @@
 package cn.ifxcode.bbs.utils;
 
-import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -22,9 +22,12 @@ public class SystemConfigUtils {
 		if(StringUtils.isNotBlank(PropertiesUtils.getValue("redis.pass"))) {
 			jedis.auth(PropertiesUtils.getValue("redis.pass"));
 		}
-		List<String> list = jedis.hmget(RedisKeyUtils.getSystemConfig(), "config");
-		if(list != null && list.size() > 0) {
-			object = JSONObject.parseObject(list.get(0));
+		Map<String, String> map = jedis.hgetAll(RedisKeyUtils.getSystemConfig());
+		if(map != null && map.size() > 0) {
+			object = new JSONObject(true);
+			for (Map.Entry<String, String> entry : map.entrySet()) {
+				object.put(entry.getKey(), entry.getValue());
+			}
 		}
 		jedis.disconnect();
 		jedisPool.destroy();
@@ -50,4 +53,5 @@ public class SystemConfigUtils {
 		}
 		return false;
 	}
+	
 }

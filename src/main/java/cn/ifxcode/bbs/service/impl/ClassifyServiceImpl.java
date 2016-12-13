@@ -1,21 +1,26 @@
 package cn.ifxcode.bbs.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
 import ltang.redis.service.RedisObjectMapService;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.google.common.collect.Maps;
 
+import cn.ifxcode.bbs.bean.Page;
 import cn.ifxcode.bbs.constant.BbsConstant;
 import cn.ifxcode.bbs.dao.ClassifyDao;
 import cn.ifxcode.bbs.entity.Classify;
 import cn.ifxcode.bbs.service.ClassifyService;
+import cn.ifxcode.bbs.utils.DateUtils;
 import cn.ifxcode.bbs.utils.JsonUtils;
 import cn.ifxcode.bbs.utils.RedisKeyUtils;
 
@@ -67,6 +72,43 @@ public class ClassifyServiceImpl implements ClassifyService {
 		jsonObject.put("classifies", jsonArray.toJSONString());
 		redisObjectMapService.save(RedisKeyUtils.getClassifyByBoardId(bid), jsonObject, JSONObject.class);
 		return BbsConstant.OK;
+	}
+
+	@Override
+	public List<Classify> getAllClassify(Page page) {
+		return this.getAllClassify(page, null, null, null, 0, -1, -1);
+	}
+
+	@Override
+	public List<Classify> getAllClassify(Page page, String startTime,
+			String endTime, String name, int bid, int status, int auth) {
+		Map<String, Object> map = Maps.newHashMap();
+		map.put("page", page);
+		if(StringUtils.isNotBlank(startTime)) {
+			map.put("starttime", startTime);
+		}
+		if(StringUtils.isNotBlank(endTime)) {
+			map.put("endtime", endTime);
+		}
+		if(StringUtils.isNotBlank(name)) {
+			map.put("name", "%" + name + "%");
+		}
+		if(bid != 0) {
+			map.put("bid", bid);
+		}
+		if(status != 0) {
+			map.put("status", status);
+		}
+		if(auth != 0) {
+			map.put("auth", auth);
+		}
+		List<Classify> classifies = classifyDao.getAllClassify(map);
+		for (Classify classify : classifies) {
+			classify.setClassCreateTime(DateUtils.dt14LongFormat(DateUtils.dt14FromStr(classify.getClassCreateTime())));
+			Classify c = this.getClassifyByCid(classify.getBoardId(), classify.getClassId());
+			classify.setClassTopicCount(c.getClassTopicCount());
+		}
+		return classifies;
 	}
 	
 }

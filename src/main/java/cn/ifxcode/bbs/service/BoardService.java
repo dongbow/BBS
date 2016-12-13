@@ -25,4 +25,6 @@ public interface BoardService {
 
 	public List<Board> getAllBoard(Page page);
 
+	public List<Board> getAllBoards();
+
 }

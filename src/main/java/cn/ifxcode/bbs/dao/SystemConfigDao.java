@@ -1,9 +1,11 @@
 package cn.ifxcode.bbs.dao;
 
+import java.util.List;
+
 import cn.ifxcode.bbs.entity.SystemConfig;
 
 public interface SystemConfigDao {
 
-	public SystemConfig getSystemConfig();
+	public List<SystemConfig> getSystemConfig();
 	
 }

@@ -17,6 +17,7 @@
 		<result column="topic_status" property="topicStatus" jdbcType="INTEGER" />
 		<result column="topic_create_time" property="topicCreateTime" jdbcType="VARCHAR" />
 		<result column="topic_create_ip" property="topicCreateIp" jdbcType="VARCHAR" />
+		<result column="topic_file_ids" property="topicFileIds" jdbcType="VARCHAR" />
 		<association property="topicInfo" javaType="TopicInfo">
 			<id column="topic_id" property="topicId" jdbcType="BIGINT" />
 			<result column="topic_is_check" property="topicIsCheck" jdbcType="INTEGER" />
@@ -46,9 +47,9 @@
 	
 	<insert id="insertTopic" useGeneratedKeys="true" keyProperty="topicId" parameterType="Topic">
 		insert into bbs_topic (user_id, board_id, class_id, nav_id, topic_title, topic_content, topic_status, 
-			topic_create_time, topic_create_ip)
+			topic_create_time, topic_create_ip, topic_file_ids)
 		values (#{userId}, #{boardId}, #{classId}, #{navId}, #{topicTitle}, #{topicContent}, 
-			#{topicStatus}, #{topicCreateTime}, #{topicCreateIp})
+			#{topicStatus}, #{topicCreateTime}, #{topicCreateIp}, #{topicFileIds})
 	</insert>
 	
 	<select id="getTopicByTopicId" resultMap="BaseTopic">
@@ -173,7 +174,7 @@
 	
 	<update id="updateTopic">
 		update bbs_topic set board_id = #{boardId}, class_id = #{classId}, nav_id = #{navId}, 
-			topic_title = #{topicTitle}, topic_content = #{topicContent}, topic_status = #{topicStatus} 
+			topic_title = #{topicTitle}, topic_content = #{topicContent}, topic_status = #{topicStatus}, topic_file_ids = #{topicFileIds} 
 		where topic_id = #{topicId}
 	</update>
 </mapper>

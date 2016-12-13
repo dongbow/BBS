@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ifxcode.bbs.dao.FileDao">
+	
+	<cache type="cn.ifxcode.bbs.dao.cache.LoggingRedisCache"/>
+	
+	<insert id="insert" parameterType="BbsFile">
+		insert into bbs_file 
+			(uuid, file_name, file_link, file_sign, file_type, file_size, down_count, uid, nickname, upload_time, upload_ip) 
+		values
+			(#{uuid}, #{fileName}, #{fileLink}, #{fileSign}, #{fileType}, #{fileSize}, #{downCount}, #{uid}, 
+			 #{nickname}, #{uploadTime}, #{uploadIp})
+	</insert>
+	
+	<select id="getFileLinkByUuid" parameterType="map" resultType="map">
+		select file_name, file_link form bbs_file where uuid = #{uuid} and file_sign = #{sign}
+	</select>
+	
+	<select id="vaildOnce" parameterType="map" resultType="Integer">
+		select count(1) from bbs_file_down where uuid = #{uuid} and uid = #{uid}
+	</select>
+	
+	<update id="AddDownCount">
+		update bbs_file set down_count = down_count + 1 where uuid = #{uuid}
+	</update>
+	
+	<insert id="insertHistory">
+		insert into bbs_file_down (uuid, uid, nickname, down_time, ip) 
+		values (#{uuid}, #{uid}, #{nickname}, #{down_time}, #{ip})
+	</insert>
+
+</mapper>

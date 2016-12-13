@@ -1,11 +1,18 @@
 package cn.ifxcode.bbs.service.impl;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.fileupload.FileItem;
@@ -16,21 +23,45 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.alibaba.fastjson.JSONObject;
+import com.google.common.collect.Maps;
 import com.qiniu.common.QiniuException;
 import com.qiniu.http.Response;
 import com.qiniu.storage.BucketManager;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
 
-import cn.ifxcode.bbs.constant.BbsConstant;
+import cn.ifxcode.bbs.bean.CookieBean;
+import cn.ifxcode.bbs.dao.FileDao;
+import cn.ifxcode.bbs.dao.GeneralDao;
+import cn.ifxcode.bbs.dao.UserValueDao;
+import cn.ifxcode.bbs.entity.BbsFile;
+import cn.ifxcode.bbs.entity.GoldHistory;
+import cn.ifxcode.bbs.entity.UserValue;
+import cn.ifxcode.bbs.enumtype.EGHistory;
+import cn.ifxcode.bbs.enumtype.FileEnum;
 import cn.ifxcode.bbs.service.FileService;
+import cn.ifxcode.bbs.service.UserService;
+import cn.ifxcode.bbs.utils.GetRemoteIpUtil;
+import cn.ifxcode.bbs.utils.UserValueUtils;
 
 @Service
 public class FileServiceImpl implements FileService {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	@Resource
+	private UserService userService;
+	
+	@Resource
+	private GeneralDao generalDao;
+	
+	@Resource
+	private UserValueDao userValueDao;
+	
+	@Resource
+	private FileDao fileDao;
 	
 	@Value("${temp.file.dir}")
 	private String tempFile;
@@ -91,13 +122,13 @@ public class FileServiceImpl implements FileService {
 		}
 	}
 	
-	public JSONObject uploadPicture(HttpServletRequest request) {
+	public String uploadPicture(HttpServletRequest request) {
 		return this.uploadPicture(request, null);
 	}
 
-	public JSONObject uploadPicture(HttpServletRequest request, String fileName) {
-		JSONObject data = new JSONObject(true);
-		if(path.isEmpty()) {
+	public String uploadPicture(HttpServletRequest request, String fileName) {
+		String data = null;
+		if(path == null) {
 			File uploadDir = new File(request.getSession().getServletContext().getRealPath("/"), tempFile);
 			path = uploadDir.getAbsolutePath();
 			
@@ -119,7 +150,7 @@ public class FileServiceImpl implements FileService {
 			for (FileItem item : items) {
 				try {
 					if(!this.validatePicture(item)) {
-						data.put(BbsConstant.RC, BbsConstant.ERROR);
+						return data;
 					}
 					if(StringUtils.isEmpty(fileName)) {
 						synchronized (this) {
@@ -137,13 +168,14 @@ public class FileServiceImpl implements FileService {
 					}
 					Response response = null;
 					File file = new File(path + "/" + qiniuFileName);
+					createFile(file, item);
 					response = uploadManager.put(file, qiniuFileName, auth.uploadToken(bucket));
 					file.delete();
 					if(response.isOK()) {
-						data.put("rc",BbsConstant.OK);
-	    				data.put("url",doMain + "/" +qiniuFileName);
+	    				data = doMain + "/" +qiniuFileName;
+	    				saveFile(new BbsFile(data, FileEnum.IMAGE, item, userService, request));
 					} else {
-						data.put(BbsConstant.RC, BbsConstant.ERROR);
+						return data;
 					}
 				} catch (QiniuException e) {
 					logger.error("pic upload error", e);
@@ -156,13 +188,13 @@ public class FileServiceImpl implements FileService {
 		return data;
 	}
 
-	public JSONObject uploadFile(HttpServletRequest request) {
+	public String uploadFile(HttpServletRequest request) {
 		return this.uploadFile(request, null);
 	}
 
-	public JSONObject uploadFile(HttpServletRequest request, String fileName) {
-		JSONObject data = new JSONObject(true);
-		if(path.isEmpty()) {
+	public String uploadFile(HttpServletRequest request, String fileName) {
+		String data = null;
+		if(path == null) {
 			File uploadDir = new File(request.getSession().getServletContext().getRealPath("/"), tempFile);
 			path = uploadDir.getAbsolutePath();
 			
@@ -184,7 +216,7 @@ public class FileServiceImpl implements FileService {
 			for (FileItem item : items) {
 				try {
 					if(!this.validateFile(item)) {
-						data.put(BbsConstant.RC, BbsConstant.ERROR);
+						return data;
 					}
 					if(StringUtils.isEmpty(fileName)) {
 						synchronized (this) {
@@ -195,13 +227,16 @@ public class FileServiceImpl implements FileService {
 					}
 					Response response = null;
 					File file = new File(path + "/" + qiniuFileName);
+					createFile(file, item);
 					response = uploadManager.put(file, qiniuFileName, auth.uploadToken(bucket));
 					file.delete();
 					if(response.isOK()) {
-						data.put("rc",BbsConstant.OK);
-	    				data.put("url",doMain + "/" +qiniuFileName);
+	    				data = doMain + "/" +qiniuFileName;
+	    				BbsFile bbsFile = new BbsFile(data, FileEnum.FILE, item, userService, request);
+	    				saveFile(bbsFile);
+	    				data = bbsFile.getUuid();
 					} else {
-						data.put(BbsConstant.RC, BbsConstant.ERROR);
+						return data;
 					}
 				} catch (QiniuException e) {
 					logger.error("pic upload error", e);
@@ -255,6 +290,84 @@ public class FileServiceImpl implements FileService {
 		builder.append(UUID.randomUUID().toString().replace("-", ""));
 		builder.append(new Date().getTime());
 		return builder.append(".").append(fileType).toString();
+	}
+	
+	private void createFile(File file, FileItem item) {
+		if(!file.exists()) {
+			InputStream ins = null;
+			 OutputStream ous = null;
+            try{
+            	ins = item.getInputStream();
+                ous = new FileOutputStream(file);
+                byte[] buffer = new byte[1024];
+                int len = 0;
+                while((len = ins.read(buffer)) > -1)
+                    ous.write(buffer,0,len);
+            } catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally{
+                try {
+					ous.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+                try {
+					ins.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+            }
+		}
+	}
+	
+	private int saveFile(BbsFile bbsFile) {
+		return fileDao.insert(bbsFile);
+	}
+
+	@Override
+	public Map<String, Object> getFileLinkByUuid(String file) {
+		Map<String, Object> map = Maps.newHashMap();
+		map.put("uuid", file);
+		map.put("sign", FileEnum.FILE.getCode());
+		return fileDao.getFileLinkByUuid(map);
+	}
+
+	@Override
+	public boolean vaildOnce(String uuid, HttpServletRequest request) {
+		long uid = userService.getUserIdFromCookie(request);
+		Map<String, Object> map = Maps.newHashMap();
+		map.put("uuid", uuid);
+		map.put("uid", uid);
+		int row = fileDao.vaildOnce(map);
+		if(row == 0) {
+			UserValue value = userService.getUserValue(uid);
+			value = UserValueUtils.download(value);
+			if(value == null) {
+				return false;
+			} else {
+				CookieBean cookieBean = userService.getCookieBeanFromCookie(request);
+				if(value.isGoldChange()) {
+					GoldHistory goldHistory = new GoldHistory(value.getUserId(), cookieBean.getNick_name(), value.getThisGold(), EGHistory.DOWNLOAD.getFrom(), 
+							EGHistory.DOWNLOAD.getDesc(), value.getTodayGoldTime());
+					generalDao.insertGoldHistory(goldHistory);
+				}
+				userValueDao.updateUserValue(value);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	@Transactional
+	public int AddDownCount(String uuid, HttpServletRequest request) {
+		synchronized (uuid) {
+			fileDao.insertHistory(uuid, userService.getUserIdFromCookie(request), userService.getNicknameFromCookie(request), new Date(), GetRemoteIpUtil.getRemoteIp(request));
+			fileDao.AddDownCount(uuid);
+		}
+		return 0;
 	}
 	
 }

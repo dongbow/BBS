@@ -17,6 +17,7 @@ public class Topic implements Serializable {
 	private int topicIsAccess;
 	private String topicCreateTime;
 	private String topicCreateIp;
+	private String topicFileIds;
 	private TopicInfo topicInfo;
 	private TopicData topicData;
 	private Board board;
@@ -149,6 +150,14 @@ public class Topic implements Serializable {
 
 	public void setClassify(Classify classify) {
 		this.classify = classify;
+	}
+
+	public String getTopicFileIds() {
+		return topicFileIds;
+	}
+
+	public void setTopicFileIds(String topicFileIds) {
+		this.topicFileIds = topicFileIds;
 	}
 
 }

@@ -45,7 +45,7 @@ public class BbsInterceptor extends HandlerInterceptorAdapter{
 		
 		StringBuffer url = request.getRequestURL();
 		
-		if(generalService.checkBbsIsClose() && request.getRequestURI().indexOf(BbsConstant.CLOSE) > 0) {
+		if(generalService.checkBbsIsClose()) {
 			if(url.indexOf(BbsConstant.SYSTEM) > 0 || url.indexOf(BbsConstant.LOGOUT) > 0) {
 				logger.info("bbs is closeing, but this ip is: " + GetRemoteIpUtil.getRemoteIp(request));
 				this.auth(request, response);

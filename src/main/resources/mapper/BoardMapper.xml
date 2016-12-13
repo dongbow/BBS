@@ -25,13 +25,13 @@
 			<![CDATA[ and DATE_FORMAT(board_create_time, '%Y-%m-%d') <= #{endtime} ]]>
 		</if>
 		<if test="bid != null">
-			and board_id = #{bid}
+			and board_id = #{bid} 
 		</if>
 		<if test="name != null">
 			and board_name like #{name} 
 		</if>
 		<if test="status != null">
-			and board_status = status 
+			and board_status = #{status} 
 		</if>
 		<if test="navId != null">
 			and nav_id = #{navId} 

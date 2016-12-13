@@ -4,10 +4,35 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.ifxcode.bbs.dao.ClassifyDao">
 	
+	<cache type="cn.ifxcode.bbs.dao.cache.LoggingRedisCache"/>
+	
 	<select id="getClassifyByBoardId" resultType="Classify">
 		select * from bbs_board_classify where class_status = 0 
 			and board_id = #{boardId}
 		order by class_sort asc
+	</select>
+	
+	<select id="getAllClassify" parameterType="map" resultType="Classify">
+		select * from bbs_board_classify where 1 = 1 
+		<if test="starttime != null">
+			<![CDATA[ and DATE_FORMAT(class_create_time, '%Y-%m-%d') >= #{starttime} ]]>
+		</if>
+		<if test="endtime != null">
+			<![CDATA[ and DATE_FORMAT(class_create_time, '%Y-%m-%d') <= #{endtime} ]]>
+		</if>
+		<if test="name != null">
+			and class_name like #{name} 
+		</if>
+		<if test="status != null">
+			and class_status = #{status} 
+		</if>
+		<if test="bid != null">
+			and board_id = #{bid} 
+		</if>
+		<if test="auth != null">
+			and auth = #{auth} 
+		</if>
+		order by board_id asc, class_sort asc
 	</select>
 	
 </mapper>

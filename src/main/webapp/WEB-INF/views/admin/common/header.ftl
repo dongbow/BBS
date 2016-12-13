@@ -187,7 +187,7 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
                     <li><a href="${path}/system/admin/self"><i class="fa fa-user"></i>个人信息</a></li>
-                    <li><a href="#"><i class="fa fa-cog"></i>系统设置</a></li>
+                    <li><a href="${path}/system/admin/config/setting"><i class="fa fa-cog"></i>系统设置</a></li>
                     <li><a href="${path}/account/logout?from=system"><i class="fa fa-sign-out"></i>退出系统</a></li>
                 </ul>
             </li>

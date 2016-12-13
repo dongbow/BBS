@@ -4,7 +4,7 @@
  */
 
 CKEDITOR.editorConfig = function( config ) {
-	config.plugins = 'dialogui,dialog,about,a11yhelp,dialogadvtab,basicstyles,bidi,blockquote,clipboard,button,panelbutton,panel,floatpanel,colorbutton,colordialog,templates,menu,contextmenu,div,resize,toolbar,elementspath,list,indent,enterkey,entities,popup,filebrowser,find,fakeobjects,flash,floatingspace,listblock,richcombo,font,forms,format,htmlwriter,horizontalrule,iframe,wysiwygarea,image,smiley,justify,link,liststyle,magicline,maximize,newpage,pagebreak,pastetext,pastefromword,preview,print,removeformat,save,selectall,showblocks,showborders,sourcearea,specialchar,menubutton,scayt,stylescombo,tab,table,tabletools,undo,wsc,syntaxhighlight';
+	config.plugins = 'dialogui,dialog,about,a11yhelp,dialogadvtab,basicstyles,bidi,blockquote,clipboard,button,panelbutton,panel,floatpanel,colorbutton,colordialog,templates,menu,contextmenu,div,resize,toolbar,elementspath,list,indent,enterkey,entities,popup,filebrowser,find,fakeobjects,flash,floatingspace,listblock,richcombo,font,forms,format,htmlwriter,horizontalrule,iframe,wysiwygarea,image,smiley,justify,link,liststyle,magicline,maximize,newpage,pagebreak,pastetext,pastefromword,preview,print,removeformat,save,selectall,showblocks,showborders,sourcearea,specialchar,menubutton,scayt,stylescombo,tab,table,tabletools,undo,wsc,syntaxhighlight,multiimg';
 	config.skin = 'moono';
 	config.syntaxhighlight_lang = 'java';
 	config.syntaxhighlight_hideControls = true;
@@ -33,7 +33,7 @@ CKEDITOR.editorConfig = function( config ) {
 		['Bold','Underline'], 
 		['TextColor','BGColor'], 
 		['Table'],
-		['Image', 'Smiley'],
+		['multiimg', 'Smiley'],
 		['Syntaxhighlight'],
 		['Maximize']
 	];
@@ -47,7 +47,7 @@ CKEDITOR.editorConfig = function( config ) {
 		['Format','Font','FontSize'],
 		['Bold','Italic','Underline'], 
 		['TextColor','BGColor'],
-		['Image','Smiley'],
+		['multiimg','Smiley'],
 		['Preview', 'Maximize']
 	];
 	//		['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'], 
@@ -58,7 +58,7 @@ CKEDITOR.editorConfig = function( config ) {
 		['TextColor'],
 		['Bold','Underline'], 
 		['Link','Unlink'], 
-		['Image','Smiley'],
+		['multiimg','Smiley'],
 		['Syntaxhighlight']
 	];
 	
@@ -71,7 +71,7 @@ CKEDITOR.editorConfig = function( config ) {
 		['Bold','Italic','Underline','Strike'], 
 		['NumberedList','BulletedList'],
 		['Link','Unlink'], 
-		['Image','Table','Smiley'],
+		['multiimg','Table','Smiley'],
 		['Syntaxhighlight'],
 		['Maximize']
 	];

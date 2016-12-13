@@ -44,6 +44,14 @@ public class UserValueUtils {
 		return userValue;
 	}
 	
+	public static UserValue download(UserValue userValue) {
+		if(userValue.getUserGold() < Math.abs(-2)) {
+			return null;
+		}
+		gold2(userValue, -2);
+		return userValue;
+	}
+	
 	private static void Exp(UserValue userValue, int value) {
 		if((userValue.getTodayExp() == 0 && StringUtils.isEmpty(userValue.getTodayExpTime()))
 				|| (userValue.getTodayExp() < 50 && DateUtils.getDateDifferenceBegin(userValue.getTodayExpTime(), DateUtils.dt14LongFormat(new Date())) >= 0)) {
@@ -68,6 +76,18 @@ public class UserValueUtils {
 			userValue.setGoldChange(true);
 			userValue.setThisGold(value);
 		}
+	}
+	
+	private static void gold2(UserValue userValue, int value) {
+		userValue.setUserGold(userValue.getUserGold() + value);
+		if(userValue.getTodayGold() == 50) {
+			userValue.setTodayGold(value);
+		} else {
+			userValue.setTodayGold(userValue.getTodayGold() + Math.abs(value));
+		}
+		userValue.setTodayGoldTime(DateUtils.dt14LongFormat(new Date()));
+		userValue.setGoldChange(true);
+		userValue.setThisGold(value);
 	}
 
 }

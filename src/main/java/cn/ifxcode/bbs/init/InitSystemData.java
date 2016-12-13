@@ -241,9 +241,11 @@ public class InitSystemData {
 	public void initSystemConfig() {
 //		Runnable runnable = new Runnable() {
 //			public void run() {
-				SystemConfig config = systemConfigDao.getSystemConfig();
+				List<SystemConfig> configs = systemConfigDao.getSystemConfig();
 				JSONObject object = new JSONObject(true);
-				object.put("config", JSON.toJSONString(config));
+				for (SystemConfig sc : configs) {
+					object.put(sc.getAttrName(), sc.getAttrValue());
+				}
 				redisObjectMapService.save(RedisKeyUtils.getSystemConfig(), object, JSONObject.class);
 //			}
 //		};

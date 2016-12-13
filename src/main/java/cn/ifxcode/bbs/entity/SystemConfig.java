@@ -7,10 +7,8 @@ public class SystemConfig implements Serializable {
 	private static final long serialVersionUID = -725687150506716745L;
 
 	private int id;
-	private int isOpenBbs;
-	private int isAllowRegister;
-	private int isOpenTopicAudit;
-	private int isOpenReplyAudit;
+	private String attrName;
+	private String attrValue;
 
 	public int getId() {
 		return id;
@@ -20,36 +18,20 @@ public class SystemConfig implements Serializable {
 		this.id = id;
 	}
 
-	public int getIsOpenBbs() {
-		return isOpenBbs;
+	public String getAttrName() {
+		return attrName;
 	}
 
-	public void setIsOpenBbs(int isOpenBbs) {
-		this.isOpenBbs = isOpenBbs;
+	public void setAttrName(String attrName) {
+		this.attrName = attrName;
 	}
 
-	public int getIsAllowRegister() {
-		return isAllowRegister;
+	public String getAttrValue() {
+		return attrValue;
 	}
 
-	public void setIsAllowRegister(int isAllowRegister) {
-		this.isAllowRegister = isAllowRegister;
-	}
-
-	public int getIsOpenTopicAudit() {
-		return isOpenTopicAudit;
-	}
-
-	public void setIsOpenTopicAudit(int isOpenTopicAudit) {
-		this.isOpenTopicAudit = isOpenTopicAudit;
-	}
-
-	public int getIsOpenReplyAudit() {
-		return isOpenReplyAudit;
-	}
-
-	public void setIsOpenReplyAudit(int isOpenReplyAudit) {
-		this.isOpenReplyAudit = isOpenReplyAudit;
+	public void setAttrValue(String attrValue) {
+		this.attrValue = attrValue;
 	}
 
 }

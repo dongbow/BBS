@@ -64,14 +64,11 @@
 		        </div>
 		        <div class="bbs-upload">
 		        	<div class="file-btns">
-		        		<a class="btn image-btn" href="javascript:;">上传图片</a>
-		        		<input name="images" id="images" multiple="multiple" accept="image/*" type="file" style="display:none">
 		        		<a class="btn file-btn" href="javascript:;">上传附件</a>
 		        		<input name="files" id="files" multiple="multiple" type="file" style="display:none">
 		        		<button>发表帖子</button>
 		        	</div>
 		        	<div class="upload-desc">
-		        		<p>图片只支持jpg|jpeg|png|gif|bmp，大小5M以内</p>
 		        		<p>附件支持exe|zip|rar|msi|png|jpg|jpeg|gif|bmp|doc|docx|xls|xlsx|ppt|pptx|txt|jar|md|sql|java|pdf|psd，大小50M以内</p>
 		        	</div>
 		        	<div class="image-cont" style=""></div>
