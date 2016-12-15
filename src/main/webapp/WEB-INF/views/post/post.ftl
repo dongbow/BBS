@@ -71,8 +71,8 @@
 		        	<div class="upload-desc">
 		        		<p>附件支持exe|zip|rar|msi|png|jpg|jpeg|gif|bmp|doc|docx|xls|xlsx|ppt|pptx|txt|jar|md|sql|java|pdf|psd，大小50M以内</p>
 		        	</div>
-		        	<div class="image-cont" style=""></div>
-		        	<div class="file-cont" style=""></div>
+		        	<div id="image-cont" style="display:none"></div>
+		        	<div class="file-cont" style="display:none"></div>
 		        </div>
 		        <div id="bg"></div>
 		        <div id="bbs-dialog" style="display:none">

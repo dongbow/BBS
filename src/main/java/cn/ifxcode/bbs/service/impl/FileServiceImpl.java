@@ -33,6 +33,7 @@ import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
 
 import cn.ifxcode.bbs.bean.CookieBean;
+import cn.ifxcode.bbs.bean.Page;
 import cn.ifxcode.bbs.dao.FileDao;
 import cn.ifxcode.bbs.dao.GeneralDao;
 import cn.ifxcode.bbs.dao.UserValueDao;
@@ -368,6 +369,31 @@ public class FileServiceImpl implements FileService {
 			fileDao.AddDownCount(uuid);
 		}
 		return 0;
+	}
+
+	@Override
+	public List<BbsFile> getUploadFile(Page page, FileEnum file) {
+		return this.getUploadFile(page, file, null, null, 0, null);
+	}
+
+	@Override
+	public List<BbsFile> getUploadFile(Page page, FileEnum file, String startTime, String endTime, long uid, String nickname) {
+		Map<String, Object> map = Maps.newHashMap();
+		map.put("page", page);
+		map.put("sign", file.getCode());
+		if(StringUtils.isNotBlank(startTime)) {
+			map.put("starttime", startTime);
+		}
+		if(StringUtils.isNotBlank(endTime)) {
+			map.put("endtime", endTime);
+		}
+		if(uid != 0) {
+			map.put("uid", uid);
+		}
+		if(StringUtils.isNotBlank(nickname)) {
+			map.put("name", nickname);
+		}
+		return fileDao.getUploadFile(map);
 	}
 	
 }

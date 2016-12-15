@@ -30,5 +30,21 @@
 		insert into bbs_file_down (uuid, uid, nickname, down_time, ip) 
 		values (#{uuid}, #{uid}, #{nickname}, #{down_time}, #{ip})
 	</insert>
+	
+	<select id="getUploadFile" parameterType="map" resultType="BbsFile">
+		select * from bbs_file where file_sign = #{sign} 
+		<if test="starttime != null">
+			<![CDATA[ and DATE_FORMAT(upload_time, '%Y-%m-%d') >= #{starttime} ]]>
+		</if>
+		<if test="endtime != null">
+			<![CDATA[ and DATE_FORMAT(upload_time, '%Y-%m-%d') <= #{endtime} ]]>
+		</if>
+		<if test="name != null">
+			and nickname like #{name} 
+		</if>
+		<if test="uid != null">
+			and uid = #{uid} 
+		</if>
+	</select>
 
 </mapper>

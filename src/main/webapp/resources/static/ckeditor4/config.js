@@ -97,6 +97,7 @@ CKEDITOR.on('dialogDefinition',function(ev){
     var dialogDefinition=ev.data.definition;
     if(dialogName=='image'){
         var tabs = dialogDefinition.contents;
+        tabs[2]=null;
         tabs[3]=null;
     }
     if(dialogName == 'flash'){

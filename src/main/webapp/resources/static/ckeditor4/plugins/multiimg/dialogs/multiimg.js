@@ -20,9 +20,17 @@
                     }]  
                 }],  
                 onOk: function() {  
-                    var html = $("#uploadFrame").contents().find('#uploadInf').html();
-                    //点击确定按钮后的操作  
-                    a.insertHtml(html);  
+                	//点击确定按钮后的操作  
+                    var html = '';
+                    var length = $('#image-cont', parent.document).length;
+                    if(length > 0) {
+                    	html = $("#uploadFrame").contents().find('#uploadInf').html();
+                    	$('#image-cont', parent.document).append(html);
+                        $('#image-cont', parent.document).show();
+                    } else {
+                    	html = $("#uploadFrame").contents().find('#uploadInf2').html();
+                    	a.insertHtml(html);
+                    }
                 },  
                 onShow: function () {  
                     document.getElementById("uploadFrame").setAttribute("src","/bbs/resources/static/ckeditor4/plugins/multiimg/dialogs/upload.html?v=' +new Date().getSeconds() + '");  

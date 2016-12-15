@@ -26,6 +26,10 @@ $(function(){
 			$(this).val(0);
 		}
 	});
+	
+	$('.img-add').live('click', imgadd);
+	
+	$('.img-del').live('click', imgdel);
 });
 
 function checklength() {
@@ -55,4 +59,14 @@ function validate() {
 		dialog('不能留空');
 		return false;
 	}
+}
+
+function imgadd() {
+	var src = $(this).parent().parent().find('img').attr('data-cke-saved-src');
+	var html = '<img alt="" data-cke-saved-src="' + src + '" src="' + src + '"style="width:50%"><br/>';
+	CKEDITOR.instances.editor.insertHtml(html);
+}
+
+function imgdel() {
+	$(this).parent().parent().remove();
 }
