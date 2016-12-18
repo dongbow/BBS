@@ -77,7 +77,6 @@
 					html += '			<button type="button" id="fileSubmit" class="upload_submit_btn">确认上传文件</button>';
 					html += '		</div>';
 					html += '		<div id="uploadInf" class="upload_inf"></div>';
-					html += '		<div id="uploadInf2" class="upload_inf2"></div>';
 					html += '	</div>';
 					html += '</form>';
 				}else{
@@ -109,6 +108,7 @@
 					html += '			<button type="button" id="fileSubmit" class="upload_submit_btn">确认上传文件</button>';
 					html += '		</div>';
 					html += '		<div id="uploadInf" class="upload_inf"></div>';
+					html += '		<div id="uploadInf2" class="upload_inf2"></div>';
 					html += '	</div>';
 					html += '</form>';
 				}
@@ -335,6 +335,7 @@
 						$("#uploadProgress_" + file.index).hide();
 						$("#uploadSuccess_" + file.index).show();
 						$('#uploadInf').hide();
+						$('#uploadInf2').hide();
 						var sHtml = '<div class="up-img">';
 						sHtml += '<img alt="" data-cke-saved-src="' + response + '" src="' + response + '"style="width:100px;float: left;margin:0 0 5px">';
 						sHtml += '<p><a class="img-add" href="javascript:;">插入</a><a class="img-del" href="javascript:;">删除</a></p></div>';

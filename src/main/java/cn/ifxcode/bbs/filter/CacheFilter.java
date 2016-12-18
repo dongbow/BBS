@@ -12,9 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class CacheFilter implements Filter {
 
-	private FilterConfig filterConfig;
-	
-    public CacheFilter() {
+	public CacheFilter() {
     }
 
 	public void destroy() {
@@ -28,7 +26,6 @@ public class CacheFilter implements Filter {
 	}
 
 	public void init(FilterConfig fConfig) throws ServletException {
-		this.filterConfig = fConfig;
 	}
 
 }

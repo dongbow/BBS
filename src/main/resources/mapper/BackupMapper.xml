@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ifxcode.bbs.dao.BackupDao">
+	
+	<cache type="cn.ifxcode.bbs.dao.cache.LoggingRedisCache"/>
+	
+	<insert id="insert" parameterType="Backup">
+		insert into bbs_backup 
+			(id, url, back_time, uid, nickname) 
+		values
+			(#{id}, #{url}, #{backTime}, #{uid}, #{nickname})
+	</insert>
+
+	<select id="getAllBacks" resultType="Backup">
+		select * from bbs_backup
+		<if test="starttime != null">
+			<![CDATA[ and DATE_FORMAT(back_time, '%Y-%m-%d') >= #{starttime} ]]>
+		</if>
+		<if test="endtime != null">
+			<![CDATA[ and DATE_FORMAT(back_time, '%Y-%m-%d') <= #{endtime} ]]>
+		</if>
+		order by back_time desc
+	</select>
+	
+</mapper>

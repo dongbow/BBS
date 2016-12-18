@@ -6,7 +6,9 @@
     			<li class="menu-list"><a href="${path}${res.resLink}"><i class="fa ${res.resIcon}"></i><span>${res.resName}</span></a>
                     <ul class="sub-menu-list">
                     	<#list res.resources as sub>
-                        	<li><a href="${path}${sub.resLink}"><i class="fa ${sub.resIcon}"></i>${sub.resName}</a></li>
+                    		<#if sub.resType lt 2>
+                    			<li><a href="${path}${sub.resLink}"><i class="fa ${sub.resIcon}"></i>${sub.resName}</a></li>
+                    		</#if>
 						</#list>
                     </ul>
             	</li>

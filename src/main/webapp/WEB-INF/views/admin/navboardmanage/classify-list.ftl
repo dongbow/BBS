@@ -50,8 +50,8 @@
 			            <div class="col-md-2 form-group">
 		                    <select id="auth" class="selectpicker show-tick form-control">
 		                      	<option value="-1">是否公开</option>
-						        <option value="0">公开访问</option>
-						        <option value="1">权限访问</option>
+						        <option value="0">公开发帖</option>
+						        <option value="1">权限发帖</option>
 					        </select>
 			            </div>
 	                	<div class="col-md-4 form-group">

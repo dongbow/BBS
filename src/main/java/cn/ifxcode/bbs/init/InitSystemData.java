@@ -34,8 +34,10 @@ import cn.ifxcode.bbs.entity.Navigation;
 import cn.ifxcode.bbs.entity.QuickNavigation;
 import cn.ifxcode.bbs.entity.Resources;
 import cn.ifxcode.bbs.entity.Role;
+import cn.ifxcode.bbs.entity.ScheduleJob;
 import cn.ifxcode.bbs.entity.SwfArea;
 import cn.ifxcode.bbs.entity.SystemConfig;
+import cn.ifxcode.bbs.service.QuartzService;
 import cn.ifxcode.bbs.utils.JsonUtils;
 import cn.ifxcode.bbs.utils.RedisKeyUtils;
 
@@ -84,6 +86,9 @@ public class InitSystemData {
 	@Resource
 	private FriendLinkDao friendLinkDao;
 	
+	@Resource
+	private QuartzService quartzService;
+	
 	//private ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
 	
 	@PostConstruct
@@ -99,6 +104,7 @@ public class InitSystemData {
 		this.initNavBoard();
 		this.initClassify();
 		this.initFriendLink();
+		//this.initJob();
 		long end = System.currentTimeMillis();
 		logger.info("init system time: {}", (end - start) / 1000);
 		//executorService.shutdown();
@@ -263,6 +269,15 @@ public class InitSystemData {
 //			}
 //		};
 //		executorService.scheduleWithFixedDelay(runnable, 1, 10, TimeUnit.SECONDS);
+	}
+	
+	public void initJob() {
+		List<ScheduleJob> jobs = quartzService.getAllJobFromDB(null);
+		if(jobs != null && jobs.size() > 0) {
+			for (ScheduleJob job : jobs) {
+				quartzService.addJob(job);
+			}
+		}
 	}
 	
 }

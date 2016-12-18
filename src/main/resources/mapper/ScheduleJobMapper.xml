@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.ifxcode.bbs.dao.ScheduleJobDao">
+
+	<cache type="cn.ifxcode.bbs.dao.cache.LoggingRedisCache"/>
+
+	<sql id="Base_Column_List">
+		job_id, create_time, update_time, job_name, job_group, job_status,
+		cron_expression,
+		description, bean_class, is_concurrent, spring_id, method_name
+	</sql>
+	
+	<select id="selectByJobId" parameterType="java.lang.Long" resultType="ScheduleJob">
+		select
+		<include refid="Base_Column_List" />
+		from schedule_job
+		where job_id = #{jobId,jdbcType=BIGINT}
+	</select>
+	
+	<delete id="delete" parameterType="java.lang.Long">
+		delete from schedule_job
+		where job_id = #{jobId,jdbcType=BIGINT}
+	</delete>
+	
+	<insert id="insert" parameterType="ScheduleJob">
+		insert into schedule_job (job_id, create_time, update_time,
+		job_name, job_group, job_status,
+		cron_expression, description, bean_class,
+		is_concurrent, spring_id, method_name
+		)
+		values (#{jobId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP},
+		#{updateTime,jdbcType=TIMESTAMP},
+		#{jobName,jdbcType=VARCHAR}, #{jobGroup,jdbcType=VARCHAR}, #{jobStatus,jdbcType=VARCHAR},
+		#{cronExpression,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR},
+		#{beanClass,jdbcType=VARCHAR},
+		#{isConcurrent,jdbcType=VARCHAR}, #{springId,jdbcType=VARCHAR}, #{methodName,jdbcType=VARCHAR}
+		)
+	</insert>
+	
+	<update id="updateByJobId" parameterType="ScheduleJob">
+		update schedule_job
+		set create_time = #{createTime,jdbcType=TIMESTAMP},
+		update_time = #{updateTime,jdbcType=TIMESTAMP},
+		job_name = #{jobName,jdbcType=VARCHAR},
+		job_group = #{jobGroup,jdbcType=VARCHAR},
+		job_status = #{jobStatus,jdbcType=VARCHAR},
+		cron_expression = #{cronExpression,jdbcType=VARCHAR},
+		description = #{description,jdbcType=VARCHAR},
+		bean_class = #{beanClass,jdbcType=VARCHAR},
+		is_concurrent = #{isConcurrent,jdbcType=VARCHAR},
+		spring_id = #{springId,jdbcType=VARCHAR},
+		method_name = #{methodName,jdbcType=VARCHAR}
+		where job_id = #{jobId,jdbcType=BIGINT}
+	</update>
+	
+	<select id="getAll" resultType="ScheduleJob">
+		select
+		<include refid="Base_Column_List" />
+		from schedule_job 
+		<where>
+			<if test="name != null">
+				job_name like #{name} 
+			</if>
+			<if test="status != null">
+				and job_status = #{status} 
+			</if>
+		</where>
+	</select>
+</mapper>

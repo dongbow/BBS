@@ -7,8 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import ltang.redis.service.RedisObjectMapService;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,8 +33,6 @@ import com.alibaba.fastjson.JSONObject;
 @Controller
 public class BoardController extends BaseUserController {
 
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
-	
 	private final int DEFAULT_PAGE_SIZE = 25;
 	
 	@Resource

@@ -81,5 +81,5 @@ function activeClass() {
 
 function resetWindow() {
 	var height = $(window).height();
-	$('.main-content').css('min-height', height + 'px')
+	$('.main-content').css('min-height', height + 'px');
 }

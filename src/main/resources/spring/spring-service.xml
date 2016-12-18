@@ -30,6 +30,10 @@
 	    </property> 
     </bean>
     
+    <bean id="springUtils" class="cn.ifxcode.bbs.utils.SpringUtils" />
+    
+    <bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" />
+
     <!-- 配置事务管理器 -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <!-- 注入数据库连接池 -->
