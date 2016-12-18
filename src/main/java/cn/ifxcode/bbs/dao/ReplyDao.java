@@ -15,4 +15,6 @@ public interface ReplyDao {
 
 	public int getCount(long tid);
 
+	public List<Reply> getReplyListByUserId(Map<String, Object> map);
+
 }

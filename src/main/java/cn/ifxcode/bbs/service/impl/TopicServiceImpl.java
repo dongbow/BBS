@@ -221,6 +221,14 @@ public class TopicServiceImpl implements TopicService{
 		return topics;
 	}
 	
+	public Topic getTopicForReplyByTopicId(long topicId) {
+		Topic topic = topicDao.getTopicByTopicId(topicId);
+		topic.setBoard(boardService.getBoardByBoardId(topic.getNavId(), topic.getBoardId()));
+		JSONObject object = this.saveOrUpdateTopicData(topic.getTopicId(), null, null, null, null, -1, null, null);
+		topic.setTopicData(JSON.toJavaObject(object, TopicData.class));
+		return topic;
+	}
+	
 	private void formatTopic(List<Topic> topics) {
 		if(!topics.isEmpty() && topics.size() > 0) {
 			for (Topic topic : topics) {

@@ -16,4 +16,6 @@ public interface ReplyService {
 
 	public int getCount(long topicId);
 
+	public List<Reply> getReplyListByUserId(Page page, long uid);
+
 }

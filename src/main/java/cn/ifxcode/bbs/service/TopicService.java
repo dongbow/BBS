@@ -41,5 +41,7 @@ public interface TopicService {
 
 	public int updateTopic(String tid, String ttitle, String tcontent, int isreply, int iselite, int istop, 
 			int isglobaltop, int ishome, HttpServletRequest request);
+	
+	public Topic getTopicForReplyByTopicId(long topicId);
 
 }

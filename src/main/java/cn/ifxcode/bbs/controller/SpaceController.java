@@ -30,6 +30,7 @@ import cn.ifxcode.bbs.service.ReplyService;
 import cn.ifxcode.bbs.service.TopicService;
 import cn.ifxcode.bbs.service.UserService;
 import cn.ifxcode.bbs.utils.NumberUtils;
+import cn.ifxcode.bbs.utils.ParamsBuildUtils;
 import cn.ifxcode.bbs.utils.RedisKeyUtils;
 
 @Controller
@@ -115,7 +116,7 @@ public class SpaceController extends BaseUserController {
 	
 	@RequestMapping("/uid/{uid}/{bbs}")
 	public ModelAndView toSpaceTopic(@PathVariable("uid")String uid, HttpServletRequest request, 
-			@PathVariable("bbs")String bbs, @RequestParam(value="p", defaultValue = "1", required = false)int pageNo) {
+			@PathVariable("bbs")String bbs, @RequestParam(value="page", defaultValue = "1", required = false)int pageNo) {
 		if(StringUtils.isEmpty(uid) || !this.bbsEquals(bbs)) {
 			return new ModelAndView("redirect:" + BbsConstant.DOMAIN);
 		}
@@ -138,7 +139,7 @@ public class SpaceController extends BaseUserController {
 		}
 		if("topic".equals(bbs)) {
 			if(user.getUserPrivacy().getTopicIsPublic() == 0 || (object != null && user.getUserAccess().getUserId() == cookieBean.getUser_id())) {
-				Page page = Page.newBuilder(pageNo, DEFAULT_PAGE_SIZE, request.getRequestURI());
+				Page page = Page.newBuilder(pageNo, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
 				List<Topic> topics = topicService.getTopicListByUserId(user.getUserAccess().getUserId(), page);
 				mv.addObject("page", page);
 				mv.addObject("topics", topics);
@@ -147,10 +148,10 @@ public class SpaceController extends BaseUserController {
 		} else if("reply".equals(bbs)) {
 			mv.setViewName("space/space-reply");
 			if(user.getUserPrivacy().getReplyIsPublic() == 0 || (object != null && user.getUserAccess().getUserId() == cookieBean.getUser_id())) {
-//				Page page = Page.newBuilder(pageNo, DEFAULT_PAGE_SIZE, request.getRequestURI());
-//				List<Reply> replies = replyService.getReplyListByUserId();
-//				mv.addObject("page", page);
-//				mv.addObject("replies", replies);
+				Page page = Page.newBuilder(pageNo, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
+				List<Reply> replies = replyService.getReplyListByUserId(page, user.getUserAccess().getUserId());
+				mv.addObject("page", page);
+				mv.addObject("replies", replies);
 			}
 		} else if("friends".equals(bbs)) {
 			if(user.getUserPrivacy().getFriendIsPublic() == 0) {

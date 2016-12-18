@@ -31,4 +31,10 @@
 		select count(1) from bbs_reply where topic_id = #{tid}
 	</select>
 	
+	<select id="getReplyListByUserId" resultType="Reply">
+		select reply_id, user_id, topic_id, board_id, reply_parent_id, reply_content 
+		from bbs_reply where user_id = #{uid} and reply_status = 0 
+		order by reply_create_time desc
+	</select>
+	
 </mapper>

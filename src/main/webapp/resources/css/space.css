@@ -326,7 +326,7 @@ body{
     padding: 0 10px;
 }
 
-#ct .t1 .th td,#ct .t1 .th th {
+#ct .t1 td,#ct .t1 .th th {
     border: medium none;
     height: 20px;
     padding:8px 0;
@@ -391,16 +391,6 @@ tr a:hover{
 	margin-right: 20px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+.xg1,.xg1 a {
+	color: #999 !important;
+}

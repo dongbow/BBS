@@ -22,6 +22,7 @@ public class Reply implements Serializable {
 	private Reply reply;
 	private User user;
 	private UserValue userValue;
+	private Topic topic;
 
 	public long getReplyId() {
 		return replyId;
@@ -149,6 +150,14 @@ public class Reply implements Serializable {
 
 	public void setUserValue(UserValue userValue) {
 		this.userValue = userValue;
+	}
+
+	public Topic getTopic() {
+		return topic;
+	}
+
+	public void setTopic(Topic topic) {
+		this.topic = topic;
 	}
 
 }

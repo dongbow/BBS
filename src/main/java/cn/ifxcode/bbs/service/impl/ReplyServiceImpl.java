@@ -139,4 +139,27 @@ public class ReplyServiceImpl implements ReplyService{
 		return replyDao.getCount(tid);
 	}
 
+	@Override
+	public List<Reply> getReplyListByUserId(Page page, long uid) {
+		Map<String, Object> map = Maps.newHashMap();
+		map.put("page", page);
+		map.put("uid", uid);
+		List<Reply> replies = replyDao.getReplyListByUserId(map);
+		for (Reply reply : replies) {
+			String content = HtmlUtils.htmlUnescape(reply.getReplyContent());
+			if (content.indexOf("<img") != -1) {
+				content = "评论包含图片，点击查看详情[image]...";
+			} else if(content.indexOf("<pre") != -1) {
+				content = "评论包含代码，点击查看详情[code]...";
+			} else {
+				if(content.length() > 40) {
+					content = content.substring(0, 40) + "...";
+				}
+			}
+			reply.setReplyContent(content);
+			reply.setTopic(topicService.getTopicForReplyByTopicId(reply.getTopicId()));
+		}
+		return replies;
+	}
+
 }

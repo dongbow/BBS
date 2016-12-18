@@ -66,14 +66,50 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<th>reply</th>
-						</tr>
+						<#if replies??>
+							<#list replies as reply>
+								<tr>
+									<th><a href="${path}/board/${reply.topic.boardId}/topic/detail/${reply.topic.topicId}" target="_blank">${reply.topic.topicTitle}</a></th>
+									<th><a class="board" href="${path}/navigation/${reply.topic.board.navId}/board/${reply.topic.boardId}" target="_blank">${reply.topic.board.boardName}</a></th>
+									<th class="num">
+										<a class="xi2" href="${path}/board/${reply.topic.boardId}/topic/detail/${reply.topic.topicId}" target="_blank">${reply.topic.topicData.topicReplyCount}</a>
+										<em>${reply.topic.topicData.topicViewCount}</em>
+									</th>
+									<th class="by">
+										<cite><a href="${path}/space/nickname/${reply.topic.topicData.lastestReplyUser!}" target="_blank">${reply.topic.topicData.lastestReplyUser!}</a></cite>
+	            						<em><a href="" target="_blank">${reply.topic.topicData.lastestReplyTime!}</a></em>
+									</th>
+								</tr>
+								<tr>
+                					<td colspan="4" class="xg1">&nbsp;
+                						<img src="${path}/resources/images/icon_quote_m_s.gif" style="vertical-align:middle;"> 
+                							<a href="forum.php?mod=redirect&amp;goto=findpost&amp;ptid=1299455&amp;pid=19464615" target="_blank">
+                								<#noescape>${reply.replyContent}</#noescape>
+                							</a> 
+                						<img src="${path}/resources/images/icon_quote_m_e.gif" style="vertical-align:middle;">
+                					</td>
+            					</tr>
+							</#list>
+						<#else>
+							<tr>
+								<th colspan="4" style="text-align:center">该用户评论未公开</th>
+							</tr>
+						</#if>
 					</tbody>
 				</table>
 			</div>
+			<#if page??>
+				<#include "../common/page.ftl"/>
+				<@buildPage page = page/>
+			</#if>
 		</div>
 	</div>
 	<#include "../common/footer.ftl"/>
 </body>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('.infoTextAndGoPageBtnWrap').remove();
+			$('.both').remove();
+		});
+	</script>
 </html>
