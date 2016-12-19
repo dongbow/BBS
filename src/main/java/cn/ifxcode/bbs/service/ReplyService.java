@@ -18,4 +18,8 @@ public interface ReplyService {
 
 	public List<Reply> getReplyListByUserId(Page page, long uid);
 
+	public List<Reply> getReplyList(Page page, int status, int audit);
+	
+	public List<Reply> getReplyList(Page page, int status, int audit, String startTime, String endTime, long uid, long tid, long bid);
+
 }

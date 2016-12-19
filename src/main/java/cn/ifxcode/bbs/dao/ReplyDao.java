@@ -17,4 +17,8 @@ public interface ReplyDao {
 
 	public List<Reply> getReplyListByUserId(Map<String, Object> map);
 
+	public List<Reply> getReplyList(Map<String, Object> map);
+
+	public List<Reply> getReplyListForTrash(Map<String, Object> map);
+
 }

@@ -9,6 +9,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -160,6 +161,71 @@ public class ReplyServiceImpl implements ReplyService{
 			reply.setTopic(topicService.getTopicForReplyByTopicId(reply.getTopicId()));
 		}
 		return replies;
+	}
+
+	@Override
+	public List<Reply> getReplyList(Page page, int status, int audit) {
+		return this.getReplyList(page, status, audit, null, null, 0, 0, 0);
+	}
+
+	@Override
+	public List<Reply> getReplyList(Page page, int status, int audit,
+			String startTime, String endTime, long uid, long tid, long bid) {
+		Map<String, Object> map = Maps.newHashMap();
+		map.put("page", page);
+		map.put("status", status);
+		map.put("audit", audit);
+		if(StringUtils.isNotBlank(startTime)) {
+			map.put("starttime", startTime);
+		}
+		if(StringUtils.isNotBlank(endTime)) {
+			map.put("endtime", endTime);
+		}
+		if(uid != 0) {
+			map.put("uid", uid);
+		}
+		if(tid != 0) {
+			map.put("tid", tid);
+		}
+		if(bid != 0) {
+			map.put("bid", bid);
+		}
+		List<Reply> replies = null;
+		
+		if(status == 1 && audit == 2) {
+			replies = replyDao.getReplyListForTrash(map);
+		} else {
+			replies = replyDao.getReplyList(map);
+		}
+		for (Reply reply : replies) {
+			reply.setReplyCreateTime(DateUtils.dt14LongFormat(DateUtils.dt14FromStr(reply.getReplyCreateTime())));
+			reply.setUser(userService.getUserById(reply.getUserId()));
+			this.dealAdminPage(reply);
+			if(audit == 1) {
+				if(reply.getReplyParentId() != 0) {
+					if(reply.getReplyParentId() != 0) {
+						Reply parent = replyDao.getReplyByPid(reply.getReplyParentId());
+						this.dealAdminPage(parent);
+						reply.setReply(parent);
+					}
+				}
+			}
+		}
+		return replies;
+	}
+	
+	private void dealAdminPage(Reply reply) {
+		String tip = "";
+		if(reply.getReplyStatus() == 1) {
+			tip = "<font color=\"red\">该评论内容已删除</font><br/>";
+		} 
+		if(reply.getReplyIsCheck() == 2 ) {
+			tip = "<font color=\"red\">该评论未通过审核</font><br/>";
+		}
+		if(reply.getUser() != null && (reply.getUser().getUserAccess().getUserIsDelete() == 1 || reply.getUser().getUserAccess().getUserIsLocked() == 1)) {
+			tip = "<font color=\"red\">该评论用户被锁定或者被删除</font><br/>";
+		}
+		reply.setReplyContent(tip + HtmlUtils.htmlUnescape(reply.getReplyContent()));
 	}
 
 }

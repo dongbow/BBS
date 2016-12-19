@@ -170,7 +170,7 @@ public class UserLoginController {
 	
 	@RequestMapping("/register")
 	public String toRegister() {
-		if(!SystemConfigUtils.getIsAllowRegister()) {
+		if(SystemConfigUtils.getIsAllowRegister()) {
 			return "account/register-stop";
 		}
 		return "account/register";
@@ -183,7 +183,7 @@ public class UserLoginController {
 			@RequestParam(value = "boardManager", required = false, defaultValue = "0")int boardManager, 
 			@RequestParam(value = "roleIds", required = false, defaultValue = "4")String roleIds, 
 			HttpServletRequest request) {
-		if(!SystemConfigUtils.getIsAllowRegister()) {
+		if(SystemConfigUtils.getIsAllowRegister()) {
 			return "account/register-stop";
 		}
 		String href = null;

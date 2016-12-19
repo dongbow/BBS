@@ -34,21 +34,21 @@ public class SystemConfigUtils {
 	}
 	
 	public static boolean getIsAllowRegister() {
-		if(Integer.parseInt(object.getString("isAllowRegister")) == 0) {
+		if(Integer.parseInt(object.getString("isAllowRegister")) == 1) {
 			return true;
 		}
 		return false;
 	}
 	
 	public static boolean getIsOpenTopicAudit() {
-		if(Integer.parseInt(object.getString("isOpenTopicAudit")) == 0) {
+		if(Integer.parseInt(object.getString("isOpenTopicAudit")) == 1) {
 			return true;
 		}
 		return false;
 	}
 	
 	public static boolean getIsOpenReplyAudit() {
-		if(Integer.parseInt(object.getString("isOpenReplyAudit")) == 0) {
+		if(Integer.parseInt(object.getString("isOpenReplyAudit")) == 1) {
 			return true;
 		}
 		return false;

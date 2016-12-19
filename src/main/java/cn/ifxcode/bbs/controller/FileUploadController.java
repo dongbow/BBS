@@ -52,9 +52,9 @@ public class FileUploadController {
 		if(StringUtils.isNotBlank(file)) {
 			Map<String, Object> map = fileService.getFileLinkByUuid(file);
 			if(map != null && map.containsKey("file_link")) {
-				if(!fileService.vaildOnce(file, request)) {
+				if(fileService.vaildOnce(file, request)) {
 					fileService.AddDownCount(file, request);
-					DownloadUtils.downloadFile(map, response);
+					DownloadUtils.download(map, response);
 				} else {
 					try {
 						response.getWriter().print("金币不足");

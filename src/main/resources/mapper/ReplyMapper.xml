@@ -37,4 +37,44 @@
 		order by reply_create_time desc
 	</select>
 	
+	<select id="getReplyList" resultType="Reply">
+		select * from bbs_reply where reply_status = #{status} and reply_is_check = #{audit} 
+		<if test="uid != null">
+		 and user_id = #{uid} 
+		</if>
+		<if test="tid != null">
+		 and topic_id = #{tid} 
+		</if>
+		<if test="bid != null">
+		 and board_id = #{bid} 
+		</if>
+		<if test="starttime != null">
+			<![CDATA[ and DATE_FORMAT(reply_create_time, '%Y-%m-%d') >= #{starttime} ]]>
+		</if>
+		<if test="endtime != null">
+			<![CDATA[ and DATE_FORMAT(reply_create_time, '%Y-%m-%d') <= #{endtime} ]]>
+		</if>
+		order by reply_create_time desc
+	</select>
+	
+	<select id="getReplyListForTrash" resultType="Reply">
+		select * from bbs_reply where (reply_status = #{status} or reply_is_check = #{audit}) 
+		<if test="uid != null">
+		 and user_id = #{uid} 
+		</if>
+		<if test="tid != null">
+		 and topic_id = #{tid} 
+		</if>
+		<if test="bid != null">
+		 and board_id = #{bid} 
+		</if>
+		<if test="starttime != null">
+			<![CDATA[ and DATE_FORMAT(reply_create_time, '%Y-%m-%d') >= #{starttime} ]]>
+		</if>
+		<if test="endtime != null">
+			<![CDATA[ and DATE_FORMAT(reply_create_time, '%Y-%m-%d') <= #{endtime} ]]>
+		</if>
+		order by reply_create_time desc
+	</select>
+	
 </mapper>
