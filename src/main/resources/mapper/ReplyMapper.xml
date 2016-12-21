@@ -77,4 +77,8 @@
 		order by reply_create_time desc
 	</select>
 	
+	<select id="getReplyByReplyId" resultType="Reply">
+		select reply_id, user_id, topic_id, board_id, reply_parent_id, reply_content from bbs_reply where reply_id = #{replyId}
+	</select>
+	
 </mapper>

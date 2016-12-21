@@ -228,4 +228,9 @@ public class ReplyServiceImpl implements ReplyService{
 		reply.setReplyContent(tip + HtmlUtils.htmlUnescape(reply.getReplyContent()));
 	}
 
+	@Override
+	public Reply getReplyByReplyId(long replyId) {
+		return replyDao.getReplyByReplyId(replyId);
+	}
+
 }

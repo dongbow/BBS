@@ -18,6 +18,7 @@ public class Resources implements Serializable, Comparable<Resources> {
 	private Integer resParentId;
 	private String resCreateTime;
 	private String resIcon;
+	private int turnWay;
 	private List<Role> roles;
 	private List<Resources> resources = new ArrayList<Resources>();
 
@@ -133,6 +134,14 @@ public class Resources implements Serializable, Comparable<Resources> {
 	@Override
 	public int compareTo(Resources res) {
 		return this.resId.compareTo(res.resId);
+	}
+
+	public int getTurnWay() {
+		return turnWay;
+	}
+
+	public void setTurnWay(int turnWay) {
+		this.turnWay = turnWay;
 	}
 	
 }

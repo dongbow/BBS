@@ -6,7 +6,7 @@
 	<link href="${path}/resources/css/shCoreDefault.css" type="text/css" rel="stylesheet">
 	<script type="text/javascript" src="${path}/resources/js/shCore.js"></script>
 	<script type="text/javascript" src="${path}/resources/js/syntaxhighlighter.js"></script>
-  	<title>评论列表</title>
+  	<title>回收站</title>
 </head>
 
 <body class="sticky-header">
@@ -76,7 +76,10 @@
 	                        			<tr>
 	                        				<td><input type="checkbox"></td>
 				                            <td class="numeric" data-title="ID">${reply.replyId}</td>
-				                            <td class="numeric" data-title="帖子ID">${reply.topicId}</td>
+				                            <td class="numeric" data-title="帖子ID">
+				                            	${reply.topicId}
+				                            	<a href="${path}/board/${reply.boardId}/topic/detail/${reply.topicId}" target="_blank" style="color:#428bca" title="进入帖子"><i class="fa fa-external-link"></i></a>
+				                            </td>
 				                            <td class="numeric" data-title="评论人">
 				                            	<a href="${path}/space/uid/${reply.userId}" target="_blank" style="color:#428bca">${reply.user.userAccess.userNickname}</a>
 				                            </td>
@@ -88,6 +91,7 @@
 				                            <td class="numeric" data-title="评论IP">${reply.replyIp}</td>
 				                            <td class="numeric" data-title="查看更多">
 				                            	<a class="btn btn-link btn-xs reply-content" type="button" data-value="${reply.replyContent}">预览评论</a>
+				                            	<a class="btn btn-link btn-xs del-reason" type="button" data-value="">删除原因</a>
 				                            </td>
 				                            <td class="numeric" data-title="操作">
 				                            	<a class="btn btn-default btn-xs" type="button"><i class="fa fa-edit"></i> 恢复 </a>

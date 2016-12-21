@@ -59,7 +59,7 @@ public class ResourcesServiceImpl implements ResourcesService {
 	@SysLog(module = "系统管理", methods = "资源管理-添加")
 	@Transactional
 	public int addResources(String name, String link, String sign, int pid,
-			String icon, int type, int sort, int status, int roles[], HttpServletRequest request) {
+			String icon, int type, int sort, int status, int way, int roles[], HttpServletRequest request) {
 		synchronized (this) {
 			if(FormValidate.stringUtils(name, link, sign, icon) && roles.length > 0) {
 				Resources resources = new Resources();
@@ -71,6 +71,7 @@ public class ResourcesServiceImpl implements ResourcesService {
 				resources.setResIcon(icon);
 				resources.setResStatus(status);
 				resources.setResType(type);
+				resources.setTurnWay(way);
 				resources.setResCreateTime(DateUtils.dt14LongFormat(new Date()));
 				try {
 					int row = resourcesDao.insertResources(resources);

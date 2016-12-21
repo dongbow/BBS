@@ -48,6 +48,8 @@ public class TipController extends BaseUserController{
 			model.addAttribute("tip", "space-notexists");
 		} else if("post-fail".equals(tip)) {
 			model.addAttribute("tip", "post-fail");
+		} else if("reply-notexists".equals(tip)) {
+			model.addAttribute("tip", "reply-notexists");
 		} else if("reply-fail".equals(tip)) {
 			model.addAttribute("tip", "reply-fail");
 		} else if("reply-noauth".equals(tip)) {

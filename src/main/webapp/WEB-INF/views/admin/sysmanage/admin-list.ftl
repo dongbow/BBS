@@ -96,7 +96,9 @@
 			                        	<th><input type="checkbox"></th>
 			                            <td data-title="ID">${user.userAccess.userId}</td>
 			                            <td data-title="用户名">${user.userAccess.userName}</td>
-			                            <td class="numeric" data-title="昵称">${user.userAccess.userNickname}</td>
+			                            <td class="numeric" data-title="昵称">
+			                            	<a href="${path}/space/uid/${user.userAccess.userId}" target="_blank" style="color:#428bca">${user.userAccess.userNickname}</a>
+			                            </td>
 			                            <td class="numeric" data-title="角色">
 			                            	<#list user.roles as role>
 			                            		${role.roleName}.

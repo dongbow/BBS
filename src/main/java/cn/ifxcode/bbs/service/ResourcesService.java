@@ -11,7 +11,7 @@ public interface ResourcesService {
 	public List<Resources> getResourcesByIds(List<Integer> roleIds);
 
 	public int addResources(String name, String link, String sign, int pid,
-			String icon, int type, int sort, int status, int[] roles, HttpServletRequest request);
+			String icon, int type, int sort, int status, int way, int[] roles, HttpServletRequest request);
 
 	public List<String> getAllModules();
 	

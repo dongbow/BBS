@@ -25,8 +25,8 @@ import cn.ifxcode.bbs.service.GeneralService;
 import cn.ifxcode.bbs.service.NavigationService;
 import cn.ifxcode.bbs.service.TopicService;
 import cn.ifxcode.bbs.service.UserService;
+import cn.ifxcode.bbs.utils.FormValidate;
 import cn.ifxcode.bbs.utils.JsonUtils;
-import cn.ifxcode.bbs.utils.NumberUtils;
 import cn.ifxcode.bbs.utils.RedisKeyUtils;
 
 import com.alibaba.fastjson.JSONArray;
@@ -73,17 +73,16 @@ public class PostController extends BaseUserController {
 	@RequestMapping("/choose")
 	public String cPost(Model model, @RequestParam(value = "gid", required = false)String gid) {
 		this.data(model);
-		if(StringUtils.isNotBlank(gid) && NumberUtils.getAllNumber(gid) > 0) {
-			model.addAttribute("gid", NumberUtils.getAllNumber(gid));
+		if(StringUtils.isNotBlank(gid) && FormValidate.number(gid)) {
+			model.addAttribute("gid", Integer.parseInt(gid));
 		}
 		return "common/cpost";
 	}
 	
-	@RequestMapping("/new/board/{bid}/topic")
-	public String goPost(@PathVariable("bid")String bid, Model model, HttpServletRequest request) {
-		long boardId = NumberUtils.getAllNumber(bid);
+	@RequestMapping("/new/board/{bid:\\d+}/topic")
+	public String goPost(@PathVariable("bid")int boardId, Model model, HttpServletRequest request) {
 		if(boardId != 0) {
-			List<Classify> classifies = classifyService.getClassifyByBoardId((int) boardId);
+			List<Classify> classifies = classifyService.getClassifyByBoardId(boardId);
 			if(classifies != null) {
 				Navigation navigation = navigationService.getNavigation(classifies.get(0).getNavId());
 				Board board = boardService.getBoardByBoardId(classifies.get(0).getNavId(), classifies.get(0).getBoardId());
@@ -102,17 +101,24 @@ public class PostController extends BaseUserController {
 	}
 	
 	@RequestMapping(value = "/new/topic/do", method = RequestMethod.POST)
-	public String doPost(int cid, String ttitle, String tcontent, long uid, int bid, int gid, 
+	public String doPost(String cid, String ttitle, String tcontent, String uid, String bid, String gid, 
 			@RequestParam(required = false, defaultValue = "0")int isreply,
 			@RequestParam(required = false, defaultValue = "0")int iselite,
 			@RequestParam(required = false, defaultValue = "0")int istop,
 			@RequestParam(required = false, defaultValue = "0")int isglobaltop,
 			@RequestParam(required = false, defaultValue = "0")int ishome, 
 			HttpServletRequest request) {
-		if(cid == -1 || StringUtils.isEmpty(ttitle) || StringUtils.isEmpty(tcontent)) {
+		if(StringUtils.isEmpty(ttitle) 
+				|| StringUtils.isEmpty(tcontent) 
+				|| !FormValidate.number(uid) 
+				|| !FormValidate.number(bid) 
+				|| !FormValidate.number(gid)
+				|| !FormValidate.number(cid) 
+				|| Integer.parseInt(cid) == -1) {
 			return "redirect:/tip?tip=post-fail";
 		}
-		long topicId = topicService.insertTopic(cid, ttitle, tcontent, uid, bid, gid, 
+		long topicId = topicService.insertTopic(Integer.parseInt(cid), ttitle, tcontent, Long.parseLong(uid), 
+				Integer.parseInt(bid), Integer.parseInt(gid), 
 				isreply, iselite, istop, isglobaltop, ishome, request);
 		if(topicId > BbsConstant.OK) {
 			return "redirect:/board/" + bid + "/topic/detail/" + topicId;

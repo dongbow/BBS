@@ -22,7 +22,7 @@ import cn.ifxcode.bbs.constant.BbsConstant;
 import cn.ifxcode.bbs.constant.BbsErrorCode;
 import cn.ifxcode.bbs.entity.UserFavorite;
 import cn.ifxcode.bbs.service.UserService;
-import cn.ifxcode.bbs.utils.NumberUtils;
+import cn.ifxcode.bbs.utils.FormValidate;
 import cn.ifxcode.bbs.utils.ParamsBuildUtils;
 
 @Controller
@@ -40,10 +40,8 @@ public class FavoriteController extends BaseUserController {
 		Result result = null;
 		CookieBean cookieBean = userService.checkIsLogin(request);
 		if(cookieBean != null) { 
-			long needId1 = NumberUtils.getAllNumber(id1);
-			long needId2 = NumberUtils.getAllNumber(id2);
-			if(needId1 != 0 && needId2 != 0 && StringUtils.isNotBlank(sign) && StringUtils.isNotBlank(name)) {
-				int row = userService.addFavorite(needId1, needId2, sign, name, request);
+			if(FormValidate.number(id1) && FormValidate.number(id2) && StringUtils.isNotBlank(sign) && StringUtils.isNotBlank(name)) {
+				int row = userService.addFavorite(Long.parseLong(id1), Long.parseLong(id2), sign, name, request);
 				if(row == BbsConstant.OK) {
 					result = new Result(BbsConstant.OK, "收藏成功");
 				} else if(row == BbsErrorCode.FAVORITE_REPEAT) {
@@ -77,13 +75,14 @@ public class FavoriteController extends BaseUserController {
 	}
 	
 	@RequestMapping("/favorite/{type}")
-	public String getFavoriteList(@RequestParam(value = "page", required = false, defaultValue = "1")int pageNo, 
+	public String getFavoriteList(@RequestParam(value = "page", required = false, defaultValue = "1")String pageNo, 
 			@PathVariable("type")String type, HttpServletRequest request, Model model) {
 		if(!validType(type)) {
 			return "redirect:/index";
 		}
 		CookieBean bean = userService.getCookieBeanFromCookie(request);
-		Page page = Page.newBuilder(pageNo, PAGE_SIZE_DEFAULT, ParamsBuildUtils.createUrl(request));
+		if(!FormValidate.number(pageNo)) {pageNo = "1";}
+		Page page = Page.newBuilder(Integer.parseInt(pageNo), PAGE_SIZE_DEFAULT, ParamsBuildUtils.createUrl(request));
 		List<UserFavorite> favorites = Collections.emptyList();
 		if(type.equals("topic")) {
 			favorites = userService.getAllFavorites(bean.getUser_id(), page, 1);

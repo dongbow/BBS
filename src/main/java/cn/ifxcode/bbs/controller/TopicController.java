@@ -36,7 +36,7 @@ import cn.ifxcode.bbs.service.ReportService;
 import cn.ifxcode.bbs.service.TopicService;
 import cn.ifxcode.bbs.service.UserService;
 import cn.ifxcode.bbs.utils.DateUtils;
-import cn.ifxcode.bbs.utils.NumberUtils;
+import cn.ifxcode.bbs.utils.FormValidate;
 import cn.ifxcode.bbs.utils.ParamsBuildUtils;
 
 @Controller
@@ -70,21 +70,13 @@ public class TopicController extends BaseUserController{
 	@Resource
 	private GeneralService generalService;
 	
-	@RequestMapping("/board/{bid}/topic/detail/{tid}")
-	public String toTopic(@PathVariable("bid")String bid, 
-			@PathVariable("tid")String tid, 
-			@RequestParam(value = "page", required = false, defaultValue = "1")int pno, 
-			@RequestParam(required = false, defaultValue = "0")int sort, 
-			@RequestParam(required = false, defaultValue = "0")long uid, 
+	@RequestMapping("/board/{bid:\\d+}/topic/detail/{tid:\\d+}")
+	public String toTopic(@PathVariable("bid")int boardId, 
+			@PathVariable("tid")long topicId, 
+			@RequestParam(value = "page", required = false, defaultValue = "1")String pno, 
+			@RequestParam(required = false, defaultValue = "0")String sort, 
+			@RequestParam(required = false, defaultValue = "0")String uid, 
 			Model model, HttpServletRequest request) {
-		long boardId = NumberUtils.getAllNumber(bid);
-		if(Long.toString(boardId).length() > 10) {
-			return "redirect:/tip?tip=board-notexists";
-		}
-		long topicId = NumberUtils.getAllNumber(tid);
-		if(Long.toString(topicId).length() > 15) {
-			return "redirect:/tip?tip=topic-notexists";
-		}
 		Topic topic = topicService.getTopicByTopicId(topicId);
 		if(topic != null) {
 			topic.setTopicContent(HtmlUtils.htmlUnescape(topic.getTopicContent()));
@@ -95,8 +87,13 @@ public class TopicController extends BaseUserController{
 			Classify classify = classifyService.getClassifyByCid(topic.getBoardId(), topic.getClassId());
 			Navigation navigation = navigationService.getNavigation(topic.getNavId());
 			Board board = boardService.getBoardByBoardId(topic.getNavId(), topic.getBoardId());
-			Page page = Page.newBuilder(pno, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
-			List<Reply> replies = replyService.getReplyListByTopicId(page, topic.getTopicId(), uid, sort);
+			if(!FormValidate.number(uid) || !FormValidate.number(sort, 0, 1) || !FormValidate.number(pno)) {
+				uid = "0";
+				sort = "0";
+				pno = "1";
+			}
+			Page page = Page.newBuilder(Integer.parseInt(pno), DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
+			List<Reply> replies = replyService.getReplyListByTopicId(page, topic.getTopicId(), Long.parseLong(uid), Integer.parseInt(sort));
 			model.addAttribute("navigation", navigation);
 			model.addAttribute("pboard", board);
 			model.addAttribute("clas", classify);
@@ -105,7 +102,7 @@ public class TopicController extends BaseUserController{
 			model.addAttribute("topic", topic);
 			model.addAttribute("page", page);
 			model.addAttribute("replies", replies);
-			model.addAttribute("sort", sort);
+			model.addAttribute("sort", Integer.parseInt(sort));
 			if(generalService.isLocalBMC(request)) {
 				model.addAttribute("localbmc", 1);
 			} else {
@@ -117,24 +114,20 @@ public class TopicController extends BaseUserController{
 		return "redirect:/tip?tip=topic-notexists";
 	}
 	
-	@RequestMapping("/board/{bid}/topic/detail/{tid}/gofloor")
-	public String toTopicFloor(@PathVariable("bid")String bid, 
-			@PathVariable("tid")String tid, 
-			@RequestParam(value = "page", required = false, defaultValue = "1")int pno, 
-			@RequestParam(required = false)Integer floor, 
-			@RequestParam(required = false, defaultValue = "0")int lastest) {
-		long boardId = NumberUtils.getAllNumber(bid);
-		if(Long.toString(boardId).length() > 10) {
-			return "redirect:/tip?tip=board-notexists";
+	@RequestMapping("/board/{bid:\\d+}/topic/detail/{tid:\\d+}/gofloor")
+	public String toTopicFloor(@PathVariable("bid")int boardId, 
+			@PathVariable("tid")long topicId, 
+			@RequestParam(value = "page", required = false, defaultValue = "1")String pno, 
+			@RequestParam(required = false)String floor, 
+			@RequestParam(required = false, defaultValue = "0")String lastest) {
+		if(!FormValidate.number(pno) || !FormValidate.number(lastest, 0, 1)) {
+			pno = "1";
+			lastest = "0";
 		}
-		long topicId = NumberUtils.getAllNumber(tid);
-		if(Long.toString(topicId).length() > 15) {
-			return "redirect:/tip?tip=topic-notexists";
-		}
-		if(lastest != 0) {
+		if(Integer.parseInt(lastest) != 0) {
 			int count = replyService.getCount(topicId);
-			pno = (int) Math.ceil((double) count / DEFAULT_PAGE_SIZE);
-			floor = count;
+			pno = Double.toString(Math.ceil((double) count / DEFAULT_PAGE_SIZE));
+			floor = Integer.toString(count);
 		}
 		return "redirect:/board/" + boardId + "/topic/detail/" + topicId + "?page=" + pno + "#floor_" + floor;
 	}
@@ -166,17 +159,9 @@ public class TopicController extends BaseUserController{
 		return result;
 	}
 	
-	@RequestMapping(value = "/board/{bid}/topic/detail/{tid}/update", method = RequestMethod.GET)
-	public String topicUpdate(@PathVariable("bid")String bid, @PathVariable("tid")String tid, 
+	@RequestMapping(value = "/board/{bid:\\d+}/topic/detail/{tid:\\d+}/update", method = RequestMethod.GET)
+	public String topicUpdate(@PathVariable("bid")int boardId, @PathVariable("tid")long topicId, 
 			HttpServletRequest request, Model model) {
-		long boardId = NumberUtils.getAllNumber(bid);
-		if(Long.toString(boardId).length() > 10) {
-			return "redirect:/tip?tip=board-notexists";
-		}
-		long topicId = NumberUtils.getAllNumber(tid);
-		if(Long.toString(topicId).length() > 15) {
-			return "redirect:/tip?tip=topic-notexists";
-		}
 		Topic topic = topicService.getTopicByTopicId(topicId);
 		if(topic != null) {
 			if(generalService.checkUpdate(request, topic.getUserId())) {
@@ -202,7 +187,7 @@ public class TopicController extends BaseUserController{
 		return "redirect:/tip?tip=topic-notexists";
 	}
 	
-	@RequestMapping(value = "/board/{boardid}/topic/update", method = RequestMethod.POST)
+	@RequestMapping(value = "/board/{boardid:\\d+}/topic/update", method = RequestMethod.POST)
 	public String topicUpdateDo(String bid, String tid, String ttitle, String tcontent, String uid, 
 			@RequestParam(required = false, defaultValue = "0")int isreply,
 			@RequestParam(required = false, defaultValue = "0")int iselite,
@@ -210,10 +195,11 @@ public class TopicController extends BaseUserController{
 			@RequestParam(required = false, defaultValue = "0")int isglobaltop,
 			@RequestParam(required = false, defaultValue = "0")int ishome, 
 			HttpServletRequest request) {
-		if(StringUtils.isEmpty(ttitle) || StringUtils.isEmpty(tcontent)) {
+		if(StringUtils.isEmpty(ttitle) || StringUtils.isEmpty(tcontent) || !FormValidate.number(uid) 
+				|| !FormValidate.number(bid) || !FormValidate.number(tid)) {
 			return "redirect:/tip?tip=update-fail";
 		}
-		if(generalService.checkUpdate(request, NumberUtils.getAllNumber(uid))) {
+		if(generalService.checkUpdate(request, Long.parseLong(uid))) {
 			int row = topicService.updateTopic(tid, ttitle, tcontent, isreply, iselite, istop, isglobaltop, ishome, request);
 			if(row == BbsConstant.OK) {
 				return "redirect:/board/" + bid + "/topic/detail/" + tid;

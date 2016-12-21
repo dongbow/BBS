@@ -246,10 +246,34 @@ public class TopicServiceImpl implements TopicService{
 	}
 	
 	public List<Topic> getHomeTopic() {
-		List<Topic> topics = topicDao.getHomeTopTopic();
+		return this.getHomeTopic(null);
+	}
+	
+	public List<Topic> getHomeTopic(Page page) {
+		return this.getHomeTopic(page, null, null, 0, 0);
+	} 
+	
+	public List<Topic> getHomeTopic(Page page, String startTime, String endTime, long tid, long uid) {
+		Map<String, Object> map = Maps.newHashMap();
+		if(page != null) {
+			map.put("page", page);
+		}
+		if(tid != 0) {
+			map.put("tid", tid);
+		}
+		if(uid != 0) {
+			map.put("uid", uid);
+		}
+		if(StringUtils.isNotBlank(startTime)) {
+			map.put("starttime", startTime);
+		}
+		if(StringUtils.isNotBlank(endTime)) {
+			map.put("endtime", endTime);
+		}
+		List<Topic> topics = topicDao.getHomeTopTopic(map);
 		this.formatTopicData(topics);
 		return topics;
-	}
+	} 
 	
 	public List<Topic> getTopicsByNavId(Page page, long navId, String type,
 			String filter, String orderby) {

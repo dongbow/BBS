@@ -24,7 +24,7 @@ import cn.ifxcode.bbs.service.ClassifyService;
 import cn.ifxcode.bbs.service.NavigationService;
 import cn.ifxcode.bbs.service.TopicService;
 import cn.ifxcode.bbs.service.UserService;
-import cn.ifxcode.bbs.utils.NumberUtils;
+import cn.ifxcode.bbs.utils.FormValidate;
 import cn.ifxcode.bbs.utils.ParamsBuildUtils;
 import cn.ifxcode.bbs.utils.RedisKeyUtils;
 
@@ -53,34 +53,26 @@ public class BoardController extends BaseUserController {
 	@Resource
 	private ClassifyService classifyService;
 	
-	@RequestMapping("/navigation/{gid}/board/{bid}")
-	public String toBoard(@PathVariable("gid")String gid, @PathVariable("bid")String bid, 
-			@RequestParam(value = "page", required = false, defaultValue = "1")int p, 
+	@RequestMapping("/navigation/{gid:\\d+}/board/{bid:\\d+}")
+	public String toBoard(@PathVariable("gid")int navId, @PathVariable("bid")int boardId, 
+			@RequestParam(value = "page", required = false, defaultValue = "1")String p, 
 			@RequestParam(required = false, defaultValue = "topic")String type,
 			@RequestParam(required = false, defaultValue = "lastpost")String filter,
 			@RequestParam(required = false, defaultValue = "lastpost")String orderby, 
 			Model model, HttpServletRequest request) {
-		long navId = NumberUtils.getAllNumber(gid);
-		if(navId == 0 || Long.toString(navId).length() > 10) {
-			return "redirect:/tip?tip=nav-notexists";
-		}
-		JSONObject object = redisObjectMapService.get(RedisKeyUtils.getBoardsByNavId((int) navId), JSONObject.class);
+		JSONObject object = redisObjectMapService.get(RedisKeyUtils.getBoardsByNavId(navId), JSONObject.class);
 		if(object == null) {
 			return "redirect:/tip?tip=nav-notexists";
 		}
-		long boardId = NumberUtils.getAllNumber(bid);
-		if(boardId == 0 || Long.toString(boardId).length() > 10) {
-			return "redirect:/tip?tip=board-notexists";
-		}
-		Navigation navigation = navigationService.getNavigation((int) navId);
-		Board board = boardService.getBoardByBoardId(object, (int) boardId);
+		Navigation navigation = navigationService.getNavigation(navId);
+		Board board = boardService.getBoardByBoardId(object, boardId);
 		if(board == null) {
 			return "redirect:/tip?tip=board-notexists";
 		}
-		//BoardInfo boardInfo = boardService.getBoardInfoByBoardId((int) boardId);
-		BoardInfo boardInfo = boardService.getBoardInfoFromRedis((int) boardId);
-		List<Classify> classifies = classifyService.getClassifyByBoardId((int) boardId);
-		Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
+		BoardInfo boardInfo = boardService.getBoardInfoFromRedis(boardId);
+		List<Classify> classifies = classifyService.getClassifyByBoardId(boardId);
+		if(!FormValidate.number(p)) { p = "1"; }
+		Page page = Page.newBuilder(Integer.parseInt(p), DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
 		List<Topic> gTopics = topicService.getGlobalTopTopic();
 		List<Topic> lTopics = topicService.getLocalTopTopic(board.getBoardId());
 		List<Topic> hTopics = topicService.getTopicsByBoardId(page, boardId, type, filter, orderby);
@@ -95,42 +87,31 @@ public class BoardController extends BaseUserController {
 		return "board/board";
 	}
 	
-	@RequestMapping("/navigation/{gid}/board/{bid}/classify/{cid}")
-	public String toClassify(@PathVariable("gid")String gid, @PathVariable("bid")String bid, 
-			@PathVariable("cid")String cid, 
-			@RequestParam(value = "page", required = false, defaultValue = "1")int p, 
+	@RequestMapping("/navigation/{gid:\\d+}/board/{bid:\\d+}/classify/{cid:\\d+}")
+	public String toClassify(@PathVariable("gid")int navId, @PathVariable("bid")int boardId, 
+			@PathVariable("cid")int classId, 
+			@RequestParam(value = "page", required = false, defaultValue = "1")String p, 
 			@RequestParam(required = false, defaultValue = "topic")String type,
 			@RequestParam(required = false, defaultValue = "lastpost")String filter,
 			@RequestParam(required = false, defaultValue = "lastpost")String orderby, 
 			Model model, HttpServletRequest request) {
-		long navId = NumberUtils.getAllNumber(gid);
-		if(navId == 0 || Long.toString(navId).length() > 10) {
-			return "redirect:/tip?tip=nav-notexists";
-		}
 		JSONObject object = redisObjectMapService.get(RedisKeyUtils.getBoardsByNavId((int) navId), JSONObject.class);
 		if(object == null) {
 			return "redirect:/tip?tip=nav-notexists";
 		}
-		long boardId = NumberUtils.getAllNumber(bid);
-		if(boardId == 0 || Long.toString(boardId).length() > 10) {
-			return "redirect:/tip?tip=board-notexists";
-		}
-		long classId = NumberUtils.getAllNumber(cid);
-		if(classId == 0) {
-			return "redirect:/tip?tip=class-notexists";
-		}
-		Navigation navigation = navigationService.getNavigation((int) navId);
-		Board board = boardService.getBoardByBoardId(object, (int) boardId);
+		Navigation navigation = navigationService.getNavigation(navId);
+		Board board = boardService.getBoardByBoardId(object, boardId);
 		if(board == null) {
 			return "redirect:/tip?tip=board-notexists";
 		}
-		Classify classify = classifyService.getClassifyByCid(board.getBoardId(), (int) classId);
+		Classify classify = classifyService.getClassifyByCid(board.getBoardId(), classId);
 		if(classify == null) {
 			return "redirect:/tip?tip=class-notexists";
 		}
 		BoardInfo boardInfo = boardService.getBoardInfoFromRedis((int) boardId);
 		List<Classify> classifies = classifyService.getClassifyByBoardId((int) boardId);
-		Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
+		if(!FormValidate.number(p)) { p = "1"; }
+		Page page = Page.newBuilder(Integer.parseInt(p), DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
 		List<Topic> gTopics = topicService.getGlobalTopTopic();
 		List<Topic> lTopics = topicService.getLocalTopTopic(board.getBoardId());
 		List<Topic> hTopics = topicService.getTopicsByClassId(page, classId, type, filter, orderby);

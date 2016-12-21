@@ -3,17 +3,27 @@
 	<#if child?? && child?size gt 0>
 		<#list child as res>
     		<#if res.resources?? && res.resources?size gt 0 && res.resType lt 1 && res.resStatus == 0>
-    			<li class="menu-list"><a href="${path}${res.resLink}"><i class="fa ${res.resIcon}"></i><span>${res.resName}</span></a>
-                    <ul class="sub-menu-list">
-                    	<#list res.resources as sub>
-                    		<#if sub.resType lt 2>
-                    			<li><a href="${path}${sub.resLink}"><i class="fa ${sub.resIcon}"></i>${sub.resName}</a></li>
-                    		</#if>
-						</#list>
-                    </ul>
-            	</li>
-    		<#elseif res.resources?? && res.resType lt 1 && res.resStatus == 0>
-    			<li><a href="${path}${res.resLink}"><i class="fa ${res.resIcon}"></i><span>${res.resName}</span></a></li>
+    			<#assign subChild = 0/>
+    			<#list res.resources as sub>
+            		<#if sub.resType gte 2>
+            			<#assign subChild = 1/><#break>
+            		</#if>
+				</#list>
+				<#if subChild = 1>
+					<li><a href="${path}${res.resLink}" <#if res.turnWay == 1>target="_blank"</#if>><i class="fa ${res.resIcon}"></i><span>${res.resName}</span></a></li>
+				<#else>
+					<li class="menu-list"><a href="${path}${res.resLink}"><i class="fa ${res.resIcon}"></i><span>${res.resName}</span></a>
+	                    <ul class="sub-menu-list">
+	                    	<#list res.resources as sub>
+	                    		<#if sub.resType lt 2>
+	                    			<li><a href="${path}${sub.resLink}" <#if sub.turnWay == 1>target="_blank"</#if>><i class="fa ${sub.resIcon}"></i>${sub.resName}</a></li>
+	                    		</#if>
+							</#list>
+	                    </ul>
+	            	</li>
+				</#if>
+    		<#elseif res.resType lt 1 && res.resStatus == 0>
+    			<li><a href="${path}${res.resLink}" <#if res.turnWay == 1>target="_blank"</#if>><i class="fa ${res.resIcon}"></i><span>${res.resName}</span></a></li>
     		</#if>
             <@buildMenu child=res.resources/>
         </#list>

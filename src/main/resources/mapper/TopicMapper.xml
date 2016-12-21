@@ -71,11 +71,30 @@
 	</select>
 	
 	<select id="getHomeTopTopic" resultMap="BaseTopic">
-		SELECT * FROM bbs_topic AS t LEFT JOIN bbs_topic_info AS i ON i.topic_id = t.topic_id 
+		SELECT 
+			t.topic_id, t.user_id, t.board_id, t.class_id, t.nav_id, t.topic_title, t.topic_content, t.topic_status, 
+			t.topic_create_time, t.topic_create_ip, 
+			i.topic_is_check, i.topic_is_home, i.topic_is_home_end_time, i.topic_is_reply, i.topic_is_local_top, i.topic_is_local_top_end_time, 
+			i.topic_is_global_top, i.topic_is_global_top_end_time, i.topic_is_hot, i.topic_is_cream, 
+			d.topic_reply_count, d.topic_view_count, d.topic_favorite_count, d.topic_title_style, 
+			d.lastest_reply_user, d.lastest_reply_time, d.topic_update_user_id, d.topic_update_user, d.topic_update_time 
+		FROM bbs_topic AS t LEFT JOIN bbs_topic_info AS i ON i.topic_id = t.topic_id 
 		LEFT JOIN bbs_topic_data AS d ON d.topic_id = t.topic_id
 		WHERE t.topic_status = 0 AND i.topic_is_home = 1 
 		AND (DATE_FORMAT(i.topic_is_home_end_time, '%Y-%m-%d') &lt;= DATE_FORMAT(NOW(), '%Y-%m-%d')
-		OR i.topic_is_home_end_time IS NULL);
+		OR i.topic_is_home_end_time IS NULL) 
+		<if test="uid != null">
+			and t.user_id = #{uid} 
+		</if>
+		<if test="tid != null">
+			and t.topic_id = #{tid} 
+		</if>
+		<if test="starttime != null">
+			<![CDATA[ and DATE_FORMAT(topic_create_time, '%Y-%m-%d') >= #{starttime} ]]>
+		</if>
+		<if test="endtime != null">
+			<![CDATA[ and DATE_FORMAT(topic_create_time, '%Y-%m-%d') <= #{endtime} ]]>
+		</if>
 	</select>
 	
 	<select id="getTopicsByNavId" resultMap="BaseTopic">

@@ -44,4 +44,8 @@ public interface TopicService {
 	
 	public Topic getTopicForReplyByTopicId(long topicId);
 
+	public List<Topic> getHomeTopic(Page page);
+	
+	public List<Topic> getHomeTopic(Page page, String startTime, String endTime, long tid, long uid);
+
 }

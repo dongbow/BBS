@@ -36,8 +36,9 @@ function save() {
 	var type = $('#type').val();
 	var sort = $('#sort').val();
 	var status = $('#status').val();
+	var way = $('#way').val();
 	var roles = $('#roles').val();
-	if(name && link && sign && pid && icon && type && sort && status && roles) {
+	if(name && link && sign && pid && icon && type && sort && status && roles && way) {
 		$.post($('#res-add').attr('href'), {
 			"name": name,
 			"link": link,
@@ -47,6 +48,7 @@ function save() {
 			"type": type,
 			"sort": sort,
 			"status": status,
+			"way": way, 
 			"roles": roles
 		}, function(result) {
 			if(result.rc.rc == 9001){

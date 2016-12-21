@@ -1,19 +1,26 @@
+<#assign index = -1/>
 <#macro buildParent parent>
 	<#if parent?? && parent?size gt 0>
+		<#assign index = index + 1/>
+		<#assign n = parent?size/>
 		<#list parent as res>
-			<#assign i = res.resources?size/>
-			<#if res.resType == 0>
-        		<#assign m = '-----'/>
-        	<#elseif res.resType == 1>
-        		<#assign m = '----------'/>
-        	<#else>
-        		<#assign m = '---------------'/>
-        	</#if>
-			<option value="${res.resId}_${res.resType}_${i + 1}">${m}${res.resName}</option>
-			<@buildParent parent = res.resources/>
+			<#assign resl = res.resources?size/>
+			<option value="${res.resId}_${res.resType}_${resl + 1}">
+				<#list 0..index as i>
+					<#if i lte index>
+						----
+					</#if>
+				</#list>
+				${res.resName}
+			</option>
+			<#if res.resources?? && res.resources?size gt 0>
+				<@buildParent parent = res.resources/>
+			</#if>
 		</#list>
+		<#assign index = index - 1/>
 	</#if>
 </#macro>
+
 <div class="modal-dialog">
     <div class="modal-content">
         <div class="modal-header">
@@ -79,6 +86,14 @@
                     <select id="status" class="selectpicker show-tick col-md-6 col-xs-11">
 				        <option value="0">正常</option>
 				        <option value="1">暂不使用</option>
+			        </select>
+	            </div>
+	            
+	            <div class="form-group">
+               		<label class="control-label col-md-4">跳转类型</label>
+                    <select id="way" class="selectpicker show-tick col-md-6 col-xs-11">
+				        <option value="0">当前页</option>
+				        <option value="1">新窗口</option>
 			        </select>
 	            </div>
 	            

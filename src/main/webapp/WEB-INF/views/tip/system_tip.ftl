@@ -64,6 +64,10 @@
 			     		抱歉，帖子发表失败<br/>
 			     		<a class="goback" href="javascript:;">返回上一页</a>
 		     		</#if>
+		     		<#if tip == 'reply-notexists'>
+			     		抱歉，评论不存在<br/>
+			     		<a class="goback" href="javascript:;">返回上一页</a>
+		     		</#if>
 		     		<#if tip == 'reply-fail'>
 			     		抱歉，回复失败<br/>
 			     		<a class="goback" href="javascript:;">返回上一页</a>

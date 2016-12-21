@@ -41,9 +41,9 @@ import cn.ifxcode.bbs.service.HomeImageService;
 import cn.ifxcode.bbs.service.NavigationService;
 import cn.ifxcode.bbs.service.TopicService;
 import cn.ifxcode.bbs.service.UserService;
+import cn.ifxcode.bbs.utils.FormValidate;
 import cn.ifxcode.bbs.utils.GetRemoteIpUtil;
 import cn.ifxcode.bbs.utils.JsonUtils;
-import cn.ifxcode.bbs.utils.NumberUtils;
 import cn.ifxcode.bbs.utils.ParamsBuildUtils;
 import cn.ifxcode.bbs.utils.RedisKeyUtils;
 import cn.ifxcode.bbs.utils.UserValueUtils;
@@ -99,25 +99,22 @@ public class IndexController extends BaseUserController{
 		return "index";
 	}
 	
-	@RequestMapping("/navigation/{gid}")
-	public String toNavigation(@PathVariable("gid")String gid, 
+	@RequestMapping("/navigation/{gid:\\d+}")
+	public String toNavigation(@PathVariable("gid")int navId, 
 			@RequestParam(required = false, defaultValue = "topic")String type,
 			@RequestParam(required = false, defaultValue = "lastpost")String filter,
 			@RequestParam(required = false, defaultValue = "lastpost")String orderby, 
-			@RequestParam(value = "page", required = false, defaultValue = "1")int p, 
+			@RequestParam(value = "page", required = false, defaultValue = "1")String p, 
 			HttpServletRequest request, Model model) {
-		long navId = NumberUtils.getAllNumber(gid);
-		if(Long.toString(navId).length() > 10) {
-			return "redirect:/tip?tip=nav-notexists";
-		}
-		JSONObject object = redisObjectMapService.get(RedisKeyUtils.getBoardsByNavId((int) navId), JSONObject.class);
+		JSONObject object = redisObjectMapService.get(RedisKeyUtils.getBoardsByNavId(navId), JSONObject.class);
 		if(object == null) {
 			return "redirect:/tip?tip=nav-notexists";
 		}
-		Navigation navigation = navigationService.getNavigation((int) navId);
+		Navigation navigation = navigationService.getNavigation(navId);
 		JSONArray array = JSONArray.parseArray(object.getString("boards"));
 		List<Board> boards = JsonUtils.decodeJson(array, Board.class);
-		Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
+		if(!FormValidate.number(p)) {p = "1";}
+		Page page = Page.newBuilder(Integer.parseInt(p), DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
 		List<Topic> gTopics = topicService.getGlobalTopTopic();
 		List<Topic> hTopics = topicService.getTopicsByNavId(page, navId, type, filter, orderby);
 		model.addAttribute("navigation", navigation);
@@ -164,10 +161,9 @@ public class IndexController extends BaseUserController{
 		return object;
 	}
 	
-	@RequestMapping(value = "/click/{id}", method = RequestMethod.POST)
-	public Result click(@PathVariable("id")String id) {
+	@RequestMapping(value = "/click/{id:\\d+}", method = RequestMethod.POST)
+	public Result click(@PathVariable("id")int fid) {
 		Result result = null;
-		long fid = NumberUtils.getAllNumber(id);
 		if(fid != 0) {
 			generalService.click("friendlinks", Long.toString(fid));
 			result = new Result(BbsConstant.OK, BbsConstant.RC);

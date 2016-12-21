@@ -6,7 +6,7 @@
 	<link href="${path}/resources/css/shCoreDefault.css" type="text/css" rel="stylesheet">
 	<script type="text/javascript" src="${path}/resources/js/shCore.js"></script>
 	<script type="text/javascript" src="${path}/resources/js/syntaxhighlighter.js"></script>
-  	<title>待审核</title>
+  	<title>首页主题</title>
 </head>
 
 <body class="sticky-header">
@@ -33,21 +33,15 @@
 	                        </div>
 	                	</div>
 			            <div class="col-md-2 form-group">
-			            	<input id="uid" type="text" class="form-control" placeholder="评论人ID">
+		                    <input id="uid" class="form-control" name="uid" type="text" placeholder="用户ID">
 			            </div>
 			            <div class="col-md-2 form-group">
-			            	<input id="tid" type="text" class="form-control" placeholder="帖子ID">
+		                    <input id="tid" class="form-control" name="tid" type="text" placeholder="帖子ID">
 			            </div>
-			            <div class="col-md-2 form-group">
-		                    <select id="navid" class="selectpicker show-tick form-control" data-live-search="true">
-		                      	<option value="0">所属版块</option>
-						        <#list boards as board>
-						        	<option value="${board.boardId}">${board.boardName}</option>
-						        </#list>
-					        </select>
-			            </div>
+                		
 	                	<div class="col-md-4 form-group">
 	            			<a class="btn btn-success btn-sm" type="button"><i class="fa fa-search"></i> 查找 </a>
+	            			<a class="btn btn-info btn-sm" type="button"><i class="fa fa-random"></i> 批量取消首页 </a>
 	            		</div>
                 	</div>
                 </form>
@@ -59,37 +53,39 @@
 	                        <thead class="cf">
 	                        <tr>
 	                        	<th><input type="checkbox"></th>
-	                            <th class="numeric">ID</th>
-	                            <th class="numeric">帖子ID</th>
-	                            <th class="numeric">评论人</th>
-	                            <th class="numeric">评论时间</th>
-	                            <th class="numeric">评论IP</th>
-	                            <th class="numeric">查看更多</th>
+	                            <th>ID</th>
+	                            <th class="numeric">帖子标题</th>
+	                            <th class="numeric">发表人</th>
+	                            <th class="numeric">阅读数</th>
+	                            <th class="numeric">回复数</th>
+	                            <th class="numeric">截止时间</th>
+	                            <th class="numeric">发表时间</th>
+	                            <th class="numeric">预览</th>
 	                            <th class="numeric">操作</th>
 	                        </tr>
 	                        </thead>
 	                        <tbody>
-	                        	<#if replys??>
-	                        		<#list replys as reply>
+	                        	<#if topics??>
+	                        		<#list topics as topic>
 	                        			<tr>
-	                        				<td><input type="checkbox"></td>
-				                            <td class="numeric" data-title="ID">${reply.replyId}</td>
-				                            <td class="numeric" data-title="帖子ID">
-				                            	${reply.topicId}
-				                            	<a href="${path}/board/${reply.boardId}/topic/detail/${reply.topicId}" target="_blank" style="color:#428bca" title="进入帖子"><i class="fa fa-external-link"></i></a>
+	                        				<th><input type="checkbox"></th>
+				                            <td data-title="ID">${topic.topicId}</td>
+				                            <td class="numeric" data-title="帖子标题">
+				                            	<a href="${path}/board/${topic.boardId}/topic/detail/${topic.topicId}" target="_blank" style="color:#428bca">${topic.topicTitle}</a>
 				                            </td>
-				                            <td class="numeric" data-title="评论人">
-				                            	<a href="${path}/space/uid/${reply.userId}" target="_blank" style="color:#428bca">${reply.user.userAccess.userNickname}</a>
+				                            <td class="numeric" data-title="发表人">
+				                            	<a href="${path}/space/uid/${topic.userId}" target="_blank" style="color:#428bca">${topic.user.userAccess.userNickname}</a>
 				                            </td>
-				                            <td class="numeric" data-title="评论时间">${reply.replyCreateTime}</td>
-				                            <td class="numeric" data-title="评论IP">${reply.replyIp}</td>
-				                            <td class="numeric" data-title="查看更多">
-				                            	<a class="btn btn-link btn-xs reply-content" type="button" data-value="${reply.replyContent}">预览评论</a>
+				                            <td class="numeric" data-title="阅读数">${topic.topicData.topicViewCount}</td>
+				                            <td class="numeric" data-title="回复数">${topic.topicData.topicReplyCount}</td>
+				                            <td class="numeric" data-title="截止时间"><#if topic.topicInfo.topicIsHomeEndTime??>${topic.topicInfo.topicIsHomeEndTime?substring(0, 10)}</#if></td>
+				                            <td class="numeric" data-title="发表时间">${topic.topicCreateTime}</td>
+				                            <td class="numeric" data-title="预览">
+				                            	<a class="btn btn-link btn-xs topic-data" type="button" data-value="${topic.topicContent}"> 预览 </a>
 				                            </td>
 				                            <td class="numeric" data-title="操作">
-				                            	<a class="btn btn-default btn-xs" type="button"><i class="fa fa-eye"></i> 通过 </a>
-				                            	<a class="btn btn-default btn-xs" type="button"><i class="fa fa-eye-slash"></i> 失败 </a>
-				                            	<a class="btn btn-default btn-xs" type="button"><i class="fa fa-edit"></i> 编辑 </a>
+				                            	<a class="btn btn-default btn-xs" type="button"><i class="fa fa-random"></i> 取消首页 </a>
+				                            	<a class="btn btn-default btn-xs" type="button"><i class="fa fa-edit"></i> 时间更改 </a>
 				                            </td>
 				                        </tr>
 	                        		</#list>
@@ -99,12 +95,12 @@
 	                </section>
 	                <@buildPage page=page/>
 	                <!-- Modal -->
-			        <div class="modal fade" id="reply-content-modal" tabindex="-1" role="dialog" aria-labelledby="reply-content-modal" aria-hidden="true">
+			        <div class="modal fade" id="topic-content-modal" tabindex="-1" role="dialog" aria-labelledby="topic-content-modal" aria-hidden="true">
 			        	<div class="modal-dialog modal-lg">
 						    <div class="modal-content">
 						        <div class="modal-header">
 						            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						            <h4 class="modal-title"></h4>
+						            <h4 class="modal-title">帖子查看</h4>
 						        </div>
 						        <div class="modal-body" style="text-align:center; overflow:hidden">
 						        </div>
@@ -123,11 +119,10 @@
         </footer>
         <!--footer section end-->
 
-
     </div>
     <!-- main content end-->
 </section>
 	<#include "../common/footer.ftl">
-	<script type="text/javascript" src="${path}/resources/js/admin/reply/reply.js"></script>
+	<script type="text/javascript" src="${path}/resources/js/admin/homemanage/topic.js"></script>
 </body>
 </html>

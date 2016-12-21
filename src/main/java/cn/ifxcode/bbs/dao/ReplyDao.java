@@ -21,4 +21,6 @@ public interface ReplyDao {
 
 	public List<Reply> getReplyListForTrash(Map<String, Object> map);
 
+	public Reply getReplyByReplyId(long replyId);
+
 }

@@ -22,7 +22,7 @@ import cn.ifxcode.bbs.constant.BbsErrorCode;
 import cn.ifxcode.bbs.entity.User;
 import cn.ifxcode.bbs.entity.UserFriends;
 import cn.ifxcode.bbs.service.UserService;
-import cn.ifxcode.bbs.utils.NumberUtils;
+import cn.ifxcode.bbs.utils.FormValidate;
 import cn.ifxcode.bbs.utils.ParamsBuildUtils;
 
 @Controller
@@ -39,11 +39,10 @@ public class FriendsController extends BaseUserController {
 	@ResponseBody
 	@RequestMapping(value = "/friends/add", method = RequestMethod.POST)
 	public Result addFriend(String recUid, String recName, HttpServletRequest request) {
-		long recUserId = NumberUtils.getAllNumber(recUid);
-		if(recUserId != 0 && StringUtils.isNotBlank(recUid) && StringUtils.isNotBlank(recName)) {
-			User user = userService.getUserById(recUserId);
+		if(FormValidate.number(recUid) && StringUtils.isNotBlank(recUid) && StringUtils.isNotBlank(recName)) {
+			User user = userService.getUserById(Long.parseLong(recUid));
 			if(user != null && user.getUserPrivacy().getIsAddFriend() == 0) {
-				int row = userService.addFriend(recUserId, recName, request);
+				int row = userService.addFriend(Long.parseLong(recUid), recName, request);
 				if(row == BbsConstant.OK) {
 					result = new Result(BbsConstant.OK, "加好友请求发送成功");
 				} else if(row == BbsErrorCode.FRIEND_REPEAT) {
@@ -61,9 +60,11 @@ public class FriendsController extends BaseUserController {
 	}
 	
 	@RequestMapping("/friends/list")
-	public String getFriendsList(@RequestParam(value = "page", required = false, defaultValue = "1")int pageNo, HttpServletRequest request, Model model) {
+	public String getFriendsList(@RequestParam(value = "page", required = false, defaultValue = "1")String pageNo, 
+			HttpServletRequest request, Model model) {
 		CookieBean bean = userService.getCookieBeanFromCookie(request);
-		Page page = Page.newBuilder(pageNo, 20, ParamsBuildUtils.createUrl(request));
+		if(!FormValidate.number(pageNo)) {pageNo = "1";}
+		Page page = Page.newBuilder(Integer.parseInt(pageNo), 20, ParamsBuildUtils.createUrl(request));
 		List<UserFriends> friends = userService.getFriendsList(bean.getUser_id(), page);
 		model.addAttribute("page", page);
 		model.addAttribute("friends", friends);
@@ -86,14 +87,15 @@ public class FriendsController extends BaseUserController {
 	}
 	
 	@RequestMapping("/friends/request")
-	public String getFriendsRequest(@RequestParam(value = "page", required = false, defaultValue = "1")int pageNo, 
+	public String getFriendsRequest(@RequestParam(value = "page", required = false, defaultValue = "1")String pageNo, 
 			@RequestParam(required = false, defaultValue="request")String type, HttpServletRequest request, Model model) {
 		CookieBean bean = userService.getCookieBeanFromCookie(request);
 		if(!this.validType(type)) {
 			return "redirect:/index";
 		}
 		if(type.equals("request")) {
-			Page page = Page.newBuilder(pageNo, PAGE_SIZE_DEFAULT, ParamsBuildUtils.createUrl(request));
+			if(!FormValidate.number(pageNo)) {pageNo = "1";}
+			Page page = Page.newBuilder(Integer.parseInt(pageNo), PAGE_SIZE_DEFAULT, ParamsBuildUtils.createUrl(request));
 			List<UserFriends> friends = userService.getAllFriendsRequest(bean.getUser_id(), page);
 			model.addAttribute("page", page);
 			model.addAttribute("friends", friends);
@@ -107,9 +109,8 @@ public class FriendsController extends BaseUserController {
 	@ResponseBody
 	@RequestMapping(value = "/friends/add/{status}", method = RequestMethod.POST)
 	public Result dealStatus(@PathVariable("status")String status, String id) {
-		long friendId = NumberUtils.getAllNumber(id);
-		if(friendId != 0 && StringUtils.isNotBlank(status)) {
-			int row = userService.dealFriendStatus(status, Long.toString(friendId));
+		if(FormValidate.number(id) && StringUtils.isNotBlank(status)) {
+			int row = userService.dealFriendStatus(status, id);
 			if(row == BbsConstant.OK) {
 				result = new Result(BbsConstant.OK, status.equals("pass") ? "已添加" : "已拒绝");
 			} else {

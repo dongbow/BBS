@@ -17,6 +17,7 @@ import cn.ifxcode.bbs.entity.Recommend;
 import cn.ifxcode.bbs.service.HomeImageService;
 import cn.ifxcode.bbs.service.QuickNavigationService;
 import cn.ifxcode.bbs.service.RecommendService;
+import cn.ifxcode.bbs.service.TopicService;
 import cn.ifxcode.bbs.utils.ParamsBuildUtils;
 
 @Controller
@@ -33,6 +34,9 @@ public class HomeManageController extends BaseController {
 	
 	@Resource
 	private RecommendService recommendService;
+	
+	@Resource
+	private TopicService topicService;
 	
 	@RequestMapping("/image")
 	public String toImage(@RequestParam(value="page", required = false, defaultValue = "1")int p, 
@@ -62,6 +66,15 @@ public class HomeManageController extends BaseController {
 		model.addAttribute("recommends", recommends);
 		model.addAttribute("page", page);
 		return "admin/homemanage/recommend-list";
+	}
+	
+	@RequestMapping("/topic")
+	public String toTopic(@RequestParam(value="page", required = false, defaultValue = "1")int p, 
+			HttpServletRequest request, Model model) {
+		Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
+		model.addAttribute("topics", topicService.getHomeTopic(page));
+		model.addAttribute("page", page);
+		return "admin/homemanage/topic-list";
 	}
 	
 }

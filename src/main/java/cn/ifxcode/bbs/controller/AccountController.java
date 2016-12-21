@@ -19,6 +19,7 @@ import cn.ifxcode.bbs.bean.Result;
 import cn.ifxcode.bbs.constant.BbsConstant;
 import cn.ifxcode.bbs.constant.BbsErrorCode;
 import cn.ifxcode.bbs.service.UserService;
+import cn.ifxcode.bbs.utils.FormValidate;
 import cn.ifxcode.bbs.utils.MD5Utils;
 import cn.ifxcode.bbs.utils.ValidateCode;
 
@@ -70,13 +71,13 @@ public class AccountController {
 	}
 	
 	@RequestMapping(value = "/resetpwd", method = RequestMethod.POST)
-	public String resetPwd(@RequestParam(required = false, defaultValue = "0")long uid, 
+	public String resetPwd(@RequestParam(required = false, defaultValue = "0")String uid, 
 			@RequestParam(required = false)String name, String password, String repassword) {
-		if(uid == 0 && StringUtils.isEmpty(name)) {
+		if(FormValidate.number(uid) && StringUtils.isEmpty(name)) {
 			return "redirect:/index";
 		}
 		if(this.validPwd(password, repassword)) {
-			userService.resetPassword(uid, name, MD5Utils.getMD5String(password));
+			userService.resetPassword(Long.parseLong(uid), name, MD5Utils.getMD5String(password));
 			return "redirect:/account/logout?from=forget";
 		}
 		return "redirect:/index";

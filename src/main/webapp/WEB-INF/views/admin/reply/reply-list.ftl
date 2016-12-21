@@ -77,7 +77,10 @@
 	                        			<tr>
 	                        				<td><input type="checkbox"></td>
 				                            <td class="numeric" data-title="ID">${reply.replyId}</td>
-				                            <td class="numeric" data-title="帖子ID">${reply.topicId}</td>
+				                            <td class="numeric" data-title="帖子ID">
+				                            	${reply.topicId}
+				                            	<a href="${path}/board/${reply.boardId}/topic/detail/${reply.topicId}" target="_blank" style="color:#428bca" title="进入帖子"><i class="fa fa-external-link"></i></a>
+				                            </td>
 				                            <td class="numeric" data-title="评论人">
 				                            	<a href="${path}/space/uid/${reply.userId}" target="_blank" style="color:#428bca">${reply.user.userAccess.userNickname}</a>
 				                            </td>

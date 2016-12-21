@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import ltang.redis.service.RedisObjectMapService;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,7 +28,7 @@ import cn.ifxcode.bbs.service.BoardService;
 import cn.ifxcode.bbs.service.ReplyService;
 import cn.ifxcode.bbs.service.TopicService;
 import cn.ifxcode.bbs.service.UserService;
-import cn.ifxcode.bbs.utils.NumberUtils;
+import cn.ifxcode.bbs.utils.FormValidate;
 import cn.ifxcode.bbs.utils.ParamsBuildUtils;
 import cn.ifxcode.bbs.utils.RedisKeyUtils;
 
@@ -54,13 +53,9 @@ public class SpaceController extends BaseUserController {
 	@Resource
 	private RedisObjectMapService redisObjectMapService;
 	
-	@RequestMapping("/uid/{uid}")
-	public String toSpace(@PathVariable("uid")String uid, HttpServletRequest request, 
+	@RequestMapping("/uid/{uid:\\d+}")
+	public String toSpace(@PathVariable("uid")long userId, HttpServletRequest request, 
 			Model model) {
-		if(!StringUtils.isNotBlank(uid)) {
-			return "redirect:" + BbsConstant.DOMAIN;
-		}
-		long userId = NumberUtils.getAllNumber(uid);
 		CookieBean cookieBean = userService.getCookieBeanFromCookie(request);
 		JSONObject object = null;
 		if(cookieBean != null) {
@@ -114,13 +109,12 @@ public class SpaceController extends BaseUserController {
 		return "space/space-uid";
 	}
 	
-	@RequestMapping("/uid/{uid}/{bbs}")
-	public ModelAndView toSpaceTopic(@PathVariable("uid")String uid, HttpServletRequest request, 
-			@PathVariable("bbs")String bbs, @RequestParam(value="page", defaultValue = "1", required = false)int pageNo) {
-		if(StringUtils.isEmpty(uid) || !this.bbsEquals(bbs)) {
+	@RequestMapping("/uid/{uid:\\d+}/{bbs}")
+	public ModelAndView toSpaceTopic(@PathVariable("uid")long userId, HttpServletRequest request, 
+			@PathVariable("bbs")String bbs, @RequestParam(value="page", defaultValue = "1", required = false)String pageNo) {
+		if(!this.bbsEquals(bbs)) {
 			return new ModelAndView("redirect:" + BbsConstant.DOMAIN);
 		}
-		long userId = NumberUtils.getAllNumber(uid);
 		CookieBean cookieBean = userService.getCookieBeanFromCookie(request);
 		JSONObject object = null;
 		if(cookieBean != null) {
@@ -137,9 +131,10 @@ public class SpaceController extends BaseUserController {
 		} else {
 			mv.addObject("islogin", 1);
 		}
+		if(!FormValidate.number(pageNo)) {pageNo = "1";}
 		if("topic".equals(bbs)) {
 			if(user.getUserPrivacy().getTopicIsPublic() == 0 || (object != null && user.getUserAccess().getUserId() == cookieBean.getUser_id())) {
-				Page page = Page.newBuilder(pageNo, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
+				Page page = Page.newBuilder(Integer.parseInt(pageNo), DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
 				List<Topic> topics = topicService.getTopicListByUserId(user.getUserAccess().getUserId(), page);
 				mv.addObject("page", page);
 				mv.addObject("topics", topics);
@@ -148,7 +143,7 @@ public class SpaceController extends BaseUserController {
 		} else if("reply".equals(bbs)) {
 			mv.setViewName("space/space-reply");
 			if(user.getUserPrivacy().getReplyIsPublic() == 0 || (object != null && user.getUserAccess().getUserId() == cookieBean.getUser_id())) {
-				Page page = Page.newBuilder(pageNo, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
+				Page page = Page.newBuilder(Integer.parseInt(pageNo), DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
 				List<Reply> replies = replyService.getReplyListByUserId(page, user.getUserAccess().getUserId());
 				mv.addObject("page", page);
 				mv.addObject("replies", replies);

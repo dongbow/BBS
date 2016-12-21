@@ -218,7 +218,7 @@
 			            <div class="tbmenu">
 			            	<#if user??>
 			            		<#if user.userAccess.userIsAdmin == 1 || (user.userAccess.userIsBoderManager == 1 && localbmc == 1)|| user.userAccess.userId == reply.user.userAccess.userId>
-			                		<a href="" id="">编辑</a>
+			                		<a href="${path}/board/${reply.boardId}/topic/${reply.topicId}/reply/${reply.replyId}/update" id="">编辑</a>
 			                	</#if>
             					<#if user.userAccess.userIsAdmin == 1 || (user.userAccess.userIsBoderManager == 1 && localbmc == 1)>
 				            		<a href="" id="">删除</a>

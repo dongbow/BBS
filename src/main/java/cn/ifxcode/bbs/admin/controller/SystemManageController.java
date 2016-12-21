@@ -137,10 +137,10 @@ public class SystemManageController extends BaseController{
 	@ResponseBody
 	@RequestMapping(value = "/resources/add", method = RequestMethod.POST)
 	public Result addResources(String name, String link, String sign, int pid, 
-			String icon, int type, int sort, int status, 
+			String icon, int type, int sort, int status, int way, 
 			@RequestParam("roles[]")int[] roles, HttpServletRequest request) {
 		Result result = null;
-		int row = resourcesService.addResources(name, link, sign, pid, icon, type, sort, status, roles, request);
+		int row = resourcesService.addResources(name, link, sign, pid, icon, type, sort, status, way, roles, request);
 		if(row == BbsConstant.OK) {
 			result = new Result(BbsConstant.OK, "添加成功");
 		} else {

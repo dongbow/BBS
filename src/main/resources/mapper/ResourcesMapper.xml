@@ -16,6 +16,7 @@
 	 	<result column="res_sort" property="resSort" jdbcType="INTEGER" />
 	 	<result column="res_parent_id" property="resParentId" jdbcType="INTEGER" />
 	 	<result column="res_create_time" property="resCreateTime" jdbcType="VARCHAR" />
+	 	<result column="turn_way" property="turnWay" jdbcType="INTEGER" />
 	 	<result column="res_icon" property="resIcon" jdbcType="VARCHAR" />
 	 	<collection property="roles" ofType="Role">
 	 		<id column="role_id" property="roleId" jdbcType="INTEGER" />
@@ -38,7 +39,7 @@
 	 
 	 <select id="getResByRoleIds" resultMap="BaseResources">
 	 	 select distinct(r.res_id), r.res_name, r.res_link, r.res_sign, r.res_type, r.res_status, r.res_sort, r.res_parent_id,
-	 	 	r.res_create_time, r.res_icon from resources as r, role as l, role_resources as rr 
+	 	 	r.res_create_time, r.res_icon, r.turn_way from resources as r, role as l, role_resources as rr 
 	 	 	where r.res_id = rr.res_id 
 	 	 	and l.role_id = rr.role_id 
 	 	 	and l.role_status = 0
@@ -51,9 +52,9 @@
 	 
 	 <insert id="insertResources" keyProperty="resId" parameterType="Resources">
 	 	insert into resources (res_name, res_link, res_sign, res_type, res_status, res_sort, res_parent_id,
-	 	 	res_create_time, res_icon)
+	 	 	res_create_time, res_icon, turn_way)
 	 	values (#{resName}, #{resLink}, #{resSign}, #{resType}, #{resStatus}, #{resSort}, #{resParentId}, 
-	 		#{resCreateTime}, #{resIcon})
+	 		#{resCreateTime}, #{resIcon}, #{turnWay})
 	 </insert>
 
 	<select id="getAllModules" resultType="String">

@@ -1,5 +1,6 @@
 package cn.ifxcode.bbs.utils;
 
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -26,4 +27,15 @@ public class FormValidate {
 		}
 		return true;
 	}
+	
+	public static boolean number(String param, int... values) {
+		if(values.length > 1) 
+			Arrays.sort(values);
+		return number(param) && Arrays.binarySearch(values, Integer.parseInt(param)) > -1;
+	}
+	
+	public static boolean number(String param) {
+		return Pattern.matches("\\d+", param);
+	}
+
 }
