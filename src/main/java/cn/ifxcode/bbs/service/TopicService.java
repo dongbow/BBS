@@ -48,4 +48,14 @@ public interface TopicService {
 	
 	public List<Topic> getHomeTopic(Page page, String startTime, String endTime, long tid, long uid);
 
+	public List<Topic> getTopicList(Page page, int status, int audit);
+	
+	public List<Topic> getTopicList(Page page, String startTime, String endTime, long uid, long topicId, int navId, int boardId, int classId, int status, int audit);
+
+	public List<Topic> getTopicSpecList(Page page, int all);
+	
+	public List<Topic> getTopicList(Page page, String sql, String startTime, String endTime, long uid, long topicId, int navId, int boardId, int classId);
+
+	public List<Topic> getTopicTopList(Page page, int all);
+
 }

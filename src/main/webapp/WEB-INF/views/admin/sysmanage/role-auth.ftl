@@ -6,7 +6,11 @@
         </div>
         <div class="modal-body">
             <form action="#" class="form-horizontal ">
-                auth
+            	<div class="panel-body">
+        			<a class="btn btn-info btn-sm role-checked" type="button"><i class="fa fa-check-circle"></i> 全选 </a>
+	            	<a class="btn btn-info btn-sm role-o-checked" type="button"><i class="fa fa-circle"></i> 反选 </a>
+            	</div>
+				 <ul id="tree" class="ztree"></ul>
             </form>
         </div>
         <div class="modal-footer" style="text-align:center">
@@ -15,3 +19,8 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+	$(document).ready(function() {
+		zTreeNodes.init(${rid});
+	});
+</script>

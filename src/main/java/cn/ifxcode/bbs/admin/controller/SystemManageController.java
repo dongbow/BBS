@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.ifxcode.bbs.bean.Page;
 import cn.ifxcode.bbs.bean.Result;
+import cn.ifxcode.bbs.bean.TreeNode;
 import cn.ifxcode.bbs.constant.BbsConstant;
+import cn.ifxcode.bbs.entity.Resources;
 import cn.ifxcode.bbs.entity.Role;
 import cn.ifxcode.bbs.service.ResourcesService;
 import cn.ifxcode.bbs.service.RoleService;
@@ -113,8 +115,18 @@ public class SystemManageController extends BaseController{
 	}
 	
 	@RequestMapping(value = "/role/authorize", method = RequestMethod.GET)
-	public String getRoleAuthPanel() {
+	public String getRoleAuthPanel(@RequestParam(value = "rid", required = true)int roleId, Model model) {
+		model.addAttribute("rid", roleId);
 		return "admin/sysmanage/role-auth";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/role/tree")
+	public List<TreeNode> getTreeNodes(@RequestParam(value = "rid", required = true)int roleId, HttpServletRequest request) {
+		List<Resources> mRes = resourcesService.getMasterRes(request);
+		List<Resources> sRes = resourcesService.getResourcesByRoleIdNotTree(roleId);
+		List<TreeNode> nodes = TreeNode.buildTreeNode(mRes, sRes);
+		return nodes;
 	}
 	
 	@RequestMapping("/resources")

@@ -62,7 +62,7 @@ function saveRole() {
 
 function roleAuth(event) {
 	event.preventDefault();
-	$.get($(this).attr('href'), function(result) {
+	$.get($(this).attr('href'), {"rid": $(this).attr('data-role')}, function(result) {
 		if(result.rc != undefined && result.rc.rc == 9001){
 			loginDialog(result);
 		} else if(result.rc != undefined && result.rc.rc == 9999) {
@@ -79,3 +79,24 @@ function roleAuth(event) {
 function saveAuth() {
 	
 }
+
+var zTreeNodes = {
+	init: function(id) {
+		$.get(ROOT + '/system/admin/sysmanage/role/tree', {"rid": id}, function(zNodes) {
+			tree = $.fn.zTree.init($("#tree"), setting, zNodes);  
+	        tree.expandAll(true);
+		});
+	}
+};
+
+var setting = {
+    check: {
+        enable: true, 
+        chkboxType: { "Y" : "ps", "N" : "ps" }
+    },
+    data: {
+        simpleData: {
+            enable: true
+        }
+    }
+};

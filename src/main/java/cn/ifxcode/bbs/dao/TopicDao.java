@@ -27,4 +27,10 @@ public interface TopicDao {
 
 	public int updateTopic(Topic topic);
 
+	public List<Topic> getTopicListForTrash(Map<String, Object> map);
+
+	public List<Topic> getTopicList(Map<String, Object> map);
+
+	public List<Topic> getTopicInfoList(Map<String, Object> map);
+
 }

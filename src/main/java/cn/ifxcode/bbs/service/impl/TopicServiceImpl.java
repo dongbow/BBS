@@ -486,4 +486,121 @@ public class TopicServiceImpl implements TopicService{
 		return BbsConstant.ERROR;
 	}
 
+	@Override
+	public List<Topic> getTopicList(Page page, int status, int audit) {
+		return this.getTopicList(page, null, null, 0, 0, 0, 0, 0, status, audit);
+	}
+
+	@Override
+	public List<Topic> getTopicList(Page page, String startTime, String endTime, 
+			long uid, long topicId, int navId, int boardId, int classId, int status, int audit) {
+		Map<String, Object> map = Maps.newHashMap();
+		map.put("page", page);
+		map.put("status", status);
+		map.put("audit", audit);
+		if(StringUtils.isNotBlank(startTime)) {
+			map.put("starttime", startTime);
+		}
+		if(StringUtils.isNotBlank(endTime)) {
+			map.put("endtime", endTime);
+		}
+		if(uid != 0) {
+			map.put("uid", uid);
+		}
+		if(topicId != 0) {
+			map.put("topicId", topicId);
+		}
+		if(navId != 0) {
+			map.put("navId", navId);
+		}
+		if(boardId != 0) {
+			map.put("boardId", boardId);
+		}
+		if (classId != 0) {
+			map.put("classId", classId);
+		}
+		List<Topic> topics = null;
+		if(audit == 2) {
+			topics = topicDao.getTopicListForTrash(map);
+		} else {
+			topics = topicDao.getTopicList(map);
+		}
+		for (Topic topic : topics) {
+			topic.setTopicContent(HtmlUtils.htmlUnescape(topic.getTopicContent()));
+			topic.setTopicCreateTime(DateUtils.dt14LongFormat(DateUtils.dt14FromStr(topic.getTopicCreateTime())));
+			topic.setTopicData(this.getTopicDateForListFromRedis(topic.getTopicId(), topic.getBoardId()));
+			topic.setUser(userService.getUserById(topic.getUserId()));
+			topic.setBoard(boardService.getBoardByBoardId(topic.getNavId(), topic.getBoardId()));
+			topic.setClassify(classifyService.getClassifyByCid(topic.getBoardId(), topic.getClassId()));
+		}
+		return topics;
+	}
+
+	@Override
+	public List<Topic> getTopicSpecList(Page page, int all) {
+		String sql = "";
+		if(all == -1) {
+			sql = "(i.topic_is_hot = 1 or i.topic_is_cream = 1)";
+		} else if(all == 1) {
+			sql = "i.topic_is_hot = 1";
+		} else {
+			sql = "i.topic_is_cream = 1";
+		}
+		return this.getTopicList(page, sql, null, null, 0, 0, 0, 0, 0);
+	}
+
+	@Override
+	public List<Topic> getTopicList(Page page, String sql, String startTime,
+			String endTime, long uid, long topicId, int navId, int boardId, int classId) {
+		Map<String, Object> map = Maps.newHashMap();
+		map.put("page", page);
+		map.put("sql", sql);
+		if(StringUtils.isNotBlank(startTime)) {
+			map.put("starttime", startTime);
+		}
+		if(StringUtils.isNotBlank(endTime)) {
+			map.put("endtime", endTime);
+		}
+		if(uid != 0) {
+			map.put("uid", uid);
+		}
+		if(topicId != 0) {
+			map.put("topicId", topicId);
+		}
+		if(navId != 0) {
+			map.put("navId", navId);
+		}
+		if(boardId != 0) {
+			map.put("boardId", boardId);
+		}
+		if (classId != 0) {
+			map.put("classId", classId);
+		}
+		List<Topic> topics = topicDao.getTopicInfoList(map);
+		for (Topic topic : topics) {
+			topic.setTopicContent(HtmlUtils.htmlUnescape(topic.getTopicContent()));
+			topic.setTopicCreateTime(DateUtils.dt14LongFormat(DateUtils.dt14FromStr(topic.getTopicCreateTime())));
+			topic.setTopicData(this.getTopicDateForListFromRedis(topic.getTopicId(), topic.getBoardId()));
+			topic.setUser(userService.getUserById(topic.getUserId()));
+			topic.setBoard(boardService.getBoardByBoardId(topic.getNavId(), topic.getBoardId()));
+			topic.setClassify(classifyService.getClassifyByCid(topic.getBoardId(), topic.getClassId()));
+		}
+		return topics;
+	}
+
+	@Override
+	public List<Topic> getTopicTopList(Page page, int all) {
+		String sql_local = "i.topic_is_local_top = 1 AND (DATE_FORMAT(i.topic_is_local_top_end_time, '%Y-%m-%d') <= DATE_FORMAT(NOW(), '%Y-%m-%d') OR i.topic_is_local_top_end_time IS NULL)";
+		String sql_global = "i.topic_is_global_top = 1 AND (DATE_FORMAT(i.topic_is_global_top_end_time, '%Y-%m-%d') <= DATE_FORMAT(NOW(), '%Y-%m-%d') OR i.topic_is_global_top_end_time IS NULL)";
+		String sql = "";
+		if(all == -1) {
+			sql = "((" + sql_local + ") or (" + sql_global + "))";
+		} else if(all == 1) {
+			sql = sql_local;
+		} else {
+			sql = sql_global;
+		}
+		return this.getTopicList(page, sql, null, null, 0, 0, 0, 0, 0);
+	}
+
 }

@@ -16,5 +16,9 @@ public interface ResourcesService {
 	public List<String> getAllModules();
 	
 	public void addResourcesToRedis(Resources resources, int[] roles);
+
+	public List<Resources> getMasterRes(HttpServletRequest request);
+
+	public List<Resources> getResourcesByRoleIdNotTree(int roleId);
 	
 }

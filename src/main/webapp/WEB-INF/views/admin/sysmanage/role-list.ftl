@@ -1,7 +1,9 @@
-
+<#assign path="${request.contextPath}">
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<link rel="stylesheet" href="${path}/resources/static/ztree/css/demo.css" type="text/css">
+	<link rel="stylesheet" href="${path}/resources/static/ztree/css/metroStyle/metroStyle.css" type="text/css">
 	<#include "../common/import.ftl">
   	<title>角色管理</title>
 </head>
@@ -112,6 +114,9 @@
     <!-- main content end-->
 </section>
 	<#include "../common/footer.ftl">
+	<script type="text/javascript" src="${path}/resources/static/ztree/js/jquery.ztree.core.min.js"></script>
+	<script type="text/javascript" src="${path}/resources/static/ztree/js/jquery.ztree.excheck.min.js"></script>
+	<script type="text/javascript" src="${path}/resources/static/ztree/js/jquery.ztree.exedit.min.js"></script>
 	<script type="text/javascript" src="${path}/resources/js/admin/sysmanage/role.js"></script>
 	<script type="text/javascript" src="${path}/resources/static/admin/js/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
 </body>

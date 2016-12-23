@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +22,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;
 
+import cn.ifxcode.bbs.bean.CookieBean;
 import cn.ifxcode.bbs.constant.BbsConstant;
 import cn.ifxcode.bbs.dao.ResourcesDao;
 import cn.ifxcode.bbs.entity.Resources;
@@ -31,6 +34,7 @@ import cn.ifxcode.bbs.utils.DateUtils;
 import cn.ifxcode.bbs.utils.FormValidate;
 import cn.ifxcode.bbs.utils.JsonUtils;
 import cn.ifxcode.bbs.utils.RedisKeyUtils;
+import cn.ifxcode.bbs.utils.RoleIdUtils;
 
 @Service
 public class ResourcesServiceImpl implements ResourcesService {
@@ -111,6 +115,31 @@ public class ResourcesServiceImpl implements ResourcesService {
 			jsonObject.put("resources", JSONArray.parseArray(JSON.toJSONString(list)).toJSONString());
 			redisObjectMapService.save(RedisKeyUtils.getResourcesByRoleId(id), jsonObject, JSONObject.class);
 		}
+	}
+
+	@Override
+	public List<Resources> getMasterRes(HttpServletRequest request) {
+		CookieBean bean = userService.getCookieBeanFromCookie(request);
+		List<Integer> ids = RoleIdUtils.getRoleIds(bean.getRole_ids());
+		List<Resources> lists = new ArrayList<Resources>();
+		for (Integer id : ids) {
+			JSONObject object = redisObjectMapService.get(RedisKeyUtils.getResourcesByRoleId(id), JSONObject.class);
+			JSONArray result = JSONArray.parseArray(object.getString("resources"));
+			List<Resources> res = JsonUtils.decodeJson(result);
+			lists.addAll(res);
+		}
+		Set<Resources> set = new TreeSet<Resources>(lists);
+		List<Resources> resources = new ArrayList<Resources>(set);
+		return resources;
+		
+	}
+
+	@Override
+	public List<Resources> getResourcesByRoleIdNotTree(int roleId) {
+		JSONObject object = redisObjectMapService.get(RedisKeyUtils.getResourcesByRoleId(roleId), JSONObject.class);
+		JSONArray result = JSONArray.parseArray(object.getString("resources"));
+		List<Resources> res = JsonUtils.decodeJson(result);
+		return res;
 	}
 
 }
