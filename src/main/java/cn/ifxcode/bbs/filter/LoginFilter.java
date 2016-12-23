@@ -26,6 +26,8 @@ import cn.ifxcode.bbs.bean.CookieBean;
 import cn.ifxcode.bbs.bean.Result;
 import cn.ifxcode.bbs.constant.BbsConstant;
 import cn.ifxcode.bbs.constant.BbsErrorCode;
+import cn.ifxcode.bbs.entity.Role;
+import cn.ifxcode.bbs.entity.User;
 import cn.ifxcode.bbs.utils.CookieUtils;
 import cn.ifxcode.bbs.utils.PropertiesUtils;
 import cn.ifxcode.bbs.utils.RedisKeyUtils;
@@ -51,8 +53,22 @@ public class LoginFilter implements Filter {
             if(cookieBean != null && cookieBean.getUser_id() > 0) {
             	JSONObject object = this.getJsonObjectFromRedis(RedisKeyUtils.getUserInfo(cookieBean.getUser_id()));
             	if(object != null) {
-            		chain.doFilter(request, response);
-            		return;
+            		if(httpRequest.getRequestURL().indexOf("/druid") > 0) {
+            			User user = JSONObject.toJavaObject(object, User.class);
+            			List<Role> roles = user.getRoles();
+            			for (Role role : roles) {
+    						if(role.getRoleId().equals(1)) {
+    							chain.doFilter(request, response);
+    	                		return;
+    						} else {
+    							httpResponse.sendRedirect(BbsConstant.ROOT + BbsConstant.TIP + "?tip=noauth");
+    							return;
+    						}
+						}
+            		} else {
+            			chain.doFilter(request, response);
+                		return;
+            		}
             	}
             } 
         }

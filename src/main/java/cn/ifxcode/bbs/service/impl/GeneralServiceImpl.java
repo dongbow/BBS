@@ -297,7 +297,8 @@ public class GeneralServiceImpl implements GeneralService {
 			return true;
 		}
 		CookieBean bean = userService.getCookieBeanFromCookie(request);
-		String ids = RoleIdUtils.getRoleIdsFromCookie(RoleIdUtils.getRoleIds(bean.getRole_ids()));
+		List<Integer> rids = RoleIdUtils.getRoleIds(bean.getRole_ids());
+		String ids = RoleIdUtils.getRoleIdsFromCookie(rids);
 		JSONObject object = redisObjectMapService.get(RedisKeyUtils.getResourcesByRoleId(Integer.parseInt(ids)), JSONObject.class);
 		List<Resources> resources = JsonUtils.decodeJson(JSONArray.parseArray(object.getString("resources")));
 		try {
