@@ -107,7 +107,7 @@ $(function(){
           <button id="scbar_btn" class="header_submit" value="true" name="searchsubmit" type="submit"> 
             <strong>搜索</strong> 
           </button>
-          <input id="scbar_txt" class="header_search" type="text" value="" name="srchtxt" placeholder="请输入关键字搜索" />
+          <input id="scbar_txt" class="header_search" type="text" value="" name="kw" placeholder="请输入关键字搜索" />
         </div>
     </form>
   </div>

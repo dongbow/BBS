@@ -74,7 +74,6 @@
 	                    <table class="table table-bordered table-striped table-condensed cf">
 	                        <thead class="cf">
 	                        <tr>
-	                        	<th><input type="checkbox"></th>
 	                            <th>ID</th>
 	                            <th class="numeric">帖子标题</th>
 	                            <th class="numeric">发表人</th>
@@ -92,7 +91,6 @@
 	                        	<#if topics??>
 	                        		<#list topics as topic>
 	                        			<tr>
-	                        				<th><input type="checkbox"></th>
 				                            <td data-title="ID">${topic.topicId}</td>
 				                            <td class="numeric" data-title="帖子标题">
 				                            	<a href="${path}/board/${topic.boardId}/topic/detail/${topic.topicId}" target="_blank" style="color:#428bca">${topic.topicTitle}</a>
@@ -103,10 +101,16 @@
 				                            <td class="numeric" data-title="阅读数">${topic.topicData.topicViewCount}</td>
 				                            <td class="numeric" data-title="回复数">${topic.topicData.topicReplyCount}</td>
 				                            <td class="numeric" data-title="置顶类型">
-				                            	<#if topic.topicInfo.topicIsCream! == 1>是<#else>否</#if>
+				                            	<#if topic.topicInfo.topicIsLocalTop == 1>版块置顶</#if>
+				                            	<#if topic.topicInfo.topicIsGlobalTop == 1>全局置顶</#if>
 				                            </td>
 				                            <td class="numeric" data-title="截止时间">
-				                            	<#if topic.topicInfo.topicIsHot! == 1>是<#else>否</#if>
+				                            	<#if topic.topicInfo.topicIsLocalTop == 1>
+				                            		<#if topic.topicInfo.topicIsLocalTopEndTime??>${topic.topicInfo.topicIsLocalTopEndTime?substring(0, 10)}</#if>
+				                            	</#if>
+				                            	<#if topic.topicInfo.topicIsGlobalTop == 1>
+				                            		<#if topic.topicInfo.topicIsGlobalTopEndTime??>${topic.topicInfo.topicIsGlobalTopEndTime?substring(0, 10)}</#if>
+				                            	</#if>
 				                            </td>
 				                            <td class="numeric" data-title="发表时间">${topic.topicCreateTime}</td>
 				                            <td class="numeric" data-title="发表IP">${topic.topicCreateIp}</td>
@@ -120,13 +124,14 @@
 													  修改状态 <span class="caret"></span>
 													</button>
 													<ul class="dropdown-menu" role="menu">
-														<li><a href="#">全局置顶</a></li>
-													    <li><a href="#">取消全局置顶</a></li>
-													    <li><a href="#">修改全局全局时间</a></li>
-													    <li class="divider"></li>
-													    <li><a href="#">版块置顶</a></li>
-													    <li><a href="#">取消版块置顶</a></li>
-													    <li><a href="#">修改版块置顶时间</a></li>
+														<#if topic.topicInfo.topicIsLocalTop == 1>
+															<li><a href="#">取消版块置顶</a></li>
+													    	<li><a href="#">修改置顶时间</a></li>
+														</#if>
+														<#if topic.topicInfo.topicIsGlobalTop == 1>
+															<li><a href="#">取消全局置顶</a></li>
+													    	<li><a href="#">修改置顶时间</a></li>
+				                            			</#if>
 													</ul>
 												</div>
 				                            </td>

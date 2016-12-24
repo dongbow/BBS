@@ -57,6 +57,8 @@
 			            
 	                	<div class="col-md-4 form-group">
 	            			<a class="btn btn-success btn-sm" type="button"><i class="fa fa-search"></i> 查找 </a>
+	            			<a class="btn btn-info btn-sm" type="button"><i class="fa fa-eye"></i> 批量通过 </a>
+	            			<a class="btn btn-warning btn-sm" type="button"><i class="fa fa-eye-slash"></i> 批量失败 </a>
 	            		</div>
                 	</div>
                 </form>

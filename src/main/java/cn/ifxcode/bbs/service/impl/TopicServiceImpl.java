@@ -603,4 +603,9 @@ public class TopicServiceImpl implements TopicService{
 		return this.getTopicList(page, sql, null, null, 0, 0, 0, 0, 0);
 	}
 
+	@Override
+	public List<Topic> getTopicListForIndex() {
+		return topicDao.getTopicListForIndex();
+	}
+
 }

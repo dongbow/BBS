@@ -74,7 +74,6 @@
 	                    <table class="table table-bordered table-striped table-condensed cf">
 	                        <thead class="cf">
 	                        <tr>
-	                        	<th><input type="checkbox"></th>
 	                            <th>ID</th>
 	                            <th class="numeric">帖子标题</th>
 	                            <th class="numeric">发表人</th>
@@ -92,7 +91,6 @@
 	                        	<#if topics??>
 	                        		<#list topics as topic>
 	                        			<tr>
-	                        				<th><input type="checkbox"></th>
 				                            <td data-title="ID">${topic.topicId}</td>
 				                            <td class="numeric" data-title="帖子标题">
 				                            	<a href="${path}/board/${topic.boardId}/topic/detail/${topic.topicId}" target="_blank" style="color:#428bca">${topic.topicTitle}</a>
@@ -120,11 +118,16 @@
 													  修改状态 <span class="caret"></span>
 													</button>
 													<ul class="dropdown-menu" role="menu">
-														<li><a href="#">加精</a></li>
-													    <li><a href="#">取消加精</a></li>
-													    <li class="divider"></li>
-													    <li><a href="#">加热门</a></li>
-													    <li><a href="#">取消热门</a></li>
+														<#if topic.topicInfo.topicIsCream! == 1>
+															<li><a href="#">取消加精</a></li>
+														<#else>
+															<li><a href="#">加精</a></li>
+														</#if>
+													    <#if topic.topicInfo.topicIsHot! == 1>
+													    	<li><a href="#">取消热门</a></li>
+													    <#else>
+													    	<li><a href="#">加热门</a></li>
+													    </#if>
 													</ul>
 												</div>
 				                            </td>

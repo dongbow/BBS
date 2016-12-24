@@ -36,12 +36,17 @@ public class NavigationServiceImpl implements NavigationService{
 	public List<Navigation> getAllNavigations() {
 		return navigationDao.getAllNavigations();
 	}
-
-	@Override
-	public Navigation getNavigation(int navId) {
+	
+	public List<Navigation> getAllNavigationsFromCache() {
 		JSONObject object = redisObjectMapService.get(RedisKeyUtils.getNavigations(), JSONObject.class);
 		JSONArray array = JSONArray.parseArray(object.getString("navigations"));
 		List<Navigation> navigations = JsonUtils.decodeJson(array, Navigation.class);
+		return navigations;
+	}
+
+	@Override
+	public Navigation getNavigation(int navId) {
+		List<Navigation> navigations = this.getAllNavigationsFromCache();
 		for (Navigation navigation : navigations) {
 			if(navigation.getNavId() == navId) {
 				return navigation;

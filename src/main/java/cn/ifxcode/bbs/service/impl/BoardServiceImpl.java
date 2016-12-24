@@ -73,6 +73,14 @@ public class BoardServiceImpl implements BoardService {
 		return this.getBoardByBoardId(object, boardId);
 	}
 
+	@Override
+	public List<Board> getBoardByNavId(Integer navId) {
+		JSONObject object = redisObjectMapService.get(RedisKeyUtils.getBoardsByNavId((int) navId), JSONObject.class);
+		JSONArray array = JSONArray.parseArray(object.getString("boards"));
+		List<Board> boards = JsonUtils.decodeJson(array, Board.class);
+		return boards;
+	}
+	
 	public JSONObject saveOrUpdateBoardInfo(int boardId, BoardSign sign, int favorite) {
 		synchronized (this) {
 			JSONObject object = redisObjectMapService.get(RedisKeyUtils.getBoardInfoByBoardId(boardId), JSONObject.class);

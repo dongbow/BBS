@@ -14,6 +14,8 @@ public interface BoardService {
 	public Board getBoardByBoardId(JSONObject object, int boardId);
 
 	public BoardInfo getBoardInfoByBoardId(int boardId);
+	
+	public List<Board> getBoardByNavId(Integer navId);
 
 	public Board getBoardByBoardId(Integer navId, Integer boardId);
 

@@ -8,6 +8,8 @@ import cn.ifxcode.bbs.entity.Navigation;
 public interface NavigationService {
 
 	public List<Navigation> getAllNavigations();
+	
+	public List<Navigation> getAllNavigationsFromCache();
 
 	public Navigation getNavigation(int navId);
 

@@ -58,4 +58,6 @@ public interface TopicService {
 
 	public List<Topic> getTopicTopList(Page page, int all);
 
+	public List<Topic> getTopicListForIndex();
+
 }

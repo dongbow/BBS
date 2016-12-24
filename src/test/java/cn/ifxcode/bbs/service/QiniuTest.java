@@ -31,9 +31,9 @@ public class QiniuTest {
 	public void test() {
 		Auth auth = Auth.create(ak, sk);
 		UploadManager uploadManager = new UploadManager();
-		File file = new File("F:\\Tsbbs\\webapps\\Tsbbs\\tsbbs\\images\\20150813\\logo.png");
+		File file = new File("C:\\Users\\Administrator\\Desktop\\crossdomain.xml");
 		//String fileName = this.createName("jpg");
-		String fileName = "logo.png";
+		String fileName = "crossdomain.xml";
 		try {
 			Response res = uploadManager.put(file, fileName, auth.uploadToken(bucket));
 			if(res.isOK()) {

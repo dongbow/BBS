@@ -33,4 +33,6 @@ public interface TopicDao {
 
 	public List<Topic> getTopicInfoList(Map<String, Object> map);
 
+	public List<Topic> getTopicListForIndex();
+
 }
