@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ifxcode.bbs.dao.BmcLogDao">
+
+	<cache type="cn.ifxcode.bbs.dao.cache.LoggingRedisCache"/>
+
+	<sql id="allKey">
+		modules, status, status_desc, args, user_id, user_nickname, ip, create_time
+	</sql>
+	
+    <insert id="insert" parameterType="BmcLog">
+    	insert into bmc_log (<include refid="allKey"/>)
+    	values (#{modules}, #{status}, #{statusDesc}, #{args}, #{userId}, #{userNickname}, #{ip}, #{createTime})
+    </insert>
+
+	<select id="getAllOperationLog" resultType="BmcLog">
+		select * from bmc_log where 1 = 1 
+		<if test="starttime != null">
+			<![CDATA[ and DATE_FORMAT(create_time, '%Y-%m-%d') >= #{starttime} ]]>
+		</if>
+		<if test="endtime != null">
+			<![CDATA[ and DATE_FORMAT(create_time, '%Y-%m-%d') <= #{endtime} ]]>
+		</if>
+		<if test="module != null">
+			and modules = #{module} 
+		</if>
+		<if test="name != null">
+			and user_nickname = #{name} 
+		</if>
+		<if test="status != null">
+			and status = #{status} 
+		</if>
+		order by create_time desc
+	</select>
+</mapper>

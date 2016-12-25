@@ -222,5 +222,20 @@
 	<update id="updatePassword" flushCache="false">
 		update user_access set user_password = #{password} where user_id = #{uid}
 	</update>
+	
+	<select id="getAllNotTalkUser" resultMap="BaseUser">
+		select u.user_id, u.user_name, u.user_nickname, u.user_create_time, u.user_reg_ip, 
+			r.role_name 
+		from user_access as u left join user_role as ur on ur.user_id = u.user_id 
+		left join role as r on r.role_id = ur.role_id 
+		where u.user_is_delete = 1 and u.user_is_locked = 1 and u.user_is_speak = 1 
+		<if test="uid != null">
+			and u.user_id = #{uid} 
+		</if>
+		<if test="nickname != null">
+			and u.user_nickname = #{nickname} 
+		</if>
+		order by u.user_id 
+	</select>
 
 </mapper>

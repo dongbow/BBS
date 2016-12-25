@@ -54,4 +54,6 @@ public interface UserDao {
 
 	public int updatePassword(@Param("password")String password, @Param("uid")long uid);
 
+	public List<User> getAllNotTalkUser(Map<String, Object> map);
+
 }

@@ -45,10 +45,11 @@
 		                        			<li>
 				                                <a href="#">${board.boardName} <span class="fa arrow"></span></a>
 				                                <ul class="nav nav-third-level">
-				                                    <li><a class="J_menuItem" href="${path}/manage/bmc/${board.boardId}/audit/topic">帖子待审核</a></li>
-				                                    <li><a class="J_menuItem" href="${path}/manage/bmc/${board.boardId}/audit/reply">评论待审核</a></li>
-				                                    <li><a class="J_menuItem" href="${path}/manage/bmc/${board.boardId}/delete/topic">帖子回收站</a></li>
-				                                    <li><a class="J_menuItem" href="${path}/manage/bmc/${board.boardId}/delete/reply">评论回收站</a></li>
+				                                    <li><a class="J_menuItem" href="${path}/manage/bmc/audit/topic?bid=${board.boardId}">帖子待审核</a></li>
+				                                    <li><a class="J_menuItem" href="${path}/manage/bmc/audit/reply?bid=${board.boardId}">评论待审核</a></li>
+				                                    <li><a class="J_menuItem" href="${path}/manage/bmc/delete/topic?bid=${board.boardId}">帖子回收站</a></li>
+				                                    <li><a class="J_menuItem" href="${path}/manage/bmc/delete/reply?bid=${board.boardId}">评论回收站</a></li>
+				                                    <li><a class="J_menuItem" href="${path}/manage/bmc/closelreply?bid=${board.boardId}">已关闭回复</a></li>
 				                                </ul>
 				                            </li>
 		                        		</#list>
@@ -57,9 +58,6 @@
 		                    </li>
                     	</#list>
                     </#if>
-                    <li>
-                    	<a class="J_menuItem" href="${path}/manage/bmc/topic/notreply"><i class="fa fa-magic"></i> <span class="nav-label">已关闭回复</span></a>
-                    </li>
                     <li>
                         <a class="J_menuItem" href="${path}/manage/bmc/user/notspeak"><i class="fa fa-magic"></i> <span class="nav-label">禁言用户</span></a>
                     </li>

@@ -84,4 +84,15 @@ public class TopicManageController extends BaseController {
 		return "admin/topic/topic-top-list";
 	}
 	
+	@RequestMapping("/closereply")
+	public String toCloseReply(@RequestParam(value="page", required = false, defaultValue = "1")int p,
+			HttpServletRequest request, Model model) {
+		Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
+		model.addAttribute("topics", topicService.getTopicCloseReplyList(page, 0, 0, 0));
+		model.addAttribute("navs", navigationService.getAllNavigations());
+		model.addAttribute("boards", boardService.getAllBoards());
+		model.addAttribute("page", page);
+		return "admin/topic/topic-close-list";
+	}
+	
 }

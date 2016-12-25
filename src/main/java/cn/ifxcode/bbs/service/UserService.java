@@ -90,5 +90,7 @@ public interface UserService {
 	public List<PastHistory> getAllUserSigns(Page page, long userId);
 
 	public List<PastHistory> getUserSignsByUid(Page page, String startTime, String endTime, long uid);
+
+	public List<User> getAllNotTalkUser(Page page, long uid, String nickname);
 	
 }

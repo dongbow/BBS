@@ -35,4 +35,6 @@ public interface TopicDao {
 
 	public List<Topic> getTopicListForIndex();
 
+	public List<Topic> getTopicCloseReplyList(Map<String, Object> map);
+
 }

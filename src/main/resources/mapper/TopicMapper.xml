@@ -310,4 +310,20 @@
 		where
 			t.topic_status = 0 and i.topic_is_check = 1
 	</select>
+	
+	<select id="getTopicCloseReplyList" resultType="Topic">
+		select t.topic_id, t.topic_title, t.topic_content, t.board_id, t.user_id, t.topic_create_time, t.topic_create_ip 
+		from bbs_topic as t left join bbs_topic_info as i on i.topic_id = t.topic_id 
+		where i.topic_is_reply = 1 
+		<if test="topicId != null">
+			and t.topic_id = #{topicId} 
+		</if>
+		<if test="navId != null">
+			and t.nav_id = #{navId} 
+		</if>
+		<if test="boardId != null">
+			and t.board_id = #{boardId}
+		</if>
+		order by t.topic_create_time desc
+	</select>
 </mapper>

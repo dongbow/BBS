@@ -752,4 +752,21 @@ public class UserServiceImpl implements UserService {
 		return histories;
 	}
 
+	@Override
+	public List<User> getAllNotTalkUser(Page page, long uid, String nickname) {
+		Map<String, Object> map = Maps.newHashMap();
+		map.put("page", nickname);
+		if(uid != 0) {
+			map.put("uid", uid);
+		}
+		if(StringUtils.isNotBlank(nickname)) {
+			map.put("nickname", nickname);
+		}
+		List<User> users = userDao.getAllNotTalkUser(map);
+		for (User user : users) {
+			user.getUserAccess().setUserCreateTime(DateUtils.dt14LongFormat(DateUtils.dt14FromStr(user.getUserAccess().getUserCreateTime())));
+		}
+		return users;
+	}
+
 }

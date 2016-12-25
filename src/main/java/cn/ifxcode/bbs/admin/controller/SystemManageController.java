@@ -160,4 +160,13 @@ public class SystemManageController extends BaseController{
 		}
 		return result;
 	}
+	
+	@RequestMapping("/nottalk")
+	public String toNotTalk(@RequestParam(value="page", required = false, defaultValue = "1")int p,
+			HttpServletRequest request, Model model) {
+		Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
+		model.addAttribute("users", userService.getAllNotTalkUser(page, 0, null));
+		model.addAttribute("page", page);
+		return "admin/sysmanage/nottalk-list";
+	}
 }

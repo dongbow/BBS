@@ -608,4 +608,26 @@ public class TopicServiceImpl implements TopicService{
 		return topicDao.getTopicListForIndex();
 	}
 
+	@Override
+	public List<Topic> getTopicCloseReplyList(Page page, long topicId, int navId, int boardId) {
+		Map<String, Object> map = Maps.newHashMap();
+		map.put("page", page);
+		if(topicId != 0) {
+			map.put("topicId", topicId);
+		}
+		if(navId != 0) {
+			map.put("navId", navId);
+		}
+		if(boardId != 0) {
+			map.put("boardId", boardId);
+		}
+		List<Topic> topics = topicDao.getTopicCloseReplyList(map);
+		for (Topic topic : topics) {
+			topic.setTopicContent(HtmlUtils.htmlUnescape(topic.getTopicContent()));
+			topic.setTopicCreateTime(DateUtils.dt14LongFormat(DateUtils.dt14FromStr(topic.getTopicCreateTime())));
+			topic.setUser(userService.getUserById(topic.getUserId()));
+		}
+		return topics;
+	}
+
 }

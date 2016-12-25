@@ -60,4 +60,6 @@ public interface TopicService {
 
 	public List<Topic> getTopicListForIndex();
 
+	public List<Topic> getTopicCloseReplyList(Page page, long topicId, int navId, int boardId);
+
 }
