@@ -33,7 +33,7 @@
 	                    <table class="table table-bordered table-striped table-condensed cf">
 	                        <thead class="cf">
 	                        <tr>
-	                        	<th><input type="checkbox"></th>
+	                        	<th><input type="checkbox" id="data-ids"></th>
 	                            <th>ID</th>
 	                            <th>名字</th>
 	                            <th class="numeric">链接</th>
@@ -48,7 +48,7 @@
 		                        <#if quickNavigations??>
 		                        	<#list quickNavigations as quick>
 		                        		<tr>
-				                        	<th><input type="checkbox"></th>
+				                        	<th><input type="checkbox" data-id="${quick.id}"></th>
 				                            <td data-title="ID">${quick.id}</td>
 				                            <td data-title="名字">${quick.quickName}</td>
 				                            <td class="numeric" data-title="链接">${quick.quickLink}</td>

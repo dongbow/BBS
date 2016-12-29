@@ -58,7 +58,7 @@
 	                    <table class="table table-bordered table-striped table-condensed cf">
 	                        <thead class="cf">
 	                        <tr>
-	                        	<th><input type="checkbox"></th>
+	                        	<th><input type="checkbox" id="data-ids"></th>
 	                            <th>ID</th>
 	                            <th class="numeric">名字</th>
 	                            <th class="numeric">链接</th>
@@ -73,7 +73,7 @@
 	                        	<#if recommends??>
 	                        		<#list recommends as rc>
 	                        			<tr>
-	                        				<th><input type="checkbox"></th>
+	                        				<th><input type="checkbox" data-id="${rc.rcId}"></th>
 				                            <td data-title="ID">${rc.rcId}</td>
 				                            <td class="numeric" data-title="导航名">
 				                            	<a href="${rc.rcHref}" target="_blank" style="color:#428bca">${rc.rcName}</a>

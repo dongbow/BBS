@@ -492,7 +492,7 @@ CREATE TABLE `system_log` (
   `method` varchar(255) NOT NULL COMMENT '方法',
   `status` int(1) NOT NULL COMMENT '执行状态',
   `status_desc` varchar(255) NOT NULL COMMENT '描述',
-  `args` varchar(255) DEFAULT NULL COMMENT '参数',
+  `args` varchar(2555) DEFAULT NULL COMMENT '参数',
   `user_id` bigint(20) NOT NULL COMMENT '操作人ID',
   `user_nickname` varchar(20) NOT NULL COMMENT '操作人昵称',
   `ip` varchar(20) NOT NULL COMMENT 'IP',
@@ -647,3 +647,17 @@ CREATE TABLE `user_value` (
   `user_friend_count` int(11) DEFAULT '0' COMMENT '用户好友数',
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户论坛数据表';
+
+-- ----------------------------
+-- Table structure for bbs_count
+-- ----------------------------
+DROP TABLE IF EXISTS `bbs_count`;
+CREATE TABLE `bbs_count` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增id',
+  `time` VARCHAR(20) NOT NULL COMMENT '日期',
+  `topic_count` BIGINT NOT NULL COMMENT '今日帖子数量',
+	`reply_count` BIGINT NOT NULL COMMENT '今日回复数量',
+	`user_sign_count` BIGINT NOT NULL COMMENT '今日签到数量',
+	`newuser_count` BIGINT NOT NULL COMMENT '今日新用户数量',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='数据统计表';

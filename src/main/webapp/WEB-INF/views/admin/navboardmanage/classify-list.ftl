@@ -68,7 +68,7 @@
 	                    <table class="table table-bordered table-striped table-condensed cf">
 	                        <thead class="cf">
 	                        <tr>
-	                        	<th><input type="checkbox"></th>
+	                        	<th><input type="checkbox" id="data-ids"></th>
 	                            <th>ID</th>
 	                            <th class="numeric">分类名</th>
 	                            <th class="numeric">分类颜色</th>
@@ -84,7 +84,7 @@
 	                        	<#if clas??>
 	                        		<#list clas as c>
 	                        			<tr class="${c.classId}">
-	                        				<th><input type="checkbox"></th>
+	                        				<th><input type="checkbox" data-id="${c.classId}"></th>
 				                            <td data-title="ID">${c.classId}</td>
 				                            <td class="numeric" data-title="分类名">
 				                            	<a href="${path}/navigation/${c.navId}/board/${c.boardId}" target="_blank" style="color:#428bca">${c.className}</a>

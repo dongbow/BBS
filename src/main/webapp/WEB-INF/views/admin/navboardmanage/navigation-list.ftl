@@ -54,7 +54,7 @@
 	                    <table class="table table-bordered table-striped table-condensed cf">
 	                        <thead class="cf">
 	                        <tr>
-	                        	<th><input type="checkbox"></th>
+	                        	<th><input type="checkbox" id="data-ids"></th>
 	                            <th>ID</th>
 	                            <th class="numeric">导航名</th>
 	                            <th class="numeric">导航描述</th>
@@ -68,7 +68,7 @@
 	                        	<#if roleNavs??>
 	                        		<#list roleNavs as nav>
 	                        			<tr>
-	                        				<th><input type="checkbox"></th>
+	                        				<th><input type="checkbox" data-id="${nav.navId}"></th>
 				                            <td data-title="ID">${nav.navId}</td>
 				                            <td class="numeric" data-title="导航名">
 				                            	<a href="${path}/navigation/${nav.navId}" target="_blank" style="color:#428bca">${nav.navName}</a>

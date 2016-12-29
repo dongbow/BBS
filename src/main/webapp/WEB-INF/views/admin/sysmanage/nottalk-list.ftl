@@ -31,7 +31,15 @@
 	                	<div class="col-md-4 form-group">
 	            			<a class="btn btn-success btn-sm search" type="button" href="${path}/system/admin/sysmanage/user/search"><i class="fa fa-search"></i> 查找 </a>
 			            	<a class="btn btn-danger btn-sm" type="button"><i class="fa fa-microphone"></i> 批量解禁 </a>
-			            	<button class="btn btn-primary btn-sm" type="button"><i class="fa fa-share-square-o"></i> 导出 </button>
+			            	<div class="btn-group">
+								<button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+								 <i class="fa fa-share-square-o"></i> 导出 <span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" role="menu">
+									<li><a href="#">导出当前页</a></li>
+									<li><a href="#">导出所有</a></li>
+								</ul>
+							</div>
 	            		</div>
                 	</div>
                 </form>
@@ -42,7 +50,7 @@
 	                    <table class="table table-bordered table-striped table-condensed cf">
 	                        <thead class="cf">
 	                        <tr>
-	                        	<th><input type="checkbox"></th>
+	                        	<th><input type="checkbox" id="data-ids"></th>
 	                            <th>ID</th>
 	                            <th class="numeric">昵称</th>
 	                            <th class="numeric">角色</th>
@@ -55,7 +63,7 @@
 	                        <#if users??>
 	                        	<#list users as user>
 	                        		<tr>
-			                        	<th><input type="checkbox"></th>
+			                        	<th><input type="checkbox" data-id="${user.userAccess.userId}"></th>
 			                            <td data-title="ID">${user.userAccess.userId}</td>
 			                            <td class="numeric" data-title="昵称">
 			                            	<a href="${path}/space/uid/${user.userAccess.userId}" target="_blank" style="color:#428bca">${user.userAccess.userNickname}</a>

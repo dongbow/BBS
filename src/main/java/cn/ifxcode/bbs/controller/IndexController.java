@@ -146,6 +146,7 @@ public class IndexController extends BaseUserController{
 								EGHistory.SIGN.getDesc(), userValue.getUserLastestPastTime());
 					}
 					goldExperienceService.insertGE(goldHistory, experienceHistory);
+					generalService.saveCount("usersign");
 					result = new Result(BbsConstant.OK, "签到成功");
 					object.put("uv", userValue);
 				} else {

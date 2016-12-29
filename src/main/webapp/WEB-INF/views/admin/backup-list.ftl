@@ -44,7 +44,7 @@
 	                    <table class="table table-bordered table-striped table-condensed cf">
 	                        <thead class="cf">
 	                        <tr>
-	                        	<th><input type="checkbox"></th>
+	                        	<th><input type="checkbox" id="data-ids"></th>
 	                            <th class="numeric">ID</th>
 	                            <th class="numeric">文件地址</th>
 	                            <th class="numeric">备份人</th>
@@ -57,7 +57,7 @@
 	                        		<#assign bid = page.pageSize * (page.pageNo - 1) + 1/>
 	                        		<#list backs as back>
 	                        			<tr>
-	                        				<th><input type="checkbox"></th>
+	                        				<th><input type="checkbox" data-id="${back.id}"></th>
 				                            <td class="numeric" data-title="ID">${bid}</td>
 				                            <td class="numeric" data-title="文件地址">${back.url}</td>
 				                            <td class="numeric" data-title="备份人">

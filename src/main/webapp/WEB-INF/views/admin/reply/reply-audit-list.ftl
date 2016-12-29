@@ -58,7 +58,7 @@
 	                    <table class="table table-bordered table-striped table-condensed cf">
 	                        <thead class="cf">
 	                        <tr>
-	                        	<th><input type="checkbox"></th>
+	                        	<th><input type="checkbox" id="data-ids"></th>
 	                            <th class="numeric">ID</th>
 	                            <th class="numeric">帖子ID</th>
 	                            <th class="numeric">评论人</th>
@@ -72,7 +72,7 @@
 	                        	<#if replys??>
 	                        		<#list replys as reply>
 	                        			<tr>
-	                        				<td><input type="checkbox"></td>
+	                        				<td><input type="checkbox" data-id="${reply.replyId}"></td>
 				                            <td class="numeric" data-title="ID">${reply.replyId}</td>
 				                            <td class="numeric" data-title="帖子ID">
 				                            	${reply.topicId}

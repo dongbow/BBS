@@ -41,7 +41,15 @@
                 		
 	                	<div class="col-md-4 form-group">
 	            			<a class="btn btn-success btn-sm" type="button"><i class="fa fa-search"></i> 查找 </a>
-			            	<button class="btn btn-primary btn-sm" type="button"><i class="fa fa-share-square-o"></i> 导出 </button>
+			            	<div class="btn-group">
+								<button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+								 <i class="fa fa-share-square-o"></i> 导出 <span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" role="menu">
+									<li><a href="#">导出当前页</a></li>
+									<li><a href="#">导出所有</a></li>
+								</ul>
+							</div>
 	            		</div>
                 	</div>
                 </form>

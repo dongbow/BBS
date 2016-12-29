@@ -39,4 +39,6 @@ public interface GeneralService {
 	public boolean checkUpdate(HttpServletRequest request, long userId);
 
 	public boolean authResources(HttpServletRequest request);
+	
+	public void saveCount(String key);
 }

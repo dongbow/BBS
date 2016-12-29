@@ -55,4 +55,9 @@
 		</if>
 		ORDER BY create_time desc
 	</select>
+	
+	<insert id="insertTodayCount" parameterType="map">
+		insert into bbs_count (time, topic_count, reply_count, user_sign_count, newuser_count) 
+		values (#{time}, #{topic}, #{reply}, #{usersign}, #{newuser})
+	</insert>
 </mapper>

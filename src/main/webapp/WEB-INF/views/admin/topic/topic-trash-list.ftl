@@ -68,7 +68,7 @@
 	                    <table class="table table-bordered table-striped table-condensed cf">
 	                        <thead class="cf">
 	                        <tr>
-	                        	<th><input type="checkbox"></th>
+	                        	<th><input type="checkbox" id="data-ids"></th>
 	                            <th>ID</th>
 	                            <th class="numeric">帖子标题</th>
 	                            <th class="numeric">发表人</th>
@@ -84,7 +84,7 @@
 	                        	<#if topics??>
 	                        		<#list topics as topic>
 	                        			<tr>
-	                        				<th><input type="checkbox"></th>
+	                        				<th><input type="checkbox" data-id="${topic.topicId}"></th>
 				                            <td data-title="ID">${topic.topicId}</td>
 				                            <td class="numeric" data-title="帖子标题">
 				                            	<a href="${path}/board/${topic.boardId}/topic/detail/${topic.topicId}" target="_blank" style="color:#428bca">${topic.topicTitle}</a>

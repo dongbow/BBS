@@ -78,7 +78,7 @@
 	                    <table class="table table-bordered table-striped table-condensed cf">
 	                        <thead class="cf">
 	                        <tr>
-	                        	<th><input type="checkbox"></th>
+	                        	<th><input type="checkbox" id="data-ids"></th>
 	                            <th>ID</th>
 	                            <th class="numeric">版块名</th>
 	                            <th class="numeric">版块描述</th>
@@ -95,7 +95,7 @@
 	                        	<#if boards??>
 	                        		<#list boards as board>
 	                        			<tr class="${board.navId}">
-	                        				<th><input type="checkbox"></th>
+	                        				<th><input type="checkbox" data-id="${board.boardId}"></th>
 				                            <td data-title="ID">${board.boardId}</td>
 				                            <td class="numeric" data-title="版块名">
 				                            	<a href="${path}/navigation/${board.navId}/board/${board.boardId}" target="_blank" style="color:#428bca">${board.boardName}</a>

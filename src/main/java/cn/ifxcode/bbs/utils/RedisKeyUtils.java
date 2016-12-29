@@ -69,5 +69,9 @@ public class RedisKeyUtils {
 		}
 		return base;
 	}
+
+	public static String getCount(String key) {
+		return "bbs:global:count:" + key;
+	}
 	
 }

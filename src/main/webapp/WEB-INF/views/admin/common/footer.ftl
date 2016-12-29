@@ -39,5 +39,6 @@
 <script src="${path}/resources/static/dist/js/bootstrap-select.js"></script>
   
 <script src="${path}/resources/js/admin/APP.js"></script>
+<script src="${path}/resources/js/admin/base/common.js"></script>
 <script type="text/javascript" src="http://cdn.bootcss.com/bootbox.js/4.4.0/bootbox.min.js"></script>
 

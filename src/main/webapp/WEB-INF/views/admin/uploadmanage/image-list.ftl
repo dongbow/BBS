@@ -48,7 +48,7 @@
 	                    <table class="table table-bordered table-striped table-condensed cf">
 	                        <thead class="cf">
 	                        <tr>
-	                        	<th><input type="checkbox"></th>
+	                        	<th><input type="checkbox" id="data-ids"></th>
 	                            <th class="numeric">名字</th>
 	                            <th class="numeric">地址</th>
 	                            <th class="numeric">类型</th>
@@ -62,7 +62,7 @@
 	                        	<#if images??>
 	                        		<#list images as img>
 	                        			<tr>
-	                        				<th><input type="checkbox"></th>
+	                        				<th><input type="checkbox" data-id="${img.uuid}"></th>
 				                            <td class="numeric" data-title="名字">${img.fileName}</td>
 				                            <td class="numeric" data-title="地址">${img.fileLink}</td>
 				                            <td class="numeric" data-title="类型">${img.fileType}</td>

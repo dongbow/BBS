@@ -38,6 +38,18 @@ public class BackUpController extends BaseController {
 		return "admin/backup-list";
 	}
 	
+	@RequestMapping("/backup/search")
+	public String toBackUpSearch(String startTime, String endTime, 
+			@RequestParam(value="page", required = false, defaultValue = "1")int p, 
+			HttpServletRequest request, Model model) {
+		Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
+		List<Backup> backs = backupService.searchBackups(page, startTime, endTime);
+		model.addAttribute("backs", backs);
+		model.addAttribute("page", page);
+		ParamsBuildUtils.createModel(model, request);
+		return "admin/backup-list";
+	}
+	
 	@ResponseBody
 	@RequestMapping(value = "/backup/add", method = RequestMethod.POST)
 	public Result addBack(@RequestParam(required = false)String name, String exec, 

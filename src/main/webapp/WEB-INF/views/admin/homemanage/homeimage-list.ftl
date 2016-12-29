@@ -33,7 +33,7 @@
 	                    <table class="table table-bordered table-striped table-condensed cf">
 	                        <thead class="cf">
 	                        <tr>
-	                        	<th><input type="checkbox"></th>
+	                        	<th><input type="checkbox" id="data-ids"></th>
 	                            <th>ID</th>
 	                            <th>标题</th>
 	                            <th class="numeric">链接</th>
@@ -48,7 +48,7 @@
 		                        <#if images??>
 		                        	<#list images as img>
 		                        		<tr>
-				                        	<th><input type="checkbox"></th>
+				                        	<th><input type="checkbox" data-id="${img.id}"></th>
 				                            <td data-title="ID">${img.id}</td>
 				                            <td data-title="标题">${img.homeTitle}</td>
 				                            <td class="numeric" data-title="链接">${img.homeLink}</td>

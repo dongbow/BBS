@@ -2253,7 +2253,7 @@ CREATE TABLE `system_log` (
   `method` varchar(255) NOT NULL COMMENT '方法',
   `status` int(1) NOT NULL COMMENT '执行状态',
   `status_desc` varchar(255) NOT NULL COMMENT '描述',
-  `args` varchar(255) DEFAULT NULL COMMENT '参数',
+  `args` varchar(2555) DEFAULT NULL COMMENT '参数',
   `user_id` bigint(20) NOT NULL COMMENT '操作人ID',
   `user_nickname` varchar(20) NOT NULL COMMENT '操作人昵称',
   `ip` varchar(20) NOT NULL COMMENT 'IP',

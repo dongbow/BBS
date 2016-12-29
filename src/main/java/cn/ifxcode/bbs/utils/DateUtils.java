@@ -219,4 +219,19 @@ public class DateUtils {
 		return c.getTime();
 	}
 
+	public static String getToday() {
+		Calendar c = Calendar.getInstance();
+		return dt10FromDate(c.getTime());
+	}
+	
+	public static String getYesterday() {
+		Calendar c = Calendar.getInstance();
+		c.add(Calendar.DAY_OF_MONTH, -1);
+		return dt10FromDate(c.getTime());
+	}
+
+	public static void main(String[] args) {
+		System.out.println(getToday());
+	}
+	
 }

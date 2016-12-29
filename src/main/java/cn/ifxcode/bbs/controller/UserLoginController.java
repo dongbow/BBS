@@ -41,6 +41,7 @@ import cn.ifxcode.bbs.enumtype.EGHistory;
 import cn.ifxcode.bbs.enumtype.LoginError;
 import cn.ifxcode.bbs.service.EmailService;
 import cn.ifxcode.bbs.service.FriendLinkService;
+import cn.ifxcode.bbs.service.GeneralService;
 import cn.ifxcode.bbs.service.GoldExperienceService;
 import cn.ifxcode.bbs.service.LoginLogService;
 import cn.ifxcode.bbs.service.UserService;
@@ -84,6 +85,9 @@ public class UserLoginController {
 	
 	@Resource
 	private FriendLinkService friendLinkService;
+	
+	@Resource
+	private GeneralService generalService;
 	
 	private GoldHistory goldHistory = null;
 	private ExperienceHistory experienceHistory = null;
@@ -195,6 +199,7 @@ public class UserLoginController {
 				&& StringUtils.equals(validatecode.toLowerCase(), 
 						ValidateCode.getValidateCode(request).toLowerCase())) {
 			if (userService.insertUser(userName, password, email, isAdmin, boardManager, roleIds, request) == BbsConstant.OK) {
+				generalService.saveCount("newuser");
 				href = "redirect:/account/login";
 			}
 		} else {

@@ -35,7 +35,7 @@
 	                    <table class="table table-bordered table-striped table-condensed cf">
 	                        <thead class="cf">
 	                        <tr>
-	                        	<th><input type="checkbox"></th>
+	                        	<th><input type="checkbox" id="data-ids"></th>
 	                            <th>ID</th>
 	                            <th>角色名</th>
 	                            <th class="numeric">角色颜色</th>
@@ -53,10 +53,10 @@
 				                        	<th>
 				                        		<#if r.roleId == 1>
 					                    			<#if su == 1>
-					                    				<input type="checkbox">
+					                    				<input type="checkbox" data-id="${r.roleId}">
 					                    			</#if>
 					                    		<#else>
-					                    			<input type="checkbox">
+					                    			<input type="checkbox" data-id="${r.roleId}">
 					                    		</#if>
 						                    </th>
 				                            <td data-title="ID">${r.roleId}</td>

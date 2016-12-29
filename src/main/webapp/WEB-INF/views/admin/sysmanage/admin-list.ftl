@@ -20,10 +20,10 @@
         <!--body wrapper start-->
         <div class="wrapper">
         	<div class="panel panel-default">
-        		<form action="" method="get" id="user">
+        		<form action="" method="get" id="dataForm">
 	                <div class="panel-body">
 	                    <div class="col-md-2 form-group">
-			            	<input id="user-id" name="userId" type="text" value="${userId!}" class="form-control" placeholder="用户ID">
+			            	<input id="user-id" name="userId" type="text" value="${userId!}" class="form-control data-c-id" placeholder="用户ID">
 			            </div>
 			            <div class="col-md-2 form-group">
 			            	<input id="user-name" name="username" type="text" value="${username!}" class="form-control" placeholder="用户名">
@@ -61,10 +61,18 @@
 	                        </div>
 	                	</div>
 	                	<div class="col-md-4 form-group">
-	            			<a class="btn btn-success btn-sm user-search" type="button" href="${path}/system/admin/sysmanage/admin/search"><i class="fa fa-search"></i> 查找 </a>
+	            			<a class="btn btn-success btn-sm" id="data-search" type="button" href="${path}/system/admin/sysmanage/admin/search"><i class="fa fa-search"></i> 查找 </a>
 	            			<a class="btn btn-info btn-sm" type="button"><i class="fa fa-plus"></i> 添加 </a>
 			            	<a class="btn btn-danger btn-sm" type="button"><i class="fa fa-trash-o"></i> 删除 </a>
-			            	<button class="btn btn-primary btn-sm" type="button"><i class="fa fa-share-square-o"></i> 导出 </button>
+			            	<div class="btn-group">
+								<button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+								 <i class="fa fa-share-square-o"></i> 导出 <span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" role="menu">
+									<li><a href="#">导出当前页</a></li>
+									<li><a href="#">导出所有</a></li>
+								</ul>
+							</div>
 	            		</div>
                 	</div>
                 </form>
@@ -75,7 +83,7 @@
 	                    <table class="table table-bordered table-striped table-condensed cf">
 	                        <thead class="cf">
 	                        <tr>
-	                        	<th><input type="checkbox"></th>
+	                        	<th><input type="checkbox" id="data-ids"></th>
 	                            <th>ID</th>
 	                            <th>用户名</th>
 	                            <th class="numeric">昵称</th>
@@ -93,7 +101,7 @@
 	                        <#if users??>
 	                        	<#list users as user>
 	                        		<tr>
-			                        	<th><input type="checkbox"></th>
+			                        	<th><input type="checkbox" data-id="${user.userAccess.userId}"></th>
 			                            <td data-title="ID">${user.userAccess.userId}</td>
 			                            <td data-title="用户名">${user.userAccess.userName}</td>
 			                            <td class="numeric" data-title="昵称">

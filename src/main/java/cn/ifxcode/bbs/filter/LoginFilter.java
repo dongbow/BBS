@@ -53,7 +53,7 @@ public class LoginFilter implements Filter {
             if(cookieBean != null && cookieBean.getUser_id() > 0) {
             	JSONObject object = this.getJsonObjectFromRedis(RedisKeyUtils.getUserInfo(cookieBean.getUser_id()));
             	if(object != null) {
-            		if(httpRequest.getRequestURL().indexOf("/druid") > 0) {
+            		if(httpRequest.getRequestURL().indexOf("/druid") > 0 || httpRequest.getRequestURL().indexOf("/monitoring") > 0) {
             			User user = JSONObject.toJavaObject(object, User.class);
             			List<Role> roles = user.getRoles();
             			for (Role role : roles) {

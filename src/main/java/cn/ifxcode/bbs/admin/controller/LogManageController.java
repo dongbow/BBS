@@ -70,6 +70,19 @@ public class LogManageController extends BaseController{
 		return "admin/logmanage/operationlog-list";
 	}
 	
+	@RequestMapping("/operation/search")
+	public String toOperationLogSearch(String startTime, String endTime,
+			String module, String name, int status, 
+			@RequestParam(value="page", required = false, defaultValue = "1")int p,
+			HttpServletRequest request, Model model) {
+		Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
+		model.addAttribute("logs", operationLogService.getAllOperationLog(page, startTime, endTime, module, name, status));
+		model.addAttribute("page", page);
+		model.addAttribute("modules", resourcesService.getAllModules());
+		ParamsBuildUtils.createModel(model, request);
+		return "admin/logmanage/operationlog-list";
+	}
+	
 	@RequestMapping("/sign")
 	public String toSign(@RequestParam(value="page", required = false, defaultValue = "1")int p,
 			HttpServletRequest request, Model model) {

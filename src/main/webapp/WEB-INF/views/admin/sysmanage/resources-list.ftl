@@ -2,7 +2,7 @@
 	<#if child?? && child?size gt 0>
         <#list child as res>
             <tr>
-        		<th><input type="checkbox"></th>
+        		<th><input type="checkbox" data-id="${res.resId}"></th>
         		<td class="numeric" data-title="ID">${res.resId}</td>
                 <td class="numeric" data-title="资源名">
                 	<#if res.resType == 0>
@@ -76,7 +76,7 @@
 	                    <table class="table table-bordered table-striped table-condensed cf">
 	                        <thead class="cf">
 	                        <tr>
-	                        	<th><input type="checkbox"></th>
+	                        	<th><input type="checkbox" id="data-ids"></th>
 	                            <th class="numeric">ID</th>
 	                            <th class="numeric">资源名</th>
 	                            <th class="numeric">资源链接</th>

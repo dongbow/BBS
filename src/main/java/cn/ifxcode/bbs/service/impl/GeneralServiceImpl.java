@@ -321,4 +321,22 @@ public class GeneralServiceImpl implements GeneralService {
 		return false;
 	}
 
+	@Override
+	public synchronized void saveCount(String key) {
+		String realKey = RedisKeyUtils.getCount(key);
+		String today = DateUtils.getToday();
+		JSONObject object = redisObjectMapService.get(realKey, JSONObject.class);
+		if(object != null) {
+			if(object.containsKey(today)) {
+				object.put(today, object.getLongValue(today) + 1);
+			} else {
+				object.put(today, 1);
+			}
+		} else {
+			object = new JSONObject(true);
+			object.put(today, 1);
+		}
+		redisObjectMapService.save(realKey, object, JSONObject.class);
+	}
+
 }

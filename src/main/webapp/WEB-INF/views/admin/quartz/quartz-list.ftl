@@ -46,7 +46,7 @@
 	                    <table class="table table-bordered table-striped table-condensed cf">
 	                        <thead class="cf">
 	                        <tr>
-	                        	<th><input type="checkbox"></th>
+	                        	<th><input type="checkbox" id="data-ids"></th>
 	                            <th>ID</th>
 	                            <th>任务名</th>
 	                            <th class="numeric">任务状态</th>
@@ -62,20 +62,20 @@
 	                        <#if jobs??>
 	                        	<#list jobs as job>
 	                        		<tr>
-			                        	<th><input type="checkbox"></th>
+			                        	<th><input type="checkbox" data-id="${job.jobId}"></th>
 			                            <td data-title="ID">${job.jobId}</td>
 			                            <td data-title="任务名">${job.jobName}</td>
 			                            <td class="numeric" data-title="任务状态">
-			                            	<#if job.jobStatus == 1>运行<#else>暂停</#if>
+			                            	<#if job.jobStatus == '1'>运行<#else>暂停</#if>
 			                            </td>
 			                            <td class="numeric" data-title="执行周期">${job.cronExpression}</td>
 			                            <td class="numeric" data-title="类地址">${job.beanClass}</td>
-			                            <td class="numeric" data-title="方法">${methodName}</td>
+			                            <td class="numeric" data-title="方法">${job.methodName}</td>
 			                            <td class="numeric" data-title="描述">${job.description!}</td>
-			                            <td class="numeric" data-title="创建时间">${job.createTime}</td>
+			                            <td class="numeric" data-title="创建时间">${job.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
 			                            <th class="numeric" data-title="操作">
 			                            	<button class="btn btn-default btn-xs" type="button"><i class="fa fa-edit"></i> 编辑 </button>
-			                            	<#if job.jobStatus == 1>
+			                            	<#if job.jobStatus == '1'>
 			                            		<button class="btn btn-default btn-xs" type="button"><i class="fa fa-lock"></i> 暂停 </button>
 			                            	<#else>
 			                            		<button class="btn btn-default btn-xs" type="button"><i class="fa fa-unlock-alt"></i> 启动</button>

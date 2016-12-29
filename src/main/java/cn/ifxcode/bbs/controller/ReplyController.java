@@ -61,6 +61,7 @@ public class ReplyController extends BaseUserController{
 				if(topic.getTopicInfo().getTopicIsReply() == 0) {
 					long replyId = replyService.insertReply(request, topic.getBoardId(), topicId, Long.parseLong(uid), rcontext, Long.parseLong(pid));
 					if(replyId > BbsConstant.OK) {
+						generalService.saveCount("reply");
 						return "redirect:/board/" + topic.getBoardId()+ "/topic/detail/" + topic.getTopicId() + "/gofloor?lastest=1";
 					}
 				} else {

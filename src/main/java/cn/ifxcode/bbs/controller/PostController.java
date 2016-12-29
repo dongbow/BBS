@@ -121,6 +121,7 @@ public class PostController extends BaseUserController {
 				Integer.parseInt(bid), Integer.parseInt(gid), 
 				isreply, iselite, istop, isglobaltop, ishome, request);
 		if(topicId > BbsConstant.OK) {
+			generalService.saveCount("topic");
 			return "redirect:/board/" + bid + "/topic/detail/" + topicId;
 		}
 		return "redirect:/tip?tip=post-fail";

@@ -104,7 +104,7 @@ public class InitSystemData {
 		this.initNavBoard();
 		this.initClassify();
 		this.initFriendLink();
-		//this.initJob();
+		this.initJob();
 		long end = System.currentTimeMillis();
 		logger.info("init system time: {}", (end - start) / 1000);
 		//executorService.shutdown();

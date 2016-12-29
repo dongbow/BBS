@@ -49,7 +49,7 @@ public class BmcLogAop {
 	@Resource
 	private UserService userService;
 	
-	@Pointcut("@annotation(cn.ifxcode.bbs.logger.BmsLogAnno)")
+	@Pointcut("@annotation(cn.ifxcode.bbs.logger.BmcLogAnno)")
 	public void LogAspect() {
 	}
 
@@ -120,20 +120,17 @@ public class BmcLogAop {
 	}
 	
 	private String getArgs(Method method, Object[] arguments) {
-		StringBuilder builder = new StringBuilder("{");
+		StringBuilder builder = new StringBuilder("<table class=\"table table-bordered\"><tbody>");
 		String params[] = parameterNameDiscoverer.getParameterNames(method);
 		for (int i = 0; i < params.length; i++) {
 			if(!StringUtils.equals("request", params[i])) {
 				if(arguments[i].getClass().isArray()) {
 					arguments[i] = Arrays.toString(makeArrayObject(arguments[i]).toArray());
 				}
-				builder.append(params[i]).append(":").append(arguments[i]);
-				if(i != params.length - 1) {
-					builder.append("; ");
-				}
+				builder.append("<tr><td>" + params[i]).append("</td><td>").append(arguments[i] + "</td></tr>");
 			}
         }
-        return builder.append("}").toString();
+        return builder.append("</tbody></table>").toString();
     }
 	
     private List<Object> makeArrayObject(Object array) {  
