@@ -20,6 +20,8 @@ public interface ReplyService {
 
 	public List<Reply> getReplyList(Page page, int status, int audit);
 	
+	public List<Reply> getReplyList(Page page, int bid, long tid);
+	
 	public List<Reply> getReplyList(Page page, int status, int audit, String startTime, String endTime, long uid, long tid, long bid);
 
 	public Reply getReplyByReplyId(long replyId);

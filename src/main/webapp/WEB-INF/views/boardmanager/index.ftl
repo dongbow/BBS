@@ -47,9 +47,9 @@
 				                                <ul class="nav nav-third-level">
 				                                    <li><a class="J_menuItem" href="${path}/manage/bmc/audit/topic?bid=${board.boardId}">帖子待审核</a></li>
 				                                    <li><a class="J_menuItem" href="${path}/manage/bmc/audit/reply?bid=${board.boardId}">评论待审核</a></li>
-				                                    <li><a class="J_menuItem" href="${path}/manage/bmc/delete/topic?bid=${board.boardId}">帖子回收站</a></li>
-				                                    <li><a class="J_menuItem" href="${path}/manage/bmc/delete/reply?bid=${board.boardId}">评论回收站</a></li>
-				                                    <li><a class="J_menuItem" href="${path}/manage/bmc/closelreply?bid=${board.boardId}">已关闭回复</a></li>
+				                                    <li><a class="J_menuItem" href="${path}/manage/bmc/trash/topic?bid=${board.boardId}">帖子回收站</a></li>
+				                                    <li><a class="J_menuItem" href="${path}/manage/bmc/trash/reply?bid=${board.boardId}">评论回收站</a></li>
+				                                    <li><a class="J_menuItem" href="${path}/manage/bmc/closereply?bid=${board.boardId}">已关闭回复</a></li>
 				                                </ul>
 				                            </li>
 		                        		</#list>

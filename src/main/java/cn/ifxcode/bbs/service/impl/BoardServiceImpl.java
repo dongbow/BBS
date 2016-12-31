@@ -201,4 +201,17 @@ public class BoardServiceImpl implements BoardService {
 		return this.getAllBoard(null);
 	}
 
+	@Override
+	public boolean isExists(String bid) {
+		if(bid.length() <= 11) {
+			List<Board> boards = getAllBoard();
+			for (Board board : boards) {
+				if(board.getBoardId() == Integer.parseInt(bid)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 }

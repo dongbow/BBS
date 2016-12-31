@@ -14,12 +14,9 @@
     	<div class="panel panel-default">
     		<form action="" method="post">
                 <div class="panel-body">
-		            <div class="col-md-4 form-group">
-		            	<input value="${tid!}" type="text" class="form-control" placeholder="帖子ID">
-		            </div>
                 	<div class="col-md-4 form-group">
-            			<a class="btn btn-info btn-sm" type="button"><i class="fa fa-search"></i> 查找 </a>
-            			<a class="btn btn-success btn-sm" type="button"><i class="fa fa-search"></i> 批量开启 </a>
+            			<a class="btn btn-success btn-sm" type="button"><i class="fa fa-search"></i> 批量通过  </a>
+            			<a class="btn btn-danger btn-sm" type="button"><i class="fa fa-search"></i> 批量删除 </a>
             		</div>
             	</div>
             </form>
@@ -54,7 +51,9 @@
 			                            	<a class="btn btn-link btn-xs topic-content" type="button">预览</a>
 			                            </td>
 			                            <td class="numeric" data-title="操作">
-			                            	<a class="btn btn-default btn-xs" type="button" data-id="${t.topicId}">开启回复</a>
+			                            	<a class="btn btn-default btn-xs" type="button" data-id="${t.topicId}">编辑</a>
+			                            	<a class="btn btn-default btn-xs" type="button" data-id="${t.topicId}">通过</a>
+			                            	<a class="btn btn-default btn-xs" type="button" data-id="${t.topicId}">删除</a>
 			                            </td>
 			                        </tr>
 	                        	</#list>

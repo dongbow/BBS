@@ -224,7 +224,7 @@
 			and t.navId = #{navid} 
 		</if>
 		<if test="boardId != null">
-			and t.boardId = #{boardId} 
+			and t.board_Id = #{boardId} 
 		</if>
 		<if test="classId != null">
 			and t.class_id = #{classId}
@@ -258,7 +258,7 @@
 			and t.navId = #{navid} 
 		</if>
 		<if test="boardId != null">
-			and t.boardId = #{boardId} 
+			and t.board_Id = #{boardId} 
 		</if>
 		<if test="classId != null">
 			and t.class_id = #{classId}
@@ -293,7 +293,7 @@
 			and t.navId = #{navid} 
 		</if>
 		<if test="boardId != null">
-			and t.boardId = #{boardId} 
+			and t.board_Id = #{boardId} 
 		</if>
 		<if test="classId != null">
 			and t.class_id = #{classId}

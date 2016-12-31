@@ -14,12 +14,15 @@
     	<div class="panel panel-default">
     		<form action="" method="post">
                 <div class="panel-body">
-		            <div class="col-md-4 form-group">
-		            	<input value="${tid!}" type="text" class="form-control" placeholder="帖子ID">
+		            <div class="col-md-3 form-group">
+		            	<input value="${uid!}" type="text" class="form-control" placeholder="用户ID">
+		            </div>
+		            <div class="col-md-3 form-group">
+		            	<input value="${nickname!}" type="text" class="form-control" placeholder="用户昵称">
 		            </div>
                 	<div class="col-md-4 form-group">
             			<a class="btn btn-info btn-sm" type="button"><i class="fa fa-search"></i> 查找 </a>
-            			<a class="btn btn-success btn-sm" type="button"><i class="fa fa-search"></i> 批量开启 </a>
+            			<a class="btn btn-success btn-sm" type="button"><i class="fa fa-search"></i> 批量解禁 </a>
             		</div>
             	</div>
             </form>
@@ -31,30 +34,22 @@
                         <thead class="cf">
                         <tr>
                         	<th class="numeric"><input type="checkbox"></th>
-                        	<th class="numeric">帖子ID</th>
-                            <th class="numeric">标题</th>
-                            <th class="numeric">发帖人</th>
-                            <th class="numeric">预览</th>
+                        	<th class="numeric">用户ID</th>
+                            <th class="numeric">用户昵称</th>
                             <th class="numeric">操作</th>
                         </tr>
                         </thead>
                         <tbody>
-	                        <#if topics??>
-	                        	<#list topics as t>
+	                        <#if users??>
+	                        	<#list users as u>
 	                        		<tr>
-	                        			<td class="numeric"><input type="checkbox" data-id="${t.topicId}"></td>
-			                            <td class="numeric" data-title="帖子ID">${t.topicId}</td>
-			                            <td class="numeric" data-title="标题">
-			                            	<a class="btn btn-link btn-xs" type="button" target="_blank" href="${path}/board/${t.boardId}/topic/detail/${t.topicId}">${t.topicTitle}</a>
-			                            </td>
-			                            <td class="numeric" data-title="发帖人">
-			                            	<a class="btn btn-link btn-xs" type="button" target="_blank" href="${path}/space/uid/${t.userId}">${t.user.userAccess.userNickname}</a>
-			                            </td>
-			                            <td class="numeric" data-title="预览">
-			                            	<a class="btn btn-link btn-xs topic-content" type="button">预览</a>
+	                        			<td class="numeric"><input type="checkbox" data-id="${u.userAccess.userId}"></td>
+			                            <td class="numeric" data-title="用户ID">${u.userAccess.userId}</td>
+			                            <td class="numeric" data-title="用户昵称">
+			                            	<a class="btn btn-link btn-xs" type="button" target="_blank" href="${path}/space/uid/${u.userAccess.userId}">${u.userAccess.userNickname}</a>
 			                            </td>
 			                            <td class="numeric" data-title="操作">
-			                            	<a class="btn btn-default btn-xs" type="button" data-id="${t.topicId}">开启回复</a>
+			                            	<a class="btn btn-default btn-xs" type="button" data-id="${u.userAccess.userId}">解禁</a>
 			                            </td>
 			                        </tr>
 	                        	</#list>

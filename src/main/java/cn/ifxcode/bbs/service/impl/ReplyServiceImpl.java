@@ -170,6 +170,11 @@ public class ReplyServiceImpl implements ReplyService{
 	public List<Reply> getReplyList(Page page, int status, int audit) {
 		return this.getReplyList(page, status, audit, null, null, 0, 0, 0);
 	}
+	
+	@Override
+	public List<Reply> getReplyList(Page page, int bid, long tid) {
+		return this.getReplyList(page, 0, 0, null, null, 0, tid, bid);
+	}
 
 	@Override
 	public List<Reply> getReplyList(Page page, int status, int audit,

@@ -279,6 +279,23 @@ public class GeneralServiceImpl implements GeneralService {
 		}
 		return false;
 	}
+	
+	public boolean isLocalBMCByBoardId(int bid, HttpServletRequest request) {
+		long uid = userService.getUserIdFromCookie(request);
+		User user = userService.getUserByIdFromRedis(Long.toString(uid));
+		if(user != null && user.getUserAccess().getUserIsAdmin() == 1) {
+			return true;
+		}
+		if(user != null && user.getUserAccess().getUserIsBoderManager() == 1) {
+			List<Integer> list = userService.getAllBoardManageId(uid);
+			for (Integer id : list) {
+				if(id.equals(bid)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 
 	@Override
 	public boolean checkUpdate(HttpServletRequest request, long userId) {

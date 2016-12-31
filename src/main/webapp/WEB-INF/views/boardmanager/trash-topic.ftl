@@ -14,12 +14,15 @@
     	<div class="panel panel-default">
     		<form action="" method="post">
                 <div class="panel-body">
-		            <div class="col-md-4 form-group">
+		            <div class="col-md-3 form-group">
 		            	<input value="${tid!}" type="text" class="form-control" placeholder="帖子ID">
+		            </div>
+		            <div class="col-md-3 form-group">
+		            	<input value="${uid!}" type="text" class="form-control" placeholder="用户ID">
 		            </div>
                 	<div class="col-md-4 form-group">
             			<a class="btn btn-info btn-sm" type="button"><i class="fa fa-search"></i> 查找 </a>
-            			<a class="btn btn-success btn-sm" type="button"><i class="fa fa-search"></i> 批量开启 </a>
+            			<a class="btn btn-success btn-sm" type="button"><i class="fa fa-search"></i> 批量恢复 </a>
             		</div>
             	</div>
             </form>
@@ -34,7 +37,7 @@
                         	<th class="numeric">帖子ID</th>
                             <th class="numeric">标题</th>
                             <th class="numeric">发帖人</th>
-                            <th class="numeric">预览</th>
+                            <th class="numeric">更多</th>
                             <th class="numeric">操作</th>
                         </tr>
                         </thead>
@@ -50,11 +53,13 @@
 			                            <td class="numeric" data-title="发帖人">
 			                            	<a class="btn btn-link btn-xs" type="button" target="_blank" href="${path}/space/uid/${t.userId}">${t.user.userAccess.userNickname}</a>
 			                            </td>
-			                            <td class="numeric" data-title="预览">
+			                            <td class="numeric" data-title="更多">
 			                            	<a class="btn btn-link btn-xs topic-content" type="button">预览</a>
+			                            	<a class="btn btn-link btn-xs topic-content" type="button">删除原因</a>
 			                            </td>
 			                            <td class="numeric" data-title="操作">
-			                            	<a class="btn btn-default btn-xs" type="button" data-id="${t.topicId}">开启回复</a>
+			                            	<a class="btn btn-default btn-xs" type="button" data-id="${t.topicId}">恢复</a>
+			                            	<a class="btn btn-default btn-xs" type="button" data-id="${t.topicId}">编辑</a>
 			                            </td>
 			                        </tr>
 	                        	</#list>

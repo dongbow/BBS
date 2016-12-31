@@ -31,4 +31,6 @@ public interface BoardService {
 
 	public List<Board> getAllBoards();
 
+	public boolean isExists(String bid);
+
 }

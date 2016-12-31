@@ -486,6 +486,11 @@ public class TopicServiceImpl implements TopicService{
 	public List<Topic> getTopicList(Page page, int status, int audit) {
 		return this.getTopicList(page, null, null, 0, 0, 0, 0, 0, status, audit);
 	}
+	
+	@Override
+	public List<Topic> getTopicList(Page page, int bid) {
+		return this.getTopicList(page, null, null, 0, 0, 0, bid, 0, 0, 0);
+	}
 
 	@Override
 	public List<Topic> getTopicList(Page page, String startTime, String endTime, 
