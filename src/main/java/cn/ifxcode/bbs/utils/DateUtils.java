@@ -79,6 +79,14 @@ public class DateUtils {
 	public static String dt8FormDate(Date date) {
 		return dt8.format(date);
 	}
+	
+	public static Date dt8FormStr(String time) {
+		try {
+			return dt8.parse(time);
+		} catch (ParseException e) {
+		}
+		return null;
+	}
 
 	public static String dt10ChFromDate(Date date) {
 		return dt10Ch.format(date);
@@ -185,6 +193,11 @@ public class DateUtils {
 		return c.getTime();
 	}
 	
+	public static String getYesSeven(String end) throws ParseException {
+		Date date = getSevenDaysAgoDate(dt10FromStr(end));
+		return dt10FromDate(date);
+	}
+	
 	public static Date getSevenDaysAfterDate(Date date) {
 		if (date == null) {
 			date = new Date();
@@ -230,8 +243,8 @@ public class DateUtils {
 		return dt10FromDate(c.getTime());
 	}
 
-	public static void main(String[] args) {
-		System.out.println(getToday());
+	public static void main(String[] args) throws ParseException {
+		System.out.println(getYesSeven(getYesterday()));
 	}
 	
 }

@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.alibaba.fastjson.JSONObject;
+
 import cn.ifxcode.bbs.entity.Board;
 import cn.ifxcode.bbs.entity.SwfArea;
 import cn.ifxcode.bbs.enumtype.EGHistory;
@@ -41,4 +43,6 @@ public interface GeneralService {
 	public boolean authResources(HttpServletRequest request);
 	
 	public void saveCount(String key);
+
+	public JSONObject getChartData(int day, String start, String end);
 }

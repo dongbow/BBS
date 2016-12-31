@@ -60,4 +60,8 @@
 		insert into bbs_count (time, topic_count, reply_count, user_sign_count, newuser_count) 
 		values (#{time}, #{topic}, #{reply}, #{usersign}, #{newuser})
 	</insert>
+	
+	<select id="getChartData" parameterType="map" resultType="map">
+		<![CDATA[ SELECT * FROM `bbs_count` WHERE time <= #{end} AND time >= #{start} ]]>
+	</select>
 </mapper>

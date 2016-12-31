@@ -23,7 +23,7 @@
                 <div class="col-sm-12">
                     <section class="panel">
                         <header class="panel-heading">
-                          	  柱状图
+                          	  用户相关统计
                         <span class="tools pull-right">
                             <a href="javascript:;" class="fa fa-chevron-down"></a>
                          </span>
@@ -43,7 +43,7 @@
                 <div class="col-sm-12">
                     <section class="panel">
                         <header class="panel-heading">
-                           	 折线图
+                           	主题回复相关统计
                         <span class="tools pull-right">
                             <a href="javascript:;" class="fa fa-chevron-down"></a>
                          </span>
@@ -52,6 +52,26 @@
 
                             <div class="chart">
                                 <div id="chart2" style="width: 100%;height:400px;"></div>
+                            </div>
+
+                        </div>
+                    </section>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-sm-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                           	版块点击统计
+                        <span class="tools pull-right">
+                            <a href="javascript:;" class="fa fa-chevron-down"></a>
+                         </span>
+                        </header>
+                        <div class="panel-body">
+
+                            <div class="chart">
+                                <div id="chart3" style="width: 100%;height:400px;"></div>
                             </div>
 
                         </div>

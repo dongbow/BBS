@@ -53,7 +53,6 @@
 </div>
 <script type="text/javascript">
     $(function () {
-    	$('#color').colorpicker();
         $('.selectpicker').selectpicker('refresh');
     });
 </script>

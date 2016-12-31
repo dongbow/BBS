@@ -24,8 +24,10 @@ public class LoginLogServiceImpl implements LoginLogService {
 	@Resource
 	private LoginLogDao loginLogDao;
 	
-	public synchronized int insertLog(LoginLog loginLog) {
-		return loginLogDao.insertLog(loginLog);
+	public int insertLog(LoginLog loginLog) {
+		synchronized (this) {
+			return loginLogDao.insertLog(loginLog);
+		}
 	}
 
 	public List<LoginLog> getAllLoginlog(Page page, String startTime,

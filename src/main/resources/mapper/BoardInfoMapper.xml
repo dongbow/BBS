@@ -8,4 +8,12 @@
 		select * from bbs_board_info where board_id = #{boardId}
 	</select>
 	
+	<update id="updateBoardInfo" parameterType="BoardInfo">
+		update bbs_board_info set board_click_count = #{boardClickCount}, 
+			board_topic_count = #{boardTopicCount}, 
+			board_reply_count = #{boardReplyCount}, 
+			board_favorite_count = #{boardFavoriteCount} 
+		where board_id = #{boardId} 
+	</update>
+	
 </mapper>

@@ -3,12 +3,19 @@ package cn.ifxcode.bbs.admin.controller;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.ifxcode.bbs.bean.Page;
+import cn.ifxcode.bbs.bean.Result;
+import cn.ifxcode.bbs.constant.BbsConstant;
+import cn.ifxcode.bbs.entity.ScheduleJob;
 import cn.ifxcode.bbs.service.QuartzService;
 import cn.ifxcode.bbs.utils.ParamsBuildUtils;
 
@@ -16,6 +23,8 @@ import cn.ifxcode.bbs.utils.ParamsBuildUtils;
 @RequestMapping("/system/admin/quartz")
 public class QuartzController extends BaseController {
 
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	private static final Integer DEFAULT_PAGE_SIZE = 10;
 	
 	@Resource
@@ -28,6 +37,24 @@ public class QuartzController extends BaseController {
 		model.addAttribute("jobs", quartzService.getAllJobFromDB(page));
 		model.addAttribute("page", page);
 		return "admin/quartz/quartz-list";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/runnow", method = RequestMethod.POST)
+	public Result runJobNow(long id) {
+		Result result = null;
+		try {
+			ScheduleJob job = quartzService.getJobById(id);
+			if(quartzService.runAJobNow(job) == BbsConstant.OK) {
+				result = new Result(BbsConstant.OK, "任务执行成功");
+			} else {
+				result = new Result(BbsConstant.ERROR, "任务执行失败");
+			}
+		} catch (Exception e) {
+			logger.error("run job now fail", e);
+			result = new Result(BbsConstant.ERROR, "任务执行失败");
+		}
+		return result;
 	}
 	
 }

@@ -25,6 +25,8 @@ public interface BoardService {
 
 	public List<Board> getBMC(List<Integer> boardIds);
 
+	public List<Board> getAllBoard();
+	
 	public List<Board> getAllBoard(Page page);
 
 	public List<Board> getAllBoards();

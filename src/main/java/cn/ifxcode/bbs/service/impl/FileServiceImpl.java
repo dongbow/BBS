@@ -100,6 +100,9 @@ public class FileServiceImpl implements FileService {
 	@Value("${file.size}")
 	private int fileSize;
 	
+	@Value("${qiniu.compress}")
+	private String qiniuCompress;
+	
 	private UploadManager uploadManager;
 	
 	private String path = null;
@@ -186,7 +189,7 @@ public class FileServiceImpl implements FileService {
 			logger.error("pic upload error", e);
 			e.printStackTrace();
 		}
-		return data;
+		return data + qiniuCompress;
 	}
 
 	public String uploadFile(HttpServletRequest request) {

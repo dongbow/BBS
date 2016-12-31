@@ -6,7 +6,7 @@ $(function(){
   });
 
   $('.tcontent img').click(function(){
-	  var imgsrc = this.src;
+	  var imgsrc = this.src.split('?')[0];
 	  window.open(imgsrc);
   });
   

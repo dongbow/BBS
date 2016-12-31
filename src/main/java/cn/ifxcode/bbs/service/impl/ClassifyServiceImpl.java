@@ -57,21 +57,23 @@ public class ClassifyServiceImpl implements ClassifyService {
 
 	@Override
 	public int saveOrUpdateCount(int bid, int cid) {
-		List<Classify> classifies = this.getClassifyByBoardId(bid);
-		for (Classify c : classifies) {
-			if(c.getClassId().equals(cid)) {
-				if(c.getClassTopicCount() == 0) {
-					c.setClassTopicCount(1);
-				} else {
-					c.setClassTopicCount(c.getClassTopicCount() + 1);
+		synchronized (this) {
+			List<Classify> classifies = this.getClassifyByBoardId(bid);
+			for (Classify c : classifies) {
+				if(c.getClassId().equals(cid)) {
+					if(c.getClassTopicCount() == 0) {
+						c.setClassTopicCount(1);
+					} else {
+						c.setClassTopicCount(c.getClassTopicCount() + 1);
+					}
 				}
 			}
+			JSONArray jsonArray = JSONArray.parseArray(JSON.toJSONString(classifies));
+			JSONObject jsonObject = new JSONObject(true);
+			jsonObject.put("classifies", jsonArray.toJSONString());
+			redisObjectMapService.save(RedisKeyUtils.getClassifyByBoardId(bid), jsonObject, JSONObject.class);
+			return BbsConstant.OK;
 		}
-		JSONArray jsonArray = JSONArray.parseArray(JSON.toJSONString(classifies));
-		JSONObject jsonObject = new JSONObject(true);
-		jsonObject.put("classifies", jsonArray.toJSONString());
-		redisObjectMapService.save(RedisKeyUtils.getClassifyByBoardId(bid), jsonObject, JSONObject.class);
-		return BbsConstant.OK;
 	}
 
 	@Override

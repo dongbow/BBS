@@ -6,7 +6,7 @@
 	
 	<cache type="cn.ifxcode.bbs.dao.cache.LoggingRedisCache"/>
 	
-	<select id="getBoardsByNavId" resultType="Board">
+	<select id="getBoardsByNavId" resultType="Board" useCache="false">
 		select * from bbs_board where board_status = 0 
 			and nav_id = #{navId}
 		order by board_sort asc

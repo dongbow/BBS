@@ -1,32 +1,76 @@
-$(function() {
-	var myChart = echarts.init(document.getElementById('chart1'));
+
+$(document).ready(function() {
+	chartData(7, '', '');
+});
+
+function chartData(day, start, end) {
+	$.post(ROOT + '/system/admin/chart/data', {
+		"day": day,
+		'start': start,
+		'end': end
+	}, function(result) {
+		drawChart(result);
+	});
+}
+
+var myChart;
+var myChart2;
+var myChart3;
+
+function drawChart(result) {
+	myChart = echarts.init(document.getElementById('chart1'));
 
 	// 指定图表的配置项和数据
 	var option = {
-	    tooltip: {},
-	    legend: {
-	        data:['销量']
-	    },
-	    xAxis: {
-	        data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
-	    },
-	    yAxis: {},
-	    series: [{
-	        name: '销量',
-	        type: 'bar',
-	        data: [5, 20, 36, 10, 10, 20]
-	    }]
-	};
+		    tooltip : {
+		        trigger: 'axis',
+		        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+		            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+		        }
+		    },
+		    legend: {
+		        data:['每日签到','每日新用户']
+		    },
+		    grid: {
+		        left: '3%',
+		        right: '4%',
+		        bottom: '3%',
+		        containLabel: true
+		    },
+		    xAxis : [
+		        {
+		            type : 'category',
+		            data : result.date
+		        }
+		    ],
+		    yAxis : [
+		        {
+		            type : 'value'
+		        }
+		    ],
+		    series : [
+		        {
+		            name:'每日签到',
+		            type:'bar',
+		            data:result.sign
+		        },
+		        {
+		            name:'每日新用户',
+		            type:'bar',
+		            data:result.user
+		        }
+		    ]
+		};
 	// 使用刚指定的配置项和数据显示图表。
 	myChart.setOption(option);
 	
-	var myChart2 = echarts.init(document.getElementById('chart2'));
+	myChart2 = echarts.init(document.getElementById('chart2'));
 	var option2 = {
 		    tooltip: {
 		        trigger: 'axis'
 		    },
 		    legend: {
-		        data:['邮件营销','联盟广告','视频广告','直接访问','搜索引擎']
+		        data:['每日主题','每日回复']
 		    },
 		    grid: {
 		        left: '3%',
@@ -42,48 +86,68 @@ $(function() {
 		    xAxis: {
 		        type: 'category',
 		        boundaryGap: false,
-		        data: ['周一','周二','周三','周四','周五','周六','周日']
+		        data: result.date
 		    },
 		    yAxis: {
 		        type: 'value'
 		    },
 		    series: [
 		        {
-		            name:'邮件营销',
+		            name:'每日主题',
 		            type:'line',
 		            stack: '总量',
-		            data:[120, 132, 101, 134, 90, 230, 210]
+		            data:result.topic
 		        },
 		        {
-		            name:'联盟广告',
+		            name:'每日回复',
 		            type:'line',
 		            stack: '总量',
-		            data:[220, 182, 191, 234, 290, 330, 310]
-		        },
-		        {
-		            name:'视频广告',
-		            type:'line',
-		            stack: '总量',
-		            data:[150, 232, 201, 154, 190, 330, 410]
-		        },
-		        {
-		            name:'直接访问',
-		            type:'line',
-		            stack: '总量',
-		            data:[320, 332, 301, 334, 390, 330, 320]
-		        },
-		        {
-		            name:'搜索引擎',
-		            type:'line',
-		            stack: '总量',
-		            data:[820, 932, 901, 934, 1290, 1330, 1320]
+		            data:result.reply
 		        }
 		    ]
 		};
 	myChart2.setOption(option2);
 	
-	window.onresize = function() {
-		myChart.resize();
-		myChart2.resize();
-	}
-});
+	myChart3 = echarts.init(document.getElementById('chart3'));
+	var option3 = {
+	    title : {
+	        text: '版块点击量',
+	        subtext: '热门版块',
+	        x:'center'
+	    },
+	    tooltip : {
+	        trigger: 'item',
+	        formatter: "{a} <br/>{b} : {c} ({d}%)"
+	    },
+	    legend: {
+	        orient: 'vertical',
+	        left: 'left',
+	        data: result.boardname
+	    },
+	    series : [
+	        {
+	            name: '访问来源',
+	            type: 'pie',
+	            radius : '55%',
+	            center: ['50%', '60%'],
+	            data:result.clicks,
+	            itemStyle: {
+	                emphasis: {
+	                    shadowBlur: 10,
+	                    shadowOffsetX: 0,
+	                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+	                }
+	            }
+	        }
+	    ]
+	};
+	myChart3.setOption(option3);
+
+}
+
+window.onresize = function() {
+	myChart.resize();
+	myChart2.resize();
+	myChart3.resize();
+}
+

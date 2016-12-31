@@ -20,7 +20,7 @@
 		select role_id from role where is_access = 1
 	</select>
 	
-	<select id="getAllRoles" resultType="Role">
+	<select id="getAllRoles" resultType="Role" useCache="false">
 		select * from role
 	</select>
 	

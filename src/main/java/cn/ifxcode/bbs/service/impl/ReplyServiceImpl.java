@@ -148,10 +148,13 @@ public class ReplyServiceImpl implements ReplyService{
 		List<Reply> replies = replyDao.getReplyListByUserId(map);
 		for (Reply reply : replies) {
 			String content = HtmlUtils.htmlUnescape(reply.getReplyContent());
+			content = content.replace("<br />", "");
 			if (content.indexOf("<img") != -1) {
 				content = "评论包含图片，点击查看详情[image]...";
 			} else if(content.indexOf("<pre") != -1) {
 				content = "评论包含代码，点击查看详情[code]...";
+			} else if(content.indexOf("<table") != -1) { 
+				content = "评论包含表格，点击查看详情[table]...";
 			} else {
 				if(content.length() > 40) {
 					content = content.substring(0, 40) + "...";

@@ -193,22 +193,20 @@ public class TopicServiceImpl implements TopicService{
 	
 	@Override
 	public TopicData getTopicDateFromRedis(long topicId, Integer boardId) {
-		Lock lock = new ReentrantLock();
-		TopicData topicData = null;
-		try{
-			lock.lock();
-			JSONObject object = this.saveOrUpdateTopicData(topicId, TopicSign.VIEW, null, null, null, -1, null, null);
-			boardService.saveOrUpdateBoardInfo(boardId, BoardSign.CLICK, 0);
-			topicData = JSON.toJavaObject(object, TopicData.class);
-			if (StringUtils.isNotBlank(topicData.getTopicUpdateTime())) {
-				topicData.setTopicUpdateTime(DateUtils.dt14LongFormat(DateUtils.dt14FromStr(topicData.getTopicUpdateTime())));
+		synchronized (this) {
+			TopicData topicData = null;
+			try{
+				JSONObject object = this.saveOrUpdateTopicData(topicId, TopicSign.VIEW, null, null, null, -1, null, null);
+				boardService.saveOrUpdateBoardInfo(boardId, BoardSign.CLICK, 0);
+				topicData = JSON.toJavaObject(object, TopicData.class);
+				if (StringUtils.isNotBlank(topicData.getTopicUpdateTime())) {
+					topicData.setTopicUpdateTime(DateUtils.dt14LongFormat(DateUtils.dt14FromStr(topicData.getTopicUpdateTime())));
+				}
+			} catch (Exception e) {
+				logger.error("insertTopicData fail", e);
 			}
-		} catch (Exception e) {
-			logger.error("insertTopicData fail", e.getMessage());
-		} finally {
-			lock.unlock();
+			return topicData;
 		}
-		return topicData;
 	}
 
 	@Override
@@ -351,19 +349,17 @@ public class TopicServiceImpl implements TopicService{
 	}
 	
 	public TopicData getTopicDateForListFromRedis(long topicId, Integer boardId) {
-		Lock lock = new ReentrantLock();
-		TopicData topicData = null;
-		try{
-			lock.lock();
-			JSONObject object = this.saveOrUpdateTopicData(topicId, null, null, null, null, -1, null, null);
-			boardService.saveOrUpdateBoardInfo(boardId, BoardSign.CLICK, 0);
-			topicData = JSON.toJavaObject(object, TopicData.class);
-		} catch (Exception e) {
-			logger.error("insertTopicData fail", e.getMessage());
-		} finally {
-			lock.unlock();
+		synchronized (this) {
+			TopicData topicData = null;
+			try{
+				JSONObject object = this.saveOrUpdateTopicData(topicId, null, null, null, null, -1, null, null);
+				boardService.saveOrUpdateBoardInfo(boardId, BoardSign.CLICK, 0);
+				topicData = JSON.toJavaObject(object, TopicData.class);
+			} catch (Exception e) {
+				logger.error("insertTopicData fail", e);
+			}
+			return topicData;
 		}
-		return topicData;
 	}
 
 	@Override

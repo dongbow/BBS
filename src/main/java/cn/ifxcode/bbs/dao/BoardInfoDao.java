@@ -6,4 +6,6 @@ public interface BoardInfoDao {
 
 	public BoardInfo getBoardInfoByBoardId(int boardId);
 
+	public int updateBoardInfo(BoardInfo info);
+
 }

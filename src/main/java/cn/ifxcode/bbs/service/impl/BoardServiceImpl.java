@@ -3,8 +3,6 @@ package cn.ifxcode.bbs.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 import javax.annotation.Resource;
 
@@ -111,18 +109,16 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public BoardInfo getBoardInfoFromRedis(int boardId) {
-		Lock lock = new ReentrantLock();
-		BoardInfo boardInfo = null;
-		try {
-			lock.lock();
-			JSONObject object = this.saveOrUpdateBoardInfo(boardId, BoardSign.CLICK, 0);
-			boardInfo = JSON.toJavaObject(object, BoardInfo.class);
-		} catch (Exception e) {
-			logger.error("insertBoardInfo fail", e.getMessage());
-		} finally {
-			lock.unlock();
+		synchronized (this) {
+			BoardInfo boardInfo = null;
+			try {
+				JSONObject object = this.saveOrUpdateBoardInfo(boardId, BoardSign.CLICK, 0);
+				boardInfo = JSON.toJavaObject(object, BoardInfo.class);
+			} catch (Exception e) {
+				logger.error("insertBoardInfo fail", e);
+			}
+			return boardInfo;
 		}
-		return boardInfo;
 	}
 
 	@Override

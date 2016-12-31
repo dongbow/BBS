@@ -74,13 +74,13 @@
 			                            <td class="numeric" data-title="描述">${job.description!}</td>
 			                            <td class="numeric" data-title="创建时间">${job.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
 			                            <th class="numeric" data-title="操作">
-			                            	<button class="btn btn-default btn-xs" type="button"><i class="fa fa-edit"></i> 编辑 </button>
+			                            	<a class="btn btn-default btn-xs" type="button"><i class="fa fa-edit"></i> 编辑 </a>
 			                            	<#if job.jobStatus == '1'>
-			                            		<button class="btn btn-default btn-xs" type="button"><i class="fa fa-lock"></i> 暂停 </button>
+			                            		<a class="btn btn-default btn-xs" type="button"><i class="fa fa-lock"></i> 暂停 </a>
 			                            	<#else>
-			                            		<button class="btn btn-default btn-xs" type="button"><i class="fa fa-unlock-alt"></i> 启动</button>
+			                            		<a class="btn btn-default btn-xs" type="button"><i class="fa fa-unlock-alt"></i> 启动</a>
 			                            	</#if>
-			                            	<button class="btn btn-default btn-xs" type="button"><i class="fa fa-edit"></i> 立即执行 </button>
+			                            	<a class="btn btn-default btn-xs quartz-now" type="button" href="${path}/system/admin/quartz/runnow" data-id="${job.jobId}"><i class="fa fa-edit"></i> 立即执行 </a>
 			                            </th>
 			                        </tr>
 	                        	</#list>
@@ -105,6 +105,6 @@
     <!-- main content end-->
 </section>
 	<#include "../common/footer.ftl">
-	<script type="text/javascript" src="${path}/resources/js/admin/sysmanage/user.js"></script>
+	<script type="text/javascript" src="${path}/resources/js/admin/quartz.js"></script>
 </body>
 </html>

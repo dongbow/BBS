@@ -186,9 +186,8 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	private List<User> formatUser(List<User> users) {
-		List<SwfArea> areas = JsonUtils.decodeAreaJson(JSONArray
-				.parseArray(redisObjectMapService.get(RedisKeyUtils.getAreas(),
-						JSONObject.class).getString("areas")));
+		JSONArray array = JSONArray.parseArray(redisObjectMapService.get(RedisKeyUtils.getAreas(), JSONObject.class).getString("areas"));
+		List<SwfArea> areas = JsonUtils.decodeJson(array, SwfArea.class);
 		List<User> list = new ArrayList<User>();
 		for (User user : users) {
 			for (SwfArea area : areas) {
@@ -324,9 +323,8 @@ public class UserServiceImpl implements UserService {
 		this.formatEmail(user);
 		if(StringUtils.isNotBlank(user.getUserInfo().getUserProvince())
 				&& StringUtils.isNotBlank(user.getUserInfo().getUserCity())) {
-			List<SwfArea> areas = JsonUtils.decodeAreaJson(JSONArray
-					.parseArray(redisObjectMapService.get(RedisKeyUtils.getAreas(),
-							JSONObject.class).getString("areas")));
+			JSONArray array = JSONArray.parseArray(redisObjectMapService.get(RedisKeyUtils.getAreas(), JSONObject.class).getString("areas"));
+			List<SwfArea> areas = JsonUtils.decodeJson(array, SwfArea.class);
 			for (SwfArea area : areas) {
 				if(StringUtils.equals(user.getUserInfo().getUserProvince(), Integer.toString(area.getId()))) {
 					user.getUserInfo().setUserProvince(area.getName());

@@ -3,6 +3,7 @@ package cn.ifxcode.bbs.service.impl;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
@@ -11,18 +12,22 @@ import javax.servlet.http.HttpServletRequest;
 import ltang.redis.service.RedisObjectMapService;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 import cn.ifxcode.bbs.bean.CookieBean;
 import cn.ifxcode.bbs.constant.BbsConstant;
 import cn.ifxcode.bbs.dao.GeneralDao;
 import cn.ifxcode.bbs.dao.UserValueDao;
 import cn.ifxcode.bbs.entity.Board;
+import cn.ifxcode.bbs.entity.BoardInfo;
 import cn.ifxcode.bbs.entity.Classify;
 import cn.ifxcode.bbs.entity.ExperienceHistory;
 import cn.ifxcode.bbs.entity.GoldHistory;
@@ -37,6 +42,7 @@ import cn.ifxcode.bbs.service.ClassifyService;
 import cn.ifxcode.bbs.service.GeneralService;
 import cn.ifxcode.bbs.service.UserService;
 import cn.ifxcode.bbs.utils.DateUtils;
+import cn.ifxcode.bbs.utils.FormValidate;
 import cn.ifxcode.bbs.utils.GetRemoteIpUtil;
 import cn.ifxcode.bbs.utils.JsonUtils;
 import cn.ifxcode.bbs.utils.RedisKeyUtils;
@@ -46,6 +52,8 @@ import cn.ifxcode.bbs.utils.UserValueUtils;
 @Service
 public class GeneralServiceImpl implements GeneralService {
 
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@Resource
 	private UserService userService;
 	
@@ -191,9 +199,8 @@ public class GeneralServiceImpl implements GeneralService {
 
 	@Override
 	public List<SwfArea> getAllProvinces() {
-		List<SwfArea> areas = JsonUtils.decodeAreaJson(JSONArray
-				.parseArray(redisObjectMapService.get(RedisKeyUtils.getAreas(),
-						JSONObject.class).getString("areas")));
+		JSONArray array = JSONArray.parseArray(redisObjectMapService.get(RedisKeyUtils.getAreas(), JSONObject.class).getString("areas"));
+		List<SwfArea> areas = JsonUtils.decodeJson(array, SwfArea.class);
 		List<SwfArea> provinces = Lists.newArrayList();
 		for (SwfArea swfArea : areas) {
 			if(swfArea.getParentId() == 0) {
@@ -206,9 +213,8 @@ public class GeneralServiceImpl implements GeneralService {
 	@Override
 	public List<SwfArea> getCitys(String userProvince) {
 		long pid = Integer.parseInt(userProvince);
-		List<SwfArea> areas = JsonUtils.decodeAreaJson(JSONArray
-				.parseArray(redisObjectMapService.get(RedisKeyUtils.getAreas(),
-						JSONObject.class).getString("areas")));
+		JSONArray array = JSONArray.parseArray(redisObjectMapService.get(RedisKeyUtils.getAreas(), JSONObject.class).getString("areas"));
+		List<SwfArea> areas = JsonUtils.decodeJson(array, SwfArea.class);
 		List<SwfArea> citys = Lists.newArrayList();
 		for (SwfArea swfArea : areas) {
 			if(swfArea.getParentId() == pid) {
@@ -300,7 +306,7 @@ public class GeneralServiceImpl implements GeneralService {
 		List<Integer> rids = RoleIdUtils.getRoleIds(bean.getRole_ids());
 		String ids = RoleIdUtils.getRoleIdsFromCookie(rids);
 		JSONObject object = redisObjectMapService.get(RedisKeyUtils.getResourcesByRoleId(Integer.parseInt(ids)), JSONObject.class);
-		List<Resources> resources = JsonUtils.decodeJson(JSONArray.parseArray(object.getString("resources")));
+		List<Resources> resources = JsonUtils.decodeJson(JSONArray.parseArray(object.getString("resources")), Resources.class);
 		try {
 			this.authHref(url, resources);
 		} catch (StopException e) {
@@ -337,6 +343,56 @@ public class GeneralServiceImpl implements GeneralService {
 			object.put(today, 1);
 		}
 		redisObjectMapService.save(realKey, object, JSONObject.class);
+	}
+
+	@Override
+	public JSONObject getChartData(int day, String start, String end) {
+		JSONObject object = new JSONObject(true);
+		try {
+			if(!FormValidate.stringUtils(start, end)) {
+				end = DateUtils.getYesterday();
+				start = DateUtils.getYesSeven(end);
+			}
+			Map<String, Object> params = Maps.newHashMap();
+			params.put("start", start);
+			params.put("end", end);
+			List<Map<String, Object>> maps = generalDao.getChartData(params);
+			
+			List<String> date = Lists.newArrayList();
+			List<Long> sign = Lists.newArrayList();
+			List<Long> user = Lists.newArrayList();
+			List<Long> topic = Lists.newArrayList();
+			List<Long> reply = Lists.newArrayList();
+			for (Map<String, Object> map : maps) {
+				date.add(map.get("time").toString());
+				sign.add(Long.parseLong(map.get("user_sign_count").toString()));
+				user.add(Long.parseLong(map.get("newuser_count").toString()));
+				topic.add(Long.parseLong(map.get("topic_count").toString()));
+				reply.add(Long.parseLong(map.get("reply_count").toString()));
+			}
+			object.put("date", net.sf.json.JSONArray.fromObject(date));
+			object.put("sign", net.sf.json.JSONArray.fromObject(sign));
+			object.put("user", net.sf.json.JSONArray.fromObject(user));
+			object.put("topic", net.sf.json.JSONArray.fromObject(topic));
+			object.put("reply", net.sf.json.JSONArray.fromObject(reply));
+			
+			List<Board> boards = boardService.getAllBoard();
+			List<String> names = Lists.newArrayList();
+			List<Map<String, Object>> boardsData = Lists.newArrayList();
+			for (Board board : boards) {
+				names.add(board.getBoardName());
+				Map<String, Object> map = Maps.newHashMap();
+				map.put("name", board.getBoardName());
+				BoardInfo info = boardService.getBoardInfoFromRedis(board.getBoardId());
+				map.put("value", info.getBoardClickCount());
+				boardsData.add(map);
+			}
+			object.put("boardname", net.sf.json.JSONArray.fromObject(names));
+			object.put("clicks", net.sf.json.JSONArray.fromObject(boardsData));
+		} catch (Exception e) {
+			logger.error("get chart data fail", e);
+		}
+		return object;
 	}
 
 }

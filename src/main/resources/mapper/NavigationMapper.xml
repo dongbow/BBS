@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.ifxcode.bbs.dao.NavigationDao">
 	
-	<select id="getAllNavigations" resultType="Navigation">
+	<select id="getAllNavigations" resultType="Navigation" useCache="false">
 		select * from bbs_navigation where nav_status = 0 order by nav_sort asc
 	</select>
 	

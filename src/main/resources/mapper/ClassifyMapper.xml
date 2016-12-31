@@ -6,7 +6,7 @@
 	
 	<cache type="cn.ifxcode.bbs.dao.cache.LoggingRedisCache"/>
 	
-	<select id="getClassifyByBoardId" resultType="Classify">
+	<select id="getClassifyByBoardId" resultType="Classify" useCache="false">
 		select * from bbs_board_classify where class_status = 0 
 			and board_id = #{boardId}
 		order by class_sort asc

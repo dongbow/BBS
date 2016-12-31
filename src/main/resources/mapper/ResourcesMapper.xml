@@ -29,7 +29,7 @@
 	 	</collection>
 	 </resultMap>
 	 
-	 <select id="getResourcesByRoleId" resultMap="BaseResources">
+	 <select id="getResourcesByRoleId" resultMap="BaseResources" useCache="false">
 	 	select r.* from resources as r, role as ro, role_resources as rr
 	 	where r.res_id = rr.res_id
 	 	and ro.role_id = rr.role_id

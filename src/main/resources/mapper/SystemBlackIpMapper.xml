@@ -6,7 +6,7 @@
 	
 	<cache type="cn.ifxcode.bbs.dao.cache.LoggingRedisCache"/>
 	
-	<select id="findAllIpAddress" resultType="String">
+	<select id="findAllIpAddress" resultType="String" useCache="false">
 		select black_ip from system_blacklist
 	</select>
 

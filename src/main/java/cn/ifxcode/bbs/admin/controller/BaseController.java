@@ -48,7 +48,7 @@ public class BaseController {
 		for (Integer id : ids) {
 			JSONObject object = redisObjectMapService.get(RedisKeyUtils.getResourcesByRoleId(id), JSONObject.class);
 			JSONArray result = JSONArray.parseArray(object.getString("resources"));
-			List<Resources> res = JsonUtils.decodeJson(result);
+			List<Resources> res = JsonUtils.decodeJson(result, Resources.class);
 			lists.addAll(res);
 		}
 		Set<Resources> set = new TreeSet<Resources>(lists);

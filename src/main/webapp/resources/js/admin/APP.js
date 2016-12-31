@@ -14,6 +14,10 @@ function notBlank() {
 	bootbox.alert('不能留空');
 }
 
+function sucTip(msg) {
+	bootbox.alert(msg);
+}
+
 function refreshLocation(msg) {
 	bootbox.alert(msg, function() {
 		window.location = window.location;

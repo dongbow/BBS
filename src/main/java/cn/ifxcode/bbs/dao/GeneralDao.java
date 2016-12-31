@@ -24,5 +24,7 @@ public interface GeneralDao {
 	public List<ExperienceHistory> getUserExpsByUid(Map<String, Object> map);
 
 	public void insertTodayCount(Map<String, Object> map);
+
+	public List<Map<String, Object>> getChartData(Map<String, Object> map);
 	
 }

@@ -109,7 +109,7 @@ public class ResourcesServiceImpl implements ResourcesService {
 	public void addResourcesToRedis(Resources resources, int[] roles) {
 		for (int id : roles) {
 			JSONObject object = redisObjectMapService.get(RedisKeyUtils.getResourcesByRoleId(id), JSONObject.class);
-			List<Resources> list = JsonUtils.decodeJson(JSONArray.parseArray(object.getString("resources")));
+			List<Resources> list = JsonUtils.decodeJson(JSONArray.parseArray(object.getString("resources")), Resources.class);
 			list.add(resources);
 			JSONObject jsonObject = new JSONObject(true);
 			jsonObject.put("resources", JSONArray.parseArray(JSON.toJSONString(list)).toJSONString());
@@ -125,7 +125,7 @@ public class ResourcesServiceImpl implements ResourcesService {
 		for (Integer id : ids) {
 			JSONObject object = redisObjectMapService.get(RedisKeyUtils.getResourcesByRoleId(id), JSONObject.class);
 			JSONArray result = JSONArray.parseArray(object.getString("resources"));
-			List<Resources> res = JsonUtils.decodeJson(result);
+			List<Resources> res = JsonUtils.decodeJson(result, Resources.class);
 			lists.addAll(res);
 		}
 		Set<Resources> set = new TreeSet<Resources>(lists);
@@ -138,7 +138,7 @@ public class ResourcesServiceImpl implements ResourcesService {
 	public List<Resources> getResourcesByRoleIdNotTree(int roleId) {
 		JSONObject object = redisObjectMapService.get(RedisKeyUtils.getResourcesByRoleId(roleId), JSONObject.class);
 		JSONArray result = JSONArray.parseArray(object.getString("resources"));
-		List<Resources> res = JsonUtils.decodeJson(result);
+		List<Resources> res = JsonUtils.decodeJson(result, Resources.class);
 		return res;
 	}
 

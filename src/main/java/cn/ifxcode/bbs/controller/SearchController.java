@@ -37,7 +37,7 @@ public class SearchController {
 			@RequestParam(value = "time", required = false)String time, 
 			@RequestParam(value = "sort", required = false)String sort, Model model) {
 		if(StringUtils.isNotBlank(keyWord)) {
-			
+			search(model, page, keyWord, filter, bid, time, sort);
 		}
 		if(StringUtils.isNotBlank(adv) && "yes".equals(adv)) {
 			List<Navigation> navigations = navigationService.getAllNavigationsFromCache();

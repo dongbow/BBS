@@ -6,7 +6,7 @@
 	
 	<cache type="cn.ifxcode.bbs.dao.cache.LoggingRedisCache"/>
 	
-	<select id="getSystemConfig" resultType="SystemConfig">
+	<select id="getSystemConfig" resultType="SystemConfig" useCache="false">
 		select * from system_config
 	</select>
 
