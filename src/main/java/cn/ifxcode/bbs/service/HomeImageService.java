@@ -10,5 +10,7 @@ public interface HomeImageService {
 	public List<HomeImage> getHomeImages();
 
 	public List<HomeImage> searchImages(Page page);
+
+	public int addImage(String title, String link, String url, int sort, int status);
 	
 }

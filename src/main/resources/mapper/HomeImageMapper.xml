@@ -11,7 +11,12 @@
 	</select>
 	
 	<select id="searchImages" resultType="HomeImage">
-		select * from bbs_home_image order by home_create_time desc
+		select * from bbs_home_image order by home_status asc, home_sort asc
 	</select>
+	
+	<insert id="insert" parameterType="HomeImage">
+		insert into bbs_home_image (home_title, home_link, home_img_link, home_sort, home_status, home_create_time) 
+		values(#{homeTitle}, #{homeLink}, #{homeImgLink}, #{homeSort}, #{homeStatus}, #{homeCreateTime})
+	</insert>
 
 </mapper>

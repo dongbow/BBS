@@ -13,4 +13,10 @@ public interface RecommendService {
 
 	public List<Recommend> getAllRecommends();
 
+	public int addRecommend(String name, String link, int location, int sort, int status);
+
+	public Recommend getRecommend(int id);
+
+	public int updateRecommend(int id, String name, String link, int location, int sort, int status);
+
 }

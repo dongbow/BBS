@@ -22,7 +22,7 @@
         	<div class="panel panel-default">
         		<form action="" method="post">
 	                <div class="panel-body">
-            			<a class="btn btn-info btn-sm" type="button" data-toggle="modal" href="#add"><i class="fa fa-plus"></i> 添加 </a>
+            			<a class="btn btn-info btn-sm data-add" type="button" href="${path}/system/admin/home/quick/add"><i class="fa fa-plus"></i> 添加 </a>
 		            	<a class="btn btn-danger btn-sm" type="button"><i class="fa fa-trash-o"></i> 删除 </a>
                 	</div>
                 </form>
@@ -68,6 +68,9 @@
 	                    </table>
 	                </section>
 	                <@buildPage page=page/>
+	                 <!-- Modal -->
+	                <div class="modal fade" id="data-modal" tabindex="-1" role="dialog" aria-labelledby="data-modal" aria-hidden="true" data-backdrop="static"></div>
+			        <!-- modal -->
 	            </div>
 	        </section>
         </div>
@@ -83,6 +86,7 @@
     </div>
     <!-- main content end-->
 </section>
+	<script type="text/javascript" src="${path}/resources/js/admin/homemanage/quick.js"></script>
 	<#include "../common/footer.ftl">
 </body>
 </html>

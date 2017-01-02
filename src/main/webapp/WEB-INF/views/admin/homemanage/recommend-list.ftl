@@ -46,7 +46,7 @@
                 		
 	                	<div class="col-md-4 form-group">
 	            			<a class="btn btn-success btn-sm" type="button"><i class="fa fa-search"></i> 查找 </a>
-	            			<a class="btn btn-info btn-sm" type="button"><i class="fa fa-plus"></i> 添加 </a>
+	            			<a class="btn btn-info btn-sm data-add" type="button" href="${path}/system/admin/home/recommend/add"><i class="fa fa-plus"></i> 添加 </a>
 	            			<a class="btn btn-danger btn-sm" type="button"><i class="fa fa-trash-o"></i> 删除 </a>
 	            		</div>
                 	</div>
@@ -88,7 +88,7 @@
 				                            </td>
 				                            <td class="numeric" data-title="创建时间">${rc.createTime}</td>
 				                            <td class="numeric" data-title="操作">
-				                            	<a class="btn btn-default btn-xs" type="button"><i class="fa fa-edit"></i> 编辑 </a>
+				                            	<a class="btn btn-default btn-xs data-update" type="button" href="${path}/system/admin/home/recommend/update" data-id="${rc.rcId}"><i class="fa fa-edit"></i> 编辑 </a>
 				                            </td>
 				                        </tr>
 	                        		</#list>
@@ -97,6 +97,9 @@
 	                    </table>
 	                </section>
 	                <@buildPage page=page/>
+	                <!-- Modal -->
+	                <div class="modal fade" id="data-modal" tabindex="-1" role="dialog" aria-labelledby="data-modal" aria-hidden="true" data-backdrop="static"></div>
+			        <!-- modal -->
 	            </div>
 	        </section>
         </div>
@@ -112,6 +115,7 @@
     </div>
     <!-- main content end-->
 </section>
+	<script type="text/javascript" src="${path}/resources/js/admin/homemanage/recommend.js"></script>
 	<#include "../common/footer.ftl">
 </body>
 </html>

@@ -12,4 +12,9 @@
 		select * from bbs_quick_navigation order by quick_create_time desc
 	</select>
 	
+	<insert id="insert" parameterType="QuickNavigation">
+		insert into bbs_quick_navigation (quick_name, quick_link, quick_color, quick_sort, quick_status, quick_create_time) 
+		values (#{quickName}, #{quickLink}, #{quickColor}, #{quickSort}, #{quickStatus}, #{quickCreateTime})
+	</insert>
+	
 </mapper>

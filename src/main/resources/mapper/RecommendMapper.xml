@@ -26,5 +26,20 @@
 	<select id="getAllRecommendsForMenu" resultType="Recommend">
 		select rc_name, rc_href, location from bbs_recommend where rc_status = 0 order by location, rc_sort
 	</select>
+	
+	<insert id="insert" parameterType="Recommend">
+		insert into bbs_recommend (rc_name, rc_href, location, rc_sort, rc_status, create_time) 
+		values (#{rcName}, #{rcHref}, #{location}, #{rcSort}, #{rcStatus}, #{createTime})
+	</insert>
+	
+	<select id="get" resultType="Recommend">
+		select * from bbs_recommend where rc_id = #{id}
+	</select>
+
+	<update id="update" parameterType="Recommend">
+		update bbs_recommend set rc_name = #{rcName}, rc_href = #{rcHref}, 
+			location = #{location}, rc_sort = #{rcSort}, rc_status = #{rcStatus} 
+		where rc_id = #{rcId}
+	</update>
 
 </mapper>

@@ -22,7 +22,7 @@
         	<div class="panel panel-default">
         		<form action="" method="post">
 	                <div class="panel-body">
-            			<a class="btn btn-info btn-sm" type="button" data-toggle="modal" href="#add"><i class="fa fa-plus"></i> 添加 </a>
+            			<a class="btn btn-info btn-sm data-add" type="button" href="${path}/system/admin/home/image/add"><i class="fa fa-plus"></i> 添加 </a>
 		            	<a class="btn btn-danger btn-sm" type="button"><i class="fa fa-trash-o"></i> 删除 </a>
                 	</div>
                 </form>
@@ -37,7 +37,7 @@
 	                            <th>ID</th>
 	                            <th>标题</th>
 	                            <th class="numeric">链接</th>
-	                            <th class="numeric">图片地址</th>
+	                            <th class="numeric">图片预览</th>
 	                            <th class="numeric">排序</th>
 	                            <th class="numeric">状态</th>
 	                            <th class="numeric">创建时间</th>
@@ -52,15 +52,21 @@
 				                            <td data-title="ID">${img.id}</td>
 				                            <td data-title="标题">${img.homeTitle}</td>
 				                            <td class="numeric" data-title="链接">${img.homeLink}</td>
-				                            <td id="imgurl_${img.id}" class="numeric" data-title="图片地址">${img.homeImgLink}</td>
+				                            <td class="numeric" data-title="图片预览">
+				                            	<a class="btn btn-link btn-xs btn-img" type="button" data-img="${img.homeImgLink}"> 查看图片 </a>
+				                            </td>
 				                            <td class="numeric" data-title="排序">${img.homeSort}</td>
 				                            <td class="numeric" data-title="状态">
 				                            	<#if img.homeStatus == 0>正常<#else>已删除</#if>
 				                            </td>
 				                            <td class="numeric" data-title="创建时间">${img.homeCreateTime}</td>
-				                            <th class="numeric" data-title="操作">
-				                            	<a class="btn btn-link btn-xs btn-img" type="button" data-img="${img.homeImgLink}"> 查看图片 </a>
-				                            </th>
+				                            <td class="numeric" data-title="操作">
+				                            	<#if img.homeStatus == 0>
+				                            		<a class="btn btn-default btn-xs" type="button"><i class="fa fa-trash-o"></i> 删除 </a>
+				                            	<#else>
+				                            		<a class="btn btn-default btn-xs" type="button"><i class="fa fa-pause"></i> 启用 </a>
+				                            	</#if>
+				                            </td>
 				                        </tr>
 		                        	</#list>
 		                        </#if>
@@ -69,6 +75,8 @@
 	                </section>
 	                <@buildPage page=page/>
 	                <!-- Modal -->
+	                <div class="modal fade" id="data-modal" tabindex="-1" role="dialog" aria-labelledby="data-modal" aria-hidden="true" data-backdrop="static"></div>
+	                
 			        <div class="modal fade" id="image-modal" tabindex="-1" role="dialog" aria-labelledby="image-modal" aria-hidden="true">
 			        	<div class="modal-dialog modal-lg">
 						    <div class="modal-content">
@@ -77,7 +85,7 @@
 						            <h4 class="modal-title">查看图片</h4>
 						        </div>
 						        <div class="modal-body" style="text-align:center; overflow:hidden">
-						        	<img class="look-img" alt="image" src=""/>
+						        	<img class="look-img" alt="image" src="" width="100%"/>
 						        </div>
 						    </div>
 						</div>
@@ -99,6 +107,7 @@
     <!-- main content end-->
 </section>
 	<script type="text/javascript" src="${path}/resources/js/admin/homemanage/homeimage.js"></script>
+	<script type="text/javascript" src="${path}/resources/js/jquery/jquery.form.js"></script>
 	<#include "../common/footer.ftl">
 </body>
 </html>

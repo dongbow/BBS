@@ -11,4 +11,6 @@ public interface HomeImageDao {
 
 	public List<HomeImage> searchImages(Map<String, Object> map);
 
+	public int insert(HomeImage homeImage);
+
 }

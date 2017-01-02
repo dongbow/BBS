@@ -45,6 +45,7 @@
 		<if test="uid != null">
 			and uid = #{uid} 
 		</if>
+		order by upload_time desc
 	</select>
 
 </mapper>

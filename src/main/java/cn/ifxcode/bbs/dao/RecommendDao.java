@@ -11,4 +11,10 @@ public interface RecommendDao {
 
 	public List<Recommend> getAllRecommendsForMenu();
 
+	public int insert(Recommend recommend);
+
+	public Recommend get(int id);
+
+	public int update(Recommend recommend);
+
 }
