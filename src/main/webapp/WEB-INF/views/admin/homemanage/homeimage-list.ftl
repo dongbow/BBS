@@ -23,7 +23,7 @@
         		<form action="" method="post">
 	                <div class="panel-body">
             			<a class="btn btn-info btn-sm data-add" type="button" href="${path}/system/admin/home/image/add"><i class="fa fa-plus"></i> 添加 </a>
-		            	<a class="btn btn-danger btn-sm" type="button"><i class="fa fa-trash-o"></i> 删除 </a>
+		            	<a class="btn btn-danger btn-sm data-delete" type="button" href="${path}/system/admin/home/image/delete"><i class="fa fa-trash-o"></i> 删除 </a>
                 	</div>
                 </form>
             </div>
@@ -48,7 +48,11 @@
 		                        <#if images??>
 		                        	<#list images as img>
 		                        		<tr>
-				                        	<th><input type="checkbox" data-id="${img.id}"></th>
+				                        	<th>
+				                        		<#if img.homeStatus == 0>
+				                        			<input type="checkbox" data-id="${img.id}" class="data-check-id">
+				                        		</#if>
+				                        	</th>
 				                            <td data-title="ID">${img.id}</td>
 				                            <td data-title="标题">${img.homeTitle}</td>
 				                            <td class="numeric" data-title="链接">${img.homeLink}</td>
@@ -61,11 +65,7 @@
 				                            </td>
 				                            <td class="numeric" data-title="创建时间">${img.homeCreateTime}</td>
 				                            <td class="numeric" data-title="操作">
-				                            	<#if img.homeStatus == 0>
-				                            		<a class="btn btn-default btn-xs" type="button"><i class="fa fa-trash-o"></i> 删除 </a>
-				                            	<#else>
-				                            		<a class="btn btn-default btn-xs" type="button"><i class="fa fa-pause"></i> 启用 </a>
-				                            	</#if>
+				                            	<a class="btn btn-default btn-xs data-update" type="button" href="${path}/system/admin/home/image/update" data-id="${img.id}"><i class="fa fa-edit"></i> 编辑 </a>
 				                            </td>
 				                        </tr>
 		                        	</#list>

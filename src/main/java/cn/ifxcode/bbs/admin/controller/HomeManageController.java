@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,7 +56,7 @@ public class HomeManageController extends BaseController {
 	
 	@RequestMapping(value = "/image/add", method = RequestMethod.GET)
 	public String toImageAdd() {
-		return "admin/homemanage/homeimage-add";
+		return "admin/homemanage/homeimage-panel";
 	}
 	
 	@ResponseBody
@@ -71,6 +72,45 @@ public class HomeManageController extends BaseController {
 			}
 		} else {
 			result = new Result(BbsConstant.ERROR, "添加失败");
+		}
+		return result;
+	}
+	
+	@RequestMapping(value = "/image/update", method = RequestMethod.GET)
+	public String toImageUpdate(int id, Model model) {
+		model.addAttribute("img", homeImageService.getHomeImage(id));
+		return "admin/homemanage/homeimage-panel";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/image/update", method = RequestMethod.POST)
+	public Result imageUpdate(int id, String title, String link, String url, int sort, int status) {
+		Result result = null;
+		if(FormValidate.stringUtils(title, link, url)) {
+			int row = homeImageService.updateImage(id, title, link, url, sort, status);
+			if(row == BbsConstant.OK) {
+				result = new Result(BbsConstant.OK, "更新成功");
+			} else {
+				result = new Result(BbsConstant.ERROR, "更新失败");
+			}
+		} else {
+			result = new Result(BbsConstant.ERROR, "更新失败");
+		}
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/image/delete", method = RequestMethod.POST)
+	public Result imageDelete(@RequestParam("ids[]")String ids) {
+		Result result = null;
+		if(StringUtils.isNotBlank(ids)) {
+			if(homeImageService.deleteImage(ids) == BbsConstant.OK) {
+				result = new Result(BbsConstant.OK, "删除成功");
+			} else {
+				result = new Result(BbsConstant.ERROR, "删除失败");
+			}
+		} else {
+			result = new Result(BbsConstant.ERROR, "删除失败");
 		}
 		return result;
 	}
@@ -103,6 +143,45 @@ public class HomeManageController extends BaseController {
 			}
 		} else {
 			result = new Result(BbsConstant.ERROR, "添加失败");
+		}
+		return result;
+	}
+	
+	@RequestMapping(value = "/quick/update", method = RequestMethod.GET)
+	public String toQuickUpdate(int id, Model model) {
+		model.addAttribute("quick", quickNavigationService.getQuickNavigation(id));
+		return "admin/homemanage/quicknavigation-panel";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/quick/update", method = RequestMethod.POST)
+	public Result quickUpdate(int id, String name, String link, String color, int sort, int status) {
+		Result result = null;
+		if(FormValidate.stringUtils(name, link, color)) {
+			int row = quickNavigationService.updateQuick(id, name, link, color, sort, status);
+			if(row == BbsConstant.OK) {
+				result = new Result(BbsConstant.OK, "更新成功");
+			} else {
+				result = new Result(BbsConstant.ERROR, "更新失败");
+			}
+		} else {
+			result = new Result(BbsConstant.ERROR, "更新失败");
+		}
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/quick/delete", method = RequestMethod.POST)
+	public Result quickDelete(@RequestParam("ids[]")String ids) {
+		Result result = null;
+		if(StringUtils.isNotBlank(ids)) {
+			if(quickNavigationService.deleteQuick(ids) == BbsConstant.OK) {
+				result = new Result(BbsConstant.OK, "删除成功");
+			} else {
+				result = new Result(BbsConstant.ERROR, "删除失败");
+			}
+		} else {
+			result = new Result(BbsConstant.ERROR, "删除失败");
 		}
 		return result;
 	}
@@ -170,6 +249,22 @@ public class HomeManageController extends BaseController {
 			}
 		} else {
 			result = new Result(BbsConstant.ERROR, "更新失败");
+		}
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/recommend/delete", method = RequestMethod.POST)
+	public Result recommendDelete(@RequestParam("ids[]")String ids) {
+		Result result = null;
+		if(StringUtils.isNotBlank(ids)) {
+			if(recommendService.deleteRecommend(ids) == BbsConstant.OK) {
+				result = new Result(BbsConstant.OK, "删除成功");
+			} else {
+				result = new Result(BbsConstant.ERROR, "删除失败");
+			}
+		} else {
+			result = new Result(BbsConstant.ERROR, "删除失败");
 		}
 		return result;
 	}

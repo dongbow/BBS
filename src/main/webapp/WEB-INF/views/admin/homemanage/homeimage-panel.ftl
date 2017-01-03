@@ -3,7 +3,7 @@
     <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">添加滚动图</h4>
+            <h4 class="modal-title">轮播图链</h4>
         </div>
         <div class="modal-body">
         	<form action="${path}/upload/image" method="post" enctype="multipart/form-data" id="upload-form">
@@ -13,14 +13,14 @@
                 <div class="form-group">
                     <label class="control-label col-md-4">标题</label>
                     <div class="col-md-6">
-                        <input id="title" type="text" value="" class="form-control">
+                        <input id="title" type="text" value="<#if img??>${img.homeTitle!}</#if>" class="form-control">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-md-4">链接</label>
                     <div class="col-md-6 col-xs-11">
-                        <input id="link" class="form-control" type="text" value="" />
+                        <input id="link" class="form-control" type="text" value="<#if img??>${img.homeLink!}</#if>" />
                     </div>
                 </div>
                 
@@ -32,35 +32,41 @@
                     </div>
                 </div>
                 
-                <div class="form-group image-view" style="display:none">
+                <div class="form-group image-view" style="display:<#if img??>block<#else>none</#if>">
                     <label class="control-label col-md-4">图片预览</label>
                     <div class="col-md-6 col-xs-11">
-                    	<img alt="upload" width="100%">
+                    	<#if img??>
+                    		<img alt="upload" width="100%" src="${img.homeImgLink!}">
+                    	<#else>
+                    		<label class="control-label loading" style="display:none">上传中...</label>
+                    		<img alt="upload" width="100%">
+                    	</#if>
                     </div>
                 </div>
                 
                 <div class="form-group">
                     <label class="control-label col-md-4">图片地址</label>
                     <div class="col-md-6 col-xs-11">
-                        <input id="img-url" class="form-control" type="text" value="" />
+                        <input id="img-url" class="form-control" type="text" value="<#if img??>${img.homeImgLink!}</#if>" />
                     </div>
                 </div>
                 
                 <div class="form-group">
                     <label class="control-label col-md-4">顺序</label>
                     <div class="col-md-6 col-xs-11">
-                        <input id="sort" class="form-control res-sort" type="text" value=""/>
+                        <input id="sort" class="form-control res-sort" type="text" value="<#if img??>${img.homeSort!}</#if>"/>
                     </div>
                 </div>
                 
                 <div class="form-group">
                		<label class="control-label col-md-4">状态</label>
                     <select id="status" class="selectpicker show-tick col-md-6 col-xs-11">
-				        <option value="0">正常</option>
-				        <option value="1">暂不使用</option>
+				        <option <#if img??><#if img.homeStatus?number == 0>selected</#if></#if> value="0">正常</option>
+				        <option <#if img??><#if img.homeStatus?number == 1>selected</#if></#if> value="1">暂不使用</option>
 			        </select>
 	            </div>
 
+				<input type="hidden" id="data-call-id" value="<#if img??>${img.id!}</#if>">
             </form>
         </div>
         <div class="modal-footer" style="text-align:center">

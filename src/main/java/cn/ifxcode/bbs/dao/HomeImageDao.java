@@ -13,4 +13,10 @@ public interface HomeImageDao {
 
 	public int insert(HomeImage homeImage);
 
+	public HomeImage get(int id);
+
+	public int update(HomeImage homeImage);
+
+	public int delete(Map<String, Object> map);
+
 }

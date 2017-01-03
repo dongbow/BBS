@@ -18,5 +18,22 @@
 		insert into bbs_home_image (home_title, home_link, home_img_link, home_sort, home_status, home_create_time) 
 		values(#{homeTitle}, #{homeLink}, #{homeImgLink}, #{homeSort}, #{homeStatus}, #{homeCreateTime})
 	</insert>
+	
+	<select id="get" resultType="HomeImage">
+		select * from bbs_home_image where id = #{id}
+	</select>
+	
+	<update id="update" parameterType="HomeImage">
+		update bbs_home_image set home_title = #{homeTitle}, home_link = #{homeLink}, 
+		home_img_link = #{homeImgLink}, home_sort = #{homeSort}, home_status = #{homeStatus} 
+		where id = #{id}
+	</update>
+	
+	<update id="delete" parameterType="map">
+		update bbs_home_image set home_status = 1 where id in 
+		<foreach collection="imgIds" index="index" item="imgId" open="(" separator="," close=")">  
+           	#{imgId}   
+   		</foreach>
+	</update>
 
 </mapper>

@@ -19,4 +19,6 @@ public interface RecommendService {
 
 	public int updateRecommend(int id, String name, String link, int location, int sort, int status);
 
+	public int deleteRecommend(String ids);
+
 }

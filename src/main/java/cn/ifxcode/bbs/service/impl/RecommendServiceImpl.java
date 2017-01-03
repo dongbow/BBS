@@ -10,6 +10,7 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.collect.Maps;
 
@@ -106,6 +107,24 @@ public class RecommendServiceImpl implements RecommendService {
 			logger.error("update home recommend fail", e);
 		}
 		return BbsConstant.ERROR;
+	}
+
+	@Override
+	@Transactional
+	@SysLog(module = "首页管理", methods = "首页推荐-删除")
+	public int deleteRecommend(String ids) {
+		String rcIds[] = ids.split(",");
+		int result = 0;
+		try {
+			Map<String, Object> map = Maps.newHashMap();
+			map.put("rcIds", rcIds);
+			if(rcIds.length == recommendDao.delete(map)) {
+				result = BbsConstant.OK;
+			}
+		} catch (Exception e) {
+			logger.error("delete recommend fail", e);
+		}
+		return result;
 	}
 
 }

@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.collect.Maps;
 
@@ -69,6 +70,50 @@ public class HomeImageServiceImpl implements HomeImageService{
 			logger.error("add home image fail", e);
 		}
 		return BbsConstant.ERROR;
+	}
+
+	@Override
+	public HomeImage getHomeImage(int id) {
+		return homeImageDao.get(id);
+	}
+
+	@Override
+	@SysLog(module = "首页管理", methods = "轮播图链-编辑")
+	public int updateImage(int id, String title, String link, String url, int sort, int status) {
+		try {
+			HomeImage homeImage = new HomeImage();
+			homeImage.setId(id);
+			homeImage.setHomeTitle(title);
+			homeImage.setHomeLink(link);
+			homeImage.setHomeImgLink(url);
+			homeImage.setHomeSort(sort);
+			homeImage.setHomeStatus(status);
+			homeImage.setHomeCreateTime(DateUtils.dt14LongFormat(new Date()));
+			if(homeImageDao.update(homeImage) == BbsConstant.OK) {
+				return BbsConstant.OK;
+			}
+		} catch (Exception e) {
+			logger.error("update home image fail", e);
+		}
+		return BbsConstant.ERROR;
+	}
+
+	@Override
+	@Transactional
+	@SysLog(module = "首页管理", methods = "轮播图链-删除")
+	public int deleteImage(String ids) {
+		String imgIds[] = ids.split(",");
+		int result = 0;
+		try {
+			Map<String, Object> map = Maps.newHashMap();
+			map.put("imgIds", imgIds);
+			if(imgIds.length == homeImageDao.delete(map)) {
+				result = BbsConstant.OK;
+			}
+		} catch (Exception e) {
+			logger.error("delete home image fail", e);
+		}
+		return result;
 	}
 
 }

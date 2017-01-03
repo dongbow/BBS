@@ -17,4 +17,6 @@ public interface RecommendDao {
 
 	public int update(Recommend recommend);
 
+	public int delete(Map<String, Object> map);
+
 }

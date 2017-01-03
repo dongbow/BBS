@@ -12,6 +12,7 @@ import ltang.redis.service.RedisObjectMapService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -84,6 +85,52 @@ public class QuickNavigationServiceImpl implements QuickNavigationService {
 		return BbsConstant.ERROR;
 	}
 
+	@Override
+	public QuickNavigation getQuickNavigation(int id) {
+		return quickNavigationDao.get(id);
+	}
+	
+	@Override
+	@SysLog(module = "首页管理", methods = "快速导航-修改")
+	public int updateQuick(int id, String name, String link, String color, int sort, int status) {
+		try {
+			QuickNavigation navigation = new QuickNavigation();
+			navigation.setId(id);
+			navigation.setQuickName(name);
+			navigation.setQuickLink(link);
+			navigation.setQuickColor(color);
+			navigation.setQuickSort(sort);
+			navigation.setQuickStatus(status);
+			navigation.setQuickCreateTime(DateUtils.dt14LongFormat(new Date()));
+			if(quickNavigationDao.update(navigation) == BbsConstant.OK) {
+				refreshQuickNav();
+				return BbsConstant.OK;
+			}
+		} catch (Exception e) {
+			logger.error("update home quick nav fail", e);
+		}
+		return BbsConstant.ERROR;
+	}
+	
+	@Override
+	@Transactional
+	@SysLog(module = "首页管理", methods = "快速导航-删除")
+	public int deleteQuick(String ids) {
+		String qIds[] = ids.split(",");
+		int result = 0;
+		try {
+			Map<String, Object> map = Maps.newHashMap();
+			map.put("qIds", qIds);
+			if(qIds.length == quickNavigationDao.delete(map)) {
+				refreshQuickNav();
+				result = BbsConstant.OK;
+			}
+		} catch (Exception e) {
+			logger.error("delete quick nav fail", e);
+		}
+		return result;
+	}
+	
 	public void refreshQuickNav() {
 		List<QuickNavigation> quickNavigations = quickNavigationDao.getAllQuickNavigations();
 		JSONArray array = JSONArray.parseArray(JSON.toJSONString(quickNavigations));
@@ -91,4 +138,5 @@ public class QuickNavigationServiceImpl implements QuickNavigationService {
 		object.put("quickNavigations", array.toJSONString());
 		redisObjectMapService.save(RedisKeyUtils.getQuickNavigations(), object, JSONObject.class);
 	}
+
 }

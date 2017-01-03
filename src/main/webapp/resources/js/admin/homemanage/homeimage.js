@@ -41,10 +41,47 @@ function dataAddSave() {
 	}
 }
 
+function dataUpdateSave() {
+	var title = $('#title').val();
+	var link = $('#link').val();
+	var url = $('#img-url').val();
+	var sort = $('#sort').val();
+	var status = $('#status').val();
+	if(title && link && url && sort && status) {
+		$.post($('.data-update').attr('href'), {
+			"id": $('#data-call-id').val(), 
+			"title": title,
+			"link": link,
+			"url": url,
+			"sort": sort,
+			"status": status
+		}, function(result) {
+			if(result.rc.rc == 9001){
+				loginDialog(result);
+				close();
+			} else if(result.rc.rc == 9999) {
+				authDialog(result);
+				close();
+			} else if(result.rc == 1) {
+				close();
+				refreshLocation(result.msg);
+			} else {
+				failTip(result.msg);
+			}
+		});
+	} else {
+		notBlank();
+	}
+}
+
 function uploadImage() {
 	$('#upload-form').ajaxSubmit({
 		type: "POST",
         url: $('#upload-form').attr('action'),
+        beforeSend: function() {
+        	$('.image-view').show();
+        	$('.loading').show();
+        }, 
         success: function (result) {
         	if(result.rc != undefined && result.rc.rc == 9001){
     			loginDialog(result);
@@ -52,8 +89,8 @@ function uploadImage() {
     			authDialog(result);
     		} else {
     			url = result.split('?')[0];
+    			$('.loading').hide();
 	        	$('.image-view img').attr('src', url);
-	        	$('.image-view').show();
 	        	$('#img-url').attr('value', url);
     		}
         }

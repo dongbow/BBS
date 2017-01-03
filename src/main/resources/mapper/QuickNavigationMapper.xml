@@ -17,4 +17,21 @@
 		values (#{quickName}, #{quickLink}, #{quickColor}, #{quickSort}, #{quickStatus}, #{quickCreateTime})
 	</insert>
 	
+	<select id="get" resultType="QuickNavigation">
+		select * from bbs_quick_navigation where id = #{id}
+	</select>
+	
+	<update id="update" parameterType="QuickNavigation">
+		update bbs_quick_navigation set quick_name = #{quickName}, quick_link = #{quickLink}, 
+		quick_color = #{quickColor}, quick_sort = #{quickSort}, quick_status = #{quickStatus} 
+		where id = #{id}
+	</update>
+	
+	<update id="delete" parameterType="map">
+		update bbs_quick_navigation set quick_status = 1 where id in 
+		<foreach collection="qIds" index="index" item="qId" open="(" separator="," close=")">  
+           	#{qId}   
+   		</foreach>
+	</update>
+	
 </mapper>

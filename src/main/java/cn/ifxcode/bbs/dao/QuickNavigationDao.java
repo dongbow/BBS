@@ -12,5 +12,11 @@ public interface QuickNavigationDao {
 	public List<QuickNavigation> getAllQuickNavigationsPage(Map<String, Object> map);
 
 	public int insert(QuickNavigation navigation);
+
+	public QuickNavigation get(int id);
+
+	public int update(QuickNavigation navigation);
+
+	public int delete(Map<String, Object> map);
 	
 }

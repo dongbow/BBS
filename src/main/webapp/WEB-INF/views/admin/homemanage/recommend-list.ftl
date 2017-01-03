@@ -47,7 +47,7 @@
 	                	<div class="col-md-4 form-group">
 	            			<a class="btn btn-success btn-sm" type="button"><i class="fa fa-search"></i> 查找 </a>
 	            			<a class="btn btn-info btn-sm data-add" type="button" href="${path}/system/admin/home/recommend/add"><i class="fa fa-plus"></i> 添加 </a>
-	            			<a class="btn btn-danger btn-sm" type="button"><i class="fa fa-trash-o"></i> 删除 </a>
+	            			<a class="btn btn-danger btn-sm data-delete" type="button" href="${path}/system/admin/home/recommend/delete"><i class="fa fa-trash-o"></i> 删除 </a>
 	            		</div>
                 	</div>
                 </form>
@@ -73,7 +73,11 @@
 	                        	<#if recommends??>
 	                        		<#list recommends as rc>
 	                        			<tr>
-	                        				<th><input type="checkbox" data-id="${rc.rcId}"></th>
+	                        				<th>
+	                        					<#if rc.rcStatus == 0>
+	                        						<input type="checkbox" data-id="${rc.rcId}" class="data-check-id">
+	                        					</#if>
+	                        				</th>
 				                            <td data-title="ID">${rc.rcId}</td>
 				                            <td class="numeric" data-title="导航名">
 				                            	<a href="${rc.rcHref}" target="_blank" style="color:#428bca">${rc.rcName}</a>

@@ -23,7 +23,7 @@
         		<form action="" method="post">
 	                <div class="panel-body">
             			<a class="btn btn-info btn-sm data-add" type="button" href="${path}/system/admin/home/quick/add"><i class="fa fa-plus"></i> 添加 </a>
-		            	<a class="btn btn-danger btn-sm" type="button"><i class="fa fa-trash-o"></i> 删除 </a>
+		            	<a class="btn btn-danger btn-sm data-delete" type="button" href="${path}/system/admin/home/quick/delete"><i class="fa fa-trash-o"></i> 删除 </a>
                 	</div>
                 </form>
             </div>
@@ -48,7 +48,11 @@
 		                        <#if quickNavigations??>
 		                        	<#list quickNavigations as quick>
 		                        		<tr>
-				                        	<th><input type="checkbox" data-id="${quick.id}"></th>
+				                        	<th>
+				                        		<#if quick.quickStatus == 0>
+				                        			<input type="checkbox" data-id="${quick.id}" class="data-check-id">
+				                        		</#if>
+				                        	</th>
 				                            <td data-title="ID">${quick.id}</td>
 				                            <td data-title="名字">${quick.quickName}</td>
 				                            <td class="numeric" data-title="链接">${quick.quickLink}</td>
@@ -59,7 +63,7 @@
 				                            </td>
 				                            <td class="numeric" data-title="创建时间">${quick.quickCreateTime}</td>
 				                            <th class="numeric" data-title="操作">
-				                            	<a class="btn btn-default btn-xs" type="button"><i class="fa fa-edit"></i> 修改 </a>
+				                            	<a class="btn btn-default btn-xs data-update" type="button" href="${path}/system/admin/home/quick/update" data-id="${quick.id}"><i class="fa fa-edit"></i> 修改 </a>
 				                            </th>
 				                        </tr>
 		                        	</#list>

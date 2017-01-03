@@ -41,5 +41,12 @@
 			location = #{location}, rc_sort = #{rcSort}, rc_status = #{rcStatus} 
 		where rc_id = #{rcId}
 	</update>
+	
+	<update id="delete" parameterType="map">
+		update bbs_recommend set rc_status = 1 where rc_id in 
+		<foreach collection="rcIds" index="index" item="rcId" open="(" separator="," close=")">  
+           	#{rcId}   
+   		</foreach>
+	</update>
 
 </mapper>
