@@ -80,7 +80,7 @@
 			                            	<#else>
 			                            		<a class="btn btn-default btn-xs" type="button"><i class="fa fa-unlock-alt"></i> 启动</a>
 			                            	</#if>
-			                            	<a class="btn btn-default btn-xs quartz-now" type="button" href="${path}/system/admin/quartz/runnow" data-id="${job.jobId}"><i class="fa fa-edit"></i> 立即执行 </a>
+			                            	<a class="btn btn-default btn-xs quartz-now" type="button" href="${path}/system/admin/quartz/runnow" data-id="${job.jobId}"><i class="fa fa-play"></i> 立即执行 </a>
 			                            </th>
 			                        </tr>
 	                        	</#list>

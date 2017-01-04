@@ -16,9 +16,6 @@
 <!--common scripts for all pages-->
 <script src="${path}/resources/static/admin/js/scripts.js"></script>
 
-<!--Dashboard Charts-->
-<script src="${path}/resources/static/admin/js/dashboard-chart-init.js"></script>
-
 <!--dynamic table-->
 <script src="${path}/resources/static/admin/js/advanced-datatable/js/jquery.dataTables.js"></script>
 <script src="${path}/resources/static/admin/js/data-tables/DT_bootstrap.js"></script>
@@ -32,6 +29,7 @@
 <script type="text/javascript" src="${path}/resources/static/admin/js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 <script type="text/javascript" src="${path}/resources/static/admin/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
 <script type="text/javascript" src="${path}/resources/static/admin/js/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+<script type="text/javascript" src="${path}/resources/static/admin/js/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
 
 <!-- boorstarp-select -->
 <script src="${path}/resources/static/admin/js/bootstrap.min.js"></script>

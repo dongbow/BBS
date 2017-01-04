@@ -70,6 +70,7 @@
 				                            <td class="numeric" data-title="备份时间">${back.backTime}</td>
 				                            <td class="numeric" data-title="操作">
 				                            	<a class="btn btn-link btn-xs back-down" type="button" data-id="${back.id}" href="${path}/system/admin/backup/download">下载</a>
+				                            	<a class="btn btn-link btn-xs back-restore" type="button" data-id="${back.id}" href="${path}/system/admin/backup/restore">恢复</a>
 				                            </td>
 				                        </tr>
 				                        <#assign bid = bid + 1/>
