@@ -238,10 +238,11 @@ function dialog_confirm_time(msg, funOk) {
 		'width': '180px'
 	});
 	$('.tipsure').click(function() {
+		var time = $('#time').val();
 		if(typeof funOk == 'function') {
 			$('#checktip').remove();
 			$('#bbs-dialog').hide();
-			funOk();
+			funOk(time);
 			return true;
 		}
 	});
