@@ -17,7 +17,6 @@
 <link rel="stylesheet" type="text/css" href="${path}/resources/static/admin/js/bootstrap-datepicker/css/datepicker-custom.css" />
 <link rel="stylesheet" type="text/css" href="${path}/resources/static/admin/js/bootstrap-timepicker/css/timepicker.css" />
 <link rel="stylesheet" type="text/css" href="${path}/resources/static/admin/js/bootstrap-colorpicker/css/colorpicker.css" />
-<link rel="stylesheet" type="text/css" href="${path}/resources/static/admin/js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
 <link rel="stylesheet" type="text/css" href="${path}/resources/static/admin/js/bootstrap-datetimepicker/css/datetimepicker-custom.css" />
   
 <link rel="stylesheet" href="${path}/resources/static/dist/css/bootstrap-select.css">

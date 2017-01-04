@@ -39,11 +39,11 @@ public class BackUpController extends BaseController {
 	}
 	
 	@RequestMapping("/backup/search")
-	public String toBackUpSearch(String startTime, String endTime, 
+	public String toBackUpSearch(String from, String to, 
 			@RequestParam(value="page", required = false, defaultValue = "1")int p, 
 			HttpServletRequest request, Model model) {
 		Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
-		List<Backup> backs = backupService.searchBackups(page, startTime, endTime);
+		List<Backup> backs = backupService.searchBackups(page, from, to);
 		model.addAttribute("backs", backs);
 		model.addAttribute("page", page);
 		ParamsBuildUtils.createModel(model, request);

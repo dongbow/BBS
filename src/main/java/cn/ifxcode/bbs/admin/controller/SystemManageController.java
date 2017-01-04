@@ -71,10 +71,10 @@ public class SystemManageController extends BaseController{
 			@PathVariable("user")String user, 
 			@RequestParam(value="page", required = false, defaultValue = "1")int p,
 			long userId, String username, String nickname, int sex, int role, 
-			int status, String startTime, String endTime,
+			int status, String from, String to,
 			HttpServletRequest request, Model model) {
 		Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
-		model.addAttribute("users", userService.getAllUser(page, userId, username, nickname, sex, role, status, startTime, endTime, "admin".equals(user) ? 1 : 0));
+		model.addAttribute("users", userService.getAllUser(page, userId, username, nickname, sex, role, status, from, to, "admin".equals(user) ? 1 : 0));
 		model.addAttribute("page", page);
 		if("user".equals(user)) {
 			List<Role> roles = roleService.getAllRoles();

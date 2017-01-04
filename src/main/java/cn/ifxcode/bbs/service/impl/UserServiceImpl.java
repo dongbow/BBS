@@ -198,6 +198,7 @@ public class UserServiceImpl implements UserService {
 					user.getUserInfo().setUserCity(area.getName());
 				}
 			}
+			user.getUserAccess().setUserCreateTime(DateUtils.dt14LongFormat(DateUtils.dt14FromStr(user.getUserAccess().getUserCreateTime())));
 			list.add(user);
 		}
 		return list;

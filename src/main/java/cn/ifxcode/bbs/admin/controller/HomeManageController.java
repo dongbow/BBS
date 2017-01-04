@@ -197,11 +197,11 @@ public class HomeManageController extends BaseController {
 	}
 	
 	@RequestMapping("/recommend/search")
-	public String toRecommendSearch(String startTime, String endTime, int status, int location, 
+	public String toRecommendSearch(String from, String to, int status, int location, 
 			@RequestParam(value="page", required = false, defaultValue = "1")int p, 
 			HttpServletRequest request, Model model) {
 		Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
-		List<Recommend> recommends = recommendService.getAllRecommends(page, startTime, endTime, status, location);
+		List<Recommend> recommends = recommendService.getAllRecommends(page, from, to, status, location);
 		model.addAttribute("recommends", recommends);
 		model.addAttribute("page", page);
 		ParamsBuildUtils.createModel(model, request);
@@ -279,11 +279,11 @@ public class HomeManageController extends BaseController {
 	}
 	
 	@RequestMapping("/topic/search")
-	public String toTopicSearch(String startTime, String endTime, long tid, long uid, 
+	public String toTopicSearch(String from, String to, long tid, long uid, 
 			@RequestParam(value="page", required = false, defaultValue = "1")int p, 
 			HttpServletRequest request, Model model) {
 		Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
-		model.addAttribute("topics", topicService.getHomeTopic(page, startTime, endTime, tid, uid));
+		model.addAttribute("topics", topicService.getHomeTopic(page, from, to, tid, uid));
 		model.addAttribute("page", page);
 		ParamsBuildUtils.createModel(model, request);
 		return "admin/homemanage/topic-list";

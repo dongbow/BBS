@@ -20,32 +20,32 @@
         <!--body wrapper start-->
         <div class="wrapper">
         	<div class="panel panel-default">
-        		<form action="" method="post">
+        		<form action="" method="get" id="dataForm">
 	                <div class="panel-body">
 	                    <div class="col-md-4 form-group">
 	                		<div class="input-group input-large custom-date-range" data-date-format="yyyy-mm-dd">
-	                            <input id="starttime" class="form-control dpd1" name="from" type="text" placeholder="开始时间">
+	                            <input id="starttime" class="form-control dpd1" name="from" type="text" placeholder="开始时间" value="${from!}">
 	                            <span class="input-group-addon">-</span>
-	                            <input id="endtime" class="form-control dpd2" name="to" type="text"  placeholder="结束时间">
+	                            <input id="endtime" class="form-control dpd2" name="to" type="text"  placeholder="结束时间" value="${to!}">
 	                        </div>
 	                	</div>
 			            <div class="col-md-2 form-group">
-		                    <select id="status" class="selectpicker show-tick form-control">
+		                    <select id="status" name="status" class="selectpicker show-tick form-control">
 		                      	<option value="-1">状态</option>
-						        <option value="0">正常</option>
-						        <option value="1">已删除</option>
+						        <option <#if status??><#if status?number == 0>selected</#if></#if> value="0">正常</option>
+						        <option <#if status??><#if status?number == 1>selected</#if></#if> value="1">已删除</option>
 					        </select>
 			            </div>
 			            <div class="col-md-2 form-group">
-		                    <select id="location" class="selectpicker show-tick form-control">
+		                    <select id="location" name="location" class="selectpicker show-tick form-control">
 		                      	<option value="0">选择位置</option>
-						        <option value="1">文章推荐</option>
-						        <option value="2">社区动态</option>
+						        <option <#if location??><#if location?number == 1>selected</#if></#if> value="1">文章推荐</option>
+						        <option <#if location??><#if location?number == 2>selected</#if></#if> value="2">社区动态</option>
 					        </select>
 			            </div>
                 		
 	                	<div class="col-md-4 form-group">
-	            			<a class="btn btn-success btn-sm" type="button"><i class="fa fa-search"></i> 查找 </a>
+	            			<a class="btn btn-success btn-sm" id="data-search" type="button" href="${path}/system/admin/home/recommend/search"><i class="fa fa-search"></i> 查找 </a>
 	            			<a class="btn btn-info btn-sm data-add" type="button" href="${path}/system/admin/home/recommend/add"><i class="fa fa-plus"></i> 添加 </a>
 	            			<a class="btn btn-danger btn-sm data-delete" type="button" href="${path}/system/admin/home/recommend/delete"><i class="fa fa-trash-o"></i> 删除 </a>
 	            		</div>

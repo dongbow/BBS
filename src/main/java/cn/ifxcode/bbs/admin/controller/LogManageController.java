@@ -50,10 +50,10 @@ public class LogManageController extends BaseController{
 	@RequestMapping("/login/search")
 	public String loginLogSearch(
 			@RequestParam(value="page", required = false, defaultValue = "1")int pageNo, 
-			String startTime,String endTime, String loginName, int status,
+			String from,String to, String loginName, int status,
 			HttpServletRequest request, Model model) {
 		Page page = Page.newBuilder(pageNo, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
-		model.addAttribute("logs", loginLogService.getAllLoginlog(page, startTime, endTime, loginName, status));
+		model.addAttribute("logs", loginLogService.getAllLoginlog(page, from, to, loginName, status));
 		model.addAttribute("page", page);
 		ParamsBuildUtils.createModel(model, request);
 		return "admin/logmanage/loginlog-list";
@@ -71,12 +71,12 @@ public class LogManageController extends BaseController{
 	}
 	
 	@RequestMapping("/operation/search")
-	public String toOperationLogSearch(String startTime, String endTime,
+	public String toOperationLogSearch(String from, String to,
 			String module, String name, int status, 
 			@RequestParam(value="page", required = false, defaultValue = "1")int p,
 			HttpServletRequest request, Model model) {
 		Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
-		model.addAttribute("logs", operationLogService.getAllOperationLog(page, startTime, endTime, module, name, status));
+		model.addAttribute("logs", operationLogService.getAllOperationLog(page, from, to, module, name, status));
 		model.addAttribute("page", page);
 		model.addAttribute("modules", resourcesService.getAllModules());
 		ParamsBuildUtils.createModel(model, request);
@@ -93,11 +93,11 @@ public class LogManageController extends BaseController{
 	}
 	
 	@RequestMapping("/sign/detail")
-	public String toSignDetail(long uid, String starttime, String endtime, 
+	public String toSignDetail(long uid, String from, String to, 
 			@RequestParam(value="page", required = false, defaultValue = "1")int p,
 			HttpServletRequest request, Model model) {
 		Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
-		model.addAttribute("signs", userService.getUserSignsByUid(page, starttime, endtime, uid));
+		model.addAttribute("signs", userService.getUserSignsByUid(page, from, to, uid));
 		model.addAttribute("page", page);
 		return "admin/logmanage/sign-detail";
 	}
@@ -112,11 +112,11 @@ public class LogManageController extends BaseController{
 	}
 	
 	@RequestMapping("/gold/detail")
-	public String toGoldDetail(long uid, String starttime, String endtime, 
+	public String toGoldDetail(long uid, String from, String to, 
 			@RequestParam(value="page", required = false, defaultValue = "1")int p,
 			HttpServletRequest request, Model model) {
 		Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
-		model.addAttribute("golds", goldExperienceService.getUserGoldsByUid(page, starttime, endtime, uid));
+		model.addAttribute("golds", goldExperienceService.getUserGoldsByUid(page, from, to, uid));
 		model.addAttribute("page", page);
 		return "admin/logmanage/gold-detail";
 	}
@@ -131,11 +131,11 @@ public class LogManageController extends BaseController{
 	}
 	
 	@RequestMapping("/experience/detail")
-	public String toExpDetail(long uid, String starttime, String endtime, 
+	public String toExpDetail(long uid, String from, String to, 
 			@RequestParam(value="page", required = false, defaultValue = "1")int p,
 			HttpServletRequest request, Model model) {
 		Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
-		model.addAttribute("exps", goldExperienceService.getUserExpsByUid(page, starttime, endtime, uid));
+		model.addAttribute("exps", goldExperienceService.getUserExpsByUid(page, from, to, uid));
 		model.addAttribute("page", page);
 		return "admin/logmanage/exp-detail";
 	}

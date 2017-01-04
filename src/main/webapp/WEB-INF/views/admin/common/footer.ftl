@@ -22,14 +22,15 @@
 
 <!--dynamic table initialization -->
 <script src="${path}/resources/static/admin/js/dynamic_table_init.js"></script>
-<!--pickers initialization-->
-<script src="${path}/resources/static/admin/js/pickers-init.js"></script>
 
 <!--pickers plugins-->
 <script type="text/javascript" src="${path}/resources/static/admin/js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-<script type="text/javascript" src="${path}/resources/static/admin/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="${path}/resources/static/admin/js/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 <script type="text/javascript" src="${path}/resources/static/admin/js/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
 <script type="text/javascript" src="${path}/resources/static/admin/js/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+
+<!--pickers initialization-->
+<script src="${path}/resources/static/admin/js/pickers-init.js"></script>
 
 <!-- boorstarp-select -->
 <script src="${path}/resources/static/admin/js/bootstrap.min.js"></script>

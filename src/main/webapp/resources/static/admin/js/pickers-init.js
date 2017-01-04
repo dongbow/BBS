@@ -6,7 +6,13 @@ if (top.location != location) {
 $(function(){
     window.prettyPrint && prettyPrint();
     $('.default-date-picker').datepicker({
-        format: 'mm-dd-yyyy'
+        format: 'yyyy-mm-dd'
+    });
+    $('.dpd1').datepicker({
+        format: 'yyyy-mm-dd'
+    });
+    $('.dpd2').datepicker({
+        format: 'yyyy-mm-dd'
     });
     $('.dpYears').datepicker();
     $('.dpMonths').datepicker();
@@ -71,11 +77,11 @@ $(function(){
 $(".form_datetime").datetimepicker({format: 'yyyy-mm-dd hh:ii'});
 
 $(".form_datetime-component").datetimepicker({
-    format: "dd MM yyyy - hh:ii"
+    format: "yyyy-mm-dd hh:ii"
 });
 
 $(".form_datetime-adv").datetimepicker({
-    format: "dd MM yyyy - hh:ii",
+    format: "yyyy-mm-dd hh:ii",
     autoclose: true,
     todayBtn: true,
     startDate: "2013-02-14 10:00",
@@ -83,7 +89,7 @@ $(".form_datetime-adv").datetimepicker({
 });
 
 $(".form_datetime-meridian").datetimepicker({
-    format: "dd MM yyyy - HH:ii P",
+    format: "yyyy-mm-dd HH:ii P",
     showMeridian: true,
     autoclose: true,
     todayBtn: true
