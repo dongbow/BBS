@@ -29,18 +29,19 @@
         <!--body wrapper start-->
         <div class="wrapper">
         	<div class="panel panel-default">
-        		<form action="" method="post">
+        		<form action="" method="get" id="dataForm">
+        			<input type="hidden" name="uid" value="${uid!}">
 	                <div class="panel-body">
 			            <div class="col-md-4 form-group">
 	                		<div class="input-group input-large custom-date-range" data-date-format="yyyy-mm-dd">
-	                            <input id="starttime" class="form-control dpd1" name="from" type="text" placeholder="开始时间">
+	                            <input id="starttime" class="form-control dpd1" name="from" value="${from!}" type="text" placeholder="开始时间">
 	                            <span class="input-group-addon">-</span>
-	                            <input id="endtime" class="form-control dpd2" name="to" type="text"  placeholder="结束时间">
+	                            <input id="endtime" class="form-control dpd2" name="to" value="${to!}" type="text"  placeholder="结束时间">
 	                        </div>
 	                	</div>
                 		
 	                	<div class="col-md-4 form-group">
-	            			<a class="btn btn-success btn-sm" type="button"><i class="fa fa-search"></i> 查找 </a>
+	            			<a class="btn btn-success btn-sm" id="data-search" type="button" href="${path}/system/admin/log/gold/detail/search"><i class="fa fa-search"></i> 查找 </a>
 			            	<div class="btn-group">
 								<button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
 								 <i class="fa fa-share-square-o"></i> 导出 <span class="caret"></span>

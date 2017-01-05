@@ -20,9 +20,30 @@
 			and nav_name like #{name} 
 		</if>
 		<if test="status != null">
-			and nav_status = status 
+			and nav_status = #{status} 
 		</if>
 		order by nav_create_time desc
 	</select>
+	
+	<select id="get" resultType="Navigation">
+		select * from bbs_navigation where nav_id = #{id}
+	</select>
+	
+	<insert id="insert" parameterType="Navigation">
+		insert into bbs_navigation (nav_name, nav_desc, nav_sort, nav_status, nav_create_time) 
+		values (#{navName}, #{navDesc}, #{navSort}, #{navStatus}, #{navCreateTime})
+	</insert>
+	
+	<update id="update" parameterType="Navigation">
+		update bbs_navigation set nav_name = #{navName}, nav_desc = #{navDesc}, nav_sort = #{navSort}, 
+		nav_status = #{navStatus} where nav_id = #{navId} 
+	</update>
+	
+	<update id="delete" parameterType="map">
+		update bbs_navigation set nav_status = 1 where nav_id in 
+		<foreach collection="navIds" index="index" item="navId" open="(" separator="," close=")">  
+           	#{navId} 
+   		</foreach>
+	</update>
 	
 </mapper>

@@ -3,6 +3,7 @@ package cn.ifxcode.bbs.admin.controller;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -83,60 +84,84 @@ public class LogManageController extends BaseController{
 		return "admin/logmanage/operationlog-list";
 	}
 	
-	@RequestMapping("/sign")
+	@RequestMapping(value = {"/sign", "/sign/search"})
 	public String toSign(@RequestParam(value="page", required = false, defaultValue = "1")int p,
+			@RequestParam(required = false, defaultValue = "0")long uid, 
 			HttpServletRequest request, Model model) {
 		Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
-		model.addAttribute("signs", userService.getAllUserSigns(page, 0));
+		model.addAttribute("signs", userService.getAllUserSigns(page, uid));
 		model.addAttribute("page", page);
+		if(uid != 0) {
+			model.addAttribute("uid", uid);
+		}
 		return "admin/logmanage/sign-list";
 	}
 	
-	@RequestMapping("/sign/detail")
+	@RequestMapping(value = {"/sign/detail", "/sign/detail/search"})
 	public String toSignDetail(long uid, String from, String to, 
 			@RequestParam(value="page", required = false, defaultValue = "1")int p,
 			HttpServletRequest request, Model model) {
 		Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
 		model.addAttribute("signs", userService.getUserSignsByUid(page, from, to, uid));
 		model.addAttribute("page", page);
+		model.addAttribute("uid", uid);
+		if(StringUtils.isNotBlank(to) || StringUtils.isNotBlank(from)) {
+			ParamsBuildUtils.createModel(model, request);
+		}
 		return "admin/logmanage/sign-detail";
 	}
 	
-	@RequestMapping("/gold")
+	@RequestMapping(value = {"/gold", "/gold/search"})
 	public String toGold(@RequestParam(value="page", required = false, defaultValue = "1")int p,
+			@RequestParam(required = false, defaultValue = "0")long uid,
 			HttpServletRequest request, Model model) {
 		Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
-		model.addAttribute("golds", goldExperienceService.getAllUserGolds(page, 0));
+		model.addAttribute("golds", goldExperienceService.getAllUserGolds(page, uid));
 		model.addAttribute("page", page);
+		if(uid != 0) {
+			model.addAttribute("uid", uid);
+		}
 		return "admin/logmanage/gold-list";
 	}
 	
-	@RequestMapping("/gold/detail")
+	@RequestMapping(value = {"/gold/detail", "/gold/detail/search"})
 	public String toGoldDetail(long uid, String from, String to, 
 			@RequestParam(value="page", required = false, defaultValue = "1")int p,
 			HttpServletRequest request, Model model) {
 		Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
 		model.addAttribute("golds", goldExperienceService.getUserGoldsByUid(page, from, to, uid));
 		model.addAttribute("page", page);
+		model.addAttribute("uid", uid);
+		if(StringUtils.isNotBlank(to) || StringUtils.isNotBlank(from)) {
+			ParamsBuildUtils.createModel(model, request);
+		}
 		return "admin/logmanage/gold-detail";
 	}
 	
-	@RequestMapping("/experience")
+	@RequestMapping(value = {"/experience", "/experience/search"})
 	public String toExp(@RequestParam(value="page", required = false, defaultValue = "1")int p,
+			@RequestParam(required = false, defaultValue = "0")long uid,
 			HttpServletRequest request, Model model) {
 		Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
-		model.addAttribute("exps", goldExperienceService.getAllUserExps(page, 0));
+		model.addAttribute("exps", goldExperienceService.getAllUserExps(page, uid));
 		model.addAttribute("page", page);
+		if(uid != 0) {
+			model.addAttribute("uid", uid);
+		}
 		return "admin/logmanage/exp-list";
 	}
 	
-	@RequestMapping("/experience/detail")
+	@RequestMapping(value = {"/experience/detail", "/experience/detail/search"})
 	public String toExpDetail(long uid, String from, String to, 
 			@RequestParam(value="page", required = false, defaultValue = "1")int p,
 			HttpServletRequest request, Model model) {
 		Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
 		model.addAttribute("exps", goldExperienceService.getUserExpsByUid(page, from, to, uid));
 		model.addAttribute("page", page);
+		model.addAttribute("uid", uid);
+		if(StringUtils.isNotBlank(to) || StringUtils.isNotBlank(from)) {
+			ParamsBuildUtils.createModel(model, request);
+		}
 		return "admin/logmanage/exp-detail";
 	}
 	

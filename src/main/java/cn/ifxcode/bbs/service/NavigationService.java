@@ -18,5 +18,13 @@ public interface NavigationService {
 	public List<Navigation> getAllNavigation(Page page);
 	
 	public List<Navigation> getAllNavigation(Page page, String startTime, String endTime, String navName, int status);
+
+	public int addNavigation(String name, String desc, int sort, int status);
+
+	public int updateNavigation(int id, String name, String desc, int sort, int status);
+
+	public int deleteNavigation(String ids);
+
+	public Navigation getNavigationFromDB(int id);
 	
 }

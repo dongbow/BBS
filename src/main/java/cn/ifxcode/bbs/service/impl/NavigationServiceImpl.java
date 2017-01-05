@@ -1,6 +1,7 @@
 package cn.ifxcode.bbs.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -9,16 +10,22 @@ import javax.annotation.Resource;
 import ltang.redis.service.RedisObjectMapService;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;
 
 import cn.ifxcode.bbs.bean.Page;
+import cn.ifxcode.bbs.constant.BbsConstant;
 import cn.ifxcode.bbs.dao.NavigationDao;
 import cn.ifxcode.bbs.entity.Board;
 import cn.ifxcode.bbs.entity.Navigation;
+import cn.ifxcode.bbs.logger.SysLog;
 import cn.ifxcode.bbs.service.NavigationService;
 import cn.ifxcode.bbs.utils.DateUtils;
 import cn.ifxcode.bbs.utils.JsonUtils;
@@ -27,6 +34,8 @@ import cn.ifxcode.bbs.utils.RedisKeyUtils;
 @Service
 public class NavigationServiceImpl implements NavigationService{
 
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@Resource
 	private NavigationDao navigationDao;
 	
@@ -55,6 +64,11 @@ public class NavigationServiceImpl implements NavigationService{
 		return null;
 	}
 
+	@Override
+	public Navigation getNavigationFromDB(int id) {
+		return navigationDao.get(id);
+	}
+	
 	@Override
 	public List<Navigation> getBCMNavs(List<Integer> boardIds) {
 		List<Navigation> navs = new ArrayList<Navigation>();
@@ -113,6 +127,73 @@ public class NavigationServiceImpl implements NavigationService{
 		for (Navigation nav : navigations) {
 			nav.setNavCreateTime(DateUtils.dt14LongFormat(DateUtils.dt14FromStr(nav.getNavCreateTime())));
 		}
+	}
+
+	@Override
+	@SysLog(module = "导航版块", methods = "导航管理-添加")
+	public int addNavigation(String name, String desc, int sort, int status) {
+		try {
+			Navigation navigation = new Navigation();
+			navigation.setNavName(name);
+			navigation.setNavDesc(desc);
+			navigation.setNavSort(sort);
+			navigation.setNavStatus(status);
+			navigation.setNavCreateTime(DateUtils.dt14LongFormat(new Date()));
+			if(navigationDao.insert(navigation) == BbsConstant.OK) {
+				refresh();
+				return BbsConstant.OK;
+			}
+		} catch (Exception e) {
+			logger.error("add navigation fail", e);
+		}
+		return BbsConstant.ERROR;
+	}
+
+	@Override
+	@SysLog(module = "导航版块", methods = "导航管理-编辑")
+	public int updateNavigation(int id, String name, String desc, int sort, int status) {
+		try {
+			Navigation navigation = new Navigation();
+			navigation.setNavId(id);
+			navigation.setNavName(name);
+			navigation.setNavDesc(desc);
+			navigation.setNavSort(sort);
+			navigation.setNavStatus(status);
+			if(navigationDao.update(navigation) == BbsConstant.OK) {
+				refresh();
+				return BbsConstant.OK;
+			}
+		} catch (Exception e) {
+			logger.error("update navigation fail", e);
+		}
+		return BbsConstant.ERROR;
+	}
+
+	@Override
+	@Transactional
+	@SysLog(module = "导航版块", methods = "导航管理-删除")
+	public int deleteNavigation(String ids) {
+		String navIds[] = ids.split(",");
+		int result = 0;
+		try {
+			Map<String, Object> map = Maps.newHashMap();
+			map.put("navIds", navIds);
+			if(navIds.length == navigationDao.delete(map)) {
+				refresh();
+				result = BbsConstant.OK;
+			}
+		} catch (Exception e) {
+			logger.error("delete navigation fail", e);
+		}
+		return result;
+	}
+	
+	public void refresh() {
+		List<Navigation> navigations = navigationDao.getAllNavigations();
+		JSONArray array = JSONArray.parseArray(JSON.toJSONString(navigations));
+		JSONObject object = new JSONObject(true);
+		object.put("navigations", array.toJSONString());
+		redisObjectMapService.save(RedisKeyUtils.getNavigations(), object, JSONObject.class);
 	}
 
 }

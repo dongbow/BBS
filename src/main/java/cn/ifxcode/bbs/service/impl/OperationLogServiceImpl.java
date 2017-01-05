@@ -32,7 +32,7 @@ public class OperationLogServiceImpl implements OperationLogService {
 		if(StringUtils.isNotBlank(endTime)) {
 			map.put("endtime", endTime);
 		}
-		if("-1".equals(module)) {
+		if(!"-1".equals(module)) {
 			map.put("module", module);
 		}
 		if(StringUtils.isNotBlank(name)) {

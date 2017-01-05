@@ -20,14 +20,14 @@
         <!--body wrapper start-->
         <div class="wrapper">
         	<div class="panel panel-default">
-        		<form action="" method="post">
+        		<form action="" method="get" id="dataForm">
 	                <div class="panel-body">
 			            <div class="col-md-2 form-group">
-			            	<input id="uid" type="text" class="form-control" placeholder="用户ID">
+			            	<input id="uid" name="uid" value="${uid!}" type="text" class="form-control" placeholder="用户ID">
 			            </div>
                 		
 	                	<div class="col-md-4 form-group">
-	            			<a class="btn btn-success btn-sm" type="button"><i class="fa fa-search"></i> 查找 </a>
+	            			<a class="btn btn-success btn-sm" id="data-search" type="button" href="${path}/system/admin/log/gold/search"><i class="fa fa-search"></i> 查找 </a>
 			            	<div class="btn-group">
 								<button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
 								 <i class="fa fa-share-square-o"></i> 导出 <span class="caret"></span>

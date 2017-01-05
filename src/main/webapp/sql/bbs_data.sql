@@ -33,6 +33,19 @@ INSERT INTO `bbs_backup` VALUES ('1482160626080', 'F:\\backup\\bbs\\20161219\\14
 INSERT INTO `bbs_backup` VALUES ('1482326087052', 'F:\\backup\\bbs\\20161221\\1482326086318.sql', '1268', 'Smart_咚咚', '2016-12-21 21:14:47');
 INSERT INTO `bbs_backup` VALUES ('1482501008759', 'F:\\backup\\bbs\\20161223\\ztree.1482501008314.sql', '1268', 'Smart_咚咚', '2016-12-23 21:50:08');
 INSERT INTO `bbs_backup` VALUES ('1482655578977', 'F:\\backup\\bbs\\20161225\\1482655578505.sql', '1268', 'Smart_咚咚', '2016-12-25 16:46:18');
+INSERT INTO `bbs_backup` VALUES ('1482755284105', 'F:\\backup\\bbs\\20161226\\exec.1482755283697.sql', '1268', 'Smart_咚咚', '2016-12-26 20:28:04');
+INSERT INTO `bbs_backup` VALUES ('1482932890796', 'F:\\backup\\bbs\\20161228\\1482932881928.sql', '1268', 'Smart_咚咚', '2016-12-28 21:48:10');
+INSERT INTO `bbs_backup` VALUES ('1483017979181', 'F:\\backup\\bbs\\20161229\\quartz.1483017977517.sql', '1268', 'Smart_咚咚', '2016-12-29 21:26:19');
+INSERT INTO `bbs_backup` VALUES ('1483105681541', 'F:\\backup\\bbs\\20161230\\1483105680936.sql', '1268', 'Smart_咚咚', '2016-12-30 21:48:01');
+INSERT INTO `bbs_backup` VALUES ('1483108016877', 'F:\\backup\\bbs\\20161230\\chart.1483108016363.sql', '1268', 'Smart_咚咚', '2016-12-30 22:26:56');
+INSERT INTO `bbs_backup` VALUES ('1483268057212', 'F:\\backup\\bbs\\20170101\\1483268056260.sql', '1268', 'Smart_咚咚', '2017-01-01 18:54:17');
+INSERT INTO `bbs_backup` VALUES ('1483283361434', 'F:\\backup\\bbs\\20170101\\1483283360828.sql', '99999', 'system', '2017-01-01 23:09:21');
+INSERT INTO `bbs_backup` VALUES ('1483286400395', 'F:\\backup\\bbs\\20170102\\1483286400004.sql', '99999', 'system', '2017-01-02 00:00:00');
+INSERT INTO `bbs_backup` VALUES ('1483372801706', 'F:\\backup\\bbs\\20170103\\1483372800059.sql', '99999', 'system', '2017-01-03 00:00:01');
+INSERT INTO `bbs_backup` VALUES ('1483459205843', 'F:\\backup\\bbs\\20170104\\1483459200064.sql', '99999', 'system', '2017-01-04 00:00:05');
+INSERT INTO `bbs_backup` VALUES ('1483536324070', 'F:\\backup\\bbs\\20170104\\1483536322707.sql', '99999', 'system', '2017-01-04 21:25:24');
+INSERT INTO `bbs_backup` VALUES ('1483536367704', 'F:\\backup\\bbs\\20170104\\shenmegui.1483536366828.sql', '1268', 'Smart_咚咚', '2017-01-04 21:26:07');
+INSERT INTO `bbs_backup` VALUES ('1483545600600', 'F:\\backup\\bbs\\20170105\\1483545600040.sql', '99999', 'system', '2017-01-05 00:00:00');
 
 -- ----------------------------
 -- Table structure for bbs_board
@@ -133,22 +146,22 @@ CREATE TABLE `bbs_board_info` (
 -- ----------------------------
 -- Records of bbs_board_info
 -- ----------------------------
-INSERT INTO `bbs_board_info` VALUES ('191', '0', '0', '0', '0');
-INSERT INTO `bbs_board_info` VALUES ('192', '0', '0', '0', '0');
-INSERT INTO `bbs_board_info` VALUES ('193', '0', '0', '0', '0');
-INSERT INTO `bbs_board_info` VALUES ('194', '0', '0', '0', '0');
-INSERT INTO `bbs_board_info` VALUES ('195', '0', '0', '0', '0');
-INSERT INTO `bbs_board_info` VALUES ('196', '0', '0', '0', '0');
-INSERT INTO `bbs_board_info` VALUES ('197', '0', '0', '0', '0');
-INSERT INTO `bbs_board_info` VALUES ('198', '0', '0', '0', '0');
-INSERT INTO `bbs_board_info` VALUES ('199', '0', '0', '0', '0');
-INSERT INTO `bbs_board_info` VALUES ('200', '0', '0', '0', '0');
-INSERT INTO `bbs_board_info` VALUES ('201', '0', '0', '0', '0');
-INSERT INTO `bbs_board_info` VALUES ('202', '0', '0', '0', '0');
-INSERT INTO `bbs_board_info` VALUES ('203', '0', '0', '0', '0');
-INSERT INTO `bbs_board_info` VALUES ('204', '0', '0', '0', '0');
-INSERT INTO `bbs_board_info` VALUES ('205', '0', '0', '0', '0');
-INSERT INTO `bbs_board_info` VALUES ('206', '0', '0', '0', '0');
+INSERT INTO `bbs_board_info` VALUES ('191', '162', '0', '3', '0');
+INSERT INTO `bbs_board_info` VALUES ('192', '710', '1', '3', '0');
+INSERT INTO `bbs_board_info` VALUES ('193', '42', '0', '0', '0');
+INSERT INTO `bbs_board_info` VALUES ('194', '43', '0', '0', '0');
+INSERT INTO `bbs_board_info` VALUES ('195', '42', '0', '0', '0');
+INSERT INTO `bbs_board_info` VALUES ('196', '58', '0', '1', '0');
+INSERT INTO `bbs_board_info` VALUES ('197', '43', '0', '0', '0');
+INSERT INTO `bbs_board_info` VALUES ('198', '43', '0', '0', '0');
+INSERT INTO `bbs_board_info` VALUES ('199', '59', '1', '3', '0');
+INSERT INTO `bbs_board_info` VALUES ('200', '125', '1', '6', '0');
+INSERT INTO `bbs_board_info` VALUES ('201', '42', '0', '0', '0');
+INSERT INTO `bbs_board_info` VALUES ('202', '44', '0', '0', '0');
+INSERT INTO `bbs_board_info` VALUES ('203', '75', '1', '1', '0');
+INSERT INTO `bbs_board_info` VALUES ('204', '192', '1', '0', '1');
+INSERT INTO `bbs_board_info` VALUES ('205', '1340', '4', '20', '0');
+INSERT INTO `bbs_board_info` VALUES ('206', '702', '1', '6', '0');
 
 -- ----------------------------
 -- Table structure for bbs_board_manage
@@ -168,6 +181,37 @@ CREATE TABLE `bbs_board_manage` (
 -- ----------------------------
 INSERT INTO `bbs_board_manage` VALUES ('191', '1280', 'tonboyw', '0', '2016-10-21 22:33:57');
 INSERT INTO `bbs_board_manage` VALUES ('194', '1280', 'tonboyw', '0', '2016-10-21 22:34:20');
+
+-- ----------------------------
+-- Table structure for bbs_count
+-- ----------------------------
+DROP TABLE IF EXISTS `bbs_count`;
+CREATE TABLE `bbs_count` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增id',
+  `time` varchar(20) NOT NULL COMMENT '日期',
+  `topic_count` bigint(20) NOT NULL COMMENT '今日帖子数量',
+  `reply_count` bigint(20) NOT NULL COMMENT '今日回复数量',
+  `user_sign_count` bigint(20) NOT NULL COMMENT '今日签到数量',
+  `newuser_count` bigint(20) NOT NULL COMMENT '今日新用户数量',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COMMENT='数据统计表';
+
+-- ----------------------------
+-- Records of bbs_count
+-- ----------------------------
+INSERT INTO `bbs_count` VALUES ('2', '2016-12-23', '23', '26', '5', '2');
+INSERT INTO `bbs_count` VALUES ('3', '2016-12-24', '27', '34', '3', '1');
+INSERT INTO `bbs_count` VALUES ('4', '2016-12-25', '23', '34', '2', '5');
+INSERT INTO `bbs_count` VALUES ('5', '2016-12-26', '24', '23', '3', '1');
+INSERT INTO `bbs_count` VALUES ('6', '2016-12-27', '34', '34', '2', '7');
+INSERT INTO `bbs_count` VALUES ('7', '2016-12-28', '13', '45', '3', '1');
+INSERT INTO `bbs_count` VALUES ('17', '2016-12-29', '12', '28', '3', '1');
+INSERT INTO `bbs_count` VALUES ('18', '2016-12-30', '2', '9', '4', '0');
+INSERT INTO `bbs_count` VALUES ('19', '2016-12-31', '0', '3', '3', '0');
+INSERT INTO `bbs_count` VALUES ('20', '2017-01-01', '0', '0', '1', '0');
+INSERT INTO `bbs_count` VALUES ('21', '2017-01-02', '2', '3', '5', '0');
+INSERT INTO `bbs_count` VALUES ('22', '2017-01-03', '0', '0', '1', '0');
+INSERT INTO `bbs_count` VALUES ('23', '2017-01-04', '0', '0', '1', '0');
 
 -- ----------------------------
 -- Table structure for bbs_file
@@ -195,13 +239,17 @@ CREATE TABLE `bbs_file` (
 INSERT INTO `bbs_file` VALUES ('021bd441-8c8b-4f57-a9ba-bd2d50171121', '1 (6).jpg', 'http://ofrjra54d.bkt.clouddn.com/c86cc355ab2848c398a3f5e8f2fb668a1481721843268.jpg', '0', 'jpg', '28166', '0', '1268', 'Smart_咚咚', '2016-12-14 21:24:03', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('03e14a58-c5f2-493b-bd42-7f3e31951c21', '476368.jpg', 'http://ofrjra54d.bkt.clouddn.com/a331b4d06c63432f9be82cea85618b311481635324830.jpg', '0', 'jpg', '204675', '0', '1268', 'Smart_咚咚', '2016-12-13 21:22:05', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('0a2f41fd-74dc-406c-89fa-f3602eb197d2', '362640.png', 'http://ofrjra54d.bkt.clouddn.com/21752625bf564123984eaadc92c330e01481635324754.png', '0', 'png', '776367', '0', '1268', 'Smart_咚咚', '2016-12-13 21:22:06', '127.0.0.1');
+INSERT INTO `bbs_file` VALUES ('0ab42c4f-f71b-4d6f-bf06-57dbc7b846b1', '0.jpg', 'http://ofrjra54d.bkt.clouddn.com/27566099cd1f4d25b1e898c8ad9bb51d1483022083343.jpg', '0', 'jpg', '1587446', '0', '1279', 'tonboy', '2016-12-29 22:34:45', '127.0.0.1');
+INSERT INTO `bbs_file` VALUES ('0d9db0c4-4a63-478f-b6a0-a5a3d3bed57b', '0.jpg', 'http://ofrjra54d.bkt.clouddn.com/05a570efba7a466fa0001753cc0504af1483336743762.jpg', '0', 'jpg', '1587446', '0', '1268', 'Smart_咚咚', '2017-01-02 13:59:05', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('0e24e5ed-ec63-42b8-9b19-54ccbba5ca50', '4.jpg', 'http://ofrjra54d.bkt.clouddn.com/d3775d621eee44448936456d24a3fdef1481718940765.jpg', '0', 'jpg', '25691', '0', '1268', 'Smart_咚咚', '2016-12-14 20:35:40', '127.0.0.1');
+INSERT INTO `bbs_file` VALUES ('0fdf5c5f-5133-489d-9a1b-0d9da4616309', '362640.png', 'http://ofrjra54d.bkt.clouddn.com/4fca4ea1b7da4122b2d2a67a0662d05c1483367747250.png', '0', 'png', '776367', '0', '1268', 'Smart_咚咚', '2017-01-02 22:35:47', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('1026c5cc-977b-42d1-8140-42e9bec4d284', '343211.jpg', 'http://ofrjra54d.bkt.clouddn.com/892594e009934210b44a95d89354e19a1481720044052.jpg', '0', 'jpg', '182784', '0', '1268', 'Smart_咚咚', '2016-12-14 20:54:04', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('11b99120-ba05-4fb1-ab96-0db5372b72ad', '1 (10).jpg', 'http://ofrjra54d.bkt.clouddn.com/357198ebf2a54078afd12bf7ecf4d39f1481720957580.jpg', '0', 'jpg', '37056', '0', '1268', 'Smart_咚咚', '2016-12-14 21:09:17', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('1340a07d-39c3-4eee-a4a2-e6bcdc4aaa88', '343211.jpg', 'http://ofrjra54d.bkt.clouddn.com/892bd1c826a34d3f9ede11ef4d7ade8f1481717162501.jpg', '0', 'jpg', '182784', '0', '1268', 'Smart_咚咚', '2016-12-14 20:06:02', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('170a15eb-9b85-4020-a571-4452cfcbdb61', 'IMG_20140323_132312.jpg', 'http://ofrjra54d.bkt.clouddn.com/54199bc8b96f4126b923709bb032f0831482233597742.jpg', '0', 'jpg', '1044085', '0', '1268', 'Smart_咚咚', '2016-12-20 19:33:20', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('18d83a0b-d5c2-4af1-9ab6-df1bcd924017', '1 (8).jpg', 'http://ofrjra54d.bkt.clouddn.com/9a944198887249728e9df91f64241c591481718787411.jpg', '0', 'jpg', '34176', '0', '1268', 'Smart_咚咚', '2016-12-14 20:33:07', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('197f23a7-e4c0-4da2-94ae-a0b493c22faf', '1 (11).jpg', 'http://ofrjra54d.bkt.clouddn.com/f36a30cc638d4c7591a48d97aac57ceb1481721072848.jpg', '0', 'jpg', '29198', '0', '1268', 'Smart_咚咚', '2016-12-14 21:11:12', '127.0.0.1');
+INSERT INTO `bbs_file` VALUES ('1baac164-e17c-44c5-b3ef-522a6f307796', '0.jpg', 'http://ofrjra54d.bkt.clouddn.com/dc13f342d7eb4668b0e261ac1cf536711483367787371.jpg', '0', 'jpg', '1587446', '0', '1268', 'Smart_咚咚', '2017-01-02 22:36:28', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('1c4a907f-6597-4885-86f6-78ca31d95f0f', '1 (9).jpg', 'http://ofrjra54d.bkt.clouddn.com/83f97000b8b54af78ceba907ecaa71331481721871051.jpg', '0', 'jpg', '27491', '0', '1268', 'Smart_咚咚', '2016-12-14 21:24:31', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('21832329-0e2c-43d6-a4a8-10f225a5926d', '1 (17).jpg', 'http://ofrjra54d.bkt.clouddn.com/24c1d532c43e441f84565eac8ed91fed1481720848202.jpg', '0', 'jpg', '32052', '0', '1268', 'Smart_咚咚', '2016-12-14 21:07:28', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('234db760-65d0-4dba-94fe-00d7fc0d7a2e', '1 (10).jpg', 'http://ofrjra54d.bkt.clouddn.com/6cc860926af4468a93ce7d319053ebda1481889212450.jpg', '0', 'jpg', '37056', '0', '1268', 'Smart_咚咚', '2016-12-16 19:53:32', '127.0.0.1');
@@ -212,16 +260,21 @@ INSERT INTO `bbs_file` VALUES ('2d791c90-2a27-4dfc-9541-ca257664c15b', '0.jpg', 
 INSERT INTO `bbs_file` VALUES ('2f7fa2ef-b10b-44d5-bbc2-9b6024c41e83', '502058.jpg', 'http://ofrjra54d.bkt.clouddn.com/ef00fe68fb5e4570af0db298471f1c241481635324896.jpg', '0', 'jpg', '180459', '0', '1268', 'Smart_咚咚', '2016-12-13 21:22:05', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('35a033bb-6433-4341-9d65-d86aa2a3c57d', '1 (11).jpg', 'http://ofrjra54d.bkt.clouddn.com/90d0a3b79a764b64892377b78431780d1481718787584.jpg', '0', 'jpg', '29198', '0', '1268', 'Smart_咚咚', '2016-12-14 20:33:07', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('391d79e5-7a11-4558-a484-e1a9848714a1', 'top_200x200.jpg', 'http://ofrjra54d.bkt.clouddn.com/13c27b8a1e9b4426b0235df2affe67aa1481720686683.jpg', '0', 'jpg', '15931', '0', '1268', 'Smart_咚咚', '2016-12-14 21:04:46', '127.0.0.1');
+INSERT INTO `bbs_file` VALUES ('3959b1ff-e553-4e79-b67f-b0250252e318', '手机展示效果图.jpg', 'http://ofrjra54d.bkt.clouddn.com/0b682962687f43cb8483527bb3aff9d51483367728652.jpg', '0', 'jpg', '306007', '0', '1268', 'Smart_咚咚', '2017-01-02 22:35:28', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('3b112afc-4b69-4c88-b665-55b2d8f73873', '6.jpg', 'http://ofrjra54d.bkt.clouddn.com/b0ef1a7f9c0c41908ff56ea03bd3e18a1481718940827.jpg', '0', 'jpg', '26637', '0', '1268', 'Smart_咚咚', '2016-12-14 20:35:40', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('3d69df21-5fbb-48a8-aa48-bd71d5a6e161', '1 (11).jpg', 'http://ofrjra54d.bkt.clouddn.com/e852206d63644e22add903f1cfc558921481717773756.jpg', '0', 'jpg', '29198', '0', '1268', 'Smart_咚咚', '2016-12-14 20:16:13', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('40f876fe-e2f7-4a17-a0a5-e06b5ab16bc9', '1 (4).jpg', 'http://ofrjra54d.bkt.clouddn.com/b66469a3909c44f5936c5fca889042371482070567832.jpg', '0', 'jpg', '32185', '0', '1279', 'tonboy', '2016-12-18 22:16:08', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('4353e27b-5ea8-4f3d-9402-85ecf97d42b2', '343211.jpg', 'http://ofrjra54d.bkt.clouddn.com/c53cff84dd7e4217ad844a83b1bebe2f1481717232318.jpg', '0', 'jpg', '182784', '0', '1268', 'Smart_咚咚', '2016-12-14 20:07:12', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('4df10616-2b09-4cfe-b3b2-46f8d6ac439d', '1 (72).jpg', 'http://ofrjra54d.bkt.clouddn.com/2fbc77ab81124ae2ba008008b0078b9d1481718940548.jpg', '0', 'jpg', '24894', '0', '1268', 'Smart_咚咚', '2016-12-14 20:35:40', '127.0.0.1');
+INSERT INTO `bbs_file` VALUES ('4e3b2c44-e4b9-43ae-a87a-2ab739444df1', '476368.jpg', 'http://ofrjra54d.bkt.clouddn.com/7d7af858b62247cea2711346b6d95f3b1483451138473.jpg', '0', 'jpg', '204675', '0', '1268', 'Smart_咚咚', '2017-01-03 21:45:39', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('4e4a12f1-62f1-4366-9aeb-c823ec702dde', '2.jpg', 'http://ofrjra54d.bkt.clouddn.com/a376527972c34bb59f0e7abcf5e6292a1481718940599.jpg', '0', 'jpg', '27398', '0', '1268', 'Smart_咚咚', '2016-12-14 20:35:40', '127.0.0.1');
+INSERT INTO `bbs_file` VALUES ('55c25bdb-5a4d-4936-92fa-bcfa7107db89', '0.jpg', 'http://ofrjra54d.bkt.clouddn.com/3e97460ebb2d4a3bb0a64725748530c71483449266614.jpg', '0', 'jpg', '1587446', '0', '1268', 'Smart_咚咚', '2017-01-03 21:14:31', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('5810a6cb-6c25-47e9-bc70-451e0ce6bf78', '343211.jpg', 'http://ofrjra54d.bkt.clouddn.com/f8d2a6bc805c4d768c0475c0f610461a1481717331595.jpg', '0', 'jpg', '182784', '0', '1268', 'Smart_咚咚', '2016-12-14 20:08:51', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('58ccb0b0-13b2-46d6-9259-e0929293f179', '1 (10).jpg', 'http://ofrjra54d.bkt.clouddn.com/b820b9f478e94107abac85f26a0767181481719534667.jpg', '0', 'jpg', '37056', '0', '1268', 'Smart_咚咚', '2016-12-14 20:45:34', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('5aa8b935-27e1-4960-815d-75b209cd75c1', '1 (10).jpg', 'http://ofrjra54d.bkt.clouddn.com/56467c51406a442e8bb45f3e9baf98071481718787558.jpg', '0', 'jpg', '37056', '0', '1268', 'Smart_咚咚', '2016-12-14 20:33:07', '127.0.0.1');
+INSERT INTO `bbs_file` VALUES ('5ad222e8-abdc-4bb7-9bb6-fa1fdb342792', '584688.jpg', 'http://ofrjra54d.bkt.clouddn.com/53d727ad2e894aa59978ce9ba04eba9a1483111071754.jpg', '0', 'jpg', '180008', '0', '1268', 'Smart_咚咚', '2016-12-30 23:17:53', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('62ac9182-2c80-4521-b76f-014bfaf215a0', '1 (69).jpg', 'http://ofrjra54d.bkt.clouddn.com/3b40450b888e4bb1b15ef6796e9f2e491481718940535.jpg', '0', 'jpg', '28683', '0', '1268', 'Smart_咚咚', '2016-12-14 20:35:40', '127.0.0.1');
+INSERT INTO `bbs_file` VALUES ('66f4169a-39e9-450d-b4f8-918209dc1cc2', '圣诞节.jpg', 'http://ofrjra54d.bkt.clouddn.com/a412765593a14662bef78f8d17070d141483363971460.jpg', '0', 'jpg', '769462', '0', '1268', 'Smart_咚咚', '2017-01-02 21:32:53', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('6aacf643-9d02-4a55-8302-5d39c11fa18e', '1 (68).jpg', 'http://ofrjra54d.bkt.clouddn.com/284c74d5f8224d428fb40ff1d8696f771481719851347.jpg', '0', 'jpg', '29782', '0', '1268', 'Smart_咚咚', '2016-12-14 20:50:51', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('6ffc9ff3-9773-45ba-a6f7-6aa43512826b', 'top_400x400.jpg', 'http://ofrjra54d.bkt.clouddn.com/6c49477a3e3a44e2a1df622322b468a71481720686704.jpg', '0', 'jpg', '60172', '0', '1268', 'Smart_咚咚', '2016-12-14 21:04:46', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('72a91d51-2c65-4dac-a6d0-d25960c61496', '362640.png', 'http://ofrjra54d.bkt.clouddn.com/8cce5376c766425f980a00e2abfa7c131481637551521.png', '0', 'png', '776367', '0', '1268', 'Smart_咚咚', '2016-12-13 21:59:15', '127.0.0.1');
@@ -233,6 +286,7 @@ INSERT INTO `bbs_file` VALUES ('8535be4c-72ba-4a4e-a509-e83c3274e389', '1.jpg', 
 INSERT INTO `bbs_file` VALUES ('8de2dc17-38be-4f49-9609-e3ba370d84bf', '343211.jpg', 'http://ofrjra54d.bkt.clouddn.com/743b25da7229432ba9708a51d67b2ab91481717002472.jpg', '0', 'jpg', '182784', '0', '1268', 'Smart_咚咚', '2016-12-14 20:03:22', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('8efe74b9-a74a-47f4-85b0-4c681bd56b37', '1 (76).jpg', 'http://ofrjra54d.bkt.clouddn.com/c7aab8f7377c4042823005a645d662d71481889174789.jpg', '0', 'jpg', '33112', '0', '1268', 'Smart_咚咚', '2016-12-16 19:52:54', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('8f3c3c10-235e-403a-96b8-5b0f378f0e52', '1 (9).jpg', 'http://ofrjra54d.bkt.clouddn.com/0359501a6da3407c88bbc5002500e3c51481718787423.jpg', '0', 'jpg', '27491', '0', '1268', 'Smart_咚咚', '2016-12-14 20:33:07', '127.0.0.1');
+INSERT INTO `bbs_file` VALUES ('90c5fccf-f95c-4d2e-a98f-727b629a2e02', '1 (35).jpg', 'http://ofrjra54d.bkt.clouddn.com/1dd0cc8e47df49959668aca6c861c3f91483012693481.jpg', '0', 'jpg', '28607', '0', '1268', 'Smart_咚咚', '2016-12-29 19:58:15', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('92184a4b-ff46-4372-8cc3-33953ad6afd8', '1 (4).jpg', 'http://ofrjra54d.bkt.clouddn.com/fd639e01f1eb4970836b83a9e21601121481718787354.jpg', '0', 'jpg', '32185', '0', '1268', 'Smart_咚咚', '2016-12-14 20:33:07', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('9225cae8-f3c7-4b8e-870d-4283d6c54337', '1 (5).jpg', 'http://ofrjra54d.bkt.clouddn.com/67e7f9dd91ac4608ab5500236b6ff1e41481718787366.jpg', '0', 'jpg', '31514', '0', '1268', 'Smart_咚咚', '2016-12-14 20:33:07', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('925edcb5-b203-40c6-9fb1-901df7a26a87', '6 (2).jpg', 'http://ofrjra54d.bkt.clouddn.com/a82b15a637f94ee9a993aecba0d3c85d1481718940814.jpg', '0', 'jpg', '26262', '0', '1268', 'Smart_咚咚', '2016-12-14 20:35:40', '127.0.0.1');
@@ -240,9 +294,12 @@ INSERT INTO `bbs_file` VALUES ('95f4f81f-b385-4ed3-991f-08c22709c36c', '476368.j
 INSERT INTO `bbs_file` VALUES ('9b9574f3-8b04-438f-8bbe-3a505ee710cf', '1 (76).jpg', 'http://ofrjra54d.bkt.clouddn.com/3c68701829cd4efbbd138414fc9019a51481718940572.jpg', '0', 'jpg', '33112', '0', '1268', 'Smart_咚咚', '2016-12-14 20:35:40', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('9e12875e-8687-4a1e-8803-850184bb9feb', '1 (17).jpg', 'http://ofrjra54d.bkt.clouddn.com/66a3854a515c47eb8b0dbacdd3e548be1481888786940.jpg', '0', 'jpg', '32052', '0', '1268', 'Smart_咚咚', '2016-12-16 19:46:27', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('a025704b-fcd5-4f3a-a5fd-01bb278626bb', '1 (27).jpg', 'http://ofrjra54d.bkt.clouddn.com/dd3283f4274e48408c6fdf76d9cb3c8e1481717850613.jpg', '0', 'jpg', '33374', '0', '1268', 'Smart_咚咚', '2016-12-14 20:17:30', '127.0.0.1');
+INSERT INTO `bbs_file` VALUES ('a19c21e2-868a-4383-8eb3-a49a870f35a6', '锁屏壁纸.png', 'http://ofrjra54d.bkt.clouddn.com/febd4129d82b4a42a4b8e953195ae2951483349399704.png', '0', 'png', '1262748', '0', '1268', 'Smart_咚咚', '2017-01-02 17:30:01', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('a4ba2734-2ff5-4f69-bd2a-1d18bd1dac96', '165557.png', 'http://ofrjra54d.bkt.clouddn.com/bb5f3f53d1d2445f8f244072d0b11bfe1481637551086.png', '0', 'png', '804245', '0', '1268', 'Smart_咚咚', '2016-12-13 21:59:14', '127.0.0.1');
+INSERT INTO `bbs_file` VALUES ('a5960979-c061-4eb1-b630-fcf60fc3a275', '355287.jpg', 'http://ofrjra54d.bkt.clouddn.com/97ffe47c81044818afd82de5caa8ff0b1483022645879.jpg', '0', 'jpg', '135861', '0', '1279', 'tonboy', '2016-12-29 22:44:06', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('a69614f2-9b00-4f22-a7fa-44c67080745b', '580783.jpg', 'http://ofrjra54d.bkt.clouddn.com/0abc0a22fddf43d1aa010a022fb3d68f1481720245010.jpg', '0', 'jpg', '150716', '0', '1268', 'Smart_咚咚', '2016-12-14 20:57:25', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('a6ae72a3-48bb-4497-ae39-4ed1795c1f7a', '1 (4).jpg', 'http://ofrjra54d.bkt.clouddn.com/10d3d76f0fc6493a9823dda0f2a5839f1481717487100.jpg', '0', 'jpg', '32185', '0', '1268', 'Smart_咚咚', '2016-12-14 20:11:27', '127.0.0.1');
+INSERT INTO `bbs_file` VALUES ('a92d9623-0c63-491a-a920-37671c341e81', '584688.jpg', 'http://ofrjra54d.bkt.clouddn.com/1e73de3b16c646568204d88182b31d861483347065703.jpg', '0', 'jpg', '180008', '0', '1268', 'Smart_咚咚', '2017-01-02 16:51:05', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('ac019904-a35a-47dd-82be-2dc5d276ee1b', '355287.jpg', 'http://ofrjra54d.bkt.clouddn.com/70c4f9ff6bde4f599f5ac8397de5174e1481637551199.jpg', '0', 'jpg', '135861', '0', '1268', 'Smart_咚咚', '2016-12-13 21:59:12', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('ad55415e-ed75-457a-8fda-d4a1d4c7a649', '584688.jpg', 'http://ofrjra54d.bkt.clouddn.com/89294f5b02c44efc8e3d311aa70216a61482327614834.jpg', '0', 'jpg', '180008', '0', '1285', 'test01', '2016-12-21 21:40:14', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('aea370e8-8d4b-44d7-96d8-8ef881821d52', 'IMG_20140805_163817.jpg', 'http://ofrjra54d.bkt.clouddn.com/1da3d5160a7b47008211cc2db8c374fa1482327198568.jpg', '0', 'jpg', '839075', '0', '1285', 'test01', '2016-12-21 21:33:20', '127.0.0.1');
@@ -252,6 +309,8 @@ INSERT INTO `bbs_file` VALUES ('b438f24e-19fc-47a0-919a-5367c41dfcdb', '1 (7).jp
 INSERT INTO `bbs_file` VALUES ('b5ec90f2-cfc3-4bd8-b91a-948bb60749a7', '502058.jpg', 'http://ofrjra54d.bkt.clouddn.com/16931278100d43faaed052ddb70d8b0a1481637552681.jpg', '0', 'jpg', '180459', '0', '1268', 'Smart_咚咚', '2016-12-13 21:59:13', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('b6b6b6b0-80ee-40fc-8a71-a5749398e727', '1 (10).jpg', 'http://ofrjra54d.bkt.clouddn.com/0dcbb68429d1475ea3be7653bb531f641481717628284.jpg', '0', 'jpg', '37056', '0', '1268', 'Smart_咚咚', '2016-12-14 20:13:48', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('b8dc35cf-7898-46b5-9d72-11798b629d29', '476368.jpg', 'http://ofrjra54d.bkt.clouddn.com/a32b42e70ec34b6397225b91fb0e75091481637551600.jpg', '0', 'jpg', '204675', '0', '1268', 'Smart_咚咚', '2016-12-13 21:59:12', '127.0.0.1');
+INSERT INTO `bbs_file` VALUES ('b938c357-b09d-48ae-b20b-54ff4883ee8a', '锁屏壁纸.png', 'http://ofrjra54d.bkt.clouddn.com/66017e6257d04882856eaf587c20186d1483347346633.png', '0', 'png', '1262748', '0', '1268', 'Smart_咚咚', '2017-01-02 16:55:48', '127.0.0.1');
+INSERT INTO `bbs_file` VALUES ('bbe2cc30-b37b-48f6-a743-95ebe2ea0061', '锁屏壁纸.png', 'http://ofrjra54d.bkt.clouddn.com/662e90113e6b4063817084483d9d241c1483349630848.png', '0', 'png', '1262748', '0', '1268', 'Smart_咚咚', '2017-01-02 17:33:52', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('bc92e1bd-0b41-44d5-861e-f2f72fb803d7', '3.jpg', 'http://ofrjra54d.bkt.clouddn.com/2b9ac6cbd5ff4b5dbc640465d6e337cb1481718940610.jpg', '0', 'jpg', '28713', '0', '1268', 'Smart_咚咚', '2016-12-14 20:35:40', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('bd603542-d291-4616-96c8-f5650b970654', '355287.jpg', 'http://ofrjra54d.bkt.clouddn.com/0600d81093384975b199224259fc22551481716874324.jpg', '0', 'jpg', '135861', '0', '1268', 'Smart_咚咚', '2016-12-14 20:01:14', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('bdfe52f0-882f-43ff-afa5-eebc60198977', '5.jpg', 'http://ofrjra54d.bkt.clouddn.com/0203d7e8183447c1bb91220c852f18fd1481718940802.jpg', '0', 'jpg', '31120', '0', '1268', 'Smart_咚咚', '2016-12-14 20:35:40', '127.0.0.1');
@@ -261,8 +320,10 @@ INSERT INTO `bbs_file` VALUES ('c1fb146a-c34b-44c5-b137-83a6e8e16418', '343211.j
 INSERT INTO `bbs_file` VALUES ('c4304de0-07c0-4112-afc9-b406bd6d8916', '1 (10).jpg', 'http://ofrjra54d.bkt.clouddn.com/9b713a4503cd4b8d9df3cb026463814b1481721662775.jpg', '0', 'jpg', '37056', '0', '1268', 'Smart_咚咚', '2016-12-14 21:21:02', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('d3e1b9e0-c49d-4103-807a-834e2cd708e6', '7.jpg', 'http://ofrjra54d.bkt.clouddn.com/fb1f9a4804b748eaacbe0f0b5f648d461481718940840.jpg', '0', 'jpg', '27252', '0', '1268', 'Smart_咚咚', '2016-12-14 20:35:40', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('dc61eadb-943e-4e7a-a809-03b843ff4911', '476368.jpg', 'http://ofrjra54d.bkt.clouddn.com/4b6cd054c37843479adefb702c86ccf61481717487076.jpg', '0', 'jpg', '204675', '0', '1268', 'Smart_咚咚', '2016-12-14 20:11:27', '127.0.0.1');
+INSERT INTO `bbs_file` VALUES ('e38a660f-62ad-43bf-a562-bc979795b114', 'IMG_20140805_163702.jpg', 'http://ofrjra54d.bkt.clouddn.com/121d21716c924b7cbca03351ee40365f1483171211737.jpg', '0', 'jpg', '794582', '0', '1268', 'Smart_咚咚', '2016-12-31 16:00:12', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('e53769f2-7fde-4e2f-a56d-e33a7719c86d', '0.jpg', 'http://ofrjra54d.bkt.clouddn.com/a6f0470bb390465ab52076932249abeb1481637550750.jpg', '0', 'jpg', '1587446', '0', '1268', 'Smart_咚咚', '2016-12-13 21:59:14', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('e6097cb8-bcfc-486f-bdf9-d2f9bfa08fbf', '1 (17).jpg', 'http://ofrjra54d.bkt.clouddn.com/694af9402c2049dd92ff9f27a1cb943b1481889070091.jpg', '0', 'jpg', '32052', '0', '1268', 'Smart_咚咚', '2016-12-16 19:51:10', '127.0.0.1');
+INSERT INTO `bbs_file` VALUES ('f3c49479-44cf-4d4a-9ed4-7e94b2b3ad96', '0.jpg', 'http://ofrjra54d.bkt.clouddn.com/2715c32b121247228e20a6f837c078211483347012701.jpg', '0', 'jpg', '1587446', '0', '1268', 'Smart_咚咚', '2017-01-02 16:50:14', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('f76ea3e6-9760-4659-b929-0f4793fa5ba5', '1 (16).jpg', 'http://ofrjra54d.bkt.clouddn.com/1e71f67e65064a99982e786d090568b21481720848199.jpg', '0', 'jpg', '33970', '0', '1268', 'Smart_咚咚', '2016-12-14 21:07:28', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('f99f7734-d46f-433f-ba7d-1493622486b7', '1 (10).jpg', 'http://ofrjra54d.bkt.clouddn.com/d36915223239460699fc3043917019c41481721734039.jpg', '0', 'jpg', '37056', '0', '1268', 'Smart_咚咚', '2016-12-14 21:22:14', '127.0.0.1');
 INSERT INTO `bbs_file` VALUES ('fbb08f79-f5d2-43fd-affb-3b321c1721b6', '1 (6).jpg', 'http://ofrjra54d.bkt.clouddn.com/dab3ac385282455a97525c124e7c282d1481719828839.jpg', '0', 'jpg', '28166', '0', '1268', 'Smart_咚咚', '2016-12-14 20:50:28', '127.0.0.1');
@@ -298,7 +359,7 @@ CREATE TABLE `bbs_home_image` (
   `home_status` int(11) NOT NULL DEFAULT '0' COMMENT '图片状态{0:正常，1：已删除}',
   `home_create_time` datetime NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='首页滚动图表';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='首页滚动图表';
 
 -- ----------------------------
 -- Records of bbs_home_image
@@ -306,6 +367,10 @@ CREATE TABLE `bbs_home_image` (
 INSERT INTO `bbs_home_image` VALUES ('1', '邓小平', '/', 'http://ofrjra54d.bkt.clouddn.com/788d2a8d95e546eb846353e66621c15e1478275398954.jpg', '3', '0', '2016-10-02 19:10:33');
 INSERT INTO `bbs_home_image` VALUES ('2', '自由女神', '/', 'http://ofrjra54d.bkt.clouddn.com/4d6b7c1a88744142b51563bc117a63661478275367011.jpg', '2', '0', '2016-10-02 19:11:47');
 INSERT INTO `bbs_home_image` VALUES ('3', 'FACEBOOK - 扎克伯格', '/', 'http://ofrjra54d.bkt.clouddn.com/056a17d8bb2a485c96f275bcacd1c9591478275408287.jpg', '1', '0', '2016-10-02 19:12:37');
+INSERT INTO `bbs_home_image` VALUES ('4', 'Panda', 'http://oschina.net/', 'http://ofrjra54d.bkt.clouddn.com/662e90113e6b4063817084483d9d241c1483349630848.png', '4', '1', '2017-01-02 17:41:42');
+INSERT INTO `bbs_home_image` VALUES ('5', 'tower', '/', 'http://ofrjra54d.bkt.clouddn.com/7d7af858b62247cea2711346b6d95f3b1483451138473.jpg', '5', '0', '2017-01-03 21:45:45');
+INSERT INTO `bbs_home_image` VALUES ('6', 'tower', '/', 'http://ofrjra54d.bkt.clouddn.com/7d7af858b62247cea2711346b6d95f3b1483451138473.jpg', '5', '1', '2017-01-03 21:46:14');
+INSERT INTO `bbs_home_image` VALUES ('7', 'tower', '/', 'http://ofrjra54d.bkt.clouddn.com/7d7af858b62247cea2711346b6d95f3b1483451138473.jpg', '5', '1', '2017-01-03 21:54:24');
 
 -- ----------------------------
 -- Table structure for bbs_navigation
@@ -319,7 +384,7 @@ CREATE TABLE `bbs_navigation` (
   `nav_status` int(11) NOT NULL DEFAULT '0' COMMENT '导航状态{0:正常，1：已删除}',
   `nav_create_time` datetime NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`nav_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8 COMMENT='论坛导航栏表';
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8 COMMENT='论坛导航栏表';
 
 -- ----------------------------
 -- Records of bbs_navigation
@@ -329,6 +394,8 @@ INSERT INTO `bbs_navigation` VALUES ('49', 'Linux专区', 'linux', '3', '0', '20
 INSERT INTO `bbs_navigation` VALUES ('50', '数据库', 'db', '4', '0', '2016-09-30 20:44:56');
 INSERT INTO `bbs_navigation` VALUES ('51', '非技术区', '玩耍', '5', '0', '2016-09-30 20:44:56');
 INSERT INTO `bbs_navigation` VALUES ('52', '站务专区', '管理', '6', '0', '2016-09-30 20:44:56');
+INSERT INTO `bbs_navigation` VALUES ('53', '临时测', '测试十多个回复', '6', '1', '2017-01-05 21:50:36');
+INSERT INTO `bbs_navigation` VALUES ('54', '临时2', 'sg', '7', '1', '2017-01-05 21:58:00');
 
 -- ----------------------------
 -- Table structure for bbs_quick_navigation
@@ -343,7 +410,7 @@ CREATE TABLE `bbs_quick_navigation` (
   `quick_status` int(11) NOT NULL DEFAULT '0' COMMENT '快速导航状态{0:正常，1：已删除}',
   `quick_create_time` datetime NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='论坛快速导航表';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='论坛快速导航表';
 
 -- ----------------------------
 -- Records of bbs_quick_navigation
@@ -354,6 +421,8 @@ INSERT INTO `bbs_quick_navigation` VALUES ('3', '建议反馈', '/', '#2b2b2b', 
 INSERT INTO `bbs_quick_navigation` VALUES ('4', '我要申精', '/', '#2b2b2b', '4', '0', '2016-10-02 20:05:13');
 INSERT INTO `bbs_quick_navigation` VALUES ('5', '版主申请', '/', '#2b2b2b', '5', '0', '2016-10-02 20:05:30');
 INSERT INTO `bbs_quick_navigation` VALUES ('6', '新人须知', '/', '#ef6935', '6', '0', '2016-10-02 20:06:06');
+INSERT INTO `bbs_quick_navigation` VALUES ('7', '快速导航', '/', '#2b2b2b', '7', '0', '2017-01-02 18:26:06');
+INSERT INTO `bbs_quick_navigation` VALUES ('8', '凑个整数', '/', '#2b2b2b', '8', '0', '2017-01-02 18:26:39');
 
 -- ----------------------------
 -- Table structure for bbs_recommend
@@ -370,7 +439,7 @@ CREATE TABLE `bbs_recommend` (
   PRIMARY KEY (`rc_id`),
   KEY `idx_rc_status` (`rc_status`),
   KEY `idx_location` (`location`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='社区推荐表';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='社区推荐表';
 
 -- ----------------------------
 -- Records of bbs_recommend
@@ -379,6 +448,11 @@ INSERT INTO `bbs_recommend` VALUES ('1', ' 随便测试', 'http://localhost:8080
 INSERT INTO `bbs_recommend` VALUES ('2', 'this is first topic', 'http://localhost:8080/bbs/board/191/topic/detail/1235', '0', '2', '2016-12-11 19:59:33', '1');
 INSERT INTO `bbs_recommend` VALUES ('3', ' 测试单纯加精', 'http://localhost:8080/bbs/board/205/topic/detail/1237', '0', '3', '2016-12-11 20:00:08', '1');
 INSERT INTO `bbs_recommend` VALUES ('4', ' 品味乌镇', 'http://localhost:8080/bbs/board/205/topic/detail/1246', '0', '1', '2016-12-11 20:00:55', '2');
+INSERT INTO `bbs_recommend` VALUES ('5', 'qWAESRTYUPUYTWRYERTIYU', 'http://localhost:8080/bbs/board/204/topic/detail/1248', '0', '2', '2017-01-02 18:56:07', '2');
+INSERT INTO `bbs_recommend` VALUES ('6', 'erstdyuiop[ldrtfgyuhijokp', 'http://localhost:8080/bbs/board/199/topic/detail/1257', '0', '4', '2017-01-02 19:06:04', '1');
+INSERT INTO `bbs_recommend` VALUES ('7', 'JAVA SE', 'http://localhost:8080/bbs/navigation/47/board/191', '0', '4', '2017-01-02 20:21:56', '2');
+INSERT INTO `bbs_recommend` VALUES ('8', '临时', '/', '1', '1', '2017-01-03 20:17:31', '1');
+INSERT INTO `bbs_recommend` VALUES ('9', 'linshi2', '/', '1', '2', '2017-01-03 20:17:57', '2');
 
 -- ----------------------------
 -- Table structure for bbs_reply
@@ -404,7 +478,7 @@ CREATE TABLE `bbs_reply` (
   KEY `idx_reply_board_id` (`board_id`),
   KEY `idx_reply_is_check` (`reply_is_check`),
   KEY `idx_reply_status` (`reply_status`)
-) ENGINE=InnoDB AUTO_INCREMENT=3642 DEFAULT CHARSET=utf8 COMMENT='论坛回复表';
+) ENGINE=InnoDB AUTO_INCREMENT=3661 DEFAULT CHARSET=utf8 COMMENT='论坛回复表';
 
 -- ----------------------------
 -- Records of bbs_reply
@@ -483,6 +557,25 @@ INSERT INTO `bbs_reply` VALUES ('3638', '1268', '1251', '206', '0', 'wafssssssss
 INSERT INTO `bbs_reply` VALUES ('3639', '1268', '1251', '206', '3638', 'fdsaaaaaaf', '1', '0', '0', null, null, '2016-12-21 20:52:21', '127.0.0.1');
 INSERT INTO `bbs_reply` VALUES ('3640', '1285', '1252', '205', '0', '&lt;img alt=&quot;&quot; height=&quot;30&quot; src=&quot;/bbs/resources/static/ckeditor4/plugins/smiley/self/image025.png&quot; title=&quot;&quot; width=&quot;30&quot; /&gt;', '1', '0', '0', null, null, '2016-12-21 21:41:32', '127.0.0.1');
 INSERT INTO `bbs_reply` VALUES ('3641', '1285', '1241', '205', '0', 'boring', '1', '0', '0', null, null, '2016-12-24 17:03:43', '127.0.0.1');
+INSERT INTO `bbs_reply` VALUES ('3642', '1268', '1253', '196', '0', 'reply count + 1', '1', '0', '0', null, null, '2016-12-29 19:59:03', '127.0.0.1');
+INSERT INTO `bbs_reply` VALUES ('3643', '1286', '1247', '192', '0', 'new user count + 1', '1', '0', '0', null, null, '2016-12-29 20:01:56', '127.0.0.1');
+INSERT INTO `bbs_reply` VALUES ('3644', '1279', '1254', '205', '0', 'imageView/2/w/800/h/600&lt;br /&gt;\r\n似乎很合适', '1', '0', '0', null, null, '2016-12-29 22:41:35', '127.0.0.1');
+INSERT INTO `bbs_reply` VALUES ('3645', '1279', '1255', '203', '0', '&lt;img alt=&quot;&quot; src=&quot;http://ofrjra54d.bkt.clouddn.com/97ffe47c81044818afd82de5caa8ff0b1483022645879.jpg?imageView/2/w/800/h/600&quot; /&gt;', '1', '0', '0', null, null, '2016-12-29 22:44:09', '127.0.0.1');
+INSERT INTO `bbs_reply` VALUES ('3646', '1268', '1256', '200', '0', '23:15:50.386 [http-bio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - Successfully completed request&lt;br /&gt;\r\n23:15:50.386 [http-bio-8080-exec-11] DEBUG o.s.d.r.core.RedisConnectionUtils - Opening RedisConnection&lt;br /&gt;\r\n23:15:50.386 [http-bio-8080-exec-11] DEBUG o.s.d.r.core.RedisConnectionUtils - Closing Redis Connection&lt;br /&gt;\r\n23:15:50.386 [http-bio-8080-exec-11] DEBUG o.s.web.servlet.DispatcherServlet - Null ModelAndView returned to DispatcherServlet with name &amp;#39;bbs-dispatcher&amp;#39;: assuming HandlerAdapter completed request handling&lt;br /&gt;\r\n23:15:50.386 [http-bio-8080-exec-11] DEBUG o.s.web.servlet.DispatcherServlet - Successfully completed request', '1', '0', '0', null, null, '2016-12-30 23:16:44', '127.0.0.1');
+INSERT INTO `bbs_reply` VALUES ('3647', '1268', '1256', '200', '3646', '23:15:50.386 [http-bio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - Successfully completed request&lt;br /&gt;\r\n23:15:50.386 [http-bio-8080-exec-11] DEBUG o.s.d.r.core.RedisConnectionUtils - Opening RedisConnection&lt;br /&gt;\r\n23:15:50.386 [http-bio-8080-exec-11] DEBUG o.s.d.r.core.RedisConnectionUtils - Closing Redis Connection&lt;br /&gt;\r\n23:15:50.386 [http-bio-8080-exec-11] DEBUG o.s.web.servlet.DispatcherServlet - Null ModelAndView returned to DispatcherServlet with name &amp;#39;bbs-dispatcher&amp;#39;: assuming HandlerAdapter completed request handling&lt;br /&gt;\r\n23:15:50.386 [http-bio-8080-exec-11] DEBUG o.s.web.servlet.DispatcherServlet - Successfully completed request', '1', '0', '0', null, null, '2016-12-30 23:16:53', '127.0.0.1');
+INSERT INTO `bbs_reply` VALUES ('3648', '1268', '1256', '200', '0', '23:15:50.386 [http-bio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - Successfully completed request&lt;br /&gt;\r\n23:15:50.386 [http-bio-8080-exec-11] DEBUG o.s.d.r.core.RedisConnectionUtils - Opening RedisConnection&lt;br /&gt;\r\n23:15:50.386 [http-bio-8080-exec-11] DEBUG o.s.d.r.core.RedisConnectionUtils - Closing Redis Connection&lt;br /&gt;\r\n23:15:50.386 [http-bio-8080-exec-11] DEBUG o.s.web.servlet.DispatcherServlet - Null ModelAndView returned to DispatcherServlet with name &amp;#39;bbs-dispatcher&amp;#39;: assuming HandlerAdapter completed request handling&lt;br /&gt;\r\n23:15:50.386 [http-bio-8080-exec-11] DEBUG o.s.web.servlet.DispatcherServlet - Successfully completed request', '1', '0', '0', null, null, '2016-12-30 23:17:01', '127.0.0.1');
+INSERT INTO `bbs_reply` VALUES ('3649', '1268', '1256', '200', '3648', '&lt;pre class=&quot;brush:java;toolbar:false;&quot;&gt;\r\n23:15:50.386 [http-bio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - Successfully completed request\r\n23:15:50.386 [http-bio-8080-exec-11] DEBUG o.s.d.r.core.RedisConnectionUtils - Opening RedisConnection\r\n23:15:50.386 [http-bio-8080-exec-11] DEBUG o.s.d.r.core.RedisConnectionUtils - Closing Redis Connection\r\n23:15:50.386 [http-bio-8080-exec-11] DEBUG o.s.web.servlet.DispatcherServlet - Null ModelAndView returned to DispatcherServlet with name &amp;#39;bbs-dispatcher&amp;#39;: assuming HandlerAdapter completed request handling\r\n23:15:50.386 [http-bio-8080-exec-11] DEBUG o.s.web.servlet.DispatcherServlet - Successfully completed request&lt;/pre&gt;\r\n', '1', '0', '0', null, null, '2016-12-30 23:17:14', '127.0.0.1');
+INSERT INTO `bbs_reply` VALUES ('3650', '1268', '1256', '200', '3649', '23:15:50.386 [http-bio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - Successfully completed request&lt;br /&gt;\r\n23:15:50.386 [http-bio-8080-exec-11] DEBUG o.s.d.r.core.RedisConnectionUtils - Opening RedisConnection&lt;br /&gt;\r\n23:15:50.386 [http-bio-8080-exec-11] DEBUG o.s.d.r.core.RedisConnectionUtils - Closing Redis Connection&lt;br /&gt;\r\n23:15:50.386 [http-bio-8080-exec-11] DEBUG o.s.web.servlet.DispatcherServlet - Null ModelAndView returned to DispatcherServlet with name &amp;#39;bbs-dispatcher&amp;#39;: assuming HandlerAdapter completed request handling&lt;br /&gt;\r\n23:15:50.386 [http-bio-8080-exec-11] DEBUG o.s.web.servlet.DispatcherServlet - Successfully completed request', '1', '0', '0', null, null, '2016-12-30 23:17:24', '127.0.0.1');
+INSERT INTO `bbs_reply` VALUES ('3651', '1268', '1256', '200', '0', '&lt;img alt=&quot;&quot; src=&quot;http://ofrjra54d.bkt.clouddn.com/53d727ad2e894aa59978ce9ba04eba9a1483111071754.jpg?imageView/2/w/800/h/600&quot; /&gt;', '1', '0', '0', null, null, '2016-12-30 23:17:57', '127.0.0.1');
+INSERT INTO `bbs_reply` VALUES ('3652', '1268', '1257', '199', '0', '16-12-30 23:14:11\r\n&lt;table border=&quot;1&quot; class=&quot;sortable&quot; id=&quot;table5&quot; style=&quot;width:100%&quot; summary=&quot;log&quot;&gt;\r\n	&lt;tbody&gt;\r\n		&lt;tr&gt;\r\n			&lt;td&gt;&amp;nbsp;&lt;/td&gt;\r\n			&lt;td&gt;/system/admin/images/photos/user3.png&amp;nbsp;GET&lt;/td&gt;\r\n			&lt;td&gt;WARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;/td&gt;\r\n		&lt;/tr&gt;\r\n		&lt;tr&gt;\r\n			&lt;td&gt;16-12-30 23:14:11&lt;/td&gt;\r\n			&lt;td&gt;/system/admin/images/logo.png&amp;nbsp;GET&lt;/td&gt;\r\n			&lt;td&gt;WARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;/td&gt;\r\n		&lt;/tr&gt;\r\n		&lt;tr&gt;\r\n			&lt;td&gt;16-12-30 23:14:11&lt;/td&gt;\r\n			&lt;td&gt;/system/admin/images/photos/user-avatar.png&amp;nbsp;GET&lt;/td&gt;\r\n			&lt;td&gt;WARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;/td&gt;\r\n		&lt;/tr&gt;\r\n		&lt;tr&gt;\r\n			&lt;td&gt;16-12-30 23:14:11&lt;/td&gt;\r\n			&lt;td&gt;/system/admin/images/photos/user5.png&amp;nbsp;GET&lt;/td&gt;\r\n			&lt;td&gt;WARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;/td&gt;\r\n		&lt;/tr&gt;\r\n		&lt;tr&gt;\r\n			&lt;td&gt;16-12-30 23:14:11&lt;/td&gt;\r\n			&lt;td&gt;/system/admin/images/photos/user1.png&amp;nbsp;GET&lt;/td&gt;\r\n			&lt;td&gt;WARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;/td&gt;\r\n		&lt;/tr&gt;\r\n		&lt;tr&gt;\r\n			&lt;td&gt;16-12-30 23:14:11&lt;/td&gt;\r\n			&lt;td&gt;/system/admin/images/photos/user4.png&amp;nbsp;GET&lt;/td&gt;\r\n			&lt;td&gt;WARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;/td&gt;\r\n		&lt;/tr&gt;\r\n		&lt;tr&gt;\r\n			&lt;td&gt;16-12-30 23:14:11&lt;/td&gt;\r\n			&lt;td&gt;/system/admin/images/photos/user2.png&amp;nbsp;GET&lt;/td&gt;\r\n			&lt;td&gt;WARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;/td&gt;\r\n		&lt;/tr&gt;\r\n		&lt;tr&gt;\r\n			&lt;td&gt;16-12-30 23:14:11&lt;/td&gt;\r\n			&lt;td&gt;/system/admin/images/logo_icon.png&amp;nbsp;GET&lt;/td&gt;\r\n			&lt;td&gt;WARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;/td&gt;\r\n		&lt;/tr&gt;\r\n		&lt;tr&gt;\r\n			&lt;td&gt;16-12-30 23:14:11&lt;/td&gt;\r\n			&lt;td&gt;/system/admin/images/logo.png&amp;nbsp;GET&lt;/td&gt;\r\n			&lt;td&gt;WARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;/td&gt;\r\n		&lt;/tr&gt;\r\n		&lt;tr&gt;\r\n			&lt;td&gt;16-12-30 23:14:11&lt;/td&gt;\r\n			&lt;td&gt;/system/admin/images/photos/user1.png&amp;nbsp;GET&lt;/td&gt;\r\n			&lt;td&gt;WARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;/td&gt;\r\n		&lt;/tr&gt;\r\n		&lt;tr&gt;\r\n			&lt;td&gt;16-12-30 23:14:11&lt;/td&gt;\r\n			&lt;td&gt;/system/admin/images/logo_icon.png&amp;nbsp;GET&lt;/td&gt;\r\n			&lt;td&gt;WARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;/td&gt;\r\n		&lt;/tr&gt;\r\n		&lt;tr&gt;\r\n			&lt;td&gt;16-12-30 23:14:11&lt;/td&gt;\r\n			&lt;td&gt;/system/admin/images/photos/user4.png&amp;nbsp;GET&lt;/td&gt;\r\n			&lt;td&gt;WARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;/td&gt;\r\n		&lt;/tr&gt;\r\n		&lt;tr&gt;\r\n			&lt;td&gt;16-12-30 23:14:11&lt;/td&gt;\r\n			&lt;td&gt;/system/admin/images/photos/user-avatar.png&amp;nbsp;GET&lt;/td&gt;\r\n			&lt;td&gt;WARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;/td&gt;\r\n		&lt;/tr&gt;\r\n		&lt;tr&gt;\r\n			&lt;td&gt;16-12-30 23:14:11&lt;/td&gt;\r\n			&lt;td&gt;/system/admin/images/photos/user3.png&amp;nbsp;GET&lt;/td&gt;\r\n			&lt;td&gt;WARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;/td&gt;\r\n		&lt;/tr&gt;\r\n		&lt;tr&gt;\r\n			&lt;td&gt;16-12-30 23:14:11&lt;/td&gt;\r\n			&lt;td&gt;/system/admin/images/photos/user2.png&amp;nbsp;GET&lt;/td&gt;\r\n			&lt;td&gt;WARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;/td&gt;\r\n		&lt;/tr&gt;\r\n		&lt;tr&gt;\r\n			&lt;td&gt;16-12-30 23:14:11&lt;/td&gt;\r\n			&lt;td&gt;/system/admin/images/photos/user5.png&amp;nbsp;GET&lt;/td&gt;\r\n			&lt;td&gt;WARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;/td&gt;\r\n		&lt;/tr&gt;\r\n		&lt;tr&gt;\r\n			&lt;td&gt;16-12-30 23:14:12&lt;/td&gt;\r\n			&lt;td&gt;/system/admin/images/details_open.png&amp;nbsp;GET&lt;/td&gt;\r\n			&lt;td&gt;WARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;/td&gt;\r\n		&lt;/tr&gt;\r\n	&lt;/tbody&gt;\r\n&lt;/table&gt;\r\n', '1', '0', '0', null, null, '2016-12-30 23:18:56', '127.0.0.1');
+INSERT INTO `bbs_reply` VALUES ('3653', '1268', '1257', '199', '3652', '16-12-30 23:14:11&lt;br /&gt;\r\n&lt;br /&gt;\r\n/system/admin/images/photos/user3.png&amp;nbsp;GETWARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;br /&gt;\r\n16-12-30 23:14:11/system/admin/images/logo.png&amp;nbsp;GETWARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;br /&gt;\r\n16-12-30 23:14:11/system/admin/images/photos/user-avatar.png&amp;nbsp;GETWARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;br /&gt;\r\n16-12-30 23:14:11/system/admin/images/photos/user5.png&amp;nbsp;GETWARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;br /&gt;\r\n16-12-30 23:14:11/system/admin/images/photos/user1.png&amp;nbsp;GETWARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;br /&gt;\r\n16-12-30 23:14:11/system/admin/images/photos/user4.png&amp;nbsp;GETWARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;br /&gt;\r\n16-12-30 23:14:11/system/admin/images/photos/user2.png&amp;nbsp;GETWARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;br /&gt;\r\n16-12-30 23:14:11/system/admin/images/logo_icon.png&amp;nbsp;GETWARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;br /&gt;\r\n16-12-30 23:14:11/system/admin/images/logo.png&amp;nbsp;GETWARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;br /&gt;\r\n16-12-30 23:14:11/system/admin/images/photos/user1.png&amp;nbsp;GETWARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;br /&gt;\r\n16-12-30 23:14:11/system/admin/images/logo_icon.png&amp;nbsp;GETWARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;br /&gt;\r\n16-12-30 23:14:11/system/admin/images/photos/user4.png&amp;nbsp;GETWARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;br /&gt;\r\n16-12-30 23:14:11/system/admin/images/photos/user-avatar.png&amp;nbsp;GETWARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;br /&gt;\r\n16-12-30 23:14:11/system/admin/images/photos/user3.png&amp;nbsp;GETWARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;br /&gt;\r\n16-12-30 23:14:11/system/admin/images/photos/user2.png&amp;nbsp;GETWARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;br /&gt;\r\n16-12-30 23:14:11/system/admin/images/photos/user5.png&amp;nbsp;GETWARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;br /&gt;\r\n16-12-30 23:14:12/system/admin/images/details_open.png&amp;nbsp;GETWARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1', '1', '0', '0', null, null, '2016-12-30 23:19:11', '127.0.0.1');
+INSERT INTO `bbs_reply` VALUES ('3654', '1268', '1257', '199', '0', '&lt;img alt=&quot;&quot; height=&quot;30&quot; src=&quot;/bbs/resources/static/ckeditor4/plugins/smiley/self/image045.png&quot; title=&quot;&quot; width=&quot;30&quot; /&gt;', '1', '0', '0', null, null, '2016-12-30 23:20:43', '127.0.0.1');
+INSERT INTO `bbs_reply` VALUES ('3655', '1268', '1235', '191', '0', '&lt;img alt=&quot;&quot; height=&quot;30&quot; src=&quot;/bbs/resources/static/ckeditor4/plugins/smiley/self/image026.png&quot; title=&quot;&quot; width=&quot;30&quot; /&gt;', '1', '0', '0', null, null, '2016-12-31 16:34:31', '127.0.0.1');
+INSERT INTO `bbs_reply` VALUES ('3656', '1268', '1237', '205', '0', 'kjjjjjjjjjjjjjjjjjjjjjjjjjjjjjghcvvvvvvvvvvvvvvvvvvvvvtresyrxxxxxxxxxxxxxxxyrefgvbkgyhcvcvcvcvcvcvcvcvcv tufl;ki', '1', '0', '0', null, null, '2016-12-31 16:39:33', '127.0.0.1');
+INSERT INTO `bbs_reply` VALUES ('3657', '1268', '1235', '191', '0', '@Cacheable注解主要有两个作用 1）如果用户请求的数据已经被缓存，使用@Cacheable可以直接返回缓存数据 2）如果用户请求的数据没有被缓存，将执行Controller的方法，将查询结果保存在缓存中。例如在下面的例子中,以user.account作为查询缓存的key值。', '1', '0', '0', null, null, '2016-12-31 16:51:56', '127.0.0.1');
+INSERT INTO `bbs_reply` VALUES ('3658', '1268', '1247', '192', '0', '+1', '1', '0', '0', null, null, '2017-01-02 21:39:44', '127.0.0.1');
+INSERT INTO `bbs_reply` VALUES ('3659', '1268', '1258', '192', '0', '+++++++++++++++++1', '1', '0', '0', null, null, '2017-01-02 21:40:14', '127.0.0.1');
+INSERT INTO `bbs_reply` VALUES ('3660', '1286', '1259', '205', '0', '+++++++++++++++++++++++++++1', '1', '0', '0', null, null, '2017-01-02 21:42:06', '127.0.0.1');
 
 -- ----------------------------
 -- Table structure for bbs_topic
@@ -507,7 +600,7 @@ CREATE TABLE `bbs_topic` (
   KEY `idx_nav_id` (`nav_id`),
   KEY `idx_topic_status` (`topic_status`),
   KEY `idx_topic_create_time` (`topic_create_time`)
-) ENGINE=InnoDB AUTO_INCREMENT=1253 DEFAULT CHARSET=utf8 COMMENT='论坛主题表';
+) ENGINE=InnoDB AUTO_INCREMENT=1260 DEFAULT CHARSET=utf8 COMMENT='论坛主题表';
 
 -- ----------------------------
 -- Records of bbs_topic
@@ -522,7 +615,7 @@ INSERT INTO `bbs_topic` VALUES ('1241', '1268', '205', '12324', '52', '随便测
 INSERT INTO `bbs_topic` VALUES ('1242', '1268', '205', '12324', '52', '随便测试', '随便测试', '0', '2016-10-29 14:11:11', '127.0.0.1', null);
 INSERT INTO `bbs_topic` VALUES ('1243', '1268', '206', '12321', '52', '随便测试', 'fEGZrxhfchzggzdfnxbvcbxzh\r\n&lt;div style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-family:隶书&quot;&gt;fdshfmgc,v.m&lt;/span&gt;&lt;/div&gt;\r\n', '0', '2016-11-11 20:29:49', '127.0.0.1', null);
 INSERT INTO `bbs_topic` VALUES ('1244', '1279', '200', '12315', '50', '随便测试', '7YA4UZEJTKXFG&lt;img alt=&quot;&quot; src=&quot;/bbs/resources/static/ckeditor4/plugins/smiley/self/image001.png&quot; style=&quot;height:30px; width:30px&quot; title=&quot;&quot; /&gt;', '0', '2016-11-11 20:47:09', '127.0.0.1', null);
-INSERT INTO `bbs_topic` VALUES ('1245', '1280', '206', '12321', '52', 'erstdyuiop[ldrtfgyuhijokp', '&lt;div style=&quot;text-align:center&quot;&gt;&lt;img alt=&quot;&quot; src=&quot;http://ofrjra54d.bkt.clouddn.com/c7aab8f7377c4042823005a645d662d71481889174789.jpg&quot; /&gt;&lt;br /&gt;\r\nstrdyfugihojpk[lrfyguhijokp&amp;#39;ldtyfkulihojpkl&lt;br /&gt;\r\ndshghdsf&lt;br /&gt;\r\nhsdag&lt;br /&gt;\r\nsadg&lt;br /&gt;\r\nf&lt;br /&gt;\r\n&lt;img alt=&quot;&quot; src=&quot;http://ofrjra54d.bkt.clouddn.com/694af9402c2049dd92ff9f27a1cb943b1481889070091.jpg&quot; /&gt;&lt;br /&gt;\r\n&lt;img alt=&quot;&quot; src=&quot;http://ofrjra54d.bkt.clouddn.com/a49ddf6f543546bfafd5afd98693a8261481889070076.jpg&quot; /&gt;&lt;br /&gt;\r\n&amp;nbsp;&lt;/div&gt;\r\n', '0', '2016-11-13 16:09:55', '127.0.0.1', null);
+INSERT INTO `bbs_topic` VALUES ('1245', '1280', '206', '12321', '52', 'erstdyuiopdrtfgyuhijokp', '&lt;div style=&quot;text-align:center&quot;&gt;&lt;img alt=&quot;&quot; src=&quot;http://ofrjra54d.bkt.clouddn.com/c7aab8f7377c4042823005a645d662d71481889174789.jpg&quot; /&gt;&lt;br /&gt;\r\nstrdyfugihojpk[lrfyguhijokp&amp;#39;ldtyfkulihojpkl&lt;br /&gt;\r\ndshghdsf&lt;br /&gt;\r\nhsdag&lt;br /&gt;\r\nsadg&lt;br /&gt;\r\nf&lt;br /&gt;\r\n&lt;img alt=&quot;&quot; src=&quot;http://ofrjra54d.bkt.clouddn.com/694af9402c2049dd92ff9f27a1cb943b1481889070091.jpg&quot; /&gt;&lt;br /&gt;\r\n&lt;img alt=&quot;&quot; src=&quot;http://ofrjra54d.bkt.clouddn.com/a49ddf6f543546bfafd5afd98693a8261481889070076.jpg&quot; /&gt;&lt;br /&gt;\r\n&amp;nbsp;&lt;/div&gt;\r\n', '0', '2016-11-13 16:09:55', '127.0.0.1', null);
 INSERT INTO `bbs_topic` VALUES ('1246', '1279', '205', '12322', '52', '品味乌镇', '&lt;p&gt;品味乌镇&lt;/p&gt;\r\n\r\n&lt;p&gt;很早之前，我就特别向往&lt;a href=&quot;http://jiangnan.sanwen8.cn/&quot; target=&quot;_blank&quot;&gt;江南&lt;/a&gt;水乡。这种向往，缘于那些耳熟能详的唐诗宋词，譬如白居易的《忆江南》、韦庄的《菩萨蛮&amp;bull;人人尽说江南好》、王琪的《望江南&amp;bull;忆江南》等等。&lt;/p&gt;\r\n\r\n&lt;p&gt;江南何以美，美得令当年的乾隆爷七下游历？美得令无数&lt;a href=&quot;http://www.sanwen.net/&quot; target=&quot;_blank&quot;&gt;文人&lt;/a&gt;墨客百般赞叹？今年深秋里的一天，在杭州&lt;a href=&quot;http://www.sanwen.net/gongzuozongjie.html&quot; target=&quot;_blank&quot;&gt;工作&lt;/a&gt;的女儿、准女婿及其&lt;a href=&quot;http://xiaojing.sanwen8.cn/&quot; target=&quot;_blank&quot;&gt;父母&lt;/a&gt;陪着我和内人一同驱车前往乌镇游逛，让我解开了这个疑惑。&lt;/p&gt;\r\n\r\n&lt;p&gt;江南水乡的缩影&lt;/p&gt;\r\n\r\n&lt;p&gt;人们都说，乌镇是江南水乡的一张绮丽的名片。水乡的特色，无论是在&lt;a href=&quot;http://www.sanwen.net/suibi/shenghuo/&quot; target=&quot;_blank&quot;&gt;生活&lt;/a&gt;、&lt;a href=&quot;http://www.sanwen.net/&quot; target=&quot;_blank&quot;&gt;文化&lt;/a&gt;，还是建筑、物产等方面的，在乌镇都能感受得到。&lt;/p&gt;\r\n\r\n&lt;p&gt;乌镇位于嘉兴的桐乡市，离杭州不远，本来只需大约两个钟头的车程，因为迷路我们中午时分才抵达，不过这丝毫没有影响我的情绪。( &lt;a href=&quot;http://www.sanwen.net/&quot; target=&quot;_blank&quot;&gt;文章&lt;/a&gt;&lt;a href=&quot;http://www.sanwen.net/&quot; target=&quot;_blank&quot;&gt;阅读&lt;/a&gt;网：www.sanwen.net )&lt;/p&gt;\r\n\r\n&lt;p&gt;乌镇分东南西北四栅，但景区分布在东栅和西栅。东栅有茅盾故居、余榴梁钱币馆、江南百床馆等20多个景点。西栅毗邻古老的京杭大运河，面积比东栅大得多，其12座小岛被小桥串连在一起，风光甚是秀美。&lt;/p&gt;\r\n\r\n&lt;p&gt;一下车，首先映入眼帘的是一座上书&amp;ldquo;乌镇&amp;rdquo;两个大字的仿古大门楼。匆匆用过午餐后，我们便迫不及待的向景区进发。&lt;/p&gt;\r\n\r\n&lt;p&gt;我们一行漫步在东栅的石板街巷之间，观赏那一草一木、一砖一瓦，追寻沧桑&lt;a href=&quot;http://www.sanwen.net/suibi/suiyue/&quot; target=&quot;_blank&quot;&gt;岁月&lt;/a&gt;嬗递所留下的痕迹。但见桥街相连，曲径通幽，水乡特性十分鲜明。在一间古宅的门口，我见到一位神态从容的耄耋老者悠然自得的坐在旁边的凳子上看书，我向他问安，与他攀谈，他告诉我：这里就都是些老的东西，老河、老街、老屋、老人。&lt;/p&gt;\r\n\r\n&lt;p&gt;江南水乡真可谓江河湖泊星罗棋布，水网纵横，水城田野如诗如画，园林幽径魅力无穷。这里非但风景美不胜收，历来也是神州大地最为富足的鱼米之乡、丝绸之府，无可置疑的&amp;ldquo;人间&lt;a href=&quot;http://tiantang.sanwen8.cn/&quot; target=&quot;_blank&quot;&gt;天堂&lt;/a&gt;&amp;rdquo;。&lt;/p&gt;\r\n\r\n&lt;p&gt;枕河人家的水阁&lt;/p&gt;\r\n\r\n&lt;p&gt;水是水乡的活力与灵性之所在，乌镇亦然。一条起码已流淌6000年的小河蜿蜒贯穿全镇，镇上以水为街，以岸为市，两岸阁楼临水而立。&lt;/p&gt;\r\n\r\n&lt;p&gt;乌镇沿河民居皆为匠心独具的&amp;ldquo;水阁&amp;rdquo;。房子大多是二层楼房，有一部分延伸至河面，下面用石柱或木桩竖于河底擎托着，上面架横梁搁木板做成木屋。扇窗推开，宛若像框。水阁宅前屋后，皆通河道；岸植垂柳，铺以石栏；门前河面，俱覆石阶。水阁上面居住，下面停船。他们充分利用多变的地形，使流水在房屋之间通畅。&lt;/p&gt;\r\n\r\n&lt;p&gt;乌镇几乎&amp;ldquo;家家门外泊舟航&amp;rdquo;，船是人们渡河和捕鱼、驮载必不可少的工具，即便是在今日它甚至比汽车还实用。&lt;/p&gt;\r\n\r\n&lt;p&gt;身临这种&amp;ldquo;枕河人家&amp;rdquo;，使我不禁想起茅盾在《大地山河》中对&lt;a href=&quot;http://www.sanwen.net/sanwen/guxiang/&quot; target=&quot;_blank&quot;&gt;故乡&lt;/a&gt;的描述。那一幢幢水阁亭亭玉立，被碧波托起犹如出水白莲。&amp;ldquo;人在屋中居，屋在水中游&amp;rdquo;&amp;ldquo;楼台俯舟楫&amp;rdquo;&amp;ldquo;白墙青瓦水中映&amp;rdquo;的景观，实在是别有情趣。我想，闲暇时与三二好友来此度假，在水阁中喝茶聊天，或观看蓬船，或垂钓赏鱼，该有多惬意。&lt;/p&gt;\r\n\r\n&lt;p&gt;无所不在的石桥&lt;/p&gt;\r\n\r\n&lt;p&gt;乌镇素有百步一桥之说，古色古香的石桥是其一大特色。据悉，其桥梁最多时达150多座，时下经修复、重建的古桥，仅西栅就有72座。乌镇河流密度和石桥数量均为全国古镇之最，堪称古桥博物馆。&lt;/p&gt;\r\n\r\n&lt;p&gt;这些石桥把被水道分隔的巷子都连接在一起，使得水乡的交通十分便利。同时，这些各式各样或拱或平的石桥也成了颇值欣赏的艺术品。&amp;ldquo;桥里桥&amp;rdquo;当是乌镇最为著名的两座石桥了。东西走向的&amp;ldquo;通济桥&amp;rdquo;与南北走向的&amp;ldquo;仁济桥&amp;rdquo;直角相连，互为犄角，交相辉映，迷离而清雅。在&amp;ldquo;通济桥&amp;rdquo;上的两副对联也是特有韵味的，一联曰：&amp;ldquo;寒树烟中，尽乌戍六朝旧地；&lt;a href=&quot;http://www.sanwen8.cn/subject/80878/&quot; target=&quot;_blank&quot;&gt;夕阳&lt;/a&gt;帆外，是吴兴几点远山。&amp;rdquo;另一联是：&amp;ldquo;通霅门开数万家，西环浙水；题桥人至三千里，北望燕京。&amp;rdquo;其联意不仅交代了古桥的历史地理环境，又表达了乌镇人志高心远的胸怀。&lt;/p&gt;\r\n\r\n&lt;p&gt;其实，乌镇的石桥除了普遍都有耐人寻味的对联外，其装饰也都具有高雅的格调。很多桥的望柱、栏板上都雕有&lt;a href=&quot;http://www.sanwen8.cn/sanwen/jingmei/&quot; target=&quot;_blank&quot;&gt;精美&lt;/a&gt;的图案，有莲花图案、六道轮回图案、万字图案等，给古桥增添了不少韵致，也蕴涵了古镇人们的宗教习俗以及祈祷吉祥平安的&lt;a href=&quot;http://www.sanwen8.cn/&quot; target=&quot;_blank&quot;&gt;美好&lt;/a&gt;愿望。&lt;/p&gt;\r\n\r\n&lt;p&gt;我看到，在一些石桥上还建有亭阁，如昭明书院西侧的&lt;a href=&quot;http://www.sanwen.net/sanwen/yu/&quot; target=&quot;_blank&quot;&gt;雨&lt;/a&gt;读桥。桥阁能遮阳避雨，桥侧护栏可供人们凭栏观赏水上风光。&lt;/p&gt;\r\n\r\n&lt;p&gt;煦育名流的摇篮&lt;/p&gt;\r\n\r\n&lt;p&gt;提起&lt;a href=&quot;http://www.sanwen.net/&quot; target=&quot;_blank&quot;&gt;文学&lt;/a&gt;巨匠茅盾，我不由地肃然起敬。先生的故居和纪念馆就坐落在观前街上。随着人流，我们轻步入内。故居是江浙一带常见的传统木构架民居建筑，处处散发着世代书香特有的逸雅之气。抚着先生的铜像，看着先生幼年时使用过的文物，感受着先生&lt;a href=&quot;http://cengjing.sanwen8.cn/&quot; target=&quot;_blank&quot;&gt;曾经&lt;/a&gt;生活过的气息，我无限欣慨。在一丛先生亲自栽种的&amp;ldquo;南天竹&amp;rdquo;前，女儿给我拍照留念。呵呵！我有时发表拙作就&lt;a href=&quot;http://www.sanwen8.cn/sanwen/love/&quot; target=&quot;_blank&quot;&gt;爱&lt;/a&gt;以&amp;ldquo;南天竹&amp;rdquo;为笔名呢，巧合了。&lt;/p&gt;\r\n\r\n&lt;p&gt;这里还是中国最早的镇志编撰者沈平、著名理学家张杨园等名流的出生地。南朝梁代的昭明太子萧统，也曾在此寓居多年并编撰了被史学界誉为堪比《诗经》《楚辞》的《昭明文选》。据说，小小乌镇在古代先后出过数百贡生、数百举人、近百进士，近、&lt;a href=&quot;http://www.sanwen.net/shige/xiandai/&quot; target=&quot;_blank&quot;&gt;现代&lt;/a&gt;更出有众多政治家、银行家、农学家、文化学者等等。这些胸怀博大天资聪慧的水乡&lt;a href=&quot;http://www.sanwen.net/jingdian/mingyan/&quot; target=&quot;_blank&quot;&gt;名人&lt;/a&gt;大家，在中国乃至世界历史上书写了诸多浓彩重墨。&lt;/p&gt;\r\n\r\n&lt;p&gt;&amp;ldquo;紫燕剪&lt;a href=&quot;http://chuntian.sanwen8.cn/&quot; target=&quot;_blank&quot;&gt;春&lt;/a&gt;雨，丝竹弄管弦&amp;rdquo;的江南，毓秀钟灵的水乡，可真是&lt;a href=&quot;http://www.sanwen.net/&quot; target=&quot;_blank&quot;&gt;人文&lt;/a&gt;荟萃啊！&lt;/p&gt;\r\n\r\n&lt;p&gt;独特有趣的民俗&lt;/p&gt;\r\n\r\n&lt;p&gt;乌镇除了华&lt;a href=&quot;http://xiatian.sanwen8.cn/&quot; target=&quot;_blank&quot;&gt;夏&lt;/a&gt;民族共有的那些传统习俗外，还有元宵走桥、立夏称人、分龙彩雨、天贶晒虫、中元河灯等众多独特的民俗。&lt;/p&gt;\r\n\r\n&lt;p&gt;我们来的不是时候，这些活动都无缘欣赏，但也幸运地遇上了精彩的&amp;ldquo;爬高杆表演&amp;rdquo;。我们略为等候之后，只见一个白衣小伙不知从什么地方突然冒了出来，又突然&amp;ldquo;咚&amp;rdquo;的一声跳上了小船。随后便像春蚕似地向那根竹杆上方爬去，大约十五、六米长的竹杆立时晃荡起来。他时而横身与竹杆成十字交叉，时而倒立与竹杆成丁字状，做了许多&lt;a href=&quot;http://www.sanwen.net/sanwen/youmei/&quot; target=&quot;_blank&quot;&gt;优美&lt;/a&gt;而高难的动作。好惊险！两边岸上的观众纷纷鼓起掌来。我想，大概体操世界冠军也未必敢如此这般吧？弄不好就会&amp;ldquo;啪&amp;rdquo;地掉到船板上摔个鼻青脸肿，或是&amp;ldquo;咚&amp;rdquo;地掉入水中成落汤鸡呢。传说这个活动本来是蚕农们为了祈求丰收而举办的，时下也经常会向游人演绎一番。&lt;/p&gt;\r\n\r\n&lt;p&gt;夕阳西下时，我们来到了古戏台、修真观一带瞎逛。戏台上两个&lt;a href=&quot;http://nvren.sanwen8.cn/&quot; target=&quot;_blank&quot;&gt;女子&lt;/a&gt;在悠扬起伏的二胡伴奏下&amp;ldquo;咿咿呀呀&amp;rdquo;地唱着我根本听不懂的桐江花鼓。她们的扮相还算可以，动作也挺温柔，只是人都很老很老了。&lt;/p&gt;\r\n\r\n&lt;p&gt;我们漫步至&amp;ldquo;宏源泰染坊&amp;rdquo;。这里是染织作坊，却也是游人如织。听说这个作坊是始创于宋元年间的老老店了。在宽敞的晒场上，但见悬挂在纵横交错的竹竿上晾晒的几十挂蓝色印花布随风飘曳，犹如跳着优&lt;a href=&quot;http://www.sanwen.net/&quot; target=&quot;_blank&quot;&gt;美的&lt;/a&gt;舞蹈，那白色的花仿佛呼之欲出。在这里你不但可以看到美丽的花布匹从轧棉籽、纺纱线、织棉布到纱布印染传统工序全过程的演示，了解蓝印花布是怎么织成的，清新可爱的花纹又是怎么印出来的，还可以带一些蓝印花布的成品回家赠送给亲朋好友。应该提及的是，中国的蓝印花布在全世界可都是久负盛名的，而乌镇就是蓝印花布的原产地之一。&lt;/p&gt;\r\n\r\n&lt;p&gt;乌镇多名食，街巷里江南风味浓厚的各种菜肴、小吃琳琅满目。在一个可以和游客互动的手工面食作坊，内人买了一盒像是糯米糕的小食来品尝。兴致之余我们还轮起木锤锤打面团，女儿见状急忙用她的&amp;ldquo;单反&amp;rdquo;来一番连拍。哈！还真是好玩。&lt;/p&gt;\r\n\r\n&lt;p&gt;璀璨迷人的&lt;a href=&quot;http://ye.sanwen8.cn/&quot; target=&quot;_blank&quot;&gt;夜&lt;/a&gt;景&lt;/p&gt;\r\n\r\n&lt;p&gt;华灯初上之际，我们来到了西栅。&lt;/p&gt;\r\n\r\n&lt;p&gt;西栅以夜景为美。人们都说，如果不去感受乌镇的晨、昏，就不能&lt;a href=&quot;http://baogao.sanwen.net/xindetihui/&quot; target=&quot;_blank&quot;&gt;体会&lt;/a&gt;到江南水乡完整的美。这就难怪入夜了这里依然是人山人海。把车子停放好后，我们一行也尽情地去感受她的美妙。&lt;/p&gt;\r\n\r\n&lt;p&gt;体味西栅必须乘船。我们租得一条老式敞篷木船，沿着弯曲的水路，一路泛舟、游观。夜幕下的水乡古镇是何等的绚丽！这是水、桥、灯交集的世界，&lt;a href=&quot;http://meng.sanwen8.cn/&quot; target=&quot;_blank&quot;&gt;梦&lt;/a&gt;幻般的世界。置身于此，真是梦里不知身是客了。&lt;/p&gt;\r\n\r\n&lt;p&gt;看，西市河水上水下灯光辉映，俨然成了灯河。船在一条条嫕静的灯河中划行，似是划破了一池池碎银；船从一座座古老的石桥中穿越，又如穿梭在一个个时空隧道。船家摇橹的咿呀声、水被划动的哗啦声、游人的戏闹声交织在一起，仿佛一首首交响乐，令人心旷神怡，乐不思蜀。&lt;/p&gt;\r\n\r\n&lt;p&gt;回味无穷的幽情&lt;/p&gt;\r\n\r\n&lt;p&gt;电视剧《似水年华》中如此形容乌镇：&amp;ldquo;如黄昏的一帘幽梦。&amp;rdquo;驻足回味，乌镇给我最深的印象就是一种无所不在的&amp;ldquo;幽&amp;rdquo;：幽静的乡域，幽嫮的情景，幽深的街巷，幽泌的河水，幽怨的古戏，幽居的老人，幽姿的女子，幽邃的文化......&lt;/p&gt;\r\n\r\n&lt;p&gt;乌镇犹如世外桃园。幽静、恬淡，能让人放松&lt;a href=&quot;http://xinling.sanwen8.cn/&quot; target=&quot;_blank&quot;&gt;心灵&lt;/a&gt;，忘却烦恼和压抑，只留下一方清净，一分惬意，一份情怀，让人恋恋不舍。&lt;/p&gt;\r\n\r\n&lt;p&gt;乌镇犹如伊甸园。幽嫮、温馨，充满罗曼蒂克。难怪古来骚客常来吟咏风月，难怪无数少男&lt;a href=&quot;http://nvren.sanwen8.cn/&quot; target=&quot;_blank&quot;&gt;少女&lt;/a&gt;常来谈情说爱，&lt;a href=&quot;http://qianshou.sanwen8.cn/&quot; target=&quot;_blank&quot;&gt;牵手&lt;/a&gt;走过&amp;ldquo;逢源双桥&amp;rdquo;。《似水年华》里英的那句&amp;ldquo;在乌镇，令人想谈恋爱&amp;rdquo;的话，以及文和英的&lt;a href=&quot;http://www.sanwen.net/sanwen/love/&quot; target=&quot;_blank&quot;&gt;爱情&lt;/a&gt;&lt;a href=&quot;http://tonghua.sanwen.net/&quot; target=&quot;_blank&quot;&gt;故事&lt;/a&gt;，不知让多少&lt;a href=&quot;http://qingchun.sanwen8.cn/&quot; target=&quot;_blank&quot;&gt;年轻&lt;/a&gt;人为之痴迷。&lt;/p&gt;\r\n\r\n&lt;p&gt;乌镇犹如幽姿淑态的江南女子。天生丽质，柔情似水，看似纤细窈窕之身却蕴含着大家闺秀的非凡气质。那一排排的垂柳，微风吹来柳条飘散，恰如一个个少女在梳理秀发；夜幕降临后柳叶低垂，又好比一个个闭眼含羞的睡美人，妙不可言。&lt;/p&gt;\r\n\r\n&lt;p&gt;夜深了，不得不走了。惜别乌镇之前，我们两家人都留了影，算是留下一个恒久的&lt;a href=&quot;http://huiyi.sanwen8.cn/&quot; target=&quot;_blank&quot;&gt;记忆&lt;/a&gt;吧。&lt;br /&gt;\r\n&lt;br /&gt;\r\n&amp;nbsp;&lt;/p&gt;\r\n', '0', '2016-11-30 23:29:32', '127.0.0.1', null);
 INSERT INTO `bbs_topic` VALUES ('1247', '1268', '192', '12307', '47', '随便测试', 'qewterutiyyugoiou', '0', '2016-12-01 19:27:32', '127.0.0.1', null);
 INSERT INTO `bbs_topic` VALUES ('1248', '1268', '204', '12319', '52', 'qWAESRTYUPUYTWRYERTIYU', '&lt;img alt=&quot;&quot; height=&quot;363&quot; src=&quot;http://ofrjra54d.bkt.clouddn.com/8d63c096305347c19131407f05480a911481632725012.png&quot; width=&quot;653&quot; /&gt;&lt;br /&gt;\r\npicture....', '0', '2016-12-13 20:39:43', '127.0.0.1', null);
@@ -530,6 +623,13 @@ INSERT INTO `bbs_topic` VALUES ('1249', '1268', '204', '12319', '52', '撒个谎
 INSERT INTO `bbs_topic` VALUES ('1250', '1268', '205', '12322', '52', '真尼玛尴尬', '&lt;div style=&quot;text-align:center&quot;&gt;奥迪双钻的辛苦费&lt;br /&gt;\r\nasfsdhfjghg&lt;/div&gt;\r\n\r\n&lt;div style=&quot;text-align:center&quot;&gt;&lt;img alt=&quot;&quot; height=&quot;251&quot; src=&quot;http://ofrjra54d.bkt.clouddn.com/1e71f67e65064a99982e786d090568b21481720848199.jpg&quot; width=&quot;251&quot; /&gt;&lt;br /&gt;\r\n&lt;br /&gt;\r\n&lt;br /&gt;\r\n&lt;br /&gt;\r\n&lt;br /&gt;\r\n&lt;br /&gt;\r\n&lt;br /&gt;\r\n&lt;br /&gt;\r\n什么鬼。。&lt;br /&gt;\r\n&lt;img alt=&quot;&quot; src=&quot;http://ofrjra54d.bkt.clouddn.com/24c1d532c43e441f84565eac8ed91fed1481720848202.jpg&quot; /&gt;&lt;/div&gt;\r\n\r\n&lt;div&gt;rilegou&lt;br /&gt;\r\n&lt;br /&gt;\r\n&lt;img alt=&quot;&quot; height=&quot;338&quot; src=&quot;http://ofrjra54d.bkt.clouddn.com/e8d616baa19349999a189b6526f66b261481720848213.jpg&quot; width=&quot;338&quot; /&gt;&lt;/div&gt;\r\n', '0', '2016-12-14 21:08:52', '127.0.0.1', null);
 INSERT INTO `bbs_topic` VALUES ('1251', '1268', '206', '12321', '52', 'fsaddsag', 'gsadadadadadadadadadadadadadadadad&lt;br /&gt;\r\nafsfsfsfsfs', '0', '2016-12-21 20:49:12', '127.0.0.1', null);
 INSERT INTO `bbs_topic` VALUES ('1252', '1285', '205', '12322', '52', 'zzuli', '&lt;img alt=&quot;&quot; src=&quot;http://ofrjra54d.bkt.clouddn.com/89294f5b02c44efc8e3d311aa70216a61482327614834.jpg&quot; /&gt;&lt;br /&gt;\r\n赵奕欢。。。。。。。', '0', '2016-12-21 21:40:57', '127.0.0.1', null);
+INSERT INTO `bbs_topic` VALUES ('1253', '1268', '196', '12312', '49', 'savecount', '&lt;div style=&quot;text-align: center;&quot;&gt;topic count&amp;nbsp; + 1&lt;br /&gt;\r\n&lt;br /&gt;\r\n&lt;img alt=&quot;&quot; height=&quot;330&quot; src=&quot;http://ofrjra54d.bkt.clouddn.com/1dd0cc8e47df49959668aca6c861c3f91483012693481.jpg&quot; width=&quot;330&quot; /&gt;&lt;/div&gt;\r\n', '0', '2016-12-29 19:58:42', '127.0.0.1', null);
+INSERT INTO `bbs_topic` VALUES ('1254', '1279', '205', '12322', '52', '七牛参数级别的无损图像压缩', '&lt;img alt=&quot;&quot; src=&quot;http://ofrjra54d.bkt.clouddn.com/27566099cd1f4d25b1e898c8ad9bb51d1483022083343.jpg?imageView/2/w/800/h/600&quot; /&gt;&lt;br /&gt;\r\n&lt;br /&gt;\r\n七牛参数级别的无损图像压缩', '0', '2016-12-29 22:35:48', '127.0.0.1', null);
+INSERT INTO `bbs_topic` VALUES ('1255', '1279', '203', '12318', '51', 'imageView/2/w/800/h/600', 'imageView/2/w/800/h/600', '0', '2016-12-29 22:43:39', '127.0.0.1', null);
+INSERT INTO `bbs_topic` VALUES ('1256', '1268', '200', '12315', '50', '撒个谎东方股份合格', '&lt;pre class=&quot;brush:java;toolbar:false;&quot;&gt;\r\n23:15:50.386 [http-bio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - Successfully completed request\r\n23:15:50.386 [http-bio-8080-exec-11] DEBUG o.s.d.r.core.RedisConnectionUtils - Opening RedisConnection\r\n23:15:50.386 [http-bio-8080-exec-11] DEBUG o.s.d.r.core.RedisConnectionUtils - Closing Redis Connection\r\n23:15:50.386 [http-bio-8080-exec-11] DEBUG o.s.web.servlet.DispatcherServlet - Null ModelAndView returned to DispatcherServlet with name &amp;#39;bbs-dispatcher&amp;#39;: assuming HandlerAdapter completed request handling\r\n23:15:50.386 [http-bio-8080-exec-11] DEBUG o.s.web.servlet.DispatcherServlet - Successfully completed request&lt;/pre&gt;\r\n', '0', '2016-12-30 23:16:26', '127.0.0.1', null);
+INSERT INTO `bbs_topic` VALUES ('1257', '1268', '199', '12314', '50', 'erstdyuiop[ldrtfgyuhijokp', '&lt;span style=&quot;color:#40E0D0&quot;&gt;16-12-30 23:14:11&lt;/span&gt;\r\n&lt;table border=&quot;1&quot; class=&quot;sortable&quot; id=&quot;table5&quot; style=&quot;width:100%&quot; summary=&quot;log&quot;&gt;\r\n	&lt;tbody&gt;\r\n		&lt;tr&gt;\r\n			&lt;td&gt;&amp;nbsp;&lt;/td&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;/system/admin/images/photos/user3.png&amp;nbsp;GET&lt;/span&gt;&lt;/td&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;WARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;/span&gt;&lt;/td&gt;\r\n		&lt;/tr&gt;\r\n		&lt;tr&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;16-12-30 23:14:11&lt;/span&gt;&lt;/td&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;/system/admin/images/logo.png&amp;nbsp;GET&lt;/span&gt;&lt;/td&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;WARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;/span&gt;&lt;/td&gt;\r\n		&lt;/tr&gt;\r\n		&lt;tr&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;16-12-30 23:14:11&lt;/span&gt;&lt;/td&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;/system/admin/images/photos/user-avatar.png&amp;nbsp;GET&lt;/span&gt;&lt;/td&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;WARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;/span&gt;&lt;/td&gt;\r\n		&lt;/tr&gt;\r\n		&lt;tr&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;16-12-30 23:14:11&lt;/span&gt;&lt;/td&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;/system/admin/images/photos/user5.png&amp;nbsp;GET&lt;/span&gt;&lt;/td&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;WARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;/span&gt;&lt;/td&gt;\r\n		&lt;/tr&gt;\r\n		&lt;tr&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;16-12-30 23:14:11&lt;/span&gt;&lt;/td&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;/system/admin/images/photos/user1.png&amp;nbsp;GET&lt;/span&gt;&lt;/td&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;WARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;/span&gt;&lt;/td&gt;\r\n		&lt;/tr&gt;\r\n		&lt;tr&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;16-12-30 23:14:11&lt;/span&gt;&lt;/td&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;/system/admin/images/photos/user4.png&amp;nbsp;GET&lt;/span&gt;&lt;/td&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;WARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;/span&gt;&lt;/td&gt;\r\n		&lt;/tr&gt;\r\n		&lt;tr&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;16-12-30 23:14:11&lt;/span&gt;&lt;/td&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;/system/admin/images/photos/user2.png&amp;nbsp;GET&lt;/span&gt;&lt;/td&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;WARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;/span&gt;&lt;/td&gt;\r\n		&lt;/tr&gt;\r\n		&lt;tr&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;16-12-30 23:14:11&lt;/span&gt;&lt;/td&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;/system/admin/images/logo_icon.png&amp;nbsp;GET&lt;/span&gt;&lt;/td&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;WARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;/span&gt;&lt;/td&gt;\r\n		&lt;/tr&gt;\r\n		&lt;tr&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;16-12-30 23:14:11&lt;/span&gt;&lt;/td&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;/system/admin/images/logo.png&amp;nbsp;GET&lt;/span&gt;&lt;/td&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;WARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;/span&gt;&lt;/td&gt;\r\n		&lt;/tr&gt;\r\n		&lt;tr&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;16-12-30 23:14:11&lt;/span&gt;&lt;/td&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;/system/admin/images/photos/user1.png&amp;nbsp;GET&lt;/span&gt;&lt;/td&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;WARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;/span&gt;&lt;/td&gt;\r\n		&lt;/tr&gt;\r\n		&lt;tr&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;16-12-30 23:14:11&lt;/span&gt;&lt;/td&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;/system/admin/images/logo_icon.png&amp;nbsp;GET&lt;/span&gt;&lt;/td&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;WARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;/span&gt;&lt;/td&gt;\r\n		&lt;/tr&gt;\r\n		&lt;tr&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;16-12-30 23:14:11&lt;/span&gt;&lt;/td&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;/system/admin/images/photos/user4.png&amp;nbsp;GET&lt;/span&gt;&lt;/td&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;WARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;/span&gt;&lt;/td&gt;\r\n		&lt;/tr&gt;\r\n		&lt;tr&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;16-12-30 23:14:11&lt;/span&gt;&lt;/td&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;/system/admin/images/photos/user-avatar.png&amp;nbsp;GET&lt;/span&gt;&lt;/td&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;WARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;/span&gt;&lt;/td&gt;\r\n		&lt;/tr&gt;\r\n		&lt;tr&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;16-12-30 23:14:11&lt;/span&gt;&lt;/td&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;/system/admin/images/photos/user3.png&amp;nbsp;GET&lt;/span&gt;&lt;/td&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;WARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;/span&gt;&lt;/td&gt;\r\n		&lt;/tr&gt;\r\n		&lt;tr&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;16-12-30 23:14:11&lt;/span&gt;&lt;/td&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;/system/admin/images/photos/user2.png&amp;nbsp;GET&lt;/span&gt;&lt;/td&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;WARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;/span&gt;&lt;/td&gt;\r\n		&lt;/tr&gt;\r\n		&lt;tr&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;16-12-30 23:14:11&lt;/span&gt;&lt;/td&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;/system/admin/images/photos/user5.png&amp;nbsp;GET&lt;/span&gt;&lt;/td&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;WARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;/span&gt;&lt;/td&gt;\r\n		&lt;/tr&gt;\r\n		&lt;tr&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;16-12-30 23:14:12&lt;/span&gt;&lt;/td&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;/system/admin/images/details_open.png&amp;nbsp;GET&lt;/span&gt;&lt;/td&gt;\r\n			&lt;td&gt;&lt;span style=&quot;color:#40E0D0&quot;&gt;WARN&amp;nbsp;&amp;nbsp;c.i.bbs.interceptor.BbsInterceptor&amp;nbsp;-&amp;nbsp;admin&amp;nbsp;url&amp;nbsp;found,&amp;nbsp;ip&amp;nbsp;is&amp;nbsp;127.0.0.1&lt;/span&gt;&lt;/td&gt;\r\n		&lt;/tr&gt;\r\n	&lt;/tbody&gt;\r\n&lt;/table&gt;\r\n', '0', '2016-12-30 23:18:41', '127.0.0.1', null);
+INSERT INTO `bbs_topic` VALUES ('1258', '1268', '192', '12307', '47', '+++++++++++++++++++1', '+++++++++++++++++1', '0', '2017-01-02 21:40:05', '127.0.0.1', null);
+INSERT INTO `bbs_topic` VALUES ('1259', '1286', '205', '12322', '52', '+++++++++++++++++++1', '++++++++++++++++++++++++++++++++1', '0', '2017-01-02 21:41:59', '127.0.0.1', null);
 
 -- ----------------------------
 -- Table structure for bbs_topic_data
@@ -562,7 +662,7 @@ INSERT INTO `bbs_topic_data` VALUES ('1241', '0', '0', '0', null, null, null, '0
 INSERT INTO `bbs_topic_data` VALUES ('1242', '0', '0', '0', null, null, null, '0', null, null);
 INSERT INTO `bbs_topic_data` VALUES ('1243', '0', '0', '0', null, null, null, '0', null, null);
 INSERT INTO `bbs_topic_data` VALUES ('1244', '0', '0', '0', null, null, null, '0', null, null);
-INSERT INTO `bbs_topic_data` VALUES ('1245', '0', '19', '0', null, null, null, '1268', 'Smart_咚咚', '2016-12-16 19:53:06');
+INSERT INTO `bbs_topic_data` VALUES ('1245', '1', '28', '0', null, 'Smart_咚咚', '2016-12-16 19:53:35', '1268', 'Smart_咚咚', '2016-12-31 16:52:52');
 INSERT INTO `bbs_topic_data` VALUES ('1246', '0', '3', '0', null, null, null, '1279', 'tonboy', '2016-12-02 22:59:12');
 INSERT INTO `bbs_topic_data` VALUES ('1247', '0', '0', '0', null, null, null, '0', null, null);
 INSERT INTO `bbs_topic_data` VALUES ('1248', '0', '4', '0', null, null, null, '1268', 'Smart_咚咚', '2016-12-13 20:40:30');
@@ -570,6 +670,13 @@ INSERT INTO `bbs_topic_data` VALUES ('1249', '0', '0', '0', null, null, null, '0
 INSERT INTO `bbs_topic_data` VALUES ('1250', '0', '2', '0', null, null, null, '1268', 'Smart_咚咚', '2016-12-14 21:09:41');
 INSERT INTO `bbs_topic_data` VALUES ('1251', '0', '2', '0', null, null, null, '1268', 'Smart_咚咚', '2016-12-21 20:52:02');
 INSERT INTO `bbs_topic_data` VALUES ('1252', '0', '0', '0', null, null, null, '0', null, null);
+INSERT INTO `bbs_topic_data` VALUES ('1253', '0', '0', '0', null, null, null, '0', null, null);
+INSERT INTO `bbs_topic_data` VALUES ('1254', '0', '0', '0', null, null, null, '0', null, null);
+INSERT INTO `bbs_topic_data` VALUES ('1255', '0', '0', '0', null, null, null, '0', null, null);
+INSERT INTO `bbs_topic_data` VALUES ('1256', '0', '0', '0', null, null, null, '0', null, null);
+INSERT INTO `bbs_topic_data` VALUES ('1257', '2', '5', '0', null, 'Smart_咚咚', '2016-12-30 23:19:11', '1268', 'Smart_咚咚', '2016-12-30 23:19:47');
+INSERT INTO `bbs_topic_data` VALUES ('1258', '0', '0', '0', null, null, null, '0', null, null);
+INSERT INTO `bbs_topic_data` VALUES ('1259', '0', '0', '0', null, null, null, '0', null, null);
 
 -- ----------------------------
 -- Table structure for bbs_topic_info
@@ -603,7 +710,7 @@ INSERT INTO `bbs_topic_info` VALUES ('1241', '1', '1', null, '0', '0', null, '0'
 INSERT INTO `bbs_topic_info` VALUES ('1242', '1', '0', null, '0', '0', null, '0', null, '0', '1');
 INSERT INTO `bbs_topic_info` VALUES ('1243', '1', '1', null, '1', '0', null, '0', null, '0', '0');
 INSERT INTO `bbs_topic_info` VALUES ('1244', '1', '0', null, '0', '0', null, '0', null, '0', '0');
-INSERT INTO `bbs_topic_info` VALUES ('1245', '0', '0', null, '0', '0', null, '0', null, '0', '0');
+INSERT INTO `bbs_topic_info` VALUES ('1245', '1', '0', null, '0', '0', null, '0', null, '0', '0');
 INSERT INTO `bbs_topic_info` VALUES ('1246', '1', '0', null, '0', '0', null, '0', null, '0', '0');
 INSERT INTO `bbs_topic_info` VALUES ('1247', '1', '0', null, '0', '0', null, '1', null, '0', '0');
 INSERT INTO `bbs_topic_info` VALUES ('1248', '0', '0', null, '0', '0', null, '0', null, '0', '0');
@@ -611,6 +718,13 @@ INSERT INTO `bbs_topic_info` VALUES ('1249', '0', '0', null, '0', '0', null, '0'
 INSERT INTO `bbs_topic_info` VALUES ('1250', '0', '0', null, '0', '1', null, '0', null, '0', '0');
 INSERT INTO `bbs_topic_info` VALUES ('1251', '1', '0', null, '0', '0', null, '0', null, '0', '0');
 INSERT INTO `bbs_topic_info` VALUES ('1252', '1', '0', null, '0', '0', null, '0', null, '0', '0');
+INSERT INTO `bbs_topic_info` VALUES ('1253', '1', '0', null, '0', '0', null, '0', null, '0', '0');
+INSERT INTO `bbs_topic_info` VALUES ('1254', '1', '0', null, '0', '0', null, '0', null, '0', '0');
+INSERT INTO `bbs_topic_info` VALUES ('1255', '1', '0', null, '0', '0', null, '0', null, '0', '1');
+INSERT INTO `bbs_topic_info` VALUES ('1256', '1', '0', null, '0', '0', null, '0', null, '0', '0');
+INSERT INTO `bbs_topic_info` VALUES ('1257', '1', '0', null, '0', '0', null, '0', null, '0', '0');
+INSERT INTO `bbs_topic_info` VALUES ('1258', '1', '0', null, '0', '0', null, '0', null, '0', '0');
+INSERT INTO `bbs_topic_info` VALUES ('1259', '1', '0', null, '0', '0', null, '0', null, '0', '0');
 
 -- ----------------------------
 -- Table structure for bmc_log
@@ -647,7 +761,7 @@ CREATE TABLE `experience_history` (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`),
   KEY `index_exp_user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=174 DEFAULT CHARSET=utf8 COMMENT='经验历史';
+) ENGINE=InnoDB AUTO_INCREMENT=200 DEFAULT CHARSET=utf8 COMMENT='经验历史';
 
 -- ----------------------------
 -- Records of experience_history
@@ -818,6 +932,32 @@ INSERT INTO `experience_history` VALUES ('170', '1285', 'test01', '1', '登录',
 INSERT INTO `experience_history` VALUES ('171', '1285', 'test01', '1', '签到', '2016-12-24 17:01:43');
 INSERT INTO `experience_history` VALUES ('172', '1285', 'test01', '1', '回帖', '2016-12-24 17:01:43');
 INSERT INTO `experience_history` VALUES ('173', '1280', 'tonboyw', '1', '签到', '2016-12-25 17:21:11');
+INSERT INTO `experience_history` VALUES ('174', '1280', 'tonboyw', '1', '登录', '2016-12-28 23:44:47');
+INSERT INTO `experience_history` VALUES ('175', '1280', 'tonboyw', '1', '签到', '2016-12-28 23:44:50');
+INSERT INTO `experience_history` VALUES ('176', '1285', 'test01', '1', '登录', '2016-12-28 23:45:40');
+INSERT INTO `experience_history` VALUES ('177', '1285', 'test01', '1', '签到', '2016-12-28 23:45:45');
+INSERT INTO `experience_history` VALUES ('178', '1268', 'Smart_咚咚', '1', '登录', '2016-12-28 23:46:02');
+INSERT INTO `experience_history` VALUES ('179', '1285', 'test01', '1', '签到', '2016-12-28 23:45:45');
+INSERT INTO `experience_history` VALUES ('180', '1286', 'test', '1', '注册', '2016-12-29 20:00:44');
+INSERT INTO `experience_history` VALUES ('181', '1286', 'test', '1', '登录', '2016-12-29 20:01:35');
+INSERT INTO `experience_history` VALUES ('182', '1286', 'test', '1', '签到', '2016-12-29 20:01:41');
+INSERT INTO `experience_history` VALUES ('183', '1286', 'test', '1', '回帖', '2016-12-29 20:01:41');
+INSERT INTO `experience_history` VALUES ('184', '1268', 'Smart_咚咚', '1', '登录', '2016-12-29 20:03:18');
+INSERT INTO `experience_history` VALUES ('185', '1280', 'tonboyw', '1', '登录', '2016-12-30 19:41:30');
+INSERT INTO `experience_history` VALUES ('186', '1280', 'tonboyw', '1', '签到', '2016-12-30 19:41:31');
+INSERT INTO `experience_history` VALUES ('187', '1285', 'test01', '1', '登录', '2016-12-30 19:41:39');
+INSERT INTO `experience_history` VALUES ('188', '1285', 'test01', '1', '签到', '2016-12-30 19:41:41');
+INSERT INTO `experience_history` VALUES ('189', '1268', 'Smart_咚咚', '1', '登录', '2016-12-30 19:41:50');
+INSERT INTO `experience_history` VALUES ('190', '1280', 'tonboyw', '1', '签到', '2016-12-31 21:35:26');
+INSERT INTO `experience_history` VALUES ('191', '1280', 'tonboyw', '1', '登录', '2017-01-02 21:41:00');
+INSERT INTO `experience_history` VALUES ('192', '1280', 'tonboyw', '1', '签到', '2017-01-02 21:41:02');
+INSERT INTO `experience_history` VALUES ('193', '1285', 'test01', '1', '登录', '2017-01-02 21:41:16');
+INSERT INTO `experience_history` VALUES ('194', '1285', 'test01', '1', '签到', '2017-01-02 21:41:18');
+INSERT INTO `experience_history` VALUES ('195', '1286', 'test', '1', '登录', '2017-01-02 21:41:32');
+INSERT INTO `experience_history` VALUES ('196', '1286', 'test', '1', '签到', '2017-01-02 21:41:34');
+INSERT INTO `experience_history` VALUES ('197', '1286', 'test', '2', '发帖', '2017-01-02 21:41:34');
+INSERT INTO `experience_history` VALUES ('198', '1286', 'test', '1', '回帖', '2017-01-02 21:41:34');
+INSERT INTO `experience_history` VALUES ('199', '1268', 'Smart_咚咚', '1', '登录', '2017-01-02 21:42:53');
 
 -- ----------------------------
 -- Table structure for friend_link
@@ -866,7 +1006,7 @@ CREATE TABLE `gold_history` (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`),
   KEY `index_gold_user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=160 DEFAULT CHARSET=utf8 COMMENT='金币历史';
+) ENGINE=InnoDB AUTO_INCREMENT=186 DEFAULT CHARSET=utf8 COMMENT='金币历史';
 
 -- ----------------------------
 -- Records of gold_history
@@ -1029,6 +1169,32 @@ INSERT INTO `gold_history` VALUES ('156', '1285', 'test01', '1', '1', '登录', 
 INSERT INTO `gold_history` VALUES ('157', '1285', 'test01', '1', '0', '签到', '2016-12-24 17:01:43');
 INSERT INTO `gold_history` VALUES ('158', '1285', 'test01', '1', '4', '回帖', '2016-12-24 17:01:43');
 INSERT INTO `gold_history` VALUES ('159', '1280', 'tonboyw', '1', '0', '签到', '2016-12-25 17:21:11');
+INSERT INTO `gold_history` VALUES ('160', '1280', 'tonboyw', '1', '1', '登录', '2016-12-28 23:44:47');
+INSERT INTO `gold_history` VALUES ('161', '1280', 'tonboyw', '1', '0', '签到', '2016-12-28 23:44:50');
+INSERT INTO `gold_history` VALUES ('162', '1285', 'test01', '1', '1', '登录', '2016-12-28 23:45:40');
+INSERT INTO `gold_history` VALUES ('163', '1285', 'test01', '1', '0', '签到', '2016-12-28 23:45:45');
+INSERT INTO `gold_history` VALUES ('164', '1268', 'Smart_咚咚', '1', '1', '登录', '2016-12-28 23:46:02');
+INSERT INTO `gold_history` VALUES ('165', '1285', 'test01', '1', '0', '签到', '2016-12-28 23:45:45');
+INSERT INTO `gold_history` VALUES ('166', '1286', 'test', '50', '2', '注册', '2016-12-29 20:00:44');
+INSERT INTO `gold_history` VALUES ('167', '1286', 'test', '1', '1', '登录', '2016-12-29 20:01:35');
+INSERT INTO `gold_history` VALUES ('168', '1286', 'test', '1', '0', '签到', '2016-12-29 20:01:41');
+INSERT INTO `gold_history` VALUES ('169', '1286', 'test', '1', '4', '回帖', '2016-12-29 20:01:41');
+INSERT INTO `gold_history` VALUES ('170', '1268', 'Smart_咚咚', '1', '1', '登录', '2016-12-29 20:03:18');
+INSERT INTO `gold_history` VALUES ('171', '1280', 'tonboyw', '1', '1', '登录', '2016-12-30 19:41:30');
+INSERT INTO `gold_history` VALUES ('172', '1280', 'tonboyw', '1', '0', '签到', '2016-12-30 19:41:31');
+INSERT INTO `gold_history` VALUES ('173', '1285', 'test01', '1', '1', '登录', '2016-12-30 19:41:39');
+INSERT INTO `gold_history` VALUES ('174', '1285', 'test01', '1', '0', '签到', '2016-12-30 19:41:41');
+INSERT INTO `gold_history` VALUES ('175', '1268', 'Smart_咚咚', '1', '1', '登录', '2016-12-30 19:41:50');
+INSERT INTO `gold_history` VALUES ('176', '1280', 'tonboyw', '1', '0', '签到', '2016-12-31 21:35:26');
+INSERT INTO `gold_history` VALUES ('177', '1280', 'tonboyw', '1', '1', '登录', '2017-01-02 21:41:00');
+INSERT INTO `gold_history` VALUES ('178', '1280', 'tonboyw', '1', '0', '签到', '2017-01-02 21:41:02');
+INSERT INTO `gold_history` VALUES ('179', '1285', 'test01', '1', '1', '登录', '2017-01-02 21:41:16');
+INSERT INTO `gold_history` VALUES ('180', '1285', 'test01', '1', '0', '签到', '2017-01-02 21:41:18');
+INSERT INTO `gold_history` VALUES ('181', '1286', 'test', '1', '1', '登录', '2017-01-02 21:41:32');
+INSERT INTO `gold_history` VALUES ('182', '1286', 'test', '1', '0', '签到', '2017-01-02 21:41:34');
+INSERT INTO `gold_history` VALUES ('183', '1286', 'test', '2', '3', '发帖', '2017-01-02 21:41:34');
+INSERT INTO `gold_history` VALUES ('184', '1286', 'test', '1', '4', '回帖', '2017-01-02 21:41:34');
+INSERT INTO `gold_history` VALUES ('185', '1268', 'Smart_咚咚', '1', '1', '登录', '2017-01-02 21:42:53');
 
 -- ----------------------------
 -- Table structure for login_log
@@ -1044,7 +1210,7 @@ CREATE TABLE `login_log` (
   `login_ip` varchar(100) NOT NULL COMMENT '登录ip',
   PRIMARY KEY (`login_id`),
   KEY `idx_error_type` (`error_type`)
-) ENGINE=InnoDB AUTO_INCREMENT=301 DEFAULT CHARSET=utf8 COMMENT='登录日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=337 DEFAULT CHARSET=utf8 COMMENT='登录日志表';
 
 -- ----------------------------
 -- Records of login_log
@@ -1349,6 +1515,42 @@ INSERT INTO `login_log` VALUES ('297', 'test01', '/account/login', '1', null, '2
 INSERT INTO `login_log` VALUES ('298', 'dongbo', '/account/login', '1', null, '2016-12-24 19:54:57', '127.0.0.1');
 INSERT INTO `login_log` VALUES ('299', 'dongbo', '/account/login', '1', null, '2016-12-25 16:16:25', '127.0.0.1');
 INSERT INTO `login_log` VALUES ('300', 'tonboyw', '/account/login', '1', null, '2016-12-25 17:21:09', '127.0.0.1');
+INSERT INTO `login_log` VALUES ('301', 'tonboy', '/account/login', '1', null, '2016-12-25 21:46:24', '127.0.0.1');
+INSERT INTO `login_log` VALUES ('302', 'dongbo', '/system/admin/account/login', '1', null, '2016-12-25 22:07:09', '127.0.0.1');
+INSERT INTO `login_log` VALUES ('303', 'tonboy', '/account/login', '1', null, '2016-12-28 21:13:32', '127.0.0.1');
+INSERT INTO `login_log` VALUES ('304', 'dongbo', '/account/login', '1', null, '2016-12-28 21:13:59', '127.0.0.1');
+INSERT INTO `login_log` VALUES ('305', 'tonboy', '/account/login', '1', null, '2016-12-28 23:38:29', '127.0.0.1');
+INSERT INTO `login_log` VALUES ('306', 'tonboyw', '/account/login', '1', null, '2016-12-28 23:44:48', '127.0.0.1');
+INSERT INTO `login_log` VALUES ('307', 'test01', '/account/login', '1', null, '2016-12-28 23:45:40', '127.0.0.1');
+INSERT INTO `login_log` VALUES ('308', 'dongbo', '/account/login', '1', null, '2016-12-28 23:46:02', '127.0.0.1');
+INSERT INTO `login_log` VALUES ('309', 'test', '/account/login', '1', null, '2016-12-29 20:01:35', '127.0.0.1');
+INSERT INTO `login_log` VALUES ('310', 'dongbo', '/account/login', '1', null, '2016-12-29 20:03:18', '127.0.0.1');
+INSERT INTO `login_log` VALUES ('311', 'tonboy', '/account/login', '1', null, '2016-12-29 21:29:47', '127.0.0.1');
+INSERT INTO `login_log` VALUES ('312', 'dongbo', '/account/login', '1', null, '2016-12-30 19:41:18', '127.0.0.1');
+INSERT INTO `login_log` VALUES ('313', 'tonboyw', '/account/login', '1', null, '2016-12-30 19:41:30', '127.0.0.1');
+INSERT INTO `login_log` VALUES ('314', 'test01', '/account/login', '1', null, '2016-12-30 19:41:39', '127.0.0.1');
+INSERT INTO `login_log` VALUES ('315', 'dongbo', '/account/login', '1', null, '2016-12-30 19:41:50', '127.0.0.1');
+INSERT INTO `login_log` VALUES ('316', 'dongbo', '/account/login', '1', null, '2016-12-30 21:37:17', '0:0:0:0:0:0:0:1');
+INSERT INTO `login_log` VALUES ('317', 'dongbo', '/system/admin/account/login', '1', null, '2016-12-30 21:41:14', '0:0:0:0:0:0:0:1');
+INSERT INTO `login_log` VALUES ('318', 'dongbo', '/account/login', '1', null, '2016-12-30 23:27:18', '127.0.0.1');
+INSERT INTO `login_log` VALUES ('319', 'tonboy', '/account/login', '1', null, '2016-12-31 14:56:48', '0:0:0:0:0:0:0:1');
+INSERT INTO `login_log` VALUES ('320', 'dongbo', '/account/login', '1', null, '2016-12-31 14:57:36', '127.0.0.1');
+INSERT INTO `login_log` VALUES ('321', 'dongbo', '/account/login', '1', null, '2016-12-31 15:07:18', '127.0.0.1');
+INSERT INTO `login_log` VALUES ('322', 'dongbo', '/account/login', '1', null, '2016-12-31 15:43:05', '127.0.0.1');
+INSERT INTO `login_log` VALUES ('323', 'dongbo', '/account/login', '1', null, '2016-12-31 19:39:00', '127.0.0.1');
+INSERT INTO `login_log` VALUES ('324', 'dongbo', '/account/login', '1', null, '2016-12-31 21:18:26', '127.0.0.1');
+INSERT INTO `login_log` VALUES ('325', 'tonboyw', '/account/login', '1', null, '2016-12-31 21:23:45', '127.0.0.1');
+INSERT INTO `login_log` VALUES ('326', 'dongbo', '/account/login', '1', null, '2016-12-31 21:44:26', '127.0.0.1');
+INSERT INTO `login_log` VALUES ('327', 'tonboyw', '/account/login', '1', null, '2016-12-31 23:39:17', '127.0.0.1');
+INSERT INTO `login_log` VALUES ('328', 'dongbo', '/account/login', '1', null, '2017-01-01 18:52:32', '127.0.0.1');
+INSERT INTO `login_log` VALUES ('329', 'dongbo', '/account/login', '1', null, '2017-01-02 13:50:23', '127.0.0.1');
+INSERT INTO `login_log` VALUES ('330', 'dongbo', '/account/login', '1', null, '2017-01-02 13:51:30', '127.0.0.1');
+INSERT INTO `login_log` VALUES ('331', 'tonboy', '/account/login', '1', null, '2017-01-02 21:40:46', '127.0.0.1');
+INSERT INTO `login_log` VALUES ('332', 'tonboyw', '/account/login', '1', null, '2017-01-02 21:41:00', '127.0.0.1');
+INSERT INTO `login_log` VALUES ('333', 'test01', '/account/login', '1', null, '2017-01-02 21:41:16', '127.0.0.1');
+INSERT INTO `login_log` VALUES ('334', 'test', '/account/login', '1', null, '2017-01-02 21:41:32', '127.0.0.1');
+INSERT INTO `login_log` VALUES ('335', 'dongbo', '/account/login', '1', null, '2017-01-02 21:42:53', '127.0.0.1');
+INSERT INTO `login_log` VALUES ('336', 'dongbo', '/account/login', '1', null, '2017-01-03 20:18:59', '127.0.0.1');
 
 -- ----------------------------
 -- Table structure for past_history
@@ -1361,7 +1563,7 @@ CREATE TABLE `past_history` (
   `ip` varchar(30) NOT NULL COMMENT '来源ip',
   `past_time` datetime NOT NULL COMMENT '签到时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=utf8 COMMENT='签到历史表';
+) ENGINE=InnoDB AUTO_INCREMENT=120 DEFAULT CHARSET=utf8 COMMENT='签到历史表';
 
 -- ----------------------------
 -- Records of past_history
@@ -1459,6 +1661,32 @@ INSERT INTO `past_history` VALUES ('90', '1280', 'tonboyw', '127.0.0.1', '2016-1
 INSERT INTO `past_history` VALUES ('91', '1285', 'test01', '127.0.0.1', '2016-12-24 17:01:43');
 INSERT INTO `past_history` VALUES ('92', '1268', 'Smart_咚咚', '127.0.0.1', '2016-12-25 16:16:29');
 INSERT INTO `past_history` VALUES ('93', '1280', 'tonboyw', '127.0.0.1', '2016-12-25 17:21:11');
+INSERT INTO `past_history` VALUES ('94', '1268', 'Smart_咚咚', '127.0.0.1', '2016-12-26 20:29:04');
+INSERT INTO `past_history` VALUES ('95', '1268', 'Smart_咚咚', '127.0.0.1', '2016-12-27 21:22:12');
+INSERT INTO `past_history` VALUES ('96', '1268', 'Smart_咚咚', '127.0.0.1', '2016-12-28 20:08:54');
+INSERT INTO `past_history` VALUES ('97', '1279', 'tonboy', '127.0.0.1', '2016-12-28 23:38:32');
+INSERT INTO `past_history` VALUES ('98', '1280', 'tonboyw', '127.0.0.1', '2016-12-28 23:44:50');
+INSERT INTO `past_history` VALUES ('99', '1285', 'test01', '127.0.0.1', '2016-12-28 23:45:45');
+INSERT INTO `past_history` VALUES ('100', '1268', 'Smart_咚咚', '127.0.0.1', '2016-12-29 19:57:21');
+INSERT INTO `past_history` VALUES ('101', '1286', 'test', '127.0.0.1', '2016-12-29 20:01:41');
+INSERT INTO `past_history` VALUES ('102', '1279', 'tonboy', '127.0.0.1', '2016-12-29 21:29:49');
+INSERT INTO `past_history` VALUES ('103', '1279', 'tonboy', '127.0.0.1', '2016-12-30 19:41:00');
+INSERT INTO `past_history` VALUES ('104', '1268', 'Smart_咚咚', '127.0.0.1', '2016-12-30 19:41:20');
+INSERT INTO `past_history` VALUES ('105', '1280', 'tonboyw', '127.0.0.1', '2016-12-30 19:41:31');
+INSERT INTO `past_history` VALUES ('106', '1285', 'test01', '127.0.0.1', '2016-12-30 19:41:41');
+INSERT INTO `past_history` VALUES ('107', '1268', 'Smart_咚咚', '127.0.0.1', '2016-12-31 14:14:11');
+INSERT INTO `past_history` VALUES ('108', '1279', 'tonboy', '0:0:0:0:0:0:0:1', '2016-12-31 14:56:51');
+INSERT INTO `past_history` VALUES ('109', '1280', 'tonboyw', '127.0.0.1', '2016-12-31 21:35:26');
+INSERT INTO `past_history` VALUES ('110', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-01 18:52:36');
+INSERT INTO `past_history` VALUES ('111', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-02 13:50:25');
+INSERT INTO `past_history` VALUES ('112', '1279', 'tonboy', '127.0.0.1', '2017-01-02 21:40:50');
+INSERT INTO `past_history` VALUES ('113', '1280', 'tonboyw', '127.0.0.1', '2017-01-02 21:41:02');
+INSERT INTO `past_history` VALUES ('114', '1285', 'test01', '127.0.0.1', '2017-01-02 21:41:18');
+INSERT INTO `past_history` VALUES ('115', '1286', 'test', '127.0.0.1', '2017-01-02 21:41:34');
+INSERT INTO `past_history` VALUES ('116', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 20:19:19');
+INSERT INTO `past_history` VALUES ('117', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-04 20:00:54');
+INSERT INTO `past_history` VALUES ('118', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-04 21:19:19');
+INSERT INTO `past_history` VALUES ('119', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 19:49:42');
 
 -- ----------------------------
 -- Table structure for report
@@ -1512,7 +1740,7 @@ CREATE TABLE `resources` (
   `res_icon` varchar(50) DEFAULT NULL COMMENT '资源图标',
   `turn_way` int(11) NOT NULL DEFAULT '0' COMMENT '跳转方式{0：当前窗口，1：新窗口}',
   PRIMARY KEY (`res_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8 COMMENT='资源表';
+) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf8 COMMENT='资源表';
 
 -- ----------------------------
 -- Records of resources
@@ -1579,6 +1807,31 @@ INSERT INTO `resources` VALUES ('61', '获取权限树', '/system/admin/sysmanag
 INSERT INTO `resources` VALUES ('62', '禁言用户', '/system/admin/sysmanage/nottalk', 'admin:sys:talk', '1', '0', '5', '1', '2016-12-24 16:15:48', 'fa-meh-o', '0');
 INSERT INTO `resources` VALUES ('63', '已关闭评论', '/system/admin/topicmanage/closereply', 'admin:topic:closereply', '1', '0', '6', '34', '2016-12-24 16:19:00', 'fa-microphone-slash', '0');
 INSERT INTO `resources` VALUES ('64', '初始化Lucenes索引', '/system/admin/config/lucene/init', 'admin:config:lucene:init', '2', '0', '1', '45', '2016-12-24 19:58:48', 'fa-sitemap', '0');
+INSERT INTO `resources` VALUES ('66', '删除', '/system/admin/sysmanage/role/delete', 'admin:sys:role:delete', '2', '0', '3', '3', '2016-12-25 21:52:32', 'fa-trash-o', '0');
+INSERT INTO `resources` VALUES ('67', '系统监控', '/monitoring', 'admin:monitoring', '1', '0', '2', '42', '2016-12-28 21:16:45', 'fa-exclamation-triangle', '1');
+INSERT INTO `resources` VALUES ('68', '查找', '/system/admin/sysmanage/admin/search', 'admin:sys:admin:search', '2', '0', '1', '17', '2016-12-28 21:30:11', 'fa-search', '0');
+INSERT INTO `resources` VALUES ('69', '图表数据', '/system/admin/chart/data', 'admin:chart:Data', '2', '0', '1', '43', '2016-12-30 21:16:50', 'fa-bar-chart-o', '0');
+INSERT INTO `resources` VALUES ('70', '立即执行', '/system/admin/quartz/runnow', 'admin:quartz:runnow', '2', '0', '1', '51', '2016-12-31 15:03:36', 'fa-play', '0');
+INSERT INTO `resources` VALUES ('71', '添加', '/system/admin/home/image/add', 'admin:home:image:add', '2', '0', '1', '6', '2017-01-01 21:42:54', 'fa-plus', '0');
+INSERT INTO `resources` VALUES ('72', '添加', '/system/admin/home/quick/add', 'admin:home:quick:add', '2', '0', '1', '7', '2017-01-02 18:02:14', 'fa-plus', '0');
+INSERT INTO `resources` VALUES ('73', '添加', '/system/admin/home/recommend/add', 'admin:home:recommend:add', '2', '0', '1', '8', '2017-01-02 18:53:39', 'fa-plus', '0');
+INSERT INTO `resources` VALUES ('74', '编辑', '/system/admin/home/recommend/update', 'admin:home:recommend:update', '2', '0', '2', '8', '2017-01-02 20:55:56', 'fa-edit', '0');
+INSERT INTO `resources` VALUES ('75', '删除', '/system/admin/home/recommend/delete', 'admin:home:recommend:delete', '2', '0', '3', '8', '2017-01-03 20:20:43', 'fa-trash-o', '0');
+INSERT INTO `resources` VALUES ('76', '修改', '/system/admin/home/quick/update', 'admin:home:quick:update', '2', '0', '2', '7', '2017-01-03 20:46:20', 'fa-edit', '0');
+INSERT INTO `resources` VALUES ('77', '删除', '/system/admin/home/quick/delete', 'admin:home:quick:delete', '2', '0', '3', '7', '2017-01-03 21:11:44', 'fa-trash-o', '0');
+INSERT INTO `resources` VALUES ('78', '编辑', '/system/admin/home/image/update', 'admin:home:image:update', '2', '0', '2', '6', '2017-01-03 21:42:52', 'fa-edit', '0');
+INSERT INTO `resources` VALUES ('79', '删除', '/system/admin/home/image/delete', 'admin:home:image:delete', '2', '0', '3', '6', '2017-01-03 22:03:47', 'fa-trash-o', '0');
+INSERT INTO `resources` VALUES ('80', '查找', '/system/admin/home/recommend/search', 'admin:home:recommend:search', '2', '0', '4', '8', '2017-01-04 23:31:24', 'fa-search', '0');
+INSERT INTO `resources` VALUES ('81', '查找', '/system/admin/log/operation/search', 'admin:log:operation:search', '2', '0', '1', '16', '2017-01-05 19:45:32', 'fa-search', '0');
+INSERT INTO `resources` VALUES ('82', '查找', '/system/admin/log/sign/search', 'admin:log:sign:search', '2', '0', '2', '23', '2017-01-05 20:17:19', 'fa-search', '0');
+INSERT INTO `resources` VALUES ('83', '查找', '/system/admin/log/gold/search', 'admin:log:gold:search', '2', '0', '2', '25', '2017-01-05 20:18:02', 'fa-search', '0');
+INSERT INTO `resources` VALUES ('84', '查找', '/system/admin/log/experience/search', 'admin:log:experience:search', '2', '0', '2', '24', '2017-01-05 20:19:31', 'fa-search', '0');
+INSERT INTO `resources` VALUES ('85', '查找', '/system/admin/log/gold/detail/search', 'admin:log:gold:detail:search', '2', '0', '1', '31', '2017-01-05 20:41:20', 'fa-search', '0');
+INSERT INTO `resources` VALUES ('86', '查找', '/system/admin/log/experience/detail/search', 'admin:log:experience:detail:search', '2', '0', '1', '32', '2017-01-05 20:42:10', 'fa-search', '0');
+INSERT INTO `resources` VALUES ('87', '查找', '/system/admin/navboard/navigation/search', 'admin:nb:nav:search', '2', '0', '1', '27', '2017-01-05 20:59:28', 'fa-search', '0');
+INSERT INTO `resources` VALUES ('88', '添加', '/system/admin/navboard/navigation/add', 'admin:nb:nav:add', '2', '0', '2', '27', '2017-01-05 21:19:51', 'fa-plus', '0');
+INSERT INTO `resources` VALUES ('89', '编辑', '/system/admin/navboard/navigation/update', 'admin:nb:nav:update', '2', '0', '3', '27', '2017-01-05 21:20:44', 'fa-edit', '0');
+INSERT INTO `resources` VALUES ('90', '删除', '/system/admin/navboard/navigation/delete', 'admin:nb:nav:delete', '2', '0', '4', '27', '2017-01-05 21:50:10', 'fa-trash-o', '0');
 
 -- ----------------------------
 -- Table structure for role
@@ -1613,7 +1866,7 @@ CREATE TABLE `role_resources` (
   `role_id` int(11) NOT NULL COMMENT '角色ID,关联role表',
   `res_id` int(11) NOT NULL COMMENT '资源ID,关联user_resources表',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=150 DEFAULT CHARSET=utf8 COMMENT='角色-资源表';
+) ENGINE=InnoDB AUTO_INCREMENT=219 DEFAULT CHARSET=utf8 COMMENT='角色-资源表';
 
 -- ----------------------------
 -- Records of role_resources
@@ -1765,6 +2018,75 @@ INSERT INTO `role_resources` VALUES ('146', '2', '63');
 INSERT INTO `role_resources` VALUES ('147', '6', '63');
 INSERT INTO `role_resources` VALUES ('148', '1', '64');
 INSERT INTO `role_resources` VALUES ('149', '2', '64');
+INSERT INTO `role_resources` VALUES ('150', '1', '65');
+INSERT INTO `role_resources` VALUES ('151', '2', '65');
+INSERT INTO `role_resources` VALUES ('152', '1', '66');
+INSERT INTO `role_resources` VALUES ('153', '2', '66');
+INSERT INTO `role_resources` VALUES ('154', '1', '67');
+INSERT INTO `role_resources` VALUES ('155', '1', '68');
+INSERT INTO `role_resources` VALUES ('156', '1', '69');
+INSERT INTO `role_resources` VALUES ('157', '2', '69');
+INSERT INTO `role_resources` VALUES ('158', '1', '70');
+INSERT INTO `role_resources` VALUES ('159', '2', '70');
+INSERT INTO `role_resources` VALUES ('160', '1', '71');
+INSERT INTO `role_resources` VALUES ('161', '2', '71');
+INSERT INTO `role_resources` VALUES ('162', '6', '71');
+INSERT INTO `role_resources` VALUES ('163', '1', '72');
+INSERT INTO `role_resources` VALUES ('164', '2', '72');
+INSERT INTO `role_resources` VALUES ('165', '6', '72');
+INSERT INTO `role_resources` VALUES ('166', '1', '73');
+INSERT INTO `role_resources` VALUES ('167', '2', '73');
+INSERT INTO `role_resources` VALUES ('168', '6', '73');
+INSERT INTO `role_resources` VALUES ('169', '1', '74');
+INSERT INTO `role_resources` VALUES ('170', '2', '74');
+INSERT INTO `role_resources` VALUES ('171', '6', '74');
+INSERT INTO `role_resources` VALUES ('172', '1', '75');
+INSERT INTO `role_resources` VALUES ('173', '2', '75');
+INSERT INTO `role_resources` VALUES ('174', '6', '75');
+INSERT INTO `role_resources` VALUES ('175', '1', '76');
+INSERT INTO `role_resources` VALUES ('176', '2', '76');
+INSERT INTO `role_resources` VALUES ('177', '6', '76');
+INSERT INTO `role_resources` VALUES ('178', '1', '77');
+INSERT INTO `role_resources` VALUES ('179', '2', '77');
+INSERT INTO `role_resources` VALUES ('180', '6', '77');
+INSERT INTO `role_resources` VALUES ('181', '1', '78');
+INSERT INTO `role_resources` VALUES ('182', '2', '78');
+INSERT INTO `role_resources` VALUES ('183', '6', '78');
+INSERT INTO `role_resources` VALUES ('184', '1', '79');
+INSERT INTO `role_resources` VALUES ('185', '2', '79');
+INSERT INTO `role_resources` VALUES ('186', '6', '79');
+INSERT INTO `role_resources` VALUES ('187', '1', '80');
+INSERT INTO `role_resources` VALUES ('188', '2', '80');
+INSERT INTO `role_resources` VALUES ('189', '6', '80');
+INSERT INTO `role_resources` VALUES ('190', '1', '81');
+INSERT INTO `role_resources` VALUES ('191', '2', '81');
+INSERT INTO `role_resources` VALUES ('192', '1', '82');
+INSERT INTO `role_resources` VALUES ('193', '2', '82');
+INSERT INTO `role_resources` VALUES ('194', '6', '82');
+INSERT INTO `role_resources` VALUES ('195', '1', '83');
+INSERT INTO `role_resources` VALUES ('196', '2', '83');
+INSERT INTO `role_resources` VALUES ('197', '6', '83');
+INSERT INTO `role_resources` VALUES ('198', '1', '84');
+INSERT INTO `role_resources` VALUES ('199', '2', '84');
+INSERT INTO `role_resources` VALUES ('200', '6', '84');
+INSERT INTO `role_resources` VALUES ('201', '1', '85');
+INSERT INTO `role_resources` VALUES ('202', '2', '85');
+INSERT INTO `role_resources` VALUES ('203', '6', '85');
+INSERT INTO `role_resources` VALUES ('204', '1', '86');
+INSERT INTO `role_resources` VALUES ('205', '2', '86');
+INSERT INTO `role_resources` VALUES ('206', '6', '86');
+INSERT INTO `role_resources` VALUES ('207', '1', '87');
+INSERT INTO `role_resources` VALUES ('208', '2', '87');
+INSERT INTO `role_resources` VALUES ('209', '6', '87');
+INSERT INTO `role_resources` VALUES ('210', '1', '88');
+INSERT INTO `role_resources` VALUES ('211', '2', '88');
+INSERT INTO `role_resources` VALUES ('212', '6', '88');
+INSERT INTO `role_resources` VALUES ('213', '1', '89');
+INSERT INTO `role_resources` VALUES ('214', '2', '89');
+INSERT INTO `role_resources` VALUES ('215', '6', '89');
+INSERT INTO `role_resources` VALUES ('216', '1', '90');
+INSERT INTO `role_resources` VALUES ('217', '2', '90');
+INSERT INTO `role_resources` VALUES ('218', '6', '90');
 
 -- ----------------------------
 -- Table structure for schedule_job
@@ -1785,11 +2107,14 @@ CREATE TABLE `schedule_job` (
   `method_name` varchar(255) NOT NULL COMMENT '任务目标方法',
   PRIMARY KEY (`job_id`),
   UNIQUE KEY `name_group` (`job_name`,`job_group`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='任务调度表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='任务调度表';
 
 -- ----------------------------
 -- Records of schedule_job
 -- ----------------------------
+INSERT INTO `schedule_job` VALUES ('1', '2016-12-28 22:42:02', '2016-12-29 21:03:37', '每日数据统计', '数据', '1', '0 0 0 * * ? *', '每日数据统计', 'cn.ifxcode.bbs.job.task.CountJob', '1', 'countJob', 'saveCount');
+INSERT INTO `schedule_job` VALUES ('2', '2016-12-31 12:54:15', '2016-12-31 14:07:42', '版块数据同步', '数据', '1', '0 0 0 * * ? *', '版块数据同步', 'cn.ifxcode.bbs.job.task.SyncData', '1', 'syncData', 'syncBoardInfo');
+INSERT INTO `schedule_job` VALUES ('3', '2017-01-01 23:06:39', '2017-01-01 23:06:42', '备份数据库', '数据', '1', '0 0 0 * * ? *', '备份数据库', 'cn.ifxcode.bbs.job.task.BackupData', '1', 'backupData', 'backupDB');
 
 -- ----------------------------
 -- Table structure for swf_area
@@ -2260,7 +2585,7 @@ CREATE TABLE `system_log` (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`),
   KEY `sys_log_idx` (`status`)
-) ENGINE=InnoDB AUTO_INCREMENT=186 DEFAULT CHARSET=utf8 COMMENT='操作历史表';
+) ENGINE=InnoDB AUTO_INCREMENT=326 DEFAULT CHARSET=utf8 COMMENT='操作历史表';
 
 -- ----------------------------
 -- Records of system_log
@@ -2448,6 +2773,144 @@ INSERT INTO `system_log` VALUES ('182', '系统管理', '角色管理-授权', '
 INSERT INTO `system_log` VALUES ('183', '系统管理', '角色管理-授权', '1', '执行成功!', '{roleId:2; resIds:[64]}', '1268', 'Smart_咚咚', '127.0.0.1', '2016-12-24 19:58:48');
 INSERT INTO `system_log` VALUES ('184', '系统管理', '资源管理-添加', '1', '执行成功!', '{name:初始化Lucenes索引; link:/system/admin/config/lucene/init; sign:admin:config:lucene:init; pid:45; icon:fa-sitemap; type:2; sort:1; status:0; way:0; roles:[1, 2]; }', '1268', 'Smart_咚咚', '127.0.0.1', '2016-12-24 19:58:48');
 INSERT INTO `system_log` VALUES ('185', '系統备份', '添加', '1', '执行成功!', '{name:; exec:point; }', '1268', 'Smart_咚咚', '127.0.0.1', '2016-12-25 16:46:19');
+INSERT INTO `system_log` VALUES ('188', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>1</td></tr><tr><td>resIds</td><td>[66]</td></tr></tbody></table>', '1279', 'tonboy', '127.0.0.1', '2016-12-25 21:52:32');
+INSERT INTO `system_log` VALUES ('189', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>2</td></tr><tr><td>resIds</td><td>[66]</td></tr></tbody></table>', '1279', 'tonboy', '127.0.0.1', '2016-12-25 21:52:32');
+INSERT INTO `system_log` VALUES ('190', '系统管理', '资源管理-添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>name</td><td>删除</td></tr><tr><td>link</td><td>/system/admin/sysmanage/role/delete</td></tr><tr><td>sign</td><td>admin:sys:role:delete</td></tr><tr><td>pid</td><td>3</td></tr><tr><td>icon</td><td>fa-trash-o</td></tr><tr><td>type</td><td>2</td></tr><tr><td>sort</td><td>3</td></tr><tr><td>status</td><td>0</td></tr><tr><td>way</td><td>0</td></tr><tr><td>roles</td><td>[2]</td></tr></tbody></table>', '1279', 'tonboy', '127.0.0.1', '2016-12-25 21:52:32');
+INSERT INTO `system_log` VALUES ('191', '系統备份', '添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>name</td><td>exec</td></tr><tr><td>exec</td><td>point</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2016-12-26 20:28:04');
+INSERT INTO `system_log` VALUES ('192', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>1</td></tr><tr><td>resIds</td><td>[67]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2016-12-28 21:16:45');
+INSERT INTO `system_log` VALUES ('193', '系统管理', '资源管理-添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>name</td><td>系统监控</td></tr><tr><td>link</td><td>/monitoring</td></tr><tr><td>sign</td><td>admin:monitoring</td></tr><tr><td>pid</td><td>42</td></tr><tr><td>icon</td><td>fa-exclamation-triangle</td></tr><tr><td>type</td><td>1</td></tr><tr><td>sort</td><td>2</td></tr><tr><td>status</td><td>0</td></tr><tr><td>way</td><td>1</td></tr><tr><td>roles</td><td>[1]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2016-12-28 21:16:45');
+INSERT INTO `system_log` VALUES ('194', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>1</td></tr><tr><td>resIds</td><td>[68]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2016-12-28 21:30:11');
+INSERT INTO `system_log` VALUES ('195', '系统管理', '资源管理-添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>name</td><td>查找</td></tr><tr><td>link</td><td>/system/admin/sysmanage/admin/search</td></tr><tr><td>sign</td><td>admin:sys:admin:search</td></tr><tr><td>pid</td><td>17</td></tr><tr><td>icon</td><td>fa-search</td></tr><tr><td>type</td><td>2</td></tr><tr><td>sort</td><td>1</td></tr><tr><td>status</td><td>0</td></tr><tr><td>way</td><td>0</td></tr><tr><td>roles</td><td>[1]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2016-12-28 21:30:11');
+INSERT INTO `system_log` VALUES ('196', '系統备份', '添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>name</td><td></td></tr><tr><td>exec</td><td>point</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2016-12-28 21:48:10');
+INSERT INTO `system_log` VALUES ('197', '系統备份', '添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>name</td><td>quartz</td></tr><tr><td>exec</td><td>point</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2016-12-29 21:26:19');
+INSERT INTO `system_log` VALUES ('198', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>1</td></tr><tr><td>resIds</td><td>[69]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2016-12-30 21:16:50');
+INSERT INTO `system_log` VALUES ('199', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>2</td></tr><tr><td>resIds</td><td>[69]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2016-12-30 21:16:50');
+INSERT INTO `system_log` VALUES ('200', '系统管理', '资源管理-添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>name</td><td>图表数据</td></tr><tr><td>link</td><td>/system/admin/chart/data</td></tr><tr><td>sign</td><td>admin:chart:Data</td></tr><tr><td>pid</td><td>43</td></tr><tr><td>icon</td><td>fa-bar-chart-o</td></tr><tr><td>type</td><td>2</td></tr><tr><td>sort</td><td>1</td></tr><tr><td>status</td><td>0</td></tr><tr><td>way</td><td>0</td></tr><tr><td>roles</td><td>[1, 2]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2016-12-30 21:16:50');
+INSERT INTO `system_log` VALUES ('201', '系統备份', '添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>name</td><td></td></tr><tr><td>exec</td><td>point</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2016-12-30 21:48:01');
+INSERT INTO `system_log` VALUES ('202', '系統备份', '添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>name</td><td>chart</td></tr><tr><td>exec</td><td>point</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2016-12-30 22:26:56');
+INSERT INTO `system_log` VALUES ('203', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>1</td></tr><tr><td>resIds</td><td>[70]</td></tr></tbody></table>', '1279', 'tonboy', '0:0:0:0:0:0:0:1', '2016-12-31 15:03:36');
+INSERT INTO `system_log` VALUES ('204', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>2</td></tr><tr><td>resIds</td><td>[70]</td></tr></tbody></table>', '1279', 'tonboy', '0:0:0:0:0:0:0:1', '2016-12-31 15:03:36');
+INSERT INTO `system_log` VALUES ('205', '系统管理', '资源管理-添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>name</td><td>立即执行</td></tr><tr><td>link</td><td>/system/admin/quartz/runnow</td></tr><tr><td>sign</td><td>admin:quartz:runnow</td></tr><tr><td>pid</td><td>51</td></tr><tr><td>icon</td><td>fa-play</td></tr><tr><td>type</td><td>2</td></tr><tr><td>sort</td><td>1</td></tr><tr><td>status</td><td>0</td></tr><tr><td>way</td><td>0</td></tr><tr><td>roles</td><td>[2]</td></tr></tbody></table>', '1279', 'tonboy', '0:0:0:0:0:0:0:1', '2016-12-31 15:03:36');
+INSERT INTO `system_log` VALUES ('206', '系統备份', '添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>name</td><td></td></tr><tr><td>exec</td><td>point</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-01 18:54:17');
+INSERT INTO `system_log` VALUES ('207', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>1</td></tr><tr><td>resIds</td><td>[71]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-01 21:42:54');
+INSERT INTO `system_log` VALUES ('208', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>2</td></tr><tr><td>resIds</td><td>[71]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-01 21:42:54');
+INSERT INTO `system_log` VALUES ('209', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>6</td></tr><tr><td>resIds</td><td>[71]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-01 21:42:54');
+INSERT INTO `system_log` VALUES ('210', '系统管理', '资源管理-添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>name</td><td>添加</td></tr><tr><td>link</td><td>/system/admin/home/image/add</td></tr><tr><td>sign</td><td>admin:home:image:add</td></tr><tr><td>pid</td><td>6</td></tr><tr><td>icon</td><td>fa-plus</td></tr><tr><td>type</td><td>2</td></tr><tr><td>sort</td><td>1</td></tr><tr><td>status</td><td>0</td></tr><tr><td>way</td><td>0</td></tr><tr><td>roles</td><td>[1, 2, 6]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-01 21:42:54');
+INSERT INTO `system_log` VALUES ('211', '首页管理', '轮播图链-添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>title</td><td>Panda</td></tr><tr><td>link</td><td>http://oschina.net/</td></tr><tr><td>url</td><td>http://ofrjra54d.bkt.clouddn.com/662e90113e6b4063817084483d9d241c1483349630848.png</td></tr><tr><td>sort</td><td>4</td></tr><tr><td>status</td><td>0</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-02 17:34:08');
+INSERT INTO `system_log` VALUES ('212', '首页管理', '轮播图链-添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>title</td><td>Panda</td></tr><tr><td>link</td><td>http://oschina.net/</td></tr><tr><td>url</td><td>http://ofrjra54d.bkt.clouddn.com/662e90113e6b4063817084483d9d241c1483349630848.png</td></tr><tr><td>sort</td><td>4</td></tr><tr><td>status</td><td>0</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-02 17:38:58');
+INSERT INTO `system_log` VALUES ('213', '首页管理', '轮播图链-添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>title</td><td>Panda</td></tr><tr><td>link</td><td>http://oschina.net/</td></tr><tr><td>url</td><td>http://ofrjra54d.bkt.clouddn.com/662e90113e6b4063817084483d9d241c1483349630848.png</td></tr><tr><td>sort</td><td>4</td></tr><tr><td>status</td><td>0</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-02 17:41:43');
+INSERT INTO `system_log` VALUES ('214', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>1</td></tr><tr><td>resIds</td><td>[72]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-02 18:02:14');
+INSERT INTO `system_log` VALUES ('215', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>2</td></tr><tr><td>resIds</td><td>[72]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-02 18:02:14');
+INSERT INTO `system_log` VALUES ('216', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>6</td></tr><tr><td>resIds</td><td>[72]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-02 18:02:14');
+INSERT INTO `system_log` VALUES ('217', '系统管理', '资源管理-添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>name</td><td>添加</td></tr><tr><td>link</td><td>/system/admin/home/quick/add</td></tr><tr><td>sign</td><td>admin:home:quick:add</td></tr><tr><td>pid</td><td>7</td></tr><tr><td>icon</td><td>fa-plus</td></tr><tr><td>type</td><td>2</td></tr><tr><td>sort</td><td>1</td></tr><tr><td>status</td><td>0</td></tr><tr><td>way</td><td>0</td></tr><tr><td>roles</td><td>[1, 2, 6]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-02 18:02:14');
+INSERT INTO `system_log` VALUES ('218', '首页管理', '快速导航-添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>name</td><td>快速导航</td></tr><tr><td>link</td><td>/</td></tr><tr><td>color</td><td>#2b2b2b</td></tr><tr><td>sort</td><td>7</td></tr><tr><td>status</td><td>0</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-02 18:26:07');
+INSERT INTO `system_log` VALUES ('219', '首页管理', '快速导航-添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>name</td><td>凑个整数</td></tr><tr><td>link</td><td>/</td></tr><tr><td>color</td><td>#2b2b2b</td></tr><tr><td>sort</td><td>8</td></tr><tr><td>status</td><td>0</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-02 18:26:39');
+INSERT INTO `system_log` VALUES ('220', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>1</td></tr><tr><td>resIds</td><td>[73]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-02 18:53:39');
+INSERT INTO `system_log` VALUES ('221', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>2</td></tr><tr><td>resIds</td><td>[73]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-02 18:53:39');
+INSERT INTO `system_log` VALUES ('222', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>6</td></tr><tr><td>resIds</td><td>[73]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-02 18:53:39');
+INSERT INTO `system_log` VALUES ('223', '系统管理', '资源管理-添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>name</td><td>添加</td></tr><tr><td>link</td><td>/system/admin/home/recommend/add</td></tr><tr><td>sign</td><td>admin:home:recommend:add</td></tr><tr><td>pid</td><td>8</td></tr><tr><td>icon</td><td>fa-plus</td></tr><tr><td>type</td><td>2</td></tr><tr><td>sort</td><td>1</td></tr><tr><td>status</td><td>0</td></tr><tr><td>way</td><td>0</td></tr><tr><td>roles</td><td>[1, 2, 6]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-02 18:53:39');
+INSERT INTO `system_log` VALUES ('224', '首页管理', '首页推荐-添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>name</td><td>qWAESRTYUPUYTWRYERTIYU</td></tr><tr><td>link</td><td>http://localhost:8080/bbs/board/204/topic/detail/1248</td></tr><tr><td>location</td><td>0</td></tr><tr><td>sort</td><td>2</td></tr><tr><td>status</td><td>-1</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-02 18:56:07');
+INSERT INTO `system_log` VALUES ('225', '首页管理', '首页推荐-添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>name</td><td>erstdyuiop[ldrtfgyuhijokp</td></tr><tr><td>link</td><td>http://localhost:8080/bbs/board/199/topic/detail/1257</td></tr><tr><td>location</td><td>0</td></tr><tr><td>sort</td><td>3</td></tr><tr><td>status</td><td>-1</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-02 19:06:04');
+INSERT INTO `system_log` VALUES ('226', '首页管理', '首页推荐-添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>name</td><td>JAVA SE</td></tr><tr><td>link</td><td>http://localhost:8080/bbs/navigation/47/board/191</td></tr><tr><td>location</td><td>0</td></tr><tr><td>sort</td><td>4</td></tr><tr><td>status</td><td>-1</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-02 20:21:56');
+INSERT INTO `system_log` VALUES ('227', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>1</td></tr><tr><td>resIds</td><td>[74]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-02 20:55:56');
+INSERT INTO `system_log` VALUES ('228', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>2</td></tr><tr><td>resIds</td><td>[74]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-02 20:55:56');
+INSERT INTO `system_log` VALUES ('229', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>6</td></tr><tr><td>resIds</td><td>[74]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-02 20:55:56');
+INSERT INTO `system_log` VALUES ('230', '系统管理', '资源管理-添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>name</td><td>编辑</td></tr><tr><td>link</td><td>/system/admin/home/recommend/update</td></tr><tr><td>sign</td><td>admin:home:recommend:update</td></tr><tr><td>pid</td><td>8</td></tr><tr><td>icon</td><td>fa-edit</td></tr><tr><td>type</td><td>2</td></tr><tr><td>sort</td><td>2</td></tr><tr><td>status</td><td>0</td></tr><tr><td>way</td><td>0</td></tr><tr><td>roles</td><td>[1, 2, 6]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-02 20:55:56');
+INSERT INTO `system_log` VALUES ('231', '首页管理', '首页推荐-编辑', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>id</td><td>6</td></tr><tr><td>name</td><td>erstdyuiop[ldrtfgyuhijokp</td></tr><tr><td>link</td><td>http://localhost:8080/bbs/board/199/topic/detail/1257</td></tr><tr><td>location</td><td>1</td></tr><tr><td>sort</td><td>4</td></tr><tr><td>status</td><td>0</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-02 21:30:20');
+INSERT INTO `system_log` VALUES ('232', '首页管理', '首页推荐-添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>name</td><td>临时</td></tr><tr><td>link</td><td>/</td></tr><tr><td>location</td><td>1</td></tr><tr><td>sort</td><td>1</td></tr><tr><td>status</td><td>0</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 20:17:32');
+INSERT INTO `system_log` VALUES ('233', '首页管理', '首页推荐-添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>name</td><td>linshi2</td></tr><tr><td>link</td><td>/</td></tr><tr><td>location</td><td>2</td></tr><tr><td>sort</td><td>2</td></tr><tr><td>status</td><td>0</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 20:17:57');
+INSERT INTO `system_log` VALUES ('234', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>1</td></tr><tr><td>resIds</td><td>[75]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 20:20:43');
+INSERT INTO `system_log` VALUES ('235', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>2</td></tr><tr><td>resIds</td><td>[75]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 20:20:43');
+INSERT INTO `system_log` VALUES ('236', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>6</td></tr><tr><td>resIds</td><td>[75]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 20:20:43');
+INSERT INTO `system_log` VALUES ('237', '系统管理', '资源管理-添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>name</td><td>删除</td></tr><tr><td>link</td><td>/system/admin/home/recommend/delete</td></tr><tr><td>sign</td><td>admin:home:recommend:delete</td></tr><tr><td>pid</td><td>8</td></tr><tr><td>icon</td><td>fa-trash-o</td></tr><tr><td>type</td><td>2</td></tr><tr><td>sort</td><td>3</td></tr><tr><td>status</td><td>0</td></tr><tr><td>way</td><td>0</td></tr><tr><td>roles</td><td>[1, 2, 6]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 20:20:43');
+INSERT INTO `system_log` VALUES ('238', '首页管理', '首页推荐-删除', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>ids</td><td>8,9</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 20:21:03');
+INSERT INTO `system_log` VALUES ('239', '首页管理', '首页推荐-删除', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>ids</td><td>8,9</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 20:21:56');
+INSERT INTO `system_log` VALUES ('240', '首页管理', '首页推荐-删除', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>ids</td><td>8,9</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 20:24:56');
+INSERT INTO `system_log` VALUES ('241', '首页管理', '首页推荐-编辑', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>id</td><td>8</td></tr><tr><td>name</td><td>临时</td></tr><tr><td>link</td><td>/</td></tr><tr><td>location</td><td>1</td></tr><tr><td>sort</td><td>1</td></tr><tr><td>status</td><td>0</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 20:29:04');
+INSERT INTO `system_log` VALUES ('242', '首页管理', '首页推荐-编辑', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>id</td><td>8</td></tr><tr><td>name</td><td>临时</td></tr><tr><td>link</td><td>/</td></tr><tr><td>location</td><td>1</td></tr><tr><td>sort</td><td>1</td></tr><tr><td>status</td><td>1</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 20:29:38');
+INSERT INTO `system_log` VALUES ('243', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>1</td></tr><tr><td>resIds</td><td>[76]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 20:46:20');
+INSERT INTO `system_log` VALUES ('244', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>2</td></tr><tr><td>resIds</td><td>[76]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 20:46:20');
+INSERT INTO `system_log` VALUES ('245', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>6</td></tr><tr><td>resIds</td><td>[76]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 20:46:20');
+INSERT INTO `system_log` VALUES ('246', '系统管理', '资源管理-添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>name</td><td>修改</td></tr><tr><td>link</td><td>/system/admin/home/quick/update</td></tr><tr><td>sign</td><td>admin:home:quick:update</td></tr><tr><td>pid</td><td>7</td></tr><tr><td>icon</td><td>fa-edit</td></tr><tr><td>type</td><td>2</td></tr><tr><td>sort</td><td>2</td></tr><tr><td>status</td><td>0</td></tr><tr><td>way</td><td>0</td></tr><tr><td>roles</td><td>[1, 2, 6]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 20:46:20');
+INSERT INTO `system_log` VALUES ('247', '首页管理', '快速导航-修改', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>id</td><td>8</td></tr><tr><td>name</td><td>凑个整数</td></tr><tr><td>link</td><td>/</td></tr><tr><td>color</td><td>#2b2b2b</td></tr><tr><td>sort</td><td>8</td></tr><tr><td>status</td><td>1</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 21:01:46');
+INSERT INTO `system_log` VALUES ('248', '首页管理', '快速导航-修改', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>id</td><td>8</td></tr><tr><td>name</td><td>凑个整数</td></tr><tr><td>link</td><td>/</td></tr><tr><td>color</td><td>#2b2b2b</td></tr><tr><td>sort</td><td>8</td></tr><tr><td>status</td><td>1</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 21:01:48');
+INSERT INTO `system_log` VALUES ('249', '首页管理', '快速导航-修改', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>id</td><td>8</td></tr><tr><td>name</td><td>凑个整数</td></tr><tr><td>link</td><td>/</td></tr><tr><td>color</td><td>#2b2b2b</td></tr><tr><td>sort</td><td>8</td></tr><tr><td>status</td><td>0</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 21:02:22');
+INSERT INTO `system_log` VALUES ('250', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>1</td></tr><tr><td>resIds</td><td>[77]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 21:11:44');
+INSERT INTO `system_log` VALUES ('251', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>2</td></tr><tr><td>resIds</td><td>[77]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 21:11:44');
+INSERT INTO `system_log` VALUES ('252', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>6</td></tr><tr><td>resIds</td><td>[77]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 21:11:44');
+INSERT INTO `system_log` VALUES ('253', '系统管理', '资源管理-添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>name</td><td>删除</td></tr><tr><td>link</td><td>/system/admin/home/quick/delete</td></tr><tr><td>sign</td><td>admin:home:quick:delete</td></tr><tr><td>pid</td><td>7</td></tr><tr><td>icon</td><td>fa-trash-o</td></tr><tr><td>type</td><td>2</td></tr><tr><td>sort</td><td>3</td></tr><tr><td>status</td><td>0</td></tr><tr><td>way</td><td>0</td></tr><tr><td>roles</td><td>[1, 2, 6]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 21:11:45');
+INSERT INTO `system_log` VALUES ('254', '首页管理', '快速导航-删除', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>ids</td><td>8,7</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 21:12:00');
+INSERT INTO `system_log` VALUES ('255', '首页管理', '快速导航-修改', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>id</td><td>8</td></tr><tr><td>name</td><td>凑个整数</td></tr><tr><td>link</td><td>/</td></tr><tr><td>color</td><td>#2b2b2b</td></tr><tr><td>sort</td><td>8</td></tr><tr><td>status</td><td>0</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 21:12:23');
+INSERT INTO `system_log` VALUES ('256', '首页管理', '快速导航-修改', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>id</td><td>7</td></tr><tr><td>name</td><td>快速导航</td></tr><tr><td>link</td><td>/</td></tr><tr><td>color</td><td>#2b2b2b</td></tr><tr><td>sort</td><td>7</td></tr><tr><td>status</td><td>0</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 21:12:31');
+INSERT INTO `system_log` VALUES ('257', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>1</td></tr><tr><td>resIds</td><td>[78]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 21:42:52');
+INSERT INTO `system_log` VALUES ('258', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>2</td></tr><tr><td>resIds</td><td>[78]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 21:42:52');
+INSERT INTO `system_log` VALUES ('259', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>6</td></tr><tr><td>resIds</td><td>[78]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 21:42:52');
+INSERT INTO `system_log` VALUES ('260', '系统管理', '资源管理-添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>name</td><td>编辑</td></tr><tr><td>link</td><td>/system/admin/home/image/update</td></tr><tr><td>sign</td><td>admin:home:image:update</td></tr><tr><td>pid</td><td>6</td></tr><tr><td>icon</td><td>fa-edit</td></tr><tr><td>type</td><td>2</td></tr><tr><td>sort</td><td>2</td></tr><tr><td>status</td><td>0</td></tr><tr><td>way</td><td>0</td></tr><tr><td>roles</td><td>[1, 2, 6]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 21:42:52');
+INSERT INTO `system_log` VALUES ('261', '首页管理', '轮播图链-添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>title</td><td>tower</td></tr><tr><td>link</td><td>/</td></tr><tr><td>url</td><td>http://ofrjra54d.bkt.clouddn.com/7d7af858b62247cea2711346b6d95f3b1483451138473.jpg</td></tr><tr><td>sort</td><td>5</td></tr><tr><td>status</td><td>0</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 21:45:45');
+INSERT INTO `system_log` VALUES ('262', '首页管理', '轮播图链-添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>title</td><td>tower</td></tr><tr><td>link</td><td>/</td></tr><tr><td>url</td><td>http://ofrjra54d.bkt.clouddn.com/7d7af858b62247cea2711346b6d95f3b1483451138473.jpg</td></tr><tr><td>sort</td><td>5</td></tr><tr><td>status</td><td>1</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 21:46:14');
+INSERT INTO `system_log` VALUES ('263', '首页管理', '轮播图链-添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>title</td><td>tower</td></tr><tr><td>link</td><td>/</td></tr><tr><td>url</td><td>http://ofrjra54d.bkt.clouddn.com/7d7af858b62247cea2711346b6d95f3b1483451138473.jpg</td></tr><tr><td>sort</td><td>5</td></tr><tr><td>status</td><td>1</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 21:54:24');
+INSERT INTO `system_log` VALUES ('264', '首页管理', '轮播图链-编辑', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>id</td><td>5</td></tr><tr><td>title</td><td>tower</td></tr><tr><td>link</td><td>/</td></tr><tr><td>url</td><td>http://ofrjra54d.bkt.clouddn.com/7d7af858b62247cea2711346b6d95f3b1483451138473.jpg</td></tr><tr><td>sort</td><td>5</td></tr><tr><td>status</td><td>1</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 21:55:29');
+INSERT INTO `system_log` VALUES ('265', '首页管理', '轮播图链-编辑', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>id</td><td>4</td></tr><tr><td>title</td><td>Panda</td></tr><tr><td>link</td><td>http://oschina.net/</td></tr><tr><td>url</td><td>http://ofrjra54d.bkt.clouddn.com/662e90113e6b4063817084483d9d241c1483349630848.png</td></tr><tr><td>sort</td><td>4</td></tr><tr><td>status</td><td>1</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 21:55:53');
+INSERT INTO `system_log` VALUES ('266', '首页管理', '轮播图链-编辑', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>id</td><td>5</td></tr><tr><td>title</td><td>tower</td></tr><tr><td>link</td><td>/</td></tr><tr><td>url</td><td>http://ofrjra54d.bkt.clouddn.com/7d7af858b62247cea2711346b6d95f3b1483451138473.jpg</td></tr><tr><td>sort</td><td>5</td></tr><tr><td>status</td><td>0</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 21:56:02');
+INSERT INTO `system_log` VALUES ('267', '首页管理', '轮播图链-编辑', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>id</td><td>4</td></tr><tr><td>title</td><td>Panda</td></tr><tr><td>link</td><td>http://oschina.net/</td></tr><tr><td>url</td><td>http://ofrjra54d.bkt.clouddn.com/662e90113e6b4063817084483d9d241c1483349630848.png</td></tr><tr><td>sort</td><td>4</td></tr><tr><td>status</td><td>0</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 22:02:10');
+INSERT INTO `system_log` VALUES ('268', '首页管理', '轮播图链-编辑', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>id</td><td>6</td></tr><tr><td>title</td><td>tower</td></tr><tr><td>link</td><td>/</td></tr><tr><td>url</td><td>http://ofrjra54d.bkt.clouddn.com/7d7af858b62247cea2711346b6d95f3b1483451138473.jpg</td></tr><tr><td>sort</td><td>5</td></tr><tr><td>status</td><td>0</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 22:02:19');
+INSERT INTO `system_log` VALUES ('269', '首页管理', '轮播图链-编辑', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>id</td><td>7</td></tr><tr><td>title</td><td>tower</td></tr><tr><td>link</td><td>/</td></tr><tr><td>url</td><td>http://ofrjra54d.bkt.clouddn.com/7d7af858b62247cea2711346b6d95f3b1483451138473.jpg</td></tr><tr><td>sort</td><td>5</td></tr><tr><td>status</td><td>0</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 22:02:29');
+INSERT INTO `system_log` VALUES ('270', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>1</td></tr><tr><td>resIds</td><td>[79]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 22:03:47');
+INSERT INTO `system_log` VALUES ('271', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>2</td></tr><tr><td>resIds</td><td>[79]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 22:03:47');
+INSERT INTO `system_log` VALUES ('272', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>6</td></tr><tr><td>resIds</td><td>[79]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 22:03:47');
+INSERT INTO `system_log` VALUES ('273', '系统管理', '资源管理-添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>name</td><td>删除</td></tr><tr><td>link</td><td>/system/admin/home/image/delete</td></tr><tr><td>sign</td><td>admin:home:image:delete</td></tr><tr><td>pid</td><td>6</td></tr><tr><td>icon</td><td>fa-trash-o</td></tr><tr><td>type</td><td>2</td></tr><tr><td>sort</td><td>3</td></tr><tr><td>status</td><td>0</td></tr><tr><td>way</td><td>0</td></tr><tr><td>roles</td><td>[1, 2, 6]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 22:03:48');
+INSERT INTO `system_log` VALUES ('274', '首页管理', '轮播图链-删除', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>ids</td><td>4,6,7</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-03 22:04:29');
+INSERT INTO `system_log` VALUES ('275', '系統备份', '添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>name</td><td>shenmegui</td></tr><tr><td>exec</td><td>point</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-04 21:26:07');
+INSERT INTO `system_log` VALUES ('276', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>1</td></tr><tr><td>resIds</td><td>[80]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-04 23:31:24');
+INSERT INTO `system_log` VALUES ('277', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>2</td></tr><tr><td>resIds</td><td>[80]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-04 23:31:24');
+INSERT INTO `system_log` VALUES ('278', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>6</td></tr><tr><td>resIds</td><td>[80]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-04 23:31:24');
+INSERT INTO `system_log` VALUES ('279', '系统管理', '资源管理-添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>name</td><td>查找</td></tr><tr><td>link</td><td>/system/admin/home/recommend/search</td></tr><tr><td>sign</td><td>admin:home:recommend:search</td></tr><tr><td>pid</td><td>8</td></tr><tr><td>icon</td><td>fa-search</td></tr><tr><td>type</td><td>2</td></tr><tr><td>sort</td><td>4</td></tr><tr><td>status</td><td>0</td></tr><tr><td>way</td><td>0</td></tr><tr><td>roles</td><td>[1, 2, 6]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-04 23:31:24');
+INSERT INTO `system_log` VALUES ('280', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>1</td></tr><tr><td>resIds</td><td>[81]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 19:45:32');
+INSERT INTO `system_log` VALUES ('281', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>2</td></tr><tr><td>resIds</td><td>[81]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 19:45:32');
+INSERT INTO `system_log` VALUES ('282', '系统管理', '资源管理-添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>name</td><td>查找</td></tr><tr><td>link</td><td>/system/admin/log/operation/search</td></tr><tr><td>sign</td><td>admin:log:operation:search</td></tr><tr><td>pid</td><td>16</td></tr><tr><td>icon</td><td>fa-search</td></tr><tr><td>type</td><td>2</td></tr><tr><td>sort</td><td>1</td></tr><tr><td>status</td><td>0</td></tr><tr><td>way</td><td>0</td></tr><tr><td>roles</td><td>[1, 2]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 19:45:32');
+INSERT INTO `system_log` VALUES ('283', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>1</td></tr><tr><td>resIds</td><td>[82]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 20:17:19');
+INSERT INTO `system_log` VALUES ('284', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>2</td></tr><tr><td>resIds</td><td>[82]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 20:17:19');
+INSERT INTO `system_log` VALUES ('285', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>6</td></tr><tr><td>resIds</td><td>[82]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 20:17:19');
+INSERT INTO `system_log` VALUES ('286', '系统管理', '资源管理-添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>name</td><td>查找</td></tr><tr><td>link</td><td>/system/admin/log/sign/search</td></tr><tr><td>sign</td><td>admin:log:sign:search</td></tr><tr><td>pid</td><td>23</td></tr><tr><td>icon</td><td>fa-search</td></tr><tr><td>type</td><td>2</td></tr><tr><td>sort</td><td>2</td></tr><tr><td>status</td><td>0</td></tr><tr><td>way</td><td>0</td></tr><tr><td>roles</td><td>[1, 2, 6]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 20:17:20');
+INSERT INTO `system_log` VALUES ('287', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>1</td></tr><tr><td>resIds</td><td>[83]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 20:18:02');
+INSERT INTO `system_log` VALUES ('288', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>2</td></tr><tr><td>resIds</td><td>[83]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 20:18:02');
+INSERT INTO `system_log` VALUES ('289', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>6</td></tr><tr><td>resIds</td><td>[83]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 20:18:02');
+INSERT INTO `system_log` VALUES ('290', '系统管理', '资源管理-添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>name</td><td>查找</td></tr><tr><td>link</td><td>/system/admin/log/gold/search</td></tr><tr><td>sign</td><td>admin:log:gold:search</td></tr><tr><td>pid</td><td>25</td></tr><tr><td>icon</td><td>fa-search</td></tr><tr><td>type</td><td>2</td></tr><tr><td>sort</td><td>2</td></tr><tr><td>status</td><td>0</td></tr><tr><td>way</td><td>0</td></tr><tr><td>roles</td><td>[1, 2, 6]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 20:18:02');
+INSERT INTO `system_log` VALUES ('291', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>1</td></tr><tr><td>resIds</td><td>[84]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 20:19:31');
+INSERT INTO `system_log` VALUES ('292', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>2</td></tr><tr><td>resIds</td><td>[84]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 20:19:31');
+INSERT INTO `system_log` VALUES ('293', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>6</td></tr><tr><td>resIds</td><td>[84]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 20:19:31');
+INSERT INTO `system_log` VALUES ('294', '系统管理', '资源管理-添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>name</td><td>查找</td></tr><tr><td>link</td><td>/system/admin/log/experience/search</td></tr><tr><td>sign</td><td>admin:log:experience:search</td></tr><tr><td>pid</td><td>24</td></tr><tr><td>icon</td><td>fa-search</td></tr><tr><td>type</td><td>2</td></tr><tr><td>sort</td><td>2</td></tr><tr><td>status</td><td>0</td></tr><tr><td>way</td><td>0</td></tr><tr><td>roles</td><td>[1, 2, 6]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 20:19:31');
+INSERT INTO `system_log` VALUES ('295', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>1</td></tr><tr><td>resIds</td><td>[85]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 20:41:20');
+INSERT INTO `system_log` VALUES ('296', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>2</td></tr><tr><td>resIds</td><td>[85]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 20:41:20');
+INSERT INTO `system_log` VALUES ('297', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>6</td></tr><tr><td>resIds</td><td>[85]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 20:41:20');
+INSERT INTO `system_log` VALUES ('298', '系统管理', '资源管理-添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>name</td><td>查找</td></tr><tr><td>link</td><td>/system/admin/log/gold/detail/search</td></tr><tr><td>sign</td><td>admin:log:gold:detail:search</td></tr><tr><td>pid</td><td>31</td></tr><tr><td>icon</td><td>fa-search</td></tr><tr><td>type</td><td>2</td></tr><tr><td>sort</td><td>1</td></tr><tr><td>status</td><td>0</td></tr><tr><td>way</td><td>0</td></tr><tr><td>roles</td><td>[1, 2, 6]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 20:41:20');
+INSERT INTO `system_log` VALUES ('299', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>1</td></tr><tr><td>resIds</td><td>[86]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 20:42:10');
+INSERT INTO `system_log` VALUES ('300', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>2</td></tr><tr><td>resIds</td><td>[86]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 20:42:10');
+INSERT INTO `system_log` VALUES ('301', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>6</td></tr><tr><td>resIds</td><td>[86]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 20:42:10');
+INSERT INTO `system_log` VALUES ('302', '系统管理', '资源管理-添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>name</td><td>查找</td></tr><tr><td>link</td><td>/system/admin/log/experience/detail/search</td></tr><tr><td>sign</td><td>admin:log:experience:detail:search</td></tr><tr><td>pid</td><td>32</td></tr><tr><td>icon</td><td>fa-search</td></tr><tr><td>type</td><td>2</td></tr><tr><td>sort</td><td>1</td></tr><tr><td>status</td><td>0</td></tr><tr><td>way</td><td>0</td></tr><tr><td>roles</td><td>[1, 2, 6]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 20:42:10');
+INSERT INTO `system_log` VALUES ('303', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>1</td></tr><tr><td>resIds</td><td>[87]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 20:59:28');
+INSERT INTO `system_log` VALUES ('304', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>2</td></tr><tr><td>resIds</td><td>[87]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 20:59:28');
+INSERT INTO `system_log` VALUES ('305', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>6</td></tr><tr><td>resIds</td><td>[87]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 20:59:28');
+INSERT INTO `system_log` VALUES ('306', '系统管理', '资源管理-添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>name</td><td>查找</td></tr><tr><td>link</td><td>/system/admin/navboard/navigation/search</td></tr><tr><td>sign</td><td>admin:nb:nav:search</td></tr><tr><td>pid</td><td>27</td></tr><tr><td>icon</td><td>fa-search</td></tr><tr><td>type</td><td>2</td></tr><tr><td>sort</td><td>1</td></tr><tr><td>status</td><td>0</td></tr><tr><td>way</td><td>0</td></tr><tr><td>roles</td><td>[1, 2, 6]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 20:59:28');
+INSERT INTO `system_log` VALUES ('307', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>1</td></tr><tr><td>resIds</td><td>[88]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 21:19:51');
+INSERT INTO `system_log` VALUES ('308', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>2</td></tr><tr><td>resIds</td><td>[88]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 21:19:51');
+INSERT INTO `system_log` VALUES ('309', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>6</td></tr><tr><td>resIds</td><td>[88]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 21:19:51');
+INSERT INTO `system_log` VALUES ('310', '系统管理', '资源管理-添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>name</td><td>添加</td></tr><tr><td>link</td><td>/system/admin/navboard/navigation/add</td></tr><tr><td>sign</td><td>admin:nb:nav:add</td></tr><tr><td>pid</td><td>27</td></tr><tr><td>icon</td><td>fa-plus</td></tr><tr><td>type</td><td>2</td></tr><tr><td>sort</td><td>2</td></tr><tr><td>status</td><td>0</td></tr><tr><td>way</td><td>0</td></tr><tr><td>roles</td><td>[1, 2, 6]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 21:19:52');
+INSERT INTO `system_log` VALUES ('311', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>1</td></tr><tr><td>resIds</td><td>[89]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 21:20:44');
+INSERT INTO `system_log` VALUES ('312', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>2</td></tr><tr><td>resIds</td><td>[89]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 21:20:44');
+INSERT INTO `system_log` VALUES ('313', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>6</td></tr><tr><td>resIds</td><td>[89]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 21:20:44');
+INSERT INTO `system_log` VALUES ('314', '系统管理', '资源管理-添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>name</td><td>编辑</td></tr><tr><td>link</td><td>/system/admin/navboard/navigation/update</td></tr><tr><td>sign</td><td>admin:nb:nav:update</td></tr><tr><td>pid</td><td>27</td></tr><tr><td>icon</td><td>fa-edit</td></tr><tr><td>type</td><td>2</td></tr><tr><td>sort</td><td>3</td></tr><tr><td>status</td><td>0</td></tr><tr><td>way</td><td>0</td></tr><tr><td>roles</td><td>[1, 2, 6]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 21:20:44');
+INSERT INTO `system_log` VALUES ('315', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>1</td></tr><tr><td>resIds</td><td>[90]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 21:50:10');
+INSERT INTO `system_log` VALUES ('316', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>2</td></tr><tr><td>resIds</td><td>[90]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 21:50:10');
+INSERT INTO `system_log` VALUES ('317', '系统管理', '角色管理-授权', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>roleId</td><td>6</td></tr><tr><td>resIds</td><td>[90]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 21:50:10');
+INSERT INTO `system_log` VALUES ('318', '系统管理', '资源管理-添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>name</td><td>删除</td></tr><tr><td>link</td><td>/system/admin/navboard/navigation/delete</td></tr><tr><td>sign</td><td>admin:nb:nav:delete</td></tr><tr><td>pid</td><td>27</td></tr><tr><td>icon</td><td>fa-trash-o</td></tr><tr><td>type</td><td>2</td></tr><tr><td>sort</td><td>4</td></tr><tr><td>status</td><td>0</td></tr><tr><td>way</td><td>0</td></tr><tr><td>roles</td><td>[1, 2, 6]</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 21:50:10');
+INSERT INTO `system_log` VALUES ('319', '导航版块', '导航管理-添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>name</td><td>临时测试</td></tr><tr><td>desc</td><td>测试</td></tr><tr><td>sort</td><td>6</td></tr><tr><td>status</td><td>0</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 21:50:37');
+INSERT INTO `system_log` VALUES ('320', '导航版块', '导航管理-编辑', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>id</td><td>53</td></tr><tr><td>name</td><td>临时测试</td></tr><tr><td>desc</td><td>测试十多个回复</td></tr><tr><td>sort</td><td>6</td></tr><tr><td>status</td><td>0</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 21:51:25');
+INSERT INTO `system_log` VALUES ('321', '导航版块', '导航管理-编辑', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>id</td><td>53</td></tr><tr><td>name</td><td>临时测</td></tr><tr><td>desc</td><td>测试十多个回复</td></tr><tr><td>sort</td><td>6</td></tr><tr><td>status</td><td>0</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 21:51:35');
+INSERT INTO `system_log` VALUES ('322', '导航版块', '导航管理-编辑', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>id</td><td>53</td></tr><tr><td>name</td><td>临时测</td></tr><tr><td>desc</td><td>测试十多个回复</td></tr><tr><td>sort</td><td>6</td></tr><tr><td>status</td><td>1</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 21:51:48');
+INSERT INTO `system_log` VALUES ('323', '导航版块', '导航管理-编辑', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>id</td><td>53</td></tr><tr><td>name</td><td>临时测</td></tr><tr><td>desc</td><td>测试十多个回复</td></tr><tr><td>sort</td><td>6</td></tr><tr><td>status</td><td>0</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 21:57:42');
+INSERT INTO `system_log` VALUES ('324', '导航版块', '导航管理-添加', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>name</td><td>临时2</td></tr><tr><td>desc</td><td>sg</td></tr><tr><td>sort</td><td>7</td></tr><tr><td>status</td><td>0</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 21:58:00');
+INSERT INTO `system_log` VALUES ('325', '导航版块', '导航管理-删除', '1', '执行成功!', '<table class=\"table table-bordered\"><tbody><tr><td>ids</td><td>54,53</td></tr></tbody></table>', '1268', 'Smart_咚咚', '127.0.0.1', '2017-01-05 21:58:20');
 
 -- ----------------------------
 -- Table structure for user_access
@@ -2475,15 +2938,16 @@ CREATE TABLE `user_access` (
   KEY `idx_user_nickname` (`user_nickname`),
   KEY `idx_user_email` (`user_email`),
   KEY `idx_user_is_online` (`user_is_online`)
-) ENGINE=InnoDB AUTO_INCREMENT=1286 DEFAULT CHARSET=utf8 COMMENT='用户重要信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=1287 DEFAULT CHARSET=utf8 COMMENT='用户重要信息表';
 
 -- ----------------------------
 -- Records of user_access
 -- ----------------------------
-INSERT INTO `user_access` VALUES ('1268', 'dongbo', 'Smart_咚咚', 'c4ca4238a0b923820dcc509a6f75849b', 'dongbow1@163.com', '127.0.0.1', '0', '0', '0', '2016-12-25 16:16:25', '127.0.0.1', '2016-08-28 21:43:56', '1', '0', '0');
-INSERT INTO `user_access` VALUES ('1279', 'tonboy', 'tonboy', 'c4ca4238a0b923820dcc509a6f75849b', 'tonboyw1@163.com', '127.0.0.1', '0', '0', '0', '2016-12-23 23:14:17', '127.0.0.1', '2016-10-01 23:01:06', '1', '0', '0');
-INSERT INTO `user_access` VALUES ('1280', 'tonboyw', 'tonboyw', 'c4ca4238a0b923820dcc509a6f75849b', '1172051170@qq.com', '127.0.0.1', '0', '0', '0', '2016-12-25 17:21:09', '127.0.0.1', '2016-10-02 10:56:01', '0', '1', '0');
-INSERT INTO `user_access` VALUES ('1285', 'test01', 'test01', 'c4ca4238a0b923820dcc509a6f75849b', 'test01@163.com', '127.0.0.1', '0', '0', '0', '2016-12-24 17:01:40', '127.0.0.1', '2016-10-05 21:32:50', '0', '0', '0');
+INSERT INTO `user_access` VALUES ('1268', 'dongbo', 'Smart_咚咚', 'c4ca4238a0b923820dcc509a6f75849b', 'dongbow1@163.com', '127.0.0.1', '0', '0', '0', '2017-01-03 20:18:59', '127.0.0.1', '2016-08-28 21:43:56', '1', '0', '0');
+INSERT INTO `user_access` VALUES ('1279', 'tonboy', 'tonboy', 'c4ca4238a0b923820dcc509a6f75849b', 'tonboyw1@163.com', '127.0.0.1', '0', '0', '0', '2017-01-02 21:40:46', '127.0.0.1', '2016-10-01 23:01:06', '1', '0', '0');
+INSERT INTO `user_access` VALUES ('1280', 'tonboyw', 'tonboyw', 'c4ca4238a0b923820dcc509a6f75849b', '1172051170@qq.com', '127.0.0.1', '0', '0', '0', '2017-01-02 21:41:00', '127.0.0.1', '2016-10-02 10:56:01', '0', '1', '0');
+INSERT INTO `user_access` VALUES ('1285', 'test01', 'test01', 'c4ca4238a0b923820dcc509a6f75849b', 'test01@163.com', '127.0.0.1', '0', '0', '0', '2017-01-02 21:41:16', '127.0.0.1', '2016-10-05 21:32:50', '0', '0', '0');
+INSERT INTO `user_access` VALUES ('1286', 'test', 'test', 'c4ca4238a0b923820dcc509a6f75849b', 'test@ifxcode.com', '127.0.0.1', '0', '0', '0', '2017-01-02 21:41:32', '127.0.0.1', '2016-12-29 20:00:44', '0', '0', '0');
 
 -- ----------------------------
 -- Table structure for user_favorite
@@ -2515,20 +2979,11 @@ INSERT INTO `user_favorite` VALUES ('10', '1280', '47', '195', '2', '开源技�
 INSERT INTO `user_favorite` VALUES ('11', '1268', '191', '1235', '1', 'this is first topic', '2016-11-10 20:39:14', '127.0.0.1');
 INSERT INTO `user_favorite` VALUES ('13', '1279', '52', '205', '2', '论坛事务', '2016-11-10 21:58:15', '127.0.0.1');
 INSERT INTO `user_favorite` VALUES ('14', '1279', '51', '202', '2', '随便聊聊', '2016-11-10 21:59:36', '127.0.0.1');
-INSERT INTO `user_favorite` VALUES ('17', '1279', '49', '197', '2', '实用分享', '2016-11-12 00:01:42', '127.0.0.1');
-INSERT INTO `user_favorite` VALUES ('18', '1279', '50', '200', '2', '非关系型数据库', '2016-11-12 00:01:52', '127.0.0.1');
 INSERT INTO `user_favorite` VALUES ('19', '1279', '205', '1240', '1', '随便测试', '2016-11-12 00:02:04', '127.0.0.1');
 INSERT INTO `user_favorite` VALUES ('20', '1279', '200', '1244', '1', '随便测试', '2016-11-12 21:07:44', '127.0.0.1');
 INSERT INTO `user_favorite` VALUES ('21', '1280', '205', '1237', '1', '测试单纯加精', '2016-11-13 02:33:10', '127.0.0.1');
 INSERT INTO `user_favorite` VALUES ('22', '1280', '52', '205', '2', '论坛事务', '2016-11-13 02:35:55', '127.0.0.1');
 INSERT INTO `user_favorite` VALUES ('23', '1279', '205', '1242', '1', '随便测试', '2016-11-19 21:11:31', '127.0.0.1');
-INSERT INTO `user_favorite` VALUES ('24', '1279', '47', '195', '2', '开源技术', '2016-11-19 21:21:27', '127.0.0.1');
-INSERT INTO `user_favorite` VALUES ('26', '1279', '47', '192', '2', 'JAVA Web', '2016-11-19 22:21:55', '127.0.0.1');
-INSERT INTO `user_favorite` VALUES ('27', '1279', '47', '193', '2', '中间件', '2016-11-19 22:22:00', '127.0.0.1');
-INSERT INTO `user_favorite` VALUES ('28', '1279', '47', '194', '2', '企业级技术', '2016-11-19 22:22:04', '127.0.0.1');
-INSERT INTO `user_favorite` VALUES ('29', '1279', '49', '196', '2', '系统维护', '2016-11-19 22:22:16', '127.0.0.1');
-INSERT INTO `user_favorite` VALUES ('30', '1279', '50', '199', '2', '关系型数据库', '2016-11-19 22:22:25', '127.0.0.1');
-INSERT INTO `user_favorite` VALUES ('31', '1279', '50', '201', '2', '实用分享', '2016-11-19 22:22:32', '127.0.0.1');
 INSERT INTO `user_favorite` VALUES ('33', '1279', '52', '204', '2', '建议反馈', '2016-11-19 22:22:44', '127.0.0.1');
 INSERT INTO `user_favorite` VALUES ('35', '1268', '52', '206', '2', '版主专区', '2016-11-29 20:27:29', '127.0.0.1');
 INSERT INTO `user_favorite` VALUES ('36', '1280', '52', '206', '2', '版主专区', '2016-11-30 17:49:21', '127.0.0.1');
@@ -2626,6 +3081,7 @@ INSERT INTO `user_info` VALUES ('1268', 'http://ofrjra54d.bkt.clouddn.com/ca861a
 INSERT INTO `user_info` VALUES ('1279', 'http://ofrjra54d.bkt.clouddn.com/04d3d70e8529492eb63bae21f4a705dc1478274399206.jpg', null, '0', '3400', '3401', null, null, null, null);
 INSERT INTO `user_info` VALUES ('1280', 'http://ofrjra54d.bkt.clouddn.com/04d3d70e8529492eb63bae21f4a705dc1478274399206.jpg', null, '2', '3400', '3401', 'Code', '0 or 1', '1024', '');
 INSERT INTO `user_info` VALUES ('1285', 'http://ofrjra54d.bkt.clouddn.com/04d3d70e8529492eb63bae21f4a705dc1478274399206.jpg', null, '0', null, null, null, null, null, null);
+INSERT INTO `user_info` VALUES ('1286', 'http://ofrjra54d.bkt.clouddn.com/04d3d70e8529492eb63bae21f4a705dc1478274399206.jpg', null, '0', null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for user_privacy
@@ -2648,6 +3104,7 @@ INSERT INTO `user_privacy` VALUES ('1268', '0', '0', '0', '0', '0');
 INSERT INTO `user_privacy` VALUES ('1279', '1', '0', '0', '2', '0');
 INSERT INTO `user_privacy` VALUES ('1280', '0', '0', '0', '0', '0');
 INSERT INTO `user_privacy` VALUES ('1285', '0', '0', '1', '0', '0');
+INSERT INTO `user_privacy` VALUES ('1286', '0', '0', '0', '0', '0');
 
 -- ----------------------------
 -- Table structure for user_role
@@ -2658,7 +3115,7 @@ CREATE TABLE `user_role` (
   `user_id` bigint(20) NOT NULL COMMENT '用户ID,关联user_access表',
   `role_id` int(11) NOT NULL COMMENT '角色ID,关联role表',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='用户-角色表';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='用户-角色表';
 
 -- ----------------------------
 -- Records of user_role
@@ -2667,6 +3124,7 @@ INSERT INTO `user_role` VALUES ('1', '1268', '1');
 INSERT INTO `user_role` VALUES ('2', '1279', '2');
 INSERT INTO `user_role` VALUES ('3', '1280', '3');
 INSERT INTO `user_role` VALUES ('8', '1285', '4');
+INSERT INTO `user_role` VALUES ('9', '1286', '4');
 
 -- ----------------------------
 -- Table structure for user_value
@@ -2692,7 +3150,8 @@ CREATE TABLE `user_value` (
 -- ----------------------------
 -- Records of user_value
 -- ----------------------------
-INSERT INTO `user_value` VALUES ('1268', '938', '50', '2016-11-20 02:39:59', '6716', '50', '2016-11-20 02:39:59', '13', '23', '41', '6', '2016-12-25 16:16:29', '0');
-INSERT INTO `user_value` VALUES ('1279', '70', '50', '2016-11-22 13:30:26', '110', '50', '2016-11-22 13:30:26', '2', '45', '26', '3', '2016-12-23 22:42:26', '0');
-INSERT INTO `user_value` VALUES ('1280', '153', '33', '2016-12-25 17:21:11', '699', '33', '2016-12-25 17:21:11', '2', '2', '14', '2', '2016-12-25 17:21:11', '0');
-INSERT INTO `user_value` VALUES ('1285', '24', '24', '2016-12-24 17:03:43', '63', '13', '2016-12-24 17:03:43', '1', '4', '10', '1', '2016-12-24 17:01:43', '0');
+INSERT INTO `user_value` VALUES ('1268', '938', '50', '2016-11-20 02:39:59', '6716', '50', '2016-11-20 02:39:59', '17', '38', '52', '17', '2017-01-05 19:49:42', '0');
+INSERT INTO `user_value` VALUES ('1279', '70', '50', '2016-11-22 13:30:26', '110', '50', '2016-11-22 13:30:26', '4', '47', '31', '1', '2017-01-02 21:40:50', '0');
+INSERT INTO `user_value` VALUES ('1280', '160', '40', '2017-01-02 21:41:02', '706', '40', '2017-01-02 21:41:02', '2', '2', '18', '1', '2017-01-02 21:41:02', '0');
+INSERT INTO `user_value` VALUES ('1285', '30', '30', '2017-01-02 21:41:18', '69', '19', '2017-01-02 21:41:18', '1', '4', '13', '1', '2017-01-02 21:41:18', '0');
+INSERT INTO `user_value` VALUES ('1286', '9', '9', '2017-01-02 21:42:06', '58', '8', '2017-01-02 21:42:06', '1', '2', '2', '1', '2017-01-02 21:41:34', '0');
