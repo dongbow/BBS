@@ -10,6 +10,7 @@ public class HomeImage implements Serializable {
 	private String homeTitle;
 	private String homeLink;
 	private String homeImgLink;
+	private int turnWay;
 	private int homeSort;
 	private int homeStatus;
 	private String homeCreateTime;
@@ -68,6 +69,14 @@ public class HomeImage implements Serializable {
 
 	public void setHomeCreateTime(String homeCreateTime) {
 		this.homeCreateTime = homeCreateTime;
+	}
+
+	public int getTurnWay() {
+		return turnWay;
+	}
+
+	public void setTurnWay(int turnWay) {
+		this.turnWay = turnWay;
 	}
 
 }

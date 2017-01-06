@@ -81,6 +81,12 @@ public class LogManageController extends BaseController{
 		model.addAttribute("page", page);
 		model.addAttribute("modules", resourcesService.getAllModules());
 		ParamsBuildUtils.createModel(model, request);
+		if(StringUtils.isNotBlank(name)) {
+			model.addAttribute("name", name);
+		}
+		if(StringUtils.isNotBlank(module)) {
+			model.addAttribute("module", module);
+		}
 		return "admin/logmanage/operationlog-list";
 	}
 	

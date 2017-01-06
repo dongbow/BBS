@@ -20,20 +20,20 @@
         <!--body wrapper start-->
         <div class="wrapper">
         	<div class="panel panel-default">
-        		<form action="" method="get" id="user">
+        		<form action="" method="get" id="dataForm">
 	                <div class="panel-body">
 	                	<div class="col-md-2 form-group">
-			            	<input id="name" name="name" type="text" value="" class="form-control" placeholder="任务名">
+			            	<input id="name" name="name" type="text" value="${name!}" class="form-control" placeholder="任务名">
 			            </div>
 			            <div class="col-md-2 form-group">
-		                    <select id="user-lock" name="status" class="selectpicker show-tick form-control">
+		                    <select id="status" name="status" class="selectpicker show-tick form-control">
 		                      	<option value="-1">选择状态</option>
 						        <option value="0" <#if status??><#if status?number == 0>selected</#if></#if>>暂停</option>
 						        <option value="1" <#if status??><#if status?number == 1>selected</#if></#if>>运行</option>
 					        </select>
 			            </div>
 	                	<div class="col-md-4 form-group">
-	            			<a class="btn btn-success btn-sm user-search" type="button" href="${path}/system/admin/sysmanage/user/search"><i class="fa fa-search"></i> 查找 </a>
+	            			<a class="btn btn-success btn-sm" id="data-search" type="button" href="${path}/system/admin/quartz/list/search"><i class="fa fa-search"></i> 查找 </a>
 	            			<a class="btn btn-info btn-sm" type="button"><i class="fa fa-plus"></i> 添加 </a>
 			            	<a class="btn btn-danger btn-sm" type="button"><i class="fa fa-trash-o"></i> 删除 </a>
 	            		</div>

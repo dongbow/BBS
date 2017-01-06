@@ -87,7 +87,7 @@ public class TopicController extends BaseUserController{
 			Classify classify = classifyService.getClassifyByCid(topic.getBoardId(), topic.getClassId());
 			Navigation navigation = navigationService.getNavigation(topic.getNavId());
 			Board board = boardService.getBoardByBoardId(topic.getNavId(), topic.getBoardId());
-			if(!FormValidate.number(uid) || !FormValidate.number(sort, 0, 1) || !FormValidate.number(pno)) {
+			if(!FormValidate.number(uid) || !FormValidate.number(sort, 0, 1) || !FormValidate.number(pno) || Integer.parseInt(pno) <= 0) {
 				uid = "0";
 				sort = "0";
 				pno = "1";
@@ -120,7 +120,7 @@ public class TopicController extends BaseUserController{
 			@RequestParam(value = "page", required = false, defaultValue = "1")String pno, 
 			@RequestParam(required = false)String floor, 
 			@RequestParam(required = false, defaultValue = "0")String lastest) {
-		if(!FormValidate.number(pno) || !FormValidate.number(lastest, 0, 1)) {
+		if(!FormValidate.number(pno) || !FormValidate.number(lastest, 0, 1) || Integer.parseInt(pno) <= 0) {
 			pno = "1";
 			lastest = "0";
 		}

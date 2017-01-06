@@ -82,7 +82,7 @@ $(function() {
 	
 	$('.fullBtnBlue').click(function() {
 		if($('#user').val() && $('#email').val() && $('#valid').val() && isNaN($('#valid').val())) {
-			$('#mainForm').attr('action', root + '/account/forget/do');
+			$('#mainForm').attr('action', root + '/account/forget');
 			$('#mainForm').submit();
 		} else {
 			$('#error').show();

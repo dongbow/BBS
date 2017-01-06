@@ -93,7 +93,7 @@ public class UserLoginController {
 	private ExperienceHistory experienceHistory = null;
 	private UserValue userValue = null;
 	
-	@RequestMapping("/login")
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String toLogin(HttpServletRequest request) {
 		CookieBean cookieBean = userService.getCookieBeanFromCookie(request);
 		if(cookieBean != null) {
@@ -109,7 +109,7 @@ public class UserLoginController {
 		return "account/login";
 	}
 	
-	@RequestMapping(value = "/dologin")
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String doLogin(String userName, String password,
 			@RequestParam(value="remember", required = false, defaultValue = "0")int remember, 
 			@RequestParam(value="backurl", required = false, defaultValue = "/index")String backurl, 
@@ -172,7 +172,7 @@ public class UserLoginController {
 		return backurl;
 	}
 	
-	@RequestMapping("/register")
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String toRegister() {
 		if(SystemConfigUtils.getIsAllowRegister()) {
 			return "account/register-stop";
@@ -180,7 +180,7 @@ public class UserLoginController {
 		return "account/register";
 	}
 	
-	@RequestMapping(value = "/register/do", method = RequestMethod.POST)
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String doRegister(String userName, String password, String email, 
 			@RequestParam(value = "validatecode", required = false, defaultValue = "0")String validatecode, 
 			@RequestParam(value = "isAdmin", required = false, defaultValue = "0")int isAdmin, 
@@ -209,12 +209,12 @@ public class UserLoginController {
 		return href;
 	}
 	
-	@RequestMapping("/forget")
+	@RequestMapping(value = "/forget", method = RequestMethod.GET)
 	public String toForget() {
 		return "account/forget";
 	}
 	
-	@RequestMapping(value = "/forget/do", method = RequestMethod.POST)
+	@RequestMapping(value = "/forget", method = RequestMethod.POST)
 	public String doForget(String name, String email, String code, HttpServletRequest request, RedirectAttributesModelMap model) {
 		if(!code.isEmpty() && StringUtils.equals(code.toLowerCase(), ValidateCode.getValidateCode(request).toLowerCase())
 				&& !email.isEmpty() && !name.isEmpty()

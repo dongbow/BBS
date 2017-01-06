@@ -13,13 +13,15 @@ function dataAddSave() {
 	var title = $('#title').val();
 	var link = $('#link').val();
 	var url = $('#img-url').val();
+	var way = $('#way').val();
 	var sort = $('#sort').val();
 	var status = $('#status').val();
-	if(title && link && url && sort && status) {
+	if(title && link && way && url && sort && status) {
 		$.post($('.data-add').attr('href'), {
 			"title": title,
 			"link": link,
 			"url": url,
+			"way": way, 
 			"sort": sort,
 			"status": status
 		}, function(result) {
@@ -45,13 +47,15 @@ function dataUpdateSave() {
 	var title = $('#title').val();
 	var link = $('#link').val();
 	var url = $('#img-url').val();
+	var way = $('#way').val();
 	var sort = $('#sort').val();
 	var status = $('#status').val();
-	if(title && link && url && sort && status) {
+	if(title && link && url && way && sort && status) {
 		$.post($('.data-update').attr('href'), {
 			"id": $('#data-call-id').val(), 
 			"title": title,
 			"link": link,
+			"way": way, 
 			"url": url,
 			"sort": sort,
 			"status": status

@@ -35,4 +35,8 @@
 		order by board_id asc, class_sort asc
 	</select>
 	
+	<update id="syncTopicCount" flushCache="false">
+		update bbs_board_classify set class_topic_count = #{count} where class_id = #{cid}
+	</update>
+	
 </mapper>

@@ -54,12 +54,13 @@ public class HomeImageServiceImpl implements HomeImageService{
 
 	@Override
 	@SysLog(module = "首页管理", methods = "轮播图链-添加")
-	public int addImage(String title, String link, String url, int sort, int status) {
+	public int addImage(String title, String link, String url, int way, int sort, int status) {
 		try {
 			HomeImage homeImage = new HomeImage();
 			homeImage.setHomeTitle(title);
 			homeImage.setHomeLink(link);
 			homeImage.setHomeImgLink(url);
+			homeImage.setTurnWay(way);
 			homeImage.setHomeSort(sort);
 			homeImage.setHomeStatus(status);
 			homeImage.setHomeCreateTime(DateUtils.dt14LongFormat(new Date()));
@@ -79,13 +80,14 @@ public class HomeImageServiceImpl implements HomeImageService{
 
 	@Override
 	@SysLog(module = "首页管理", methods = "轮播图链-编辑")
-	public int updateImage(int id, String title, String link, String url, int sort, int status) {
+	public int updateImage(int id, String title, String link, String url, int way, int sort, int status) {
 		try {
 			HomeImage homeImage = new HomeImage();
 			homeImage.setId(id);
 			homeImage.setHomeTitle(title);
 			homeImage.setHomeLink(link);
 			homeImage.setHomeImgLink(url);
+			homeImage.setTurnWay(way);
 			homeImage.setHomeSort(sort);
 			homeImage.setHomeStatus(status);
 			homeImage.setHomeCreateTime(DateUtils.dt14LongFormat(new Date()));

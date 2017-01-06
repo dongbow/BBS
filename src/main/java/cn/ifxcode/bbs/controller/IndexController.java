@@ -113,7 +113,7 @@ public class IndexController extends BaseUserController{
 		Navigation navigation = navigationService.getNavigation(navId);
 		JSONArray array = JSONArray.parseArray(object.getString("boards"));
 		List<Board> boards = JsonUtils.decodeJson(array, Board.class);
-		if(!FormValidate.number(p)) {p = "1";}
+		if(!FormValidate.number(p) || Integer.parseInt(p) <= 0) {p = "1";}
 		Page page = Page.newBuilder(Integer.parseInt(p), DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
 		List<Topic> gTopics = topicService.getGlobalTopTopic();
 		List<Topic> hTopics = topicService.getTopicsByNavId(page, navId, type, filter, orderby);

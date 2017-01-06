@@ -12,13 +12,15 @@
 	<#include "common/rightButton.ftl"/>
 	<div id="fm">
 		<div style="float: left; width: 710px; height: auto;">
-			<div id="demo1" class="slideBox">
-				<ul class="items">
-					<#list images as img>
-						<li><a href="${img.homeLink}" title="${img.homeTitle}"><img src="${img.homeImgLink}"></a></li>
-					</#list>
-				</ul>
-			</div>
+			<#if images?? && images?size gt 0>
+				<div id="demo1" class="slideBox">
+					<ul class="items">
+						<#list images as img>
+							<li><a href="${img.homeLink}" <#if img.turnWay == 1>target="_blank"</#if> title="${img.homeTitle}"><img src="${img.homeImgLink}"></a></li>
+						</#list>
+					</ul>
+				</div>
+			</#if>
 			<div id="cont">
 				<#if gtopics??>
 					<#list gtopics as g>

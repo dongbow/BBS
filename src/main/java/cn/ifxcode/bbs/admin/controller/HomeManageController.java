@@ -61,10 +61,10 @@ public class HomeManageController extends BaseController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/image/add", method = RequestMethod.POST)
-	public Result addImage(String title, String link, String url, int sort, int status) {
+	public Result addImage(String title, String link, String url, int way, int sort, int status) {
 		Result result = null;
 		if(FormValidate.stringUtils(title, link, url)) {
-			int row = homeImageService.addImage(title, link, url, sort, status);
+			int row = homeImageService.addImage(title, link, url, way, sort, status);
 			if(row == BbsConstant.OK) {
 				result = new Result(BbsConstant.OK, "添加成功");
 			} else {
@@ -84,10 +84,10 @@ public class HomeManageController extends BaseController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/image/update", method = RequestMethod.POST)
-	public Result imageUpdate(int id, String title, String link, String url, int sort, int status) {
+	public Result imageUpdate(int id, String title, String link, String url, int way, int sort, int status) {
 		Result result = null;
 		if(FormValidate.stringUtils(title, link, url)) {
-			int row = homeImageService.updateImage(id, title, link, url, sort, status);
+			int row = homeImageService.updateImage(id, title, link, url, way, sort, status);
 			if(row == BbsConstant.OK) {
 				result = new Result(BbsConstant.OK, "更新成功");
 			} else {

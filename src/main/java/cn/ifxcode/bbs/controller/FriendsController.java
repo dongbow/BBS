@@ -63,7 +63,7 @@ public class FriendsController extends BaseUserController {
 	public String getFriendsList(@RequestParam(value = "page", required = false, defaultValue = "1")String pageNo, 
 			HttpServletRequest request, Model model) {
 		CookieBean bean = userService.getCookieBeanFromCookie(request);
-		if(!FormValidate.number(pageNo)) {pageNo = "1";}
+		if(!FormValidate.number(pageNo) || Integer.parseInt(pageNo) <= 0) {pageNo = "1";}
 		Page page = Page.newBuilder(Integer.parseInt(pageNo), 20, ParamsBuildUtils.createUrl(request));
 		List<UserFriends> friends = userService.getFriendsList(bean.getUser_id(), page);
 		model.addAttribute("page", page);
@@ -94,7 +94,7 @@ public class FriendsController extends BaseUserController {
 			return "redirect:/index";
 		}
 		if(type.equals("request")) {
-			if(!FormValidate.number(pageNo)) {pageNo = "1";}
+			if(!FormValidate.number(pageNo) || Integer.parseInt(pageNo) <= 0) {pageNo = "1";}
 			Page page = Page.newBuilder(Integer.parseInt(pageNo), PAGE_SIZE_DEFAULT, ParamsBuildUtils.createUrl(request));
 			List<UserFriends> friends = userService.getAllFriendsRequest(bean.getUser_id(), page);
 			model.addAttribute("page", page);

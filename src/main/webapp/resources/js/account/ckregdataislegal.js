@@ -6,11 +6,11 @@ $(function(){
 		$('#utip').css('display','inline');
 		$('#reg_error').hide();
 		$('#utip').html('<label style="border:1px solid #ddd;background-color:#eee;color:#666;width:auto;height:28px;padding:9px;">'
-				+'3-20个字符，允许中文，字母、数字和符号、-_</label>');
+				+'非昵称，3-20个字符，只允许字母、数字</label>');
 	});
 	
 	$('#name').blur(function(){
-		var regname=/^[A-Za-z0-9_\\-\\u4e00-\\u9fa5]+$/;
+		var regname=/^[A-Za-z0-9]+$/;
 		if($(this).val()==null||$(this).val()==""){
 			$(this).addClass('_error');
 			$('#utip').css('display','inline');
@@ -191,7 +191,7 @@ $(function(){
 		if(errLength!=0){
 			return false;
 		}else{
-			$('#regform').attr('action',root + '/account/register/do');
+			$('#regform').attr('action',root + '/account/register');
 			$('#regform').submit();
 		}
 	});

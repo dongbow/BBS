@@ -3,6 +3,7 @@ package cn.ifxcode.bbs.admin.controller;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -36,6 +37,19 @@ public class QuartzController extends BaseController {
 		Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
 		model.addAttribute("jobs", quartzService.getAllJobFromDB(page));
 		model.addAttribute("page", page);
+		return "admin/quartz/quartz-list";
+	}
+	
+	@RequestMapping("/list/search")
+	public String searchQuartz(@RequestParam(value="page", required = false, defaultValue = "1")int p, 
+			String name, int status, HttpServletRequest request, Model model) {
+		Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
+		model.addAttribute("jobs", quartzService.getAllJobFromDB(page, name, status));
+		model.addAttribute("page", page);
+		ParamsBuildUtils.createModel(model, request);
+		if(StringUtils.isNotBlank(name)) {
+			model.addAttribute("name", name);
+		}
 		return "admin/quartz/quartz-list";
 	}
 	

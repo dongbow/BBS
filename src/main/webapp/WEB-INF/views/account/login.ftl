@@ -21,7 +21,7 @@
 	    	<div class="slogan" style="float:left;">
 	    		<span class="slogan_img"></span>
 	    	</div>
-			<form id="myform" name="myform" action="${path}/account/dologin" method="post">
+			<form id="myform" name="myform" action="${path}/account/login" method="post">
 				<div class='signup_container'>
 					<div class="title">
 				    	<h1 class='signup_title'>用户登录</h1>

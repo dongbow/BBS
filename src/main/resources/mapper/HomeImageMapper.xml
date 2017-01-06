@@ -15,8 +15,8 @@
 	</select>
 	
 	<insert id="insert" parameterType="HomeImage">
-		insert into bbs_home_image (home_title, home_link, home_img_link, home_sort, home_status, home_create_time) 
-		values(#{homeTitle}, #{homeLink}, #{homeImgLink}, #{homeSort}, #{homeStatus}, #{homeCreateTime})
+		insert into bbs_home_image (home_title, home_link, home_img_link, turn_way, home_sort, home_status, home_create_time) 
+		values(#{homeTitle}, #{homeLink}, #{homeImgLink}, #{turnWay}, #{homeSort}, #{homeStatus}, #{homeCreateTime})
 	</insert>
 	
 	<select id="get" resultType="HomeImage">
@@ -25,7 +25,7 @@
 	
 	<update id="update" parameterType="HomeImage">
 		update bbs_home_image set home_title = #{homeTitle}, home_link = #{homeLink}, 
-		home_img_link = #{homeImgLink}, home_sort = #{homeSort}, home_status = #{homeStatus} 
+		home_img_link = #{homeImgLink}, turn_way = #{turnWay}, home_sort = #{homeSort}, home_status = #{homeStatus} 
 		where id = #{id}
 	</update>
 	

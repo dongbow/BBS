@@ -128,3 +128,8 @@ function resetLink() {
 	}
 }
 
+function gopage(e) {
+	if(e.keyCode == 13) {
+		window.location = window.location.pathname + '?page=' + $('#kkpager_btn_go_input').val();
+	}
+}

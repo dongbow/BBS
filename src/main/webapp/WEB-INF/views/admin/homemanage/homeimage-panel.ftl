@@ -65,6 +65,14 @@
 				        <option <#if img??><#if img.homeStatus?number == 1>selected</#if></#if> value="1">暂不使用</option>
 			        </select>
 	            </div>
+	            
+	            <div class="form-group">
+               		<label class="control-label col-md-4">类型</label>
+                    <select id="way" class="selectpicker show-tick col-md-6 col-xs-11">
+				        <option <#if img??><#if img.turnWay?number == 0>selected</#if></#if> value="0">当前窗口</option>
+				        <option <#if img??><#if img.turnWay?number == 1>selected</#if></#if> value="1">新窗口</option>
+			        </select>
+	            </div>
 
 				<input type="hidden" id="data-call-id" value="<#if img??>${img.id!}</#if>">
             </form>

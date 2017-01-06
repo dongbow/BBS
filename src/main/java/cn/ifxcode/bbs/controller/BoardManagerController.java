@@ -96,7 +96,8 @@ public class BoardManagerController {
 		if(StringUtils.isNotBlank(bid) && FormValidate.number(bid) && FormValidate.number(pageNo)) {
 			if(boardService.isExists(bid)) {
 				if(generalService.isLocalBMCByBoardId(Integer.parseInt(bid), request)) {
-					Page page = Page.newBuilder(Integer.parseInt(pageNo), DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
+					int p = Integer.parseInt(pageNo) > 0 ?Integer.parseInt(pageNo) : 1;
+					Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
 					List<Topic> topics = topicService.getTopicList(page, Integer.parseInt(bid));
 					model.addAttribute("page", page);
 					model.addAttribute("topics", topics);
@@ -118,7 +119,8 @@ public class BoardManagerController {
 		if(StringUtils.isNotBlank(bid) && FormValidate.number(bid) && FormValidate.number(pageNo)) {
 			if(boardService.isExists(bid)) {
 				if(generalService.isLocalBMCByBoardId(Integer.parseInt(bid), request)) {
-					Page page = Page.newBuilder(Integer.parseInt(pageNo), DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
+					int p = Integer.parseInt(pageNo) > 0 ?Integer.parseInt(pageNo) : 1;
+					Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
 					long tid = 0;
 					if(StringUtils.isNotBlank(topicId) && FormValidate.number(topicId)) {
 						tid = Long.parseLong(topicId);
@@ -146,7 +148,8 @@ public class BoardManagerController {
 		if(StringUtils.isNotBlank(bid) && FormValidate.number(bid) && FormValidate.number(pageNo)) {
 			if(boardService.isExists(bid)) {
 				if(generalService.isLocalBMCByBoardId(Integer.parseInt(bid), request)) {
-					Page page = Page.newBuilder(Integer.parseInt(pageNo), DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
+					int p = Integer.parseInt(pageNo) > 0 ?Integer.parseInt(pageNo) : 1;
+					Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
 					long userId = 0;
 					long topicId = 0;
 					if(StringUtils.isNotBlank(uid) && FormValidate.number(uid)) {
@@ -179,7 +182,8 @@ public class BoardManagerController {
 		if(StringUtils.isNotBlank(bid) && FormValidate.number(bid) && FormValidate.number(pageNo)) {
 			if(boardService.isExists(bid)) {
 				if(generalService.isLocalBMCByBoardId(Integer.parseInt(bid), request)) {
-					Page page = Page.newBuilder(Integer.parseInt(pageNo), DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
+					int p = Integer.parseInt(pageNo) > 0 ?Integer.parseInt(pageNo) : 1;
+					Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
 					long uid = 0;
 					long tid = 0;
 					if(StringUtils.isNotBlank(userId) && FormValidate.number(userId)) {
@@ -211,7 +215,8 @@ public class BoardManagerController {
 		if(StringUtils.isNotBlank(bid) && FormValidate.number(bid) && FormValidate.number(pageNo)) {
 			if(boardService.isExists(bid)) {
 				if(generalService.isLocalBMCByBoardId(Integer.parseInt(bid), request)) {
-					Page page = Page.newBuilder(Integer.parseInt(pageNo), DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
+					int p = Integer.parseInt(pageNo) > 0 ?Integer.parseInt(pageNo) : 1;
+					Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
 					long tid = 0;
 					if(StringUtils.isNotBlank(topicId) && FormValidate.number(topicId)) {
 						tid = Long.parseLong(topicId);

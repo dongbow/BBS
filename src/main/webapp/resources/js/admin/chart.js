@@ -126,7 +126,7 @@ function drawChart(result) {
 	    },
 	    series : [
 	        {
-	            name: '访问来源',
+	            name: '点击量',
 	            type: 'pie',
 	            radius : '55%',
 	            center: ['50%', '60%'],

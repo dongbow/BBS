@@ -123,6 +123,7 @@ CREATE TABLE `bbs_home_image` (
   `home_title` varchar(255) NOT NULL COMMENT '图片对应标题',
   `home_link` varchar(255) NOT NULL COMMENT '图片对应链接',
   `home_img_link` varchar(255) NOT NULL COMMENT '图片存储的url',
+  `turn_way` int(11) NOT NULL COMMENT '跳转类型{0：当前窗口，1：新窗口}',
   `home_sort` int(11) NOT NULL COMMENT '图片排序',
   `home_status` int(11) NOT NULL DEFAULT '0' COMMENT '图片状态{0:正常，1：已删除}',
   `home_create_time` datetime NOT NULL COMMENT '创建时间',

@@ -71,7 +71,7 @@ public class BoardController extends BaseUserController {
 		}
 		BoardInfo boardInfo = boardService.getBoardInfoFromRedis(boardId);
 		List<Classify> classifies = classifyService.getClassifyByBoardId(boardId);
-		if(!FormValidate.number(p)) { p = "1"; }
+		if(!FormValidate.number(p) || Integer.parseInt(p) <= 0) { p = "1"; }
 		Page page = Page.newBuilder(Integer.parseInt(p), DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
 		List<Topic> gTopics = topicService.getGlobalTopTopic();
 		List<Topic> lTopics = topicService.getLocalTopTopic(board.getBoardId());
@@ -110,7 +110,7 @@ public class BoardController extends BaseUserController {
 		}
 		BoardInfo boardInfo = boardService.getBoardInfoFromRedis((int) boardId);
 		List<Classify> classifies = classifyService.getClassifyByBoardId((int) boardId);
-		if(!FormValidate.number(p)) { p = "1"; }
+		if(!FormValidate.number(p) || Integer.parseInt(p) <= 0) { p = "1"; }
 		Page page = Page.newBuilder(Integer.parseInt(p), DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
 		List<Topic> gTopics = topicService.getGlobalTopTopic();
 		List<Topic> lTopics = topicService.getLocalTopTopic(board.getBoardId());

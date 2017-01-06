@@ -81,7 +81,7 @@ public class FavoriteController extends BaseUserController {
 			return "redirect:/index";
 		}
 		CookieBean bean = userService.getCookieBeanFromCookie(request);
-		if(!FormValidate.number(pageNo)) {pageNo = "1";}
+		if(!FormValidate.number(pageNo) || Integer.parseInt(pageNo) <= 0) {pageNo = "1";}
 		Page page = Page.newBuilder(Integer.parseInt(pageNo), PAGE_SIZE_DEFAULT, ParamsBuildUtils.createUrl(request));
 		List<UserFavorite> favorites = Collections.emptyList();
 		if(type.equals("topic")) {

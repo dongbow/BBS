@@ -131,7 +131,7 @@ public class SpaceController extends BaseUserController {
 		} else {
 			mv.addObject("islogin", 1);
 		}
-		if(!FormValidate.number(pageNo)) {pageNo = "1";}
+		if(!FormValidate.number(pageNo) || Integer.parseInt(pageNo) <= 0) {pageNo = "1";}
 		if("topic".equals(bbs)) {
 			if(user.getUserPrivacy().getTopicIsPublic() == 0 || (object != null && user.getUserAccess().getUserId() == cookieBean.getUser_id())) {
 				Page page = Page.newBuilder(Integer.parseInt(pageNo), DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));

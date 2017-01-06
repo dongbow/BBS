@@ -38,6 +38,7 @@
 	                            <th>标题</th>
 	                            <th class="numeric">链接</th>
 	                            <th class="numeric">图片预览</th>
+	                            <th class="numeric">类型</th>
 	                            <th class="numeric">排序</th>
 	                            <th class="numeric">状态</th>
 	                            <th class="numeric">创建时间</th>
@@ -58,6 +59,9 @@
 				                            <td class="numeric" data-title="链接">${img.homeLink}</td>
 				                            <td class="numeric" data-title="图片预览">
 				                            	<a class="btn btn-link btn-xs btn-img" type="button" data-img="${img.homeImgLink}"> 查看图片 </a>
+				                            </td>
+				                            <td class="numeric" data-title="类型">
+				                            	<#if img.turnWay == 0>当前窗口<#else>新窗口</#if>
 				                            </td>
 				                            <td class="numeric" data-title="排序">${img.homeSort}</td>
 				                            <td class="numeric" data-title="状态">
