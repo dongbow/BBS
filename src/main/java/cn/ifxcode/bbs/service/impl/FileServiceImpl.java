@@ -25,6 +25,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.qiniu.common.QiniuException;
 import com.qiniu.http.Response;
@@ -192,12 +195,11 @@ public class FileServiceImpl implements FileService {
 		return data + qiniuCompress;
 	}
 
-	public String uploadFile(HttpServletRequest request) {
+	public JSONArray uploadFile(HttpServletRequest request) {
 		return this.uploadFile(request, null);
 	}
 
-	public String uploadFile(HttpServletRequest request, String fileName) {
-		String data = null;
+	public JSONArray uploadFile(HttpServletRequest request, String fileName) {
 		if(path == null) {
 			File uploadDir = new File(request.getSession().getServletContext().getRealPath("/"), tempFile);
 			path = uploadDir.getAbsolutePath();
@@ -215,12 +217,14 @@ public class FileServiceImpl implements FileService {
 		
 		String qiniuFileName = null;
 		
+		List<Map<String, Object>> maps = Lists.newArrayList();
 		try {
 			List<FileItem> items = upload.parseRequest(request);
 			for (FileItem item : items) {
+				Map<String, Object> map = Maps.newHashMap();
 				try {
 					if(!this.validateFile(item)) {
-						return data;
+						return null;
 					}
 					if(StringUtils.isEmpty(fileName)) {
 						synchronized (this) {
@@ -235,22 +239,21 @@ public class FileServiceImpl implements FileService {
 					response = uploadManager.put(file, qiniuFileName, auth.uploadToken(bucket));
 					file.delete();
 					if(response.isOK()) {
-	    				data = doMain + "/" +qiniuFileName;
-	    				BbsFile bbsFile = new BbsFile(data, FileEnum.FILE, item, userService, request);
+	    				BbsFile bbsFile = new BbsFile(doMain + "/" +qiniuFileName, FileEnum.FILE, item, userService, request);
 	    				saveFile(bbsFile);
-	    				data = bbsFile.getUuid();
-					} else {
-						return data;
+	    				map.put("uuid", bbsFile.getUuid());
+	    				map.put("filename", item.getName());
 					}
+					maps.add(map);
 				} catch (QiniuException e) {
-					logger.error("pic upload error", e);
+					logger.error("file upload error", e);
 				}
 			}
 		} catch (Exception e) {
 			logger.error("file upload error", e);
 			e.printStackTrace();
 		}
-		return data;
+		return JSONArray.parseArray(JSONObject.toJSONString(maps));
 	}
 
 	private boolean validatePicture(FileItem item) {
@@ -361,7 +364,7 @@ public class FileServiceImpl implements FileService {
 				return true;
 			}
 		}
-		return false;
+		return true;
 	}
 
 	@Override

@@ -23,4 +23,6 @@ public interface ReplyDao {
 
 	public Reply getReplyByReplyId(long replyId);
 
+	public int delete(Map<String, Object> map);
+
 }

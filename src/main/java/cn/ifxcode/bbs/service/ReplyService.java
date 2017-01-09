@@ -26,4 +26,6 @@ public interface ReplyService {
 
 	public Reply getReplyByReplyId(long replyId);
 
+	public int deleteReply(String ids, String reason, String role);
+
 }

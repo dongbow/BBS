@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
 	<#include "../common/import.ftl">
+	<script type="text/javascript" src="${path}/resources/static/ckeditor4/ckeditor.js"></script>
 	<link href="${path}/resources/css/shCoreDefault.css" type="text/css" rel="stylesheet">
 	<script type="text/javascript" src="${path}/resources/js/shCore.js"></script>
 	<script type="text/javascript" src="${path}/resources/js/syntaxhighlighter.js"></script>
@@ -23,32 +24,38 @@
         <!--body wrapper start-->
         <div class="wrapper">
         	<div class="panel panel-default">
-        		<form action="" method="post">
+        		<form action="" method="get" id="dataForm">
 	                <div class="panel-body">
 	                    <div class="col-md-4 form-group">
 	                		<div class="input-group input-large custom-date-range" data-date-format="yyyy-mm-dd">
-	                            <input id="starttime" class="form-control dpd1" name="from" type="text" placeholder="开始时间">
+	                            <input id="starttime" class="form-control dpd1" name="from" value="${from!}" type="text" placeholder="开始时间">
 	                            <span class="input-group-addon">-</span>
-	                            <input id="endtime" class="form-control dpd2" name="to" type="text"  placeholder="结束时间">
+	                            <input id="endtime" class="form-control dpd2" name="to" value="${to!}" type="text"  placeholder="结束时间">
 	                        </div>
 	                	</div>
 			            <div class="col-md-2 form-group">
-			            	<input id="uid" type="text" class="form-control" placeholder="评论人ID">
+			            	<input id="uid" name="uid" type="text" value="${uid!}" class="form-control" placeholder="评论人ID">
 			            </div>
 			            <div class="col-md-2 form-group">
-			            	<input id="tid" type="text" class="form-control" placeholder="帖子ID">
+			            	<input id="tid" name="tid" type="text" value="${tid!}" class="form-control" placeholder="帖子ID">
 			            </div>
 			            <div class="col-md-2 form-group">
-		                    <select id="navid" class="selectpicker show-tick form-control" data-live-search="true">
+		                    <select id="bid" name="bid" value="${bid!}" class="selectpicker show-tick form-control" data-live-search="true">
 		                      	<option value="0">所属版块</option>
-						        <#list boards as board>
-						        	<option value="${board.boardId}">${board.boardName}</option>
-						        </#list>
+		                      	<#if bid??>
+		                      		<#list boards as board>
+							        	<option value="${board.boardId}" <#if bid?number == board.boardId>selected</#if>>${board.boardName}</option>
+							        </#list>
+							    <#else>
+							    	<#list boards as board>
+							        	<option value="${board.boardId}">${board.boardName}</option>
+							        </#list>
+		                      	</#if>
 					        </select>
 			            </div>
 	                	<div class="col-md-4 form-group">
-	            			<a class="btn btn-success btn-sm" type="button"><i class="fa fa-search"></i> 查找 </a>
-	            			<a class="btn btn-danger btn-sm" type="button"><i class="fa fa-trash-o"></i> 删除 </a>
+	            			<a class="btn btn-success btn-sm" id="data-search" type="button" href="${path}/system/admin/replymanage/reply/search"><i class="fa fa-search"></i> 查找 </a>
+	            			<a class="btn btn-danger btn-sm" id="data-delete" type="button" href="${path}/system/admin/replymanage/reply/delete"><i class="fa fa-trash-o"></i> 删除 </a>
 	            		</div>
                 	</div>
                 </form>
@@ -75,7 +82,7 @@
 	                        	<#if replys??>
 	                        		<#list replys as reply>
 	                        			<tr>
-	                        				<td><input type="checkbox" data-id="${reply.replyId}"></td>
+	                        				<td><input type="checkbox" data-id="${reply.replyId}" class="data-check-id"></td>
 				                            <td class="numeric" data-title="ID">${reply.replyId}</td>
 				                            <td class="numeric" data-title="帖子ID">
 				                            	${reply.topicId}
@@ -101,7 +108,7 @@
 				                            	</#if>
 				                            </td>
 				                            <td class="numeric" data-title="操作">
-				                            	<a class="btn btn-default btn-xs" type="button"><i class="fa fa-edit"></i> 编辑 </a>
+				                            	<a class="btn btn-default btn-xs data-update" type="button" href="${path}/system/admin/replymanage/update" data-id="${reply.replyId}"><i class="fa fa-edit"></i> 编辑 </a>
 				                            </td>
 				                        </tr>
 	                        		</#list>
@@ -111,6 +118,7 @@
 	                </section>
 	                <@buildPage page=page/>
 	                <!-- Modal -->
+	                <div class="modal fade" id="data-modal" tabindex="-1" role="dialog" aria-labelledby="data-modal" aria-hidden="true" data-backdrop="static"></div>
 			        <div class="modal fade" id="reply-content-modal" tabindex="-1" role="dialog" aria-labelledby="reply-content-modal" aria-hidden="true">
 			        	<div class="modal-dialog modal-lg">
 						    <div class="modal-content">

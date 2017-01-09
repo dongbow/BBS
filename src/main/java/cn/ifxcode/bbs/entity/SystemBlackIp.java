@@ -2,6 +2,8 @@ package cn.ifxcode.bbs.entity;
 
 import java.io.Serializable;
 
+import cn.ifxcode.bbs.utils.DateUtils;
+
 public class SystemBlackIp implements Serializable{
 
 	private static final long serialVersionUID = 3788901343180619316L;
@@ -27,7 +29,7 @@ public class SystemBlackIp implements Serializable{
 	}
 
 	public String getBlackCreateTime() {
-		return blackCreateTime;
+		return DateUtils.dt14LongFormat(DateUtils.dt14FromStr(blackCreateTime));
 	}
 
 	public void setBlackCreateTime(String blackCreateTime) {

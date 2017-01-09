@@ -14,7 +14,7 @@ import cn.ifxcode.bbs.enumtype.TopicSign;
 public interface TopicService {
 
 	public long insertTopic(int cid, String ttitle, String tcontent, long uid,
-			int bid, int gid, int isreply, int iselite, int istop,
+			int bid, int gid, String filelist, int isreply, int iselite, int istop,
 			int isglobaltop, int ishome, HttpServletRequest request);
 
 	public Topic getTopicByTopicId(long topicId);

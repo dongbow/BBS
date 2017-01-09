@@ -17,10 +17,10 @@
 	<insert id="insertReply" useGeneratedKeys="true" keyProperty="replyId" parameterType="Reply">
 		insert into bbs_reply (user_id, topic_id, board_id, reply_parent_id, reply_content, 
 			reply_is_check, reply_status, reply_update_user_id, reply_update_user, 
-			reply_update_time, reply_create_time, reply_ip)
+			reply_update_time, reply_create_time, reply_ip, del_reason)
 		values (#{userId}, #{topicId}, #{boardId}, #{replyParentId}, #{replyContent}, #{replyIsCheck}, 
 			#{replyStatus}, #{replyUpdateUserId}, #{replyUpdateUser}, #{replyUpdateTime}, 
-			#{replyCreateTime}, #{replyIp})
+			#{replyCreateTime}, #{replyIp}, #{delReason})
 	</insert>
 	
 	<select id="getReplyByPid" resultType="Reply">
@@ -80,5 +80,12 @@
 	<select id="getReplyByReplyId" resultType="Reply">
 		select reply_id, user_id, topic_id, board_id, reply_parent_id, reply_content from bbs_reply where reply_id = #{replyId}
 	</select>
+	
+	<update id="delete" parameterType="map">
+		update bbs_reply set reply_status = 1, del_reason = #{reason} where reply_id in 
+		<foreach collection="rids" index="index" item="rid" open="(" separator="," close=")">
+			#{rid}
+		</foreach>
+	</update>
 	
 </mapper>

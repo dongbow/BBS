@@ -26,6 +26,7 @@ import cn.ifxcode.bbs.entity.Reply;
 import cn.ifxcode.bbs.enumtype.BoardSign;
 import cn.ifxcode.bbs.enumtype.EGHistory;
 import cn.ifxcode.bbs.enumtype.TopicSign;
+import cn.ifxcode.bbs.logger.SysLog;
 import cn.ifxcode.bbs.service.BoardService;
 import cn.ifxcode.bbs.service.GeneralService;
 import cn.ifxcode.bbs.service.ReplyService;
@@ -239,6 +240,25 @@ public class ReplyServiceImpl implements ReplyService{
 	@Override
 	public Reply getReplyByReplyId(long replyId) {
 		return replyDao.getReplyByReplyId(replyId);
+	}
+
+	@Override
+	@Transactional
+	@SysLog(module = "评论管理", methods = "评论列表-删除")
+	public int deleteReply(String ids, String reason, String role) {
+		int result = 0;
+		String rids[] = ids.split(",");
+		try {
+			Map<String, Object> map = Maps.newHashMap();
+			map.put("rids", rids);
+			map.put("reason", reason + "<br/>---<font color=\"red\">" + role + "</font>");
+			if(rids.length == replyDao.delete(map)) {
+				result = BbsConstant.OK;
+			}
+		} catch (Exception e) {
+			logger.error("reply delete error", e);
+		}
+		return result;
 	}
 
 }

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ifxcode.bbs.dao.BadWordDao">
+	
+	<cache type="cn.ifxcode.bbs.dao.cache.LoggingRedisCache"/>
+	
+	<select id="getBadWords" resultType="BadWord">
+		select id, bad_word, create_time from bad_word 
+		<if test="word != null">
+			where bad_word like #{word} 
+		</if>
+	</select>
+	
+	<insert id="add" parameterType="BadWord">
+		insert into bad_word (bad_word, create_time) 
+		values (#{badWord}, #{createTime})
+	</insert>
+	
+	<delete id="delete" parameterType="map">
+		delete from bad_word where id in 
+		<foreach collection="badIds" index="index" item="badId" open="(" separator="," close=")">
+			#{badId}
+		</foreach>
+	</delete>
+
+</mapper>

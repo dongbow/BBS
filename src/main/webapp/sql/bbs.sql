@@ -194,6 +194,7 @@ CREATE TABLE `bbs_reply` (
   `reply_update_time` datetime DEFAULT NULL COMMENT '更新时间',
   `reply_create_time` datetime NOT NULL COMMENT '创建时间',
   `reply_ip` varchar(30) NOT NULL COMMENT '创建ip',
+  `del_reason` varchar(1000) DEFAULT NULL COMMENT '删除原因',
   PRIMARY KEY (`reply_id`),
   KEY `idx_reply_user_id` (`user_id`),
   KEY `idx_reply_topic_id` (`topic_id`),
@@ -662,3 +663,13 @@ CREATE TABLE `bbs_count` (
 	`newuser_count` BIGINT NOT NULL COMMENT '今日新用户数量',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='数据统计表';
+
+-- ----------------------------
+-- Table structure for bad_word
+-- ----------------------------
+CREATE TABLE `bad_word` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增id',
+  `bad_word` varchar(50) NOT NULL COMMENT '敏感词',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='敏感词';

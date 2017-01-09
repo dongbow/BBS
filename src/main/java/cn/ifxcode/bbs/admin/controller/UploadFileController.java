@@ -31,4 +31,13 @@ public class UploadFileController extends BaseController {
 		return "admin/uploadmanage/image-list";
 	}
 	
+	@RequestMapping("/file")
+	public String toFile(@RequestParam(value="page", required = false, defaultValue = "1")int p,
+			HttpServletRequest request, Model model) {
+		Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
+		model.addAttribute("files", fileService.getUploadFile(page, FileEnum.FILE));
+		model.addAttribute("page", page);
+		return "admin/uploadmanage/file-list";
+	}
+	
 }

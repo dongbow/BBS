@@ -38,7 +38,7 @@
                     	<#if img??>
                     		<img alt="upload" width="100%" src="${img.homeImgLink!}">
                     	<#else>
-                    		<label class="control-label loading" style="display:none">上传中...</label>
+                    		<label class="control-label loading" style="display:none"><i class="fa fa-spin fa-spinner"></i> 上传中...</label>
                     		<img alt="upload" width="100%">
                     	</#if>
                     </div>

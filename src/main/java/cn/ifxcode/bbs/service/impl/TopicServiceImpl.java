@@ -86,7 +86,7 @@ public class TopicServiceImpl implements TopicService{
 	@Override
 	@Transactional
 	public long insertTopic(int cid, String ttitle, String tcontent, long uid,
-			int bid, int gid, int isreply, int iselite, int istop,
+			int bid, int gid, String filelist, int isreply, int iselite, int istop,
 			int isglobaltop, int ishome, HttpServletRequest request) {
 		Lock lock = new ReentrantLock();
 		try {
@@ -101,6 +101,7 @@ public class TopicServiceImpl implements TopicService{
 			topic.setTopicCreateIp(GetRemoteIpUtil.getRemoteIp(request));
 			topic.setTopicCreateTime(DateUtils.dt14LongFormat(new Date()));
 			topic.setTopicStatus(0);
+			topic.setTopicFileIds(filelist);
 			if(topicDao.insertTopic(topic) == BbsConstant.OK) {
 				TopicInfo topicInfo = new TopicInfo();
 				topicInfo.setTopicId(topic.getTopicId());

@@ -4,6 +4,7 @@ $(function() {
 
 function add(event) {
 	event.preventDefault();
+	bootbox.setLocale("zh_CN");
 	bootbox.prompt("输入备份文件名(非必填)", function(data){ 
 		$.post($('.back-add').attr('href'), {
 			"exec": "point", 

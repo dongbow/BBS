@@ -19,6 +19,7 @@ public class Reply implements Serializable {
 	private String replyUpdateTime;
 	private String replyCreateTime;
 	private String replyIp;
+	private String delReason;
 	private Reply reply;
 	private User user;
 	private UserValue userValue;
@@ -158,6 +159,14 @@ public class Reply implements Serializable {
 
 	public void setTopic(Topic topic) {
 		this.topic = topic;
+	}
+
+	public String getDelReason() {
+		return delReason;
+	}
+
+	public void setDelReason(String delReason) {
+		this.delReason = delReason;
 	}
 
 }

@@ -54,4 +54,11 @@ public class SystemConfigUtils {
 		return false;
 	}
 	
+	public static boolean getIsOpenBadWord() {
+		if(Integer.parseInt(object.getString("isOpenBadWord")) == 1) {
+			return true;
+		}
+		return false;
+	}
+	
 }

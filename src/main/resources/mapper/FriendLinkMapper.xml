@@ -14,5 +14,43 @@
 		insert into friend_link (link_name, link, link_sign, link_status, link_contacts, link_create_time, link_end_time) 
 		values (#{linkName}, #{link}, #{linkSign}, #{linkStatus}, #{linkContacts}, #{linkCreateTime}, #{linkEndTime})
 	</insert>
+	
+	<select id="getFriendList" resultType="FriendLink" parameterType="map">
+		select * from friend_link 
+		<where>
+			<if test="starttime != null">
+				<![CDATA[ and DATE_FORMAT(link_create_time, '%Y-%m-%d') >= #{starttime} ]]>
+			</if>
+			<if test="endtime != null">
+				<![CDATA[ and DATE_FORMAT(link_create_time, '%Y-%m-%d') <= #{endtime} ]]>
+			</if>
+			<if test="name != null">
+				and link_name like #{name} 
+			</if>
+			<if test="sign != null">
+				and link_sign = #{sign} 
+			</if>
+			<if test="status != null">
+				and link_status = #{status} 
+			</if>
+		</where>
+	</select>
+	
+	<select id="get" resultType="FriendLink">
+		select * from friend_link where link_id = #{id}
+	</select>
+	
+	<update id="update" parameterType="FriendLink">
+		update friend_link set link_name = #{linkName}, link = #{link}, link_sign = #{linkSign}, 
+		link_status = #{linkStatus}, link_contacts = #{linkContacts}, link_end_time = #{linkEndTime} 
+		where link_id = #{linkId}
+	</update>
+	
+	<delete id="delete" parameterType="map">
+		delete from friend_link where link_id in 
+		<foreach collection="linkIds" index="index" item="linkId" open="(" separator="," close=")">
+			#{linkId}
+		</foreach>
+	</delete>
 
 </mapper>

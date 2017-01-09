@@ -15,7 +15,7 @@
 	</insert>
 	
 	<select id="getFileLinkByUuid" parameterType="map" resultType="map">
-		select file_name, file_link form bbs_file where uuid = #{uuid} and file_sign = #{sign}
+		select file_name, file_link from bbs_file where uuid = #{uuid} and file_sign = #{sign}
 	</select>
 	
 	<select id="vaildOnce" parameterType="map" resultType="Integer">
@@ -28,7 +28,7 @@
 	
 	<insert id="insertHistory">
 		insert into bbs_file_down (uuid, uid, nickname, down_time, ip) 
-		values (#{uuid}, #{uid}, #{nickname}, #{down_time}, #{ip})
+		values (#{uuid}, #{uid}, #{nickname}, #{date}, #{ip})
 	</insert>
 	
 	<select id="getUploadFile" parameterType="map" resultType="BbsFile">

@@ -5,6 +5,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.alibaba.fastjson.JSONArray;
+
 import cn.ifxcode.bbs.bean.Page;
 import cn.ifxcode.bbs.entity.BbsFile;
 import cn.ifxcode.bbs.enumtype.FileEnum;
@@ -15,9 +17,9 @@ public interface FileService {
 	
 	public String uploadPicture(HttpServletRequest request, String fileName);
 	
-	public String uploadFile(HttpServletRequest request);
+	public JSONArray uploadFile(HttpServletRequest request);
 	
-	public String uploadFile(HttpServletRequest request, String fileName);
+	public JSONArray uploadFile(HttpServletRequest request, String fileName);
 
 	public Map<String, Object> getFileLinkByUuid(String file);
 

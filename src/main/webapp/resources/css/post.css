@@ -269,3 +269,77 @@ body{
   margin-right: 10px;
 }
 
+.file-cont {
+	margin:10px 0;
+	padding:10px;
+	width:90;
+	height:auto;
+	overflow: hidden;
+	border:1px solid #ddd;
+}
+
+.file-cont p {
+	margin-bottom:10px;
+	font: 16px "microsoft yahei";
+	display: block;
+	overflow: hidden;
+}
+
+.file-cont p a.file-btn-pre {
+	float: right;
+	width:80px;
+	padding:0 10px;
+}
+
+.file-cont p a.delete {
+	color: red !important;
+}
+
+.file-cont p a.upload {
+	color: #19b4ea !important;
+}
+
+.file-list li {
+	display: block;
+	height: 20px;
+	border-bottom: 1px solid #ddd;
+}
+
+.file-list li a {
+	display: block;
+	height: 20px;
+	line-height:20px;
+	width:500px;
+	float: left;
+	overflow: hidden;
+}
+
+.file-list li a.file-name{
+	width:500px;
+	float: left;
+	overflow: hidden;
+}
+
+.file-list li a.file-size{
+	margin-left:20px;
+	width:100px;
+	float: left;
+	overflow: hidden;
+}
+
+.file-list li a.file-btn-pre {
+	float: right;
+	width:40px;
+	padding:0 10px;
+}
+
+.file-list li a.delete {
+	color: red !important;
+}
+
+.file-list li a.upload {
+	color: #19b4ea !important;
+}
+
+
+

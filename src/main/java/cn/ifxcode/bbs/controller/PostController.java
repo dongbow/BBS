@@ -101,7 +101,7 @@ public class PostController extends BaseUserController {
 	}
 	
 	@RequestMapping(value = "/new/topic/do", method = RequestMethod.POST)
-	public String doPost(String cid, String ttitle, String tcontent, String uid, String bid, String gid, 
+	public String doPost(String cid, String ttitle, String tcontent, String uid, String bid, String gid, String filelist, 
 			@RequestParam(required = false, defaultValue = "0")int isreply,
 			@RequestParam(required = false, defaultValue = "0")int iselite,
 			@RequestParam(required = false, defaultValue = "0")int istop,
@@ -118,7 +118,7 @@ public class PostController extends BaseUserController {
 			return "redirect:/tip?tip=post-fail";
 		}
 		long topicId = topicService.insertTopic(Integer.parseInt(cid), ttitle, tcontent, Long.parseLong(uid), 
-				Integer.parseInt(bid), Integer.parseInt(gid), 
+				Integer.parseInt(bid), Integer.parseInt(gid), filelist, 
 				isreply, iselite, istop, isglobaltop, ishome, request);
 		if(topicId > BbsConstant.OK) {
 			generalService.saveCount("topic");

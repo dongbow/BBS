@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
 	<#include "../common/import.ftl">
+	<script type="text/javascript" src="${path}/resources/static/ckeditor4/ckeditor.js"></script>
 	<link href="${path}/resources/css/shCoreDefault.css" type="text/css" rel="stylesheet">
 	<script type="text/javascript" src="${path}/resources/js/shCore.js"></script>
 	<script type="text/javascript" src="${path}/resources/js/syntaxhighlighter.js"></script>
@@ -89,7 +90,7 @@
 				                            <td class="numeric" data-title="操作">
 				                            	<a class="btn btn-default btn-xs" type="button"><i class="fa fa-eye"></i> 通过 </a>
 				                            	<a class="btn btn-default btn-xs" type="button"><i class="fa fa-eye-slash"></i> 失败 </a>
-				                            	<a class="btn btn-default btn-xs" type="button"><i class="fa fa-edit"></i> 编辑 </a>
+				                            	<a class="btn btn-default btn-xs data-update" type="button" href="${path}/system/admin/replymanage/update" data-id="${reply.replyId}"><i class="fa fa-edit"></i> 编辑 </a>
 				                            </td>
 				                        </tr>
 	                        		</#list>
@@ -99,6 +100,7 @@
 	                </section>
 	                <@buildPage page=page/>
 	                <!-- Modal -->
+	                <div class="modal fade" id="data-modal" tabindex="-1" role="dialog" aria-labelledby="data-modal" aria-hidden="true" data-backdrop="static"></div>
 			        <div class="modal fade" id="reply-content-modal" tabindex="-1" role="dialog" aria-labelledby="reply-content-modal" aria-hidden="true">
 			        	<div class="modal-dialog modal-lg">
 						    <div class="modal-content">

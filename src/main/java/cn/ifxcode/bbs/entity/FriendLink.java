@@ -3,6 +3,8 @@ package cn.ifxcode.bbs.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import cn.ifxcode.bbs.utils.DateUtils;
+
 public class FriendLink implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -57,7 +59,7 @@ public class FriendLink implements Serializable {
 	}
 
 	public String getLinkCreateTime() {
-		return linkCreateTime;
+		return DateUtils.dt14LongFormat(DateUtils.dt14FromStr(linkCreateTime));
 	}
 
 	public void setLinkCreateTime(String linkCreateTime) {

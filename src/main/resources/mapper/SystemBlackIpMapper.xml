@@ -9,5 +9,20 @@
 	<select id="findAllIpAddress" resultType="String" useCache="false">
 		select black_ip from system_blacklist
 	</select>
+	
+	<select id="getList" resultType="SystemBlackIp">
+		select * from system_blacklist
+	</select>
+	
+	<insert id="add" parameterType="SystemBlackIp">
+		insert into system_blacklist(black_ip, black_create_time) values (#{blackIp}, #{blackCreateTime})
+	</insert>
+	
+	<delete id="delete" parameterType="map">
+		delete from system_blacklist where id in 
+		<foreach collection="blackIds" index="index" item="blackId" open="(" separator="," close=")">
+			#{blackId}
+		</foreach>
+	</delete>
 
 </mapper>

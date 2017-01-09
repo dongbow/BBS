@@ -57,27 +57,34 @@
 		        </div>
 		        <div class="bbs-upload">
 		        	<div class="file-btns">
-		        		<a class="btn image-btn" href="javascript:;">上传图片</a>
-		        		<input name="images" id="images" multiple="multiple" accept="image/*" type="file" style="display:none">
 		        		<a class="btn file-btn" href="javascript:;">上传附件</a>
-		        		<input name="files" id="files" multiple="multiple" type="file" style="display:none">
-		        		<button>保存帖子</button>
+		        		<button>发表帖子</button>
 		        	</div>
 		        	<div class="upload-desc">
-		        		<p>图片只支持jpg|jpeg|png|gif|bmp，大小5M以内</p>
 		        		<p>附件支持exe|zip|rar|msi|png|jpg|jpeg|gif|bmp|doc|docx|xls|xlsx|ppt|pptx|txt|jar|md|sql|java|pdf|psd，大小50M以内</p>
 		        	</div>
-		        	<div class="image-cont" style=""></div>
-		        	<div class="file-cont" style=""></div>
+		        	<div id="image-cont" style="display:none"></div>
+		        	<div class="file-cont" style="display:none">
+		        		<p>附件列表:
+		        			<a class="file-btn-pre delete delete-all" href="javascript:;">全部删除</a>
+						    <a class="file-btn-pre upload upload-all" href="javascript:;">全部上传</a>
+		        		</p>
+		        		<ul class="file-list">
+					  	</ul>
+		        	</div>
 		        </div>
 		        <div id="bg"></div>
 		        <div id="bbs-dialog" style="display:none">
 					<!-- dialog -->
 				</div>
 	        </form>
+	        <form method="post" id="upload-form" enctype="multipart/form-data" action="${path}/upload/file" style="display:none">
+    			<input name="files" id="files" multiple="multiple" type="file" style="display:none" onchange="showFiles(this)">
+    		</form>
 	    </div>
 	</#if>
     <#include "../common/footer.ftl"/>
+     <script type="text/javascript" src="${path}/resources/js/jquery/jquery.form.js"></script>
     <script type="text/javascript" src="${path}/resources/js/shCore.js"></script>
 	<script type="text/javascript" src="${path}/resources/js/syntaxhighlighter.js"></script>
 	<script type="text/javascript" src="${path}/resources/js/post.js"></script>

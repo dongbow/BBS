@@ -26,7 +26,8 @@ public class DownloadUtils {
 			HttpEntity entity = res.getEntity();
 			in = entity.getContent();
 			out = response.getOutputStream();
-			response.setHeader("Content-Disposition", "attachment;filename=" + map.get("file_name").toString());
+			String filename = map.get("file_name").toString();
+			response.setHeader("Content-Disposition", "attachment;filename=" + filename);
 			int b;
 			while((b = in.read()) != -1) {
 				out.write(b);
