@@ -72,7 +72,7 @@ public class PostController extends BaseUserController {
 	
 	@RequestMapping("/choose")
 	public String cPost(Model model, @RequestParam(value = "gid", required = false)String gid) {
-		this.data(model);
+		data(model);
 		if(StringUtils.isNotBlank(gid) && FormValidate.number(gid)) {
 			model.addAttribute("gid", Integer.parseInt(gid));
 		}

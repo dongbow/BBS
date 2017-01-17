@@ -65,7 +65,7 @@ public class RoleServiceImpl implements RoleService {
 
 	@Override
 	public boolean checkIsSuperAdmin(HttpServletRequest request) {
-		List<Integer> roleIds = this.getRoleIds(request);
+		List<Integer> roleIds = getRoleIds(request);
 		for (Integer id : roleIds) {
 			if(id.equals(BbsConstant.SUPER_ADMIN)) {
 				return true;
@@ -87,7 +87,7 @@ public class RoleServiceImpl implements RoleService {
 			role.setRoleCreateTime(DateUtils.dt14LongFormat(new Date()));
 			try {
 				if(BbsConstant.OK == roleDao.addRole(role)) {
-					this.refreshRoleToRedis(role);
+					refreshRoleToRedis(role);
 					return BbsConstant.OK;
 				}
 			} catch (Exception e) {
@@ -100,7 +100,7 @@ public class RoleServiceImpl implements RoleService {
 
 	public void refreshRoleToRedis(Role role) {
 		boolean is = false;
-		List<Role> roles = this.getAllRoles();
+		List<Role> roles = getAllRoles();
 		for (Role r : roles) {
 			if(role.getRoleId().equals(r.getRoleId())) {
 				r = role;

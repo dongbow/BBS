@@ -39,6 +39,7 @@ import cn.ifxcode.bbs.entity.TopicInfo;
 import cn.ifxcode.bbs.enumtype.BoardSign;
 import cn.ifxcode.bbs.enumtype.EGHistory;
 import cn.ifxcode.bbs.enumtype.TopicSign;
+import cn.ifxcode.bbs.logger.SysLog;
 import cn.ifxcode.bbs.service.BoardService;
 import cn.ifxcode.bbs.service.ClassifyService;
 import cn.ifxcode.bbs.service.GeneralService;
@@ -197,7 +198,7 @@ public class TopicServiceImpl implements TopicService{
 		synchronized (this) {
 			TopicData topicData = null;
 			try{
-				JSONObject object = this.saveOrUpdateTopicData(topicId, TopicSign.VIEW, null, null, null, -1, null, null);
+				JSONObject object = saveOrUpdateTopicData(topicId, TopicSign.VIEW, null, null, null, -1, null, null);
 				boardService.saveOrUpdateBoardInfo(boardId, BoardSign.CLICK, 0);
 				topicData = JSON.toJavaObject(object, TopicData.class);
 				if (StringUtils.isNotBlank(topicData.getTopicUpdateTime())) {
@@ -216,14 +217,14 @@ public class TopicServiceImpl implements TopicService{
 		map.put("page", page);
 		map.put("userId", userId);
 		List<Topic> topics = topicDao.getTopicListByUserId(map);
-		this.formatTopic(topics);
+		formatTopic(topics);
 		return topics;
 	}
 	
 	public Topic getTopicForReplyByTopicId(long topicId) {
 		Topic topic = topicDao.getTopicByTopicId(topicId);
 		topic.setBoard(boardService.getBoardByBoardId(topic.getNavId(), topic.getBoardId()));
-		JSONObject object = this.saveOrUpdateTopicData(topic.getTopicId(), null, null, null, null, -1, null, null);
+		JSONObject object = saveOrUpdateTopicData(topic.getTopicId(), null, null, null, null, -1, null, null);
 		topic.setTopicData(JSON.toJavaObject(object, TopicData.class));
 		return topic;
 	}
@@ -232,7 +233,7 @@ public class TopicServiceImpl implements TopicService{
 		if(!topics.isEmpty() && topics.size() > 0) {
 			for (Topic topic : topics) {
 				topic.setBoard(boardService.getBoardByBoardId(topic.getNavId(), topic.getBoardId()));
-				JSONObject object = this.saveOrUpdateTopicData(topic.getTopicId(), null, null, null, null, -1, null, null);
+				JSONObject object = saveOrUpdateTopicData(topic.getTopicId(), null, null, null, null, -1, null, null);
 				topic.setTopicData(JSON.toJavaObject(object, TopicData.class));
 			}
 		}
@@ -240,16 +241,16 @@ public class TopicServiceImpl implements TopicService{
 
 	public List<Topic> getGlobalTopTopic() {
 		List<Topic> topics = topicDao.getGlobalTopTopic();
-		this.formatTopicData(topics);
+		formatTopicData(topics);
 		return topics;
 	}
 	
 	public List<Topic> getHomeTopic() {
-		return this.getHomeTopic(null);
+		return getHomeTopic(null);
 	}
 	
 	public List<Topic> getHomeTopic(Page page) {
-		return this.getHomeTopic(page, null, null, 0, 0);
+		return getHomeTopic(page, null, null, 0, 0);
 	} 
 	
 	public List<Topic> getHomeTopic(Page page, String startTime, String endTime, long tid, long uid) {
@@ -270,7 +271,7 @@ public class TopicServiceImpl implements TopicService{
 			map.put("endtime", endTime);
 		}
 		List<Topic> topics = topicDao.getHomeTopTopic(map);
-		this.formatTopicData(topics);
+		formatTopicData(topics);
 		return topics;
 	} 
 	
@@ -307,9 +308,9 @@ public class TopicServiceImpl implements TopicService{
 			map.put("bids", filterBids);
 		}
 		List<Topic> topics = topicDao.getTopicsByNavId(map);
-		this.formatTopicData(topics);
+		formatTopicData(topics);
 		if(orderby.equals("lastest_reply_time")) {
-			this.sort(topics);
+			sort(topics);
 		}
 		return topics;
 	}
@@ -333,7 +334,7 @@ public class TopicServiceImpl implements TopicService{
 		for (Topic topic : topics) {
 			topic.setTopicContent(HtmlUtils.htmlUnescape(topic.getTopicContent()));
 			topic.setTopicCreateTime(DateUtils.dt14LongFormat(DateUtils.dt14FromStr(topic.getTopicCreateTime())));
-			topic.setTopicData(this.getTopicDateForListFromRedis(topic.getTopicId(), topic.getBoardId()));
+			topic.setTopicData(getTopicDateForListFromRedis(topic.getTopicId(), topic.getBoardId()));
 			topic.setUser(userService.getUserById(topic.getUserId()));
 			topic.setBoard(boardService.getBoardByBoardId(topic.getNavId(), topic.getBoardId()));
 		}
@@ -343,7 +344,7 @@ public class TopicServiceImpl implements TopicService{
 		for (Topic topic : topics) {
 			topic.setTopicContent(HtmlUtils.htmlUnescape(topic.getTopicContent()));
 			topic.setTopicCreateTime(DateUtils.dt14LongFormat(DateUtils.dt14FromStr(topic.getTopicCreateTime())));
-			topic.setTopicData(this.getTopicDateForListFromRedis(topic.getTopicId(), topic.getBoardId()));
+			topic.setTopicData(getTopicDateForListFromRedis(topic.getTopicId(), topic.getBoardId()));
 			topic.setUser(userService.getUserById(topic.getUserId()));
 			topic.setClassify(classifyService.getClassifyByCid(topic.getBoardId(), topic.getClassId()));
 		}
@@ -353,7 +354,7 @@ public class TopicServiceImpl implements TopicService{
 		synchronized (this) {
 			TopicData topicData = null;
 			try{
-				JSONObject object = this.saveOrUpdateTopicData(topicId, null, null, null, null, -1, null, null);
+				JSONObject object = saveOrUpdateTopicData(topicId, null, null, null, null, -1, null, null);
 				boardService.saveOrUpdateBoardInfo(boardId, BoardSign.CLICK, 0);
 				topicData = JSON.toJavaObject(object, TopicData.class);
 			} catch (Exception e) {
@@ -366,7 +367,7 @@ public class TopicServiceImpl implements TopicService{
 	@Override
 	public List<Topic> getLocalTopTopic(int boardId) {
 		List<Topic> topics = topicDao.getBoardTopTopic(boardId);
-		this.formatTopicDataForBoard(topics);
+		formatTopicDataForBoard(topics);
 		return topics;
 	}
 
@@ -392,9 +393,9 @@ public class TopicServiceImpl implements TopicService{
 			orderby = "d.lastest_reply_time";
 		}
 		List<Topic> topics = topicDao.getTopicsByBoardId(map);
-		this.formatTopicDataForBoard(topics);
+		formatTopicDataForBoard(topics);
 		if(orderby.equals("d.lastest_reply_time")) {
-			this.sort(topics);
+			sort(topics);
 		}
 		return topics;
 	}
@@ -421,9 +422,9 @@ public class TopicServiceImpl implements TopicService{
 			orderby = "d.lastest_reply_time";
 		}
 		List<Topic> topics = topicDao.getTopicsByClassId(map);
-		this.formatTopicDataForBoard(topics);
+		formatTopicDataForBoard(topics);
 		if(orderby.equals("d.lastest_reply_time")) {
-			this.sort(topics);
+			sort(topics);
 		}
 		return topics;
 	}
@@ -437,7 +438,7 @@ public class TopicServiceImpl implements TopicService{
 		try {
 			lock.lock();
 			if(NumberUtils.getAllNumber(tid) > 0) {
-				Topic topic = this.getTopicByTopicId(NumberUtils.getAllNumber(tid));
+				Topic topic = getTopicByTopicId(NumberUtils.getAllNumber(tid));
 				if(topic == null) {
 					return BbsConstant.ERROR;
 				}
@@ -458,7 +459,7 @@ public class TopicServiceImpl implements TopicService{
 					topicInfo.setTopicIsLocalTop(istop);
 					topicInfo.setTopicIsReply(isreply);
 					if(topicInfoDao.update(topicInfo) == BbsConstant.OK) {
-						TopicData topicData = this.getTopicDateFromRedis(topic.getTopicId(), topic.getBoardId());
+						TopicData topicData = getTopicDateFromRedis(topic.getTopicId(), topic.getBoardId());
 						CookieBean bean = userService.getCookieBeanFromCookie(request);
 						topicData.setTopicId(topic.getTopicId());
 						if(topicData.getTopicFavoriteCount() == null) {
@@ -469,7 +470,7 @@ public class TopicServiceImpl implements TopicService{
 						topicData.setTopicUpdateUser(bean.getNick_name());
 						topicData.setTopicUpdateTime(DateUtils.dt14LongFormat(new Date()));
 						if(topicDataDao.update(topicData) == BbsConstant.OK) {
-							this.saveOrUpdateTopicData(topic.getTopicId(), null, null, null, null, bean.getUser_id(), bean.getNick_name(), topicData.getTopicUpdateTime());
+							saveOrUpdateTopicData(topic.getTopicId(), null, null, null, null, bean.getUser_id(), bean.getNick_name(), topicData.getTopicUpdateTime());
 							return BbsConstant.OK;
 						}
 					}
@@ -485,12 +486,12 @@ public class TopicServiceImpl implements TopicService{
 
 	@Override
 	public List<Topic> getTopicList(Page page, int status, int audit) {
-		return this.getTopicList(page, null, null, 0, 0, 0, 0, 0, status, audit);
+		return getTopicList(page, null, null, 0, 0, 0, 0, 0, status, audit);
 	}
 	
 	@Override
 	public List<Topic> getTopicList(Page page, int bid) {
-		return this.getTopicList(page, null, null, 0, 0, 0, bid, 0, 0, 0);
+		return getTopicList(page, null, null, 0, 0, 0, bid, 0, 0, 0);
 	}
 
 	@Override
@@ -530,7 +531,7 @@ public class TopicServiceImpl implements TopicService{
 		for (Topic topic : topics) {
 			topic.setTopicContent(HtmlUtils.htmlUnescape(topic.getTopicContent()));
 			topic.setTopicCreateTime(DateUtils.dt14LongFormat(DateUtils.dt14FromStr(topic.getTopicCreateTime())));
-			topic.setTopicData(this.getTopicDateForListFromRedis(topic.getTopicId(), topic.getBoardId()));
+			topic.setTopicData(getTopicDateForListFromRedis(topic.getTopicId(), topic.getBoardId()));
 			topic.setUser(userService.getUserById(topic.getUserId()));
 			topic.setBoard(boardService.getBoardByBoardId(topic.getNavId(), topic.getBoardId()));
 			topic.setClassify(classifyService.getClassifyByCid(topic.getBoardId(), topic.getClassId()));
@@ -548,7 +549,7 @@ public class TopicServiceImpl implements TopicService{
 		} else {
 			sql = "i.topic_is_cream = 1";
 		}
-		return this.getTopicList(page, sql, null, null, 0, 0, 0, 0, 0);
+		return getTopicList(page, sql, null, null, 0, 0, 0, 0, 0);
 	}
 
 	@Override
@@ -582,7 +583,7 @@ public class TopicServiceImpl implements TopicService{
 		for (Topic topic : topics) {
 			topic.setTopicContent(HtmlUtils.htmlUnescape(topic.getTopicContent()));
 			topic.setTopicCreateTime(DateUtils.dt14LongFormat(DateUtils.dt14FromStr(topic.getTopicCreateTime())));
-			topic.setTopicData(this.getTopicDateForListFromRedis(topic.getTopicId(), topic.getBoardId()));
+			topic.setTopicData(getTopicDateForListFromRedis(topic.getTopicId(), topic.getBoardId()));
 			topic.setUser(userService.getUserById(topic.getUserId()));
 			topic.setBoard(boardService.getBoardByBoardId(topic.getNavId(), topic.getBoardId()));
 			topic.setClassify(classifyService.getClassifyByCid(topic.getBoardId(), topic.getClassId()));
@@ -602,7 +603,7 @@ public class TopicServiceImpl implements TopicService{
 		} else {
 			sql = sql_global;
 		}
-		return this.getTopicList(page, sql, null, null, 0, 0, 0, 0, 0);
+		return getTopicList(page, sql, null, null, 0, 0, 0, 0, 0);
 	}
 
 	@Override
@@ -630,6 +631,21 @@ public class TopicServiceImpl implements TopicService{
 			topic.setUser(userService.getUserById(topic.getUserId()));
 		}
 		return topics;
+	}
+
+	//TODO 这里有多表查询的缓存问题
+	@Override
+	@SysLog(module = "首页管理", methods = "首页主题-修改时间")
+	public int updateTopicTime(long tid, String time, String roleSign) {
+		int result = 0;
+		try {
+			if(topicInfoDao.updateHomeTopicTime(time, tid) == BbsConstant.OK) {
+				result = BbsConstant.OK;
+			}
+		} catch (Exception e) {
+			logger.error("update topic home end time error", e);
+		}
+		return result;
 	}
 
 }

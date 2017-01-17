@@ -26,6 +26,7 @@ import cn.ifxcode.bbs.entity.Reply;
 import cn.ifxcode.bbs.enumtype.BoardSign;
 import cn.ifxcode.bbs.enumtype.EGHistory;
 import cn.ifxcode.bbs.enumtype.TopicSign;
+import cn.ifxcode.bbs.logger.BmcLogAnno;
 import cn.ifxcode.bbs.logger.SysLog;
 import cn.ifxcode.bbs.service.BoardService;
 import cn.ifxcode.bbs.service.GeneralService;
@@ -105,21 +106,21 @@ public class ReplyServiceImpl implements ReplyService{
 		}
 		map.put("sort", sort == 0 ? "ASC" : "DESC");
 		List<Reply> replies = replyDao.getReplyListByTopicId(map);
-		this.formatReply(replies);
+		formatReply(replies);
 		return replies;
 	}
 	
 	private void formatReply(List<Reply> replies) {
 		for (Reply reply : replies) {
-			reply = this.formatReplyContent(reply);
+			reply = formatReplyContent(reply);
 			if(reply.getReplyParentId() != 0) {
-				reply.setReply(this.getParentReply(reply.getReplyParentId()));
+				reply.setReply(getParentReply(reply.getReplyParentId()));
 			}
 		}
 	}
 	
 	private Reply getParentReply(long pid) {
-		return this.formatReplyContent(replyDao.getReplyByPid(pid));
+		return formatReplyContent(replyDao.getReplyByPid(pid));
 	}
 	
 	private Reply formatReplyContent(Reply reply) {
@@ -169,12 +170,12 @@ public class ReplyServiceImpl implements ReplyService{
 
 	@Override
 	public List<Reply> getReplyList(Page page, int status, int audit) {
-		return this.getReplyList(page, status, audit, null, null, 0, 0, 0);
+		return getReplyList(page, status, audit, null, null, 0, 0, 0);
 	}
 	
 	@Override
 	public List<Reply> getReplyList(Page page, int bid, long tid) {
-		return this.getReplyList(page, 0, 0, null, null, 0, tid, bid);
+		return getReplyList(page, 0, 0, null, null, 0, tid, bid);
 	}
 
 	@Override
@@ -209,12 +210,12 @@ public class ReplyServiceImpl implements ReplyService{
 		for (Reply reply : replies) {
 			reply.setReplyCreateTime(DateUtils.dt14LongFormat(DateUtils.dt14FromStr(reply.getReplyCreateTime())));
 			reply.setUser(userService.getUserById(reply.getUserId()));
-			this.dealAdminPage(reply);
+			dealAdminPage(reply);
 			if(audit == 1) {
 				if(reply.getReplyParentId() != 0) {
 					if(reply.getReplyParentId() != 0) {
 						Reply parent = replyDao.getReplyByPid(reply.getReplyParentId());
-						this.dealAdminPage(parent);
+						dealAdminPage(parent);
 						reply.setReply(parent);
 					}
 				}
@@ -259,6 +260,44 @@ public class ReplyServiceImpl implements ReplyService{
 			logger.error("reply delete error", e);
 		}
 		return result;
+	}
+
+	@Override
+	@SysLog(module = "评论管理", methods = "评论-编辑")
+	public int updateReply(long id, String content) {
+		int result = 0;
+		try {
+			content = HtmlUtils.htmlEscape(content);
+			if(replyDao.updateReply(id, content) == BbsConstant.OK) {
+				result = BbsConstant.OK;
+			}
+		} catch (Exception e) {
+			logger.error("update reply error", e);
+		}
+		return result;
+	}
+
+	public int restoreBMC(String ids, String sign) {
+		return 0;
+	}
+	
+	@Override
+	@SysLog(module = "评论管理", methods = "回收站-恢复")
+	public int restore(String ids, String sign) {
+		synchronized (this) {
+			int result = 0;
+			String replyIds[] = ids.split(",");
+			try {
+				Map<String, Object> map = Maps.newHashMap();
+				map.put("replyIds", replyIds);
+				if(replyDao.restore(map) == replyIds.length) {
+					result = BbsConstant.OK;
+				}
+			} catch (Exception e) {
+				logger.error("restore reply fail", e);
+			}
+			return result;
+		}
 	}
 
 }

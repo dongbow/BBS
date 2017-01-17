@@ -23,24 +23,24 @@
         <!--body wrapper start-->
         <div class="wrapper">
         	<div class="panel panel-default">
-        		<form action="" method="post">
+        		<form action="" method="get" id="dataForm">
 	                <div class="panel-body">
 	                    <div class="col-md-4 form-group">
 	                		<div class="input-group input-large custom-date-range" data-date-format="yyyy-mm-dd">
-	                            <input id="starttime" class="form-control dpd1" name="from" type="text" placeholder="开始时间">
+	                            <input id="starttime" class="form-control dpd1" name="from" value="${from!}" type="text" placeholder="开始时间">
 	                            <span class="input-group-addon">-</span>
-	                            <input id="endtime" class="form-control dpd2" name="to" type="text"  placeholder="结束时间">
+	                            <input id="endtime" class="form-control dpd2" name="to" value="${to!}" type="text"  placeholder="结束时间">
 	                        </div>
 	                	</div>
 			            <div class="col-md-2 form-group">
-		                    <input id="uid" class="form-control" name="uid" type="text" placeholder="用户ID">
+		                    <input id="uid" class="form-control" name="uid" value="${uid!}" type="text" placeholder="用户ID">
 			            </div>
 			            <div class="col-md-2 form-group">
-		                    <input id="tid" class="form-control" name="tid" type="text" placeholder="帖子ID">
+		                    <input id="tid" class="form-control" name="tid" value="${tid!}" type="text" placeholder="帖子ID">
 			            </div>
                 		
 	                	<div class="col-md-4 form-group">
-	            			<a class="btn btn-success btn-sm" type="button"><i class="fa fa-search"></i> 查找 </a>
+	            			<a class="btn btn-success btn-sm" id="data-search" type="button" href="${path}/system/admin/home/topic/search"><i class="fa fa-search"></i> 查找 </a>
 	            			<a class="btn btn-info btn-sm" type="button"><i class="fa fa-random"></i> 批量取消首页 </a>
 	            		</div>
                 	</div>
@@ -85,7 +85,7 @@
 				                            </td>
 				                            <td class="numeric" data-title="操作">
 				                            	<a class="btn btn-default btn-xs" type="button"><i class="fa fa-random"></i> 取消首页 </a>
-				                            	<a class="btn btn-default btn-xs" type="button"><i class="fa fa-edit"></i> 时间更改 </a>
+				                            	<a class="btn btn-default btn-xs topic-time" type="button" href="${path}/system/admin/home/topic/time" data-id="${topic.topicId}"><i class="fa fa-edit"></i> 时间更改 </a>
 				                            </td>
 				                        </tr>
 	                        		</#list>
@@ -95,6 +95,8 @@
 	                </section>
 	                <@buildPage page=page/>
 	                <!-- Modal -->
+	                <div class="modal fade" id="data-modal" tabindex="-1" role="dialog" aria-labelledby="data-modal" aria-hidden="true" data-backdrop="static"></div>
+	                
 			        <div class="modal fade" id="topic-content-modal" tabindex="-1" role="dialog" aria-labelledby="topic-content-modal" aria-hidden="true">
 			        	<div class="modal-dialog modal-lg">
 						    <div class="modal-content">

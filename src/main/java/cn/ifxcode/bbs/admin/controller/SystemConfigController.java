@@ -241,4 +241,9 @@ public class SystemConfigController extends BaseController {
 		}
 		return result;
 	}
+	
+	@RequestMapping(value = "/badword/import", method = RequestMethod.GET)
+	public String toImport() {
+		return "admin/config/badword-import";
+	}
 }

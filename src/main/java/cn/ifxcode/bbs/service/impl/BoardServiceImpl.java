@@ -68,7 +68,7 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public Board getBoardByBoardId(Integer navId, Integer boardId) {
 		JSONObject object = redisObjectMapService.get(RedisKeyUtils.getBoardsByNavId((int) navId), JSONObject.class);
-		return this.getBoardByBoardId(object, boardId);
+		return getBoardByBoardId(object, boardId);
 	}
 
 	@Override
@@ -112,7 +112,7 @@ public class BoardServiceImpl implements BoardService {
 		synchronized (this) {
 			BoardInfo boardInfo = null;
 			try {
-				JSONObject object = this.saveOrUpdateBoardInfo(boardId, BoardSign.CLICK, 0);
+				JSONObject object = saveOrUpdateBoardInfo(boardId, BoardSign.CLICK, 0);
 				boardInfo = JSON.toJavaObject(object, BoardInfo.class);
 			} catch (Exception e) {
 				logger.error("insertBoardInfo fail", e);
@@ -156,7 +156,7 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public List<Board> getAllBoard(Page page) {
-		return this.getAllBoardWithCondition(page, null, null, 0, null, -1, 0, -1, -1);
+		return getAllBoardWithCondition(page, null, null, 0, null, -1, 0, -1, -1);
 	}
 	
 	public List<Board> getAllBoardWithCondition(Page page, String startTime, String endTime, int boardId, 
@@ -198,7 +198,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public List<Board> getAllBoards() {
-		return this.getAllBoard(null);
+		return getAllBoard(null);
 	}
 
 	@Override

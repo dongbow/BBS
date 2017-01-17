@@ -1,4 +1,4 @@
-# BBS
+﻿# BBS
 
 项目依赖于库中 bbs-redis 请下载： https://github.com/dongbow/bbs-redis.git
 运行`mvn package`打包生成jar
@@ -16,10 +16,9 @@ SpringMVC + Spring +Mybatis + redis + Lucene + Freemarker + druid + Quartz + Boo
 - [x] 回帖，列表，设置，个人空间
 - [x] 导航，友链，版块，分类
 - [x] 关闭注册，关闭论坛，版块|帖子|回复权限
-- [x] 版主，后台部分信息查看.
+- [x] 版主，后台部分信息查看搜索修改删除.
 
 Lucene加进去了，但是目前还不能搜索
-加入了任务调度Quartz，调试中...
+加入了任务调度Quartz
 添加了系统监控JavaMelody
------
-想不起来了...
+

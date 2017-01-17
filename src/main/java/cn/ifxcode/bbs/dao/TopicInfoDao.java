@@ -8,4 +8,6 @@ public interface TopicInfoDao {
 
 	public int update(TopicInfo topicInfo);
 
+	public int updateHomeTopicTime(String time, long tid);
+
 }

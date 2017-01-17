@@ -55,7 +55,7 @@
 			            </div>
 	                	<div class="col-md-4 form-group">
 	                		<a class="btn btn-success btn-sm" id="data-search" type="button" href="${path}/system/admin/replymanage/trash/search"><i class="fa fa-search"></i> 查找 </a>
-	            			<a class="btn btn-info btn-sm" type="button"><i class="fa fa-retweet"></i> 恢复 </a>
+	            			<a class="btn btn-info btn-sm data-restore" href="${path}/system/admin/replymanage/trash/restore" type="button"><i class="fa fa-retweet"></i> 恢复 </a>
 	            		</div>
                 	</div>
                 </form>
@@ -81,7 +81,7 @@
 	                        	<#if replys??>
 	                        		<#list replys as reply>
 	                        			<tr>
-	                        				<td><input type="checkbox" data-id="${reply.replyId}"></td>
+	                        				<td><input type="checkbox" data-id="${reply.replyId}" class="data-check-id"></td>
 				                            <td class="numeric" data-title="ID">${reply.replyId}</td>
 				                            <td class="numeric" data-title="帖子ID">
 				                            	${reply.topicId}
@@ -142,5 +142,6 @@
 </section>
 	<#include "../common/footer.ftl">
 	<script type="text/javascript" src="${path}/resources/js/admin/reply/reply.js"></script>
+	<script type="text/javascript" src="${path}/resources/js/admin/reply/fix.js"></script>
 </body>
 </html>

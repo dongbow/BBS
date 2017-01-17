@@ -112,7 +112,7 @@ public class SpaceController extends BaseUserController {
 	@RequestMapping("/uid/{uid:\\d+}/{bbs}")
 	public ModelAndView toSpaceTopic(@PathVariable("uid")long userId, HttpServletRequest request, 
 			@PathVariable("bbs")String bbs, @RequestParam(value="page", defaultValue = "1", required = false)String pageNo) {
-		if(!this.bbsEquals(bbs)) {
+		if(!bbsEquals(bbs)) {
 			return new ModelAndView("redirect:" + BbsConstant.DOMAIN);
 		}
 		CookieBean cookieBean = userService.getCookieBeanFromCookie(request);

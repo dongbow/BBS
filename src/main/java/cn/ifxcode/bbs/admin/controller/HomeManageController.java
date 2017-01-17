@@ -19,6 +19,8 @@ import cn.ifxcode.bbs.constant.BbsConstant;
 import cn.ifxcode.bbs.entity.HomeImage;
 import cn.ifxcode.bbs.entity.QuickNavigation;
 import cn.ifxcode.bbs.entity.Recommend;
+import cn.ifxcode.bbs.entity.Topic;
+import cn.ifxcode.bbs.enumtype.RoleSign;
 import cn.ifxcode.bbs.service.HomeImageService;
 import cn.ifxcode.bbs.service.QuickNavigationService;
 import cn.ifxcode.bbs.service.RecommendService;
@@ -279,7 +281,8 @@ public class HomeManageController extends BaseController {
 	}
 	
 	@RequestMapping("/topic/search")
-	public String toTopicSearch(String from, String to, long tid, long uid, 
+	public String toTopicSearch(String from, String to, 
+			@RequestParam(defaultValue = "0")long tid, @RequestParam(defaultValue = "0")long uid, 
 			@RequestParam(value="page", required = false, defaultValue = "1")int p, 
 			HttpServletRequest request, Model model) {
 		Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
@@ -287,6 +290,26 @@ public class HomeManageController extends BaseController {
 		model.addAttribute("page", page);
 		ParamsBuildUtils.createModel(model, request);
 		return "admin/homemanage/topic-list";
+	}
+	
+	@RequestMapping(value = "/topic/time", method = RequestMethod.GET)
+	public String toUpdateHomeTopicTime(@RequestParam(required = false)long tid, Model model) {
+		Topic topic = topicService.getTopicByTopicId(tid);
+		model.addAttribute("topic", topic);
+		return "admin/homemanage/topic-time";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/topic/time", method = RequestMethod.POST)
+	public Result updateHomeTopicTime(@RequestParam(required = false)long tid, 
+			@RequestParam(required = false)String time) {
+		Result result = null;
+		if(BbsConstant.OK == topicService.updateTopicTime(tid, time, RoleSign.ADMIN.getSign())) {
+			result = new Result(BbsConstant.OK, "修改成功");
+		} else {
+			result = new Result(BbsConstant.OK, "修改失败");
+		}
+		return result;
 	}
 	
 }

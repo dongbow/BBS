@@ -35,7 +35,7 @@ public class BbsInterceptor extends HandlerInterceptorAdapter{
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
 		
-		this.initService(request);
+		initService(request);
 		
 		if(generalService.checkIp(request)) {
 			logger.info("black ip : " + GetRemoteIpUtil.getRemoteIp(request));
@@ -48,7 +48,7 @@ public class BbsInterceptor extends HandlerInterceptorAdapter{
 		if(generalService.checkBbsIsClose()) {
 			if(url.indexOf(BbsConstant.SYSTEM) > 0 || url.indexOf(BbsConstant.LOGOUT) > 0) {
 				logger.info("bbs is closeing, but this ip is: " + GetRemoteIpUtil.getRemoteIp(request));
-				this.auth(request, response);
+				auth(request, response);
 			}
 			response.sendRedirect(BbsConstant.ROOT + BbsConstant.CLOSE);
 			logger.info("bbs is close");
@@ -96,13 +96,13 @@ public class BbsInterceptor extends HandlerInterceptorAdapter{
 			}
 		}
 		
-		if(!this.bmc(request, response)) {
+		if(!bmc(request, response)) {
 			response.sendRedirect(BbsConstant.ROOT + BbsConstant.TIP + "?tip=noauth");
 			logger.warn("bmc url found, ip is " + GetRemoteIpUtil.getRemoteIp(request) );
 			return false;
 		}
 		
-		if(!this.auth(request, response)) {
+		if(!auth(request, response)) {
 			if(isAjax(request)) {
 				JSONObject responseJSONObject = new JSONObject(true);
 				Result result = new Result(BbsErrorCode.NOT_AUTH, BbsErrorCode.getDescribe(BbsErrorCode.NOT_AUTH));
@@ -144,7 +144,7 @@ public class BbsInterceptor extends HandlerInterceptorAdapter{
 	
 	private boolean auth(HttpServletRequest request, HttpServletResponse response) {
 		StringBuffer url = request.getRequestURL();
-		if(this.dealUrl(url)) {
+		if(dealUrl(url)) {
 			if(!generalService.authCheck(request)) {
 				return false;
 			} else {

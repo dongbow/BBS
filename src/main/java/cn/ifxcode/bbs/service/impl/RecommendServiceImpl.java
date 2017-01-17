@@ -32,7 +32,7 @@ public class RecommendServiceImpl implements RecommendService {
 	
 	@Override
 	public List<Recommend> getAllRecommends(Page page) {
-		return this.getAllRecommends(page, null, null, -1, 0);
+		return getAllRecommends(page, null, null, -1, 0);
 	}
 
 	@Override

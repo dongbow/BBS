@@ -2,6 +2,8 @@ package cn.ifxcode.bbs.entity;
 
 import java.io.Serializable;
 
+import cn.ifxcode.bbs.utils.DateUtils;
+
 public class BbsFileDown implements Serializable {
 
 	private static final long serialVersionUID = 6205635258221225231L;
@@ -10,6 +12,7 @@ public class BbsFileDown implements Serializable {
 	private String uuid;
 	private long uid;
 	private String nickname;
+	private String downTime;
 	private String ip;
 
 	public long getId() {
@@ -50,6 +53,14 @@ public class BbsFileDown implements Serializable {
 
 	public void setIp(String ip) {
 		this.ip = ip;
+	}
+
+	public String getDownTime() {
+		return DateUtils.dt14LongFormat(DateUtils.dt14FromStr(downTime));
+	}
+
+	public void setDownTime(String downTime) {
+		this.downTime = downTime;
 	}
 
 }

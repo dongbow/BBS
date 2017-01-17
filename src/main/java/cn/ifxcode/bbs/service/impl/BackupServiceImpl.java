@@ -54,7 +54,7 @@ public class BackupServiceImpl implements BackupService {
 
 	@Override
 	public List<Backup> searchBackups(Page page) {
-		return this.searchBackups(page, null, null);
+		return searchBackups(page, null, null);
 	}
 
 	@Override

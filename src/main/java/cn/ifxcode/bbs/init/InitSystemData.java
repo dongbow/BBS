@@ -94,17 +94,17 @@ public class InitSystemData {
 	@PostConstruct
 	public void initSystem() {
 		long start = System.currentTimeMillis();
-		this.initSystemConfig();
-		this.initBlackIp();
-		this.initRsources();
-		this.initRoles();
-		this.initSwfArea();
-		this.initNavigation();
-		this.initQuickNavigation();
-		this.initNavBoard();
-		this.initClassify();
-		this.initFriendLink();
-		this.initJob();
+		initSystemConfig();
+		initBlackIp();
+		initRsources();
+		initRoles();
+		initSwfArea();
+		initNavigation();
+		initQuickNavigation();
+		initNavBoard();
+		initClassify();
+		initFriendLink();
+		initJob();
 		long end = System.currentTimeMillis();
 		logger.info("init system time: {}", (end - start) / 1000);
 		//executorService.shutdown();

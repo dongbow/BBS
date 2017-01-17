@@ -9,6 +9,7 @@ import com.alibaba.fastjson.JSONArray;
 
 import cn.ifxcode.bbs.bean.Page;
 import cn.ifxcode.bbs.entity.BbsFile;
+import cn.ifxcode.bbs.entity.BbsFileDown;
 import cn.ifxcode.bbs.enumtype.FileEnum;
 
 public interface FileService {
@@ -30,5 +31,7 @@ public interface FileService {
 	public List<BbsFile> getUploadFile(Page page, FileEnum file);
 	
 	public List<BbsFile> getUploadFile(Page page, FileEnum file, String startTime, String endTime, long uid, String nickname);
-	
+
+	public List<BbsFileDown> getFileDownloadDetailList(Page page, String id, long uid);
+
 }

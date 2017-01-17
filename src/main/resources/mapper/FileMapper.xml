@@ -47,5 +47,13 @@
 		</if>
 		order by upload_time desc
 	</select>
+	
+	<select id="getFileDownloadDetailList" parameterType="map" resultType="BbsFileDown">
+		select uid, nickname, down_time, ip from bbs_file_down where uuid = #{uuid} 
+		<if test="uid != null">
+			and uid = #{uid} 
+		</if>
+		order by down_time desc
+	</select>
 
 </mapper>

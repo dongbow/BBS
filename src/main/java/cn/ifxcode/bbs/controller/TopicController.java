@@ -142,7 +142,7 @@ public class TopicController extends BaseUserController{
 	public Result doReport(String uid, String tid, String rid, String floor, String rs, 
 			String other, String url, HttpServletRequest request) {
 		Result result = null;
-		if(this.isNotBlank(uid, tid, rid, floor, rs, url)) {
+		if(FormValidate.stringUtils(uid, tid, rid, floor, rs, url)) {
 			if("其他".equals(rs)) {
 				if(StringUtils.isEmpty(other) || other.length() < 5 || other.length() > 50) {
 					return new Result(BbsConstant.ERROR, "举报原因过长或过短");
@@ -210,13 +210,5 @@ public class TopicController extends BaseUserController{
 			return "redirect:/tip?tip=noauth";
 		}
 	}
-	
-	private boolean isNotBlank(String... str) {
-		for (String string : str) {
-			if(StringUtils.isEmpty(string)) {
-				return false;
-			}
-		}
-		return true;
-	}
+
 }

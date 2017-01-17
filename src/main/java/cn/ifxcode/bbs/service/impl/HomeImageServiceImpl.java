@@ -39,7 +39,7 @@ public class HomeImageServiceImpl implements HomeImageService{
 	public List<HomeImage> searchImages(Page page) {
 		Map<String, Object> map = Maps.newHashMap();
 		map.put("page", page);
-		return this.formatHomeImages(homeImageDao.searchImages(map));
+		return formatHomeImages(homeImageDao.searchImages(map));
 	}
 	
 	private List<HomeImage> formatHomeImages(List<HomeImage> list) {

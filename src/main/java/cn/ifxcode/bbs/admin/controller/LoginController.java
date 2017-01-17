@@ -106,12 +106,12 @@ public class LoginController {
 				response.addCookie(CookieUtils.makeUserCookie(cookieBean.toString(), remember));
 				result = new Result(BbsConstant.OK, null, BbsConstant.AUTH_HOME);
 				userValue = userService.getUserValue(user.getUserAccess().getUserId());
-				this.loginAward(user.getUserAccess().getUserLastestLoginTime(), userValue, user.getUserAccess().getUserId());
+				loginAward(user.getUserAccess().getUserLastestLoginTime(), userValue, user.getUserAccess().getUserId());
 				user.getUserAccess().setUserLastestLoginIp(GetRemoteIpUtil.getRemoteIp(request));
 				user.getUserAccess().setUserLastestLoginTime(DateUtils.dt14LongFormat(new Date()));
 				userService.updateUserLastestTimeAndIp(user.getUserAccess().getUserId(), 
 						user.getUserAccess().getUserLastestLoginIp(), user.getUserAccess().getUserLastestLoginTime());
-				this.updateAwardHis(user.getUserAccess().getUserLastestLoginTime(), cookieBean);
+				updateAwardHis(user.getUserAccess().getUserLastestLoginTime(), cookieBean);
 				JSONObject object = new JSONObject(true);
 				object.put("user", JSON.toJSONString(user));
 				redisObjectMapService.save(RedisKeyUtils.getUserInfo(user.getUserAccess().getUserId()), object, JSONObject.class);

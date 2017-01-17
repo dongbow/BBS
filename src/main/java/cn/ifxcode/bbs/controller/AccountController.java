@@ -76,7 +76,7 @@ public class AccountController {
 		if(FormValidate.number(uid) && StringUtils.isEmpty(name)) {
 			return "redirect:/index";
 		}
-		if(this.validPwd(password, repassword)) {
+		if(validPwd(password, repassword)) {
 			userService.resetPassword(Long.parseLong(uid), name, MD5Utils.getMD5String(password));
 			return "redirect:/account/logout?from=forget";
 		}

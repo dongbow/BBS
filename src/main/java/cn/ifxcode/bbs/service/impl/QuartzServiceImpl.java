@@ -53,7 +53,7 @@ public class QuartzServiceImpl implements QuartzService {
 	 * 从数据库中取 区别于getAllJob
 	 */
 	public List<ScheduleJob> getAllJobFromDB(Page page) {
-		return this.getAllJobFromDB(page, null, -1);
+		return getAllJobFromDB(page, null, -1);
 	}
 	
 	public List<ScheduleJob> getAllJobFromDB(Page page, String jobName, int status) {
@@ -111,18 +111,18 @@ public class QuartzServiceImpl implements QuartzService {
 	 * 更改任务状态
 	 */
 	public int changeStatus(long jobId, String cmd) {
-		ScheduleJob job = this.getJobById(jobId);
+		ScheduleJob job = getJobById(jobId);
 		if (job == null) {
 			return BbsConstant.ERROR;
 		}
 		if ("stop".equals(cmd)) {
-			this.deleteJob(job);
+			deleteJob(job);
 			job.setJobStatus(ScheduleJob.STATUS_NOT_RUNNING);
 		} else if ("start".equals(cmd)) {
 			job.setJobStatus(ScheduleJob.STATUS_RUNNING);
-			this.addJob(job);
+			addJob(job);
 		}
-		this.updateJob(job);
+		updateJob(job);
 		return BbsConstant.ERROR;
 	}
 
@@ -131,13 +131,13 @@ public class QuartzServiceImpl implements QuartzService {
 	 */
 	public int updateCron(long jobId, String cron) {
 		if(StringUtils.isNotBlank(cron) && CronExpression.isValidExpression(cron)) {
-			ScheduleJob job = this.getJobById(jobId);
+			ScheduleJob job = getJobById(jobId);
 			if (job == null) {
 				return BbsConstant.ERROR;
 			}
 			job.setCronExpression(cron);
 			if (ScheduleJob.STATUS_RUNNING.equals(job.getJobStatus())) {
-				this.updateJobCron(job);
+				updateJobCron(job);
 			}
 			scheduleJobDao.updateByJobId(job);
 		}

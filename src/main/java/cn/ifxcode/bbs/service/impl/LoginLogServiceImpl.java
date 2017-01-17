@@ -46,7 +46,7 @@ public class LoginLogServiceImpl implements LoginLogService {
 		if(status != -1) {
 			map.put("status", status);
 		}
-		return this.formatLog(loginLogDao.getAllLoginLog(map));
+		return formatLog(loginLogDao.getAllLoginLog(map));
 	}
 	
 	private List<LoginLog> formatLog(List<LoginLog> logs) {

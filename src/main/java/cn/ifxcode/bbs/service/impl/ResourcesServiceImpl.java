@@ -88,7 +88,7 @@ public class ResourcesServiceImpl implements ResourcesService {
 								roleService.insertRoleResources(id, resIds);
 							}
 						}
-						this.addResourcesToRedis(resources, roles);
+						addResourcesToRedis(resources, roles);
 						return BbsConstant.OK;
 					}
 				} catch (Exception e) {

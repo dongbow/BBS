@@ -15,6 +15,7 @@ import cn.ifxcode.bbs.bean.Page;
 import cn.ifxcode.bbs.bean.Result;
 import cn.ifxcode.bbs.constant.BbsConstant;
 import cn.ifxcode.bbs.entity.Reply;
+import cn.ifxcode.bbs.enumtype.RoleSign;
 import cn.ifxcode.bbs.service.BoardService;
 import cn.ifxcode.bbs.service.ReplyService;
 import cn.ifxcode.bbs.utils.ParamsBuildUtils;
@@ -71,11 +72,27 @@ public class ReplyManageController extends BaseController {
 		return result;
 	}
 	
-	@RequestMapping("/update")
+	@RequestMapping(value = "/update", method = RequestMethod.GET)
 	public String toUpdate(long id, Model model) {
 		Reply reply = replyService.getReplyByReplyId(id);
 		model.addAttribute("reply", reply);
 		return "admin/reply/reply-panel";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "update", method = RequestMethod.POST)
+	public Result updateReply(long id, String content) {
+		Result result = null;
+		if(StringUtils.isNotBlank(content)) {
+			if(replyService.updateReply(id, content) == BbsConstant.OK) {
+				result = new Result(BbsConstant.OK, "修改成功");
+			} else {
+				result = new Result(BbsConstant.ERROR, "修改失败");
+			}
+		} else {
+			result = new Result(BbsConstant.ERROR, "修改失败");
+		}
+		return result;
 	}
 	
 	@RequestMapping("/audit")
@@ -112,4 +129,25 @@ public class ReplyManageController extends BaseController {
 		return "admin/reply/reply-trash-list";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/trash/restore", method = RequestMethod.POST)
+	public Result trashRestore(@RequestParam("ids[]")String ids) {
+		Result result = null;
+		if(StringUtils.isNotBlank(ids)) {
+			if(replyService.restore(ids, RoleSign.ADMIN.getSign()) == BbsConstant.OK) {
+				result = new Result(BbsConstant.OK, "恢复成功");
+			} else {
+				result = new Result(BbsConstant.ERROR, "恢复失败");
+			}
+		} else {
+			result = new Result(BbsConstant.ERROR, "恢复失败");
+		}
+		return result;
+	}
+	
+	@RequestMapping("/report")
+	public String report(@RequestParam(value="page", required = false, defaultValue = "1")int p,
+			HttpServletRequest request, Model model) {
+		return null;
+	}
 }

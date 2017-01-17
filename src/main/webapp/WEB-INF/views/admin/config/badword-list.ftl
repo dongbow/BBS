@@ -62,6 +62,9 @@
 	                    </table>
 	                </section>
 	                <@buildPage page=page/>
+	                <!-- Modal -->
+	                <div class="modal fade" id="data-modal" tabindex="-1" role="dialog" aria-labelledby="data-modal" aria-hidden="true" data-backdrop="static"></div>
+			        <!-- modal -->
 	            </div>
 	        </section>
         </div>

@@ -52,7 +52,7 @@ public class QuickNavigationServiceImpl implements QuickNavigationService {
 	public List<QuickNavigation> getAllQuickNavigations(Page page) {
 		Map<String, Object> map = Maps.newHashMap();
 		map.put("page", page);
-		return this.formatQuickNavigations(quickNavigationDao.getAllQuickNavigationsPage(map));
+		return formatQuickNavigations(quickNavigationDao.getAllQuickNavigationsPage(map));
 	}
 	
 	private List<QuickNavigation> formatQuickNavigations(List<QuickNavigation> list) {

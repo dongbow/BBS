@@ -55,7 +55,7 @@ public class NavigationServiceImpl implements NavigationService{
 
 	@Override
 	public Navigation getNavigation(int navId) {
-		List<Navigation> navigations = this.getAllNavigationsFromCache();
+		List<Navigation> navigations = getAllNavigationsFromCache();
 		for (Navigation navigation : navigations) {
 			if(navigation.getNavId() == navId) {
 				return navigation;
@@ -98,7 +98,7 @@ public class NavigationServiceImpl implements NavigationService{
 
 	@Override
 	public List<Navigation> getAllNavigation(Page page) {
-		return this.getAllNavigation(page, null, null, null, -1);
+		return getAllNavigation(page, null, null, null, -1);
 	}
 
 	@Override
@@ -119,7 +119,7 @@ public class NavigationServiceImpl implements NavigationService{
 			map.put("status", status);
 		}
 		List<Navigation> navigations = navigationDao.getAllNavigationsToAdmin(map);
-		this.format(navigations);
+		format(navigations);
 		return navigations;
 	}
 	

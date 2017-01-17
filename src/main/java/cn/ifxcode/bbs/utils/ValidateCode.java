@@ -69,11 +69,11 @@ public class ValidateCode extends HttpServlet {
     public void init() throws ServletException {
         // 从web.xml中获取初始信息
         // 宽度
-        String strWidth = this.getInitParameter("width");
+        String strWidth = getInitParameter("width");
         // 高度
-        String strHeight = this.getInitParameter("height");
+        String strHeight = getInitParameter("height");
         // 字符个数
-        String strCodeCount = this.getInitParameter("codeCount");
+        String strCodeCount = getInitParameter("codeCount");
         // 将配置的信息转换成数值
         try {
             if (strWidth != null && strWidth.length() != 0) {

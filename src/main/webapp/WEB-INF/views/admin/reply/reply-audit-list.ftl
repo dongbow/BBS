@@ -131,5 +131,6 @@
 </section>
 	<#include "../common/footer.ftl">
 	<script type="text/javascript" src="${path}/resources/js/admin/reply/reply.js"></script>
+	<script type="text/javascript" src="${path}/resources/js/admin/reply/fix.js"></script>
 </body>
 </html>

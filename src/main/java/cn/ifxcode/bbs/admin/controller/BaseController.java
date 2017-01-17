@@ -65,7 +65,7 @@ public class BaseController {
 //			result = JSONArray.parseArray(jsonObject.getString("resources"));
 //		}
 //		List<Resources> resources = JsonUtils.decodeJson(result);
-		this.formatResources(resources);
+		formatResources(resources);
 		model.addAttribute("resources", resources);
 	}
 	

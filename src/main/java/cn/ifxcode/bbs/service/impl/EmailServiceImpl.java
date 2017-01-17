@@ -38,10 +38,10 @@ public class EmailServiceImpl implements EmailService {
 		try {
 			messageHelper = new MimeMessageHelper(mailMessage, true, "UTF-8");
 			if (address != null) {
-				messageHelper.setTo(this.formatString(address));
+				messageHelper.setTo(formatString(address));
 			}
 			if (ccAddress != null) {
-				messageHelper.setCc(this.formatString(ccAddress));
+				messageHelper.setCc(formatString(ccAddress));
 			}
 			messageHelper.setFrom(email);
 			messageHelper.setSubject(subject);
@@ -68,10 +68,10 @@ public class EmailServiceImpl implements EmailService {
 		try {
 			messageHelper = new MimeMessageHelper(mailMessage, true, "UTF-8");
 			if (address != null) {
-				messageHelper.setTo(this.formatString(address));
+				messageHelper.setTo(formatString(address));
 			}
 			if (ccAddress != null) {
-				messageHelper.setCc(this.formatString(ccAddress));
+				messageHelper.setCc(formatString(ccAddress));
 			}
 			messageHelper.setFrom(email);
 			messageHelper.setSubject(subject);

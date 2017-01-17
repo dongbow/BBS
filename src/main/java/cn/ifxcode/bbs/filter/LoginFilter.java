@@ -51,7 +51,7 @@ public class LoginFilter implements Filter {
         if(StringUtils.isNotBlank(cookie)) {
         	CookieBean cookieBean = ReflectUtils.returnEntity(CookieBean.class, cookie.split(";"));
             if(cookieBean != null && cookieBean.getUser_id() > 0) {
-            	JSONObject object = this.getJsonObjectFromRedis(RedisKeyUtils.getUserInfo(cookieBean.getUser_id()));
+            	JSONObject object = getJsonObjectFromRedis(RedisKeyUtils.getUserInfo(cookieBean.getUser_id()));
             	if(object != null) {
             		if(httpRequest.getRequestURL().indexOf("/druid") > 0 || httpRequest.getRequestURL().indexOf("/monitoring") > 0) {
             			User user = JSONObject.toJavaObject(object, User.class);
@@ -75,8 +75,8 @@ public class LoginFilter implements Filter {
         StringBuffer uri = httpRequest.getRequestURL();
 		String url[] = PropertiesUtils.getValue("url.map").split(";");
 		for (String s : url) {
-			if(uri.indexOf(s) > 0 && this.urlExmap(uri)) {
-				this.result(httpRequest, httpResponse);
+			if(uri.indexOf(s) > 0 && urlExmap(uri)) {
+				result(httpRequest, httpResponse);
 				return;
 			}
 		}

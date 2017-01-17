@@ -90,7 +90,7 @@ public class FriendsController extends BaseUserController {
 	public String getFriendsRequest(@RequestParam(value = "page", required = false, defaultValue = "1")String pageNo, 
 			@RequestParam(required = false, defaultValue="request")String type, HttpServletRequest request, Model model) {
 		CookieBean bean = userService.getCookieBeanFromCookie(request);
-		if(!this.validType(type)) {
+		if(!validType(type)) {
 			return "redirect:/index";
 		}
 		if(type.equals("request")) {

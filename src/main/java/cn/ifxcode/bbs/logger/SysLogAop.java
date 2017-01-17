@@ -59,7 +59,7 @@ public class SysLogAop {
 		ServletRequestAttributes sra = (ServletRequestAttributes)ra;
 		HttpServletRequest request = sra.getRequest();
 		SystemLog systemLog = new SystemLog();
-		Map<String, Object> map = this.getMethodDescription(point);
+		Map<String, Object> map = getMethodDescription(point);
 		systemLog.setModule("<font color=\"red\">" + map.get("module").toString() + "</font>");
 		systemLog.setMethod("<font color=\"red\">" + map.get("methods").toString() + "</font>");
 		systemLog.setStatus(0);
@@ -81,7 +81,7 @@ public class SysLogAop {
 		try {
 			result = point.proceed();
 			SystemLog systemLog = new SystemLog();
-			Map<String, Object> map = this.getMethodDescription(point);
+			Map<String, Object> map = getMethodDescription(point);
 			systemLog.setModule(map.get("module").toString());
 			systemLog.setMethod(map.get("methods").toString());
 			systemLog.setStatus(1);
@@ -113,7 +113,7 @@ public class SysLogAop {
 				if (clazzs.length == arguments.length) {
 					map.put("module", method.getAnnotation(SysLog.class).module());
 					map.put("methods", method.getAnnotation(SysLog.class).methods());
-					map.put("args", this.getArgs(method, arguments));
+					map.put("args", getArgs(method, arguments));
 					String desc = method.getAnnotation(SysLog.class).description();
 					if (StringUtils.isEmpty(desc))
 						desc = "执行成功!";

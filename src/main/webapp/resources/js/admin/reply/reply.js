@@ -6,6 +6,8 @@ $(function() {
 	$('#data-delete').bind('click', deleteReply);
 	
 	$('.del-reason').bind('click', lookReason);
+	
+	$('.data-restore').bind('click', restore);
 });
 
 function lookReply() {
@@ -82,5 +84,72 @@ function deleteReply(event) {
 }
 
 function dataUpdateSave() {
+	var content = CKEDITOR.instances.content.getData();
+	var id = $('#data-call-id').val();
 	
+	if(id && content) {
+		$.post($('.data-update').attr('href'), {
+			"id": id,
+			"content": content
+		}, function(result) {
+			if(result.rc != undefined && result.rc.rc == 9001){
+    			loginDialog(result);
+    		} else if(result.rc != undefined && result.rc.rc == 9999) {
+    			authDialog(result);
+    		} else if(result.rc == 1) {
+    			refreshLocation(result.msg);
+        	} else {
+        		failTip(result.msg);
+        	}
+		});
+	}
+}
+
+function restore(event) {
+	event.preventDefault();
+	var url = $(this).attr('href');
+	var count = 0;
+	var ids = new Array();
+	$(".data-check-id").each(function() {
+		if ($(this).is(':checked')) {
+			count++;
+			ids.push($(this).attr('data-id'));
+		}
+	});
+	if(parseInt(count) == 0){
+	    bootbox.alert({
+	        message: "至少选择一条数据",
+	        size: 'small'
+	    });
+	} else {
+		bootbox.confirm({
+	        title: "系统提示",
+	        message: "确定恢复选中的" + count + "条评论?",
+	        buttons: {
+	            cancel: {
+	                label: '取消'
+	            },
+	            confirm: {
+	                label: '确定'
+	            }
+	        },
+	        callback: function (data) {
+	        	if(data == true) {
+        			$.post(url, {
+		            	"ids": ids
+		            }, function(result) {
+		            	if(result.rc != undefined && result.rc.rc == 9001){
+		        			loginDialog(result);
+		        		} else if(result.rc != undefined && result.rc.rc == 9999) {
+		        			authDialog(result);
+		        		} else if(result.rc == 1) {
+		        			refreshLocation(result.msg);
+		            	} else {
+		            		failTip(result.msg);
+		            	}
+		            });
+	        	}
+	        }
+	    });
+	}
 }

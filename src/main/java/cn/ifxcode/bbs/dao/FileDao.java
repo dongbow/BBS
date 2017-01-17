@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
 import cn.ifxcode.bbs.entity.BbsFile;
+import cn.ifxcode.bbs.entity.BbsFileDown;
 
 public interface FileDao {
 
@@ -21,5 +22,7 @@ public interface FileDao {
 	public int AddDownCount(String uuid);
 
 	public List<BbsFile> getUploadFile(Map<String, Object> map);
+
+	public List<BbsFileDown> getFileDownloadDetailList(Map<String, Object> map);
 
 }

@@ -74,7 +74,7 @@
 				                            </td>
 				                            <td class="numeric" data-title="上传时间">${file.uploadTime}</td>
 				                            <td class="numeric" data-title="操作">
-				                            	<a class="btn btn-link btn-xs" type="button" href=""> 下载详情 </a>
+				                            	<a class="btn btn-link btn-xs download-detail" type="button" href="${path}/system/admin/upload/file/downloaddetail" data-id="${file.uuid}"> 下载详情 </a>
 				                            </td>
 				                        </tr>
 	                        		</#list>
@@ -98,6 +98,7 @@
     </div>
     <!-- main content end-->
 </section>
+	<script type="text/javascript" src="${path}/resources/js/admin/uploadmanage/file.js"></script>
 	<#include "../common/footer.ftl">
 </body>
 </html>

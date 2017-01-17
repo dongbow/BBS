@@ -76,7 +76,7 @@ public class GeneralServiceImpl implements GeneralService {
 	
 	public boolean checkIp(HttpServletRequest request) {
 		String ip = GetRemoteIpUtil.getRemoteIp(request);
-		List<String> ips = this.getBlackIpsFromCache();
+		List<String> ips = getBlackIpsFromCache();
 		if(ips != null && ips.size() > 0) {
 			for (String string : ips) {
 				Pattern pattern = Pattern.compile(string);
@@ -308,7 +308,7 @@ public class GeneralServiceImpl implements GeneralService {
 			return true;
 		}
 		if(user.getUserAccess().getUserIsBoderManager() == 1) {
-			return this.isLocalBMC(request);
+			return isLocalBMC(request);
 		}
 		return false;
 	}
@@ -325,7 +325,7 @@ public class GeneralServiceImpl implements GeneralService {
 		JSONObject object = redisObjectMapService.get(RedisKeyUtils.getResourcesByRoleId(Integer.parseInt(ids)), JSONObject.class);
 		List<Resources> resources = JsonUtils.decodeJson(JSONArray.parseArray(object.getString("resources")), Resources.class);
 		try {
-			this.authHref(url, resources);
+			authHref(url, resources);
 		} catch (StopException e) {
 			return true;
 		}
@@ -338,7 +338,7 @@ public class GeneralServiceImpl implements GeneralService {
 				throw new StopException();
 			}
 			if(res.getResources() != null && res.getResources().size() > 0) {
-				this.authHref(url, res.getResources());
+				authHref(url, res.getResources());
 			}
 		}
 		return false;

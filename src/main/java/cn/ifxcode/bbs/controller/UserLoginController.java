@@ -155,7 +155,7 @@ public class UserLoginController {
 						BbsConstant.OK, DateUtils.dt14LongFormat(new Date()), GetRemoteIpUtil.getRemoteIp(request));
 				loginLogService.insertLog(loginLog);
 				if(!StringUtils.equals(backurl, "/index")) {
-					backurl = this.decode(backurl);
+					backurl = decode(backurl);
 				}
 				backurl = "redirect:" + backurl;
 			} else {
@@ -222,7 +222,7 @@ public class UserLoginController {
 				&& userService.mate(name, email) != BbsConstant.OK) {
 			return "redirect:/account/forget";
 		}
-		this.sendMail(name, email, request);
+		sendMail(name, email, request);
 		model.addFlashAttribute("fname", name);
 		model.addFlashAttribute("femail", email);
 		model.addFlashAttribute("mailurl", EmailUtils.returnAddress(email));
@@ -246,7 +246,7 @@ public class UserLoginController {
 				&& userService.mate(fname, femail) != BbsConstant.OK) {
 			result = new Result(BbsErrorCode.NOT_MATE, BbsErrorCode.getDescribe(BbsErrorCode.NOT_MATE));
 		} else {
-			this.sendMail(fname, femail, request);
+			sendMail(fname, femail, request);
 			result = new Result(BbsConstant.OK, "success");
 		}
 		return result;

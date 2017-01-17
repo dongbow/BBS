@@ -59,7 +59,7 @@ public class BmcLogAop {
 		ServletRequestAttributes sra = (ServletRequestAttributes)ra;
 		HttpServletRequest request = sra.getRequest();
 		BmcLog bmcLog = new BmcLog();
-		Map<String, Object> map = this.getMethodDescription(point);
+		Map<String, Object> map = getMethodDescription(point);
 		bmcLog.setModules("<font color=\"red\">" + map.get("module").toString() + "</font>");
 		bmcLog.setStatus(0);
 		bmcLog.setStatusDesc("<font color=\"red\">执行方法异常:-->" + e + "</font>");
@@ -80,7 +80,7 @@ public class BmcLogAop {
 		try {
 			result = point.proceed();
 			BmcLog bmcLog = new BmcLog();
-			Map<String, Object> map = this.getMethodDescription(point);
+			Map<String, Object> map = getMethodDescription(point);
 			bmcLog.setModules(map.get("module").toString());
 			bmcLog.setStatus(1);
 			bmcLog.setStatusDesc(map.get("description").toString());
@@ -110,7 +110,7 @@ public class BmcLogAop {
 				Class[] clazzs = method.getParameterTypes();
 				if (clazzs.length == arguments.length) {
 					map.put("module", method.getAnnotation(BmcLogAnno.class).modules());
-					map.put("args", this.getArgs(method, arguments));
+					map.put("args", getArgs(method, arguments));
 					map.put("description", "执行成功!");
 					break;
 				}

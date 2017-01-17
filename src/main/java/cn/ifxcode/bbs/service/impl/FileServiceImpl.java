@@ -41,6 +41,7 @@ import cn.ifxcode.bbs.dao.FileDao;
 import cn.ifxcode.bbs.dao.GeneralDao;
 import cn.ifxcode.bbs.dao.UserValueDao;
 import cn.ifxcode.bbs.entity.BbsFile;
+import cn.ifxcode.bbs.entity.BbsFileDown;
 import cn.ifxcode.bbs.entity.GoldHistory;
 import cn.ifxcode.bbs.entity.UserValue;
 import cn.ifxcode.bbs.enumtype.EGHistory;
@@ -130,7 +131,7 @@ public class FileServiceImpl implements FileService {
 	}
 	
 	public String uploadPicture(HttpServletRequest request) {
-		return this.uploadPicture(request, null);
+		return uploadPicture(request, null);
 	}
 
 	public String uploadPicture(HttpServletRequest request, String fileName) {
@@ -156,12 +157,12 @@ public class FileServiceImpl implements FileService {
 			List<FileItem> items = upload.parseRequest(request);
 			for (FileItem item : items) {
 				try {
-					if(!this.validatePicture(item)) {
+					if(!validatePicture(item)) {
 						return data;
 					}
 					if(StringUtils.isEmpty(fileName)) {
 						synchronized (this) {
-							qiniuFileName = this.createName(item);
+							qiniuFileName = createName(item);
 						}
 					} else {
 						qiniuFileName = fileName;
@@ -196,7 +197,7 @@ public class FileServiceImpl implements FileService {
 	}
 
 	public JSONArray uploadFile(HttpServletRequest request) {
-		return this.uploadFile(request, null);
+		return uploadFile(request, null);
 	}
 
 	public JSONArray uploadFile(HttpServletRequest request, String fileName) {
@@ -223,12 +224,12 @@ public class FileServiceImpl implements FileService {
 			for (FileItem item : items) {
 				Map<String, Object> map = Maps.newHashMap();
 				try {
-					if(!this.validateFile(item)) {
+					if(!validateFile(item)) {
 						return null;
 					}
 					if(StringUtils.isEmpty(fileName)) {
 						synchronized (this) {
-							qiniuFileName = this.createName(item);
+							qiniuFileName = createName(item);
 						}
 					} else {
 						qiniuFileName = fileName;
@@ -379,7 +380,7 @@ public class FileServiceImpl implements FileService {
 
 	@Override
 	public List<BbsFile> getUploadFile(Page page, FileEnum file) {
-		return this.getUploadFile(page, file, null, null, 0, null);
+		return getUploadFile(page, file, null, null, 0, null);
 	}
 
 	@Override
@@ -400,6 +401,17 @@ public class FileServiceImpl implements FileService {
 			map.put("name", nickname);
 		}
 		return fileDao.getUploadFile(map);
+	}
+
+	@Override
+	public List<BbsFileDown> getFileDownloadDetailList(Page page, String id, long uid) {
+		Map<String, Object> map = Maps.newHashMap();
+		map.put("page", page);
+		map.put("uuid", id);
+		if(uid != 0) {
+			map.put("uid", uid);
+		}
+		return fileDao.getFileDownloadDetailList(map);
 	}
 	
 }

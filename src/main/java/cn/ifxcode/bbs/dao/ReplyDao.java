@@ -3,6 +3,8 @@ package cn.ifxcode.bbs.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import cn.ifxcode.bbs.entity.Reply;
 
 public interface ReplyDao {
@@ -24,5 +26,9 @@ public interface ReplyDao {
 	public Reply getReplyByReplyId(long replyId);
 
 	public int delete(Map<String, Object> map);
+
+	public int updateReply(@Param("id")long id, @Param("content")String content);
+
+	public int restore(Map<String, Object> map);
 
 }

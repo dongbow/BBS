@@ -46,7 +46,7 @@ public class ClassifyServiceImpl implements ClassifyService {
 
 	@Override
 	public Classify getClassifyByCid(Integer boardId, Integer classId) {
-		List<Classify> classifies = this.getClassifyByBoardId(boardId);
+		List<Classify> classifies = getClassifyByBoardId(boardId);
 		for (Classify c : classifies) {
 			if(c.getClassId().equals(classId)) {
 				return c;
@@ -58,7 +58,7 @@ public class ClassifyServiceImpl implements ClassifyService {
 	@Override
 	public int saveOrUpdateCount(int bid, int cid) {
 		synchronized (this) {
-			List<Classify> classifies = this.getClassifyByBoardId(bid);
+			List<Classify> classifies = getClassifyByBoardId(bid);
 			for (Classify c : classifies) {
 				if(c.getClassId().equals(cid)) {
 					if(c.getClassTopicCount() == 0) {
@@ -78,7 +78,7 @@ public class ClassifyServiceImpl implements ClassifyService {
 
 	@Override
 	public List<Classify> getAllClassify(Page page) {
-		return this.getAllClassify(page, null, null, null, 0, -1, -1);
+		return getAllClassify(page, null, null, null, 0, -1, -1);
 	}
 
 	@Override
@@ -107,7 +107,7 @@ public class ClassifyServiceImpl implements ClassifyService {
 		List<Classify> classifies = classifyDao.getAllClassify(map);
 		for (Classify classify : classifies) {
 			classify.setClassCreateTime(DateUtils.dt14LongFormat(DateUtils.dt14FromStr(classify.getClassCreateTime())));
-			Classify c = this.getClassifyByCid(classify.getBoardId(), classify.getClassId());
+			Classify c = getClassifyByCid(classify.getBoardId(), classify.getClassId());
 			classify.setClassTopicCount(c.getClassTopicCount());
 		}
 		return classifies;

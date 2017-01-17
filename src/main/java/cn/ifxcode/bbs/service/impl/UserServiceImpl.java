@@ -108,7 +108,7 @@ public class UserServiceImpl implements UserService {
 		map.put("password", password);
 		User user = userDao.authLogin(map);
 		if(user != null) {
-			this.formatEmail(user);
+			formatEmail(user);
 		}
 		return user == null ? null : user;
 	}
@@ -182,7 +182,7 @@ public class UserServiceImpl implements UserService {
 			map.put("endtime", endTime);
 		}
 		map.put("isadmin", isAdmin);
-		return this.formatUser(userDao.getAllUser(map));
+		return formatUser(userDao.getAllUser(map));
 	}
 	
 	private List<User> formatUser(List<User> users) {
@@ -288,7 +288,7 @@ public class UserServiceImpl implements UserService {
 			logger.error("login timeout, name{}, password{}", userName, password);
 		}
 		if(user != null) {
-			this.formatEmail(user);
+			formatEmail(user);
 		}
 		return user == null ? null : user;
 	}
@@ -301,7 +301,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User getUserById(long userId) {
 		User user = userDao.getUserById(userId);
-		return user == null ? null : this.formatUser(user);
+		return user == null ? null : formatUser(user);
 	}
 	
 	public User getUserByIdToRedis(long userId) {
@@ -321,7 +321,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	private User formatUser(User user) {
-		this.formatEmail(user);
+		formatEmail(user);
 		if(StringUtils.isNotBlank(user.getUserInfo().getUserProvince())
 				&& StringUtils.isNotBlank(user.getUserInfo().getUserCity())) {
 			JSONArray array = JSONArray.parseArray(redisObjectMapService.get(RedisKeyUtils.getAreas(), JSONObject.class).getString("areas"));
@@ -345,13 +345,13 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User getUserByUserNickname(String nickname) {
 		User user = userDao.getUserByUserNickname(nickname);
-		return user == null ? null : this.formatUser(user);
+		return user == null ? null : formatUser(user);
 	}
 
 	@Override
 	public CookieBean checkIsLogin(HttpServletRequest request) {
 		synchronized (this) {
-			CookieBean cookieBean = this.getCookieBeanFromCookie(request);
+			CookieBean cookieBean = getCookieBeanFromCookie(request);
 			if(cookieBean != null) {
 				JSONObject object = redisObjectMapService.get(RedisKeyUtils.getUserInfo(cookieBean.getUser_id()), JSONObject.class);
 				if(object != null) {
@@ -456,7 +456,7 @@ public class UserServiceImpl implements UserService {
 		if(lock.tryLock()) {
 			try {
 				lock.lock();
-				long userId = this.getUserIdFromCookie(request);
+				long userId = getUserIdFromCookie(request);
 				Map<String, Object> map = Maps.newHashMap();
 				map.put("userId", userId);
 				map.put("needId1", needId1);
@@ -526,13 +526,13 @@ public class UserServiceImpl implements UserService {
 		if(lock.tryLock()) {
 			try {
 				lock.lock();
-				long userId = this.getUserIdFromCookie(request);
+				long userId = getUserIdFromCookie(request);
 				Map<String, Object> map = Maps.newHashMap();
 				map.put("sendUserId", userId);
 				map.put("recUserId", recUserId);
 				int result = friendsDao.validFriend(map);
 				if(result == 0) {
-					CookieBean bean = this.getCookieBeanFromCookie(request);
+					CookieBean bean = getCookieBeanFromCookie(request);
 					UserFriends friends = new UserFriends();
 					friends.setSendUserId(userId);
 					friends.setSendUserName(bean.getNick_name());
@@ -640,10 +640,10 @@ public class UserServiceImpl implements UserService {
 				privacy.setFriendIsPublic(ispublicfriend);
 				privacy.setReplyIsPublic(ispublicreply);
 				privacy.setTopicIsPublic(ispublictopic);
-				privacy.setUserId(this.getUserIdFromCookie(request));
+				privacy.setUserId(getUserIdFromCookie(request));
 				result = userDao.updateUserPrivacy(privacy);
 				if(result == BbsConstant.OK) {
-					this.updateUserToRedis(request, null, privacy);
+					updateUserToRedis(request, null, privacy);
 				}
 			}
 		} catch (Exception e) {
@@ -654,11 +654,11 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void updateUserToRedis(HttpServletRequest request, String mail, UserPrivacy privacy) {
-		long uid = this.getUserIdFromCookie(request);
-		User user = this.getUserByIdFromRedis(Long.toString(uid));
+		long uid = getUserIdFromCookie(request);
+		User user = getUserByIdFromRedis(Long.toString(uid));
 		if(StringUtils.isNotBlank(mail)) {
 			user.getUserAccess().setUserEmail(mail);
-			this.formatEmail(user);
+			formatEmail(user);
 		} else if (privacy != null) {
 			user.setUserPrivacy(privacy);
 		}
@@ -671,7 +671,7 @@ public class UserServiceImpl implements UserService {
 	public int vaildEmail(String omail, HttpServletRequest request) {
 		int result = 0;
 		try {
-			long uid = this.getUserIdFromCookie(request);
+			long uid = getUserIdFromCookie(request);
 			Map<String, Object> map = Maps.newConcurrentMap();
 			map.put("uid", uid);
 			map.put("email", omail);
@@ -684,7 +684,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int updateUserEmail(String nmail, HttpServletRequest request) {
-		long uid = this.getUserIdFromCookie(request);
+		long uid = getUserIdFromCookie(request);
 		return userDao.updateUserEmail(nmail, uid);
 	}
 
@@ -692,7 +692,7 @@ public class UserServiceImpl implements UserService {
 	public int vaildPassword(HttpServletRequest request, String opwd) {
 		int result = 0;
 		try {
-			long uid = this.getUserIdFromCookie(request);
+			long uid = getUserIdFromCookie(request);
 			Map<String, Object> map = Maps.newConcurrentMap();
 			map.put("uid", uid);
 			map.put("password", opwd);
@@ -705,13 +705,13 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int updatePassword(String npwd, HttpServletRequest request) {
-		long uid = this.getUserIdFromCookie(request);
+		long uid = getUserIdFromCookie(request);
 		return userDao.updatePassword(npwd, uid);
 	}
 
 	@Override
 	public String getNicknameFromCookie(HttpServletRequest request) {
-		return this.getCookieBeanFromCookie(request).getNick_name();
+		return getCookieBeanFromCookie(request).getNick_name();
 	}
 
 	@Override
