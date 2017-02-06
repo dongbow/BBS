@@ -24,4 +24,12 @@
 		order by back_time desc
 	</select>
 	
+	<select id="getBackUp" resultType="Backup">
+		select url from bbs_backup where id = #{id}
+	</select>
+	
+	<delete id="delete">
+		delete from bbs_backup where id = #{id}
+	</delete>
+	
 </mapper>

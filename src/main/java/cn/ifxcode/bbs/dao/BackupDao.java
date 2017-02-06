@@ -11,4 +11,8 @@ public interface BackupDao {
 
 	public List<Backup> getAllBacks(Map<String, Object> map);
 
+	public Backup getBackUp(String id);
+
+	public int delete(String id);
+
 }

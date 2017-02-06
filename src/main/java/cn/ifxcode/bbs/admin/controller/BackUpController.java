@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,6 +60,26 @@ public class BackUpController extends BaseController {
 			result = new Result(BbsConstant.OK, "备份成功");
 		} else {
 			result = new Result(BbsConstant.ERROR, "备份失败");
+		}
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/backup/delete", method = RequestMethod.POST)
+	public Result deleteBack(@RequestParam(value = "ids[]", required = false)String ids) {
+		Result result = null;
+		if(StringUtils.isNotBlank(ids)) {
+			try {
+				if(BbsConstant.OK == backupService.deleteBack(ids)) {
+					result = new Result(BbsConstant.OK, "删除成功");
+				} else {
+					result = new Result(BbsConstant.ERROR, "删除失败");
+				}
+			} catch (Exception e) {
+				result = new Result(BbsConstant.ERROR, e.getMessage());
+			}
+		} else {
+			result = new Result(BbsConstant.ERROR, "删除失败");
 		}
 		return result;
 	}

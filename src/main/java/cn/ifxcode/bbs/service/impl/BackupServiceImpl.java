@@ -10,6 +10,7 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.collect.Maps;
 
@@ -68,6 +69,29 @@ public class BackupServiceImpl implements BackupService {
 			map.put("endtime", endTime);
 		}
 		return backupDao.getAllBacks(map);
+	}
+
+	@Override
+	@Transactional
+	@SysLog(module = "系统备份", methods = "删除")
+	public int deleteBack(String ids) {
+		int result = 0;
+		String backIds[] = ids.split(",");
+		try {
+			for (String id : backIds) {
+				Backup backup = backupDao.getBackUp(id);
+				if(backup != null) {
+					backupDao.delete(id);
+					BackUpUtils.delete(backup.getUrl());
+				} else {
+					throw new RuntimeException("参数有误");
+				}
+			}
+			result = BbsConstant.OK;
+		} catch (Exception e) {
+			throw new RuntimeException("删除失败： error： {}", e);
+		}
+		return result;
 	}
 
 }

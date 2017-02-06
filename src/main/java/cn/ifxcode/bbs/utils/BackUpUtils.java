@@ -183,9 +183,17 @@ public class BackUpUtils {
 		}
 	}
 	
+	public static void delete(String url) {
+		File file = new File(url);
+		if(file.exists() && file.isFile()) {
+			file.delete();
+		}
+	}
+	
 	public static void main(String[] args) {
 		System.out.println(backupDB());
 		System.out.println(backupDB("懂博"));
 		//System.out.println(restore("F:\\backup\\bbs\\20161216\\dongbo.sql"));
 	}
+
 }

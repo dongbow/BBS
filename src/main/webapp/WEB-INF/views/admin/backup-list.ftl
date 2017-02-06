@@ -33,7 +33,7 @@
 	                	<div class="col-md-4 form-group">
 	            			<a class="btn btn-success btn-sm" type="button"><i class="fa fa-search"></i> 查找 </a>
 			            	<a class="btn btn-info btn-sm back-add" type="button" href="${path}/system/admin/backup/add"><i class="fa fa-plus"></i> 添加 </a>
-			            	<a class="btn btn-danger btn-sm" type="button"><i class="fa fa-trash-o"></i> 删除 </a>
+			            	<a class="btn btn-danger btn-sm data-delete" type="button" href="${path}/system/admin/backup/delete"><i class="fa fa-trash-o"></i> 删除 </a>
 	            		</div>
                 	</div>
                 </form>
@@ -57,7 +57,7 @@
 	                        		<#assign bid = page.pageSize * (page.pageNo - 1) + 1/>
 	                        		<#list backs as back>
 	                        			<tr>
-	                        				<th><input type="checkbox" data-id="${back.id}"></th>
+	                        				<th><input type="checkbox" data-id="${back.id}" class="data-check-id"></th>
 				                            <td class="numeric" data-title="ID">${bid}</td>
 				                            <td class="numeric" data-title="文件地址">${back.url}</td>
 				                            <td class="numeric" data-title="备份人">

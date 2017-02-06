@@ -14,5 +14,7 @@ public interface BackupService {
 	public List<Backup> searchBackups(Page page);
 	
 	public List<Backup> searchBackups(Page page, String startTime, String endTime);
+
+	public int deleteBack(String ids);
 	
 }
