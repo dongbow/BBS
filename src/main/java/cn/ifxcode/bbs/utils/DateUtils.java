@@ -27,8 +27,12 @@ public class DateUtils {
 		return dtlong14.format(date);
 	}
 
-	public static Date dt10FromStr(String date) throws ParseException {
-		return dt10.parse(date);
+	public static Date dt10FromStr(String date) {
+		try {
+			return dt10.parse(date);
+		} catch (ParseException e) {
+		}
+		return null;
 	}
 
 	public static String dt14FromDate(Date date) {

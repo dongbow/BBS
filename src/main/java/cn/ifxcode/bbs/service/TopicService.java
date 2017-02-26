@@ -67,4 +67,6 @@ public interface TopicService {
 
 	public int updateTopicTime(long tid, String time, String roleSign);
 
+	public int cancelHomeTopic(String ids, String roleSign);
+
 }

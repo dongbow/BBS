@@ -17,11 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
-
-
-
-
 import cn.ifxcode.bbs.bean.CookieBean;
 import cn.ifxcode.bbs.bean.Result;
 import cn.ifxcode.bbs.constant.BbsConstant;
@@ -156,6 +151,11 @@ public class SettingController extends BaseUserController{
 			result = new Result(BbsConstant.ERROR, "密码不能为空");
 		}
 		return result;
+	}
+	
+	@RequestMapping("/setting/profile/update/headimg")
+	public void updateHeadImg(String pic1) {
+		pic1.getBytes();
 	}
 	
 }

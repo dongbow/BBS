@@ -1,4 +1,4 @@
-<%-- <%@ page language="java" import="java.io.*,sun.misc.*,java.util.*,java.text.*" contentType="text/html; charset=utf-8"
+<%@ page language="java" import="java.io.*,sun.misc.*,java.util.*,java.text.*" contentType="text/html; charset=utf-8"
 pageEncoding="utf-8"%>
 <%@ page import="com.tsbbs.domain.User" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -44,4 +44,4 @@ pageEncoding="utf-8"%>
 	
 	out.println("{\"status\":1,\"picUrl\":\""+picUrl+"\"}"); //返回图片地址
 
-%> --%>
+%>

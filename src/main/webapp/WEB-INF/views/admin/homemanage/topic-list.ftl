@@ -41,7 +41,7 @@
                 		
 	                	<div class="col-md-4 form-group">
 	            			<a class="btn btn-success btn-sm" id="data-search" type="button" href="${path}/system/admin/home/topic/search"><i class="fa fa-search"></i> 查找 </a>
-	            			<a class="btn btn-info btn-sm" type="button"><i class="fa fa-random"></i> 批量取消首页 </a>
+	            			<a class="btn btn-info btn-sm qx-all" type="button" href="${path}/system/admin/home/topic/cancel" data-type="all"><i class="fa fa-random"></i> 批量取消首页 </a>
 	            		</div>
                 	</div>
                 </form>
@@ -68,7 +68,7 @@
 	                        	<#if topics??>
 	                        		<#list topics as topic>
 	                        			<tr>
-	                        				<th><input type="checkbox" data-id="${topic.topicId}"></th>
+	                        				<th><input type="checkbox" data-id="${topic.topicId}" class="data-check-id"></th>
 				                            <td data-title="ID">${topic.topicId}</td>
 				                            <td class="numeric" data-title="帖子标题">
 				                            	<a href="${path}/board/${topic.boardId}/topic/detail/${topic.topicId}" target="_blank" style="color:#428bca">${topic.topicTitle}</a>
@@ -84,7 +84,7 @@
 				                            	<a class="btn btn-link btn-xs topic-data" type="button" data-value="${topic.topicContent}"> 预览 </a>
 				                            </td>
 				                            <td class="numeric" data-title="操作">
-				                            	<a class="btn btn-default btn-xs" type="button"><i class="fa fa-random"></i> 取消首页 </a>
+				                            	<a class="btn btn-default btn-xs qx" type="button" data-id="${topic.topicId}" data-type="one" href="${path}/system/admin/home/topic/cancel"><i class="fa fa-random"></i> 取消首页 </a>
 				                            	<a class="btn btn-default btn-xs topic-time" type="button" href="${path}/system/admin/home/topic/time" data-id="${topic.topicId}"><i class="fa fa-edit"></i> 时间更改 </a>
 				                            </td>
 				                        </tr>

@@ -22,4 +22,15 @@
 			topic_is_global_top_end_time = #{topicIsGlobalTopEndTime}, topic_is_hot = #{topicIsHot}, topic_is_cream = #{topicIsCream} 
 		where topic_id = #{topicId}
 	</update>
+	
+	<update id="updateHomeTopicTime">
+		update bbs_topic_info set topic_is_home_end_time = #{time} where topic_id = #{tid} and topic_is_home = 1
+	</update>
+	
+	<update id="cancelHomeTopic">
+		update bbs_topic_info set topic_is_home = 0 and topic_is_home_end_time = null where topic_id in 
+		<foreach collection="topicIds" index="index" item="tid" open="(" separator="," close=")">  
+           	#{tid}   
+   		</foreach>
+	</update>
 </mapper>

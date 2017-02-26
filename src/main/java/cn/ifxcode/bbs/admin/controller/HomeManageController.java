@@ -25,6 +25,7 @@ import cn.ifxcode.bbs.service.HomeImageService;
 import cn.ifxcode.bbs.service.QuickNavigationService;
 import cn.ifxcode.bbs.service.RecommendService;
 import cn.ifxcode.bbs.service.TopicService;
+import cn.ifxcode.bbs.utils.DateUtils;
 import cn.ifxcode.bbs.utils.FormValidate;
 import cn.ifxcode.bbs.utils.ParamsBuildUtils;
 
@@ -295,6 +296,9 @@ public class HomeManageController extends BaseController {
 	@RequestMapping(value = "/topic/time", method = RequestMethod.GET)
 	public String toUpdateHomeTopicTime(@RequestParam(required = false)long tid, Model model) {
 		Topic topic = topicService.getTopicByTopicId(tid);
+		if(StringUtils.isNotBlank(topic.getTopicInfo().getTopicIsHomeEndTime())) {
+			topic.getTopicInfo().setTopicIsHomeEndTime(DateUtils.dt10FromDate(DateUtils.dt10FromStr(topic.getTopicInfo().getTopicIsHomeEndTime())));
+		}
 		model.addAttribute("topic", topic);
 		return "admin/homemanage/topic-time";
 	}
@@ -308,6 +312,22 @@ public class HomeManageController extends BaseController {
 			result = new Result(BbsConstant.OK, "修改成功");
 		} else {
 			result = new Result(BbsConstant.OK, "修改失败");
+		}
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/topic/cancel", method = RequestMethod.POST)
+	public Result cancelHomeTopic(@RequestParam(required = false, value = "ids[]")String ids) {
+		Result result = null;
+		if (StringUtils.isNotBlank(ids)) {
+			if (BbsConstant.OK == topicService.cancelHomeTopic(ids, RoleSign.ADMIN.getSign())) {
+				result = new Result(BbsConstant.OK, "取消成功");
+			} else {
+				result = new Result(BbsConstant.OK, "取消失败");
+			}
+		} else {
+			result = new Result(BbsConstant.OK, "取消失败");
 		}
 		return result;
 	}

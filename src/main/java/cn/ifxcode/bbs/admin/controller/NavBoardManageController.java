@@ -128,6 +128,12 @@ public class NavBoardManageController extends BaseController{
 		return "admin/navboardmanage/board-list";
 	}
 	
+//	@RequestMapping("/board/search")
+//	public String searchBoard(@RequestParam(value="page", required = false, defaultValue = "1")int p, 
+//			) {
+//		
+//	}
+	
 	@RequestMapping("/classify")
 	public String toClassify(@RequestParam(value="page", required = false, defaultValue = "1")int p,
 			HttpServletRequest request, Model model) {

@@ -648,4 +648,22 @@ public class TopicServiceImpl implements TopicService{
 		return result;
 	}
 
+	@Override
+	@Transactional
+	@SysLog(module = "首页管理", methods = "首页主题-取消首页")
+	public int cancelHomeTopic(String ids, String roleSign) {
+		int result = 0;
+		String[] topicIds = ids.split(",");
+		try {
+			Map<String, Object> map = Maps.newHashMap();
+			map.put("topicIds", topicIds);
+			if (topicIds.length == topicInfoDao.cancelHomeTopic(map)) {
+				result = BbsConstant.OK;
+			}
+		} catch (Exception e) {
+			logger.error("cancel topic home fail", e);
+		}
+		return result;
+	}
+
 }
