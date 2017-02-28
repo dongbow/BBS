@@ -98,10 +98,10 @@ public class ClassifyServiceImpl implements ClassifyService {
 		if(bid != 0) {
 			map.put("bid", bid);
 		}
-		if(status != 0) {
+		if(status != -1) {
 			map.put("status", status);
 		}
-		if(auth != 0) {
+		if(auth != -1) {
 			map.put("auth", auth);
 		}
 		List<Classify> classifies = classifyDao.getAllClassify(map);

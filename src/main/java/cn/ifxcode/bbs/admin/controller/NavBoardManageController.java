@@ -1,8 +1,11 @@
 package cn.ifxcode.bbs.admin.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cn.ifxcode.bbs.bean.Page;
 import cn.ifxcode.bbs.bean.Result;
 import cn.ifxcode.bbs.constant.BbsConstant;
+import cn.ifxcode.bbs.entity.Classify;
 import cn.ifxcode.bbs.entity.Navigation;
 import cn.ifxcode.bbs.service.BoardService;
 import cn.ifxcode.bbs.service.ClassifyService;
@@ -138,9 +142,26 @@ public class NavBoardManageController extends BaseController{
 	public String toClassify(@RequestParam(value="page", required = false, defaultValue = "1")int p,
 			HttpServletRequest request, Model model) {
 		Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
-		model.addAttribute("clas", classifyService.getAllClassify(page));
+		List<Classify> classifies = classifyService.getAllClassify(page);
+		model.addAttribute("clas", classifies);
 		model.addAttribute("boards", boardService.getAllBoards());
 		model.addAttribute("page", page);
+		return "admin/navboardmanage/classify-list";
+	}
+	
+	@RequestMapping("/classify/search")
+	public String searchClassify(@RequestParam(value="page", required = false, defaultValue = "1")int p,
+			String from, String to, String name, int bid, int status, int auth, 
+			HttpServletRequest request, Model model) {
+		Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
+		List<Classify> classifies = classifyService.getAllClassify(page, from, to, name, bid, status, auth);
+		model.addAttribute("clas", classifies);
+		model.addAttribute("boards", boardService.getAllBoards());
+		model.addAttribute("page", page);
+		ParamsBuildUtils.createModel(model, request);
+		if (StringUtils.isNotBlank(name)) {
+			model.addAttribute("name", name);
+		}
 		return "admin/navboardmanage/classify-list";
 	}
 	

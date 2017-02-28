@@ -97,4 +97,14 @@ public class Classify implements Serializable {
 		this.auth = auth;
 	}
 
+	@Override
+	public String toString() {
+		return "Classify [classId=" + classId + ", boardId=" + boardId
+				+ ", navId=" + navId + ", className=" + className
+				+ ", classStatus=" + classStatus + ", classColor=" + classColor
+				+ ", classSort=" + classSort + ", classTopicCount="
+				+ classTopicCount + ", classCreateTime=" + classCreateTime
+				+ ", auth=" + auth + "]";
+	}
+
 }
