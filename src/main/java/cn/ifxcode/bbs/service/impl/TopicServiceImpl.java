@@ -39,6 +39,7 @@ import cn.ifxcode.bbs.entity.TopicInfo;
 import cn.ifxcode.bbs.enumtype.BoardSign;
 import cn.ifxcode.bbs.enumtype.EGHistory;
 import cn.ifxcode.bbs.enumtype.TopicSign;
+import cn.ifxcode.bbs.logger.BmcLogAnno;
 import cn.ifxcode.bbs.logger.SysLog;
 import cn.ifxcode.bbs.service.BoardService;
 import cn.ifxcode.bbs.service.ClassifyService;
@@ -664,6 +665,19 @@ public class TopicServiceImpl implements TopicService{
 			logger.error("cancel topic home fail", e);
 		}
 		return result;
+	}
+
+	@Override
+	@BmcLogAnno(modules = "帖子待审核")
+	@Transactional
+	public int audit(String ids, int value) {
+		
+		try {
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return 0;
 	}
 
 }

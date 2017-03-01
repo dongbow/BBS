@@ -13,17 +13,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import cn.ifxcode.bbs.bean.CookieBean;
 import cn.ifxcode.bbs.bean.Page;
+import cn.ifxcode.bbs.bean.Result;
+import cn.ifxcode.bbs.constant.BbsConstant;
 import cn.ifxcode.bbs.entity.Board;
 import cn.ifxcode.bbs.entity.Navigation;
 import cn.ifxcode.bbs.entity.Reply;
 import cn.ifxcode.bbs.entity.Topic;
 import cn.ifxcode.bbs.entity.User;
+import cn.ifxcode.bbs.enumtype.Audit;
 import cn.ifxcode.bbs.service.BoardService;
 import cn.ifxcode.bbs.service.GeneralService;
 import cn.ifxcode.bbs.service.NavigationService;
@@ -110,6 +114,22 @@ public class BoardManagerController {
 			}
 		}
 		return "redirect:/tip?tip=board-notexists";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/audit/topic/pass", method = RequestMethod.POST)
+	public Result topicAuditPass(@RequestParam(value = "ids[]")String ids, HttpServletRequest request) {
+		Result result = null;
+		if (StringUtils.isBlank(ids)) {
+			return new Result(BbsConstant.ERROR, "请选择数据");
+		}
+		int row = topicService.audit(ids, Audit.PASS.getValue());
+		if (row == BbsConstant.OK) {
+			result = new Result(BbsConstant.OK, "通过成功");
+		} else {
+			result = new Result(BbsConstant.ERROR, "通过失败");
+		}
+		return result;
 	}
 	
 	@RequestMapping(value = {"/audit/reply", "/audit/reply/search"}, method = RequestMethod.GET)

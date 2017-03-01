@@ -9,7 +9,6 @@ import com.alibaba.fastjson.JSONObject;
 import cn.ifxcode.bbs.bean.Page;
 import cn.ifxcode.bbs.entity.Topic;
 import cn.ifxcode.bbs.entity.TopicData;
-import cn.ifxcode.bbs.enumtype.RoleSign;
 import cn.ifxcode.bbs.enumtype.TopicSign;
 
 public interface TopicService {
@@ -68,5 +67,7 @@ public interface TopicService {
 	public int updateTopicTime(long tid, String time, String roleSign);
 
 	public int cancelHomeTopic(String ids, String roleSign);
+
+	public int audit(String ids, int value);
 
 }
