@@ -37,4 +37,6 @@ public interface TopicDao {
 
 	public List<Topic> getTopicCloseReplyList(Map<String, Object> map);
 
+	public int restore(Map<String, Object> map);
+
 }

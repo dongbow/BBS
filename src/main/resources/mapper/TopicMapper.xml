@@ -326,4 +326,11 @@
 		</if>
 		order by t.topic_create_time desc
 	</select>
+	
+	<update id="restore" parameterType="map">
+		update bbs_topic set topic_status = 0 where topic_id in 
+		<foreach collection="topicIds" index="index" item="tid" open="(" separator="," close=")">
+			${tid}
+		</foreach>
+	</update>
 </mapper>

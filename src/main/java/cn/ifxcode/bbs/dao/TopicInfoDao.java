@@ -16,4 +16,6 @@ public interface TopicInfoDao {
 
 	public int cancelHomeTopic(Map<String, Object> map);
 
+	public int execAudit(Map<String, Object> map);
+
 }

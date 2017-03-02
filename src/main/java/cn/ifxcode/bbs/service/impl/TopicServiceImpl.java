@@ -36,6 +36,7 @@ import cn.ifxcode.bbs.entity.Board;
 import cn.ifxcode.bbs.entity.Topic;
 import cn.ifxcode.bbs.entity.TopicData;
 import cn.ifxcode.bbs.entity.TopicInfo;
+import cn.ifxcode.bbs.enumtype.Audit;
 import cn.ifxcode.bbs.enumtype.BoardSign;
 import cn.ifxcode.bbs.enumtype.EGHistory;
 import cn.ifxcode.bbs.enumtype.TopicSign;
@@ -671,13 +672,36 @@ public class TopicServiceImpl implements TopicService{
 	@BmcLogAnno(modules = "帖子待审核")
 	@Transactional
 	public int audit(String ids, int value) {
-		
+		String[] topicIds = ids.split(",");
 		try {
-			
+			Map<String, Object> map = Maps.newHashMap();
+			map.put("topicIds", topicIds);
+			map.put("check", value);
+			if (topicIds.length == topicInfoDao.execAudit(map)) {
+				return BbsConstant.OK;
+			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.error("audit topic fail, ids : {}", ids, e);
 		}
-		return 0;
+		return BbsConstant.ERROR;
+	}
+
+	@Override
+	@BmcLogAnno(modules = "帖子回收站")
+	@Transactional
+	public int restore(String ids, String sign) {
+		String[] topicIds = ids.split(",");
+		try {
+			Map<String, Object> map = Maps.newHashMap();
+			map.put("topicIds", topicIds);
+			topicDao.restore(map);
+			map.put("check", Audit.PASS.getValue());
+			topicInfoDao.execAudit(map);
+			return BbsConstant.OK;
+		} catch (Exception e) {
+			logger.error("resore topic fail, ids : {}", ids, e);
+		}
+		return BbsConstant.ERROR;
 	}
 
 }

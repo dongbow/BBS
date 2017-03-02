@@ -19,6 +19,7 @@
             			<a class="btn btn-danger btn-sm topic-delete" data-type="all" type="button" href="${path}/manage/bmc/audit/topic/delete"><i class="fa fa-search"></i> 批量删除 </a>
             		</div>
             	</div>
+            	<input type="hidden" name="bid" value="${bid!}" id="sign-bid">
             </form>
         </div>
         <section class="panel">

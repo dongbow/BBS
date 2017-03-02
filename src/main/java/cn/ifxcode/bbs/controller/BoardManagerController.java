@@ -22,12 +22,14 @@ import cn.ifxcode.bbs.bean.CookieBean;
 import cn.ifxcode.bbs.bean.Page;
 import cn.ifxcode.bbs.bean.Result;
 import cn.ifxcode.bbs.constant.BbsConstant;
+import cn.ifxcode.bbs.constant.BbsErrorCode;
 import cn.ifxcode.bbs.entity.Board;
 import cn.ifxcode.bbs.entity.Navigation;
 import cn.ifxcode.bbs.entity.Reply;
 import cn.ifxcode.bbs.entity.Topic;
 import cn.ifxcode.bbs.entity.User;
 import cn.ifxcode.bbs.enumtype.Audit;
+import cn.ifxcode.bbs.enumtype.RoleSign;
 import cn.ifxcode.bbs.service.BoardService;
 import cn.ifxcode.bbs.service.GeneralService;
 import cn.ifxcode.bbs.service.NavigationService;
@@ -104,6 +106,7 @@ public class BoardManagerController {
 					Page page = Page.newBuilder(p, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
 					List<Topic> topics = topicService.getTopicList(page, Integer.parseInt(bid));
 					model.addAttribute("page", page);
+					model.addAttribute("bid", bid);
 					model.addAttribute("topics", topics);
 					return "boardmanager/audit-topic";
 				} else {
@@ -118,16 +121,52 @@ public class BoardManagerController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/audit/topic/pass", method = RequestMethod.POST)
-	public Result topicAuditPass(@RequestParam(value = "ids[]")String ids, HttpServletRequest request) {
+	public Result topicAuditPass(@RequestParam(value = "ids[]")String ids, @RequestParam(required = false)String bid, 
+			HttpServletRequest request) {
 		Result result = null;
-		if (StringUtils.isBlank(ids)) {
-			return new Result(BbsConstant.ERROR, "请选择数据");
-		}
-		int row = topicService.audit(ids, Audit.PASS.getValue());
-		if (row == BbsConstant.OK) {
-			result = new Result(BbsConstant.OK, "通过成功");
+		if (StringUtils.isNotBlank(ids) && StringUtils.isNotBlank(bid) && FormValidate.number(bid)) {
+			if (boardService.isExists(bid)) {
+				if (generalService.isLocalBMCByBoardId(Integer.parseInt(bid), request)) {
+					int rc = topicService.audit(ids, Audit.PASS.getValue());
+					if (rc == BbsConstant.OK) {
+						result = new Result(BbsConstant.OK, "通过成功");
+					} else {
+						result = new Result(BbsConstant.ERROR, "通过失败");
+					}
+				} else {
+					result = new Result(BbsErrorCode.NOT_AUTH, BbsErrorCode.getDescribe(BbsErrorCode.NOT_AUTH));
+				}
+			} else {
+				result = new Result(BbsConstant.ERROR, "数据有误");
+			}
 		} else {
-			result = new Result(BbsConstant.ERROR, "通过失败");
+			result = new Result(BbsConstant.OK, "数据有误");	
+		}
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/audit/topic/delete", method = RequestMethod.POST)
+	public Result topicAuditRefault(@RequestParam(value = "ids[]")String ids, @RequestParam(required = false)String bid, 
+			HttpServletRequest request) {
+		Result result = null;
+		if (StringUtils.isNotBlank(ids) && StringUtils.isNotBlank(bid) && FormValidate.number(bid)) {
+			if (boardService.isExists(bid)) {
+				if (generalService.isLocalBMCByBoardId(Integer.parseInt(bid), request)) {
+					int rc = topicService.audit(ids, Audit.REFAUSE.getValue());
+					if (rc == BbsConstant.OK) {
+						result = new Result(BbsConstant.OK, "删除成功");
+					} else {
+						result = new Result(BbsConstant.ERROR, "删除失败");
+					}
+				} else {
+					result = new Result(BbsErrorCode.NOT_AUTH, BbsErrorCode.getDescribe(BbsErrorCode.NOT_AUTH));
+				}
+			} else {
+				result = new Result(BbsConstant.ERROR, "数据有误");
+			}
+		} else {
+			result = new Result(BbsConstant.OK, "数据有误");	
 		}
 		return result;
 	}
@@ -148,6 +187,7 @@ public class BoardManagerController {
 					}
 					List<Reply> replies = replyService.getReplyList(page, Integer.parseInt(bid), tid);
 					model.addAttribute("page", page);
+					model.addAttribute("bid", bid);
 					model.addAttribute("replies", replies);
 					return "boardmanager/audit-reply";
 				} else {
@@ -158,6 +198,58 @@ public class BoardManagerController {
 			}
 		}
 		return "redirect:/tip?tip=board-notexists";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/audit/reply/pass", method = RequestMethod.POST)
+	public Result auditReplyPass(@RequestParam(value = "ids[]")String ids, @RequestParam(required = false)String bid, 
+			HttpServletRequest request) {
+		Result result = null;
+		if (StringUtils.isNotBlank(ids) && StringUtils.isNotBlank(bid) && FormValidate.number(bid)) {
+			if (boardService.isExists(bid)) {
+				if (generalService.isLocalBMCByBoardId(Integer.parseInt(bid), request)) {
+					int rc = replyService.execAudit(ids, Audit.PASS.getValue());
+					if (rc == BbsConstant.OK) {
+						result = new Result(BbsConstant.OK, "通过成功");
+					} else {
+						result = new Result(BbsConstant.ERROR, "通过失败");
+					}
+				} else {
+					result = new Result(BbsErrorCode.NOT_AUTH, BbsErrorCode.getDescribe(BbsErrorCode.NOT_AUTH));
+				}
+			} else {
+				result = new Result(BbsConstant.ERROR, "数据有误");
+			}
+		} else {
+			result = new Result(BbsConstant.OK, "数据有误");	
+		}
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/audit/reply/delete", method = RequestMethod.POST)
+	public Result auditReplyRefause(@RequestParam(value = "ids[]")String ids, @RequestParam(required = false)String bid, 
+			HttpServletRequest request) {
+		Result result = null;
+		if (StringUtils.isNotBlank(ids) && StringUtils.isNotBlank(bid) && FormValidate.number(bid)) {
+			if (boardService.isExists(bid)) {
+				if (generalService.isLocalBMCByBoardId(Integer.parseInt(bid), request)) {
+					int rc = replyService.execAudit(ids, Audit.REFAUSE.getValue());
+					if (rc == BbsConstant.OK) {
+						result = new Result(BbsConstant.OK, "删除成功");
+					} else {
+						result = new Result(BbsConstant.ERROR, "删除失败");
+					}
+				} else {
+					result = new Result(BbsErrorCode.NOT_AUTH, BbsErrorCode.getDescribe(BbsErrorCode.NOT_AUTH));
+				}
+			} else {
+				result = new Result(BbsConstant.ERROR, "数据有误");
+			}
+		} else {
+			result = new Result(BbsConstant.OK, "数据有误");	
+		}
+		return result;
 	}
 	
 	@RequestMapping(value = {"/trash/topic", "/trash/topic/search"}, method = RequestMethod.GET)
@@ -182,6 +274,7 @@ public class BoardManagerController {
 					}
 					List<Topic> topics = topicService.getTopicList(page, null, null, userId, topicId, 0, Integer.parseInt(bid), 0, 1, 2);
 					model.addAttribute("page", page);
+					model.addAttribute("bid", bid);
 					model.addAttribute("topics", topics);
 					return "boardmanager/trash-topic";
 				} else {
@@ -192,6 +285,32 @@ public class BoardManagerController {
 			}
 		}
 		return "redirect:/tip?tip=board-notexists";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/trash/topic/restore", method = RequestMethod.POST)
+	public Result trashTopicRestore(@RequestParam(value = "ids[]")String ids, @RequestParam(required = false)String bid, 
+			HttpServletRequest request) {
+		Result result = null;
+		if (StringUtils.isNotBlank(ids) && StringUtils.isNotBlank(bid) && FormValidate.number(bid)) {
+			if (boardService.isExists(bid)) {
+				if (generalService.isLocalBMCByBoardId(Integer.parseInt(bid), request)) {
+					int rc = topicService.restore(ids, RoleSign.BMC.getSign());
+					if (rc == BbsConstant.OK) {
+						result = new Result(BbsConstant.OK, "恢复成功");
+					} else {
+						result = new Result(BbsConstant.ERROR, "恢复失败");
+					}
+				} else {
+					result = new Result(BbsErrorCode.NOT_AUTH, BbsErrorCode.getDescribe(BbsErrorCode.NOT_AUTH));
+				}
+			} else {
+				result = new Result(BbsConstant.ERROR, "数据有误");
+			}
+		} else {
+			result = new Result(BbsConstant.OK, "数据有误");	
+		}
+		return result;
 	}
 	
 	@RequestMapping(value = {"/trash/reply", "/trash/reply/search"}, method = RequestMethod.GET)
@@ -216,6 +335,7 @@ public class BoardManagerController {
 					}
 					List<Reply> replies = replyService.getReplyList(page, 1, 2, null, null, uid, tid, Integer.parseInt(bid));
 					model.addAttribute("page", page);
+					model.addAttribute("bid", bid);
 					model.addAttribute("replies", replies);
 					return "boardmanager/trash-reply";
 				} else {
@@ -226,6 +346,32 @@ public class BoardManagerController {
 			}
 		}
 		return "redirect:/tip?tip=board-notexists";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/trash/reply/restore", method = RequestMethod.POST)
+	public Result trashReplyRestore(@RequestParam(value = "ids[]")String ids, @RequestParam(required = false)String bid, 
+			HttpServletRequest request) {
+		Result result = null;
+		if (StringUtils.isNotBlank(ids) && StringUtils.isNotBlank(bid) && FormValidate.number(bid)) {
+			if (boardService.isExists(bid)) {
+				if (generalService.isLocalBMCByBoardId(Integer.parseInt(bid), request)) {
+					int rc = replyService.restore(ids, RoleSign.BMC.getSign());
+					if (rc == BbsConstant.OK) {
+						result = new Result(BbsConstant.OK, "恢复成功");
+					} else {
+						result = new Result(BbsConstant.ERROR, "恢复失败");
+					}
+				} else {
+					result = new Result(BbsErrorCode.NOT_AUTH, BbsErrorCode.getDescribe(BbsErrorCode.NOT_AUTH));
+				}
+			} else {
+				result = new Result(BbsConstant.ERROR, "数据有误");
+			}
+		} else {
+			result = new Result(BbsConstant.OK, "数据有误");	
+		}
+		return result;
 	}
 	
 	@RequestMapping(value = {"/closereply", "/closereply/search"}, method = RequestMethod.GET)

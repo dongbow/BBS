@@ -32,4 +32,6 @@ public interface ReplyService {
 
 	public int restore(String ids, String sign);
 
+	public int execAudit(String ids, int value);
+
 }

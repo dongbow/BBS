@@ -23,6 +23,7 @@ import cn.ifxcode.bbs.bean.Page;
 import cn.ifxcode.bbs.constant.BbsConstant;
 import cn.ifxcode.bbs.dao.ReplyDao;
 import cn.ifxcode.bbs.entity.Reply;
+import cn.ifxcode.bbs.enumtype.Audit;
 import cn.ifxcode.bbs.enumtype.BoardSign;
 import cn.ifxcode.bbs.enumtype.EGHistory;
 import cn.ifxcode.bbs.enumtype.TopicSign;
@@ -282,6 +283,8 @@ public class ReplyServiceImpl implements ReplyService{
 	}
 	
 	@Override
+	@Transactional
+	@BmcLogAnno(modules = "评论回收站")
 	@SysLog(module = "评论管理", methods = "回收站-恢复")
 	public int restore(String ids, String sign) {
 		synchronized (this) {
@@ -290,14 +293,33 @@ public class ReplyServiceImpl implements ReplyService{
 			try {
 				Map<String, Object> map = Maps.newHashMap();
 				map.put("replyIds", replyIds);
-				if(replyDao.restore(map) == replyIds.length) {
-					result = BbsConstant.OK;
-				}
+				replyDao.restore(map);
+				map.put("check", Audit.PASS.getValue());
+				replyDao.execAudit(map);
+				result = BbsConstant.OK;
 			} catch (Exception e) {
 				logger.error("restore reply fail", e);
 			}
 			return result;
 		}
+	}
+
+	@Override
+	@BmcLogAnno(modules = "评论待审核")
+	@Transactional
+	public int execAudit(String ids, int value) {
+		String[] replyIds = ids.split(",");
+		try {
+			Map<String, Object> map = Maps.newHashMap();
+			map.put("replyIds", replyIds);
+			map.put("check", value);
+			if (replyIds.length == replyDao.execAudit(map)) {
+				return BbsConstant.OK;
+			}
+		} catch (Exception e) {
+			logger.error("audit reply fail, ids : {}", ids, e);
+		}
+		return BbsConstant.ERROR;
 	}
 
 }

@@ -99,4 +99,11 @@
 		</foreach>
 	</update>
 	
+	<update id="execAudit" parameterType="map">
+		update bbs_reply set reply_is_check = #{check} where reply_status = 0 and reply_id in 
+		<foreach collection="replyIds" index="index" item="replyId" open="(" separator="," close=")">
+			#{replyId}
+		</foreach>
+	</update>
+	
 </mapper>

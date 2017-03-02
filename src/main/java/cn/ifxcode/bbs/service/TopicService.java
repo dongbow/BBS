@@ -70,4 +70,6 @@ public interface TopicService {
 
 	public int audit(String ids, int value);
 
+	public int restore(String ids, String sign);
+
 }

@@ -31,4 +31,6 @@ public interface ReplyDao {
 
 	public int restore(Map<String, Object> map);
 
+	public int execAudit(Map<String, Object> map);
+
 }
