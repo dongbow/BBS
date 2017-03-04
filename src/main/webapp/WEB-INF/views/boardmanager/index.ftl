@@ -62,7 +62,7 @@
                         <a class="J_menuItem" href="${path}/manage/bmc/user/notspeak"><i class="fa fa-magic"></i> <span class="nav-label">禁言用户</span></a>
                     </li>
 					<li>
-                        <a class="J_menuItem" href="${path}/manage/bmc/log"><i class="fa fa-magic"></i> <span class="nav-label">操作日志</span></a>
+                        <a class="J_menuItem" href="${path}/manage/bmc/option"><i class="fa fa-magic"></i> <span class="nav-label">操作日志</span></a>
                     </li>
                 </ul>
             </div>

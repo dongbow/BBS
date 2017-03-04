@@ -72,4 +72,6 @@ public interface TopicService {
 
 	public int restore(String ids, String sign);
 
+	public int openReply(String ids, String sign);
+
 }

@@ -98,4 +98,8 @@ public class ReplyController extends BaseUserController{
 		return "redirect:/tip?tip=reply-notexists";
 	}
 	
+	public String doUpdateReply() {
+		return null;
+	}
+	
 }

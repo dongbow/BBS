@@ -704,4 +704,20 @@ public class TopicServiceImpl implements TopicService{
 		return BbsConstant.ERROR;
 	}
 
+	@Override
+	@Transactional
+	@BmcLogAnno(modules = "开启帖子回复")
+	public int openReply(String ids, String sign) {
+		String[] topicIds = ids.split(",");
+		try {
+			Map<String, Object> map = Maps.newHashMap();
+			map.put("topicIds", topicIds);
+			topicInfoDao.openReply(map);
+			return BbsConstant.OK;
+		} catch (Exception e) {
+			logger.error("open topic reply fail, ids : {}", ids, e);
+		}
+		return BbsConstant.ERROR;
+	}
+
 }

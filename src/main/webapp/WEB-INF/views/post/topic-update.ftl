@@ -58,7 +58,7 @@
 		        <div class="bbs-upload">
 		        	<div class="file-btns">
 		        		<a class="btn file-btn" href="javascript:;">上传附件</a>
-		        		<button>发表帖子</button>
+		        		<button>保存帖子</button>
 		        	</div>
 		        	<div class="upload-desc">
 		        		<p>附件支持exe|zip|rar|msi|png|jpg|jpeg|gif|bmp|doc|docx|xls|xlsx|ppt|pptx|txt|jar|md|sql|java|pdf|psd，大小50M以内</p>

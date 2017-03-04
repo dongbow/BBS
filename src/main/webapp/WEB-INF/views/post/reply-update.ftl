@@ -21,7 +21,7 @@
 			</div>
 		</div>
 		<div id="ftopic_editor">
-	        <form action="${path}/board/${pboard.boardId}/reply/update" method="post" id="postForm" onsubmit="return validate();" style="padding-top:20px">
+	        <form action="${path}/board/${pboard.boardId}/reply/update" method="post" id="postForm" style="padding-top:20px">
 				<textarea id="editor" name="tcontent" rows="10" cols="1">
 					<#noescape>${reply.replyContent}</#noescape>
 				</textarea>
@@ -34,7 +34,7 @@
 		        <div class="bbs-upload">
 		        	<div class="file-btns">
 		        		<a class="btn file-btn" href="javascript:;">上传附件</a>
-		        		<button>发表帖子</button>
+		        		<button>保存回复</button>
 		        	</div>
 		        	<div class="upload-desc">
 		        		<p>附件支持exe|zip|rar|msi|png|jpg|jpeg|gif|bmp|doc|docx|xls|xlsx|ppt|pptx|txt|jar|md|sql|java|pdf|psd，大小50M以内</p>
@@ -63,7 +63,7 @@
      <script type="text/javascript" src="${path}/resources/js/jquery/jquery.form.js"></script>
     <script type="text/javascript" src="${path}/resources/js/shCore.js"></script>
 	<script type="text/javascript" src="${path}/resources/js/syntaxhighlighter.js"></script>
-	<script type="text/javascript" src="${path}/resources/js/post.js"></script>
+	<script type="text/javascript" src="${path}/resources/js/post-reply.js"></script>
 	<script type="text/javascript" src="${path}/resources/static/ckeditor4/ckeditor.js"></script>
     <script type="text/javascript">
 	    $(function () {

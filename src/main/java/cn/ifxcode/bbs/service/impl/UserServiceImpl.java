@@ -50,12 +50,15 @@ import cn.ifxcode.bbs.enumtype.BoardSign;
 import cn.ifxcode.bbs.enumtype.EGHistory;
 import cn.ifxcode.bbs.enumtype.Favorite;
 import cn.ifxcode.bbs.enumtype.TopicSign;
+import cn.ifxcode.bbs.logger.BmcLogAnno;
+import cn.ifxcode.bbs.logger.SysLog;
 import cn.ifxcode.bbs.service.BoardService;
 import cn.ifxcode.bbs.service.GoldExperienceService;
 import cn.ifxcode.bbs.service.TopicService;
 import cn.ifxcode.bbs.service.UserService;
 import cn.ifxcode.bbs.utils.CookieUtils;
 import cn.ifxcode.bbs.utils.DateUtils;
+import cn.ifxcode.bbs.utils.FormValidate;
 import cn.ifxcode.bbs.utils.GetRemoteIpUtil;
 import cn.ifxcode.bbs.utils.JsonUtils;
 import cn.ifxcode.bbs.utils.MD5Utils;
@@ -766,6 +769,41 @@ public class UserServiceImpl implements UserService {
 			user.getUserAccess().setUserCreateTime(DateUtils.dt14LongFormat(DateUtils.dt14FromStr(user.getUserAccess().getUserCreateTime())));
 		}
 		return users;
+	}
+
+	@Override
+	@BmcLogAnno(modules = "禁言用户")
+	@SysLog(module = "系统管理", methods = "用户管理-禁言")
+	@Transactional
+	public int speak(String ids, int speak, String sign) {
+		String[] userIds = ids.split(",");
+		try {
+			Map<String, Object> map = Maps.newHashMap();
+			map.put("userIds", userIds);
+			map.put("speak", speak);
+			userDao.speak(map);
+			for (int i = 0; i < userIds.length; i++) {
+				if (FormValidate.number(userIds[i])) {
+					User user = getUserByIdFromRedis(userIds[i]);
+					if (user != null) {
+						refreshUser(Long.parseLong(userIds[i]));
+					}
+				}
+			}
+			return BbsConstant.OK;
+		} catch (Exception e) {
+			logger.error("user speak fail", e);
+		}
+		return BbsConstant.ERROR;
+	}
+	
+	public void refreshUser(long uid) {
+		User user = getUserByIdToRedis(uid);
+		if (user != null) {
+			JSONObject object = new JSONObject(true);
+			object.put("user", JSON.toJSONString(user));
+			redisObjectMapService.save(RedisKeyUtils.getUserInfo(user.getUserAccess().getUserId()), object, JSONObject.class);
+		}
 	}
 
 }

@@ -23,6 +23,7 @@ import cn.ifxcode.bbs.bean.Page;
 import cn.ifxcode.bbs.bean.Result;
 import cn.ifxcode.bbs.constant.BbsConstant;
 import cn.ifxcode.bbs.constant.BbsErrorCode;
+import cn.ifxcode.bbs.entity.BmcLog;
 import cn.ifxcode.bbs.entity.Board;
 import cn.ifxcode.bbs.entity.Navigation;
 import cn.ifxcode.bbs.entity.Reply;
@@ -30,9 +31,11 @@ import cn.ifxcode.bbs.entity.Topic;
 import cn.ifxcode.bbs.entity.User;
 import cn.ifxcode.bbs.enumtype.Audit;
 import cn.ifxcode.bbs.enumtype.RoleSign;
+import cn.ifxcode.bbs.enumtype.Speak;
 import cn.ifxcode.bbs.service.BoardService;
 import cn.ifxcode.bbs.service.GeneralService;
 import cn.ifxcode.bbs.service.NavigationService;
+import cn.ifxcode.bbs.service.OperationLogService;
 import cn.ifxcode.bbs.service.ReplyService;
 import cn.ifxcode.bbs.service.TopicService;
 import cn.ifxcode.bbs.service.UserService;
@@ -67,6 +70,9 @@ public class BoardManagerController {
 	
 	@Resource
 	private RedisObjectMapService redisObjectMapService;
+	
+	@Resource
+	private OperationLogService operationLogService;
 	
 	@RequestMapping("/bcm")
 	public String bcm() {
@@ -390,6 +396,7 @@ public class BoardManagerController {
 					}
 					List<Topic> topics = topicService.getTopicCloseReplyList(page, tid, 0, Integer.parseInt(bid));
 					model.addAttribute("page", page);
+					model.addAttribute("bid", bid);
 					model.addAttribute("topics", topics);
 					return "boardmanager/notreply";
 				} else {
@@ -400,6 +407,32 @@ public class BoardManagerController {
 			}
 		}
 		return "redirect:/tip?tip=board-notexists";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/closereply/open", method = RequestMethod.POST)
+	public Result openReply(@RequestParam(value = "ids[]")String ids, @RequestParam(required = false)String bid, 
+			HttpServletRequest request) {
+		Result result = null;
+		if (StringUtils.isNotBlank(ids) && StringUtils.isNotBlank(bid) && FormValidate.number(bid)) {
+			if (boardService.isExists(bid)) {
+				if (generalService.isLocalBMCByBoardId(Integer.parseInt(bid), request)) {
+					int rc = topicService.openReply(ids, RoleSign.BMC.getSign());
+					if (rc == BbsConstant.OK) {
+						result = new Result(BbsConstant.OK, "开启成功");
+					} else {
+						result = new Result(BbsConstant.ERROR, "开启失败");
+					}
+				} else {
+					result = new Result(BbsErrorCode.NOT_AUTH, BbsErrorCode.getDescribe(BbsErrorCode.NOT_AUTH));
+				}
+			} else {
+				result = new Result(BbsConstant.ERROR, "数据有误");
+			}
+		} else {
+			result = new Result(BbsConstant.OK, "数据有误");	
+		}
+		return result;
 	}
 	
 	@RequestMapping(value = {"/user/notspeak", "/user/notspeak/search"}, method = RequestMethod.GET)
@@ -424,6 +457,43 @@ public class BoardManagerController {
 		model.addAttribute("page", page);
 		model.addAttribute("users", users);
 		return "boardmanager/notspeak";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/notspeak/open", method = RequestMethod.POST)
+	public Result openSpeak(@RequestParam(value = "ids[]")String ids) {
+		Result result = null;
+		if (StringUtils.isBlank(ids)) {
+			return new Result(BbsConstant.ERROR, "参数错误");
+		}
+		int row = userService.speak(ids, Speak.OPEN.getValue(), RoleSign.BMC.getSign());
+		if (row == BbsConstant.OK) {
+			result = new Result(BbsConstant.OK, "成功");
+		} else {
+			result = new Result(BbsConstant.ERROR, "失败");
+		}
+		return result;
+	}
+	
+	@RequestMapping(value = {"/option", "/option/search"})
+	public String options(@RequestParam(value = "page", required = false, defaultValue = "1")String pageNo, 
+			@RequestParam(required = false)String from, @RequestParam(required = false)String to, 
+			HttpServletRequest request, Model model) {
+		int pno = 1;
+		if(FormValidate.number(pageNo)) {
+			pno = Integer.parseInt(pageNo);
+		}
+		Page page = Page.newBuilder(pno, DEFAULT_PAGE_SIZE, ParamsBuildUtils.createUrl(request));
+		List<BmcLog> logs = operationLogService.getBMClog(from, to, page);
+		model.addAttribute("page", page);
+		model.addAttribute("logs", logs);
+		if(StringUtils.isNotBlank(from)) {
+			model.addAttribute("from", from);
+		}
+		if(StringUtils.isNotBlank(to)) {
+			model.addAttribute("to", to);
+		}
+		return "boardmanager/options";
 	}
 	
 }

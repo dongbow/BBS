@@ -18,4 +18,6 @@ public interface TopicInfoDao {
 
 	public int execAudit(Map<String, Object> map);
 
+	public int openReply(Map<String, Object> map);
+
 }

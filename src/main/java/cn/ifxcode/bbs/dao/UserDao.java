@@ -56,4 +56,6 @@ public interface UserDao {
 
 	public List<User> getAllNotTalkUser(Map<String, Object> map);
 
+	public int speak(Map<String, Object> map);
+
 }

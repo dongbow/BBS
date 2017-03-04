@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 import com.google.common.collect.Maps;
 
 import cn.ifxcode.bbs.bean.Page;
+import cn.ifxcode.bbs.dao.BmcLogDao;
 import cn.ifxcode.bbs.dao.SystemLogDao;
+import cn.ifxcode.bbs.entity.BmcLog;
 import cn.ifxcode.bbs.entity.SystemLog;
 import cn.ifxcode.bbs.service.OperationLogService;
 
@@ -20,6 +22,9 @@ public class OperationLogServiceImpl implements OperationLogService {
 
 	@Resource
 	private SystemLogDao systemLogDao;
+	
+	@Resource
+	private BmcLogDao bmcLogDao;
 	
 	@Override
 	public List<SystemLog> getAllOperationLog(Page page, String startTime,
@@ -42,6 +47,19 @@ public class OperationLogServiceImpl implements OperationLogService {
 			map.put("status", status);
 		}
 		return systemLogDao.getAllOperationLog(map);
+	}
+
+	@Override
+	public List<BmcLog> getBMClog(String startTime, String endTime, Page page) {
+		Map<String, Object> map = Maps.newHashMap();
+		map.put("page", page);
+		if(StringUtils.isNotBlank(startTime)) {
+			map.put("starttime", startTime);
+		}
+		if(StringUtils.isNotBlank(endTime)) {
+			map.put("endtime", endTime);
+		}
+		return bmcLogDao.getLogs(map);
 	}
 
 }

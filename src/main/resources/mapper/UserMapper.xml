@@ -238,4 +238,11 @@
 		order by u.user_id 
 	</select>
 
+	<update id="speak" parameterType="map">
+		update user_access set user_is_speak = #{speak} where user_id in 
+		<foreach collection="userIds" index="index" item="uid" open="(" separator="," close=")">  
+			#{uid}
+		</foreach>
+	</update>
+
 </mapper>
