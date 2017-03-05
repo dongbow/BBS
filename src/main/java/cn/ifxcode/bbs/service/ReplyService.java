@@ -28,7 +28,9 @@ public interface ReplyService {
 
 	public int deleteReply(String ids, String reason, String role);
 
-	public int updateReply(long id, String content);
+	public int updateReplyNotLog(long id, String content, HttpServletRequest request);
+	
+	public int updateReply(long id, String content, HttpServletRequest request);
 
 	public int restore(String ids, String sign);
 

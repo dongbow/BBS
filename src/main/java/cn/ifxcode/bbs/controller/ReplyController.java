@@ -98,8 +98,28 @@ public class ReplyController extends BaseUserController{
 		return "redirect:/tip?tip=reply-notexists";
 	}
 	
-	public String doUpdateReply() {
-		return null;
+	@RequestMapping(value = "/board/{bid:\\d+}/reply/update", method = RequestMethod.POST)
+	public String doUpdateReply(HttpServletRequest request, @PathVariable("bid")int boardId, 
+			@RequestParam(value = "rid", required = false)String replyId, 
+			@RequestParam(value = "tcontent", required = false)String content, Model model) {
+		if (FormValidate.stringUtils(replyId, content) && FormValidate.number(replyId)) {
+			Reply reply = replyService.getReplyByReplyId(Long.parseLong(replyId));
+			if (reply != null) {
+				Topic topic = topicService.getTopicByTopicId(reply.getTopicId());
+				if((topic.getTopicStatus() == 0 && topic.getTopicInfo().getTopicIsCheck() == 1 
+						&& generalService.checkUpdate(request, reply.getUserId())) || generalService.authCheck(request)) {
+					int row = replyService.updateReplyNotLog(Long.parseLong(replyId), content, request);
+					if (row == BbsConstant.OK) {
+						return "redirect:/board/" + topic.getBoardId()+ "/topic/detail/" + topic.getTopicId();
+					} else {
+						return "redirect:/tip?tip=reply-fail";
+					}
+				} else {
+					return "redirect:/tip?tip=noauth";
+				}
+			}
+		}
+		return "redirect:/tip?tip=reply-notexists";
 	}
 	
 }

@@ -1,5 +1,6 @@
 package cn.ifxcode.bbs.dao;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -27,7 +28,8 @@ public interface ReplyDao {
 
 	public int delete(Map<String, Object> map);
 
-	public int updateReply(@Param("id")long id, @Param("content")String content);
+	public int updateReply(@Param("id")long id, @Param("content")String content, 
+			@Param("userName")String userName, @Param("date")Date date);
 
 	public int restore(Map<String, Object> map);
 

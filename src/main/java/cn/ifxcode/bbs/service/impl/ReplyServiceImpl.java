@@ -264,18 +264,23 @@ public class ReplyServiceImpl implements ReplyService{
 	}
 
 	@Override
-	@SysLog(module = "评论管理", methods = "评论-编辑")
-	public int updateReply(long id, String content) {
+	public int updateReplyNotLog(long id, String content, HttpServletRequest request) {
 		int result = 0;
 		try {
+			String userName = userService.getNicknameFromCookie(request);
 			content = HtmlUtils.htmlEscape(content);
-			if(replyDao.updateReply(id, content) == BbsConstant.OK) {
+			if(replyDao.updateReply(id, content, userName, new Date()) == BbsConstant.OK) {
 				result = BbsConstant.OK;
 			}
 		} catch (Exception e) {
 			logger.error("update reply error", e);
 		}
 		return result;
+	}
+	
+	@SysLog(module = "评论管理", methods = "评论-编辑")
+	public int updateReply(long id, String content, HttpServletRequest request) {
+		return updateReplyNotLog(id, content, request);
 	}
 
 	public int restoreBMC(String ids, String sign) {

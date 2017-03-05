@@ -81,10 +81,10 @@ public class ReplyManageController extends BaseController {
 	
 	@ResponseBody
 	@RequestMapping(value = "update", method = RequestMethod.POST)
-	public Result updateReply(long id, String content) {
+	public Result updateReply(long id, String content, HttpServletRequest request) {
 		Result result = null;
 		if(StringUtils.isNotBlank(content)) {
-			if(replyService.updateReply(id, content) == BbsConstant.OK) {
+			if(replyService.updateReply(id, content, request) == BbsConstant.OK) {
 				result = new Result(BbsConstant.OK, "修改成功");
 			} else {
 				result = new Result(BbsConstant.ERROR, "修改失败");

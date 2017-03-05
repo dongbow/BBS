@@ -89,7 +89,7 @@
 	</update>
 	
 	<update id="updateReply">
-		update bbs_reply set reply_content = #{content} where reply_id = #{id}
+		update bbs_reply set reply_content = #{content}, reply_update_user = #{userName}, reply_update_time = #{date} where reply_id = #{id}
 	</update>
 	
 	<update id="restore" parameterType="map">

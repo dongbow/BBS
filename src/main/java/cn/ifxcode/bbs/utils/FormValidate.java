@@ -21,7 +21,7 @@ public class FormValidate {
 	
 	public static boolean stringUtils(String... str) {
 		for (String s : str) {
-			if(StringUtils.isEmpty(s)) {
+			if(StringUtils.isBlank(s)) {
 				return false;
 			}
 		}
