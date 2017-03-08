@@ -124,3 +124,22 @@ function tmove() {
 function tdel() {
 	
 }
+
+function mDelete(id) {
+	var url = root + '/post/topic/report?uid=' + uid + '&tid=' + tid;
+	$.get(url, function(result) {
+		if(result.rc != undefined && result.rc.rc == 9001){
+			loginDialog();
+			return false;
+		} else {
+			$('.bbs-report').html(result);
+			$('#checktip').css({
+				'top' : ($(window).height() - $('#checktip').height())/2 + 'px',
+				'left': ($(window).width() - $('#checktip').width())/2+'px'
+			});
+			$('#checktip p').css('margin-top', '0');
+			$('.report-btn').attr('onclick', 'doReport(' + uid + ',' + tid + ',' + rid + ',' + floor + ');');
+			$('.bbs-report').show();
+		}
+	});
+}

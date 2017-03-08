@@ -15,6 +15,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -196,6 +197,20 @@ public class FileServiceImpl implements FileService {
 		return data + qiniuCompress;
 	}
 
+	public String uploadHeadImg(String pic) {
+		String qiniuFileName = UUID.randomUUID().toString().replace("-", "") + ".jpg";
+		try {
+			byte[] file = new Base64().decode(pic);
+			Response response = uploadManager.put(file, qiniuFileName, auth.uploadToken(bucket));
+			if (response.isOK()) {
+				return doMain + "/" + qiniuFileName;
+			}
+		} catch (QiniuException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public JSONArray uploadFile(HttpServletRequest request) {
 		return uploadFile(request, null);
 	}

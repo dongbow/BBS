@@ -58,4 +58,12 @@ public interface UserDao {
 
 	public int speak(Map<String, Object> map);
 
+	public void updateHeadImg(@Param("userId")long userId, @Param("path")String path);
+
+	public int vaildNickname(String nickName);
+
+	public int updateNickname(@Param("nickName")String nickName, @Param("uid")long uid);
+
+	public int updateUserInfo(UserInfo userInfo);
+
 }

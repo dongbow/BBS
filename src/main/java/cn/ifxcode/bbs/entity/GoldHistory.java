@@ -76,7 +76,7 @@ public class GoldHistory implements Serializable {
 		this.goldFrom = goldFrom;
 	}
 
-	public String getGolDesc() {
+	public String getGoldDesc() {
 		return goldDesc;
 	}
 

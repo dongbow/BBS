@@ -18,6 +18,8 @@ public interface FileService {
 	
 	public String uploadPicture(HttpServletRequest request, String fileName);
 	
+	public String uploadHeadImg(String pic);
+	
 	public JSONArray uploadFile(HttpServletRequest request);
 	
 	public JSONArray uploadFile(HttpServletRequest request, String fileName);

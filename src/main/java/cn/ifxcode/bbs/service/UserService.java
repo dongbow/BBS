@@ -11,6 +11,7 @@ import cn.ifxcode.bbs.entity.User;
 import cn.ifxcode.bbs.entity.UserFavorite;
 import cn.ifxcode.bbs.entity.UserForget;
 import cn.ifxcode.bbs.entity.UserFriends;
+import cn.ifxcode.bbs.entity.UserInfo;
 import cn.ifxcode.bbs.entity.UserPrivacy;
 import cn.ifxcode.bbs.entity.UserValue;
 
@@ -94,5 +95,15 @@ public interface UserService {
 	public List<User> getAllNotTalkUser(Page page, long uid, String nickname);
 
 	public int speak(String ids, int speak, String sign);
+
+	public void updateHeadImg(HttpServletRequest request, String path);
+	
+	public void refreshUser(long uid);
+
+	public boolean validNickname(String nickName);
+
+	public int updateNickname(String nickName, long uid);
+
+	public int updateUserInfo(UserInfo userInfo);
 	
 }

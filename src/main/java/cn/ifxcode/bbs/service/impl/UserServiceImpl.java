@@ -806,4 +806,33 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
+	@Override
+	public void updateHeadImg(HttpServletRequest request, String path) {
+		long userId = getUserIdFromCookie(request);
+		userDao.updateHeadImg(userId, path);
+		refreshUser(userId);
+	}
+
+	@Override
+	public boolean validNickname(String nickName) {
+		if (StringUtils.isBlank(nickName)) {
+			return false;
+		}
+		if (!FormValidate.nickname(nickName)) {
+			return false;
+		}
+		int row = userDao.vaildNickname(nickName);
+		return row == 0;
+	}
+
+	@Override
+	public int updateNickname(String nickName, long uid) {
+		return userDao.updateNickname(nickName, uid);
+	}
+
+	@Override
+	public int updateUserInfo(UserInfo userInfo) {
+		return userDao.updateUserInfo(userInfo);
+	}
+
 }

@@ -39,7 +39,7 @@
 				<div class="rhmct">
 					<#if type == "info">
 						<div class="cpcont">
-							<form action="${path}/home/account/update" id="upform" name="upform">
+							<form id="upform" method="post" class="profile-form" action="${path}/home/setting/profile/update/info">
 								<table>
 									<tbody>
 										<tr>
@@ -111,8 +111,8 @@
 										</tr>
 									</tbody>
 								</table>
-								<button id="upbtn">保存</button>
 							</form>
+							<button id="upbtn" class="profile-btn">保存</button>
 						</div>
 					<#elseif type == "headimg">
 						<div class="cpcont">
@@ -124,7 +124,7 @@
 									<PARAM NAME=quality VALUE=high>
 									<PARAM NAME=bgcolor VALUE=#FFFFFF>
 									<EMBED src="${path}/resources/static/avatar/avatar.swf" quality=high bgcolor=#FFFFFF WIDTH="650" HEIGHT="450" 
-											wmode="transparent" flashVars="imgUrl=${user.userInfo.userHeadImg}&uploadUrl=${path}/resources/static/avatar/upfile.jsp&uploadSrc=false"
+											wmode="transparent" flashVars="imgUrl=${user.userInfo.userHeadImg}&uploadUrl=${path}/home/setting/profile/update/headimg&uploadSrc=false"
 										NAME="myMovieName" ALIGN="" TYPE="application/x-shockwave-flash" allowScriptAccess="always"
 										PLUGINSPAGE="http://www.macromedia.com/go/getflashplayer">
 									</EMBED>
@@ -264,6 +264,7 @@
 </script>
 <script type="text/javascript" src="${path}/resources/js/home.js" ></script>
 <script type="text/javascript" src="${path}/resources/js/jquery/jquery.md5.js"></script>
+<script type="text/javascript" src="${path}/resources/js/jquery/jquery.form.js"></script>
 <script type="text/javascript" src="${path}/resources/js/account/inputmail.js"></script>
 <script type="text/javascript" src="${path}/resources/static/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript" src="${path}/resources/static/avatar/avatar.js"></script>

@@ -244,5 +244,23 @@
 			#{uid}
 		</foreach>
 	</update>
+	
+	<update id="updateHeadImg">
+		update user_info set user_head_img = #{path} where user_id = #{userId}
+	</update>
+
+	<update id="updateUserInfo" parameterType="UserInfo">
+		update user_info set user_birth = #{userBirth}, user_sex = #{userSex}, user_province = #{userProvince},
+			user_city = #{userCity}, user_like = #{userLike}, user_sign = #{userSign}, user_qq = #{userQq}, 
+			user_phone = #{userPhone} where user_id = #{userId}
+	</update>
+	
+	<update id="updateNickname">
+		update user_access set user_nickname = #{nickName} where user_id = #{uid}
+	</update>
+	
+	<select id="vaildNickname" resultType="Integer">
+		select count(*) from user_access where user_nickname = #{nickName} 
+	</select>
 
 </mapper>

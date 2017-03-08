@@ -93,6 +93,8 @@ $(function() {
 	$('.mailbutton').bind('click', upEmail);
 	
 	$('.btn-pwd').bind('click', upPwd);
+	
+	$('.profile-btn').bind('click', upProfile);
 });
 
 function favCancle(id) {
@@ -207,4 +209,42 @@ function upPwd() {
 	} else {
 		dialog('密码不能为空');
 	}
+}
+
+function initData(page, url) {
+	$.get(url, {"page": page}, function(result) {
+		if(result.rc.rc == 9001){
+			loginDialog();
+		} else if(result.rc == 0) {
+			dialog(result.msg);
+		} else {
+			var sHtml = '';
+			for (var i = 0; i < result.data.length; i++) {
+				var gold = result.data[i];
+				sHtml += '<tr>';
+				sHtml += '<td style="width:10%;height:30px;border:1px solid #ddd">' + gold.goldDesc + '</td>';
+				sHtml += '<td style="width:10%;height:30px;border:1px solid #ddd">' + gold.goldValue + '</td>';
+				sHtml += '<td style="width:10%;height:30px;border:1px solid #ddd">' + gold.createTime + '</td>';
+				sHtml += '</tr>';
+			}
+			$('#golds-data tbody').html(sHtml);
+		}
+	});
+}
+
+function upProfile() {
+	$('.profile-form').ajaxSubmit({
+		url: $('.profile-form').attr('action'),
+		success: function(result) {
+			if(result.rc.rc == 9001){
+				loginDialog();
+			} else if(result.rc == 0) {
+				dialog(result.msg);
+			} else {
+				dialogWithBtn(result.msg, function() {
+					window.location = window.location;
+				});
+			}
+		}
+	});
 }

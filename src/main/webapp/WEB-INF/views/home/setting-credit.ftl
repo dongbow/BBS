@@ -5,6 +5,7 @@
 	<#include "../common/import.ftl"/>
 	<title>金币</title>
 	<link rel="stylesheet" type="text/css" href="${path}/resources/css/home.css">
+	<link rel="stylesheet" type="text/css" href="${path}/resources/css/jspage.css">
 </head>
 <body>
 	<#include "../common/header.ftl"/>
@@ -34,16 +35,29 @@
 						<p>我的金币：${userValue.userGold}</p>
 					</div>
 					<div class="bottomc">
-						<h2>金币规则：</h2>
-						<span>获取金币：</span>
-						<div class="getgold">
-							<p></p>
-						</div>
-						<span>减少金币：</span>
-						<div class="jsgold">
-							<p>下载附件减2金币，同一附件多次下载只扣除一次</p>
-						</div>
+						<h2>金币历史：</h2>
+						<table id="golds-data" style="text-align:center;width:100%;line-height:30px;border-collapse:collapse;border:1px solid #ddd" cellpadding="0" cellspacing="0">
+							<thead>
+								<tr>
+									<td style="width:30%;height:30px;border:1px solid #ddd">来源</td>
+									<td style="width:20%;height:30px;border:1px solid #ddd">数量</td>
+									<td style="width:50%;height:30px;border:1px solid #ddd">时间</td>
+								</tr>
+							</thead>
+							<tbody>
+								<#if golds?? && golds?size gt 0>
+									<#list golds as g>
+										<tr>
+											<td style="width:10%;height:30px;border:1px solid #ddd">${g.goldDesc!}</td>
+											<td style="width:10%;height:30px;border:1px solid #ddd">${g.goldValue}</td>
+											<td style="width:10%;height:30px;border:1px solid #ddd">${g.createTime}</td>
+										</tr>
+									</#list>
+								</#if>
+							</tbody>
+						</table>
 					</div>
+					<div class="tcdPageCode"></div>
 				</div>
 			</div>
 		</div>
@@ -51,4 +65,21 @@
 	<#include "../common/footer.ftl"/>
 </body>
 <script type="text/javascript" src="${path}/resources/js/home.js" ></script>
+<script type="text/javascript" src="${path}/resources/js/jquery/jquery.page.js" ></script>
+<script type="text/javascript">
+	$(function() {
+		Setting.init('');
+	});
+</script>
+<#if page?? && page.totalRecord gt 1>
+	<script type="text/javascript">
+		$(".tcdPageCode").createPage({
+	        pageCount:${page.totalPage},
+	        current:${page.pageNo},
+	        backFn:function(p){
+	            initData(p, '${page.searchUrl}');
+	        }
+	    });
+	</script>
+</#if>
 </html>

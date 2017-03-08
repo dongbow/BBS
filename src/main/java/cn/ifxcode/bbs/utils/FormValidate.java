@@ -38,4 +38,9 @@ public class FormValidate {
 		return Pattern.matches("\\d+", param);
 	}
 
+	//TODO
+	public static boolean nickname(String nickName) {
+		return true;
+	}
+
 }
