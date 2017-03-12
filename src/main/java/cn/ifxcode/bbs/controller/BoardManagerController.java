@@ -806,6 +806,7 @@ public class BoardManagerController {
 	
 	@RequestMapping(value = "/topic/move", method = RequestMethod.GET)
 	public String move() {
+		
 		return "topic/move";
 	}
 	
