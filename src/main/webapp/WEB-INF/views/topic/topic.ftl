@@ -221,11 +221,19 @@
 			                		<a href="${path}/board/${reply.boardId}/topic/${reply.topicId}/reply/${reply.replyId}/update" id="">编辑</a>
 			                	</#if>
             					<#if user.userAccess.userIsAdmin == 1 || (user.userAccess.userIsBoderManager == 1 && localbmc == 1)>
-				            		<a href="" id="">删除</a>
+				            		<#if user.userAccess.userIsAdmin == 1>
+				            			<a href="javascript:;" onclick="replyDel(${pboard.boardId}, ${reply.replyId}, 'sys');">删除</a>
+				            		<#else>
+				            			<a href="javascript:;" onclick="replyDel(${pboard.boardId}, ${reply.replyId}, 'bmc');">删除</a>
+				            		</#if>
 			            		</#if>
 			            	</#if>
+			            	<#if topic.topicInfo.topicIsReply == 0>
+			            		<#if reply.replyStatus == 0 && reply.replyIsCheck == 1 && reply.user.userAccess.userIsDelete == 0 && reply.user.userAccess.userIsLocked == 0>
+			                		<a class="sonreply" href="javascript:;" onclick="sReply(${reply.replyId}, ${reply.topicId});" id="reply_${reply.replyId}">回复</a>
+			                	</#if>
+			            	</#if>
 			            	<#if reply.replyStatus == 0 && reply.replyIsCheck == 1 && reply.user.userAccess.userIsDelete == 0 && reply.user.userAccess.userIsLocked == 0>
-			                	<a class="sonreply" href="javascript:;" onclick="sReply(${reply.replyId}, ${reply.topicId});" id="reply_${reply.replyId}">回复</a>
 			                	<a href="javascript:;" id="" onclick="report(${reply.user.userAccess.userId}, ${topic.topicId}, ${reply.replyId}, ${floor});">举报</a>
 			                </#if>
 			            </div>

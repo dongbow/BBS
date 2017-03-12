@@ -210,5 +210,5 @@ public class TopicController extends BaseUserController{
 			return "redirect:/tip?tip=noauth";
 		}
 	}
-
+	
 }

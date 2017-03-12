@@ -98,6 +98,10 @@ function loginDialog() {
 	});
 }
 
+function noAuth() {
+	dialog('没有权限');
+}
+
 function signSuc(number) {
 	$('#sign_btn').width('135px');
 	$('#sign_num').css({

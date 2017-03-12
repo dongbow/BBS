@@ -333,4 +333,18 @@
 			${tid}
 		</foreach>
 	</update>
+	
+	<update id="delete" parameterType="map">
+		update bbs_topic set topic_status = 1 where topic_id in 
+		<foreach collection="tids" index="index" item="tid" open="(" separator="," close=")">
+			#{tid}
+		</foreach>
+	</update>
+	
+	<update id="move" parameterType="map">
+		update bbs_topic set board_id = #{bid}, class_id = #{cid}, nav_id = #{gid} where topic_id in 
+		<foreach collection="topicIds" index="index" item="tid" open="(" separator="," close=")">
+			#{tid}
+		</foreach>
+	</update>
 </mapper>

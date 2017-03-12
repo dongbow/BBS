@@ -247,6 +247,7 @@ public class ReplyServiceImpl implements ReplyService{
 	@Override
 	@Transactional
 	@SysLog(module = "评论管理", methods = "评论列表-删除")
+	@BmcLogAnno(modules = "删除评论")
 	public int deleteReply(String ids, String reason, String role) {
 		int result = 0;
 		String rids[] = ids.split(",");

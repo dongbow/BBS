@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.HtmlUtils;
 
+import cn.ifxcode.bbs.bean.Result;
 import cn.ifxcode.bbs.constant.BbsConstant;
 import cn.ifxcode.bbs.entity.Board;
 import cn.ifxcode.bbs.entity.Navigation;
@@ -120,6 +122,34 @@ public class ReplyController extends BaseUserController{
 			}
 		}
 		return "redirect:/tip?tip=reply-notexists";
+	}
+	
+	@RequestMapping("/post/reply/delete")
+	public String delete() {
+		return "topic/delete";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/post/reply/delete/do", method = RequestMethod.POST)
+	public Result doDelete(String rid, String rs, String other, String sign, 
+			HttpServletRequest request) {
+		Result result = null;
+		if(FormValidate.stringUtils(rid, rs, sign)) {
+			if("其他".equals(rs)) {
+				if(StringUtils.isEmpty(other) || other.length() < 5 || other.length() > 50) {
+					return new Result(BbsConstant.ERROR, "原因过长或过短");
+				}
+			}
+			String reason = StringUtils.isBlank(other) ? rs : other;
+			if(replyService.deleteReply(rid, reason, sign) == BbsConstant.OK) {
+				result = new Result(BbsConstant.OK, "删除成功");
+			} else {
+				result = new Result(BbsConstant.ERROR, "删除失败");
+			}
+		} else {
+			result = new Result(BbsConstant.ERROR, "删除失败");
+		}
+		return result;
 	}
 	
 }

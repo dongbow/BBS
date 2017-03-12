@@ -74,4 +74,18 @@ public interface TopicService {
 
 	public int openReply(String ids, String sign);
 
+	public int deleteTopic(String tid, String reason, String sign);
+
+	public int closeReply(String ids, String sign);
+
+	public int cream(String ids, int cream, String role);
+
+	public int localTop(String ids, String time, int local, String role);
+
+	public int home(String ids, String time, int home);
+
+	public int globalTop(String ids, String time, int global);
+
+	public int move(String ids, String destbid, String cid, String gid, String role);
+
 }

@@ -707,6 +707,7 @@ public class TopicServiceImpl implements TopicService{
 	@Override
 	@Transactional
 	@BmcLogAnno(modules = "开启帖子回复")
+	@SysLog(module = "帖子管理", methods = "已关闭评论")
 	public int openReply(String ids, String sign) {
 		String[] topicIds = ids.split(",");
 		try {
@@ -716,6 +717,142 @@ public class TopicServiceImpl implements TopicService{
 			return BbsConstant.OK;
 		} catch (Exception e) {
 			logger.error("open topic reply fail, ids : {}", ids, e);
+		}
+		return BbsConstant.ERROR;
+	}
+
+	@Override
+	@Transactional
+	@SysLog(module = "帖子管理", methods = "帖子列表-删除")
+	@BmcLogAnno(modules = "删除帖子")
+	public int deleteTopic(String ids, String reason, String role) {
+		int result = 0;
+		String tids[] = ids.split(",");
+		try {
+			Map<String, Object> map = Maps.newHashMap();
+			map.put("tids", tids);
+			//map.put("reason", reason + "<br/>---<font color=\"red\">" + role + "</font>");
+			if(tids.length == topicDao.delete(map)) {
+				result = BbsConstant.OK;
+			}
+		} catch (Exception e) {
+			logger.error("topic delete error", e);
+		}
+		return result;
+	}
+
+	@Override
+	@Transactional
+	@BmcLogAnno(modules = "关闭帖子回复")
+	@SysLog(module = "帖子管理", methods = "帖子列表-关闭回复")
+	public int closeReply(String ids, String sign) {
+		String[] topicIds = ids.split(",");
+		try {
+			Map<String, Object> map = Maps.newHashMap();
+			map.put("topicIds", topicIds);
+			topicInfoDao.closeReply(map);
+			return BbsConstant.OK;
+		} catch (Exception e) {
+			logger.error("close topic reply fail, ids : {}", ids, e);
+		}
+		return BbsConstant.ERROR;
+	}
+
+	@Override
+	@Transactional
+	@BmcLogAnno(modules = "帖子加精")
+	@SysLog(module = "帖子管理", methods = "帖子列表-加精")
+	public int cream(String ids, int cream, String role) {
+		String[] topicIds = ids.split(",");
+		try {
+			Map<String, Object> map = Maps.newHashMap();
+			map.put("topicIds", topicIds);
+			map.put("cream", cream);
+			topicInfoDao.cream(map);
+			return BbsConstant.OK;
+		} catch (Exception e) {
+			logger.error("topic cream fail, ids : {}", ids, e);
+		}
+		return BbsConstant.ERROR;
+	}
+
+	@Override
+	@Transactional
+	@BmcLogAnno(modules = "本版置顶")
+	@SysLog(module = "帖子管理", methods = "帖子列表-本版置顶")
+	public int localTop(String ids, String time, int local, String role) {
+		String[] topicIds = ids.split(",");
+		try {
+			Map<String, Object> map = Maps.newHashMap();
+			map.put("topicIds", topicIds);
+			map.put("local", local);
+			if (local == 1) {
+				map.put("time", time);
+			}
+			topicInfoDao.localTop(map);
+			return BbsConstant.OK;
+		} catch (Exception e) {
+			logger.error("topic localTop fail, ids : {}", ids, e);
+		}
+		return BbsConstant.ERROR;
+	}
+
+	@Override
+	@Transactional
+	@SysLog(module = "帖子管理", methods = "帖子列表-推送首页")
+	public int home(String ids, String time, int home) {
+		String[] topicIds = ids.split(",");
+		try {
+			Map<String, Object> map = Maps.newHashMap();
+			map.put("topicIds", topicIds);
+			map.put("home", home);
+			if (home == 1) {
+				map.put("time", time);
+			}
+			topicInfoDao.home(map);
+			return BbsConstant.OK;
+		} catch (Exception e) {
+			logger.error("topic home fail, ids : {}", ids, e);
+		}
+		return BbsConstant.ERROR;
+	}
+
+	@Override
+	@Transactional
+	@SysLog(module = "帖子管理", methods = "帖子列表-全局置顶")
+	public int globalTop(String ids, String time, int global) {
+		String[] topicIds = ids.split(",");
+		try {
+			Map<String, Object> map = Maps.newHashMap();
+			map.put("topicIds", topicIds);
+			map.put("global", global);
+			if (global == 1) {
+				map.put("time", time);
+			}
+			topicInfoDao.globalTop(map);
+			return BbsConstant.OK;
+		} catch (Exception e) {
+			logger.error("topic global fail, ids : {}", ids, e);
+		}
+		return BbsConstant.ERROR;
+	}
+
+	@Override
+	@Transactional
+	@BmcLogAnno(modules = "移动")
+	@SysLog(module = "帖子管理", methods = "帖子列表-移动")
+	public int move(String ids, String destbid, String cid, String gid, String role) {
+		String[] topicIds = ids.split(",");
+		try {
+			Map<String, Object> map = Maps.newHashMap();
+			map.put("topicIds", topicIds);
+			map.put("bid", destbid);
+			map.put("cid", cid);
+			map.put("gid", gid);
+			topicDao.move(map);
+			return BbsConstant.OK;
+		} catch (Exception e) {
+			logger.error("topic move fail, ids : {}", ids, e);
 		}
 		return BbsConstant.ERROR;
 	}

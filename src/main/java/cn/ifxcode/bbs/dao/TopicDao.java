@@ -39,4 +39,8 @@ public interface TopicDao {
 
 	public int restore(Map<String, Object> map);
 
+	public int delete(Map<String, Object> map);
+
+	public int move(Map<String, Object> map);
+
 }

@@ -496,4 +496,343 @@ public class BoardManagerController {
 		return "boardmanager/options";
 	}
 	
+	@RequestMapping(value = "/topic/delete", method = RequestMethod.GET)
+	public String delete() {
+		return "topic/delete";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/topic/delete", method = RequestMethod.POST)
+	public Result doDelete(String tid, String bid, String rs, String other, String sign, 
+			HttpServletRequest request) {
+		Result result = null;
+		if(FormValidate.stringUtils(tid, rs, sign, bid)) {
+			if (!boardService.isExists(bid)) {
+				return new Result(BbsConstant.ERROR, "版块不存在");
+			}
+			if (!generalService.isLocalBMCByBoardId(Integer.parseInt(bid), request)) {
+				return new Result(BbsErrorCode.NOT_AUTH, BbsErrorCode.getDescribe(BbsErrorCode.NOT_AUTH));
+			}
+			if("其他".equals(rs)) {
+				if(StringUtils.isEmpty(other) || other.length() < 5 || other.length() > 50) {
+					return new Result(BbsConstant.ERROR, "原因过长或过短");
+				}
+			}
+			String reason = StringUtils.isBlank(other) ? rs : other;
+			if(topicService.deleteTopic(tid, reason, sign) == BbsConstant.OK) {
+				result = new Result(BbsConstant.OK, "删除成功");
+			} else {
+				result = new Result(BbsConstant.ERROR, "删除失败");
+			}
+		} else {
+			result = new Result(BbsConstant.ERROR, "删除失败");
+		}
+		return result;
+	}
+	
+	@RequestMapping(value = "/reply/delete", method = RequestMethod.GET)
+	public String replyDelete() {
+		return "topic/delete";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/reply/delete", method = RequestMethod.POST)
+	public Result doReplyDelete(String rid, String bid, String rs, String other, String sign, 
+			HttpServletRequest request) {
+		Result result = null;
+		if(FormValidate.stringUtils(rid, rs, sign, bid)) {
+			if (!boardService.isExists(bid)) {
+				return new Result(BbsConstant.ERROR, "版块不存在");
+			}
+			if (!generalService.isLocalBMCByBoardId(Integer.parseInt(bid), request)) {
+				return new Result(BbsErrorCode.NOT_AUTH, BbsErrorCode.getDescribe(BbsErrorCode.NOT_AUTH));
+			}
+			if("其他".equals(rs)) {
+				if(StringUtils.isEmpty(other) || other.length() < 5 || other.length() > 50) {
+					return new Result(BbsConstant.ERROR, "原因过长或过短");
+				}
+			}
+			String reason = StringUtils.isBlank(other) ? rs : other;
+			if(replyService.deleteReply(rid, reason, sign) == BbsConstant.OK) {
+				result = new Result(BbsConstant.OK, "删除成功");
+			} else {
+				result = new Result(BbsConstant.ERROR, "删除失败");
+			}
+		} else {
+			result = new Result(BbsConstant.ERROR, "删除失败");
+		}
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/topic/openreply", method = RequestMethod.POST)
+	public Result topicOpenReply(String tid, String bid, String role, 
+			HttpServletRequest request) {
+		Result result = null;
+		if (FormValidate.stringUtils(tid, bid, role) && FormValidate.number(bid) && FormValidate.number(tid)) {
+			if (boardService.isExists(bid)) {
+				if (generalService.isLocalBMCByBoardId(Integer.parseInt(bid), request)) {
+					int rc = topicService.openReply(tid, role);
+					if (rc == BbsConstant.OK) {
+						result = new Result(BbsConstant.OK, "开启成功");
+					} else {
+						result = new Result(BbsConstant.ERROR, "开启失败");
+					}
+				} else {
+					result = new Result(BbsErrorCode.NOT_AUTH, BbsErrorCode.getDescribe(BbsErrorCode.NOT_AUTH));
+				}
+			} else {
+				result = new Result(BbsConstant.ERROR, "数据有误");
+			}
+		} else {
+			result = new Result(BbsConstant.ERROR, "数据有误");	
+		}
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/topic/closereply", method = RequestMethod.POST)
+	public Result topicCloseReply(String tid, String bid, String role, 
+			HttpServletRequest request) {
+		Result result = null;
+		if (FormValidate.stringUtils(tid, bid, role) && FormValidate.number(bid) && FormValidate.number(tid)) {
+			if (boardService.isExists(bid)) {
+				if (generalService.isLocalBMCByBoardId(Integer.parseInt(bid), request)) {
+					int rc = topicService.closeReply(tid, role);
+					if (rc == BbsConstant.OK) {
+						result = new Result(BbsConstant.OK, "关闭成功");
+					} else {
+						result = new Result(BbsConstant.ERROR, "关闭失败");
+					}
+				} else {
+					result = new Result(BbsErrorCode.NOT_AUTH, BbsErrorCode.getDescribe(BbsErrorCode.NOT_AUTH));
+				}
+			} else {
+				result = new Result(BbsConstant.ERROR, "数据有误");
+			}
+		} else {
+			result = new Result(BbsConstant.ERROR, "数据有误");	
+		}
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/topic/cream", method = RequestMethod.POST)
+	public Result topicCream(String tid, String bid, String role, 
+			HttpServletRequest request) {
+		Result result = null;
+		if (FormValidate.stringUtils(tid, bid, role) && FormValidate.number(bid) && FormValidate.number(tid)) {
+			if (boardService.isExists(bid)) {
+				if (generalService.isLocalBMCByBoardId(Integer.parseInt(bid), request)) {
+					int rc = topicService.cream(tid, 1, role);
+					if (rc == BbsConstant.OK) {
+						result = new Result(BbsConstant.OK, "成功");
+					} else {
+						result = new Result(BbsConstant.ERROR, "失败");
+					}
+				} else {
+					result = new Result(BbsErrorCode.NOT_AUTH, BbsErrorCode.getDescribe(BbsErrorCode.NOT_AUTH));
+				}
+			} else {
+				result = new Result(BbsConstant.ERROR, "数据有误");
+			}
+		} else {
+			result = new Result(BbsConstant.ERROR, "数据有误");	
+		}
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/topic/qxcream", method = RequestMethod.POST)
+	public Result topicQxCream(String tid, String bid, String role, 
+			HttpServletRequest request) {
+		Result result = null;
+		if (FormValidate.stringUtils(tid, bid, role) && FormValidate.number(bid) && FormValidate.number(tid)) {
+			if (boardService.isExists(bid)) {
+				if (generalService.isLocalBMCByBoardId(Integer.parseInt(bid), request)) {
+					int rc = topicService.cream(tid, 0, role);
+					if (rc == BbsConstant.OK) {
+						result = new Result(BbsConstant.OK, "成功");
+					} else {
+						result = new Result(BbsConstant.ERROR, "失败");
+					}
+				} else {
+					result = new Result(BbsErrorCode.NOT_AUTH, BbsErrorCode.getDescribe(BbsErrorCode.NOT_AUTH));
+				}
+			} else {
+				result = new Result(BbsConstant.ERROR, "数据有误");
+			}
+		} else {
+			result = new Result(BbsConstant.ERROR, "数据有误");	
+		}
+		return result;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/topic/localtop", method = RequestMethod.POST)
+	public Result topicLocalTop(String tid, String bid, String role, String time, 
+			HttpServletRequest request) {
+		Result result = null;
+		if (FormValidate.stringUtils(tid, bid, role) && FormValidate.number(bid) && FormValidate.number(tid)) {
+			if (boardService.isExists(bid)) {
+				if (generalService.isLocalBMCByBoardId(Integer.parseInt(bid), request)) {
+					int rc = topicService.localTop(tid, time, 1, role);
+					if (rc == BbsConstant.OK) {
+						result = new Result(BbsConstant.OK, "成功");
+					} else {
+						result = new Result(BbsConstant.ERROR, "失败");
+					}
+				} else {
+					result = new Result(BbsErrorCode.NOT_AUTH, BbsErrorCode.getDescribe(BbsErrorCode.NOT_AUTH));
+				}
+			} else {
+				result = new Result(BbsConstant.ERROR, "数据有误");
+			}
+		} else {
+			result = new Result(BbsConstant.ERROR, "数据有误");	
+		}
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/topic/qxlocaltop", method = RequestMethod.POST)
+	public Result topicQxLocalTop(String tid, String bid, String role, 
+			HttpServletRequest request) {
+		Result result = null;
+		if (FormValidate.stringUtils(tid, bid, role) && FormValidate.number(bid) && FormValidate.number(tid)) {
+			if (boardService.isExists(bid)) {
+				if (generalService.isLocalBMCByBoardId(Integer.parseInt(bid), request)) {
+					int rc = topicService.localTop(tid, null, 0, role);
+					if (rc == BbsConstant.OK) {
+						result = new Result(BbsConstant.OK, "成功");
+					} else {
+						result = new Result(BbsConstant.ERROR, "失败");
+					}
+				} else {
+					result = new Result(BbsErrorCode.NOT_AUTH, BbsErrorCode.getDescribe(BbsErrorCode.NOT_AUTH));
+				}
+			} else {
+				result = new Result(BbsConstant.ERROR, "数据有误");
+			}
+		} else {
+			result = new Result(BbsConstant.ERROR, "数据有误");	
+		}
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/topic/home", method = RequestMethod.POST)
+	public Result topicHome(String tid, String time, HttpServletRequest request) {
+		Result result = null;
+		if (FormValidate.stringUtils(tid) && FormValidate.number(tid)) {
+			if (generalService.authCheck(request)) {
+				int rc = topicService.home(tid, time, 1);
+				if (rc == BbsConstant.OK) {
+					result = new Result(BbsConstant.OK, "成功");
+				} else {
+					result = new Result(BbsConstant.ERROR, "失败");
+				}
+			} else {
+				result = new Result(BbsErrorCode.NOT_AUTH, BbsErrorCode.getDescribe(BbsErrorCode.NOT_AUTH));
+			}
+		} else {
+			result = new Result(BbsConstant.ERROR, "数据有误");	
+		}
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/topic/qxhome", method = RequestMethod.POST)
+	public Result topicQxHome(String tid, HttpServletRequest request) {
+		Result result = null;
+		if (FormValidate.stringUtils(tid) && FormValidate.number(tid)) {
+			if (generalService.authCheck(request)) {
+				int rc = topicService.home(tid, null, 0);
+				if (rc == BbsConstant.OK) {
+					result = new Result(BbsConstant.OK, "成功");
+				} else {
+					result = new Result(BbsConstant.ERROR, "失败");
+				}
+			} else {
+				result = new Result(BbsErrorCode.NOT_AUTH, BbsErrorCode.getDescribe(BbsErrorCode.NOT_AUTH));
+			}
+		} else {
+			result = new Result(BbsConstant.ERROR, "数据有误");	
+		}
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/topic/globaltop", method = RequestMethod.POST)
+	public Result topicGlobal(String tid, String time, HttpServletRequest request) {
+		Result result = null;
+		if (FormValidate.stringUtils(tid) && FormValidate.number(tid)) {
+			if (generalService.authCheck(request)) {
+				int rc = topicService.globalTop(tid, time, 1);
+				if (rc == BbsConstant.OK) {
+					result = new Result(BbsConstant.OK, "成功");
+				} else {
+					result = new Result(BbsConstant.ERROR, "失败");
+				}
+			} else {
+				result = new Result(BbsErrorCode.NOT_AUTH, BbsErrorCode.getDescribe(BbsErrorCode.NOT_AUTH));
+			}
+		} else {
+			result = new Result(BbsConstant.ERROR, "数据有误");	
+		}
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/topic/qxglobaltop", method = RequestMethod.POST)
+	public Result topicQxglobalTop(String tid, HttpServletRequest request) {
+		Result result = null;
+		if (FormValidate.stringUtils(tid) && FormValidate.number(tid)) {
+			if (generalService.authCheck(request)) {
+				int rc = topicService.globalTop(tid, null, 0);
+				if (rc == BbsConstant.OK) {
+					result = new Result(BbsConstant.OK, "成功");
+				} else {
+					result = new Result(BbsConstant.ERROR, "失败");
+				}
+			} else {
+				result = new Result(BbsErrorCode.NOT_AUTH, BbsErrorCode.getDescribe(BbsErrorCode.NOT_AUTH));
+			}
+		} else {
+			result = new Result(BbsConstant.ERROR, "数据有误");	
+		}
+		return result;
+	}
+	
+	@RequestMapping(value = "/topic/move", method = RequestMethod.GET)
+	public String move() {
+		return "topic/move";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/topic/move", method = RequestMethod.POST)
+	public Result doMove(String tid, String srcbid, String destbid, String cid, String gid, 
+			String role, HttpServletRequest request) {
+		Result result = null;
+		if(FormValidate.stringUtils(tid, srcbid, destbid, cid, gid)) {
+			if (!boardService.isExists(srcbid)) {
+				return new Result(BbsConstant.ERROR, "版块不存在");
+			}
+			if (!boardService.isExists(destbid)) {
+				return new Result(BbsConstant.ERROR, "版块不存在");
+			}
+			if (!generalService.isLocalBMCByBoardId(Integer.parseInt(srcbid), request)) {
+				return new Result(BbsErrorCode.NOT_AUTH, BbsErrorCode.getDescribe(BbsErrorCode.NOT_AUTH));
+			}
+			if(topicService.move(tid, destbid, cid, gid, role) == BbsConstant.OK) {
+				result = new Result(BbsConstant.OK, "成功");
+			} else {
+				result = new Result(BbsConstant.ERROR, "失败");
+			}
+		} else {
+			result = new Result(BbsConstant.ERROR, "失败");
+		}
+		return result;
+	}
+	
 }

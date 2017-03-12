@@ -242,16 +242,20 @@ public class SettingController extends BaseUserController{
 				userInfo.setUserBirth(birthday);
 			}
 			if (StringUtils.isNotBlank(province)) {
-				if (city.indexOf('-') == -1 || !FormValidate.number(province)) {
+				try {
+					Long.parseLong(province);
+					userInfo.setUserProvince(province);
+				} catch (Exception e) {
 					throw new BbsException("省份错误");
 				}
-				userInfo.setUserProvince(province);
 			}
 			if (StringUtils.isNotBlank(city)) {
-				if (city.indexOf('-') == -1 || !FormValidate.number(city)) {
+				try {
+					Long.parseLong(city);
+					userInfo.setUserCity(city);
+				} catch (Exception e) {
 					throw new BbsException("城市错误");
 				}
-				userInfo.setUserCity(city);
 			}
 			if (StringUtils.isNotBlank(qq)) {
 				if (!FormValidate.number(qq)) {

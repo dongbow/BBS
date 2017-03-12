@@ -20,4 +20,14 @@ public interface TopicInfoDao {
 
 	public int openReply(Map<String, Object> map);
 
+	public int closeReply(Map<String, Object> map);
+
+	public int cream(Map<String, Object> map);
+
+	public int localTop(Map<String, Object> map);
+
+	public int home(Map<String, Object> map);
+
+	public int globalTop(Map<String, Object> map);
+
 }

@@ -47,4 +47,51 @@
            	#{tid}   
    		</foreach>
 	</update>
+	
+	<update id="closeReply" parameterType="map">
+		update bbs_topic_info set topic_is_reply = 1 where topic_id in 
+		<foreach collection="topicIds" index="index" item="tid" open="(" separator="," close=")">  
+           	#{tid}   
+   		</foreach>
+	</update>
+	
+	<update id="cream" parameterType="map">
+		update bbs_topic_info set topic_is_cream = #{cream} where topic_id in 
+		<foreach collection="topicIds" index="index" item="tid" open="(" separator="," close=")">  
+           	#{tid}   
+   		</foreach>
+	</update>
+	
+	<update id="localTop" parameterType="map">
+		update bbs_topic_info set topic_is_local_top = #{local} 
+			<if test="time != null">
+				, topic_is_local_top_end_time = #{time} 
+			</if>
+		where topic_id in 
+		<foreach collection="topicIds" index="index" item="tid" open="(" separator="," close=")">  
+           	#{tid}   
+   		</foreach>
+	</update>
+	
+	<update id="home" parameterType="map">
+		update bbs_topic_info set topic_is_home = #{home} 
+			<if test="time != null">
+				, topic_is_home_end_time = #{time} 
+			</if>
+		where topic_id in 
+		<foreach collection="topicIds" index="index" item="tid" open="(" separator="," close=")">  
+           	#{tid}   
+   		</foreach>
+	</update>
+	
+	<update id="globalTop" parameterType="map">
+		update bbs_topic_info set topic_is_global_top = #{global} 
+			<if test="time != null">
+				, topic_is_global_top_end_time = #{time} 
+			</if>
+		where topic_id in 
+		<foreach collection="topicIds" index="index" item="tid" open="(" separator="," close=")">  
+           	#{tid}   
+   		</foreach>
+	</update>
 </mapper>
