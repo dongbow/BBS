@@ -20,24 +20,24 @@
         <!--body wrapper start-->
         <div class="wrapper">
         	<div class="panel panel-default">
-        		<form action="" method="post">
+        		<form action="" method="get" id="dataForm">
 	                <div class="panel-body">
 	                    <div class="col-md-4 form-group">
 	                		<div class="input-group input-large custom-date-range" data-date-format="yyyy-mm-dd">
-	                            <input id="starttime" class="form-control dpd1" name="from" type="text" placeholder="开始时间">
+	                            <input id="starttime" class="form-control dpd1" name="from" value="${from!}" type="text" placeholder="开始时间">
 	                            <span class="input-group-addon">-</span>
-	                            <input id="endtime" class="form-control dpd2" name="to" type="text"  placeholder="结束时间">
+	                            <input id="endtime" class="form-control dpd2" name="to" value="${to!}" type="text"  placeholder="结束时间">
 	                        </div>
 	                	</div>
 	                	<div class="col-md-2 form-group">
-			            	<input id="uid" type="text" class="form-control" placeholder="用户ID">
+			            	<input id="uid" type="text" name="uid" value="${uid!}" class="form-control" placeholder="用户ID">
 			            </div>
 			            <div class="col-md-2 form-group">
-			            	<input id="name" type="text" class="form-control" placeholder="用户昵称">
+			            	<input id="name" type="text" name="name" value="${name!}" class="form-control" placeholder="用户昵称">
 			            </div>
 	                	<div class="col-md-4 form-group">
-	            			<a class="btn btn-success btn-sm" type="button"><i class="fa fa-search"></i> 查找 </a>
-	            			<a class="btn btn-danger btn-sm" type="button"><i class="fa fa-trash-o"></i> 删除 </a>
+	            			<a class="btn btn-success btn-sm" id="data-search" type="button" href="/system/admin/upload/file/search"><i class="fa fa-search"></i> 查找 </a>
+	            			<a class="btn btn-danger btn-sm file-delete" type="button" href="${path}/system/admin/upload/delete"><i class="fa fa-trash-o"></i> 删除 </a>
 	            		</div>
                 	</div>
                 </form>
@@ -50,7 +50,7 @@
 	                        <tr>
 	                        	<th><input type="checkbox" id="data-ids"></th>
 	                            <th class="numeric">名字</th>
-	                            <th class="numeric">地址</th>
+	                            <th class="numeric">标识</th>
 	                            <th class="numeric">类型</th>
 	                            <th class="numeric">大小</th>
 	                            <th class="numeric">下载量</th>
@@ -63,9 +63,9 @@
 	                        	<#if files??>
 	                        		<#list files as file>
 	                        			<tr>
-	                        				<th><input type="checkbox" data-id="${file.uuid}"></th>
+	                        				<th><input type="checkbox" class="data-check-id" data-id="${file.uuid}" data-rm-id="${file.rmId}"></th>
 				                            <td class="numeric" data-title="名字">${file.fileName}</td>
-				                            <td class="numeric" data-title="地址">${file.fileLink}</td>
+				                            <td class="numeric" data-title="标识">${file.rmId}</td>
 				                            <td class="numeric" data-title="类型">${file.fileType}</td>
 				                            <td class="numeric" data-title="大小">${file.fileSize}</td>
 				                            <td class="numeric" data-title="下载量">${file.downCount}</td>

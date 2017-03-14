@@ -23,26 +23,30 @@
         <!--body wrapper start-->
         <div class="wrapper">
         	<div class="panel panel-default">
-        		<form action="" method="post">
+        		<form action="${path}/system/admin/topicmanage/audit/search" method="get" id="dataForm">
 	                <div class="panel-body">
 	                    <div class="col-md-4 form-group">
 	                		<div class="input-group input-large custom-date-range" data-date-format="yyyy-mm-dd">
-	                            <input id="starttime" class="form-control dpd1" name="from" type="text" placeholder="开始时间">
+	                            <input id="starttime" class="form-control dpd1" name="from" value="${form!}" type="text" placeholder="开始时间">
 	                            <span class="input-group-addon">-</span>
-	                            <input id="endtime" class="form-control dpd2" name="to" type="text"  placeholder="结束时间">
+	                            <input id="endtime" class="form-control dpd2" name="to" value="${to!}" type="text"  placeholder="结束时间">
 	                        </div>
 	                	</div>
 			            <div class="col-md-2 form-group">
-		                    <input id="uid" class="form-control" name="uid" type="text" placeholder="用户ID">
+		                    <input id="uid" class="form-control" name="uid" value="${uid!}" type="text" placeholder="用户ID">
 			            </div>
 			            <div class="col-md-2 form-group">
-		                    <input id="tid" class="form-control" name="tid" type="text" placeholder="帖子ID">
+		                    <input id="tid" class="form-control" name="tid" value="${tid!}" type="text" placeholder="帖子ID">
 			            </div>
                 		<div class="col-md-2 form-group">
-		                    <select id="t-nav" name="navid" class="selectpicker show-tick form-control">
+		                    <select id="t-nav" name="gid" class="selectpicker show-tick form-control">
 		                      	<option value="0">所属导航</option>
 						        <#list navs as nav>
-						        	<option value="${nav.navId}">${nav.navName}</option>
+						        	<#if gid??>
+						        		<option value="${nav.navId}" <#if gid?number == nav.navId>selected</#if>>${nav.navName}</option>
+						        	<#else>
+						        		<option value="${nav.navId}">${nav.navName}</option>
+						        	</#if>
 						        </#list>
 					        </select>
 			            </div>
@@ -50,15 +54,19 @@
 		                    <select id="t-board" name="bid" class="selectpicker show-tick form-control">
 		                      	<option value="0">所属版块</option>
 		                      	<#list boards as board>
-		                      		<option value="${board.boardId}">${board.boardName}</option>
-		                      	</#list>
+						        	<#if bid??>
+								        <option value="${board.boardId}" <#if bid?number == board.boardId>selected</#if>>${board.boardName}</option>
+								    <#else>
+								        <option value="${board.boardId}">${board.boardName}</option>
+			                      	</#if>
+						        </#list>
 					        </select>
 			            </div>
 			            
 	                	<div class="col-md-4 form-group">
-	            			<a class="btn btn-success btn-sm" type="button"><i class="fa fa-search"></i> 查找 </a>
-	            			<a class="btn btn-info btn-sm" type="button"><i class="fa fa-eye"></i> 批量通过 </a>
-	            			<a class="btn btn-warning btn-sm" type="button"><i class="fa fa-eye-slash"></i> 批量失败 </a>
+	            			<a class="btn btn-success btn-sm" id="data-search" type="button" href="${path}/system/admin/topicmanage/audit/search"><i class="fa fa-search"></i> 查找 </a>
+	            			<a class="btn btn-info btn-sm data-pass" data-type="all" href="${path}/system/admin/topicmanage/audit/pass" type="button"><i class="fa fa-eye"></i> 批量通过 </a>
+	            			<a class="btn btn-warning btn-sm data-refause" data-type="all" href="${path}/system/admin/topicmanage/audit/refause" type="button"><i class="fa fa-eye-slash"></i> 批量失败 </a>
 	            		</div>
                 	</div>
                 </form>
@@ -83,7 +91,7 @@
 	                        	<#if topics??>
 	                        		<#list topics as topic>
 	                        			<tr>
-	                        				<th><input type="checkbox" data-id="${topic.topicId}"></th>
+	                        				<th><input type="checkbox" data-id="${topic.topicId}" class="data-check-id"></th>
 				                            <td data-title="ID">${topic.topicId}</td>
 				                            <td class="numeric" data-title="帖子标题">
 				                            	<a href="${path}/board/${topic.boardId}/topic/detail/${topic.topicId}" target="_blank" style="color:#428bca">${topic.topicTitle}</a>
@@ -97,9 +105,9 @@
 				                            	<a class="btn btn-link btn-xs topic-data" type="button" data-value="${topic.topicContent}"> 预览 </a>
 				                            </td>
 				                            <td class="numeric" data-title="操作">
-				                            	<a class="btn btn-default btn-xs" type="button"><i class="fa fa-eye"></i> 通过 </a>
-				                            	<a class="btn btn-default btn-xs" type="button"><i class="fa fa-eye-slash"></i> 失败 </a>
-				                            	<a class="btn btn-default btn-xs" type="button"><i class="fa fa-edit"></i> 编辑 </a>
+				                            	<a class="btn btn-default btn-xs data-pass" data-type="one" data-id="${topic.topicId}" type="button" href="${path}/system/admin/topicmanage/audit/pass"><i class="fa fa-eye"></i> 通过 </a>
+				                            	<a class="btn btn-default btn-xs data-refause" data-type="one" data-id="${topic.topicId}" type="button" href="${path}/system/admin/topicmanage/audit/refause"><i class="fa fa-eye-slash"></i> 失败 </a>
+				                            	<a class="btn btn-default btn-xs" href="${path}/board/${topic.boardId}/topic/detail/${topic.topicId}/update" type="button" target="_blank"><i class="fa fa-edit"></i> 编辑 </a>
 				                            </td>
 				                        </tr>
 	                        		</#list>
@@ -137,6 +145,6 @@
     <!-- main content end-->
 </section>
 	<#include "../common/footer.ftl">
-	<script type="text/javascript" src="${path}/resources/js/admin/homemanage/topic.js"></script>
+	<script type="text/javascript" src="${path}/resources/js/admin/topic/topic.js"></script>
 </body>
 </html>

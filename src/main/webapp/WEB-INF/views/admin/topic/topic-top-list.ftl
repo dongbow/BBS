@@ -23,26 +23,30 @@
         <!--body wrapper start-->
         <div class="wrapper">
         	<div class="panel panel-default">
-        		<form action="" method="post">
+        		<form action="" method="get" id="dataForm">
 	                <div class="panel-body">
 	                    <div class="col-md-4 form-group">
 	                		<div class="input-group input-large custom-date-range" data-date-format="yyyy-mm-dd">
-	                            <input id="starttime" class="form-control dpd1" name="from" type="text" placeholder="开始时间">
+	                            <input id="starttime" class="form-control dpd1" name="from" value="${from!}" type="text" placeholder="开始时间">
 	                            <span class="input-group-addon">-</span>
-	                            <input id="endtime" class="form-control dpd2" name="to" type="text"  placeholder="结束时间">
+	                            <input id="endtime" class="form-control dpd2" name="to" value="${to!}" type="text"  placeholder="结束时间">
 	                        </div>
 	                	</div>
 			            <div class="col-md-2 form-group">
-		                    <input id="uid" class="form-control" name="uid" type="text" placeholder="用户ID">
+		                    <input id="uid" class="form-control" name="uid" value="${uid!}" type="text" placeholder="用户ID">
 			            </div>
 			            <div class="col-md-2 form-group">
-		                    <input id="tid" class="form-control" name="tid" type="text" placeholder="帖子ID">
+		                    <input id="tid" class="form-control" name="tid" value="${tid!}" type="text" placeholder="帖子ID">
 			            </div>
                 		<div class="col-md-2 form-group">
 		                    <select id="t-nav" name="navid" class="selectpicker show-tick form-control">
 		                      	<option value="0">所属导航</option>
 						        <#list navs as nav>
-						        	<option value="${nav.navId}">${nav.navName}</option>
+						        	<#if navid??>
+						        		<option value="${nav.navId}" <#if navid?number == nav.navName>selected</#if>>${nav.navName}</option>
+						        	<#else>
+						        		<option value="${nav.navId}">${nav.navName}</option>
+						        	</#if>
 						        </#list>
 					        </select>
 			            </div>
@@ -50,20 +54,24 @@
 		                    <select id="t-board" name="bid" class="selectpicker show-tick form-control">
 		                      	<option value="0">所属版块</option>
 		                      	<#list boards as board>
-		                      		<option value="${board.boardId}">${board.boardName}</option>
+		                      		<#if bid??>
+								        <option value="${board.boardId}" <#if bid?number == board.boardId>selected</#if>>${board.boardName}</option>
+								    <#else>
+								        <option value="${board.boardId}">${board.boardName}</option>
+			                      	</#if>
 		                      	</#list>
 					        </select>
 			            </div>
 			            <div class="col-md-2 form-group">
 		                    <select id="spec-type" name="type" class="selectpicker show-tick form-control">
 		                      	<option value="-1">类型</option>
-		                      	<option value="1">版块置顶</option>
-		                      	<option value="2">全局置顶</option>
+		                      	<option <#if type??><#if type?number == 1>selected</#if></#if> value="1">版块置顶</option>
+		                      	<option <#if type??><#if type?number == 2>selected</#if></#if> value="2">全局置顶</option>
 					        </select>
 			            </div>
 			            
 	                	<div class="col-md-4 form-group">
-	            			<a class="btn btn-success btn-sm" type="button"><i class="fa fa-search"></i> 查找 </a>
+	            			<a class="btn btn-success btn-sm" id="data-search" href="${path}/system/admin/topicmanage/topsign/search" type="button"><i class="fa fa-search"></i> 查找 </a>
 	            		</div>
                 	</div>
                 </form>
@@ -118,19 +126,19 @@
 				                            	<a class="btn btn-link btn-xs topic-data" type="button" data-value="${topic.topicContent}"> 预览 </a>
 				                            </td>
 				                            <td class="numeric" data-title="操作">
-				                            	<a class="btn btn-default btn-xs" type="button"><i class="fa fa-edit"></i> 编辑内容 </a>
+				                            	<a class="btn btn-default btn-xs" href="${path}/board/${topic.boardId}/topic/detail/${topic.topicId}/update" type="button" target="_blank"><i class="fa fa-edit"></i> 编辑内容 </a>
 				                            	<div class="btn-group">
 													<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
 													  修改状态 <span class="caret"></span>
 													</button>
 													<ul class="dropdown-menu" role="menu">
 														<#if topic.topicInfo.topicIsLocalTop == 1>
-															<li><a href="#">取消版块置顶</a></li>
-													    	<li><a href="#">修改置顶时间</a></li>
+															<li><a class="data-qxlocal" href="${path}/system/admin/topicmanage/topsign/qxlocal" data-type="one" data-id="${topic.topicId}">取消版块置顶</a></li>
+													    	<li><a class="data-editlocal" href="${path}/system/admin/topicmanage/topsign/editlocal" data-type="one" data-id="${topic.topicId}">修改置顶时间</a></li>
 														</#if>
 														<#if topic.topicInfo.topicIsGlobalTop == 1>
-															<li><a href="#">取消全局置顶</a></li>
-													    	<li><a href="#">修改置顶时间</a></li>
+															<li><a class="data-qxglobal" href="${path}/system/admin/topicmanage/topsign/qxglobal" data-type="one" data-id="${topic.topicId}">取消全局置顶</a></li>
+													    	<li><a class="data-editglobal" href="${path}/system/admin/topicmanage/topsign/editglobal" data-type="one" data-id="${topic.topicId}">修改置顶时间</a></li>
 				                            			</#if>
 													</ul>
 												</div>
@@ -171,6 +179,6 @@
     <!-- main content end-->
 </section>
 	<#include "../common/footer.ftl">
-	<script type="text/javascript" src="${path}/resources/js/admin/homemanage/topic.js"></script>
+	<script type="text/javascript" src="${path}/resources/js/admin/topic/topic.js"></script>
 </body>
 </html>

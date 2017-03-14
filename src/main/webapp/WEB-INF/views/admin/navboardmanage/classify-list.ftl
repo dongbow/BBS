@@ -37,13 +37,9 @@
 		                      	<option value="0">所属版块</option>
 						        <#list boards as board>
 						        	<#if bid??>
-			                      		<#list boards as board>
-								        	<option value="${board.boardId}" <#if bid?number == board.boardId>selected</#if>>${board.boardName}</option>
-								        </#list>
+								        <option value="${board.boardId}" <#if bid?number == board.boardId>selected</#if>>${board.boardName}</option>
 								    <#else>
-								    	<#list boards as board>
-								        	<option value="${board.boardId}">${board.boardName}</option>
-								        </#list>
+								        <option value="${board.boardId}">${board.boardName}</option>
 			                      	</#if>
 						        </#list>
 					        </select>

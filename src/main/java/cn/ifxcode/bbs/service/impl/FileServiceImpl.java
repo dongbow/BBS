@@ -28,6 +28,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.qiniu.common.QiniuException;
@@ -47,6 +48,7 @@ import cn.ifxcode.bbs.entity.GoldHistory;
 import cn.ifxcode.bbs.entity.UserValue;
 import cn.ifxcode.bbs.enumtype.EGHistory;
 import cn.ifxcode.bbs.enumtype.FileEnum;
+import cn.ifxcode.bbs.logger.SysLog;
 import cn.ifxcode.bbs.service.FileService;
 import cn.ifxcode.bbs.service.UserService;
 import cn.ifxcode.bbs.utils.GetRemoteIpUtil;
@@ -123,9 +125,16 @@ public class FileServiceImpl implements FileService {
 		bucketManager = new BucketManager(auth);
 	}
 	
-	public void removeFile(String fileName) {
+	@Transactional
+	@SysLog(module = "上传资源", methods = "删除")
+	public void removeFile(String uuids, String rmIds) {
 		try {
-			bucketManager.delete(bucket, fileName);
+			List<String> uuidList = Splitter.on(",").trimResults().omitEmptyStrings().splitToList(uuids);
+			List<String> rmIdList = Splitter.on(",").trimResults().omitEmptyStrings().splitToList(rmIds);
+			for (int i = 0; i < rmIdList.size(); i++) {
+				bucketManager.delete(bucket, rmIdList.get(i));
+				fileDao.delete(uuidList.get(i));
+			}
 		} catch (QiniuException e) {
 			// ignore it
 		}
@@ -415,7 +424,12 @@ public class FileServiceImpl implements FileService {
 		if(StringUtils.isNotBlank(nickname)) {
 			map.put("name", nickname);
 		}
-		return fileDao.getUploadFile(map);
+		List<BbsFile> files = fileDao.getUploadFile(map);
+		for (BbsFile bbsFile : files) {
+			String rmId = bbsFile.getFileLink().replace(this.doMain + "/", "");
+			bbsFile.setRmId(rmId);
+		}
+		return files;
 	}
 
 	@Override

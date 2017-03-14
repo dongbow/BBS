@@ -553,6 +553,19 @@ public class TopicServiceImpl implements TopicService{
 		}
 		return getTopicList(page, sql, null, null, 0, 0, 0, 0, 0);
 	}
+	
+	public List<Topic> getTopicSpecList(Page page, String startTime, String endTime, 
+			long uid, long topicId, int navId, int boardId, int type) {
+		String sql = "";
+		if(type == -1) {
+			sql = "(i.topic_is_hot = 1 or i.topic_is_cream = 1)";
+		} else if(type == 1) {
+			sql = "i.topic_is_hot = 1";
+		} else {
+			sql = "i.topic_is_cream = 1";
+		}
+		return getTopicList(page, sql, startTime, endTime, uid, topicId, navId, boardId, 0);
+	}
 
 	@Override
 	public List<Topic> getTopicList(Page page, String sql, String startTime,
@@ -671,6 +684,7 @@ public class TopicServiceImpl implements TopicService{
 	@Override
 	@BmcLogAnno(modules = "帖子待审核")
 	@Transactional
+	@SysLog(module = "帖子管理", methods = "待审核-审核")
 	public int audit(String ids, int value) {
 		String[] topicIds = ids.split(",");
 		try {
@@ -853,6 +867,23 @@ public class TopicServiceImpl implements TopicService{
 			return BbsConstant.OK;
 		} catch (Exception e) {
 			logger.error("topic move fail, ids : {}", ids, e);
+		}
+		return BbsConstant.ERROR;
+	}
+
+	@Override
+	@Transactional
+	@SysLog(module = "帖子管理", methods = "帖子列表-热门")
+	public int hot(String ids, int hot) {
+		String[] topicIds = ids.split(",");
+		try {
+			Map<String, Object> map = Maps.newHashMap();
+			map.put("topicIds", topicIds);
+			map.put("hot", hot);
+			topicInfoDao.hot(map);
+			return BbsConstant.OK;
+		} catch (Exception e) {
+			logger.error("topic hot fail, ids : {}", ids, e);
 		}
 		return BbsConstant.ERROR;
 	}

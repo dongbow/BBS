@@ -25,4 +25,6 @@ public interface FileDao {
 
 	public List<BbsFileDown> getFileDownloadDetailList(Map<String, Object> map);
 
+	public int delete(String uuid);
+
 }

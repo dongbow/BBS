@@ -30,4 +30,6 @@ public interface TopicInfoDao {
 
 	public int globalTop(Map<String, Object> map);
 
+	public int hot(Map<String, Object> map);
+
 }

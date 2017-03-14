@@ -28,6 +28,8 @@ public class BbsFile implements Serializable {
 	private String nickname;
 	private String uploadTime;
 	private String uploadIp;
+	
+	private String rmId;
 
 	public BbsFile() {
 	}
@@ -132,6 +134,14 @@ public class BbsFile implements Serializable {
 
 	public void setDownCount(long downCount) {
 		this.downCount = downCount;
+	}
+
+	public String getRmId() {
+		return rmId;
+	}
+
+	public void setRmId(String rmId) {
+		this.rmId = rmId;
 	}
 
 }

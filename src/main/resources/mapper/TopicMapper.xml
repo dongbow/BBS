@@ -221,7 +221,7 @@
 			and t.topic_id = #{topicId} 
 		</if>
 		<if test="navId != null">
-			and t.navId = #{navid} 
+			and t.nav_id = #{navid} 
 		</if>
 		<if test="boardId != null">
 			and t.board_Id = #{boardId} 
@@ -255,7 +255,7 @@
 			and t.topic_id = #{topicId} 
 		</if>
 		<if test="navId != null">
-			and t.navId = #{navid} 
+			and t.nav_id = #{navid} 
 		</if>
 		<if test="boardId != null">
 			and t.board_Id = #{boardId} 
@@ -290,7 +290,7 @@
 			and t.topic_id = #{topicId} 
 		</if>
 		<if test="navId != null">
-			and t.navId = #{navid} 
+			and t.nav_id = #{navid} 
 		</if>
 		<if test="boardId != null">
 			and t.board_Id = #{boardId} 

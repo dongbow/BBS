@@ -55,5 +55,9 @@
 		</if>
 		order by down_time desc
 	</select>
+	
+	<delete id="delete">
+		delete from bbs_file where uuid = #{uuid}
+	</delete>
 
 </mapper>

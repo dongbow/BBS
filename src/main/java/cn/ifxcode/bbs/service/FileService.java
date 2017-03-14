@@ -35,5 +35,7 @@ public interface FileService {
 	public List<BbsFile> getUploadFile(Page page, FileEnum file, String startTime, String endTime, long uid, String nickname);
 
 	public List<BbsFileDown> getFileDownloadDetailList(Page page, String id, long uid);
+	
+	public void removeFile(String uuids, String rmIds);
 
 }

@@ -94,4 +94,11 @@
            	#{tid}   
    		</foreach>
 	</update>
+	
+	<update id="hot" parameterType="map">
+		update bbs_topic_info set topic_is_hot = #{hot} where topic_id in 
+		<foreach collection="topicIds" index="index" item="tid" open="(" separator="," close=")">  
+           	#{tid}   
+   		</foreach>
+	</update>
 </mapper>

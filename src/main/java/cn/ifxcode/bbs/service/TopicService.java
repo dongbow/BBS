@@ -56,6 +56,8 @@ public interface TopicService {
 
 	public List<Topic> getTopicSpecList(Page page, int all);
 	
+	public List<Topic> getTopicSpecList(Page page, String startTime, String endTime, long uid, long topicId, int navId, int boardId, int type);
+	
 	public List<Topic> getTopicList(Page page, String sql, String startTime, String endTime, long uid, long topicId, int navId, int boardId, int classId);
 
 	public List<Topic> getTopicTopList(Page page, int all);
@@ -87,5 +89,7 @@ public interface TopicService {
 	public int globalTop(String ids, String time, int global);
 
 	public int move(String ids, String destbid, String cid, String gid, String role);
+
+	public int hot(String ids, int hot);
 
 }
