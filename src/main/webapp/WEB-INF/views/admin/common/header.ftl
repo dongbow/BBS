@@ -84,63 +84,6 @@
             </li>
             <li>
                 <a href="#" class="btn btn-default dropdown-toggle info-number" data-toggle="dropdown">
-                    <i class="fa fa-envelope-o"></i>
-                    <span class="badge">5</span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-head pull-right">
-                    <h5 class="title">You have 5 Mails </h5>
-                    <ul class="dropdown-list normal-list">
-                        <li class="new">
-                            <a href="">
-                                <span class="thumb"><img src="images/photos/user1.png" alt="" /></span>
-                                <span class="desc">
-                                  <span class="name">John Doe <span class="badge badge-success">new</span></span>
-                                  <span class="msg">Lorem ipsum dolor sit amet...</span>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
-                                <span class="thumb"><img src="images/photos/user2.png" alt="" /></span>
-                                <span class="desc">
-                                  <span class="name">Jonathan Smith</span>
-                                  <span class="msg">Lorem ipsum dolor sit amet...</span>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
-                                <span class="thumb"><img src="images/photos/user3.png" alt="" /></span>
-                                <span class="desc">
-                                  <span class="name">Jane Doe</span>
-                                  <span class="msg">Lorem ipsum dolor sit amet...</span>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
-                                <span class="thumb"><img src="images/photos/user4.png" alt="" /></span>
-                                <span class="desc">
-                                  <span class="name">Mark Henry</span>
-                                  <span class="msg">Lorem ipsum dolor sit amet...</span>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
-                                <span class="thumb"><img src="images/photos/user5.png" alt="" /></span>
-                                <span class="desc">
-                                  <span class="name">Jim Doe</span>
-                                  <span class="msg">Lorem ipsum dolor sit amet...</span>
-                                </span>
-                            </a>
-                        </li>
-                        <li class="new"><a href="">Read All Mails</a></li>
-                    </ul>
-                </div>
-            </li>
-            <li>
-                <a href="#" class="btn btn-default dropdown-toggle info-number" data-toggle="dropdown">
                     <i class="fa fa-bell-o"></i>
                     <span class="badge">4</span>
                 </a>
@@ -181,7 +124,7 @@
             </li>
             <li>
                 <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                    <img id="headimg" src="images/photos/user-avatar.png" alt="" />
+                    <img id="headimg" src="" alt="" />
                     <span id="nickname"></span>
                     <span class="caret"></span>
                 </a>

@@ -16,6 +16,11 @@
     	</mvc:interceptor>
     </mvc:interceptors>
     
+    <mvc:resources mapping="/resources/js/**" location="/resources/js/" />  
+    <mvc:resources mapping="/resources/css/**" location="/resources/css/" />  
+    <mvc:resources mapping="/resources/images/**" location="/resources/images/" />  
+    <mvc:resources mapping="/resources/static/**" location="/resources/static/" />
+    
     <!-- 开启SpringMVC注解模式 -->
     <mvc:annotation-driven/>
 

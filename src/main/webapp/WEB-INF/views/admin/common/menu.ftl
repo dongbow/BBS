@@ -34,11 +34,11 @@
 
     <!--logo and iconic logo start-->
     <div class="logo">
-        <a href="${path}/system/admin/index.html"><img src="images/logo.png" alt=""></a>
+        <a href="${path}/system/admin/index.html"><img src="${path}/resources/static/admin/images/logo.png" alt=""></a>
     </div>
 
     <div class="logo-icon text-center">
-        <a href="index.html"><img src="images/logo_icon.png" alt=""></a>
+        <a href="index.html"><img src="${path}/resources/static/admin/images/logo_icon.png" alt=""></a>
     </div>
     <!--logo and iconic logo end-->
 

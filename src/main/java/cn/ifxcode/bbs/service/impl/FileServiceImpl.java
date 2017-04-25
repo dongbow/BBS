@@ -283,16 +283,10 @@ public class FileServiceImpl implements FileService {
 
 	private boolean validatePicture(FileItem item) {
 		if(!item.isFormField()) {
-			String types[] = imageType.split("|");
-			for (String type : types) {
-				String fileType = item.getName().substring(item.getName().indexOf(".") + 1, 
-						item.getName().length());
-				if(fileType.equals(type)) {
-					continue;
-				}
-				if(item.getSize() < imageSize * 1024 * 1024) {
-					return true;
-				}
+			List<String> types = Splitter.on("|").trimResults().omitEmptyStrings().splitToList(imageType);
+			String fileType = item.getName().substring(item.getName().lastIndexOf(".") + 1, item.getName().length());
+			if (types.contains(fileType) && (item.getSize() <= imageSize * 1024 * 1024)) {
+				return true;
 			}
 		}
 		return false;
@@ -300,24 +294,17 @@ public class FileServiceImpl implements FileService {
 	
 	private boolean validateFile(FileItem item) {
 		if(!item.isFormField()) {
-			String types[] = fileType.split("|");
-			for (String type : types) {
-				String fileType = item.getName().substring(item.getName().indexOf(".") + 1, 
-						item.getName().length());
-				if(fileType.equals(type)) {
-					continue;
-				}
-				if(item.getSize() < fileSize * 1024 * 1024) {
-					return true;
-				}
+			List<String> types = Splitter.on("|").trimResults().omitEmptyStrings().splitToList(fileType);
+			String fileType = item.getName().substring(item.getName().lastIndexOf(".") + 1, item.getName().length());
+			if (types.contains(fileType) && (item.getSize() <= fileSize * 1024 * 1024)) {
+				return true;
 			}
 		}
 		return false;
 	}
 	
 	private String createName(FileItem item) {
-		String fileType = item.getName().substring(item.getName().indexOf(".") + 1, 
-				item.getName().length());
+		String fileType = item.getName().substring(item.getName().lastIndexOf(".") + 1, item.getName().length());
 		StringBuilder builder = new StringBuilder();
 		builder.append(UUID.randomUUID().toString().replace("-", ""));
 		builder.append(new Date().getTime());

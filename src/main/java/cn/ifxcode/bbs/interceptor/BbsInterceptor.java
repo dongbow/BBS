@@ -103,6 +103,7 @@ public class BbsInterceptor extends HandlerInterceptorAdapter{
 		}
 		
 		if(!auth(request, response)) {
+			logger.info(request.getRequestURL().toString());
 			if(isAjax(request)) {
 				JSONObject responseJSONObject = new JSONObject(true);
 				Result result = new Result(BbsErrorCode.NOT_AUTH, BbsErrorCode.getDescribe(BbsErrorCode.NOT_AUTH));
