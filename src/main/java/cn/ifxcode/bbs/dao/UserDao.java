@@ -66,4 +66,6 @@ public interface UserDao {
 
 	public int updateUserInfo(UserInfo userInfo);
 
+	public List<Map<String, Object>> getUserNickname2(Map<String, Object> map);
+
 }

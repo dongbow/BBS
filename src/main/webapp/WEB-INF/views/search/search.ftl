@@ -5,43 +5,6 @@
 	<#include "../common/import.ftl"/>
 	<title>搜索</title>
 	<link rel="stylesheet" type="text/css" href="${path}/resources/css/search.css">
-	<script type="text/javascript" language="javascript">
-		function getQueryString(name) {
-			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-			var r = window.location.search.substr(1).match(reg);
-			if (r != null)
-				return unescape(r[2]);
-			return null;
-		}
-	
-		$(document).ready(function() {
-			var val = getQueryString("srchtxt");
-			document.getElementById("searchinput").value = val;
-			//alert($('.quicks').offset().left);
-		});
-		
-		$(function(){
-			$('.quicks').mouseover(function(){
-				$('#qsc').show();
-				$('#toolway b').html('↑');
-			})
-			
-			$('.quicks').mouseout(function(){
-				$('#qsc').hide();
-				$('#toolway b').html('↓');
-			})
-			
-			$('#qsc').mouseover(function(){
-				$('#qsc').show();
-				$('#toolway b').html('↑');
-			})
-			
-			$('#qsc').mouseout(function(){
-				$('#qsc').hide();
-				$('#toolway b').html('↓');
-			})
-		})
-	</script>
 </head>
 <body>
 	<div style="width: 1100px; height: 40px;margin:0px auto;">
@@ -53,28 +16,52 @@
 			<a class="author" href="${path}/search">帖子</a>
 			<a class="author" href="${path}/home/friends/request?type=add">作者</a>
 			<a class="great" href="${path}/search?adv=yes">高级搜索</a>
-			<a class="quicks great " style="">快速搜索<b>↓</b></a>
 		</div>
 		<div class="input_w">
-			<input id="searchinput" class="sach" type="text" placeholder="请输入搜索内容" value=""> 
+			<input id="searchinput" class="sach" type="text" placeholder="请输入搜索内容" value="${kw!}"> 
 			<a class="scbtn" href="${path}/search" onclick="javascript:this.href = this.href + '?kw=' + $('#searchinput').val()">搜索</a>
-		</div>
-		<div id="qsc" style="display:none;">
-			<ul>
-				<li><a href="">1小时以内的新帖</a></li>
-				<li><a href="">4小时以内的新帖</a></li>
-				<li><a href="">8小时以内的新帖</a></li>
-				<li><a href="">12小时以内的新帖</a></li>
-				<li><a href="">1周以内的帖子</a></li>
-				<li><a href="">1月以内的帖子</a></li>
-				<li><a href="">6月以内的帖子</a></li>
-				<li><a href="">1年以内的帖子</a></li>
-			</ul>
 		</div>
 		<#if adv??>
 			<#include "search-adv.ftl"/>
 		</#if>
+		<#if searchDto?? && searchDto.getTopics()?size gt 0>
+			<div class="result">
+	        	<p class="resultTips"> 结果: 找到 “<span class="emfont">${kw!}</span>” 相关内容 ${page.totalRecord} 个</p>
+	            <div class="rlt_table">
+		            <div class="rlt_thead">
+		                <div class="rlt_tr">
+		                    <div class="rlt_th rlt_title">标题</div>
+		                    <div class="rlt_th rlt_module">板块</div>
+		                    <div class="rlt_th rlt_author">作者</div>
+		                    <div class="rlt_th rlt_complex">回复/查看</div>
+		                    <div class="rlt_th rlt_lastUpdate">发布时间</div>
+		                </div>
+		            </div>
+	        		<div class="rlt_tbody">
+	        			<#list searchDto.getTopics() as topic>
+	        				<div class="rlt_tr">
+		                		<div class="rlt_th rlt_title">
+		                    		<a href="${path}/board/${topic.boardId}/topic/detail/${topic.topicId}" target="_blank" title="${topic.topicTitle}">${topic.topicTitle}</a>
+		                		</div>
+		                		<div class="rlt_th rlt_module"><a href="${path}/navigation/${topic.navId}/board/${topic.boardId}" title="${topic.board.boardName}">${topic.board.boardName}</a></div>
+		                		<div class="rlt_th rlt_author"><a href="${path}/space/uid/${topic.userId}" title="${topic.user.userAccess.userNickname}">${topic.user.userAccess.userNickname}</a></div>
+			                    <div class="rlt_th rlt_complex"><a href="javascript:void(0);" class="reply">${topic.topicData.topicReplyCount}</a>/<a href="javascript:void(0);" class="check">${topic.topicData.topicViewCount}</a></div>
+			                    <div class="rlt_th rlt_lastUpdate" title="${topic.topicCreateTime}">${topic.topicCreateTime?substring(0, 16)}</div>
+			                    <div class="rlt_th rlt_content"><#noescape>${topic.topicContent}</#noescape></div>
+		                    </div>
+						</#list>
+	    			</div>
+	        	</div>
+        		<#include "../common/page.ftl"/>
+				<@buildPage page = page/>
+	        </div>
+	    <#else>
+	    	<p class="resultTips" style="font-size: 18px"> 没有查询到 “<span class="emfont">${kw!}</span>” 的相关结果</p>
+		</#if>
 	</div>
 	<#include "../common/footer.ftl"/>
+	<script type="text/javascript">
+		$(function() {$('.goPageBox').remove();$('.both').remove();})
+	</script>
 </body>
 </html>

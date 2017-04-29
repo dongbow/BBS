@@ -4,6 +4,8 @@ public class BbsConstant {
 
 	public static final int SUPER_ADMIN = 1;
 	
+	public static final String UID = "uid";
+	public static final String TID = "tid";
 	public static final String DOMAIN = "";
 	public static final String ROOT = "/bbs";
 	public static final String TIP = "/tip";

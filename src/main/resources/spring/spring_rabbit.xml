@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/rabbit
+        http://www.springframework.org/schema/rabbit/spring-rabbit.xsd">
+        
+    <context:property-placeholder location="classpath:app.properties"/>
+    
+	<rabbit:connection-factory id="connectionFactory"
+		host="${rabbit.mq.host}" port="${rabbit.mq.port}"
+		username="${rabbit.mq.name}" password="${rabbit.mq.password}"
+		channel-cache-size="${rabbit.mq.size}" publisher-confirms="true" 
+		publisher-returns="true" />
+		
+	<rabbit:admin connection-factory="connectionFactory" />
+	
+	<rabbit:queue id="bbs_queue" durable="true" auto-delete="false" exclusive="false"
+		name="bbs_queue"></rabbit:queue>
+		
+	<rabbit:direct-exchange name="bbs-mq-exchange" durable="true" auto-delete="false" 
+		id="bbs-mq-exchange">
+		<rabbit:bindings>
+			<rabbit:binding queue="bbs_queue" key="bbs_queue_key"></rabbit:binding>
+		</rabbit:bindings>
+	</rabbit:direct-exchange>
+	
+	<bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <property name="corePoolSize" value="3"/>
+        <property name="maxPoolSize" value="5"/>
+        <property name="queueCapacity" value="15"/>
+    </bean>
+    
+	<bean id="jsonMessageConverter" class="cn.ifxcode.bbs.mq.convert.FastJsonMessageConverter"></bean>
+	
+	<!-- 生产者 -->
+	<rabbit:template exchange="bbs-mq-exchange" id="amqpTemplate" 
+		connection-factory="connectionFactory" message-converter="jsonMessageConverter"></rabbit:template>
+	
+	<!-- 消费者 -->
+	<rabbit:listener-container connection-factory="connectionFactory" acknowledge="auto" task-executor="taskExecutor">
+		<rabbit:listener queues="bbs_queue" ref="bbsQueueListener"/>
+	</rabbit:listener-container>
+	
+</beans>

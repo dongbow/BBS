@@ -98,6 +98,13 @@
 			<version>3.1.0</version>
 		</dependency>
 
+		<!-- rabbitmq -->
+		<dependency>
+			<groupId>org.springframework.amqp</groupId>
+			<artifactId>spring-rabbit</artifactId>
+			<version>1.7.2.RELEASE</version>
+		</dependency>
+		
 		<!-- freemarker -->
 		<dependency>
 			<groupId>org.freemarker</groupId>
@@ -224,6 +231,11 @@
 			<groupId>com.janeluo</groupId>
 			<artifactId>ikanalyzer</artifactId>
 			<version>2012_u6</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.lucene</groupId>
+		    <artifactId>lucene-highlighter</artifactId>
+		    <version>4.7.2</version>
 		</dependency>
 		
 		<!-- javamelody监控 -->

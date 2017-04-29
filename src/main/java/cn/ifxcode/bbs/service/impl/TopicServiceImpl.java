@@ -42,6 +42,7 @@ import cn.ifxcode.bbs.enumtype.EGHistory;
 import cn.ifxcode.bbs.enumtype.TopicSign;
 import cn.ifxcode.bbs.logger.BmcLogAnno;
 import cn.ifxcode.bbs.logger.SysLog;
+import cn.ifxcode.bbs.lucene.LuceneIndexUtils;
 import cn.ifxcode.bbs.service.BoardService;
 import cn.ifxcode.bbs.service.ClassifyService;
 import cn.ifxcode.bbs.service.GeneralService;
@@ -129,6 +130,7 @@ public class TopicServiceImpl implements TopicService{
 							&& generalService.UserAward(EGHistory.TOPIC, uid, request) == BbsConstant.OK) {
 						boardService.saveOrUpdateBoardInfo(bid, BoardSign.TOPIC, 0);
 						classifyService.saveOrUpdateCount(bid, cid);
+						LuceneIndexUtils.addIndex(topic);
 						return topic.getTopicId();
 					}
 				}
@@ -886,6 +888,18 @@ public class TopicServiceImpl implements TopicService{
 			logger.error("topic hot fail, ids : {}", ids, e);
 		}
 		return BbsConstant.ERROR;
+	}
+
+	@Override
+	public List<TopicData> getTopicDateFromRedis(List<Map<String, Long>> tidsAndBids) {
+		List<TopicData> datas = Lists.newArrayList();
+		for (Map<String, Long> map : tidsAndBids) {
+			TopicData topicData = null;
+			JSONObject object = saveOrUpdateTopicData(map.get("tid"), null, null, null, null, -1, null, null);
+			topicData = JSON.toJavaObject(object, TopicData.class);
+			datas.add(topicData);
+		}
+		return datas;
 	}
 
 }

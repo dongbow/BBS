@@ -263,4 +263,11 @@
 		select count(*) from user_access where user_nickname = #{nickName} 
 	</select>
 
+	<select id="getUserNickname2" resultType="map">
+		select user_id, user_nickname from user_access where user_id in 
+		<foreach collection="userIds" index="index" item="uid" open="(" separator="," close=")">
+			#{uid}
+		</foreach>
+	</select>
+
 </mapper>

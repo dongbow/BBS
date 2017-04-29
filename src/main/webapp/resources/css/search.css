@@ -297,3 +297,114 @@ body{
   width: 102px;
 }
 
+.result {
+  background: #fff none repeat scroll 0 0;
+  display: block;
+  height: auto;
+  margin: 50px auto 32px;
+  overflow: hidden;
+  padding: 20px 30px;
+  width: 900px;
+}
+
+.result .resultTips {
+  font-size: 16px;
+  line-height: 16px;
+  text-align: left;
+}
+
+.rlt_table {
+  margin: 32px auto 0;
+}
+
+.rlt_thead .rlt_tr {
+  border-top: medium none;
+}
+
+.rlt_table .rlt_tr {
+  border-bottom: 1px solid #ebebeb;
+  border-top: 1px solid #fafafa;
+  clear: both;
+  height: auto;
+  overflow: hidden;
+  width: 100%;
+}
+
+.rlt_thead .rlt_th {
+  color: #2b2b2b;
+}
+
+.rlt_table .rlt_th {
+  float: left;
+  font-size: 16px;
+  height: 48px;
+  line-height: 48px;
+  overflow: hidden;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rlt_table .rlt_title {
+  text-align: left;
+  text-indent: 18px;
+  width: 350px;
+}
+
+.rlt_table .rlt_module {
+  width: 100px;
+}
+
+.rlt_table .rlt_author {
+  width: 145px;
+}
+
+.rlt_table .rlt_complex {
+  width: 115px;
+}
+
+.rlt_table .rlt_lastUpdate {
+  width: 140px;
+}
+
+.rlt_tbody .rlt_tr:last-child {
+  border-bottom: medium none;
+}
+
+.rlt_tbody .rlt_module a, .rlt_tbody .rlt_author a {
+  color: #32a5e7;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.rlt_table .rlt_content {
+  clear: both;
+  height: auto;
+  line-height: 24px;
+  margin-bottom: 24px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  padding: 0 18px;
+  text-align: left;
+  white-space: normal;
+  word-break: break-all;
+}
+
+#kkpages {
+  width: 900px;
+}
+
+#kkpager_btn_go_input {
+  height: 24px;
+}
+
+#kkpager .pageBtnWrap {
+  float: right;
+}
+
+

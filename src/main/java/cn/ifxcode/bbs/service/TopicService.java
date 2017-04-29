@@ -1,6 +1,7 @@
 package cn.ifxcode.bbs.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -91,5 +92,7 @@ public interface TopicService {
 	public int move(String ids, String destbid, String cid, String gid, String role);
 
 	public int hot(String ids, int hot);
+
+	public List<TopicData> getTopicDateFromRedis(List<Map<String, Long>> tidsAndBids);
 
 }

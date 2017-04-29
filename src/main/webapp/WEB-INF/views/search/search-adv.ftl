@@ -1,5 +1,6 @@
 <div class="wp">
     <form method="get" autocomplete="off" action="search">
+    	<p style="text-align: center; color: red">暂未完成，敬请期待...</p>
         <div class="searchAdForm">
             <div class="row">
                 <div class="td1">关键词</div>

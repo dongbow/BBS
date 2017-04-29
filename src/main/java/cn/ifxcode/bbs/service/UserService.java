@@ -1,6 +1,7 @@
 package cn.ifxcode.bbs.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -105,5 +106,7 @@ public interface UserService {
 	public int updateNickname(String nickName, long uid);
 
 	public int updateUserInfo(UserInfo userInfo);
+
+	public List<Map<String, Object>> getUserNickname(List<Long> userIds);
 	
 }

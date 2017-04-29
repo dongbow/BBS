@@ -835,4 +835,11 @@ public class UserServiceImpl implements UserService {
 		return userDao.updateUserInfo(userInfo);
 	}
 
+	@Override
+	public List<Map<String, Object>> getUserNickname(List<Long> userIds) {
+		Map<String, Object> map = Maps.newHashMap();
+		map.put("userIds", userIds);
+		return userDao.getUserNickname2(map);
+	}
+
 }
