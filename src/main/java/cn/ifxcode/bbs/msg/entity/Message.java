@@ -1,11 +1,18 @@
 package cn.ifxcode.bbs.msg.entity;
 
+import java.io.Serializable;
 import java.util.Date;
+
+import org.springframework.data.mongodb.core.mapping.Document;
+
 /**
  * 消息类
  */
-public class Message {
+@Document
+public class Message implements Serializable {
 
+	private static final long serialVersionUID = -1984847587598329566L;
+	
 	//发送者
 	public Long from;
 	//发送者名称

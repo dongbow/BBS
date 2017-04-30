@@ -2,8 +2,11 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mongo="http://www.springframework.org/schema/data/mongo"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/data/mongo 
+        http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
     <!-- 1:配置数据库相关参数properties的属性：${url} -->
@@ -18,12 +21,12 @@
         <property name="password" value="${jdbc.password}"/>
 
         <!-- 配置初始化大小、最小、最大 -->  
-		<property name="initialSize" value="1" />  
-		<property name="minIdle" value="1" />   
-		<property name="maxActive" value="20" />  
+		<property name="initialSize" value="${jdbc.initialSize}" />  
+		<property name="minIdle" value="${jdbc.minIdle}" />   
+		<property name="maxActive" value="${jdbc.maxActive}" />  
 	   
 		<!-- 配置获取连接等待超时的时间 -->  
-		<property name="maxWait" value="60000" />  
+		<property name="maxWait" value="${jdbc.maxWait}" />  
 	   
 		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->  
 		<property name="timeBetweenEvictionRunsMillis" value="60000" />  
@@ -64,4 +67,24 @@
         <property name="basePackage" value="cn.ifxcode.bbs.dao"/>
     </bean>
 
+	<!-- spring-data-mongodb -->
+	<mongo:mongo host="${mongo.host}" port="${mongo.port}">
+		<mongo:options connections-per-host="${mongo.connectionsPerHost}"
+			threads-allowed-to-block-for-connection-multiplier="${mongo.threadsAllowedToBlockForConnectionMultiplier}"
+			connect-timeout="${mongo.connectTimeout}" 
+			max-wait-time="${mongo.maxWaitTime}"
+			auto-connect-retry="${mongo.autoConnectRetry}" 
+			socket-keep-alive="${mongo.socketKeepAlive}"
+			socket-timeout="${mongo.socketTimeout}" 
+			slave-ok="${mongo.slaveOk}"
+			write-number="1" 
+			write-timeout="0" 
+			write-fsync="true" />
+	</mongo:mongo>
+
+	<mongo:db-factory dbname="database" mongo-ref="mongo" />
+
+	<bean id="anotherMongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
+	</bean>
 </beans>

@@ -105,6 +105,18 @@
 			<version>1.7.2.RELEASE</version>
 		</dependency>
 		
+		<!-- mongodb -->
+		<dependency>
+        	<groupId>org.springframework.data</groupId>
+        	<artifactId>spring-data-mongodb</artifactId>
+        	<version>1.10.3.RELEASE</version>
+    	</dependency>
+		<dependency>
+		    <groupId>org.mongodb</groupId>
+		    <artifactId>mongo-java-driver</artifactId>
+		    <version>3.4.2</version>
+		</dependency>
+		
 		<!-- freemarker -->
 		<dependency>
 			<groupId>org.freemarker</groupId>

@@ -40,9 +40,9 @@ public class BbsWebSocketHandler implements WebSocketHandler {
 	 * 建立连接后
 	 */
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		User user = (User) session.getAttributes().get(BbsConstant.SESSION_NAME);
-		if (userSocketSessionMap.get(user.getUserAccess().getUserId()) == null) {
-			userSocketSessionMap.put(user.getUserAccess().getUserId(), session);
+		long uid = Long.valueOf(session.getAttributes().get(BbsConstant.UID).toString());
+		if (userSocketSessionMap.get(uid) == null) {
+			userSocketSessionMap.put(uid, session);
 		}
 	}
 
