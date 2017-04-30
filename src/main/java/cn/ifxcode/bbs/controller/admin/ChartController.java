@@ -1,4 +1,4 @@
-package cn.ifxcode.bbs.admin.controller;
+package cn.ifxcode.bbs.controller.admin;
 
 import javax.annotation.Resource;
 

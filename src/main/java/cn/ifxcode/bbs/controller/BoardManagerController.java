@@ -4,12 +4,14 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import ltang.redis.service.RedisObjectMapService;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -834,6 +836,20 @@ public class BoardManagerController {
 			result = new Result(BbsConstant.ERROR, "失败");
 		}
 		return result;
+	}
+	
+	@ModelAttribute
+	public void session(HttpServletRequest request, HttpSession session) {
+		if (session.getAttribute(BbsConstant.SESSION_NAME) == null) {
+			CookieBean cookieBean = userService.getCookieBeanFromCookie(request);
+			if(cookieBean != null) {
+				JSONObject object = redisObjectMapService.get(RedisKeyUtils.getUserInfo(cookieBean.getUser_id()), JSONObject.class);
+				if(object != null) {
+					User user = JsonUtils.decodeJson(object);
+					session.setAttribute(BbsConstant.SESSION_NAME, user);
+				}
+			}
+		}
 	}
 	
 }

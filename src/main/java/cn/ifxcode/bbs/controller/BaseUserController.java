@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import ltang.redis.service.RedisObjectMapService;
 
@@ -17,6 +18,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import cn.ifxcode.bbs.bean.CookieBean;
+import cn.ifxcode.bbs.constant.BbsConstant;
 import cn.ifxcode.bbs.entity.Navigation;
 import cn.ifxcode.bbs.entity.Recommend;
 import cn.ifxcode.bbs.entity.User;
@@ -60,12 +62,15 @@ public class BaseUserController {
 	}
 	
 	@ModelAttribute
-	public void getUserInfo(HttpServletRequest request, Model model) {
+	public void getUserInfo(HttpServletRequest request, HttpSession session, Model model) {
 		CookieBean cookieBean = userService.getCookieBeanFromCookie(request);
 		if(cookieBean != null) {
 			JSONObject object = redisObjectMapService.get(RedisKeyUtils.getUserInfo(cookieBean.getUser_id()), JSONObject.class);
 			if(object != null) {
 				User user = JsonUtils.decodeJson(object);
+				if (session.getAttribute(BbsConstant.SESSION_NAME) == null) {
+					session.setAttribute(BbsConstant.SESSION_NAME, user);
+				}
 				model.addAttribute("user", user);
 				UserValue userValue = userService.getUserValue(user.getUserAccess().getUserId());
 				model.addAttribute("userValue", userValue);

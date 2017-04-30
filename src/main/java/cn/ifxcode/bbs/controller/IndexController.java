@@ -1,5 +1,6 @@
 package cn.ifxcode.bbs.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -34,10 +35,12 @@ import cn.ifxcode.bbs.entity.PastHistory;
 import cn.ifxcode.bbs.entity.Topic;
 import cn.ifxcode.bbs.entity.UserValue;
 import cn.ifxcode.bbs.enumtype.EGHistory;
+import cn.ifxcode.bbs.msg.entity.Message;
 import cn.ifxcode.bbs.service.FriendLinkService;
 import cn.ifxcode.bbs.service.GeneralService;
 import cn.ifxcode.bbs.service.GoldExperienceService;
 import cn.ifxcode.bbs.service.HomeImageService;
+import cn.ifxcode.bbs.service.MessageService;
 import cn.ifxcode.bbs.service.NavigationService;
 import cn.ifxcode.bbs.service.TopicService;
 import cn.ifxcode.bbs.service.UserService;
@@ -76,6 +79,9 @@ public class IndexController extends BaseUserController{
 	
 	@Resource
 	private FriendLinkService friendLinkService;
+	
+	@Resource
+	private MessageService messageService;
 	
 	private GoldHistory goldHistory = null;
 	private ExperienceHistory experienceHistory = null;
@@ -175,7 +181,14 @@ public class IndexController extends BaseUserController{
 	}
 	
 	@RequestMapping("/friendlink")
-	public String toFriendLink() {
+	public String toFriendLink(HttpServletRequest request) {
+		Message message = new Message();
+		message.setDate(new Date());
+		message.setFrom(99999L);
+		message.setFromName("system");
+		message.setText("welcome to bbs");
+		message.setTo(userService.getUserIdFromCookie(request));
+		messageService.sendMsg(request, message);
 		return "friendlink";
 	}
 	

@@ -1,4 +1,4 @@
-package cn.ifxcode.bbs.mq.convert;
+package cn.ifxcode.bbs.msg.mq;
 
 import java.io.UnsupportedEncodingException;
 

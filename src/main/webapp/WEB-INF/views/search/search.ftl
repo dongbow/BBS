@@ -56,7 +56,9 @@
 				<@buildPage page = page/>
 	        </div>
 	    <#else>
-	    	<p class="resultTips" style="font-size: 18px"> 没有查询到 “<span class="emfont">${kw!}</span>” 的相关结果</p>
+	    	<#if kw??>
+	    		<p class="resultTips" style="font-size: 18px"> 没有查询到 “<span class="emfont">${kw!}</span>” 的相关结果</p>
+	    	</#if>
 		</#if>
 	</div>
 	<#include "../common/footer.ftl"/>

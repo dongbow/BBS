@@ -289,6 +289,33 @@ function dialogWithBtn(msg, funOk) {
 	$('#bbs-dialog').show();
 }
 
+function bbs_tip(msg) {
+	var sHtml = '<div id="checktip" style="width:400px;height:30px;background:#19b4ea;color:#fff">';
+	sHtml +=    '    <div class="tipcont">';
+	sHtml +=    '     	<p class="context">';
+	sHtml += msg;
+	sHtml +=    '     	</p>';
+	sHtml +=    '    </div>';
+	sHtml +=    '</div>';
+	$('#bbs-dialog').html(sHtml);
+	$('#checktip').css({
+		'top' : ($(window).height() - $('#checktip').height() - 100)/2 + 'px',
+		'left': ($(window).width() - $('#checktip').width())/2+'px'
+	});
+	$('#checktip .tipcont').css({'background': '#19b4ea'});
+	$('#checktip p').css({
+		'color': '#fff',
+		'margin-top': 0
+	});
+	$('#bbs-dialog').show();
+	setTimeout("bbs_tip_close()", 2000);
+}
+
+function bbs_tip_close() {
+	$('#checktip').remove();
+	$('#bbs-dialog').hide();
+}
+
 function click() {
 	var id = $(this).attr('id');
 	$.post(Url.links(id), function(result) {

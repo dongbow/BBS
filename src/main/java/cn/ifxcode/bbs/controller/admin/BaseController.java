@@ -1,4 +1,4 @@
-package cn.ifxcode.bbs.admin.controller;
+package cn.ifxcode.bbs.controller.admin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +7,7 @@ import java.util.TreeSet;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import ltang.redis.service.RedisObjectMapService;
 
@@ -18,7 +19,9 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import cn.ifxcode.bbs.bean.CookieBean;
+import cn.ifxcode.bbs.constant.BbsConstant;
 import cn.ifxcode.bbs.entity.Resources;
+import cn.ifxcode.bbs.entity.User;
 import cn.ifxcode.bbs.service.ResourcesService;
 import cn.ifxcode.bbs.service.UserService;
 import cn.ifxcode.bbs.utils.DateUtils;
@@ -74,6 +77,20 @@ public class BaseController {
 			for (Resources res : resources) {
 				res.setResCreateTime(DateUtils.dtlong14FromDate(DateUtils.dt14FromStr(res.getResCreateTime())));
 				formatResources(res.getResources());
+			}
+		}
+	}
+	
+	@ModelAttribute
+	public void session(HttpServletRequest request, HttpSession session) {
+		if (session.getAttribute(BbsConstant.SESSION_NAME) == null) {
+			CookieBean cookieBean = userService.getCookieBeanFromCookie(request);
+			if(cookieBean != null) {
+				JSONObject object = redisObjectMapService.get(RedisKeyUtils.getUserInfo(cookieBean.getUser_id()), JSONObject.class);
+				if(object != null) {
+					User user = JsonUtils.decodeJson(object);
+					session.setAttribute(BbsConstant.SESSION_NAME, user);
+				}
 			}
 		}
 	}

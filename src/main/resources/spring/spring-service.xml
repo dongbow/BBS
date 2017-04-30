@@ -16,7 +16,7 @@
     <context:property-placeholder location="classpath:app.properties"/>
     
     <!-- 扫描service包下所有使用注解的类型 -->
-    <context:component-scan base-package="cn.ifxcode.bbs.service ltang.redis cn.ifxcode.bbs.init cn.ifxcode.bbs.job cn.ifxcode.bbs.logger"/>
+    <context:component-scan base-package="cn.ifxcode.bbs.service ltang.redis cn.ifxcode.bbs.init cn.ifxcode.bbs.job cn.ifxcode.bbs.logger cn.ifxcode.bbs.msg"/>
 
 	<bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">    
 	    <property name="host" value="${email.host}" />    

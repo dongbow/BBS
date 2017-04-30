@@ -13,3 +13,5 @@
 
 <script src="${path}/resources/js/jquery/jquery-1.8.0.min.js" type="text/javascript" ></script>
 <script src="${path}/resources/js/APP.js" type="text/javascript" ></script>
+
+<script src="${path}/resources/js/websocket/websocket.js" type="text/javascript" ></script>
