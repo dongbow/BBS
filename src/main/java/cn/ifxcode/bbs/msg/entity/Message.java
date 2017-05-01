@@ -98,22 +98,17 @@ public class Message implements Serializable {
 		this.status = status;
 	}
 	
-	public Message() {
-		try {
-			this.id = IdWorker.getFlowIdWorkerInstance().nextId();
-			this.date = Calendar.getInstance().getTime();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	public Message() {}
 	
 	public Message (builder builder) {
+		this.id = builder.id;
 		this.from = builder.from;
 		this.fromName = builder.fromName;
 		this.to = builder.to;
 		this.text = builder.text;
 		this.type = builder.type;
 		this.status = builder.status;
+		this.date = builder.date;
 	}
 	
 	public String toJSONString() {
@@ -121,6 +116,7 @@ public class Message implements Serializable {
 	}
 	
 	public static class builder {
+		private long id;
 		//发送者
 		private Long from = 99999L;
 		//发送者名称
@@ -134,7 +130,16 @@ public class Message implements Serializable {
 		//状态 (1：已读， 0：未读)
 		private int status = 0;
 		
-		public builder() {}
+		private Date date;
+		
+		public builder() {
+			try {
+				this.id = IdWorker.getFlowIdWorkerInstance().nextId();
+				this.date = Calendar.getInstance().getTime();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
 		public Long getFrom() {
 			return from;
@@ -205,6 +210,22 @@ public class Message implements Serializable {
 		
 		public Message build() {
 			return new Message(this);
+		}
+
+		public Date getDate() {
+			return date;
+		}
+
+		public void setDate(Date date) {
+			this.date = date;
+		}
+
+		public long getId() {
+			return id;
+		}
+
+		public void setId(long id) {
+			this.id = id;
 		}
 	}
 

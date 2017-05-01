@@ -30,6 +30,7 @@ import cn.ifxcode.bbs.exception.BbsException;
 import cn.ifxcode.bbs.service.FileService;
 import cn.ifxcode.bbs.service.GeneralService;
 import cn.ifxcode.bbs.service.GoldExperienceService;
+import cn.ifxcode.bbs.service.RoleService;
 import cn.ifxcode.bbs.service.UserService;
 import cn.ifxcode.bbs.utils.CookieUtils;
 import cn.ifxcode.bbs.utils.FormValidate;
@@ -40,6 +41,9 @@ public class SettingController extends BaseUserController{
 
 	@Resource
 	private UserService userService;
+	
+	@Resource
+	private RoleService roleService;
 	
 	@Resource
 	private GeneralService generalService;
@@ -111,7 +115,10 @@ public class SettingController extends BaseUserController{
 	}
 	
 	@RequestMapping("/setting/usergroup")
-	public String userGroup() {
+	public String userGroup(Model model, HttpServletRequest request) {
+		User user = userService.getUserById(userService.getUserIdFromCookie(request));
+		model.addAttribute("userinfo", user);
+		model.addAttribute("roles", roleService.getAllRoles());
 		return "home/setting-usergroup";
 	}
 	

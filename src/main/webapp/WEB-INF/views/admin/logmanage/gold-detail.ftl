@@ -42,15 +42,7 @@
                 		
 	                	<div class="col-md-4 form-group">
 	            			<a class="btn btn-success btn-sm" id="data-search" type="button" href="${path}/system/admin/log/gold/detail/search"><i class="fa fa-search"></i> 查找 </a>
-			            	<div class="btn-group">
-								<button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
-								 <i class="fa fa-share-square-o"></i> 导出 <span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu" role="menu">
-									<li><a href="#">导出当前页</a></li>
-									<li><a href="#">导出所有</a></li>
-								</ul>
-							</div>
+			            	<a class="btn btn-primary btn-sm" target="_blank" href="" type="button"><i class="fa fa-share-square-o"></i>导出</a>
 	            		</div>
                 	</div>
                 </form>

@@ -20,9 +20,19 @@
         <!--body wrapper start-->
         <div class="wrapper">
         	<div class="row">
-                <div class="col-md-4">
+        		<div class="col-md-4">
+			        <div class="panel">
+			            <div class="panel-body">
+			                <div class="calendar-block ">
+			                    <div class="cal1">
+			                    </div>
+			                </div>
+			            </div>
+			        </div>
+			    </div>
+                <div class="col-md-8">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-8">
                             <div class="panel">
                                 <div class="panel-body">
                                     <div class="profile-pic text-center">
@@ -31,7 +41,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-8">
                             <div class="panel">
                                 <div class="panel-body">
                                     <ul class="p-info">
@@ -55,56 +65,6 @@
                                             	<#list uInfo.roles as role>
                                             		${role.roleName}. 
                                             	</#list>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-8">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="panel">
-                                <form>
-                                    <textarea class="form-control input-lg p-text-area" rows="2" placeholder="待办事项记录"></textarea>
-                                </form>
-                                <footer class="panel-footer">
-                                    <button class="btn btn-post pull-right">记录</button>
-                                    <ul class="nav nav-pills p-option">
-                                        <li>
-                                            <a href="#"><i class="fa fa-camera"></i></a>
-                                        </li>
-                                    </ul>
-                                </footer>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="panel">
-                                <header class="panel-heading">
-                                    	我的待办历史
-                                    <span class="tools pull-right">
-                                        <a class="fa fa-chevron-down" href="javascript:;"></a>
-                                        <a class="fa fa-times" href="javascript:;"></a>
-                                     </span>
-                                </header>
-                                <div class="panel-body">
-                                    <ul class="activity-list">
-                                        <li>
-                                            <div class="avatar">
-                                                <img src="${uInfo.userInfo.userHeadImg}" alt="头像"/>
-                                            </div>
-                                            <div class="activity-desk">
-                                                <h5>
-                                                	<a href="#">${uInfo.userAccess.userNickname}</a>
-                                                	<span>发表时间</span>
-                                                </h5>
-                                                <div class="album">
-                                                   	 记录内容，Ajax
-                                                </div>
                                             </div>
                                         </li>
                                     </ul>

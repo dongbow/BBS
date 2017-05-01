@@ -11,7 +11,7 @@
 	</select>
 
 	<insert id="insert" keyProperty="friendId" parameterType="UserFriends">
-		insert into user_friends (send_user_id, send_user_name, rec_user_id, rec_user_name, friend_status, send_time, update_time, friend_ip)  
+		insert into user_friends_request (send_user_id, send_user_name, rec_user_id, rec_user_name, friend_status, send_time, update_time, friend_ip)  
 		values (#{sendUserId}, #{sendUserName}, #{recUserId}, #{recUserName}, #{friendStatus}, #{sendTime}, #{updateTime}, #{friendIp})
 	</insert>
 	

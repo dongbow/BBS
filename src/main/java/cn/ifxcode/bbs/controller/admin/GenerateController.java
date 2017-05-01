@@ -39,11 +39,6 @@ public class GenerateController extends BaseController{
 	@Resource
 	private RedisObjectMapService redisObjectMapService;
 	
-	@RequestMapping("/system/admin/index")
-	public String toIndex() {
-		return "admin/index";
-	}
-	
 	@RequestMapping("/system/admin/index/body")
 	public String getIndexBody() {
 		return "admin/index-body";
@@ -80,7 +75,7 @@ public class GenerateController extends BaseController{
 		return result;
 	}
 	
-	@RequestMapping("/system/admin/self")
+	@RequestMapping(value = {"/system/admin/index", "/system/admin/self"})
 	public String toSelf(HttpServletRequest request, Model model) {
 		long uid = userService.getUserIdFromCookie(request);
 		User user = userService.getUserByIdFromRedis(Long.toString(uid));

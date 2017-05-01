@@ -55,9 +55,6 @@
 			</div>
 		</div>
 	</#if>
-	<div class="feeling">
-		<a href=""><img alt="FEELING" src="${path}/resources/images/linshi/feel.jpg" /></a>
-	</div>
 	<#if rcs?? && rcs?size gt 0>
 		<div id="bbs_notice">
 			<p>社区动态</p>
@@ -74,15 +71,17 @@
 			</div>
 		</div>
 	</#if>
-	<div id="bbs_active">
-		<p>活跃会员</p>
-		<div class="bbs_active_space">
-			<a href=""><img alt="member" src="${path}/resources/images/linshi/headimg.jpg" /></a> 
-			<a href=""><img alt="member" src="${path}/resources/images/linshi/headimg.jpg" /></a>
-			<a href=""><img alt="member" src="${path}/resources/images/linshi/headimg.jpg" /></a> 
-			<a href=""><img alt="member" src="${path}/resources/images/linshi/headimg.jpg" /></a>
-			<a href=""><img alt="member" src="${path}/resources/images/linshi/headimg.jpg" /></a> 
-			<a href=""><img alt="member" src="${path}/resources/images/linshi/headimg.jpg" /></a>
+	<#--
+		<div id="bbs_active">
+			<p>活跃会员</p>
+			<div class="bbs_active_space">
+				<a href=""><img alt="member" src="${path}/resources/images/linshi/headimg.jpg" /></a> 
+				<a href=""><img alt="member" src="${path}/resources/images/linshi/headimg.jpg" /></a>
+				<a href=""><img alt="member" src="${path}/resources/images/linshi/headimg.jpg" /></a> 
+				<a href=""><img alt="member" src="${path}/resources/images/linshi/headimg.jpg" /></a>
+				<a href=""><img alt="member" src="${path}/resources/images/linshi/headimg.jpg" /></a> 
+				<a href=""><img alt="member" src="${path}/resources/images/linshi/headimg.jpg" /></a>
+			</div>
 		</div>
-	</div>
+	-->
 </div>

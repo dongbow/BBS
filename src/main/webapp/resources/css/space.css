@@ -394,3 +394,110 @@ tr a:hover{
 .xg1,.xg1 a {
 	color: #999 !important;
 }
+
+.tbmu {
+  border-bottom: 1px dashed #e4e7e9;
+  padding: 8px 10px 8px 0;
+}
+
+.buddy {
+  margin: 0 -4px 10px -2px;
+}
+
+.cl::after {
+  clear: both;
+  content: ".";
+  display: block;
+  height: 0;
+  visibility: hidden;
+}
+
+.buddy li {
+  height: 75px;
+}
+
+.buddy li {
+  background: #f9f9f9 none repeat scroll 0 0;
+  border: 1px solid #f3f3f3;
+  display: inline;
+  float: left;
+  height: 58px;
+  margin: 10px 5px 0;
+  overflow: hidden;
+  padding: 10px 10px 10px 70px;
+  width: 154px;
+}
+
+.buddy .avt {
+  margin-left: -60px;
+  position: absolute;
+}
+
+.bbda a {
+  color: #00a7ea;
+}
+
+.avt img {
+  margin-top: 5px;
+}
+
+.avt img {
+  -moz-border-bottom-colors: none;
+  -moz-border-left-colors: none;
+  -moz-border-right-colors: none;
+  -moz-border-top-colors: none;
+  background: #fff none repeat scroll 0 0;
+  border-color: #f2f2f2 #e4e7e9 #e4e7e9 #f2f2f2;
+  border-image: none;
+  border-style: solid;
+  border-width: 1px;
+  height: 48px;
+  padding: 2px;
+  width: 48px;
+}
+
+.bbda img {
+	margin-left: 0
+}
+
+.brs, .avt img, .oshr {
+  border-radius: 5px;
+}
+
+a img {
+  border: medium none;
+}
+
+.buddy h4 {
+  height: 20px;
+  overflow: hidden;
+}
+
+.bbda a {
+  color: #00a7ea;
+}
+
+.buddy .maxh {
+  height: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 175px;
+  padding: 0 !important;
+}
+
+.bbda h4 {
+	font: inherit;
+}
+.add_ul {
+  width: 185px;
+}
+
+.xg1, .xg1 a {
+  color: #999;
+}
+
+.pipe {
+  color: #ccc;
+  margin: 0 5px;
+}

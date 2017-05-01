@@ -35,7 +35,26 @@
 				<div class="rhmct">
 					<#if type == "request">
 						<div class="cpcont">
-							request
+							<ul class="buddy c1">
+						<#list [1,2,3,4,5] as a>
+							<li class="bbda cl">
+								<div class="avt">
+									<a href="space-uid-359954.html" target="_blank">
+										<img src="http://img.res.meizu.com/img/download/uc/35/99/54/00/00/359954/w50h50" onerror="this.onerror=null;this.src=&quot;http://common.res.meizu.com/resources/php/bbs/static/image/noavatar_small.gif&quot;">
+									</a>
+								</div>
+								<h4>
+									<a href="space-uid-359954.html" title="wx2893154" target="_blank">wx2893154</a>
+								</h4>
+								<p class="maxh">超级管理员</p>
+								<div class="xg1 add_ul">
+									<a href="javascript:;">通过</a>
+									<span class="pipe">|</span>
+									<a href="javascript:;">拒绝</a>
+								</div>
+							</li>
+						</#list>
+					</ul>
 						</div>
 					<#else>
 						<div class="cpcont">

@@ -84,6 +84,15 @@ public class SystemManageController extends BaseController{
 		return "admin/sysmanage/" + user +"-list";
 	}
 	
+	@RequestMapping(value = "/{user}/add", method = RequestMethod.GET)
+	public String getUserAddPanel(@PathVariable("user")String user, Model model) {
+		List<Role> roles = roleService.getAllRoles();
+		model.addAttribute("roles", roles);
+		model.addAttribute("sys", user);
+		model.addAttribute("op", "add");
+		return "admin/sysmanage/user-add";
+	}
+	
 	@RequestMapping("/role")
 	public String toRoleList(Model model, HttpServletRequest request) {
 		List<Role> roles = roleService.getAllRoles();

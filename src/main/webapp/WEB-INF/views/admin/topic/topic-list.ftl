@@ -105,11 +105,9 @@
 				                            <td class="numeric" data-title="发表IP">${topic.topicCreateIp}</td>
 				                            <td class="numeric" data-title="更多">
 				                            	<a class="btn btn-link btn-xs topic-data" type="button" data-value="${topic.topicContent}"> 预览 </a>
-				                            	<a class="btn btn-link btn-xs topic-other" type="button" data-value="${topic.topicContent}"> 其他信息 </a>
 				                            </td>
 				                            <td class="numeric" data-title="操作">
 				                            	<a class="btn btn-default btn-xs" type="button"><i class="fa fa-edit"></i> 编辑内容 </a>
-				                            	<a class="btn btn-default btn-xs" type="button"><i class="fa fa-edit"></i> 修改信息 </a>
 				                            </td>
 				                        </tr>
 	                        		</#list>

@@ -30,7 +30,34 @@
 			</div>
 			<div id="rhomecont">
 				<div class="rhmct">
-					usergroup
+					<div class="topc">
+						<p>我的用户组：
+							<#list userinfo.roles as role>
+								<a style="color:${role.roleColor}" href="javascript:;">${role.roleName}</a>.&nbsp;&nbsp;
+							</#list>
+						</p>
+					</div>
+					<div class="bottomc">
+						<h2>用户组：</h2>
+						<table id="golds-data" style="text-align:center;width:100%;line-height:30px;border-collapse:collapse;border:1px solid #ddd" cellpadding="0" cellspacing="0">
+							<thead>
+								<tr>
+									<td style="width:30%;height:30px;border:1px solid #ddd">名称</td>
+									<td style="width:70%;height:30px;border:1px solid #ddd">描述</td>
+								</tr>
+							</thead>
+							<tbody>
+								<#if roles?? && roles?size gt 0>
+									<#list roles as g>
+										<tr>
+											<td style="width:30%;height:30px;border:1px solid #ddd">${g.roleName!}</td>
+											<td style="width:70%;height:30px;border:1px solid #ddd">${g.roleDesc!}</td>
+										</tr>
+									</#list>
+								</#if>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
