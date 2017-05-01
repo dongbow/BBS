@@ -6,25 +6,34 @@
 
 	<cache type="cn.ifxcode.bbs.dao.cache.LoggingRedisCache"/>
 
+	<select id="get" resultType="UserFriends">
+		select * from user_friend_request where friend_id = #{id}
+	</select>
+
 	<select id="validFriend" resultType="Integer" useCache="false">
 		select count(1) from user_friends where friend_status = 2 and ((send_user_id = #{sendUserId} and rec_user_id = #{recUserId}) or (send_user_id = #{recUserId} and rec_user_id = #{sendUserId})) 
 	</select>
 
 	<insert id="insert" keyProperty="friendId" parameterType="UserFriends">
-		insert into user_friends_request (send_user_id, send_user_name, rec_user_id, rec_user_name, friend_status, send_time, update_time, friend_ip)  
+		insert into user_friend_request (send_user_id, send_user_name, rec_user_id, rec_user_name, friend_status, send_time, update_time, friend_ip)  
 		values (#{sendUserId}, #{sendUserName}, #{recUserId}, #{recUserName}, #{friendStatus}, #{sendTime}, #{updateTime}, #{friendIp})
 	</insert>
 	
+	<insert id="insertFriend" parameterType="UserFriends">
+		insert into user_friends (friend_id, send_user_id, send_user_name, rec_user_id, rec_user_name, friend_status, send_time, update_time, friend_ip)  
+		values (#{friendId}, #{sendUserId}, #{sendUserName}, #{recUserId}, #{recUserName}, #{friendStatus}, #{sendTime}, #{updateTime}, #{friendIp})
+	</insert>
+	
 	<update id="dealFriendStatus">
-		update user_friends set friend_status = #{status}, update_time = #{update} where friend_status = #{isStatus}
+		update user_friend_request set friend_status = #{status}, update_time = #{update} where friend_status = #{isStatus}
 		and friend_id in 
-		<foreach collection="array" index="index" item="friendIds" open="(" separator="," close=")">  
-           	#{friendIds}   
+		<foreach collection="friendIds" index="index" item="friendId" open="(" separator="," close=")">  
+           	#{friendId}   
    		</foreach>
 	</update>
 	
 	<select id="getAllFriendsRequest" resultType="UserFriends">
-		select * from user_friends where rec_user_id = #{userId} and friend_status in (1, 2, 3) order by send_time desc
+		select * from user_friend_request where rec_user_id = #{userId} and friend_status in (1, 2, 3) order by send_time desc
 	</select>
 	
 	<select id="getFriendsList" resultType="UserFriends">

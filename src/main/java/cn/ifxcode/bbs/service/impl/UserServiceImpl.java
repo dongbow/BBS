@@ -522,9 +522,13 @@ public class UserServiceImpl implements UserService {
 		}
 		return result;
 	}
+	
+	public UserFriends get(long id) {
+		return friendsDao.get(id);
+	}
 
 	@Override
-	public int addFriend(long recUserId, String recName, HttpServletRequest request) {
+	public int addFriendRequest(long recUserId, String recName, HttpServletRequest request) {
 		Lock lock = new ReentrantLock();
 		if(lock.tryLock()) {
 			try {
@@ -585,6 +589,15 @@ public class UserServiceImpl implements UserService {
 		map.put("update", new Date());
 		synchronized (this) {
 			if(BbsConstant.OK == friendsDao.dealFriendStatus(map)) {
+				if (fs == BbsConstant.FRIEND_STATUS_PASS) {
+					UserFriends friend = get(Long.valueOf(friendIds[0]));
+					Map<String, Object> vMap = Maps.newHashMap();
+					vMap.put("sendUserId", friend.getSendUserId());
+					vMap.put("recUserId", friend.getRecUserId());
+					if (0 == friendsDao.validFriend(vMap)) {
+						friendsDao.insertFriend(friend);
+					}
+				}
 				return BbsConstant.OK;
 			}
 		}
@@ -599,6 +612,7 @@ public class UserServiceImpl implements UserService {
 		List<UserFriends> friends = friendsDao.getAllFriendsRequest(map);
 		for (UserFriends f : friends) {
 			f.setImage(userDao.getUserImage(f.getSendUserId()));
+			f.setRole(userDao.getUserById(f.getSendUserId()).getRoles().get(0).getRoleName());
 			f.setSendTime(DateUtils.dt14LongFormat(DateUtils.dt14FromStr(f.getSendTime())));
 		}
 		return friends;

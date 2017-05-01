@@ -248,3 +248,20 @@ function upProfile() {
 		}
 	});
 }
+
+function requestf(id, sign) {
+	if (id && sign) {
+		var status = sign == 2 ? 'pass' : 'refause';
+		$.post(root + '/home/friends/add/' + status, {
+			'id': id,
+		}, function(result) {
+			if(result.rc.rc == 9001){
+				loginDialog();
+			} else if(result.rc == 0) {
+				dialog(result.msg);
+			} else {
+				$(this).parent().html('<a href="javascript:;">' + 已通过 + '</a>');
+			}
+		});
+	}
+}

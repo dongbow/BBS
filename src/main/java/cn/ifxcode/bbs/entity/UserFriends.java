@@ -15,7 +15,10 @@ public class UserFriends implements Serializable {
 	private String sendTime;
 	private String updateTime;
 	private String friendIp;
+	//头像
 	private String image;
+	//角色  只取一个
+	private String role;
 
 	public long getFriendId() {
 		return friendId;
@@ -95,6 +98,14 @@ public class UserFriends implements Serializable {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 }

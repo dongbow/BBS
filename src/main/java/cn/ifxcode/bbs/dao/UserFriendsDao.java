@@ -17,4 +17,8 @@ public interface UserFriendsDao {
 
 	public List<UserFriends> getFriendsList(Map<String, Object> map);
 
+	public UserFriends get(long id);
+
+	public void insertFriend(UserFriends friend);
+
 }

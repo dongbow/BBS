@@ -29,7 +29,7 @@ import cn.ifxcode.bbs.utils.ParamsBuildUtils;
 @RequestMapping("/home")
 public class FriendsController extends BaseUserController {
 
-	private final int PAGE_SIZE_DEFAULT = 15;
+	private final int PAGE_SIZE_DEFAULT = 12;
 	
 	@Resource
 	private UserService userService;
@@ -42,7 +42,7 @@ public class FriendsController extends BaseUserController {
 		if(FormValidate.number(recUid) && StringUtils.isNotBlank(recUid) && StringUtils.isNotBlank(recName)) {
 			User user = userService.getUserById(Long.parseLong(recUid));
 			if(user != null && user.getUserPrivacy().getIsAddFriend() == 0) {
-				int row = userService.addFriend(Long.parseLong(recUid), recName, request);
+				int row = userService.addFriendRequest(Long.parseLong(recUid), recName, request);
 				if(row == BbsConstant.OK) {
 					result = new Result(BbsConstant.OK, "加好友请求发送成功");
 				} else if(row == BbsErrorCode.FRIEND_REPEAT) {

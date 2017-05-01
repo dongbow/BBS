@@ -62,7 +62,9 @@ public interface UserService {
 
 	public int cancelFavorite(String ids);
 
-	public int addFriend(long recUserId, String recName, HttpServletRequest request);
+	public UserFriends get(long id);
+	
+	public int addFriendRequest(long recUserId, String recName, HttpServletRequest request);
 
 	public int dealFriendStatus(String status, String... friendId);
 
