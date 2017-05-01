@@ -43,7 +43,7 @@ $(function(){
 	  <div id="header_cont">
 	      <a id="logo" href="${path}"><img src="${path}/resources/images/logo.png"></a>
 	      <div id="name_cont">
-	          <a href="home.htm?md=space&type=pm" target="_blank" id="message"><span>0</span></a>
+	          <a href="home.htm?md=space&type=pm" target="_blank" id="message" class="header-msg-num"><span>0</span></a>
 	          <a id="usercenter" title="${user.userAccess.userNickname}" target="_blank" href="${path}/space/uid/${user.userAccess.userId}">${user.userAccess.userNickname}</a>
 	          <a id="userhead" href="${path}/space/uid/${user.userAccess.userId}" target="_blank">
 	          	<img id="cut" title="访问我的空间" src="${user.userInfo.userHeadImg}"/>
@@ -73,7 +73,7 @@ $(function(){
 	        <div id="bbs_tip_menu">
 	            <ul>
 	                <li>
-	                	<a target="_blank" href="${path}/home/message">消息<span>0</span></a>
+	                	<a class="header-msg-num" target="_blank" href="${path}/home/message">消息<span>0</span></a>
 	                	<a target="_blank" href="${path}/home/friends/list">好友</a>
 	                </li>
 	                <li>

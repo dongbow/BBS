@@ -1,6 +1,5 @@
 package cn.ifxcode.bbs.controller;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -35,6 +34,7 @@ import cn.ifxcode.bbs.entity.PastHistory;
 import cn.ifxcode.bbs.entity.Topic;
 import cn.ifxcode.bbs.entity.UserValue;
 import cn.ifxcode.bbs.enumtype.EGHistory;
+import cn.ifxcode.bbs.enumtype.MsgType;
 import cn.ifxcode.bbs.msg.entity.Message;
 import cn.ifxcode.bbs.service.FriendLinkService;
 import cn.ifxcode.bbs.service.GeneralService;
@@ -182,12 +182,7 @@ public class IndexController extends BaseUserController{
 	
 	@RequestMapping("/friendlink")
 	public String toFriendLink(HttpServletRequest request) {
-		Message message = new Message();
-		message.setDate(new Date());
-		message.setFrom(99999L);
-		message.setFromName("system");
-		message.setText("welcome to bbs");
-		message.setTo(userService.getUserIdFromCookie(request));
+		Message message = new Message.builder().to(userService.getUserIdFromCookie(request)).text("welcome to bbs").type(MsgType.DIALOG.getCode()).status(1).build();
 		messageService.sendMsg(request, message);
 		return "friendlink";
 	}

@@ -2,9 +2,8 @@ package cn.ifxcode.bbs.enumtype;
 
 public enum MsgType {
 
-	SYSTEM(1),
-	COMMENT(2),
-	FRRIEND(3);
+	DIALOG(1),
+	NUMBER(2);
 	
 	private int code;
 	

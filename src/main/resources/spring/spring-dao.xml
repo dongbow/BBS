@@ -6,7 +6,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/data/mongo 
-        http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd
+        http://www.springframework.org/schema/data/mongo/spring-mongo.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
     <!-- 1:配置数据库相关参数properties的属性：${url} -->
@@ -68,19 +68,14 @@
     </bean>
 
 	<!-- spring-data-mongodb -->
-	<mongo:mongo host="${mongo.host}" port="${mongo.port}">
-		<mongo:options connections-per-host="${mongo.connectionsPerHost}"
+	<mongo:mongo-client host="${mongo.host}" port="${mongo.port}">
+		<mongo:client-options connections-per-host="${mongo.connectionsPerHost}"
 			threads-allowed-to-block-for-connection-multiplier="${mongo.threadsAllowedToBlockForConnectionMultiplier}"
 			connect-timeout="${mongo.connectTimeout}" 
 			max-wait-time="${mongo.maxWaitTime}"
-			auto-connect-retry="${mongo.autoConnectRetry}" 
 			socket-keep-alive="${mongo.socketKeepAlive}"
-			socket-timeout="${mongo.socketTimeout}" 
-			slave-ok="${mongo.slaveOk}"
-			write-number="1" 
-			write-timeout="0" 
-			write-fsync="true" />
-	</mongo:mongo>
+			socket-timeout="${mongo.socketTimeout}" />
+	</mongo:mongo-client>
 
 	<mongo:db-factory dbname="database" mongo-ref="mongo" />
 

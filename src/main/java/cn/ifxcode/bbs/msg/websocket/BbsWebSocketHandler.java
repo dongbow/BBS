@@ -17,11 +17,9 @@ import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 
 import cn.ifxcode.bbs.constant.BbsConstant;
-import cn.ifxcode.bbs.entity.User;
 import cn.ifxcode.bbs.msg.entity.Message;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 /**
  * Socket处理器
@@ -53,7 +51,7 @@ public class BbsWebSocketHandler implements WebSocketHandler {
 		if(message.getPayloadLength()==0)return;
 		Message msg = new Gson().fromJson(message.getPayload().toString(), Message.class);
 		msg.setDate(new Date());
-		sendMessageToUser(msg.getTo(), new TextMessage(new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create().toJson(msg)));
+		sendMessageToUser(msg.getTo(), new TextMessage(msg.toJSONString()));
 	}
 
 	/**
