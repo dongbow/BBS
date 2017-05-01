@@ -64,8 +64,15 @@
 						</h4>
 						<p class="maxh">超级管理员</p>
 						<div class="xg1 add_ul">
-							<a href="javascript:;" id="interaction_359954" onmouseover="showMenu(this.id);" class="showmenu" initialized="true">加好友</a>
-							<span class="pipe">|</span>
+							<#if user??>
+								<#if user.userAccess.userId != userinfo.userAccess.userId>
+									<a href="javascript:;" id="interaction_359954" onmouseover="showMenu(this.id);" class="showmenu" initialized="true">加好友</a>
+									<span class="pipe">|</span>
+								</#if>
+							<#else>
+								<a href="javascript:;" id="interaction_359954" onmouseover="showMenu(this.id);" class="showmenu" initialized="true">加好友</a>
+								<span class="pipe">|</span>
+							</#if>
 							<a href="javascript:;">私信</a>
 						</div>
 					</li>
