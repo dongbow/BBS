@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ifxcode.bbs.dao.AwardValueDao">
+	
+	<select id="getAllFromDB" resultType="AwardValue">
+		select * from award_value 
+	</select>
+	
+	<update id="updateAwardValue" parameterType="AwardValue">
+		update award_value set gold_value = #{goldValue}, exp_value = #{expValue} where id = #{id}
+	</update>
+
+</mapper>

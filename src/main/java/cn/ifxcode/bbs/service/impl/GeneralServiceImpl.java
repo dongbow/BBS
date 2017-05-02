@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
@@ -17,6 +20,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
@@ -24,8 +28,10 @@ import com.google.common.collect.Maps;
 
 import cn.ifxcode.bbs.bean.CookieBean;
 import cn.ifxcode.bbs.constant.BbsConstant;
+import cn.ifxcode.bbs.dao.AwardValueDao;
 import cn.ifxcode.bbs.dao.GeneralDao;
 import cn.ifxcode.bbs.dao.UserValueDao;
+import cn.ifxcode.bbs.entity.AwardValue;
 import cn.ifxcode.bbs.entity.Board;
 import cn.ifxcode.bbs.entity.BoardInfo;
 import cn.ifxcode.bbs.entity.Classify;
@@ -36,10 +42,13 @@ import cn.ifxcode.bbs.entity.SwfArea;
 import cn.ifxcode.bbs.entity.User;
 import cn.ifxcode.bbs.entity.UserValue;
 import cn.ifxcode.bbs.enumtype.EGHistory;
+import cn.ifxcode.bbs.enumtype.MsgType;
 import cn.ifxcode.bbs.exception.StopException;
+import cn.ifxcode.bbs.msg.entity.Message;
 import cn.ifxcode.bbs.service.BoardService;
 import cn.ifxcode.bbs.service.ClassifyService;
 import cn.ifxcode.bbs.service.GeneralService;
+import cn.ifxcode.bbs.service.MessageService;
 import cn.ifxcode.bbs.service.UserService;
 import cn.ifxcode.bbs.utils.DateUtils;
 import cn.ifxcode.bbs.utils.FormValidate;
@@ -73,6 +82,14 @@ public class GeneralServiceImpl implements GeneralService {
 	
 	@Resource
 	private RedisObjectMapService redisObjectMapService;
+	
+	@Resource
+	private AwardValueDao awardValueDao;
+	
+	@Resource
+	private MessageService messageService;
+	
+	private ScheduledExecutorService executorService = Executors.newScheduledThreadPool(5);
 	
 	public boolean checkIp(HttpServletRequest request) {
 		String ip = GetRemoteIpUtil.getRemoteIp(request);
@@ -139,6 +156,8 @@ public class GeneralServiceImpl implements GeneralService {
 			generalDao.insertExperienceHistory(experienceHistory);
 		}
 		userValueDao.updateUserValue(userValue);
+		Message message = new Message.builder().to(userService.getUserIdFromCookie(request)).text("金币+" + userValue.getThisGold() + "，经验+" + userValue.getThisExp()).type(MsgType.DIALOG.getCode()).status(1).build();
+		delayMsg(request, message);
 		return BbsConstant.OK;
 	}
 
@@ -410,6 +429,51 @@ public class GeneralServiceImpl implements GeneralService {
 			logger.error("get chart data fail", e);
 		}
 		return object;
+	}
+
+	@Override
+	public List<AwardValue> getAllFromDB() {
+		return awardValueDao.getAllFromDB();
+	}
+
+	@Override
+	public List<AwardValue> getAllFromRedis() {
+		JSONObject object = redisObjectMapService.get(RedisKeyUtils.getAwards(), JSONObject.class);
+		return JsonUtils.decodeJson(JSONArray.parseArray(object.getString("awards")), AwardValue.class);
+	}
+
+	public AwardValue getAwardValue(String type) {
+		List<AwardValue> list = getAllFromRedis();
+		for (AwardValue av : list) {
+			if (av.getValueType().equals(type)) {
+				return av;
+			}
+		}
+		return null;
+	}
+	
+	@Override
+	public void refreashAwardValue() {
+		List<AwardValue> list = getAllFromDB();
+		JSONArray array = JSONArray.parseArray(JSON.toJSONString(list));
+		JSONObject object = new JSONObject(true);
+		object.put("awards", array.toJSONString());
+		redisObjectMapService.save(RedisKeyUtils.getAwards(), object, JSONObject.class);
+	}
+
+	@Override
+	public int updateAwardValue(List<AwardValue> values) {
+		return 0;
+	}
+
+	@Override
+	public void delayMsg(final HttpServletRequest request, final Message message) {
+		executorService.schedule(new Runnable() {
+			@Override
+			public void run() {
+				messageService.sendMsg(request, message);
+			}
+		}, 3, TimeUnit.SECONDS);
 	}
 
 }

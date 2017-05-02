@@ -16,11 +16,13 @@ import org.springframework.stereotype.Controller;
 import cn.ifxcode.bbs.bean.Page;
 import cn.ifxcode.bbs.bean.Result;
 import cn.ifxcode.bbs.constant.BbsConstant;
+import cn.ifxcode.bbs.entity.AwardValue;
 import cn.ifxcode.bbs.entity.FriendLink;
 import cn.ifxcode.bbs.entity.Topic;
 import cn.ifxcode.bbs.lucene.LuceneIndexUtils;
 import cn.ifxcode.bbs.service.BadWordService;
 import cn.ifxcode.bbs.service.FriendLinkService;
+import cn.ifxcode.bbs.service.GeneralService;
 import cn.ifxcode.bbs.service.SystemBlackIpService;
 import cn.ifxcode.bbs.service.TopicService;
 import cn.ifxcode.bbs.utils.FormValidate;
@@ -44,8 +46,13 @@ public class SystemConfigController extends BaseController {
 	@Resource
 	private BadWordService badWordService;
 	
+	@Resource
+	private GeneralService generalService;
+	
 	@RequestMapping("/setting")
-	public String toSetting() {
+	public String toSetting(Model model) {
+		List<AwardValue> avs = generalService.getAllFromRedis();
+		model.addAttribute("avs", avs);
 		return "admin/config/setting";
 	}
 	

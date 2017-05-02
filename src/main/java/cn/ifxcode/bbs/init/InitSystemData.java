@@ -37,6 +37,7 @@ import cn.ifxcode.bbs.entity.Role;
 import cn.ifxcode.bbs.entity.ScheduleJob;
 import cn.ifxcode.bbs.entity.SwfArea;
 import cn.ifxcode.bbs.entity.SystemConfig;
+import cn.ifxcode.bbs.service.GeneralService;
 import cn.ifxcode.bbs.service.QuartzService;
 import cn.ifxcode.bbs.utils.JsonUtils;
 import cn.ifxcode.bbs.utils.RedisKeyUtils;
@@ -89,6 +90,9 @@ public class InitSystemData {
 	@Resource
 	private QuartzService quartzService;
 	
+	@Resource
+	private GeneralService generalService;
+	
 	//private ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
 	
 	@PostConstruct
@@ -105,6 +109,7 @@ public class InitSystemData {
 		initClassify();
 		initFriendLink();
 		initJob();
+		initAwardValue();
 		long end = System.currentTimeMillis();
 		logger.info("init system time: {}", (end - start) / 1000);
 		//executorService.shutdown();
@@ -278,6 +283,10 @@ public class InitSystemData {
 				quartzService.addJob(job);
 			}
 		}
+	}
+	
+	public void initAwardValue() {
+		generalService.refreashAwardValue();
 	}
 	
 }

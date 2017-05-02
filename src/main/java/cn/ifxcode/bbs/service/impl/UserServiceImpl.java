@@ -34,6 +34,7 @@ import cn.ifxcode.bbs.dao.UserFavoriteDao;
 import cn.ifxcode.bbs.dao.UserForgetDao;
 import cn.ifxcode.bbs.dao.UserFriendsDao;
 import cn.ifxcode.bbs.dao.UserValueDao;
+import cn.ifxcode.bbs.entity.AwardValue;
 import cn.ifxcode.bbs.entity.ExperienceHistory;
 import cn.ifxcode.bbs.entity.GoldHistory;
 import cn.ifxcode.bbs.entity.PastHistory;
@@ -53,6 +54,7 @@ import cn.ifxcode.bbs.enumtype.TopicSign;
 import cn.ifxcode.bbs.logger.BmcLogAnno;
 import cn.ifxcode.bbs.logger.SysLog;
 import cn.ifxcode.bbs.service.BoardService;
+import cn.ifxcode.bbs.service.GeneralService;
 import cn.ifxcode.bbs.service.GoldExperienceService;
 import cn.ifxcode.bbs.service.TopicService;
 import cn.ifxcode.bbs.service.UserService;
@@ -104,6 +106,9 @@ public class UserServiceImpl implements UserService {
 	
 	@Resource
 	private GoldExperienceService goldExperienceService;
+	
+	@Resource
+	private GeneralService generalService;
 	
 	public User authLogin(String name, String password) {
 		Map<String, Object> map = Maps.newHashMap();
@@ -235,12 +240,13 @@ public class UserServiceImpl implements UserService {
 					UserPrivacy privacy = new UserPrivacy();
 					privacy.setUserId(access.getUserId());
 					UserValue value = new UserValue();
+					AwardValue av = generalService.getAwardValue("注册");
 					value.setUserId(access.getUserId());
-					value.setUserExperience(1);
-					value.setTodayExp(1);
+					value.setUserExperience(av.getExpValue());
+					value.setTodayExp(av.getGoldValue());
 					value.setTodayExpTime(DateUtils.dt14LongFormat(new Date()));
-					value.setUserGold(50);
-					value.setTodayGold(50);
+					value.setUserGold(av.getGoldValue());
+					value.setTodayGold(av.getGoldValue());
 					value.setUserReplyCount(0);
 					value.setUserTopicCount(0);
 					value.setUserFriendCount(0);

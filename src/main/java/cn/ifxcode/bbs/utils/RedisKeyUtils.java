@@ -73,5 +73,9 @@ public class RedisKeyUtils {
 	public static String getCount(String key) {
 		return "bbs:global:count:" + key;
 	}
+
+	public static String getAwards() {
+		return "bbs:global:award";
+	}
 	
 }

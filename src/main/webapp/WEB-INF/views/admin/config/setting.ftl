@@ -103,69 +103,20 @@
                          </span>
                         </header>
                         <div class="panel-body">
-                        	<div class="form-group col-sm-10">
-		                        <label class="col-sm-2 control-label">每日限制(除注册)</label>
-		                        <div class="col-sm-5">
-		                            <input class="form-control" placeholder="金币" ype="text">
-		                        </div>
-		                        <div class="col-sm-5">
-		                            <input class="form-control" placeholder="经验" ype="text">
-		                        </div>
-		                    </div>
-                        	<div class="form-group col-sm-10">
-		                        <label class="col-sm-2 control-label">注册</label>
-		                        <div class="col-sm-5">
-		                            <input class="form-control" placeholder="金币" ype="text">
-		                        </div>
-		                        <div class="col-sm-5">
-		                            <input class="form-control" placeholder="经验" ype="text">
-		                        </div>
-		                    </div>
-                        	<div class="form-group col-sm-10">
-		                        <label class="col-sm-2 control-label">每日登录</label>
-		                        <div class="col-sm-5">
-		                            <input class="form-control" placeholder="金币" ype="text">
-		                        </div>
-		                        <div class="col-sm-5">
-		                            <input class="form-control" placeholder="经验" ype="text">
-		                        </div>
-		                    </div>
-		                    <div class="form-group col-sm-10">
-		                        <label class="col-sm-2 control-label">签到</label>
-		                        <div class="col-sm-5">
-		                            <input class="form-control" placeholder="金币" ype="text">
-		                        </div>
-		                        <div class="col-sm-5">
-		                            <input class="form-control" placeholder="经验" ype="text">
-		                        </div>
-		                    </div>
-		                    <div class="form-group col-sm-10">
-		                        <label class="col-sm-2 control-label">发帖</label>
-		                        <div class="col-sm-5">
-		                            <input class="form-control" placeholder="金币" ype="text">
-		                        </div>
-		                        <div class="col-sm-5">
-		                            <input class="form-control" placeholder="经验" ype="text">
-		                        </div>
-		                    </div>
-		                    <div class="form-group col-sm-10">
-		                        <label class="col-sm-2 control-label">回帖</label>
-		                        <div class="col-sm-5">
-		                            <input class="form-control" placeholder="金币" ype="text">
-		                        </div>
-		                        <div class="col-sm-5">
-		                            <input class="form-control" placeholder="经验" ype="text">
-		                        </div>
-		                    </div>
-		                    <div class="form-group col-sm-10">
-		                        <label class="col-sm-2 control-label">首次下载(同一附件)</label>
-		                        <div class="col-sm-5">
-		                            <input class="form-control" placeholder="金币" ype="text">
-		                        </div>
-		                        <div class="col-sm-5">
-		                            <input class="form-control" placeholder="经验" ype="text">
-		                        </div>
-		                    </div>
+                        	<#if avs??>
+                        		<#list avs as av>
+                        			<div class="form-group col-sm-10">
+				                        <label class="col-sm-2 control-label">${av.valueType}</label>
+				                        <input type="hidden" value="${av.id}" class="av-id">
+				                        <div class="col-sm-5">
+				                            <input class="form-control" placeholder="金币" type="text" value="${av.goldValue}">
+				                        </div>
+				                        <div class="col-sm-5">
+				                            <input class="form-control" placeholder="经验" type="text" value="${av.expValue}">
+				                        </div>
+				                    </div>
+                        		</#list>
+                        	</#if>
                         </div>
                     </section>
                 </div>

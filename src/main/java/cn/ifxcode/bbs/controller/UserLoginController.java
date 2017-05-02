@@ -39,6 +39,8 @@ import cn.ifxcode.bbs.entity.UserForget;
 import cn.ifxcode.bbs.entity.UserValue;
 import cn.ifxcode.bbs.enumtype.EGHistory;
 import cn.ifxcode.bbs.enumtype.LoginError;
+import cn.ifxcode.bbs.enumtype.MsgType;
+import cn.ifxcode.bbs.msg.entity.Message;
 import cn.ifxcode.bbs.service.EmailService;
 import cn.ifxcode.bbs.service.FriendLinkService;
 import cn.ifxcode.bbs.service.GeneralService;
@@ -147,6 +149,8 @@ public class UserLoginController {
 								EGHistory.LOGIN.getDesc(), user.getUserAccess().getUserLastestLoginTime());
 					}
 					goldExperienceService.insertGE(goldHistory, experienceHistory);
+					Message message = new Message.builder().to(userService.getUserIdFromCookie(request)).text("今日首次登陆成功，金币+" + userValue.getThisGold() + "，经验+" + userValue.getThisExp()).type(MsgType.DIALOG.getCode()).status(1).build();
+					generalService.delayMsg(request, message);
 				}
 				JSONObject object = new JSONObject(true);
 				object.put("user", JSON.toJSONString(user));
