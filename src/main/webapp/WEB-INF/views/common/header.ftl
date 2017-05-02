@@ -73,7 +73,7 @@ $(function(){
 	        <div id="bbs_tip_menu">
 	            <ul>
 	                <li>
-	                	<a class="header-msg-num" target="_blank" href="${path}/home/message">消息<span>0</span></a>
+	                	<a class="header-msg-num" target="_blank" href="${path}/home/message/list">消息<span>0</span></a>
 	                	<a target="_blank" href="${path}/home/friends/list">好友</a>
 	                </li>
 	                <li>
@@ -110,5 +110,12 @@ $(function(){
           <input id="scbar_txt" class="header_search" type="text" value="" name="kw" placeholder="请输入关键字搜索" />
         </div>
     </form>
+    <script type="text/javascript">
+    	$(function() {
+    		if (navigator.userAgent.indexOf("Chrome") > -1) {
+    			$('#scbar_txt').css({'height': 33 + 'px'});
+    		}
+    	});
+    </script>
   </div>
 </div>

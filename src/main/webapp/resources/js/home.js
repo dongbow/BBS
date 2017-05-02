@@ -30,6 +30,16 @@ var Friends = {
 	}
 };
 
+var message = {
+		init : function(type) {
+			$('#homeleftmenu').css('height', $('#rhomecont').height());
+			if(type == 'notice') {
+				$('#rhomecont ul li').removeClass('csth');
+				$('.cshead').addClass('csth');
+			}
+		}
+	};
+
 $(function() {
 
 	if($('#nmail').length > 0) {

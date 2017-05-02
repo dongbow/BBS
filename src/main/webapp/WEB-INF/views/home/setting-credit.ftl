@@ -35,6 +35,29 @@
 						<p>我的金币：${userValue.userGold}</p>
 					</div>
 					<div class="bottomc">
+						<h2>金币规则：</h2>
+						<table style="text-align:center;width:100%;line-height:30px;border-collapse:collapse;border:1px solid #ddd" cellpadding="0" cellspacing="0">
+							<thead>
+								<tr>
+									<td style="width:50%;height:30px;border:1px solid #ddd">描述</td>
+									<td style="width:25%;height:30px;border:1px solid #ddd">金币</td>
+									<td style="width:25%;height:30px;border:1px solid #ddd">经验</td>
+								</tr>
+							</thead>
+							<tbody>
+								<#if avs?? && avs?size gt 0>
+									<#list avs as g>
+										<tr>
+											<td style="width:10%;height:30px;border:1px solid #ddd">${g.valueType!}</td>
+											<td style="width:10%;height:30px;border:1px solid #ddd">${g.goldValue}</td>
+											<td style="width:10%;height:30px;border:1px solid #ddd">${g.expValue}</td>
+										</tr>
+									</#list>
+								</#if>
+							</tbody>
+						</table>
+					</div>
+					<div class="bottomc">
 						<h2>金币历史：</h2>
 						<table id="golds-data" style="text-align:center;width:100%;line-height:30px;border-collapse:collapse;border:1px solid #ddd" cellpadding="0" cellspacing="0">
 							<thead>

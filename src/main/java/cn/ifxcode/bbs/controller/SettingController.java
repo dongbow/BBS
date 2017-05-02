@@ -95,6 +95,7 @@ public class SettingController extends BaseUserController{
 		List<GoldHistory> golds = goldExperienceService.getUserGoldsByUid(page, null, null, uid);
 		model.addAttribute("page", page);
 		model.addAttribute("golds", golds);
+		model.addAttribute("avs", generalService.getAllFromRedis());
 		return "home/setting-credit";
 	}
 	
