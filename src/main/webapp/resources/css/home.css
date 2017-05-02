@@ -430,6 +430,85 @@ a img {
   margin: 0 5px;
 }
 
+.nts {
+  //padding-left: 20px;
+}
+
+.cl::after {
+  clear: both;
+  content: ".";
+  display: block;
+  height: 0;
+  visibility: hidden;
+}
+
+.cl::after {
+  clear: both;
+  content: ".";
+  display: block;
+  height: 0;
+  visibility: hidden;
+}
+
+.nts dl {
+  border-bottom: 1px dashed #e4e7e9;
+}
+
+.xlda dl {
+  //padding-left: 65px;
+}
+
+.xlda .m {
+  display: inline;
+  margin: 8px 0 8px -65px;
+}
+
+.xld .m {
+  float: left;
+  margin: 8px 8px 10px 0;
+}
+
+.xld dd {
+  margin-bottom: 8px;
+}
+
+.mbn {
+  margin-bottom: 5px;
+}
+
+.xlda dd a {
+  color: #00a7ea;
+}
+
+.xlda .avt img {
+  display: block;
+}
+
+.xlda dd img {
+  max-width: 550px;
+}
+
+.xld dt {
+  font-weight: 700;
+  padding: 15px 0 14px;
+}
+
+.xld a.b {
+  background-position: 0 -40px;
+}
+
+.xw0 {
+  font-weight: 400;
+}
+
+.xg1, .xg1 a {
+  color: #999;
+}
+
+.xlda dd a {
+  color: #00a7ea;
+}
+
 
 
 

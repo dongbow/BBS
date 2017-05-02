@@ -30,12 +30,33 @@
 			</div>
 			<div id="rhomecont">
 				<div class="rhmct">
-					帖子
+					<div class="xld xlda">
+						<div class="nts">
+							<#list [1,2,3,4,5,6,7,8,9,10] as a>
+								<dl class="cl " notice="2294912">
+									<dd class="m avt mbn">
+										<a href="space-uid-19382300.html"><img src="http://img.res.meizu.com/img/download/uc/19/38/23/00/00/19382300/w50h50" onerror="this.onerror=null;this.src=&quot;http://common.res.meizu.com/resources/php/bbs/static/image/noavatar_small.gif&quot;"></a>
+									</dd>
+									<dt><span class="xg1 xw0">2016-2-15 10:30</span></dt>
+									<dd class="ntc_body" style="">
+										<a href="space-uid-19382300.html">罗小栋</a> 回复了您的帖子 
+										<a href="forum.php?mod=redirect&amp;goto=findpost&amp;ptid=670496&amp;pid=10453258" target="_blank">『资源组』WIFI万能钥匙—显密版  不用麻烦下载查看器啦！</a> &nbsp; 
+										<a href="forum.php?mod=redirect&amp;goto=findpost&amp;pid=10453258&amp;ptid=670496" target="_blank" class="lit">查看</a>
+									</dd>
+								</dl>
+							</#list>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<#include "../common/footer.ftl"/>
 </body>
+<script type="text/javascript">
+	$(function() {
+		Setting.init('init');
+	});
+</script>
 <script type="text/javascript" src="${path}/resources/js/home.js" ></script>
 </html>

@@ -22,11 +22,13 @@ websocket.onopen = function(event) {
 websocket.onmessage = function(event) {
 	var data=JSON.parse(event.data);
 	console.log("WebSocket:收到一条消息",data);
-	if (data.type == 1) {
+	if (data.jsType == 1) {
 		bbs_tip(data.text);
-	} else if (data.type == 2) {
+	} else if (data.jsType == 2) {
 		$('.header-msg-num span').text(data.text);
 		$('.header-msg-num span').css({'background': '#f00'});
+	} else if (data.jsType == 3) {
+		
 	}
 	//scrollToBottom();
 };

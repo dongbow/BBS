@@ -155,7 +155,7 @@ public class IndexController extends BaseUserController{
 					generalService.saveCount("usersign");
 					result = new Result(BbsConstant.OK, "签到成功");
 					object.put("uv", userValue);
-					Message message = new Message.builder().to(userService.getUserIdFromCookie(request)).text("签到成功，金币+" + userValue.getThisGold() + "，经验+" + userValue.getThisExp()).type(MsgType.DIALOG.getCode()).status(1).build();
+					Message message = new Message.builder().to(userService.getUserIdFromCookie(request)).text("签到成功，金币+" + userValue.getThisGold() + "，经验+" + userValue.getThisExp()).jsType(MsgType.DIALOG.getCode()).status(1).build();
 					messageService.sendMsg(request, message);
 				} else {
 					result = new Result(BbsConstant.ERROR, "签到失败，请稍后重试");

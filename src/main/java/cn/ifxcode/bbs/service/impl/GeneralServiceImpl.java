@@ -156,7 +156,7 @@ public class GeneralServiceImpl implements GeneralService {
 			generalDao.insertExperienceHistory(experienceHistory);
 		}
 		userValueDao.updateUserValue(userValue);
-		Message message = new Message.builder().to(userService.getUserIdFromCookie(request)).text("金币+" + userValue.getThisGold() + "，经验+" + userValue.getThisExp()).type(MsgType.DIALOG.getCode()).status(1).build();
+		Message message = new Message.builder().to(userService.getUserIdFromCookie(request)).text("金币+" + userValue.getThisGold() + "，经验+" + userValue.getThisExp()).jsType(MsgType.DIALOG.getCode()).status(1).build();
 		delayMsg(request, message);
 		return BbsConstant.OK;
 	}

@@ -27,8 +27,10 @@ public class Message implements Serializable {
 	private Long to;
 	//发送的文本
 	private String text;
-	//类型
-	private int type;
+	//消息类型
+	private int msgType;
+	//js处理类型
+	private int jsType;
 	//状态 (1：已读， 0：未读)
 	private int status;
 	//发送日期
@@ -74,12 +76,12 @@ public class Message implements Serializable {
 		this.date = date;
 	}
 
-	public int getType() {
-		return type;
+	public int getJsType() {
+		return jsType;
 	}
 
-	public void setType(int type) {
-		this.type = type;
+	public void setJsType(int jsType) {
+		this.jsType = jsType;
 	}
 
 	public Long getId() {
@@ -106,7 +108,8 @@ public class Message implements Serializable {
 		this.fromName = builder.fromName;
 		this.to = builder.to;
 		this.text = builder.text;
-		this.type = builder.type;
+		this.setMsgType(builder.msgType);
+		this.jsType = builder.jsType;
 		this.status = builder.status;
 		this.date = builder.date;
 	}
@@ -115,6 +118,24 @@ public class Message implements Serializable {
 		return new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create().toJson(this);
 	}
 	
+	public int getMsgType() {
+		return msgType;
+	}
+
+	public void setMsgType(int msgType) {
+		this.msgType = msgType;
+	}
+	
+	@Override
+	public String toString() {
+		return "Message [id=" + id + ", from=" + from + ", fromName="
+				+ fromName + ", to=" + to + ", text=" + text + ", msgType="
+				+ msgType + ", jsType=" + jsType + ", status=" + status
+				+ ", date=" + date + "]";
+	}
+
+
+
 	public static class builder {
 		private long id;
 		//发送者
@@ -125,8 +146,10 @@ public class Message implements Serializable {
 		private Long to;
 		//发送的文本
 		private String text;
-		//类型
-		private int type;
+		//消息类型
+		private int msgType;
+		//js处理类型
+		private int jsType;
 		//状态 (1：已读， 0：未读)
 		private int status = 0;
 		
@@ -139,43 +162,6 @@ public class Message implements Serializable {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
-		
-		public Long getFrom() {
-			return from;
-		}
-		public void setFrom(Long from) {
-			this.from = from;
-		}
-		public String getFromName() {
-			return fromName;
-		}
-		public void setFromName(String fromName) {
-			this.fromName = fromName;
-		}
-		public Long getTo() {
-			return to;
-		}
-		public void setTo(Long to) {
-			this.to = to;
-		}
-		public String getText() {
-			return text;
-		}
-		public void setText(String text) {
-			this.text = text;
-		}
-		public int getType() {
-			return type;
-		}
-		public void setType(int type) {
-			this.type = type;
-		}
-		public int getStatus() {
-			return status;
-		}
-		public void setStatus(int status) {
-			this.status = status;
 		}
 		
 		public builder from(long from) {
@@ -198,8 +184,14 @@ public class Message implements Serializable {
 			return this;
 		}
 		
-		public builder type(int type) {
-			this.type = type;
+		
+		public builder msgType(int msgType) {
+			this.msgType = msgType;
+			return this;
+		}
+		
+		public builder jsType(int jsType) {
+			this.jsType = jsType;
 			return this;
 		}
 		

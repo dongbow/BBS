@@ -149,7 +149,7 @@ public class UserLoginController {
 								EGHistory.LOGIN.getDesc(), user.getUserAccess().getUserLastestLoginTime());
 					}
 					goldExperienceService.insertGE(goldHistory, experienceHistory);
-					Message message = new Message.builder().to(userService.getUserIdFromCookie(request)).text("今日首次登陆成功，金币+" + userValue.getThisGold() + "，经验+" + userValue.getThisExp()).type(MsgType.DIALOG.getCode()).status(1).build();
+					Message message = new Message.builder().to(userService.getUserIdFromCookie(request)).text("今日首次登陆成功，金币+" + userValue.getThisGold() + "，经验+" + userValue.getThisExp()).jsType(MsgType.DIALOG.getCode()).status(1).build();
 					generalService.delayMsg(request, message);
 				}
 				JSONObject object = new JSONObject(true);

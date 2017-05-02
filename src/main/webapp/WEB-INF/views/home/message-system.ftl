@@ -31,12 +31,12 @@
 			<div id="rhomecont">
 				<ul>
 					<li class="csth"><a href="${path}/home/message/list">系统提醒</a></li>
-					<li class="cshead"><a href="${path}/home/message/list?type=notice">系统通知</a></li>
+					<li class="cshead"><a href="${path}/home/message/list?type=notice">公共消息</a></li>
 				</ul>
 				<div class="rhmct">
 					<#if type == "notice">
 						<div class="cpcont">
-							通知
+							公共消息
 						</div>
 					<#else>
 						<div class="cpcont">
