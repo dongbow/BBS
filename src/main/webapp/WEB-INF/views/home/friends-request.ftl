@@ -66,7 +66,37 @@
 						</div>
 					<#else>
 						<div class="cpcont">
-							add
+							<div class="search-cont">
+								<form method="get" action="${path}/home/friends/request">
+									<input type="hidden" name="type" value="add">
+									<input type="text" id="search-name" name="key" value="${key!}" placeholder="输入昵称/UID">
+									<button class="search-btn">查找</button>
+								</form>
+							</div>
+							<#if friends?? && friends?size gt 0>
+								<ul class="buddy c1">
+									<#list friends as f>
+										<li class="bbda cl">
+											<div class="avt">
+												<a href="${path}/space/uid/${f.recUserId}" target="_blank">
+													<img src="${f.image}" onerror="this.onerror=null;this.src=&quot;http://common.res.meizu.com/resources/php/bbs/static/image/noavatar_small.gif&quot;">
+												</a>
+											</div>
+											<h4>
+												<a href="${path}/space/uid/${f.recUserId}" title="${f.recUserName}" target="_blank">${f.recUserName}</a>
+											</h4>
+											<p class="maxh">${f.role}</p>
+											<div class="xg1 add_ul">
+												<a href="javascript:;" onclick="friends(${f.recUserId}, '${f.recUserName}')">加好友</a>
+												<span class="pipe">|</span>
+												<a href="javascript:;" onclick="">发私信</a>
+											</div>
+										</li>
+									</#list>
+								</ul>
+							<#else>
+								<p>没有查找到相关用户信息</p>
+							</#if>
 						</div>
 					</#if>
 				</div>

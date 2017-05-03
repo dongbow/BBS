@@ -40,6 +40,9 @@ public class FriendsController extends BaseUserController {
 	@RequestMapping(value = "/friends/add", method = RequestMethod.POST)
 	public Result addFriend(String recUid, String recName, HttpServletRequest request) {
 		if(FormValidate.number(recUid) && StringUtils.isNotBlank(recUid) && StringUtils.isNotBlank(recName)) {
+			if (Long.parseLong(recUid) == userService.getUserIdFromCookie(request)) {
+				return new Result(BbsConstant.ERROR, "不允许添加自己为好友");
+			}
 			User user = userService.getUserById(Long.parseLong(recUid));
 			if(user != null && user.getUserPrivacy().getIsAddFriend() == 0) {
 				int row = userService.addFriendRequest(Long.parseLong(recUid), recName, request);
@@ -101,6 +104,13 @@ public class FriendsController extends BaseUserController {
 			model.addAttribute("friends", friends);
 			model.addAttribute("type", "request");
 		} else {
+			model.addAttribute("key", request.getParameter("key"));
+			if (StringUtils.isNotBlank(request.getParameter("key"))) {
+				List<UserFriends>  friends = userService.findUserToAddFriend(request.getParameter("key"), request);
+				if (friends != null && friends.size() > 0) {
+					model.addAttribute("friends", friends);
+				}
+			}
 			model.addAttribute("type", "add");
 		}
 		return "home/friends-request";

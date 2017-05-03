@@ -110,5 +110,7 @@ public interface UserService {
 	public int updateUserInfo(UserInfo userInfo);
 
 	public List<Map<String, Object>> getUserNickname(List<Long> userIds);
+
+	public List<UserFriends> findUserToAddFriend(String key, HttpServletRequest request);
 	
 }

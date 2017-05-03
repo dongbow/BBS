@@ -269,5 +269,16 @@
 			#{uid}
 		</foreach>
 	</select>
+	
+	<select id="findUserToAddFriend" resultMap="BaseUser">
+		select ua.user_id as uid, ua.user_id, ua.user_nickname, ui.user_head_img, r.role_name
+		from user_access as ua, user_info as ui, role as r, user_role as ur 
+		where ua.user_id = ui.user_id 
+		and ua.user_id = ur.user_id 
+		and r.role_id = ur.role_id
+		and ua.user_is_delete = 0 
+		and ua.user_is_locked = 0 
+		and (ua.user_id = #{uid} or ua.user_nickname like #{name})
+	</select>
 
 </mapper>

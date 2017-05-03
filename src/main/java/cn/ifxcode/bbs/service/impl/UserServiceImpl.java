@@ -21,6 +21,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import cn.ifxcode.bbs.bean.CookieBean;
@@ -860,6 +862,30 @@ public class UserServiceImpl implements UserService {
 		Map<String, Object> map = Maps.newHashMap();
 		map.put("userIds", userIds);
 		return userDao.getUserNickname2(map);
+	}
+
+	@Override
+	public List<UserFriends> findUserToAddFriend(String key, HttpServletRequest request) {
+		String nameKey = "%" + key + "%";
+		Map<String, Object> map = Maps.newHashMap();
+		map.put("name", nameKey);
+		map.put("uid", key);
+		List<User> list = userDao.findUserToAddFriend(map);
+		final User loginUser = getUserByIdFromRedis(Long.toString(getUserIdFromCookie(request)));
+		List<UserFriends> data = Lists.transform(list, new Function<User, UserFriends>() {
+			@Override
+			public UserFriends apply(User u) {
+				UserFriends uf = new UserFriends();
+				uf.setSendUserId(loginUser.getUserAccess().getUserId());
+				uf.setSendUserName(loginUser.getUserAccess().getUserNickname());
+				uf.setImage(u.getUserInfo().getUserHeadImg());
+				uf.setRecUserId(u.getUserAccess().getUserId());
+				uf.setRecUserName(u.getUserAccess().getUserNickname());
+				uf.setRole(u.getRoles().get(0).getRoleName());
+				return uf;
+			}
+		});
+		return data;
 	}
 
 }

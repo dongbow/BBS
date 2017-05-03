@@ -509,8 +509,39 @@ a img {
   color: #00a7ea;
 }
 
+.search-cont {
+	width: 100%;
+    height: auto;
+    padding: 5px 0;
+    overflow: hidden
+}
 
+#search-name {
+	width: 170px;
+    height: 20px;
+    padding: 2px;
+    margin-right: 20px;
+    color: #666;
+    float: left;
+}
 
+.search-btn {
+	display: block;
+    width: 60px;
+    height: 28px;
+    padding: 3px 0px;
+    text-align: center;
+    border: 1px solid #ddd;
+    background: #ddd;
+    float: left;
+    font: 14px/20px 'microsoft yahei';
+    border-radius: 3px;
+}
+
+.search-btn:hover {
+	background: #19b4ea;
+	color:#fff;
+}
 
 
 

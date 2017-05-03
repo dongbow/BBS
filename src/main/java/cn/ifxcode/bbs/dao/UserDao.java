@@ -68,4 +68,6 @@ public interface UserDao {
 
 	public List<Map<String, Object>> getUserNickname2(Map<String, Object> map);
 
+	public List<User> findUserToAddFriend(Map<String, Object> map);
+
 }
