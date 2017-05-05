@@ -10,4 +10,6 @@ public interface MessageService {
 	
 	public void sendMsgToAll(Message message);
 	
+	public void delayMsg(HttpServletRequest request, Message message);
+	
 }

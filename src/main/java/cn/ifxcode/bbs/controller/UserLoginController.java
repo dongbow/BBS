@@ -46,6 +46,7 @@ import cn.ifxcode.bbs.service.FriendLinkService;
 import cn.ifxcode.bbs.service.GeneralService;
 import cn.ifxcode.bbs.service.GoldExperienceService;
 import cn.ifxcode.bbs.service.LoginLogService;
+import cn.ifxcode.bbs.service.MessageService;
 import cn.ifxcode.bbs.service.UserService;
 import cn.ifxcode.bbs.utils.AESUtils;
 import cn.ifxcode.bbs.utils.CookieUtils;
@@ -90,6 +91,9 @@ public class UserLoginController {
 	
 	@Resource
 	private GeneralService generalService;
+	
+	@Resource
+	private MessageService messageService;
 	
 	private GoldHistory goldHistory = null;
 	private ExperienceHistory experienceHistory = null;
@@ -150,7 +154,7 @@ public class UserLoginController {
 					}
 					goldExperienceService.insertGE(goldHistory, experienceHistory);
 					Message message = new Message.builder().to(userService.getUserIdFromCookie(request)).text("今日首次登陆成功，金币+" + userValue.getThisGold() + "，经验+" + userValue.getThisExp()).jsType(MsgType.DIALOG.getCode()).status(1).build();
-					generalService.delayMsg(request, message);
+					messageService.delayMsg(request, message);
 				}
 				JSONObject object = new JSONObject(true);
 				object.put("user", JSON.toJSONString(user));
@@ -312,7 +316,8 @@ public class UserLoginController {
 	
 	private String decode(String backurl) {
 		try {
-			backurl = URLDecoder.decode(backurl, BbsConstant.UTF8).split(BbsConstant.ROOT)[1];
+			backurl = URLDecoder.decode(backurl, BbsConstant.UTF8);
+			//backurl = backurl.split(BbsConstant.ROOT)[1];
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}

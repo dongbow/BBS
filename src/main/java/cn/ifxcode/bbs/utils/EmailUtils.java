@@ -58,15 +58,16 @@ public class EmailUtils {
 	}
 	
 	public static String createUrl(String username, Date startTime, HttpServletRequest request) {
-		StringBuilder url = new StringBuilder(request.getRequestURL().toString().split(BbsConstant.ROOT)[0]);
-		url.append(BbsConstant.ROOT).append("/account/password/reset?rd=");
+		StringBuilder url = new StringBuilder(getServer(request));
+		url.append("account/password/reset?rd=");
 		url.append(AESUtils.encrypt(username, BbsConstant.PASSWORD).toLowerCase());
 		url.append("&st=").append(startTime.getTime());
 		return url.toString();
 	}
 	
 	public static String getServer(HttpServletRequest request) {
-		return request.getRequestURL().toString().split(BbsConstant.ROOT)[0] + BbsConstant.ROOT;
+		StringBuffer url = request.getRequestURL();
+		return url.delete(url.length() - request.getRequestURI().length(), url.length()).append(request.getServletContext().getContextPath()).append("/").toString();
 	}
 	
 	public static String createContent(String username, Date startTime, String validtime, HttpServletRequest request){

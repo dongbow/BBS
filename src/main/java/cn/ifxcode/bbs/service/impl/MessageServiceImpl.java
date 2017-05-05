@@ -1,6 +1,9 @@
 package cn.ifxcode.bbs.service.impl;
 
 import java.io.IOException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +25,8 @@ public class MessageServiceImpl implements MessageService {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
+	private ScheduledExecutorService executorService = Executors.newScheduledThreadPool(5);
+	
 	@Resource
 	private BbsWebSocketHandler webSocketHandler;
 
@@ -42,6 +47,16 @@ public class MessageServiceImpl implements MessageService {
 	public void sendMsgToAll(Message message) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void delayMsg(final HttpServletRequest request,final Message message) {
+		executorService.schedule(new Runnable() {
+			@Override
+			public void run() {
+				sendMsg(request, message);
+			}
+		}, 3, TimeUnit.SECONDS);
 	}
 	
 }

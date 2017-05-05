@@ -10,7 +10,6 @@ import cn.ifxcode.bbs.entity.AwardValue;
 import cn.ifxcode.bbs.entity.Board;
 import cn.ifxcode.bbs.entity.SwfArea;
 import cn.ifxcode.bbs.enumtype.EGHistory;
-import cn.ifxcode.bbs.msg.entity.Message;
 
 public interface GeneralService {
 
@@ -60,5 +59,4 @@ public interface GeneralService {
 	
 	public int updateAwardValue(List<AwardValue> values);
 
-	public void delayMsg(HttpServletRequest request, Message message);
 }

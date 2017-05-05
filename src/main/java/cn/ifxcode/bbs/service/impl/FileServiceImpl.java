@@ -86,12 +86,6 @@ public class FileServiceImpl implements FileService {
 	@Value("${qiniu.bucket}")
 	private String bucket;
 	
-	@Value("${thumbnail.file.dir}")
-	private String thumbnailFileDir;
-	
-	@Value("${thumbnail.url}")
-	private String thumbnailUrl;
-	
 	@Value("${image.type}")
 	private String imageType;
 	

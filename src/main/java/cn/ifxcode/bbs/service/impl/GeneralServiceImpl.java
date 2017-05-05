@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
@@ -89,8 +86,6 @@ public class GeneralServiceImpl implements GeneralService {
 	@Resource
 	private MessageService messageService;
 	
-	private ScheduledExecutorService executorService = Executors.newScheduledThreadPool(5);
-	
 	public boolean checkIp(HttpServletRequest request) {
 		String ip = GetRemoteIpUtil.getRemoteIp(request);
 		List<String> ips = getBlackIpsFromCache();
@@ -157,7 +152,7 @@ public class GeneralServiceImpl implements GeneralService {
 		}
 		userValueDao.updateUserValue(userValue);
 		Message message = new Message.builder().to(userService.getUserIdFromCookie(request)).text("金币+" + userValue.getThisGold() + "，经验+" + userValue.getThisExp()).jsType(MsgType.DIALOG.getCode()).status(1).build();
-		delayMsg(request, message);
+		messageService.delayMsg(request, message);
 		return BbsConstant.OK;
 	}
 
@@ -464,16 +459,6 @@ public class GeneralServiceImpl implements GeneralService {
 	@Override
 	public int updateAwardValue(List<AwardValue> values) {
 		return 0;
-	}
-
-	@Override
-	public void delayMsg(final HttpServletRequest request, final Message message) {
-		executorService.schedule(new Runnable() {
-			@Override
-			public void run() {
-				messageService.sendMsg(request, message);
-			}
-		}, 3, TimeUnit.SECONDS);
 	}
 
 }
