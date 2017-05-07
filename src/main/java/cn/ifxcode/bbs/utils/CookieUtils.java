@@ -65,6 +65,8 @@ public class CookieUtils {
             int maxAge, boolean secure) {
         Cookie ck = new Cookie(key, StringUtils.isEmpty(value) ? null : AESUtils.encrypt(value, BbsConstant.PASSWORD));
         ck.setMaxAge(maxAge); 
+        domain = getEnv() == true ? PropertiesUtils.getValue("bbs.cookie") : domain;
+        ck.setDomain(domain);
         ck.setPath("/");
         ck.setSecure(secure);
         return ck;
@@ -172,9 +174,13 @@ public class CookieUtils {
      */
     public static void clearCookies(HttpServletResponse response) {
         for (String s : LOCAL_COOKIE) {
-            response.addCookie(CookieUtils.makeCookieExpire(s, "",
-            		BbsConstant.DOMAIN));
+        	String domain = getEnv() == true ? PropertiesUtils.getValue("bbs.cookie") : BbsConstant.DOMAIN;
+            response.addCookie(CookieUtils.makeCookieExpire(s, "", domain));
         }
+    }
+    
+    public static boolean getEnv() {
+    	return Boolean.parseBoolean(PropertiesUtils.getValue("bbs.env"));
     }
 
 }
