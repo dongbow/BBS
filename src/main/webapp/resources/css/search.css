@@ -50,17 +50,17 @@ body{
 }
 
 .sach{
-	float:left;
-	display:block;
-	margin:9px 10px;
-	//line-height:10px;
-	width:532px;
-	height:30px;
-	border:none;
-	color:#666;
-	//border-radius:5px;
-	font:20px "microsoft yahei";
-	background:#fafafa;
+	float: left;
+    display: block;
+    outline: medium none;
+    width: 532px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    padding: 5px 10px;
+    color: #666;
+    font: 20px "microsoft yahei";
+    background: #fafafa;
 }
 
 .scbtn{

@@ -63,7 +63,16 @@
 	</div>
 	<#include "../common/footer.ftl"/>
 	<script type="text/javascript">
-		$(function() {$('.goPageBox').remove();$('.both').remove();})
+		$(function() {
+			$('.goPageBox').remove();
+			$('.both').remove();
+			
+			$('#searchinput').bind('keydown', function(e) {
+				if (e.keyCode == 13) {
+					$('.scbtn').click();
+				}
+			});
+		})
 	</script>
 </body>
 </html>

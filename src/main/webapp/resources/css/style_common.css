@@ -8,6 +8,10 @@ a {
      text-decoration: none;
 }
 
+input, textarea{
+	outline: medium none;
+}
+
 html, body, div,a,ul, li,td ,p{
      border: 0px none;
      font: inherit;
