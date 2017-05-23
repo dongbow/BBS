@@ -58,11 +58,12 @@ public class ReplyServiceImpl implements ReplyService{
 	@Resource
 	private GeneralService generalService;
 	
+	private Lock lock = new ReentrantLock();
+	
 	@Override
 	@Transactional
 	public long insertReply(HttpServletRequest request, long boardId,
 			long topicId, long uid, String rcontext, long pid) {
-		Lock lock = new ReentrantLock();
 		if(lock.tryLock()) {
 			try {
 				Reply reply = new Reply();

@@ -112,6 +112,8 @@ public class UserServiceImpl implements UserService {
 	@Resource
 	private GeneralService generalService;
 	
+	private Lock lock = new ReentrantLock();
+	
 	public User authLogin(String name, String password) {
 		Map<String, Object> map = Maps.newHashMap();
 		map.put("name", name);
@@ -217,7 +219,6 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public Integer insertUser(String userName, String password, String email, 
 			 int isAdmin, int boardManager, String roleIds, HttpServletRequest request) {
-		Lock lock = new ReentrantLock();
 		int result = 0;
 		if(lock.tryLock()) {
 			try {
@@ -281,11 +282,9 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User loginCheck(String userName, String password) {
-		Lock lock = new ReentrantLock();
 		User user = null;
 		if(lock.tryLock()) {
 			try {
-				lock.lock();
 				Map<String, Object> map = Maps.newHashMap();
 				map.put("name", userName);
 				map.put("password", password);
@@ -322,10 +321,10 @@ public class UserServiceImpl implements UserService {
 	private void formatEmail(User user) {
 		String email = user.getUserAccess().getUserEmail();
 		String first = email.split("@")[0];
-		if(first.length() < 4) {
+		if(first.length() <= 4) {
 			first = first.substring(0, 1) + "****";
 		} else {
-			first = first.substring(0, 4) + "****";
+			first = first.substring(0, 2) + "****";
 		}
 		email = first + "@" + email.split("@")[1];
 		user.getUserAccess().setUserEmail(email);
@@ -375,10 +374,8 @@ public class UserServiceImpl implements UserService {
 
 	@Transactional
 	public Integer addSign(UserValue userValue, PastHistory pastHistory) {
-		Lock lock = new ReentrantLock();
 		if(lock.tryLock()) {
 			try {
-				lock.lock();
 				if(userValueDao.updateUserValue(userValue) == BbsConstant.OK
 						&& pastHistoryDao.insertPastHistory(pastHistory) == BbsConstant.OK) {
 					return BbsConstant.OK;
@@ -403,10 +400,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int updateUserValue(UserValue userValue) {
-		Lock lock = new ReentrantLock();
 		if(lock.tryLock()) {
 			try {
-				lock.lock();
 				return userValueDao.updateUserValue(userValue);
 			} catch (Exception e) {
 				logger.error("user update uservalue error", e);
@@ -463,10 +458,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int addFavorite(long needId1, long needId2, String sign, String name, HttpServletRequest request) {
-		Lock lock = new ReentrantLock();
 		if(lock.tryLock()) {
 			try {
-				lock.lock();
 				long userId = getUserIdFromCookie(request);
 				Map<String, Object> map = Maps.newHashMap();
 				map.put("userId", userId);
@@ -537,10 +530,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int addFriendRequest(long recUserId, String recName, HttpServletRequest request) {
-		Lock lock = new ReentrantLock();
 		if(lock.tryLock()) {
 			try {
-				lock.lock();
 				long userId = getUserIdFromCookie(request);
 				Map<String, Object> map = Maps.newHashMap();
 				map.put("sendUserId", userId);

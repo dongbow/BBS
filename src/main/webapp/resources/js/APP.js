@@ -37,7 +37,7 @@ $(function(){
 			} else if(result.rc.rc == 9001){
 				loginDialog();
 			} else {
-				alert(result.rc.msg);
+				dialog(result.rc.msg);
 			}
 		});
 	});

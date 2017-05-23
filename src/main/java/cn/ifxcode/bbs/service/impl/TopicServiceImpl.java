@@ -87,58 +87,60 @@ public class TopicServiceImpl implements TopicService{
 	@Resource
 	private RedisObjectMapService redisObjectMapService;
 	
+	private Lock lock = new ReentrantLock();
+	
 	@Override
 	@Transactional
 	public long insertTopic(int cid, String ttitle, String tcontent, long uid,
 			int bid, int gid, String filelist, int isreply, int iselite, int istop,
 			int isglobaltop, int ishome, HttpServletRequest request) {
-		Lock lock = new ReentrantLock();
-		try {
-			lock.lock();
-			Topic topic = new Topic();
-			topic.setBoardId(bid);
-			topic.setClassId(cid);
-			topic.setNavId(gid);
-			topic.setUserId(uid);
-			topic.setTopicTitle(ttitle);
-			topic.setTopicContent(HtmlUtils.htmlEscape(tcontent));
-			topic.setTopicCreateIp(GetRemoteIpUtil.getRemoteIp(request));
-			topic.setTopicCreateTime(DateUtils.dt14LongFormat(new Date()));
-			topic.setTopicStatus(0);
-			topic.setTopicFileIds(filelist);
-			if(topicDao.insertTopic(topic) == BbsConstant.OK) {
-				TopicInfo topicInfo = new TopicInfo();
-				topicInfo.setTopicId(topic.getTopicId());
-				if(SystemConfigUtils.getIsOpenTopicAudit()) {
-					topicInfo.setTopicIsCheck(0);
-				} else {
-					topicInfo.setTopicIsCheck(1);
-				}
-				topicInfo.setTopicIsCream(iselite);
-				topicInfo.setTopicIsGlobalTop(isglobaltop);
-				topicInfo.setTopicIsHome(ishome);
-				topicInfo.setTopicIsHot(0);
-				topicInfo.setTopicIsLocalTop(istop);
-				topicInfo.setTopicIsReply(isreply);
-				if(topicInfoDao.insert(topicInfo) == BbsConstant.OK) {
-					TopicData topicData = new TopicData();
-					topicData.setTopicFavoriteCount(0);
-					topicData.setTopicId(topic.getTopicId());
-					topicData.setTopicReplyCount(0);
-					topicData.setTopicViewCount(0);
-					if(topicDataDao.insert(topicData) == BbsConstant.OK
-							&& generalService.UserAward(EGHistory.TOPIC, uid, request) == BbsConstant.OK) {
-						boardService.saveOrUpdateBoardInfo(bid, BoardSign.TOPIC, 0);
-						classifyService.saveOrUpdateCount(bid, cid);
-						LuceneIndexUtils.addIndex(topic);
-						return topic.getTopicId();
+		if (lock.tryLock()) {
+			try {
+				Topic topic = new Topic();
+				topic.setBoardId(bid);
+				topic.setClassId(cid);
+				topic.setNavId(gid);
+				topic.setUserId(uid);
+				topic.setTopicTitle(ttitle);
+				topic.setTopicContent(HtmlUtils.htmlEscape(tcontent));
+				topic.setTopicCreateIp(GetRemoteIpUtil.getRemoteIp(request));
+				topic.setTopicCreateTime(DateUtils.dt14LongFormat(new Date()));
+				topic.setTopicStatus(0);
+				topic.setTopicFileIds(filelist);
+				if(topicDao.insertTopic(topic) == BbsConstant.OK) {
+					TopicInfo topicInfo = new TopicInfo();
+					topicInfo.setTopicId(topic.getTopicId());
+					if(SystemConfigUtils.getIsOpenTopicAudit()) {
+						topicInfo.setTopicIsCheck(0);
+					} else {
+						topicInfo.setTopicIsCheck(1);
+					}
+					topicInfo.setTopicIsCream(iselite);
+					topicInfo.setTopicIsGlobalTop(isglobaltop);
+					topicInfo.setTopicIsHome(ishome);
+					topicInfo.setTopicIsHot(0);
+					topicInfo.setTopicIsLocalTop(istop);
+					topicInfo.setTopicIsReply(isreply);
+					if(topicInfoDao.insert(topicInfo) == BbsConstant.OK) {
+						TopicData topicData = new TopicData();
+						topicData.setTopicFavoriteCount(0);
+						topicData.setTopicId(topic.getTopicId());
+						topicData.setTopicReplyCount(0);
+						topicData.setTopicViewCount(0);
+						if(topicDataDao.insert(topicData) == BbsConstant.OK
+								&& generalService.UserAward(EGHistory.TOPIC, uid, request) == BbsConstant.OK) {
+							boardService.saveOrUpdateBoardInfo(bid, BoardSign.TOPIC, 0);
+							classifyService.saveOrUpdateCount(bid, cid);
+							LuceneIndexUtils.addIndex(topic);
+							return topic.getTopicId();
+						}
 					}
 				}
+			} catch (Exception e) {
+				logger.error("insertTopic fail", e);
+			} finally {
+				lock.unlock();
 			}
-		} catch (Exception e) {
-			logger.error("insertTopic fail", e);
-		} finally {
-			lock.unlock();
 		}
 		return BbsConstant.ERROR;
 	}
@@ -227,7 +229,13 @@ public class TopicServiceImpl implements TopicService{
 	
 	public Topic getTopicForReplyByTopicId(long topicId) {
 		Topic topic = topicDao.getTopicByTopicId(topicId);
-		topic.setBoard(boardService.getBoardByBoardId(topic.getNavId(), topic.getBoardId()));
+		try {
+			topic.setBoard(boardService.getBoardByBoardId(topic.getNavId(), topic.getBoardId()));
+		} catch (Exception e) {
+			long gid = topic.getNavId();
+			long bid = topic.getBoardId();
+			logger.debug("gid:{}, bid:{}", gid, bid);
+		}
 		JSONObject object = saveOrUpdateTopicData(topic.getTopicId(), null, null, null, null, -1, null, null);
 		topic.setTopicData(JSON.toJavaObject(object, TopicData.class));
 		return topic;
@@ -438,52 +446,52 @@ public class TopicServiceImpl implements TopicService{
 	public int updateTopic(String tid, String ttitle, String tcontent,
 			int isreply, int iselite, int istop, int isglobaltop, int ishome,
 			HttpServletRequest request) {
-		Lock lock = new ReentrantLock();
-		try {
-			lock.lock();
-			if(NumberUtils.getAllNumber(tid) > 0) {
-				Topic topic = getTopicByTopicId(NumberUtils.getAllNumber(tid));
-				if(topic == null) {
-					return BbsConstant.ERROR;
-				}
-				topic.setTopicTitle(ttitle);
-				topic.setTopicContent(HtmlUtils.htmlEscape(tcontent));
-				if(topicDao.updateTopic(topic) == BbsConstant.OK) {
-					TopicInfo topicInfo = new TopicInfo();
-					topicInfo.setTopicId(topic.getTopicId());
-					if(SystemConfigUtils.getIsOpenTopicAudit()) {
-						topicInfo.setTopicIsCheck(0);
-					} else {
-						topicInfo.setTopicIsCheck(1);
+		if (lock.tryLock()) {
+			try {
+				if(NumberUtils.getAllNumber(tid) > 0) {
+					Topic topic = getTopicByTopicId(NumberUtils.getAllNumber(tid));
+					if(topic == null) {
+						return BbsConstant.ERROR;
 					}
-					topicInfo.setTopicIsCream(iselite);
-					topicInfo.setTopicIsGlobalTop(isglobaltop);
-					topicInfo.setTopicIsHome(ishome);
-					topicInfo.setTopicIsHot(0);
-					topicInfo.setTopicIsLocalTop(istop);
-					topicInfo.setTopicIsReply(isreply);
-					if(topicInfoDao.update(topicInfo) == BbsConstant.OK) {
-						TopicData topicData = getTopicDateFromRedis(topic.getTopicId(), topic.getBoardId());
-						CookieBean bean = userService.getCookieBeanFromCookie(request);
-						topicData.setTopicId(topic.getTopicId());
-						if(topicData.getTopicFavoriteCount() == null) {
-							topicData.setTopicFavoriteCount(0);
+					topic.setTopicTitle(ttitle);
+					topic.setTopicContent(HtmlUtils.htmlEscape(tcontent));
+					if(topicDao.updateTopic(topic) == BbsConstant.OK) {
+						TopicInfo topicInfo = new TopicInfo();
+						topicInfo.setTopicId(topic.getTopicId());
+						if(SystemConfigUtils.getIsOpenTopicAudit()) {
+							topicInfo.setTopicIsCheck(0);
+						} else {
+							topicInfo.setTopicIsCheck(1);
 						}
-						topicData.setTopicUpdateUserId(bean.getUser_id());
-						topicData.setTopicUpdateUserId(bean.getUser_id());
-						topicData.setTopicUpdateUser(bean.getNick_name());
-						topicData.setTopicUpdateTime(DateUtils.dt14LongFormat(new Date()));
-						if(topicDataDao.update(topicData) == BbsConstant.OK) {
-							saveOrUpdateTopicData(topic.getTopicId(), null, null, null, null, bean.getUser_id(), bean.getNick_name(), topicData.getTopicUpdateTime());
-							return BbsConstant.OK;
+						topicInfo.setTopicIsCream(iselite);
+						topicInfo.setTopicIsGlobalTop(isglobaltop);
+						topicInfo.setTopicIsHome(ishome);
+						topicInfo.setTopicIsHot(0);
+						topicInfo.setTopicIsLocalTop(istop);
+						topicInfo.setTopicIsReply(isreply);
+						if(topicInfoDao.update(topicInfo) == BbsConstant.OK) {
+							TopicData topicData = getTopicDateFromRedis(topic.getTopicId(), topic.getBoardId());
+							CookieBean bean = userService.getCookieBeanFromCookie(request);
+							topicData.setTopicId(topic.getTopicId());
+							if(topicData.getTopicFavoriteCount() == null) {
+								topicData.setTopicFavoriteCount(0);
+							}
+							topicData.setTopicUpdateUserId(bean.getUser_id());
+							topicData.setTopicUpdateUserId(bean.getUser_id());
+							topicData.setTopicUpdateUser(bean.getNick_name());
+							topicData.setTopicUpdateTime(DateUtils.dt14LongFormat(new Date()));
+							if(topicDataDao.update(topicData) == BbsConstant.OK) {
+								saveOrUpdateTopicData(topic.getTopicId(), null, null, null, null, bean.getUser_id(), bean.getNick_name(), topicData.getTopicUpdateTime());
+								return BbsConstant.OK;
+							}
 						}
 					}
 				}
+			} catch (Exception e) {
+				logger.error("update topic fail", e);
+			} finally {
+				lock.unlock();
 			}
-		} catch (Exception e) {
-			logger.error("update topic fail", e);
-		} finally {
-			lock.unlock();
 		}
 		return BbsConstant.ERROR;
 	}

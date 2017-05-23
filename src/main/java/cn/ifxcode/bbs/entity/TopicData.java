@@ -103,5 +103,18 @@ public class TopicData implements Serializable, Comparable<TopicData> {
 	public int compareTo(TopicData o) {
 		return DateUtils.dt14FromStr(this.lastestReplyTime).compareTo(DateUtils.dt14FromStr(o.lastestReplyTime));
 	}
+	
+	@Override
+	public String toString() {
+		return "TopicData [topicId=" + topicId + ", topicReplyCount="
+				+ topicReplyCount + ", topicViewCount=" + topicViewCount
+				+ ", topicFavoriteCount=" + topicFavoriteCount
+				+ ", topicTitleStyle=" + topicTitleStyle
+				+ ", lastestReplyUser=" + lastestReplyUser
+				+ ", lastestReplyTime=" + lastestReplyTime
+				+ ", topicUpdateUserId=" + topicUpdateUserId
+				+ ", topicUpdateUser=" + topicUpdateUser + ", topicUpdateTime="
+				+ topicUpdateTime + "]";
+	}
 
 }

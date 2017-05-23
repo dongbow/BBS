@@ -59,7 +59,7 @@ public class ParamsBuildUtils {
 				}
 			}
 		} catch (Exception e) {
-			// nothing
+			// ignore
 		}
 	}
 	

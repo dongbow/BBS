@@ -278,7 +278,7 @@ public class UserLoginController {
 	
 	@RequestMapping("/password/reset")
 	public String toPwdReset(String rd, String st, HttpServletRequest request, Model model) {
-		if(StringUtils.isEmpty(st) && StringUtils.isEmpty(rd)) {
+		if(StringUtils.isBlank(st) && StringUtils.isBlank(rd)) {
 			return "redirect:/account/forget";
 		}
 		String name = AESUtils.decrypt(rd.toUpperCase(), BbsConstant.PASSWORD);
@@ -306,6 +306,7 @@ public class UserLoginController {
 				null, BbsConstant.DOMAIN));
 		redisObjectMapService.delete(RedisKeyUtils.getUserInfo(id));
 		redisObjectMapService.delete(RedisKeyUtils.getRemember(id));
+		request.getSession().invalidate();
 		if(BbsConstant.SYSTEM.equals(from)) {
 			return "redirect:" + BbsConstant.ADMIN_LOGIN;
 		} else if("forget".equals(from)) {

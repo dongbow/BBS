@@ -31,6 +31,8 @@ public class ReportServiceImpl implements ReportService {
 	
 	@Resource
 	private ReportDao reportDao;
+	
+	private Lock lock = new ReentrantLock();
 
 	@Override
 	public int addReport(String uid, String tid, String rid, String floor,
@@ -43,10 +45,8 @@ public class ReportServiceImpl implements ReportService {
 			return BbsConstant.ERROR;
 		}
 		CookieBean bean = userService.getCookieBeanFromCookie(request);
-		Lock lock = new ReentrantLock();
 		if(lock.tryLock()) {
 			try {
-				lock.lock();
 				Report report = new Report();
 				report.setBeFloor((int) beFloor);
 				report.setBeRid(beRid);

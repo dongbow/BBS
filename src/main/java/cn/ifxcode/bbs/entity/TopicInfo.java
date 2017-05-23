@@ -106,4 +106,19 @@ public class TopicInfo implements Serializable {
 		this.topicIsCream = topicIsCream;
 	}
 
+	@Override
+	public String toString() {
+		return "TopicInfo [topicId=" + topicId + ", topicIsCheck="
+				+ topicIsCheck + ", topicIsHome=" + topicIsHome
+				+ ", topicIsHomeEndTime=" + topicIsHomeEndTime
+				+ ", topicIsReply=" + topicIsReply + ", topicIsLocalTop="
+				+ topicIsLocalTop + ", topicIsLocalTopEndTime="
+				+ topicIsLocalTopEndTime + ", topicIsGlobalTop="
+				+ topicIsGlobalTop + ", topicIsGlobalTopEndTime="
+				+ topicIsGlobalTopEndTime + ", topicIsHot=" + topicIsHot
+				+ ", topicIsCream=" + topicIsCream + "]";
+	}
+	
+	
+
 }
