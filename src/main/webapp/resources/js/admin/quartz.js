@@ -1,5 +1,6 @@
 $(function() {
 	$('.quartz-now').bind('click', runNow);
+	
 });
 
 function runNow(e) {
@@ -19,4 +20,12 @@ function runNow(e) {
 			failTip(result.msg);
 		}
 	});
+}
+
+function dataAddSave() {
+	
+}
+
+function dataUpdateSave() {
+	
 }

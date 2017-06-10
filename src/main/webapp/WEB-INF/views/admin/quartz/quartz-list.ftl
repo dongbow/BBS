@@ -34,8 +34,8 @@
 			            </div>
 	                	<div class="col-md-4 form-group">
 	            			<a class="btn btn-success btn-sm" id="data-search" type="button" href="${path}/system/admin/quartz/list/search"><i class="fa fa-search"></i> 查找 </a>
-	            			<a class="btn btn-info btn-sm" type="button"><i class="fa fa-plus"></i> 添加 </a>
-			            	<a class="btn btn-danger btn-sm" type="button"><i class="fa fa-trash-o"></i> 删除 </a>
+	            			<a class="btn btn-info btn-sm data-add" type="button" href="${path}/system/admin/quartz/add"><i class="fa fa-plus"></i> 添加 </a>
+			            	<a class="btn btn-danger btn-sm data-delete" type="button" href="${path}/system/admin/quartz/delete"><i class="fa fa-trash-o"></i> 删除 </a>
 	            		</div>
                 	</div>
                 </form>
@@ -62,7 +62,7 @@
 	                        <#if jobs??>
 	                        	<#list jobs as job>
 	                        		<tr>
-			                        	<th><input type="checkbox" data-id="${job.jobId}"></th>
+			                        	<th><input type="checkbox" data-id="${job.jobId}" class="data-check-id"></th>
 			                            <td data-title="ID">${job.jobId}</td>
 			                            <td data-title="任务名">${job.jobName}</td>
 			                            <td class="numeric" data-title="任务状态">
@@ -74,7 +74,7 @@
 			                            <td class="numeric" data-title="描述">${job.description!}</td>
 			                            <td class="numeric" data-title="创建时间">${job.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
 			                            <th class="numeric" data-title="操作">
-			                            	<a class="btn btn-default btn-xs" type="button"><i class="fa fa-edit"></i> 编辑 </a>
+			                            	<a class="btn btn-default btn-xs data-update" href="${path}/system/admin/quartz/update" data-id="${job.jobId}" type="button"><i class="fa fa-edit"></i> 编辑 </a>
 			                            	<#if job.jobStatus == '1'>
 			                            		<a class="btn btn-default btn-xs" type="button"><i class="fa fa-lock"></i> 暂停 </a>
 			                            	<#else>
@@ -93,6 +93,9 @@
 	        </section>
         </div>
         <!--body wrapper end-->
+
+		<!-- model -->
+		<div class="modal fade" id="data-modal" tabindex="-1" role="dialog" aria-labelledby="data-modal" aria-hidden="true" data-backdrop="static"></div>
 
         <!--footer section start-->
         <footer style="bottom:0">

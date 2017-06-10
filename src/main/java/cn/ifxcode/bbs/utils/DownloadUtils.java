@@ -1,5 +1,7 @@
 package cn.ifxcode.bbs.utils;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -53,6 +55,19 @@ public class DownloadUtils {
 				}
 			}
 		}
+	}
+	
+	public static void downloadLocal(String filePath, String fileName, HttpServletResponse response) throws IOException {
+		InputStream in = new FileInputStream(new File(filePath));
+		OutputStream out = response.getOutputStream();
+		response.setHeader("Content-Disposition", "attachment;filename=" + fileName);
+		int b;
+		while((b = in.read()) != -1) {
+			out.write(b);
+		}
+		out.flush();
+		in.close();
+		out.close();
 	}
 	
 }

@@ -14,5 +14,7 @@ public interface BadWordService {
 	public List<BadWord> getBadWords(Page page);
 	
 	public List<BadWord> getBadWords(Page page, String word);
+
+	public int batchSave(List<BadWord> list);
 	
 }

@@ -1,5 +1,7 @@
 $(function() {
 	$('#data-add').bind('click', badAdd);
+	
+	$('.data-import').bind('click', badImport);
 });
 
 function badAdd(event) {
@@ -22,4 +24,56 @@ function badAdd(event) {
 			});
 		}
 	}); 
+}
+
+function badImport(event) {
+	event.preventDefault();
+	$.get($(this).attr('href'), function(result) {
+		if(result.rc != undefined && result.rc.rc == 9001){
+			loginDialog(result);
+		} else if(result.rc != undefined && result.rc.rc == 9999) {
+			authDialog(result);
+		} else {
+			$('#data-modal').html(result);
+			$('#data-modal').modal();
+			$('.modal-footer').on('click', '.save', dataAddSave);
+			$('.modal-footer').on('click', '.cancel', close);
+		}
+	});
+}
+
+function uploadFile() {
+	$('#upload-form').ajaxSubmit({
+		type: "POST",
+        url: $('#upload-form').attr('action'),
+        success: function (result) {
+        	if(result.rc != undefined && result.rc.rc == 9001){
+    			loginDialog(result);
+    		} else if(result.rc != undefined && result.rc.rc == 9999) {
+    			authDialog(result);
+    		} else if (result.rc == 0) {
+    			failTip(result.msg);
+    		} else {
+	        	$('#import_url').attr('value', result.data);
+    		}
+        }
+	});
+}
+
+function dataAddSave() {
+	var path = $('#import_url').attr('value');
+	$.post($('.data-import').attr('href'), {
+		'path': path
+	}, function(result) {
+		if(result.rc != undefined && result.rc.rc == 9001){
+			loginDialog(result);
+		} else if(result.rc != undefined && result.rc.rc == 9999) {
+			authDialog(result);
+		} else if (result.rc == 0) {
+			failTip(result.msg);
+		} else {
+			sucTip(result.msg);
+			$('.close').click();
+		}
+	});
 }

@@ -1,5 +1,6 @@
 package cn.ifxcode.bbs.service.impl;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +9,7 @@ import javax.annotation.Resource;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -74,6 +76,14 @@ public class BadWordServiceImpl implements BadWordService {
 			map.put("word", "%" + word + "%");
 		}
 		return badWordDao.getBadWords(map);
+	}
+
+	@Override
+	@Transactional
+	@SysLog(module = "系统配置", methods = "敏感词-导入")
+	@Async
+	public int batchSave(List<BadWord> list) {
+		return new BadWord().batchSave(list, Calendar.getInstance().getTime());
 	}
 
 }

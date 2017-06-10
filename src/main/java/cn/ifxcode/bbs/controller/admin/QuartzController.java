@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -53,6 +54,21 @@ public class QuartzController extends BaseController {
 		return "admin/quartz/quartz-list";
 	}
 	
+	@RequestMapping("/history")
+	public String history() {
+		return "admin/quartz/quartz-history";
+	}
+	
+	@RequestMapping(value = "/{type}", method = RequestMethod.GET)
+	public String addPanel(@PathVariable(value = "type")String type, 
+			@RequestParam(value = "id", required = false)Integer jobId, Model model) {
+		if (type.equals("update")) {
+			ScheduleJob job = quartzService.getJobById(jobId);
+			model.addAttribute("job", job);
+		}
+		return "admin/quartz/quartz-panel";
+	}
+	
 	@ResponseBody
 	@RequestMapping(value = "/runnow", method = RequestMethod.POST)
 	public Result runJobNow(long id) {
@@ -67,6 +83,50 @@ public class QuartzController extends BaseController {
 		} catch (Exception e) {
 			logger.error("run job now fail", e);
 			result = new Result(BbsConstant.ERROR, "任务执行失败");
+		}
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/pause")
+	public Result pause(long id) {
+		Result result = null;
+		try {
+			ScheduleJob job = quartzService.getJobById(id);
+			if (job != null) {
+				if (quartzService.pauseJob(job) == BbsConstant.OK) {
+					result = new Result(BbsConstant.OK, "任务暂停成功");
+				} else {
+					result = new Result(BbsConstant.ERROR, "任务暂停失败");
+				}
+			} else {
+				result = new Result(BbsConstant.ERROR, "任务暂停失败");
+			}
+		} catch (Exception e) {
+			logger.error("pause job fail", e);
+			result = new Result(BbsConstant.ERROR, "任务暂停失败");
+		}
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/start")
+	public Result resume(long id) {
+		Result result = null;
+		try {
+			ScheduleJob job = quartzService.getJobById(id);
+			if (job != null) {
+				if (quartzService.resumeJob(job) == BbsConstant.OK) {
+					result = new Result(BbsConstant.OK, "任务启动成功");
+				} else {
+					result = new Result(BbsConstant.ERROR, "任务启动失败");
+				}
+			} else {
+				result = new Result(BbsConstant.ERROR, "任务启动失败");
+			}
+		} catch (Exception e) {
+			logger.error("resume job fail", e);
+			result = new Result(BbsConstant.ERROR, "任务启动失败");
 		}
 		return result;
 	}

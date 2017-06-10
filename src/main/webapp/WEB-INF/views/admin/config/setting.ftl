@@ -25,51 +25,22 @@
                         <header class="panel-heading">
                           	  系统功能
                         <span class="tools pull-right">
-                        	<a href="${path}" class="fa fa-save system-save" style="background:#5bc0de !important;color:#fff"> 保存更改 </a>
+                        	<a href="${path}/system/admin/config/update" class="fa fa-save system-save" style="background:#5bc0de !important;color:#fff"> 保存更改 </a>
                             <a href="javascript:;" class="fa fa-chevron-down"></a>
                          </span>
                         </header>
                         <div class="panel-body">
-                        	<div class="col-md-2 form-group">
-                        		<label class="control-label">论坛访问</label>
-			                    <select id="isOpenBbs" class="selectpicker show-tick form-control">
-			                      	<option value="0">开启</option>
-			                      	<option value="1">关闭</option>
-						        </select>
-				            </div>
-				            
-				            <div class="col-md-2 form-group">
-                        		<label class="control-label">论坛注册</label>
-			                    <select id="isAllowRegister" class="selectpicker show-tick form-control">
-			                      	<option value="0">开启</option>
-			                      	<option value="1">关闭</option>
-						        </select>
-				            </div>
-				            
-				            <div class="col-md-2 form-group">
-                        		<label class="control-label">帖子审核</label>
-			                    <select id="isOpenTopicAudit" class="selectpicker show-tick form-control">
-			                      	<option value="0">开启</option>
-			                      	<option selected value="1">关闭</option>
-						        </select>
-				            </div>
-				            
-				            <div class="col-md-2 form-group">
-                        		<label class="control-label">评论审核</label>
-			                    <select id="isOpenReplyAudit" class="selectpicker show-tick form-control">
-			                      	<option value="0">开启</option>
-			                      	<option selected value="1">关闭</option>
-						        </select>
-				            </div>
-				            
-				            <div class="col-md-2 form-group">
-                        		<label class="control-label">敏感词</label>
-			                    <select id="isOpenBadWord" class="selectpicker show-tick form-control">
-			                      	<option value="0">开启</option>
-			                      	<option selected value="1">关闭</option>
-						        </select>
-				            </div>
-				            
+                        	<#if config?? && config?size gt 0>
+                        		<#list config as cg>
+                        			<div class="col-md-2 form-group">
+		                        		<label class="control-label">${cg.zhAttrName}</label>
+					                    <select id="${cg.attrName}" class="selectpicker show-tick form-control">
+					                      	<option value="0" <#if cg.attrValue?number == 0>selected</#if>>开启</option>
+					                      	<option value="1" <#if cg.attrValue?number == 1>selected</#if>>关闭</option>
+								        </select>
+						            </div>
+                        		</#list>
+                        	</#if>
                         </div>
                     </section>
                 </div>
@@ -85,8 +56,8 @@
                          </span>
                         </header>
                         <div class="panel-body">
-                        	<a class="btn btn-info" type="button">重置搜索索引</a>
-                        	<a class="btn btn-info" type="button">一键刷新缓存</a>
+                        	<a class="btn btn-info lucene-init" type="button" href="${path}/system/admin/config/lucene/init">初始化（重置）搜索索引</a>
+                        	<a class="btn btn-info cache-refresh" type="button" href="${path}/system/admin/config/cache/refresh">一键刷新缓存</a>
                         </div>
                     </section>
                 </div>
@@ -98,7 +69,7 @@
                         <header class="panel-heading">
                           	  金币经验
                         <span class="tools pull-right">
-                        	<a href="${path}" class="fa fa-save system-save" style="background:#5bc0de !important;color:#fff"> 保存更改 </a>
+                        	<a href="${path}/system/admin/config/award/update" class="fa fa-save award-save" style="background:#5bc0de !important;color:#fff"> 保存更改 </a>
                             <a href="javascript:;" class="fa fa-chevron-down"></a>
                          </span>
                         </header>
@@ -128,7 +99,7 @@
                         <header class="panel-heading">
                           	  其他操作
                         <span class="tools pull-right">
-                        	<a href="${path}" class="fa fa-save system-save" style="background:#5bc0de !important;color:#fff"> 保存更改 </a>
+                        	<a href="${path}/system/admin/config/email/update" class="fa fa-save system-save" style="background:#5bc0de !important;color:#fff"> 保存更改 </a>
                             <a href="javascript:;" class="fa fa-chevron-down"></a>
                          </span>
                         </header>

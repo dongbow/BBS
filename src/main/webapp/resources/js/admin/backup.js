@@ -1,5 +1,7 @@
 $(function() {
 	$('.back-add').bind('click', add);
+	
+	$('.back-restore').bind('click', restore);
 });
 
 function add(event) {
@@ -21,4 +23,37 @@ function add(event) {
 			}
 		});
 	});
+}
+
+function restore(event) {
+	event.preventDefault();
+	bootbox.confirm({
+        title: "系统提示",
+        message: "确定恢复当前选中的备份文件?",
+        buttons: {
+            cancel: {
+                label: '取消'
+            },
+            confirm: {
+                label: '确定'
+            }
+        },
+        callback: function (data) {
+        	if(data == true) {
+        		$.post($('.back-restore').attr('href'), {
+	            	"id": $('.back-restore').attr('data-id')
+	            }, function(result) {
+	            	if(result.rc != undefined && result.rc.rc == 9001){
+	        			loginDialog(result);
+	        		} else if(result.rc != undefined && result.rc.rc == 9999) {
+	        			authDialog(result);
+	        		} else if(result.rc == 1) {
+	        			refreshLocation(result.msg);
+	            	} else {
+	            		failTip(result.msg);
+	            	}
+	            });
+        	}
+        }
+    });
 }

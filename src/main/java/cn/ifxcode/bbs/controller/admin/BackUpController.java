@@ -1,11 +1,15 @@
 package cn.ifxcode.bbs.controller.admin;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,12 +22,16 @@ import cn.ifxcode.bbs.bean.Result;
 import cn.ifxcode.bbs.constant.BbsConstant;
 import cn.ifxcode.bbs.entity.Backup;
 import cn.ifxcode.bbs.service.BackupService;
+import cn.ifxcode.bbs.utils.BackUpUtils;
+import cn.ifxcode.bbs.utils.DownloadUtils;
 import cn.ifxcode.bbs.utils.ParamsBuildUtils;
 
 @Controller
 @RequestMapping("/system/admin")
 public class BackUpController extends BaseController {
 
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	private static final int DEFAULT_PAGE_SIZE = 10;
 	
 	@Resource
@@ -82,5 +90,39 @@ public class BackUpController extends BaseController {
 			result = new Result(BbsConstant.ERROR, "删除失败");
 		}
 		return result;
+	}
+	
+	@RequestMapping("/backup/download")
+	public void download(String id, HttpServletResponse response) {
+		Backup backup = backupService.getBackup(id);
+		
+		try {
+			if (backup == null) {
+				response.getWriter().print("404");
+			} else {
+				DownloadUtils.downloadLocal(backup.getUrl(), backup.getId() + ".sql", response);
+			}
+		} catch (IOException e) {
+			// ignore
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/backup/restore", method = RequestMethod.POST)
+	public Result restore(String id) {
+		if (StringUtils.isNotBlank(id)) {
+			Backup backup = backupService.getBackup(id);
+			if (backup == null) {
+				return new Result(BbsConstant.ERROR, "备份文件不存在");
+			}
+			try {
+				if (BackUpUtils.restore(backup.getUrl())) {
+					return new Result(BbsConstant.OK, "恢复成功");
+				}
+			} catch (Exception e) {
+				logger.error("恢复失败", e);
+			}
+		}
+		return new Result(BbsConstant.ERROR, "恢复失败");
 	}
 }

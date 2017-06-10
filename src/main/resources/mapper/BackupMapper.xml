@@ -25,7 +25,7 @@
 	</select>
 	
 	<select id="getBackUp" resultType="Backup">
-		select url from bbs_backup where id = #{id}
+		select * from bbs_backup where id = #{id}
 	</select>
 	
 	<delete id="delete">

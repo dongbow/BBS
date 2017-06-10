@@ -80,6 +80,7 @@
     <!-- main content end-->
 </section>
 	<script type="text/javascript" src="${path}/resources/js/admin/config/badword.js"></script>
+	<script type="text/javascript" src="${path}/resources/js/jquery/jquery.form.js"></script>
 	<#include "../common/footer.ftl">
 </body>
 </html>

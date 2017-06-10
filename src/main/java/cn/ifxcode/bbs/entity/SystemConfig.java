@@ -7,6 +7,7 @@ public class SystemConfig implements Serializable {
 	private static final long serialVersionUID = -725687150506716745L;
 
 	private int id;
+	private String zhAttrName;
 	private String attrName;
 	private String attrValue;
 
@@ -32,6 +33,14 @@ public class SystemConfig implements Serializable {
 
 	public void setAttrValue(String attrValue) {
 		this.attrValue = attrValue;
+	}
+
+	public String getZhAttrName() {
+		return zhAttrName;
+	}
+
+	public void setZhAttrName(String zhAttrName) {
+		this.zhAttrName = zhAttrName;
 	}
 
 }

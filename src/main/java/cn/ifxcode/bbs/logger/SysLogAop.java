@@ -133,6 +133,9 @@ public class SysLogAop {
 				if(arguments[i].getClass().isArray()) {
 					arguments[i] = Arrays.toString(makeArrayObject(arguments[i]).toArray());
 				}
+				if (arguments[i].getClass().getSimpleName().equals("List")) {
+					arguments[i] = "object is list";
+				}
 				builder.append("<tr><td>" + params[i]).append("</td><td>").append(arguments[i] + "</td></tr>");
 			}
         }

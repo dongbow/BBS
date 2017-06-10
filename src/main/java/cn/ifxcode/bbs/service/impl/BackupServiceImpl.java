@@ -94,4 +94,9 @@ public class BackupServiceImpl implements BackupService {
 		return result;
 	}
 
+	@Override
+	public Backup getBackup(String id) {
+		return backupDao.getBackUp(id);
+	}
+
 }
