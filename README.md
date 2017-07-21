@@ -1,4 +1,6 @@
-﻿# BBS
+## 没啥写的欲望了。。
+
+## BBS
 
 项目依赖于库中 bbs-redis 请下载： https://github.com/dongbow/bbs-redis.git
 运行`mvn package`打包生成jar
